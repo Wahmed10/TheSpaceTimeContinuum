@@ -1,0 +1,9 @@
+IMPLEMENTATION_PLAN.md
+pnpm-lock.yaml
+apps/web/public/
+packages/astro/test/fixtures/
+assets/
+test-results/
+playwright-report/
+.next/
+.tools/

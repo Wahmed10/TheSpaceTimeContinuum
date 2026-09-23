@@ -1,0 +1,18 @@
+{
+  "name": "@space/engine",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@space/domain": "workspace:*",
+    "@space/astro": "workspace:*",
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.183.0"
+  }
+}

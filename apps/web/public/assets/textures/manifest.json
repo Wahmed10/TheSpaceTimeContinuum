@@ -1,0 +1,338 @@
+[
+  {
+    "name": "sun",
+    "res": 1024,
+    "file": "/assets/textures/sun_1024.ktx2",
+    "bytes": 614513,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "sun",
+    "res": 2048,
+    "file": "/assets/textures/sun_2048.ktx2",
+    "bytes": 2363455,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "sun",
+    "res": 4096,
+    "file": "/assets/textures/sun_4096.ktx2",
+    "bytes": 6173332,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_daymap",
+    "res": 1024,
+    "file": "/assets/textures/earth_daymap_1024.ktx2",
+    "bytes": 322133,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_daymap",
+    "res": 2048,
+    "file": "/assets/textures/earth_daymap_2048.ktx2",
+    "bytes": 1143742,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_daymap",
+    "res": 4096,
+    "file": "/assets/textures/earth_daymap_4096.ktx2",
+    "bytes": 3490301,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_daymap",
+    "res": 8192,
+    "file": "/assets/textures/earth_daymap_8192.ktx2",
+    "bytes": 11986209,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_nightmap",
+    "res": 1024,
+    "file": "/assets/textures/earth_nightmap_1024.ktx2",
+    "bytes": 254170,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_nightmap",
+    "res": 2048,
+    "file": "/assets/textures/earth_nightmap_2048.ktx2",
+    "bytes": 727627,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_nightmap",
+    "res": 4096,
+    "file": "/assets/textures/earth_nightmap_4096.ktx2",
+    "bytes": 1652719,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_nightmap",
+    "res": 8192,
+    "file": "/assets/textures/earth_nightmap_8192.ktx2",
+    "bytes": 5077709,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_clouds",
+    "res": 1024,
+    "file": "/assets/textures/earth_clouds_1024.ktx2",
+    "bytes": 547636,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_clouds",
+    "res": 2048,
+    "file": "/assets/textures/earth_clouds_2048.ktx2",
+    "bytes": 2068807,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_clouds",
+    "res": 4096,
+    "file": "/assets/textures/earth_clouds_4096.ktx2",
+    "bytes": 7380638,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_normal_map",
+    "res": 1024,
+    "file": "/assets/textures/earth_normal_map_1024.ktx2",
+    "bytes": 95279,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_normal_map",
+    "res": 2048,
+    "file": "/assets/textures/earth_normal_map_2048.ktx2",
+    "bytes": 377555,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_specular_map",
+    "res": 1024,
+    "file": "/assets/textures/earth_specular_map_1024.ktx2",
+    "bytes": 117795,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "earth_specular_map",
+    "res": 2048,
+    "file": "/assets/textures/earth_specular_map_2048.ktx2",
+    "bytes": 251436,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "moon",
+    "res": 1024,
+    "file": "/assets/textures/moon_1024.ktx2",
+    "bytes": 468893,
+    "license": "NASA-media-guidelines",
+    "credit": "NASA SVS / LRO / LROC / LOLA"
+  },
+  {
+    "name": "moon",
+    "res": 2048,
+    "file": "/assets/textures/moon_2048.ktx2",
+    "bytes": 1747202,
+    "license": "NASA-media-guidelines",
+    "credit": "NASA SVS / LRO / LROC / LOLA"
+  },
+  {
+    "name": "moon",
+    "res": 4096,
+    "file": "/assets/textures/moon_4096.ktx2",
+    "bytes": 6838898,
+    "license": "NASA-media-guidelines",
+    "credit": "NASA SVS / LRO / LROC / LOLA"
+  },
+  {
+    "name": "mars",
+    "res": 1024,
+    "file": "/assets/textures/mars_1024.ktx2",
+    "bytes": 604752,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "mars",
+    "res": 2048,
+    "file": "/assets/textures/mars_2048.ktx2",
+    "bytes": 2340640,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "mars",
+    "res": 4096,
+    "file": "/assets/textures/mars_4096.ktx2",
+    "bytes": 6376396,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "mercury",
+    "res": 1024,
+    "file": "/assets/textures/mercury_1024.ktx2",
+    "bytes": 565405,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "mercury",
+    "res": 2048,
+    "file": "/assets/textures/mercury_2048.ktx2",
+    "bytes": 2179507,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "venus_atmosphere",
+    "res": 1024,
+    "file": "/assets/textures/venus_atmosphere_1024.ktx2",
+    "bytes": 462356,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "venus_atmosphere",
+    "res": 2048,
+    "file": "/assets/textures/venus_atmosphere_2048.ktx2",
+    "bytes": 1469930,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "jupiter",
+    "res": 1024,
+    "file": "/assets/textures/jupiter_1024.ktx2",
+    "bytes": 588964,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "jupiter",
+    "res": 2048,
+    "file": "/assets/textures/jupiter_2048.ktx2",
+    "bytes": 2190648,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "saturn",
+    "res": 1024,
+    "file": "/assets/textures/saturn_1024.ktx2",
+    "bytes": 423380,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "saturn",
+    "res": 2048,
+    "file": "/assets/textures/saturn_2048.ktx2",
+    "bytes": 1290948,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "saturn_ring_alpha",
+    "res": 1024,
+    "file": "/assets/textures/saturn_ring_alpha_1024.ktx2",
+    "bytes": 16916,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "saturn_ring_alpha",
+    "res": 2048,
+    "file": "/assets/textures/saturn_ring_alpha_2048.ktx2",
+    "bytes": 31288,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "uranus",
+    "res": 1024,
+    "file": "/assets/textures/uranus_1024.ktx2",
+    "bytes": 32836,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "uranus",
+    "res": 2048,
+    "file": "/assets/textures/uranus_2048.ktx2",
+    "bytes": 61982,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "neptune",
+    "res": 1024,
+    "file": "/assets/textures/neptune_1024.ktx2",
+    "bytes": 376168,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "neptune",
+    "res": 2048,
+    "file": "/assets/textures/neptune_2048.ktx2",
+    "bytes": 1105614,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "stars_milky_way",
+    "res": 1024,
+    "file": "/assets/textures/stars_milky_way_1024.ktx2",
+    "bytes": 262048,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "stars_milky_way",
+    "res": 2048,
+    "file": "/assets/textures/stars_milky_way_2048.ktx2",
+    "bytes": 851135,
+    "license": "CC-BY-4.0",
+    "credit": "Solar System Scope"
+  },
+  {
+    "name": "moon_height",
+    "res": 1024,
+    "file": "/assets/textures/moon_height_1024.ktx2",
+    "bytes": 478308,
+    "license": "NASA-media-guidelines",
+    "credit": "NASA SVS / LRO / LROC / LOLA"
+  },
+  {
+    "name": "moon_normal",
+    "res": 1024,
+    "file": "/assets/textures/moon_normal_1024.ktx2",
+    "bytes": 484627,
+    "license": "NASA-media-guidelines",
+    "credit": "NASA SVS / LRO / LROC / LOLA"
+  }
+]

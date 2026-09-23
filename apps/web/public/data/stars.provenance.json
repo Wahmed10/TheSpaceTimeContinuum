@@ -1,0 +1,10 @@
+{
+  "source": "https://heasarc.gsfc.nasa.gov/FTP/heasarc/dbase/tdat_files/heasarc_bsc5p.tdat.gz",
+  "reference": "Hoffleit and Warren, Bright Star Catalog, fifth revised edition (preliminary), 1991; HEASARC BSC5P",
+  "documentation": "https://heasarc.gsfc.nasa.gov/W3Browse/star-catalog/bsc5p.html",
+  "frame": "J2000 equatorial (FK5, approximated as ICRF)",
+  "format": "little-endian float32: unit x,y,z,visual magnitude,B-V",
+  "count": 9096,
+  "sha256": "3f43280d0e9da514e111bb64df94ecba65036bad0dcf91c5c0df22cf20a1a984",
+  "limitations": "Fixed J2000 directions; no proper motion, parallax or variability. Missing B-V defaults to 0.65. Non-stellar records without magnitude omitted. Colors and displayed sizes are illustrative."
+}

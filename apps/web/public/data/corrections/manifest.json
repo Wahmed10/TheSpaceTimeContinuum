@@ -1,0 +1,55 @@
+{
+  "format": "f64le:t0,step,count;f32le:dx,dy,dz,dvx,dvy,dvz",
+  "startJd": 2415006.5,
+  "stepDays": 7,
+  "count": 10493,
+  "source": "NASA/JPL Horizons",
+  "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+  "generatedAt": "2026-09-23T01:17:17.859Z",
+  "bodies": {
+    "Sun": {
+      "file": "sun.bin",
+      "bytes": 251856
+    },
+    "Mercury": {
+      "file": "mercury.bin",
+      "bytes": 251856
+    },
+    "Venus": {
+      "file": "venus.bin",
+      "bytes": 251856
+    },
+    "Earth": {
+      "file": "earth.bin",
+      "bytes": 251856
+    },
+    "Moon": {
+      "file": "moon.bin",
+      "bytes": 251856
+    },
+    "Mars": {
+      "file": "mars.bin",
+      "bytes": 251856
+    },
+    "Jupiter": {
+      "file": "jupiter.bin",
+      "bytes": 251856
+    },
+    "Saturn": {
+      "file": "saturn.bin",
+      "bytes": 251856
+    },
+    "Uranus": {
+      "file": "uranus.bin",
+      "bytes": 251856
+    },
+    "Neptune": {
+      "file": "neptune.bin",
+      "bytes": 251856
+    },
+    "Pluto": {
+      "file": "pluto.bin",
+      "bytes": 251856
+    }
+  }
+}

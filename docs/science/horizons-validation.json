@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-09-23T15:22:16.965Z",
+  "thresholds": {
+    "maxAngleArcsec": 30,
+    "maxRelativeDistance": 0.00001
+  },
+  "records": [
+    {
+      "body": "Sun",
+      "maxAngleArcsec": 0.0011282430834674954,
+      "maxRelativeDistance": 5.091888323108102e-9,
+      "maxPositionErrorKm": 0.0038681720389252003,
+      "pass": true
+    },
+    {
+      "body": "Mercury",
+      "maxAngleArcsec": 1.1893640111493624,
+      "maxRelativeDistance": 0.00000446483791983502,
+      "maxPositionErrorKm": 475.6845317443034,
+      "pass": true
+    },
+    {
+      "body": "Venus",
+      "maxAngleArcsec": 0.00042830641228620896,
+      "maxRelativeDistance": 5.12005745157106e-10,
+      "maxPositionErrorKm": 0.23165504681870408,
+      "pass": true
+    },
+    {
+      "body": "Moon",
+      "maxAngleArcsec": 0.015303295983355449,
+      "maxRelativeDistance": 7.045949512208605e-8,
+      "maxPositionErrorKm": 15.004265220825596,
+      "pass": true
+    },
+    {
+      "body": "Earth",
+      "maxAngleArcsec": 0.016475120942463433,
+      "maxRelativeDistance": 6.989184845572922e-8,
+      "maxPositionErrorKm": 15.558375972882558,
+      "pass": true
+    },
+    {
+      "body": "Mars",
+      "maxAngleArcsec": 0.000014056746338101996,
+      "maxRelativeDistance": 6.583012977240881e-11,
+      "maxPositionErrorKm": 0.017607943140841496,
+      "pass": true
+    },
+    {
+      "body": "Jupiter",
+      "maxAngleArcsec": 0.034988432804481884,
+      "maxRelativeDistance": 1.7233040677002918e-7,
+      "maxPositionErrorKm": 168.94260089624373,
+      "pass": true
+    },
+    {
+      "body": "Saturn",
+      "maxAngleArcsec": 0.0034345946741215472,
+      "maxRelativeDistance": 1.6433990340207984e-8,
+      "maxPositionErrorKm": 33.80146523756353,
+      "pass": true
+    },
+    {
+      "body": "Uranus",
+      "maxAngleArcsec": 0.0014244577254338834,
+      "maxRelativeDistance": 7.434529407498735e-9,
+      "maxPositionErrorKm": 27.752649556600954,
+      "pass": true
+    },
+    {
+      "body": "Neptune",
+      "maxAngleArcsec": 0.006914952549164675,
+      "maxRelativeDistance": 3.023573028100673e-8,
+      "maxPositionErrorKm": 203.95956276314203,
+      "pass": true
+    },
+    {
+      "body": "Pluto",
+      "maxAngleArcsec": 0.11234730434564148,
+      "maxRelativeDistance": 4.176972885406441e-7,
+      "maxPositionErrorKm": 5025.347880570822,
+      "pass": true
+    }
+  ]
+}

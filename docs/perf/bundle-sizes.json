@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-09-23T20:39:55.763Z",
+  "note": "Individual emitted chunks, not a route attribution report; engine dependencies may span several chunks.",
+  "rows": [
+    {
+      "file": "245ixzhawq7x6.js",
+      "bytes": 1012457,
+      "gzipBytes": 285345
+    },
+    {
+      "file": "3vr47b5o0jfnk.js",
+      "bytes": 401358,
+      "gzipBytes": 93649
+    },
+    {
+      "file": "0xmzd9t7zug7y.js",
+      "bytes": 229152,
+      "gzipBytes": 71626
+    },
+    {
+      "file": "12o-b_i5ri059.js",
+      "bytes": 178152,
+      "gzipBytes": 47195
+    },
+    {
+      "file": "0cz1d0mv5g_q7.js",
+      "bytes": 112594,
+      "gzipBytes": 39627
+    },
+    {
+      "file": "0k5t4bjyfea45.js",
+      "bytes": 87344,
+      "gzipBytes": 29410
+    },
+    {
+      "file": "3gdqqor_ewhhb.js",
+      "bytes": 54834,
+      "gzipBytes": 23361
+    },
+    {
+      "file": "1aiwg10_k1y25.js",
+      "bytes": 21832,
+      "gzipBytes": 7300
+    },
+    {
+      "file": "turbopack-0o0975_k04brq.js",
+      "bytes": 9688,
+      "gzipBytes": 3837
+    },
+    {
+      "file": "38pzk6o0jx64k.js",
+      "bytes": 14375,
+      "gzipBytes": 3667
+    },
+    {
+      "file": "2132or27qobej.js",
+      "bytes": 2419,
+      "gzipBytes": 1273
+    },
+    {
+      "file": "05xahiwmy6wjz.js",
+      "bytes": 1218,
+      "gzipBytes": 670
+    },
+    {
+      "file": "25isie2v47zam.js",
+      "bytes": 949,
+      "gzipBytes": 582
+    },
+    {
+      "file": "266t_sq228xvy.js",
+      "bytes": 285,
+      "gzipBytes": 239
+    }
+  ]
+}

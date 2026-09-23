@@ -1,0 +1,20 @@
+{
+  "name": "@space/db",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@space/domain": "workspace:*",
+    "drizzle-orm": "0.45.3",
+    "@neondatabase/serverless": "^1.0.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.0"
+  }
+}

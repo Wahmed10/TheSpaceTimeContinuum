@@ -1,0 +1,29 @@
+{
+  "name": "web",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@space/domain": "workspace:*",
+    "@space/astro": "workspace:*",
+    "@space/engine": "workspace:*",
+    "@space/db": "workspace:*",
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zustand": "5.0.15",
+    "@radix-ui/react-popover": "^1.1.0",
+    "@radix-ui/react-dialog": "^1.1.0",
+    "minisearch": "7.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0"
+  }
+}

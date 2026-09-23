@@ -1,0 +1,3 @@
+import {it,expect} from 'vitest';
+import {ResidualTable} from '../src/ephemeris/ResidualTable';
+it('interpolates positions and derivatives, honors offsets, and refuses extrapolation',()=>{const buf=new ArrayBuffer(72),v=new DataView(buf);v.setFloat64(0,0,true);v.setFloat64(8,10,true);v.setFloat64(16,2,true);for(const [i,n] of [0,0,0,0,0,0,1000,0,0,300,0,0].entries())v.setFloat32(24+i*4,n,true);const table=new ResidualTable(buf),out=new Float64Array(9);out[0]=99;expect(table.addTo(5,out,3)).toBe(true);expect(out[0]).toBe(99);expect(out[3]).toBeCloseTo(125);expect(out[6]).toBeCloseTo(75);expect(table.addTo(-1,out)).toBe(false);expect(table.addTo(11,out)).toBe(false);expect(()=>new ResidualTable(new ArrayBuffer(4))).toThrow();});

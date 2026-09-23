@@ -1,0 +1,55 @@
+{
+  "body": "Venus",
+  "queries": [
+    {
+      "format": "json",
+      "COMMAND": "'299'",
+      "OBJ_DATA": "'NO'",
+      "EPHEM_TYPE": "'VECTORS'",
+      "CENTER": "'500@0'",
+      "REF_SYSTEM": "'ICRF'",
+      "REF_PLANE": "'FRAME'",
+      "VEC_TABLE": "'2'",
+      "OUT_UNITS": "'KM-S'",
+      "TIME_TYPE": "'TDB'",
+      "CSV_FORMAT": "'YES'",
+      "START_TIME": "'JD2415006.5'",
+      "STOP_TIME": "'JD2449999.6'",
+      "STEP_SIZE": "'7 d'"
+    },
+    {
+      "format": "json",
+      "COMMAND": "'299'",
+      "OBJ_DATA": "'NO'",
+      "EPHEM_TYPE": "'VECTORS'",
+      "CENTER": "'500@0'",
+      "REF_SYSTEM": "'ICRF'",
+      "REF_PLANE": "'FRAME'",
+      "VEC_TABLE": "'2'",
+      "OUT_UNITS": "'KM-S'",
+      "TIME_TYPE": "'TDB'",
+      "CSV_FORMAT": "'YES'",
+      "START_TIME": "'JD2450006.5'",
+      "STOP_TIME": "'JD2484999.6'",
+      "STEP_SIZE": "'7 d'"
+    },
+    {
+      "format": "json",
+      "COMMAND": "'299'",
+      "OBJ_DATA": "'NO'",
+      "EPHEM_TYPE": "'VECTORS'",
+      "CENTER": "'500@0'",
+      "REF_SYSTEM": "'ICRF'",
+      "REF_PLANE": "'FRAME'",
+      "VEC_TABLE": "'2'",
+      "OUT_UNITS": "'KM-S'",
+      "TIME_TYPE": "'TDB'",
+      "CSV_FORMAT": "'YES'",
+      "START_TIME": "'JD2485006.5'",
+      "STOP_TIME": "'JD2488450.6'",
+      "STEP_SIZE": "'7 d'"
+    }
+  ],
+  "generatedAt": "2026-09-23T01:17:50.158Z",
+  "note": "Hermite-interpolated residuals added to astronomy-engine 2.1.19 barycentric states. Guard samples bracket the supported date interval."
+}

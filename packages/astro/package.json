@@ -1,0 +1,15 @@
+{
+  "name": "@space/astro",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@space/domain": "workspace:*",
+    "astronomy-engine": "2.1.19",
+    "satellite.js": "7.1.0"
+  }
+}

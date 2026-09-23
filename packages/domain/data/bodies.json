@@ -1,0 +1,467 @@
+[
+  {
+    "id": "star:sun",
+    "kind": "star",
+    "name": "Sun",
+    "aliases": [],
+    "astronomyBody": "Sun",
+    "physical": {
+      "meanRadiusKm": 695700
+    },
+    "color": "#ffcd77",
+    "texture": "sun",
+    "importance": 100,
+    "description": "The star at the center of our solar system. Its light takes about eight minutes to reach Earth.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "planet:mercury",
+    "kind": "planet",
+    "name": "Mercury",
+    "aliases": [],
+    "parentId": "star:sun",
+    "astronomyBody": "Mercury",
+    "physical": {
+      "meanRadiusKm": 2439.7,
+      "periodDays": 87.969
+    },
+    "color": "#bfb4a2",
+    "texture": "mercury",
+    "importance": 99,
+    "description": "A small, cratered world with the most extreme daily temperature swings of any planet.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "planet:venus",
+    "kind": "planet",
+    "name": "Venus",
+    "aliases": [],
+    "parentId": "star:sun",
+    "astronomyBody": "Venus",
+    "physical": {
+      "meanRadiusKm": 6051.8,
+      "periodDays": 224.701
+    },
+    "color": "#e6c695",
+    "texture": "venus_atmosphere",
+    "importance": 98,
+    "description": "A volcanic world wrapped in thick clouds, with a crushing carbon dioxide atmosphere.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "planet:earth",
+    "kind": "planet",
+    "name": "Earth",
+    "aliases": [
+      "Terra",
+      "our planet"
+    ],
+    "parentId": "star:sun",
+    "astronomyBody": "Earth",
+    "physical": {
+      "meanRadiusKm": 6371.0084,
+      "periodDays": 365.256
+    },
+    "color": "#78b8e8",
+    "texture": "earth_daymap",
+    "importance": 97,
+    "description": "Our ocean world. The only place in the universe where we know life exists.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:moon",
+    "kind": "moon",
+    "name": "Moon",
+    "aliases": [
+      "Luna"
+    ],
+    "parentId": "planet:earth",
+    "astronomyBody": "Moon",
+    "physical": {
+      "meanRadiusKm": 1737.4,
+      "periodDays": 27.322
+    },
+    "color": "#ccc9c3",
+    "texture": "moon",
+    "importance": 96,
+    "description": "Earth’s companion preserves a record of billions of years of solar system history.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "planet:mars",
+    "kind": "planet",
+    "name": "Mars",
+    "aliases": [],
+    "parentId": "star:sun",
+    "astronomyBody": "Mars",
+    "physical": {
+      "meanRadiusKm": 3389.5,
+      "periodDays": 686.98
+    },
+    "color": "#d98059",
+    "texture": "mars",
+    "importance": 95,
+    "description": "A cold desert world with giant volcanoes, ancient riverbeds, and two small moons.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "planet:jupiter",
+    "kind": "planet",
+    "name": "Jupiter",
+    "aliases": [],
+    "parentId": "star:sun",
+    "astronomyBody": "Jupiter",
+    "physical": {
+      "meanRadiusKm": 69911,
+      "periodDays": 4332.59
+    },
+    "color": "#d7b393",
+    "texture": "jupiter",
+    "importance": 94,
+    "description": "The largest planet, with powerful storms and a system of remarkably diverse moons.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "planet:saturn",
+    "kind": "planet",
+    "name": "Saturn",
+    "aliases": [],
+    "parentId": "star:sun",
+    "astronomyBody": "Saturn",
+    "physical": {
+      "meanRadiusKm": 58232,
+      "periodDays": 10759.22
+    },
+    "color": "#ead5a2",
+    "texture": "saturn",
+    "importance": 93,
+    "description": "An immense gas giant surrounded by bright rings made largely of water ice.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "planet:uranus",
+    "kind": "planet",
+    "name": "Uranus",
+    "aliases": [],
+    "parentId": "star:sun",
+    "astronomyBody": "Uranus",
+    "physical": {
+      "meanRadiusKm": 25362,
+      "periodDays": 30688.5
+    },
+    "color": "#9ee0e3",
+    "texture": "uranus",
+    "importance": 92,
+    "description": "An ice giant that rolls around the Sun on its side.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "planet:neptune",
+    "kind": "planet",
+    "name": "Neptune",
+    "aliases": [],
+    "parentId": "star:sun",
+    "astronomyBody": "Neptune",
+    "physical": {
+      "meanRadiusKm": 24622,
+      "periodDays": 60182
+    },
+    "color": "#557fef",
+    "texture": "neptune",
+    "importance": 91,
+    "description": "Dark, cold, and swept by supersonic winds at the edge of the planetary realm.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "dwarf:pluto",
+    "kind": "dwarf",
+    "name": "Pluto",
+    "aliases": [],
+    "parentId": "star:sun",
+    "astronomyBody": "Pluto",
+    "physical": {
+      "meanRadiusKm": 1188.3,
+      "periodDays": 90560
+    },
+    "color": "#c9b7a7",
+    "importance": 90,
+    "description": "A complex icy world in the Kuiper belt, explored by New Horizons in 2015.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "dwarf:ceres",
+    "kind": "dwarf",
+    "name": "Ceres",
+    "aliases": [],
+    "parentId": "star:sun",
+    "physical": {
+      "meanRadiusKm": 469.7,
+      "periodDays": 1680
+    },
+    "color": "#b5b2aa",
+    "importance": 89,
+    "description": "The largest object in the asteroid belt, with bright salt deposits and a water-rich interior.",
+    "provenance": {
+      "providerId": "jpl-mean-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "method": "mean-elements",
+      "certainty": "approximate"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:phobos",
+    "kind": "moon",
+    "name": "Phobos",
+    "aliases": [],
+    "parentId": "planet:mars",
+    "physical": {
+      "meanRadiusKm": 11.267,
+      "periodDays": 0.31891
+    },
+    "color": "#a09584",
+    "importance": 88,
+    "description": "Mars’s inner moon is a small, irregular body orbiting close to the planet.",
+    "provenance": {
+      "providerId": "jpl-mean-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "method": "mean-elements",
+      "certainty": "approximate"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:deimos",
+    "kind": "moon",
+    "name": "Deimos",
+    "aliases": [],
+    "parentId": "planet:mars",
+    "physical": {
+      "meanRadiusKm": 6.2,
+      "periodDays": 1.26244
+    },
+    "color": "#b2a28a",
+    "importance": 87,
+    "description": "The smaller and more distant of Mars’s two moons.",
+    "provenance": {
+      "providerId": "jpl-mean-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "method": "mean-elements",
+      "certainty": "approximate"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:io",
+    "kind": "moon",
+    "name": "Io",
+    "aliases": [],
+    "parentId": "planet:jupiter",
+    "physical": {
+      "meanRadiusKm": 1821.6,
+      "periodDays": 1.769
+    },
+    "color": "#dbc978",
+    "importance": 86,
+    "description": "A volcanic moon heated by Jupiter’s immense tidal forces.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:europa",
+    "kind": "moon",
+    "name": "Europa",
+    "aliases": [],
+    "parentId": "planet:jupiter",
+    "physical": {
+      "meanRadiusKm": 1560.8,
+      "periodDays": 3.551
+    },
+    "color": "#d6cbb0",
+    "importance": 85,
+    "description": "A fractured ice shell may conceal a global ocean.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:ganymede",
+    "kind": "moon",
+    "name": "Ganymede",
+    "aliases": [],
+    "parentId": "planet:jupiter",
+    "physical": {
+      "meanRadiusKm": 2634.1,
+      "periodDays": 7.155
+    },
+    "color": "#aea899",
+    "importance": 84,
+    "description": "The largest moon in the solar system, with its own magnetic field.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:callisto",
+    "kind": "moon",
+    "name": "Callisto",
+    "aliases": [],
+    "parentId": "planet:jupiter",
+    "physical": {
+      "meanRadiusKm": 2410.3,
+      "periodDays": 16.689
+    },
+    "color": "#979186",
+    "importance": 83,
+    "description": "A heavily cratered world on the outskirts of Jupiter’s main moon system.",
+    "provenance": {
+      "providerId": "astronomy-engine",
+      "sourceUrl": "https://github.com/cosinekitty/astronomy",
+      "method": "analytic-ephemeris",
+      "certainty": "computed"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:titan",
+    "kind": "moon",
+    "name": "Titan",
+    "aliases": [],
+    "parentId": "planet:saturn",
+    "physical": {
+      "meanRadiusKm": 2574.73,
+      "periodDays": 15.945
+    },
+    "color": "#d6a75e",
+    "importance": 82,
+    "description": "A hazy moon with methane lakes and a thick nitrogen atmosphere.",
+    "provenance": {
+      "providerId": "jpl-mean-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "method": "mean-elements",
+      "certainty": "approximate"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:triton",
+    "kind": "moon",
+    "name": "Triton",
+    "aliases": [],
+    "parentId": "planet:neptune",
+    "physical": {
+      "meanRadiusKm": 1353.4,
+      "periodDays": 5.877
+    },
+    "color": "#cbbcc2",
+    "importance": 81,
+    "description": "Neptune’s largest moon orbits in the opposite direction to its planet’s rotation.",
+    "provenance": {
+      "providerId": "jpl-mean-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "method": "mean-elements",
+      "certainty": "approximate"
+    },
+    "tags": []
+  },
+  {
+    "id": "moon:charon",
+    "kind": "moon",
+    "name": "Charon",
+    "aliases": [],
+    "parentId": "dwarf:pluto",
+    "physical": {
+      "meanRadiusKm": 606,
+      "periodDays": 6.387
+    },
+    "color": "#b0a5a1",
+    "importance": 80,
+    "description": "Pluto’s large companion shares a mutual, tidally locked dance.",
+    "provenance": {
+      "providerId": "jpl-mean-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "method": "mean-elements",
+      "certainty": "approximate"
+    },
+    "tags": []
+  }
+]
