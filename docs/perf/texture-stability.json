@@ -1,0 +1,57 @@
+{
+  "focusChanges": 20,
+  "before": {
+    "fps": 7.215555217985722,
+    "p95Ms": 916.5999999999999,
+    "medianMs": 33.30000000000018,
+    "backend": "webgl2",
+    "tier": "low",
+    "gpuBytes": 8039512,
+    "pendingTextures": 0,
+    "textureCount": 15,
+    "entities": 4,
+    "cameraWorld": [
+      83433507.09816453,
+      -301950897.47761047,
+      544717545.3624417
+    ],
+    "cameraLocal": [
+      0,
+      0,
+      0
+    ],
+    "selected": null,
+    "focusScreen": {
+      "x": 720,
+      "y": 500
+    },
+    "ready": true
+  },
+  "after": {
+    "fps": 5.714557836087432,
+    "p95Ms": 433.3000000000002,
+    "medianMs": 66.59999999999991,
+    "backend": "webgl2",
+    "tier": "low",
+    "gpuBytes": 8039512,
+    "pendingTextures": 0,
+    "textureCount": 15,
+    "entities": 4,
+    "cameraWorld": [
+      150157503.66118836,
+      -4267813.254405684,
+      -1845280.4482357723
+    ],
+    "cameraLocal": [
+      0,
+      0,
+      0
+    ],
+    "selected": "star:sun",
+    "focusScreen": {
+      "x": -7808.728569996894,
+      "y": -1789.1137142627774
+    },
+    "ready": true
+  }
+}

@@ -3,6 +3,7 @@ export class Input {
   private pointers = new Map<number, { x: number; y: number }>();
   private pinch = 0;
   private travel = 0;
+  private lastTap = 0;
   private controller = new AbortController();
   constructor(
     canvas: HTMLCanvasElement,
@@ -45,8 +46,16 @@ export class Input {
     canvas.addEventListener(
       'pointerup',
       (e) => {
-        if (this.travel < 6 && this.pointers.size === 1)
+        if (this.travel < 6 && this.pointers.size === 1) {
           pick(e.clientX, e.clientY, e.pointerType === 'touch');
+          if (e.pointerType === 'touch') {
+            const now = performance.now();
+            if (now - this.lastTap < 300) {
+              focus();
+              this.lastTap = 0;
+            } else this.lastTap = now;
+          }
+        }
         this.pointers.delete(e.pointerId);
       },
       { signal },

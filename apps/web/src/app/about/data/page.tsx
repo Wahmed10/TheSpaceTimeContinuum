@@ -26,8 +26,23 @@ export default function Data() {
       <h2>Sources & credits</h2>
       <ul>
         <li>
-          <a href="https://svs.gsfc.nasa.gov/4720/">NASA CGI Moon Kit</a>
-          {' '}— NASA SVS, LRO/LROC/LOLA and Ernie Wright. Lunar color, derived normals and displacement; resized and compressed for display.
+          <a href="https://svs.gsfc.nasa.gov/4851/">Deep Star Maps 2020</a> —
+          NASA GSFC Scientific Visualization Studio, Ernie Wright. Faint-star
+          background tone-mapped and compressed for display, aligned with the
+          J2000 catalog.
+        </li>
+        <li>
+          <a href="https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg004/">
+            NASA MGS MOLA
+          </a>{' '}
+          — NASA GSFC/MOLA team. Mars normals derived from the 4
+          pixels-per-degree topography product, shifted in longitude and
+          compressed for display.
+        </li>
+        <li>
+          <a href="https://svs.gsfc.nasa.gov/4720/">NASA CGI Moon Kit</a> — NASA
+          SVS, LRO/LROC/LOLA and Ernie Wright. Lunar color, derived normals and
+          displacement; resized and compressed for display.
         </li>
         <li>
           <a href="https://github.com/cosinekitty/astronomy">

@@ -304,22 +304,6 @@
     "credit": "Solar System Scope"
   },
   {
-    "name": "stars_milky_way",
-    "res": 1024,
-    "file": "/assets/textures/stars_milky_way_1024.ktx2",
-    "bytes": 262048,
-    "license": "CC-BY-4.0",
-    "credit": "Solar System Scope"
-  },
-  {
-    "name": "stars_milky_way",
-    "res": 2048,
-    "file": "/assets/textures/stars_milky_way_2048.ktx2",
-    "bytes": 851135,
-    "license": "CC-BY-4.0",
-    "credit": "Solar System Scope"
-  },
-  {
     "name": "moon_height",
     "res": 1024,
     "file": "/assets/textures/moon_height_1024.ktx2",
@@ -334,5 +318,37 @@
     "bytes": 484627,
     "license": "NASA-media-guidelines",
     "credit": "NASA SVS / LRO / LROC / LOLA"
+  },
+  {
+    "name": "mars_normal",
+    "res": 1024,
+    "file": "/assets/textures/mars_normal_1024.ktx2",
+    "bytes": 284401,
+    "license": "NASA-PDS",
+    "credit": "NASA GSFC / MGS MOLA team"
+  },
+  {
+    "name": "stars_milky_way",
+    "res": 1024,
+    "file": "/assets/textures/stars_milky_way_1024.ktx2",
+    "bytes": 123010,
+    "license": "NASA-media-guidelines",
+    "credit": "NASA SVS / Ernie Wright"
+  },
+  {
+    "name": "stars_milky_way",
+    "res": 2048,
+    "file": "/assets/textures/stars_milky_way_2048.ktx2",
+    "bytes": 398059,
+    "license": "NASA-media-guidelines",
+    "credit": "NASA SVS / Ernie Wright"
+  },
+  {
+    "name": "stars_milky_way",
+    "res": 4096,
+    "file": "/assets/textures/stars_milky_way_4096.ktx2",
+    "bytes": 1580706,
+    "license": "NASA-media-guidelines",
+    "credit": "NASA SVS / Ernie Wright"
   }
 ]

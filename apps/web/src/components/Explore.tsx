@@ -76,6 +76,16 @@ export default function Explore() {
     [unit, setUnit] = useState<'km' | 'mi' | 'AU'>('km');
   const body = bodies.find((b) => b.id === selectedId);
   const dateRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (engine) {
+      const enabled = new Set(engine.getMapState().layers);
+      setLayers({
+        planets: enabled.has('planets'),
+        moons: enabled.has('moons'),
+        orbits: enabled.has('orbits'),
+      });
+    }
+  }, [engine]);
   function choose(id: string) {
     engine?.focus(id);
     setSearchOpen(false);

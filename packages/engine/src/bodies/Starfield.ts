@@ -24,6 +24,9 @@ export function createStarfield(assets: AssetManager, catalog: Float32Array) {
     }),
   );
   sky.rotation.x = Math.PI / 2;
+  // NASA's celestial map is centered at RA=0 with RA increasing leftward.
+  // Reflect local Z so the texture agrees with the ICRF catalog directions.
+  sky.scale.z = -1;
   sky.renderOrder = -100;
   sky.frustumCulled = false;
   group.add(sky);

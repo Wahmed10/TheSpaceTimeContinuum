@@ -1,0 +1,180 @@
+{
+  "software": true,
+  "benchmark": {
+    "measuredAt": "2026-09-24T01:59:07.794Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+    "viewport": {
+      "width": 1280,
+      "height": 800,
+      "dpr": 1
+    },
+    "firstFrameMs": 486,
+    "backend": "webgl2",
+    "adapter": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "softwareRenderer": true,
+    "results": [
+      {
+        "view": "Solar System",
+        "fps": 6.1086151178371555,
+        "p95Ms": 300,
+        "medianMs": 150,
+        "backend": "webgl2",
+        "tier": "low",
+        "gpuBytes": 8039512,
+        "pendingTextures": 0,
+        "textureCount": 15,
+        "entities": 4,
+        "cameraWorld": [
+          83433507.09816453,
+          -301950897.47761047,
+          544717545.3624417
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "star:sun",
+        "focusScreen": {
+          "x": 640,
+          "y": 400
+        },
+        "ready": true
+      },
+      {
+        "view": "Earth close",
+        "fps": 5.628366969526412,
+        "p95Ms": 200,
+        "medianMs": 183.29999999999927,
+        "backend": "webgl2",
+        "tier": "low",
+        "gpuBytes": 8039512,
+        "pendingTextures": 0,
+        "textureCount": 15,
+        "entities": 4,
+        "cameraWorld": [
+          149942516.5989103,
+          -3976318.8231390114,
+          -1681464.4649593867
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "planet:earth",
+        "focusScreen": {
+          "x": 640,
+          "y": 400.0000000000001
+        },
+        "ready": true
+      },
+      {
+        "view": "Earth LEO",
+        "fps": 4.7001880075203015,
+        "p95Ms": 233.3000000000029,
+        "medianMs": 216.59999999999854,
+        "backend": "webgl2",
+        "tier": "low",
+        "gpuBytes": 8039512,
+        "pendingTextures": 0,
+        "textureCount": 15,
+        "entities": 4,
+        "cameraWorld": [
+          149938978.15702263,
+          -3970869.916807207,
+          -1703506.3564652835
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "planet:earth",
+        "focusScreen": {
+          "x": 640,
+          "y": 400.0000000000008
+        },
+        "ready": true
+      },
+      {
+        "view": "Moon close",
+        "fps": 6.435834727764193,
+        "p95Ms": 216.59999999999854,
+        "medianMs": 150,
+        "backend": "webgl2",
+        "tier": "low",
+        "gpuBytes": 8039512,
+        "pendingTextures": 0,
+        "textureCount": 15,
+        "entities": 4,
+        "cameraWorld": [
+          150156428.2816005,
+          -4271429.013919271,
+          -1851243.4653443007
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "moon:moon",
+        "focusScreen": {
+          "x": 640,
+          "y": 400.00000000000017
+        },
+        "ready": true
+      },
+      {
+        "view": "Mars close",
+        "fps": 6.414747999092071,
+        "p95Ms": 250,
+        "medianMs": 150,
+        "backend": "webgl2",
+        "tier": "low",
+        "gpuBytes": 8039512,
+        "pendingTextures": 0,
+        "textureCount": 15,
+        "entities": 4,
+        "cameraWorld": [
+          36825455.63069135,
+          207297382.86026517,
+          94123956.15734713
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "planet:mars",
+        "focusScreen": {
+          "x": 640,
+          "y": 400.0000000000001
+        },
+        "ready": true
+      }
+    ]
+  },
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.13435596144853434,
+    "thresholdPx": 0.5,
+    "depthResults": [
+      {
+        "scenario": "10 km cloud shell, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "10 km cloud shell, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Moon behind Earth",
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "method": "GPU MSAA marker centroid versus float64 perspective projection; opaque depth probes with logarithmic depth",
+    "altitudeKm": 400
+  }
+}

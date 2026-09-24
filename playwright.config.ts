@@ -3,6 +3,7 @@ export default defineConfig({
   testDir: './e2e',
   timeout: 90000,
   workers: 1,
+  snapshotPathTemplate: '{testDir}/visual-reference/{testFilePath}/{arg}{ext}',
   use: {
     baseURL: 'http://localhost:3000',
     viewport: { width: 1440, height: 1000 },

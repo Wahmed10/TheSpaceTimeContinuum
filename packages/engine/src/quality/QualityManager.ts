@@ -12,11 +12,16 @@ export class QualityManager {
   dpr: number;
   private slow = 0;
   private fast = 0;
+  private initialTier: QualityTier;
   constructor(
     private mobile: boolean,
     private backend: string,
+    readonly limits: { maxTextureSize?: number; memoryGB?: number } = {},
   ) {
     this.tier = mobile ? 'low' : backend === 'webgl2' ? 'medium' : 'high';
+    if ((limits.memoryGB ?? 8) <= 2 || (limits.maxTextureSize ?? 8192) < 4096)
+      this.tier = 'low';
+    this.initialTier = this.tier;
     this.dpr = Math.min(
       globalThis.devicePixelRatio || 1,
       QUALITY[this.tier].dpr,
@@ -24,14 +29,7 @@ export class QualityManager {
   }
   set(setting: QualitySetting) {
     this.setting = setting;
-    this.tier =
-      setting === 'auto'
-        ? this.mobile
-          ? 'low'
-          : this.backend === 'webgl2'
-            ? 'medium'
-            : 'high'
-        : setting;
+    this.tier = setting === 'auto' ? this.initialTier : setting;
     this.dpr = Math.min(
       globalThis.devicePixelRatio || 1,
       QUALITY[this.tier].dpr,
@@ -61,6 +59,19 @@ export class QualityManager {
       this.fast = 0;
       this.dpr += 0.25;
       return true;
+    }
+    if (this.fast >= 20 && this.tier !== this.initialTier) {
+      this.fast = 0;
+      const order: QualityTier[] = ['low', 'medium', 'high', 'ultra'];
+      const index = order.indexOf(this.tier);
+      if (index < order.indexOf(this.initialTier)) {
+        this.tier = order[index + 1]!;
+        this.dpr = Math.min(
+          globalThis.devicePixelRatio || 1,
+          QUALITY[this.tier].dpr,
+        );
+        return true;
+      }
     }
     return false;
   }

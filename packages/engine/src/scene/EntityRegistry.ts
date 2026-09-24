@@ -32,7 +32,9 @@ export class EntityRegistry {
   update(tdbSec: number) {
     for (const e of this.entries.values()) {
       e.visible = e.provider.stateAt(tdbSec, e.physical).ok;
-      e.display.set(e.physical.subarray(0, 3));
+      e.display[0] = e.physical[0]!;
+      e.display[1] = e.physical[1]!;
+      e.display[2] = e.physical[2]!;
     }
   }
 }

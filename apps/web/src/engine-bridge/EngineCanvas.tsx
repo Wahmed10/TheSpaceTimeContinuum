@@ -47,7 +47,12 @@ export default function EngineCanvas() {
           ready: true,
           error: null,
         });
-        if (q.has('test') || q.has('perf')) window.__spaceEngine = engine;
+        if (
+          q.has('test') ||
+          q.has('perf') ||
+          location.pathname.startsWith('/lab/')
+        )
+          window.__spaceEngine = engine;
         unsubs.push(
           engine.on('select', (id) =>
             useEngineStore.setState({

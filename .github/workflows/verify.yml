@@ -18,6 +18,7 @@ jobs:
       - run: pnpm verify
       - run: pnpm licenses:check
       - run: pnpm exec tsx tools/check-assets.ts
+      - run: node tools/measure-engine.mjs
       - run: pnpm build
   browser:
     runs-on: ubuntu-latest
@@ -37,4 +38,7 @@ jobs:
           name: renderer-evidence
           path: |
             docs/perf/screens
+            docs/perf/precision-webgl.json
+            docs/perf/texture-stability.json
+            docs/perf/react-profile.json
             test-results

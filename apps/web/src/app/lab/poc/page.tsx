@@ -1,4 +1,4 @@
-import Explore from '../../../components/Explore';
+import PhaseOneLab from '../../../components/PhaseOneLab';
 export default function Page() {
-  return <Explore />;
+  return <PhaseOneLab />;
 }

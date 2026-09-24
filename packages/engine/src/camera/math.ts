@@ -20,6 +20,20 @@ export function exponentialZoom(
   return clamp(distanceKm * Math.exp(clamp(delta, -2, 2)), min, max);
 }
 export const ease = (t: number) => t * t * (3 - 2 * t);
+export function criticalDamping(
+  current: number,
+  target: number,
+  velocity: number,
+  dt: number,
+  out: Float64Array,
+  frequency = 16,
+) {
+  const offset = current - target,
+    c = velocity + frequency * offset,
+    decay = Math.exp(-frequency * dt);
+  out[0] = target + (offset + c * dt) * decay;
+  out[1] = (velocity - frequency * c * dt) * decay;
+}
 export function transitionDistance(
   start: number,
   end: number,

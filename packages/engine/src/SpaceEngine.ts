@@ -10,6 +10,7 @@ import {
   LineBasicNodeMaterial,
   Mesh,
   SphereGeometry,
+  Quaternion,
 } from 'three/webgpu';
 import type { WebGPURenderer } from 'three/webgpu';
 import { BODIES, LAYERS } from '@space/domain';
@@ -70,6 +71,7 @@ export class SpaceEngine {
   readonly clock = new SimulationClock();
   readonly cameraController = new CameraController();
   readonly backend: string;
+  private adapterDescription = 'unknown';
   private scene = new Scene();
   private camera = new PerspectiveCamera(45, 1, 0.1, 1e12);
   private assets: AssetManager;
@@ -93,6 +95,7 @@ export class SpaceEngine {
   private scratch = new Vector3();
   private projected = new Vector3();
   private quat = new Float64Array(4);
+  private inverseOrientation = new Quaternion();
   private orbits: {
     line: Line;
     bodyId: string;
@@ -107,6 +110,7 @@ export class SpaceEngine {
   private height = 1;
   private started = performance.now();
   private initialReady = false;
+  private deterministic = false;
   private postFX: PostFX;
   static async create(canvas: HTMLCanvasElement, options: EngineOptions = {}) {
     const started = performance.now();
@@ -155,11 +159,47 @@ export class SpaceEngine {
     stars: Float32Array,
   ) {
     this.assets = assets;
+    this.deterministic = options.test ?? false;
     this.backend = backend;
+    const hardware = renderer.backend as unknown as {
+      device?: {
+        limits: { maxTextureDimension2D: number };
+        adapterInfo?: {
+          vendor: string;
+          architecture: string;
+          description: string;
+        };
+      };
+      gl?: WebGL2RenderingContext;
+    };
+    const maxTextureSize =
+      hardware.device?.limits.maxTextureDimension2D ??
+      (hardware.gl
+        ? Number(hardware.gl.getParameter(hardware.gl.MAX_TEXTURE_SIZE))
+        : 8192);
+    const memoryGB =
+      (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8;
+    const info = hardware.device?.adapterInfo;
+    if (info)
+      this.adapterDescription = [
+        info.vendor,
+        info.architecture,
+        info.description,
+      ]
+        .filter(Boolean)
+        .join(' / ');
+    if (hardware.gl) {
+      const extension = hardware.gl.getExtension('WEBGL_debug_renderer_info');
+      if (extension)
+        this.adapterDescription = String(
+          hardware.gl.getParameter(extension.UNMASKED_RENDERER_WEBGL),
+        );
+    }
     this.quality = new QualityManager(
       /Mobi|Android/i.test(navigator.userAgent) ||
         matchMedia('(max-width: 700px)').matches,
       backend,
+      { maxTextureSize, memoryGB },
     );
     this.renderer.setPixelRatio(this.quality.dpr);
     this.postFX = new PostFX(renderer, this.scene, this.camera);
@@ -250,7 +290,6 @@ export class SpaceEngine {
   private frame = (now: number) => {
     if (this.disposed) return;
     const dt = this.last ? now - this.last : 16.7;
-    if (this.last !== 0 && this.quality.tier === 'low' && dt < 30) return;
     this.last = now;
     this.perf.add(dt);
     const tdbSec = this.clock.tick();
@@ -272,6 +311,7 @@ export class SpaceEngine {
         e.physical[1]! - world[1]!,
         e.physical[2]! - world[2]!,
       );
+      e.visual.animationTime.value = this.deterministic ? 0 : now / 1000;
       e.boost = radiusBoost(
         e.body.physical.meanRadiusKm!,
         d,
@@ -320,7 +360,8 @@ export class SpaceEngine {
         this.quat[3]!,
       );
       if (e.visual.clouds)
-        e.visual.clouds.rotation.y = (tdbSec / 86400) * 0.015;
+        e.visual.clouds.rotation.y = ((tdbSec / 86400) * 0.015) % (2 * Math.PI);
+      e.visual.cloudPhase.value = e.visual.clouds?.rotation.y ?? 0;
       e.visual.sunDirection.value
         .set(
           sun.physical[0]! - e.physical[0]!,
@@ -328,6 +369,10 @@ export class SpaceEngine {
           sun.physical[2]! - e.physical[2]!,
         )
         .normalize();
+      this.inverseOrientation.copy(group.quaternion).invert();
+      e.visual.localSunDirection.value
+        .copy(e.visual.sunDirection.value)
+        .applyQuaternion(this.inverseOrientation);
       group.visible =
         e.visible &&
         (e.body.kind === 'star' ||
@@ -352,7 +397,9 @@ export class SpaceEngine {
     if (!this.initialReady) {
       this.initialReady = true;
       this.canvas.dataset.ready = 'true';
-      this.canvas.dataset.firstFrameMs = String(Math.round(now - this.started));
+      this.canvas.dataset.firstFrameMs = String(
+        Math.round(performance.now() - this.started),
+      );
     }
     if (now - this.lastUI >= 250) {
       const elapsedSec = this.lastUI ? (now - this.lastUI) / 1000 : 0;
@@ -569,9 +616,12 @@ export class SpaceEngine {
   }
   private applyQuality() {
     const tier = QUALITY[this.quality.tier];
-    this.assets.setResolution(tier.texture);
+    this.assets.setResolution(
+      Math.min(tier.texture, this.quality.limits.maxTextureSize ?? 8192),
+    );
     for (const e of this.registry.entries.values()) {
       const old = e.visual.mesh.geometry;
+      e.visual.detailStrength.value = tier.texture >= 4096 ? 1 : 0;
       if (old.parameters.widthSegments !== tier.segments) {
         const geometry = new SphereGeometry(
           1,
@@ -642,6 +692,7 @@ export class SpaceEngine {
       tier: this.quality.tier,
       gpuBytes: this.assets.gpuBytes,
       pendingTextures: this.assets.pending,
+      textureCount: this.renderer.info.memory.textures,
       entities: this.registry.entries.size,
       cameraWorld: Array.from(this.cameraController.world),
       cameraLocal: this.camera.position.toArray(),
@@ -649,6 +700,117 @@ export class SpaceEngine {
       focusScreen: focus ? { x: focus.screenX, y: focus.screenY } : null,
       ready: this.initialReady,
     };
+  }
+  referenceView(bodyId: string, phase: 'day' | 'night' | 'quarter' | 'limb') {
+    this.focus(bodyId, { transition: false });
+    const body = this.registry.entries.get(bodyId),
+      sun = this.registry.entries.get('star:sun');
+    if (!body || !sun) return;
+    const x = sun.physical[0]! - body.physical[0]!,
+      y = sun.physical[1]! - body.physical[1]!,
+      z = sun.physical[2]! - body.physical[2]!;
+    this.cameraController.azimuthRad =
+      Math.atan2(y, x) +
+      (phase === 'night' ? Math.PI : phase === 'quarter' ? Math.PI / 2 : 0);
+    this.cameraController.elevationRad =
+      Math.atan2(z, Math.hypot(x, y)) * (phase === 'night' ? -1 : 1);
+    if (phase === 'limb')
+      this.cameraController.distanceKm = body.body.physical.meanRadiusKm! * 2.8;
+  }
+  setRendering(active: boolean) {
+    if (this.disposed) return;
+    if (active) {
+      this.last = 0;
+      this.start();
+    } else this.renderer.setAnimationLoop(null);
+  }
+  async measurePrecision(samples = 600) {
+    this.renderer.setAnimationLoop(null);
+    try {
+      const { measurePrecision } = await import('./perf/PrecisionProbe');
+      return await measurePrecision(this.renderer, samples);
+    } finally {
+      this.last = 0;
+      if (!this.disposed) this.start();
+    }
+  }
+  async benchmark(onView: (name: string) => void = () => {}) {
+    let wasHidden = document.hidden;
+    const visibility = () => {
+      wasHidden ||= document.hidden;
+    };
+    document.addEventListener('visibilitychange', visibility);
+    const views = [
+      { name: 'Solar System', id: 'star:sun', wide: true },
+      { name: 'Earth close', id: 'planet:earth' },
+      { name: 'Earth LEO', id: 'planet:earth', distance: 6771.0084 },
+      { name: 'Moon close', id: 'moon:moon' },
+      { name: 'Mars close', id: 'planet:mars' },
+    ];
+    const results = [];
+    const wait = (ms: number) =>
+      new Promise<void>((resolve) => setTimeout(resolve, ms));
+    const saved = this.getMapState(),
+      savedMode = this.clock.mode,
+      savedRate = this.clock.rate,
+      setting = this.quality.setting;
+    try {
+      this.clock.setTime(isoToTdb('2026-09-22T00:00:00Z'));
+      this.setScale('true');
+      this.setQuality(setting === 'auto' ? this.quality.tier : setting);
+      for (const view of views) {
+        if (this.disposed)
+          throw new Error('Renderer was disposed during benchmark');
+        onView(view.name);
+        this.focus(view.id, { transition: false, wide: view.wide ?? false });
+        if (view.distance) {
+          this.referenceView(view.id, 'quarter');
+          this.cameraController.distanceKm = view.distance;
+        }
+        const deadline = performance.now() + 30000;
+        while (this.assets.pending && performance.now() < deadline)
+          await wait(100);
+        if (this.assets.pending)
+          throw new Error(
+            'Textures did not settle. Wait for loading and run again.',
+          );
+        await wait(3000);
+        this.perf.reset();
+        await wait(10000);
+        if (wasHidden)
+          throw new Error(
+            'Benchmark invalid: the tab was hidden. Run again with this tab visible.',
+          );
+        results.push({
+          view: view.name,
+          ...this.diagnostics(),
+          pendingTextures: this.assets.pending,
+        });
+      }
+      return {
+        measuredAt: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        viewport: {
+          width: this.width,
+          height: this.height,
+          dpr: this.quality.dpr,
+        },
+        firstFrameMs: Number(this.canvas.dataset.firstFrameMs),
+        backend: this.backend,
+        adapter: this.adapterDescription,
+        softwareRenderer: /swiftshader|llvmpipe|software/i.test(
+          this.adapterDescription,
+        ),
+        results,
+      };
+    } finally {
+      document.removeEventListener('visibilitychange', visibility);
+      if (!this.disposed) {
+        this.setQuality(setting);
+        this.applyMapState(saved);
+        if (savedMode === 'playing') this.clock.play(savedRate);
+      }
+    }
   }
   dispose() {
     if (this.disposed) return;

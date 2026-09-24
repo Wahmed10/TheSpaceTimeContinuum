@@ -13,11 +13,15 @@ export class PerfMonitor {
   private index = 0;
   private count = 0;
   add(dtMs: number) {
-    if (dtMs > 0 && dtMs < 1000) {
+    if (dtMs > 0 && Number.isFinite(dtMs)) {
       this.times[this.index] = dtMs;
       this.index = (this.index + 1) % this.times.length;
       this.count = Math.min(this.count + 1, this.times.length);
     }
+  }
+  reset() {
+    this.index = 0;
+    this.count = 0;
   }
   stats() {
     let total = 0;
@@ -30,6 +34,7 @@ export class PerfMonitor {
     return {
       fps: this.count ? 1000 / (total / this.count) : 0,
       p95Ms: sorted[Math.floor(this.count * 0.95)] ?? 0,
+      medianMs: sorted[Math.floor(this.count * 0.5)] ?? 0,
     };
   }
 }

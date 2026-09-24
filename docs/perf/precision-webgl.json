@@ -1,0 +1,22 @@
+{
+  "samples": 600,
+  "maxErrorPx": 0.13435596144853434,
+  "thresholdPx": 0.5,
+  "depthResults": [
+    {
+      "scenario": "10 km cloud shell, altitude 400 km",
+      "pass": true
+    },
+    {
+      "scenario": "10 km cloud shell, altitude 1000000 km",
+      "pass": true
+    },
+    {
+      "scenario": "Moon behind Earth",
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "method": "GPU MSAA marker centroid versus float64 perspective projection; opaque depth probes with logarithmic depth",
+  "altitudeKm": 400
+}

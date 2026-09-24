@@ -7,6 +7,7 @@ interface AssetRecord {
   desired: number;
   loading: boolean;
   data: boolean;
+  references: number;
 }
 interface ManifestEntry {
   name: string;
@@ -45,6 +46,7 @@ export class AssetManager {
         'moon_normal',
         'moon_height',
         'mars',
+        'mars_normal',
         'stars_milky_way',
       ]);
       return manager;
@@ -86,6 +88,7 @@ export class AssetManager {
           desired: 1024,
           loading: false,
           data,
+          references: 0,
         });
       }),
     );
@@ -94,18 +97,19 @@ export class AssetManager {
     const record = this.records.get(name);
     if (!record) throw new Error(`Texture not preloaded: ${name}`);
     record.data = data;
+    record.references++;
     record.desired = res;
     void this.upgrade(name, record);
     return record.texture;
   }
   private async upgrade(name: string, record: AssetRecord) {
-    if (this.disposed || record.loading) return;
+    if (this.disposed || record.loading || this.records.get(name)!==record) return;
     const entry = this.url(name, record.desired);
     if (!entry || entry.res === record.resolution) return;
     record.loading = true;
     try {
       const loaded = await this.loader.loadAsync(entry.file);
-      if (this.disposed) {
+      if (this.disposed || this.records.get(name) !== record) {
         loaded.dispose();
         return;
       }
@@ -131,8 +135,17 @@ export class AssetManager {
   }
   setResolution(res: number) {
     for (const [name, record] of this.records) {
-      record.desired = name === 'stars_milky_way' ? Math.min(res, 2048) : res;
+      record.desired = name === 'stars_milky_way' ? Math.min(res, 4096) : res;
       void this.upgrade(name, record);
+    }
+  }
+  release(name: string) {
+    const record = this.records.get(name);
+    if (!record) return;
+    if (record.references > 0) record.references--;
+    if (record.references === 0) {
+      record.texture.dispose();
+      this.records.delete(name);
     }
   }
   dispose() {

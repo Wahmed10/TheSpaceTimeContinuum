@@ -6,6 +6,7 @@ import {
   sphericalToCartesian,
   transitionDistance,
   transitionDuration,
+  criticalDamping,
 } from './math';
 interface View {
   targetId: string;
@@ -25,6 +26,10 @@ export class CameraController {
   readonly center = new Float64Array(3);
   private offset = new Float64Array(3);
   private panOffset = new Float64Array(3);
+  private zoomTarget: number | null = null;
+  private zoomVelocity = 0;
+  private previousTime = 0;
+  private damping = new Float64Array(2);
   private flight: {
     startMs: number;
     durationMs: number;
@@ -41,8 +46,8 @@ export class CameraController {
   }
   zoom(delta: number, radiusKm: number) {
     this.flight = null;
-    this.distanceKm = exponentialZoom(
-      this.distanceKm,
+    this.zoomTarget = exponentialZoom(
+      this.zoomTarget ?? this.distanceKm,
       delta,
       radiusKm * 1.05,
       200 * AU_KM,
@@ -70,6 +75,8 @@ export class CameraController {
     wide = false,
     record = true,
   ) {
+    this.zoomTarget = null;
+    this.zoomVelocity = 0;
     if (record)
       this.history.push({
         targetId: this.targetId,
@@ -114,6 +121,26 @@ export class CameraController {
     this.elevationRad = view.elevationRad;
   }
   update(target: Float64Array, now: number, minRadiusKm: number) {
+    const dt = this.previousTime
+      ? Math.min(0.1, Math.max(0, (now - this.previousTime) / 1000))
+      : 1 / 60;
+    this.previousTime = now;
+    if (this.zoomTarget !== null) {
+      criticalDamping(
+        Math.log(this.distanceKm),
+        Math.log(this.zoomTarget),
+        this.zoomVelocity,
+        dt,
+        this.damping,
+      );
+      this.distanceKm = Math.exp(this.damping[0]!);
+      this.zoomVelocity = this.damping[1]!;
+      if (Math.abs(this.distanceKm / this.zoomTarget - 1) < 1e-7) {
+        this.distanceKm = this.zoomTarget;
+        this.zoomTarget = null;
+        this.zoomVelocity = 0;
+      }
+    }
     this.fade = 0;
     if (this.flight) {
       const f = this.flight;
@@ -129,7 +156,8 @@ export class CameraController {
           : f.endDistance
         : transitionDistance(f.startDistance, f.endDistance, f.separationKm, t);
       if (t === 1) this.flight = null;
-    } else if (this.following) this.center.set(target.subarray(0, 3));
+    } else if (this.following)
+      for (let i = 0; i < 3; i++) this.center[i] = target[i]!;
     this.distanceKm = Math.max(minRadiusKm * 1.05, this.distanceKm);
     sphericalToCartesian(
       this.distanceKm,

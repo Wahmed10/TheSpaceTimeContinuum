@@ -19,7 +19,6 @@ const maps = [
   'saturn_ring_alpha',
   'uranus',
   'neptune',
-  'stars_milky_way',
 ];
 const manifest: {
   name: string;

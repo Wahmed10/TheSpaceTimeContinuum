@@ -1,0 +1,13 @@
+{
+  "bodies": [
+    "Sun",
+    "Earth",
+    "Moon",
+    "Mars"
+  ],
+  "frames": 10000,
+  "msPerFrame": 0.11574978999999999,
+  "budgetMs": 0.2,
+  "pass": true,
+  "node": "v24.12.0"
+}

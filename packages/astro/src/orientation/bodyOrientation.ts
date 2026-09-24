@@ -14,7 +14,7 @@ export function bodyOrientation(
   const ra = axis.ra * 15 * DEG_TO_RAD,
     dec = axis.dec * DEG_TO_RAD,
     w = axis.spin * DEG_TO_RAD;
-  const nx = Math.cos(dec) * Math.cos(ra),
+  let nx = Math.cos(dec) * Math.cos(ra),
     ny = Math.cos(dec) * Math.sin(ra),
     nz = Math.sin(dec);
   const ax = -Math.sin(ra),
@@ -23,9 +23,28 @@ export function bodyOrientation(
   const bx = -nz * ay,
     by = nz * ax,
     bz = nx * ay - ny * ax;
-  const xx = ax * Math.cos(w) + bx * Math.sin(w),
+  let xx = ax * Math.cos(w) + bx * Math.sin(w),
     xy = ay * Math.cos(w) + by * Math.sin(w),
     xz = az * Math.cos(w) + bz * Math.sin(w);
+  if (body === 'Earth') {
+    const time = toAstroTime(tdbSec);
+    const gast = Astronomy.SiderealTime(time) * 15 * DEG_TO_RAD;
+    const rotation = Astronomy.Rotation_EQD_EQJ(time);
+    const prime = Astronomy.RotateVector(
+      rotation,
+      new Astronomy.Vector(Math.cos(gast), Math.sin(gast), 0, time),
+    );
+    const pole = Astronomy.RotateVector(
+      rotation,
+      new Astronomy.Vector(0, 0, 1, time),
+    );
+    xx = prime.x;
+    xy = prime.y;
+    xz = prime.z;
+    nx = pole.x;
+    ny = pole.y;
+    nz = pole.z;
+  }
   const zx = xy * nz - xz * ny,
     zy = xz * nx - xx * nz,
     zz = xx * ny - xy * nx;

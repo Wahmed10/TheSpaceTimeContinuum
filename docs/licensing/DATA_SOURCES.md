@@ -1,13 +1,17 @@
-# Data sources used in this preview
+# Data sources
 
-| Source | Use | Attribution / terms |
+| Source | Use | Credit / limitations |
 |---|---|---|
-| https://github.com/cosinekitty/astronomy | Local analytic ephemerides and rotation axes | astronomy-engine, MIT |
-| https://ssd.jpl.nasa.gov/api/horizons.api | Committed independent reference vectors | NASA/JPL Horizons; server-side sequential requests only; cache results; stop on non-200 |
-| https://ssd-api.jpl.nasa.gov/doc/horizons.html | Vector query format | Retrieved 2026-09-22; docs describe 1.3, service returned 1.2, both explicitly recognized |
-| https://ssd.jpl.nasa.gov/planets/phys_par.html | Planetary physical constants | NASA/JPL SSD |
+| https://github.com/cosinekitty/astronomy | Analytic ephemerides and IAU rotations | MIT; exact pinned version required for residual tables |
+| https://ssd.jpl.nasa.gov/horizons/ | Weekly residual corrections and separate reference vectors | NASA/JPL; sequential server-side acquisition, cached locally |
+| https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc | Independent Mars orientation references | NASA/JPL NAIF, IAU 2015 model |
+| https://svs.gsfc.nasa.gov/4720/ | LROC color and LOLA lunar terrain | NASA SVS, Ernie Wright, LRO/LROC/LOLA; display-resolution derivatives |
+| https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg004/ | Mars normal map from topography | NASA GSFC/MGS MOLA team, 4 pixels/degree |
+| https://svs.gsfc.nasa.gov/4851/ | Deep Star Maps 2020 faint-star background | NASA GSFC SVS, Ernie Wright; tone-mapped and KTX2 compressed |
+| https://heasarc.gsfc.nasa.gov/W3Browse/star-catalog/bsc5p.html | 9,096 fixed J2000 star directions | Hoffleit and Warren (1991), HEASARC; no proper motion or variability |
+| https://www.solarsystemscope.com/textures/ | Other planetary textures | CC BY 4.0; based on NASA imagery, with enhanced colors and illustrative unmapped terrain |
+| https://ssd.jpl.nasa.gov/planets/phys_par.html | Physical constants | NASA/JPL SSD |
 | https://ssd.jpl.nasa.gov/sats/phys_par/ | Satellite radii | NASA/JPL SSD |
-| https://hpiers.obspm.fr/iers/bul/bulc/bulletinc.dat | Leap-second review | IERS Bulletin C 72 (2026-07-06): no leap second December 2026 |
-| https://www.solarsystemscope.com/textures/ | Planet and sky textures | Solar System Scope, CC BY 4.0; modifications and individual URLs in assets/ASSET_LICENSES.md |
+| https://hpiers.obspm.fr/iers/bul/bulc/bulletinc.dat | Leap-second review | IERS Bulletin C 72; no leap second in December 2026 |
 
-The browser makes no provider requests. Stars are a background image, not a selectable or scientifically oriented catalog. The current scene uses only the four hero bodies; unused curated body records are not a claim of validated positions. Provider ingestion, live news, discovery data, satellites, and spacecraft are not implemented yet.
+Per-file credits are in `assets/ASSET_LICENSES.md`. Browser data requests stay on this application's origin. LIVE follows the device clock and does not imply telemetry. Body maps and celestial background are visualizations, not scientific image-analysis products. Later-phase ingestion, satellites, spacecraft and news are not implemented.

@@ -1,6 +1,32 @@
 import { it, expect } from 'vitest';
 import { QualityManager } from '../src/quality/QualityManager';
 import { CameraController } from '../src/camera/CameraController';
+import { criticalDamping } from '../src/camera/math';
+
+it('critical damping converges without overshoot at varied frame rates', () => {
+  for (const dt of [1 / 30, 1 / 60, 1 / 144]) {
+    let position = 0,
+      velocity = 0;
+    const out = new Float64Array(2);
+    for (let t = 0; t < 2; t += dt) {
+      criticalDamping(position, 1, velocity, dt, out);
+      expect(out[0]).toBeGreaterThanOrEqual(position);
+      expect(out[0]).toBeLessThanOrEqual(1);
+      position = out[0]!;
+      velocity = out[1]!;
+    }
+    expect(position).toBeCloseTo(1, 8);
+  }
+});
+it('AUTO respects memory constraints and recovers a dropped tier', () => {
+  expect(new QualityManager(false, 'webgpu', { memoryGB: 2 }).tier).toBe('low');
+  const q = new QualityManager(false, 'webgpu');
+  q.sample(50, 5);
+  q.sample(50, 5);
+  expect(q.tier).toBe('medium');
+  q.sample(5, 20);
+  expect(q.tier).toBe('high');
+});
 
 it('waits for sustained pressure, reduces DPR first, and respects manual quality', () => {
   const manager = new QualityManager(false, 'webgl2');

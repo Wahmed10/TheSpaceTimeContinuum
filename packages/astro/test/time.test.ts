@@ -32,7 +32,7 @@ describe('time scales', () => {
         Date.UTC(1900, 0, 1) +
         ((Date.UTC(2101, 0, 1) - Date.UTC(1900, 0, 1)) * seed) / 2147483647;
       expect(Math.abs(tdbToUtcMs(utcMsToTdb(ms)) - ms)).toBeLessThanOrEqual(
-        0.002,
+        0.001,
       );
       expect(Math.abs(tdbMinusTt(utcMsToTdb(ms)))).toBeLessThan(0.0017);
     }

@@ -1,6 +1,6 @@
 # Asset licenses
 
-All textures: Solar System Scope, CC BY 4.0, https://www.solarsystemscope.com/textures/. Based on NASA data, color enhanced; some unmapped terrain is illustrative. Downloaded 2026-09-23. Resized and encoded to WebP. No endorsement implied.
+Sources and modifications are recorded per file below. Solar System Scope maps use CC BY 4.0; NASA SVS and PDS assets retain their own credits. Runtime textures are KTX2. WebP entries document archived development previews. No endorsement implied.
 
 | File | Source | License | Credit | Modification |
 |---|---|---|---|---|
@@ -71,10 +71,12 @@ All textures: Solar System Scope, CC BY 4.0, https://www.solarsystemscope.com/te
 | /assets/textures/uranus_2048.ktx2 | https://www.solarsystemscope.com/textures/download/2k_uranus.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
 | /assets/textures/neptune_1024.ktx2 | https://www.solarsystemscope.com/textures/download/2k_neptune.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
 | /assets/textures/neptune_2048.ktx2 | https://www.solarsystemscope.com/textures/download/2k_neptune.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
-| /assets/textures/stars_milky_way_1024.ktx2 | https://www.solarsystemscope.com/textures/download/2k_stars_milky_way.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
-| /assets/textures/stars_milky_way_2048.ktx2 | https://www.solarsystemscope.com/textures/download/2k_stars_milky_way.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
 | /assets/textures/moon_1024.ktx2 | https://svs.gsfc.nasa.gov/4720/ | NASA media guidelines | NASA SVS, LRO/LROC/LOLA; Ernie Wright | 2019 LROC color, resized; KTX2 |
 | /assets/textures/moon_2048.ktx2 | https://svs.gsfc.nasa.gov/4720/ | NASA media guidelines | NASA SVS, LRO/LROC/LOLA; Ernie Wright | 2019 LROC color, resized; KTX2 |
 | /assets/textures/moon_4096.ktx2 | https://svs.gsfc.nasa.gov/4720/ | NASA media guidelines | NASA SVS, LRO/LROC/LOLA; Ernie Wright | 2019 LROC color, resized; KTX2 |
 | /assets/textures/moon_height_1024.ktx2 | https://svs.gsfc.nasa.gov/4720/ | NASA media guidelines | NASA SVS, LRO/LROC/LOLA; Ernie Wright | LOLA 4 pixels/degree; derived normal or 8-bit height (-12 to +12 km); KTX2 |
 | /assets/textures/moon_normal_1024.ktx2 | https://svs.gsfc.nasa.gov/4720/ | NASA media guidelines | NASA SVS, LRO/LROC/LOLA; Ernie Wright | LOLA 4 pixels/degree; derived normal or 8-bit height (-12 to +12 km); KTX2 |
+| /assets/textures/mars_normal_1024.ktx2 | https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg004/megt90n000cb.lbl | NASA PDS data | NASA GSFC, MGS MOLA team | 4 pixels/degree topography; spherical finite-difference normals; longitude shift; KTX2 |
+| /assets/textures/stars_milky_way_1024.ktx2 | https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k.exr | NASA media guidelines | NASA GSFC SVS, Ernie Wright | Deep Star Maps 2020 faint-star background; Reinhard tone mapping, sRGB, resize, KTX2 |
+| /assets/textures/stars_milky_way_2048.ktx2 | https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k.exr | NASA media guidelines | NASA GSFC SVS, Ernie Wright | Deep Star Maps 2020 faint-star background; Reinhard tone mapping, sRGB, resize, KTX2 |
+| /assets/textures/stars_milky_way_4096.ktx2 | https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k.exr | NASA media guidelines | NASA GSFC SVS, Ernie Wright | Deep Star Maps 2020 faint-star background; Reinhard tone mapping, sRGB, resize, KTX2 |

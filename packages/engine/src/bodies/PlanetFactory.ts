@@ -25,12 +25,12 @@ import {
   color,
   normalMap,
   positionLocal,
-  time,
   mx_noise_float,
-  uv,
   normalLocal,
   transformedNormalView,
   transformedNormalWorld,
+  cameraPosition,
+  positionWorld,
 } from 'three/tsl';
 import type { BodySpec } from '@space/domain';
 import type { AssetManager } from '../assets/AssetManager';
@@ -43,6 +43,10 @@ export function createPlanet(
   const group = new Group();
   const geometry = new SphereGeometry(1, segments, segments / 2);
   const sunDirection = uniform(new Vector3(1, 0, 0));
+  const localSunDirection = uniform(new Vector3(1, 0, 0));
+  const cloudPhase = uniform(0);
+  const detailStrength = uniform(res >= 4096 ? 1 : 0);
+  const animationTime = uniform(0);
   const albedo = body.texture
     ? texture(assets.load(body.texture, res))
     : color(body.color);
@@ -53,11 +57,15 @@ export function createPlanet(
     metalness: 0,
   });
   material.colorNode = albedo.rgb;
+  if (body.id === 'planet:mars')
+    material.normalNode = normalMap(
+      texture(assets.load('mars_normal', 1024, true)),
+    );
   if (body.id === 'star:sun') {
     const mu = normalView.dot(positionView.normalize().negate()).clamp(0, 1);
     const limb = mu.mul(0.6).add(0.4);
     const granulation = mx_noise_float(
-      positionLocal.mul(85).add(time.mul(0.025)),
+      positionLocal.mul(85).add(animationTime.mul(0.025)),
     )
       .mul(0.13)
       .add(0.9);
@@ -92,6 +100,7 @@ export function createPlanet(
         texture(assets.load('moon_height', 1024, true))
           .r.mul(24)
           .sub(12)
+          .mul(detailStrength)
           .div(1737.4),
       ),
     );
@@ -116,13 +125,30 @@ export function createPlanet(
     cm.colorNode = vec3(1);
     const cloudsMap = assets.load('earth_clouds', res, true);
     cm.opacityNode = texture(cloudsMap).r.mul(0.8);
-    if (res >= 4096) {
-      const shadow = texture(
-        cloudsMap,
-        vec2(uv().x, uv().y.oneMinus()).add(vec2(0.001, 0.001)),
-      )
+    {
+      // Intersect the sunlight ray from the unit surface with the cloud shell.
+      const n = normalLocal.normalize();
+      const incidence = n.dot(localSunDirection);
+      const distance = incidence.negate().add(
+        incidence
+          .mul(incidence)
+          .add(1.003 * 1.003 - 1)
+          .sqrt(),
+      );
+      const hit = n.add(localSunDirection.mul(distance)).normalize();
+      const shadowUv = vec2(
+        hit.z
+          .atan(hit.x)
+          .div(2 * Math.PI)
+          .negate()
+          .add(0.5)
+          .sub(cloudPhase.div(2 * Math.PI)),
+        hit.y.asin().div(Math.PI).negate().add(0.5),
+      );
+      const shadow = texture(cloudsMap, shadowUv)
         .r.mul(day)
         .mul(0.25)
+        .mul(detailStrength)
         .oneMinus();
       material.colorNode = albedo.rgb.mul(shadow);
     }
@@ -148,6 +174,49 @@ export function createPlanet(
     atmosphere.opacityNode = fresnel
       .mul(smoothstep(-0.25, 0.6, light.negate()))
       .mul(0.3);
+    if (body.id === 'planet:earth') {
+      // Analytic spherical-shell path length with Rayleigh and HG Mie phases.
+      // Uniform-density single scattering is a display approximation; it omits
+      // multiple scattering and altitude-dependent weather/aerosols.
+      const mu = normalView.dot(positionView.normalize()).abs().clamp(0, 1);
+      const inner = 1 / 1.012;
+      const discriminant = mu.mul(mu).sub(1 - inner * inner);
+      const chord = mu.sub(discriminant.max(0).sqrt()).mul(1.012);
+      const thickness = mix(
+        mu.mul(2 * 1.012),
+        chord,
+        smoothstep(-0.0001, 0.0001, discriminant),
+      );
+      const cosine = cameraPosition
+        .sub(positionWorld)
+        .normalize()
+        .dot(sunDirection)
+        .clamp(-1, 1);
+      const rayleigh = cosine
+        .mul(cosine)
+        .add(1)
+        .mul(3 / (16 * Math.PI));
+      const mie = float(1 - 0.76 * 0.76).div(
+        float(1 + 0.76 * 0.76)
+          .sub(cosine.mul(2 * 0.76))
+          .pow(1.5)
+          .mul(4 * Math.PI),
+      );
+      const daylight = smoothstep(-0.15, 0.2, light.negate());
+      const twilight = float(1).sub(light.abs().div(0.2).clamp(0, 1));
+      atmosphere.colorNode = vec3(5.8 / 33.1, 13.5 / 33.1, 1)
+        .mul(rayleigh.mul(12))
+        .add(vec3(1, 0.85, 0.65).mul(mie.mul(0.12)))
+        .add(vec3(0.5, 0.12, 0.025).mul(twilight));
+      atmosphere.opacityNode = thickness
+        .mul(-12)
+        .exp()
+        .oneMinus()
+        .mul(daylight)
+        .mul(0.6)
+        .add(fresnel.mul(daylight).mul(0.06))
+        .clamp(0, 0.8);
+    }
     const shell = new Mesh(geometry, atmosphere);
     shell.name = 'atmosphere';
     shell.scale.setScalar(body.id === 'planet:earth' ? 1.012 : 1.008);
@@ -175,5 +244,14 @@ export function createPlanet(
     glow.scale.set(6, 6, 1);
     group.add(glow);
   }
-  return { group, mesh, clouds, sunDirection };
+  return {
+    group,
+    mesh,
+    clouds,
+    sunDirection,
+    localSunDirection,
+    cloudPhase,
+    detailStrength,
+    animationTime,
+  };
 }

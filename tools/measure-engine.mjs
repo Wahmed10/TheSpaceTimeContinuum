@@ -1,0 +1,10 @@
+import {createRequire} from 'node:module';
+import {gzipSync} from 'node:zlib';
+import {writeFile} from 'node:fs/promises';
+const {build}=createRequire(import.meta.resolve('tsx'))('esbuild');
+const result=await build({entryPoints:['packages/engine/src/index.ts'],bundle:true,format:'esm',platform:'browser',target:'es2022',minify:true,write:false,metafile:true});
+const bytes=result.outputFiles[0].contents;
+const report={generatedAt:new Date().toISOString(),method:'Standalone tree-shaken public engine entry, including all transitively bundled dependencies and lab probes; gzip level 9. Excludes separately fetched assets and transcoder.',bytes:bytes.length,gzipBytes:gzipSync(bytes,{level:9}).length,budgetBytes:450000,inputs:Object.keys(result.metafile.inputs)};
+await writeFile('docs/perf/engine-bundle.json',JSON.stringify(report,null,2));
+console.log({bytes:report.bytes,gzipBytes:report.gzipBytes,budgetBytes:report.budgetBytes});
+if(report.gzipBytes>report.budgetBytes)process.exitCode=1;
