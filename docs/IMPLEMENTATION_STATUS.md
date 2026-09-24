@@ -2,6 +2,8 @@
 
 Phase 1 implementation is ready for review. **Acceptance remains pending physical-device validation.** The user chose "Keep the gate strict" and requested finishing Phase 1. Phase 2 has not started. The positive localhost visual review is recorded; it does not replace the device matrix.
 
+Update: two user-supplied Windows Chrome WebGPU reports now establish LOW and ULTRA performance (~161.3 FPS at p95 in all five views) and rendered precision/depth passes. The expected HIGH report actually records ULTRA. Exact HIGH, forced WebGL2, mobile and backend visual comparison remain unrecorded. The user explicitly requires approval before Phase 2; no approval has been given.
+
 ## Implemented and locally verified
 
 - Strict TypeScript workspace, Next.js UI, framework-free Three WebGPU/WebGL2 renderer, package boundaries and CI workflows.
