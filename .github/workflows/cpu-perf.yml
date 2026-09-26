@@ -47,6 +47,8 @@ jobs:
         if: always()
         with:
           name: cpu-performance-evidence
+          include-hidden-files: true
+          if-no-files-found: error
           path: |
             .tools/cpu-current*.json
             .tools/cpu-server.log

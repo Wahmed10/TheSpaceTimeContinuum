@@ -2,6 +2,8 @@
 
 ## Current update: September 26, 2026
 
+Hosted CI update: the repository is now `Wahmed10/TheSpaceTimeContinuum`, with local/remote `main` connected. [Verify passed](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36277070443), including all 16 browser tests. CPU recording ran successfully but its artifact was excluded by the hidden-directory default; the uploader is fixed and recording must be repeated before baseline comparison. See [hosted CI status](perf/hosted-ci.md). Older no-remote/no-hosted-run statements below are historical.
+
 Latest device review: [six September 26 reports](perf/device-review-2026-09-26.md) pass at recorded tiers: laptop WebGPU HIGH, laptop WebGL2 MEDIUM and Android Brave LOW, including all 11 depth probes and three 10k-point runs. The user reports no visual issues and explicitly requests no Phase 3 implementation yet. This supersedes the older statement below that all supplied reports predate orbit/API changes. Remaining exact tiers/browser coverage and engineering acceptance are still open.
 
 Fresh-session transition guide: [Phase 3 handoff](../PHASE_3_HANDOFF.md). The user reports that current navigation looks good. This is qualitative usability feedback; outstanding formal acceptance items below remain open. Phase 3 implementation has not started.
