@@ -43,3 +43,11 @@ Original downloads are preserved byte-for-byte as [LOW](device-user-webgpu-low.j
 | ULTRA | 1707 x 904 / 1.5 | approximately 165 | 6.2 ms (~161.3 FPS) | 153,092,544 bytes (146 MiB) | 0.10768 px, 600 samples |
 
 Both report WebGPU, zero pending textures in every view and all three depth checks passing. Their softwareRenderer flag is false, but adapter is empty; GPU model is not established by these files. Both carry the same 484 ms first-frame value, so these are not two independent cold-load measurements. ULTRA provides encouraging evidence above the 60 FPS target, but does not fill the exact HIGH, forced-WebGL2, mobile or visual-parity rows. Phase 2 remains explicitly unapproved.
+
+## September 25 continuation evidence
+
+The user authorized Phase 2 previously. A new WebGPU ULTRA rerun passes all five view thresholds, rendered precision and depth checks; the Phase 2 10k-point run also exceeds 60 FPS and passes partial-upload readback. See [dated review](device-review-2026-09-25.md) for reports, hashes and limitations. Adapter names are blank. Exact HIGH/forced WebGL2/mobile and visual signoff requirements remain pending; the historical table above is not relabeled or silently passed.
+
+## Physical Samsung mobile evidence
+
+User-supplied Samsung S23 Ultra / Brave WebGL2 reports pass their measured checks: Phase 1 ULTRA p95 16.7-16.8 ms, precision 0.104706333 px and all three depth probes; Phase 2 10,000 points at 60.003 average FPS with one point draw and passing partial-upload readback. See [device review](device-review-2026-09-25.md) for preserved JSON and hashes. This confirms the user could load and test the application on their phone after the LAN fix. These reports predate P2.7; no new-orbit device pass is implied. LOW/MEDIUM mobile tier runs and remaining browser/backend requirements remain pending.

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "measuredAt": "2026-09-26T06:43:19.926Z",
+  "backend": "webgl2",
+  "adapter": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "softwareRenderer": true,
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "tier": "low",
+  "viewport": {
+    "width": 1440,
+    "height": 1000,
+    "dpr": 1
+  },
+  "entities": 21,
+  "frames": 120,
+  "warmupFrames": 30,
+  "method": "performance.now around complete engine frame, including render submission; RAF waits excluded; not GPU timing",
+  "results": [
+    {
+      "path": "solar-orbit",
+      "frames": 120,
+      "meanMs": 1.4308333329856395,
+      "medianMs": 1.4000000059604645,
+      "p95Ms": 2.5,
+      "maxMs": 3
+    },
+    {
+      "path": "earth-leo",
+      "frames": 120,
+      "meanMs": 1.7083333330849806,
+      "medianMs": 1.7999999821186066,
+      "p95Ms": 2.4000000059604645,
+      "maxMs": 3.2999999821186066
+    },
+    {
+      "path": "moon-orbit",
+      "frames": 120,
+      "meanMs": 1.3416666659216085,
+      "medianMs": 1.4000000059604645,
+      "p95Ms": 2,
+      "maxMs": 2.300000011920929
+    },
+    {
+      "path": "mars-orbit",
+      "frames": 120,
+      "meanMs": 1.339999998609225,
+      "medianMs": 1.4000000059604645,
+      "p95Ms": 2.0999999940395355,
+      "maxMs": 2.2999999821186066
+    },
+    {
+      "path": "earth-moon-zoom",
+      "frames": 120,
+      "meanMs": 1.3366666677097478,
+      "medianMs": 1.4000000059604645,
+      "p95Ms": 2.4000000059604645,
+      "maxMs": 2.800000011920929
+    }
+  ],
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "cpuModel": "AMD Ryzen 7 8845HS w/ Radeon 780M Graphics     ",
+    "browserMajor": "153",
+    "browserVersion": "153.0.8010.12",
+    "osRelease": "10.0.26200",
+    "nodeVersion": "v24.12.0"
+  }
+}

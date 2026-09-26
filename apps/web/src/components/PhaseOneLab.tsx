@@ -45,6 +45,32 @@ export default function PhaseOneLab() {
       setBusy(false);
     }
   }
+  async function runPoints() {
+    const engine = window.__spaceEngine;
+    if (!engine) return;
+    setBusy(true);
+    setStatus('Measuring 10,000 points. Keep this tab visible.');
+    try {
+      const report = await engine.measurePoints();
+      const url = URL.createObjectURL(
+        new Blob([JSON.stringify(report, null, 2)], {
+          type: 'application/json',
+        }),
+      );
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `phase-two-points-${report.backend}-${Date.now()}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      setStatus(
+        `Point report downloaded: ${report.fps.toFixed(1)} FPS${report.softwareRenderer ? ' (software renderer)' : ''}.`,
+      );
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : String(error));
+    } finally {
+      setBusy(false);
+    }
+  }
   return (
     <>
       <Profiler id="Explore" onRender={recordCommit}>
@@ -65,6 +91,9 @@ export default function PhaseOneLab() {
       >
         <button disabled={busy} onClick={() => void run()}>
           {busy ? 'Benchmark running' : 'Run Phase 1 device checks'}
+        </button>
+        <button disabled={busy} onClick={() => void runPoints()}>
+          Run Phase 2 point checks
         </button>
         <p role="status">
           {status ||

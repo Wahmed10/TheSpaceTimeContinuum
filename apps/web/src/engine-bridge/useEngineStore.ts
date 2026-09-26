@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import type { SpaceEngine, PerfSample, QualitySetting } from '@space/engine';
+import type { EngineApi, PerfSample, QualitySetting } from '@space/engine';
 interface Store {
-  engine: SpaceEngine | null;
+  engine: EngineApi | null;
   selectedId: string | null;
   mode: 'live' | 'playing' | 'paused';
   rate: number;

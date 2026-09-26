@@ -3,14 +3,14 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import * as Popover from '@radix-ui/react-popover';
 import * as Dialog from '@radix-ui/react-dialog';
-import { BODIES } from '@space/domain';
+import { EXPLORABLE_BODIES } from '@space/domain';
 import type { QualitySetting } from '@space/engine';
 import { useEngineStore } from '../engine-bridge/useEngineStore';
 const EngineCanvas = dynamic(() => import('../engine-bridge/EngineCanvas'), {
   ssr: false,
 });
-const heroIds = ['star:sun', 'planet:earth', 'moon:moon', 'planet:mars'];
-const bodies = BODIES.filter((b) => heroIds.includes(b.id));
+const bodies = EXPLORABLE_BODIES;
+const destinations = bodies.filter(body => ['planet:earth', 'moon:moon', 'planet:mars', 'planet:jupiter'].includes(body.id));
 const rates = [1, 10, 60, 100, 3600, 86400, 2629800, 31557600];
 const rateLabels = [
   '1×',
@@ -70,6 +70,7 @@ export default function Explore() {
     [layers, setLayers] = useState<Record<string, boolean>>({
       planets: true,
       moons: true,
+      dwarfs: true,
       orbits: true,
     }),
     [reduced, setReduced] = useState(false),
@@ -82,6 +83,7 @@ export default function Explore() {
       setLayers({
         planets: enabled.has('planets'),
         moons: enabled.has('moons'),
+        dwarfs: enabled.has('dwarfs'),
         orbits: enabled.has('orbits'),
       });
     }
@@ -199,7 +201,7 @@ export default function Explore() {
                   </label>
                 ))}
                 <div className="popover-foot">
-                  More layers arrive after the renderer gate.
+                  More moons and small bodies are being validated.
                 </div>
               </Popover.Content>
             </Popover.Portal>
@@ -337,22 +339,26 @@ export default function Explore() {
                 </p>
               )}
               <p>
-                Positions combine a local analytic ephemeris with JPL Horizons
-                correction tables. They are calculated, not spacecraft
-                telemetry.
+                {body.astronomyBody || body.id === 'moon:callisto'
+                  ? 'Positions combine an analytic ephemeris with JPL Horizons corrections.'
+                  : body.provenance.certainty === 'approximate'
+                    ? 'Positions use approximate orbital models between JPL Horizons snapshots.'
+                    : 'Positions use a local analytic ephemeris.'}{' '}
+                These are calculated positions, not spacecraft telemetry.
+                {body.provenance.uncertaintyNote && ` ${body.provenance.uncertaintyNote}`}
               </p>
               <a
                 href={body.provenance.sourceUrl}
                 target="_blank"
                 rel="noreferrer"
               >
-                astronomy-engine · method & source ↗
+                {body.provenance.providerId === 'jpl-horizons-orbital-elements' ? 'NASA/JPL' : 'astronomy-engine'} · method & source ↗
               </a>
             </div>
           )}
           <div className="provenance">
             <span className="provenance-dot" /> CALCULATED POSITION{' '}
-            <span>JPL-corrected ephemeris</span>
+            <span>{body.astronomyBody || body.id === 'moon:callisto' ? 'JPL-corrected ephemeris' : body.provenance.certainty === 'approximate' ? 'Approximate orbit' : 'Analytic ephemeris'}</span>
           </div>
         </aside>
       )}
@@ -394,7 +400,7 @@ export default function Explore() {
       <section className="bottom-dock">
         <div className="destinations">
           <span>GO SOMEWHERE</span>
-          {bodies.map((b) => (
+          {destinations.map((b) => (
             <button
               key={b.id}
               className={selectedId === b.id ? 'chosen' : ''}
@@ -570,7 +576,7 @@ export default function Explore() {
             ))}
             {!filtered.length && (
               <p className="empty-search">
-                No worlds found. Try Earth, Moon, Mars, or Sun.
+                No worlds found. Try Jupiter, Europa, Pluto, or Earth.
               </p>
             )}
             <div className="search-foot">

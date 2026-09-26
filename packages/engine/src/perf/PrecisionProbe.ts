@@ -11,6 +11,7 @@ import {
   NoToneMapping,
 } from 'three/webgpu';
 import type { WebGPURenderer } from 'three/webgpu';
+import { OrbitLayer } from '../layers/OrbitLayer';
 
 /** Actual render/readback of a surface marker while a LEO camera orbits at 1 AU. */
 export async function measurePrecision(
@@ -147,6 +148,128 @@ export async function measurePrecision(
         scenario: 'Moon behind Earth',
         pass: Number(pixel[0]) > 200 && Number(pixel[2]) < 20,
       });
+      moonMesh.visible = false;
+      for (const altitude of [400, 30000, 1e6]) {
+        earthMesh.position.set(0, 0, -6371 - altitude);
+        for (const inFront of [false, true]) {
+          const z = inFront ? -altitude / 2 : -6371 - altitude;
+          const orbit = new OrbitLayer(
+            new Float64Array([-1e7, 0, z, 1e7, 0, z]),
+            '#0000ff',
+            'computed',
+          );
+          orbit.update(new Float64Array(3), new Float64Array(3), 1, true);
+          orbit.line.material.linewidth = 8;
+          orbit.line.material.opacity = 1;
+          scene.add(orbit.line);
+          try {
+            renderer.render(scene, camera);
+            const color = await renderer.readRenderTargetPixelsAsync(
+              target,
+              size / 2,
+              size / 2,
+              1,
+              1,
+            );
+            depthResults.push({
+              scenario: `Orbit ${inFront ? 'in front of' : 'inside'} Earth, altitude ${altitude} km`,
+              pass: inFront
+                ? Number(color[2]) > 200 && Number(color[0]) < 20
+                : Number(color[0]) > 200 && Number(color[2]) < 20,
+            });
+          } finally {
+            orbit.dispose();
+          }
+        }
+      }
+      earthMesh.position.set(0, 0, -30000);
+      const crossing = new OrbitLayer(
+        new Float64Array([0, 0, -30000, -1e7, 0, 1e7]),
+        '#0000ff',
+        'computed',
+      );
+      crossing.update(new Float64Array(3), new Float64Array(3), 1, true);
+      crossing.line.material.linewidth = 8;
+      crossing.line.material.opacity = 1;
+      scene.add(crossing.line);
+      try {
+        renderer.render(scene, camera);
+        const pixels = await renderer.readRenderTargetPixelsAsync(
+          target,
+          size / 2 - 32,
+          size / 2,
+          32,
+          1,
+        );
+        let pass = true;
+        for (let x = 0; x < 32; x++)
+          pass &&=
+            Number(pixels[x * 4]) > 200 && Number(pixels[x * 4 + 2]) < 20;
+        depthResults.push({
+          scenario: 'Orbit from Earth center crossing the camera plane',
+          pass,
+        });
+      } finally {
+        crossing.dispose();
+      }
+      const oblique = new OrbitLayer(
+        new Float64Array([-1e7, 0, -1e7 - 30000, 1e7, 0, 1e7 - 30000]),
+        '#0000ff',
+        'computed',
+      );
+      oblique.update(new Float64Array(3), new Float64Array(3), 1, true);
+      oblique.line.material.linewidth = 8;
+      oblique.line.material.opacity = 1;
+      scene.add(oblique.line);
+      try {
+        renderer.render(scene, camera);
+        const pixels = await renderer.readRenderTargetPixelsAsync(
+          target,
+          0,
+          size / 2,
+          size,
+          1,
+        );
+        let pass = true;
+        const mismatches: {
+          x: number;
+          blueExpected: boolean;
+          red: number;
+          blue: number;
+        }[] = [];
+        for (let x = 8; x < size - 8; x++) {
+          const slope = (((x + 0.5) / size) * 2 - 1) * Math.tan(Math.PI / 8);
+          const norm = Math.hypot(slope, 1);
+          const along = 30000 / norm;
+          // Do not compare full pixel colors at the tessellated/MSAA limb.
+          if (Math.abs(Math.abs((30000 * slope) / norm) - 6371) < 100) continue;
+          const discriminant = 6371 ** 2 - ((30000 * slope) / norm) ** 2;
+          const sphereDepth =
+            discriminant > 0 ? along - Math.sqrt(discriminant) : Infinity;
+          const lineDepth = (30000 / (1 + slope)) * norm;
+          if (Math.abs(sphereDepth - lineDepth) < 100) continue;
+          const blueExpected = lineDepth < sphereDepth;
+          const matches = blueExpected
+            ? Number(pixels[x * 4 + 2]) > 200 && Number(pixels[x * 4]) < 20
+            : Number(pixels[x * 4]) > 200 && Number(pixels[x * 4 + 2]) < 20;
+          pass &&= matches;
+          if (!matches)
+            mismatches.push({
+              x,
+              blueExpected,
+              red: Number(pixels[x * 4]),
+              blue: Number(pixels[x * 4 + 2]),
+            });
+        }
+        depthResults.push({
+          scenario:
+            'Oblique orbit visibility versus float64 ray-sphere intersections',
+          pass,
+          mismatches,
+        });
+      } finally {
+        oblique.dispose();
+      }
     } finally {
       sphere.dispose();
       red.dispose();
@@ -159,7 +282,7 @@ export async function measurePrecision(
       depthResults,
       pass: maxErrorPx < 0.5 && depthResults.every((r) => r.pass),
       method:
-        'GPU MSAA marker centroid versus float64 perspective projection; opaque depth probes with logarithmic depth',
+        'GPU MSAA marker centroid versus float64 perspective projection; sphere, shell and orbit depth probes, including oblique ribbon visibility versus ray-sphere intersections',
       altitudeKm: 400,
     };
   } finally {

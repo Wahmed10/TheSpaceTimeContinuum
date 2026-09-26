@@ -1,0 +1,20 @@
+{
+  "count": 10000,
+  "frames": 240,
+  "warmupFrames": 30,
+  "drawCalls": 3,
+  "pointDrawCalls": 1,
+  "partialUploadVerified": true,
+  "fps": 164.7107267860813,
+  "p95Ms": 6.2000000000116415,
+  "medianMs": 6.100000000005821,
+  "viewport": {
+    "width": 2560,
+    "height": 1356
+  },
+  "method": "10k Earth-local sprites plus a sphere; 64 position/size updates per frame; requestAnimationFrame timing. Readback verifies a partial color upload.",
+  "backend": "webgpu",
+  "adapter": "",
+  "softwareRenderer": false,
+  "measuredAt": "2026-09-25T05:23:35.491Z"
+}

@@ -4,6 +4,7 @@ export class Input {
   private pinch = 0;
   private travel = 0;
   private lastTap = 0;
+  private multiTouch = false;
   private controller = new AbortController();
   constructor(
     canvas: HTMLCanvasElement,
@@ -11,6 +12,7 @@ export class Input {
     radius: () => number,
     pick: (x: number, y: number, touch: boolean) => void,
     focus: () => void,
+    hover: (x: number | null, y: number | null) => void = () => {},
   ) {
     const signal = this.controller.signal;
     canvas.addEventListener(
@@ -19,6 +21,9 @@ export class Input {
         canvas.focus();
         canvas.setPointerCapture(e.pointerId);
         this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (this.pointers.size === 1) this.multiTouch = false;
+        else this.multiTouch = true;
+        hover(null, null);
         this.travel = 0;
         this.pinch = this.distance();
       },
@@ -28,7 +33,10 @@ export class Input {
       'pointermove',
       (e) => {
         const p = this.pointers.get(e.pointerId);
-        if (!p) return;
+        if (!p) {
+          if (e.pointerType !== 'touch') hover(e.clientX, e.clientY);
+          return;
+        }
         const dx = e.clientX - p.x,
           dy = e.clientY - p.y;
         this.travel += Math.abs(dx) + Math.abs(dy);
@@ -46,7 +54,7 @@ export class Input {
     canvas.addEventListener(
       'pointerup',
       (e) => {
-        if (this.travel < 6 && this.pointers.size === 1) {
+        if (!this.multiTouch && this.travel < 6 && this.pointers.size === 1) {
           pick(e.clientX, e.clientY, e.pointerType === 'touch');
           if (e.pointerType === 'touch') {
             const now = performance.now();
@@ -60,6 +68,9 @@ export class Input {
       },
       { signal },
     );
+    canvas.addEventListener('pointerleave', () => hover(null, null), {
+      signal,
+    });
     canvas.addEventListener(
       'pointercancel',
       (e) => this.pointers.delete(e.pointerId),
@@ -69,6 +80,7 @@ export class Input {
       'wheel',
       (e) => {
         e.preventDefault();
+        hover(null, null);
         camera.zoom(e.deltaY * (e.deltaMode === 1 ? 0.025 : 0.0015), radius());
       },
       { signal, passive: false },

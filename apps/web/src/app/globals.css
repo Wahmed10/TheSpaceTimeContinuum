@@ -96,6 +96,8 @@ kbd {
   overflow: hidden;
 }
 .space-label {
+  transition: opacity 150ms ease;
+  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -118,6 +120,12 @@ kbd {
 }
 .space-label.selected {
   color: #fff;
+}
+.space-label[data-visible='true'] {
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
 }
 .topbar {
   position: absolute;
@@ -722,6 +730,17 @@ p {
   gap: 16px;
   padding: 22px;
   border-bottom: 1px solid var(--border);
+}
+.search-dialog {
+  max-height: calc(80dvh - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.search-dialog .search-box {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #15202a;
 }
 .search-box input {
   background: none;

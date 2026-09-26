@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-09-24T22:32:01.625Z",
+  "node": "v24.12.0",
+  "samples": [
+    {
+      "provider": "phobos-osculating",
+      "calls": 100000,
+      "elapsedMs": 37.62110000000001,
+      "heapDeltaBeforeGcBytes": 1235920,
+      "retainedGrowthBytes": 488,
+      "retainedGrowthUnder1MB": true,
+      "upstreamAllocates": false
+    },
+    {
+      "provider": "astronomy:Earth",
+      "calls": 100000,
+      "elapsedMs": 1698.9204,
+      "heapDeltaBeforeGcBytes": 1677224,
+      "retainedGrowthBytes": 5016,
+      "retainedGrowthUnder1MB": true,
+      "upstreamAllocates": true
+    },
+    {
+      "provider": "astronomy:callisto",
+      "calls": 100000,
+      "elapsedMs": 511.27379999999994,
+      "heapDeltaBeforeGcBytes": 1093592,
+      "retainedGrowthBytes": 5904,
+      "retainedGrowthUnder1MB": true,
+      "upstreamAllocates": true
+    },
+    {
+      "provider": "synthetic-kepler",
+      "calls": 100000,
+      "elapsedMs": 23.958500000000186,
+      "heapDeltaBeforeGcBytes": 933160,
+      "retainedGrowthBytes": 248,
+      "retainedGrowthUnder1MB": true,
+      "upstreamAllocates": false
+    },
+    {
+      "provider": "synthetic-sampled",
+      "calls": 100000,
+      "elapsedMs": 10.038499999999658,
+      "heapDeltaBeforeGcBytes": 18656,
+      "retainedGrowthBytes": 5968,
+      "retainedGrowthUnder1MB": true,
+      "upstreamAllocates": false
+    }
+  ],
+  "frameTreeMsPerFrame": 0.12584917,
+  "note": "Post-GC retained heap growth is a leak check, not proof of zero allocations. Astronomy-engine allocates transient objects. Frame-tree timing includes four corrected origins, texture rotations and numerical rotation derivatives; GPU timing is excluded."
+}

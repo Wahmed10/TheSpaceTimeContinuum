@@ -1,0 +1,127 @@
+{
+  "generatedAt": "2026-09-24T22:41:49.821Z",
+  "status": "NOT ACCEPTED FOR RENDERING",
+  "note": "Rounded mean-element models have unresolved epoch/reference-plane/precession conventions and long-term drift. This model path is excluded from rendering; the five bodies now use independently validated osculating snapshot models. Two expected-failure diagnostic tests retain the 2% epoch geometry target; these are not science passes.",
+  "results": [
+    {
+      "moon": "phobos",
+      "jdTdb": 2451545,
+      "errorKm": 9.367669583251542,
+      "relativeVectorError": 0.0009845679230472933
+    },
+    {
+      "moon": "phobos",
+      "jdTdb": 2451545.5,
+      "errorKm": 67.90826615615144,
+      "relativeVectorError": 0.007335013263669447
+    },
+    {
+      "moon": "phobos",
+      "jdTdb": 2451546,
+      "errorKm": 128.75626237637533,
+      "relativeVectorError": 0.013622899838725016
+    },
+    {
+      "moon": "phobos",
+      "jdTdb": 2461307.5,
+      "errorKm": 10276.396829811243,
+      "relativeVectorError": 1.101270762040312
+    },
+    {
+      "moon": "deimos",
+      "jdTdb": 2451545,
+      "errorKm": 43.639559454493345,
+      "relativeVectorError": 0.0018609245050019547
+    },
+    {
+      "moon": "deimos",
+      "jdTdb": 2451545.5,
+      "errorKm": 53.39860999990226,
+      "relativeVectorError": 0.002275949398822773
+    },
+    {
+      "moon": "deimos",
+      "jdTdb": 2451546,
+      "errorKm": 38.23936953865527,
+      "relativeVectorError": 0.0016302883874945153
+    },
+    {
+      "moon": "deimos",
+      "jdTdb": 2461307.5,
+      "errorKm": 42649.013184438016,
+      "relativeVectorError": 1.8177218869591198
+    },
+    {
+      "moon": "titan",
+      "jdTdb": 2451545,
+      "errorKm": 2392363.988908072,
+      "relativeVectorError": 1.9054907097005047
+    },
+    {
+      "moon": "titan",
+      "jdTdb": 2451545.5,
+      "errorKm": 2400996.2507522665,
+      "relativeVectorError": 1.9104924271034316
+    },
+    {
+      "moon": "titan",
+      "jdTdb": 2451546,
+      "errorKm": 2409210.119523874,
+      "relativeVectorError": 1.9170968195786517
+    },
+    {
+      "moon": "titan",
+      "jdTdb": 2461307.5,
+      "errorKm": 2434438.3391686194,
+      "relativeVectorError": 1.9608660870123538
+    },
+    {
+      "moon": "triton",
+      "jdTdb": 2451545,
+      "errorKm": 25063.608504993692,
+      "relativeVectorError": 0.07065816637659973
+    },
+    {
+      "moon": "triton",
+      "jdTdb": 2451545.5,
+      "errorKm": 25010.66596633965,
+      "relativeVectorError": 0.07050918659988027
+    },
+    {
+      "moon": "triton",
+      "jdTdb": 2451546,
+      "errorKm": 25060.259520554235,
+      "relativeVectorError": 0.07064681876558752
+    },
+    {
+      "moon": "triton",
+      "jdTdb": 2461307.5,
+      "errorKm": 62760.586954296174,
+      "relativeVectorError": 0.176928863703262
+    },
+    {
+      "moon": "charon",
+      "jdTdb": 2451545,
+      "errorKm": 28.196141053287143,
+      "relativeVectorError": 0.0014386918080667274
+    },
+    {
+      "moon": "charon",
+      "jdTdb": 2451545.5,
+      "errorKm": 18.95732618201724,
+      "relativeVectorError": 0.0009672641396591496
+    },
+    {
+      "moon": "charon",
+      "jdTdb": 2451546,
+      "errorKm": 6.4855053608821045,
+      "relativeVectorError": 0.00033091640402302966
+    },
+    {
+      "moon": "charon",
+      "jdTdb": 2461307.5,
+      "errorKm": 28.71089719628489,
+      "relativeVectorError": 0.0014653028246175096
+    }
+  ]
+}

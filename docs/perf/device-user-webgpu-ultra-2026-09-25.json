@@ -1,0 +1,719 @@
+{
+  "benchmark": {
+    "measuredAt": "2026-09-25T05:25:51.466Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1707,
+      "height": 904,
+      "dpr": 1.5
+    },
+    "firstFrameMs": 725,
+    "backend": "webgpu",
+    "adapter": "",
+    "softwareRenderer": false,
+    "results": [
+      {
+        "view": "Solar System",
+        "fps": 164.69942355201954,
+        "p95Ms": 6.2000000000116415,
+        "medianMs": 6.100000000005821,
+        "backend": "webgpu",
+        "tier": "ultra",
+        "gpuBytes": 153092544,
+        "pendingTextures": 0,
+        "textureCount": 29,
+        "entities": 21,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:mars",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": true
+          }
+        ],
+        "pointLayers": 7,
+        "cameraWorld": [
+          -13791208.780419864,
+          -628850529.344564,
+          5603124.099244299
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "star:sun",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452.0000000000004
+        },
+        "ready": true
+      },
+      {
+        "view": "Earth close",
+        "fps": 164.69942355201624,
+        "p95Ms": 6.2000000000116415,
+        "medianMs": 6.100000000005821,
+        "backend": "webgpu",
+        "tier": "ultra",
+        "gpuBytes": 153092544,
+        "pendingTextures": 0,
+        "textureCount": 29,
+        "entities": 21,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 3,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mars",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": true
+          }
+        ],
+        "pointLayers": 7,
+        "cameraWorld": [
+          149938573.20511064,
+          -3989577.7354409806,
+          -1703330.7203339566
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "planet:earth",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452.0000000000003
+        },
+        "ready": true
+      },
+      {
+        "view": "Earth LEO",
+        "fps": 164.69942355201624,
+        "p95Ms": 6.2000000000116415,
+        "medianMs": 6.099999999976717,
+        "backend": "webgpu",
+        "tier": "ultra",
+        "gpuBytes": 153092544,
+        "pendingTextures": 0,
+        "textureCount": 29,
+        "entities": 21,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 3,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mars",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": true
+          }
+        ],
+        "pointLayers": 7,
+        "cameraWorld": [
+          149938978.15702263,
+          -3970869.916807207,
+          -1703506.3564652835
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "planet:earth",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452.0000000000009
+        },
+        "ready": true
+      },
+      {
+        "view": "Moon close",
+        "fps": 164.6881218692115,
+        "p95Ms": 6.2000000000116415,
+        "medianMs": 6.099999999976717,
+        "backend": "webgpu",
+        "tier": "ultra",
+        "gpuBytes": 153092544,
+        "pendingTextures": 0,
+        "textureCount": 29,
+        "entities": 21,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 2,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 3,
+            "visible": true
+          },
+          {
+            "id": "planet:mars",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": true
+          }
+        ],
+        "pointLayers": 7,
+        "cameraWorld": [
+          150156428.2816005,
+          -4271429.013919271,
+          -1851243.4653443007
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "moon:moon",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452.0000000000002
+        },
+        "ready": true
+      },
+      {
+        "view": "Mars close",
+        "fps": 164.69942355201624,
+        "p95Ms": 6.2000000000116415,
+        "medianMs": 6.099999999976717,
+        "backend": "webgpu",
+        "tier": "ultra",
+        "gpuBytes": 153092544,
+        "pendingTextures": 0,
+        "textureCount": 29,
+        "entities": 21,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:mars",
+            "level": 3,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": true
+          }
+        ],
+        "pointLayers": 7,
+        "cameraWorld": [
+          36825455.63069135,
+          207297382.86026517,
+          94123956.15734713
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "planet:mars",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452.0000000000001
+        },
+        "ready": true
+      }
+    ]
+  },
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.10767969251782006,
+    "thresholdPx": 0.5,
+    "depthResults": [
+      {
+        "scenario": "10 km cloud shell, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "10 km cloud shell, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Moon behind Earth",
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "method": "GPU MSAA marker centroid versus float64 perspective projection; opaque depth probes with logarithmic depth",
+    "altitudeKm": 400
+  }
+}

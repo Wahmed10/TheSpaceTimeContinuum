@@ -14,6 +14,15 @@ export default function EngineCanvas() {
   const [generation, setGeneration] = useState(0);
   useEffect(() => {
     let disposed = false;
+    let expired = false;
+    const startupDeadline = window.setTimeout(() => {
+      if (disposed) return;
+      expired = true;
+      useEngineStore.setState({
+        error:
+          'Loading the graphics and planetary maps took too long. Check your connection and reload to try again.',
+      });
+    }, 60000);
     let engine: SpaceEngine | undefined;
     const unsubs: (() => void)[] = [];
     // Each mount owns its canvas, so disposing an obsolete asynchronous mount
@@ -29,7 +38,7 @@ export default function EngineCanvas() {
     async function init() {
       try {
         const { SpaceEngine } = await import('@space/engine');
-        if (disposed) return;
+        if (disposed || expired) return;
         const q = new URLSearchParams(location.search);
         engine = await SpaceEngine.create(canvas, {
           forceWebGL: generation > 0 || q.get('renderer') === 'webgl',
@@ -37,10 +46,11 @@ export default function EngineCanvas() {
           test: q.has('test'),
           ...(q.get('t') ? { tdbSec: isoToTdb(q.get('t')!) } : {}),
         });
-        if (disposed) {
+        if (disposed || expired) {
           engine.dispose();
           return;
         }
+        window.clearTimeout(startupDeadline);
         useEngineStore.setState({
           engine,
           backend: engine.backend,
@@ -57,7 +67,7 @@ export default function EngineCanvas() {
           engine.on('select', (id) =>
             useEngineStore.setState({
               selectedId: id,
-              following: engine!.cameraController.following,
+              following: engine!.isFollowing,
             }),
           ),
           engine.on('clock', (s) => {
@@ -84,15 +94,16 @@ export default function EngineCanvas() {
         }
         if (q.has('layers')) {
           const enabled = new Set(q.get('layers')!.split(','));
-          for (const id of ['planets', 'moons', 'orbits'])
+          for (const id of ['planets', 'moons', 'dwarfs', 'orbits'])
             engine.setLayer(id, enabled.has(id));
         }
         if (q.get('scenario') === 'leo') {
           engine.focus('planet:earth', { transition: false });
-          engine.cameraController.distanceKm = 6771.0084;
+          engine.setReferenceDistance(6771.0084);
         }
       } catch (error) {
-        if (!disposed)
+        window.clearTimeout(startupDeadline);
+        if (!disposed && !expired)
           useEngineStore.setState({
             error:
               error instanceof Error
@@ -104,6 +115,7 @@ export default function EngineCanvas() {
     void init();
     return () => {
       disposed = true;
+      window.clearTimeout(startupDeadline);
       unsubs.forEach((fn) => fn());
       engine?.dispose();
       canvas.remove();

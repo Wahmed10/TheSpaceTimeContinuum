@@ -1,8 +1,25 @@
-﻿# Implementation status - 2026-09-23
+# Implementation status - 2026-09-23
 
-Phase 1 implementation is ready for review. **Acceptance remains pending physical-device validation.** The user chose "Keep the gate strict" and requested finishing Phase 1. Phase 2 has not started. The positive localhost visual review is recorded; it does not replace the device matrix.
+## Current update: September 26, 2026
 
-Update: two user-supplied Windows Chrome WebGPU reports now establish LOW and ULTRA performance (~161.3 FPS at p95 in all five views) and rendered precision/depth passes. The expected HIGH report actually records ULTRA. Exact HIGH, forced WebGL2, mobile and backend visual comparison remain unrecorded. The user explicitly requires approval before Phase 2; no approval has been given.
+Latest device review: [six September 26 reports](perf/device-review-2026-09-26.md) pass at recorded tiers: laptop WebGPU HIGH, laptop WebGL2 MEDIUM and Android Brave LOW, including all 11 depth probes and three 10k-point runs. The user reports no visual issues and explicitly requests no Phase 3 implementation yet. This supersedes the older statement below that all supplied reports predate orbit/API changes. Remaining exact tiers/browser coverage and engineering acceptance are still open.
+
+Fresh-session transition guide: [Phase 3 handoff](../PHASE_3_HANDOFF.md). The user reports that current navigation looks good. This is qualitative usability feedback; outstanding formal acceptance items below remain open. Phase 3 implementation has not started.
+
+Phase 2 is explicitly authorized. P2.1 and P2.3-P2.8 are implemented with local verification. All 21 built-in bodies render and appear in search. The six osculating snapshot models retain their 300 independent JPL holdouts and unchanged tolerances. Detailed non-hero materials and Saturn rings remain Phase 3.
+
+P2.9 now has a v1 consumer `EngineApi`, typed events, provider-backed entity registration and external point-source registration. The application store uses the consumer API and boundary checks reject camera-internal access. A 10,000-point source was exercised through rendering, touch picking, focus, layer reuse, failure isolation and disposal. The API does not fabricate missing ingest data or automatically add external records to the application search UI. See `packages/engine/README.md` for ownership, validation and source-buffer contracts.
+
+P2.10 has a five-camera-path CPU recorder, Playwright CLI and comparator that fails above 20% mean or p95 regression. Schema 2 advances simulation at 1x with fixed 60 Hz scheduling; comparisons require matching CPU/platform/browser/configuration and scheduled-work counts. The corrected local Windows/SwiftShader repeat passes all five paths (largest p95 increase 10.34%). Earlier schema 1 evidence and its failed comparison remain preserved. Hosted acceptance is pending: no Git remote is configured. The manual CI bootstrap workflow requires a matching reviewed Linux baseline before comparison or automatic triggers are enabled.
+
+Current tests: 116 passed plus the same two expected rejected-model diagnostics; typecheck/lint and production build pass. Ten final browser regressions pass, covering mobile/LAN startup, picking, providers/sources, orbits, precision/depth, texture reuse and all eight unchanged material references. Precision is 0.134356 px against 0.5 px, with all 11 depth scenarios passing. Engine bundle is 368,185 / 450,000 gzip bytes. Physical Samsung S23 Ultra / Brave ULTRA and desktop WebGPU reports remain preserved with verified original hashes; they predate these registration changes.
+
+P2.2 upstream astronomy-engine allocation acceptance, hosted CPU CI calibration, remaining device tiers and visual/backend signoff are still pending. Phase 2 is not declared fully accepted. See [Phase 2 checkpoint](PHASE_2_CHECKPOINT.md) and [CPU evidence guide](perf/cpu-regression.md).
+## Historical Phase 1 checkpoint (September 23)
+
+Phase 1 implementation was ready for review. **Acceptance remained pending physical-device validation.** The user chose "Keep the gate strict" and requested finishing Phase 1. Phase 2 had not started at this historical checkpoint. The positive localhost visual review does not replace the device matrix.
+
+Two user-supplied Windows Chrome WebGPU reports establish LOW and ULTRA performance (~161.3 FPS at p95 in all five views) and rendered precision/depth passes. The expected HIGH report actually records ULTRA. Exact HIGH, forced WebGL2, mobile and backend visual comparison remain unrecorded. Phase 2 approval was subsequently supplied; these physical-device measurements remain pending.
 
 ## Implemented and locally verified
 
@@ -21,7 +38,7 @@ Update: two user-supplied Windows Chrome WebGPU reports now establish LOW and UL
 
 See [gate report](perf/gate-report.md) and [device matrix](perf/device-matrix.md). Local browser evidence uses SwiftShader WebGL2; no real WebGPU adapter is available. Texture memory means compressed asset mip storage, not total VRAM. Atmosphere uses uniform-density analytic scattering. Lunar displacement is display-resolution, 8-bit terrain across +/-12 km, not scientific terrain data.
 
-No hosted CI run, deployment, database or physical-device PASS is claimed. Upstream astronomy-engine still allocates internal objects; the Phase 2 zero-allocation requirement has not been asserted. Phases 2-11 and 4B remain unimplemented; db and ingest are skeletons.
+No hosted CI run, deployment, database or complete device-matrix PASS is claimed; individual submitted device results are recorded separately. Upstream astronomy-engine still allocates internal objects; the Phase 2 zero-allocation requirement has not been asserted. Phase 2 is now partially implemented as described above; later phases, db and ingest remain unimplemented/skeletons.
 
 ## Reproduce
 

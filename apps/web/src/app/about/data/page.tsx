@@ -52,8 +52,11 @@ export default function Data() {
         </li>
         <li>
           <a href="https://ssd.jpl.nasa.gov/horizons/">NASA/JPL Horizons</a> —
-          ephemeris correction tables and independent reference vectors for
-          validation.
+          ephemeris corrections, orbital-element snapshots, and independent
+          reference vectors for validation. Phobos, Deimos, Titan, Triton,
+          Charon and Ceres use approximate local orbital propagation blended
+          between snapshots. Recorded errors at test dates are not continuous
+          accuracy guarantees.
         </li>
         <li>
           <a href="https://www.solarsystemscope.com/textures/">
@@ -80,11 +83,12 @@ export default function Data() {
       </ul>
       <h2>Architecture preview</h2>
       <p>
-        This release implements the first renderer milestone: Sun, Earth, Moon,
-        and Mars. The plan’s stricter scientific and real-device performance
-        gates are tracked in the repository before further layers are enabled.
-        No news, satellite, asteroid, or spacecraft positions are invented to
-        fill missing data.
+        This release includes 21 catalog bodies: the Sun, eight planets, Pluto,
+        Ceres and ten moons. Additional bodies currently use simple lit colors;
+        detailed materials and rings are still in development. Scientific
+        validation and physical-device performance evidence are tracked in the
+        repository. Live satellite feeds, spacecraft trajectories and news are
+        not yet available.
       </p>
       <h2>Privacy</h2>
       <p>

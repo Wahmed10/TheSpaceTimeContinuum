@@ -1,0 +1,2072 @@
+{
+  "benchmark": {
+    "measuredAt": "2026-09-26T22:27:58.855Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1707,
+      "height": 904,
+      "dpr": 1.5
+    },
+    "firstFrameMs": 773,
+    "backend": "webgl2",
+    "adapter": "Brave",
+    "softwareRenderer": false,
+    "results": [
+      {
+        "view": "Solar System",
+        "fps": 164.68812186933647,
+        "p95Ms": 6.200000001117587,
+        "medianMs": 6.099999999627471,
+        "backend": "webgl2",
+        "tier": "medium",
+        "gpuBytes": 27263424,
+        "pendingTextures": 0,
+        "textureCount": 27,
+        "entities": 21,
+        "sourcePoints": 0,
+        "sources": [],
+        "layers": [
+          {
+            "id": "planets",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "moons",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": false
+          },
+          {
+            "id": "dwarfs",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "orbits",
+            "category": "orbits",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "neo",
+            "category": "small-bodies",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.stations",
+            "category": "satellites",
+            "requested": true,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.starlink",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.gnss",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.weather",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.science",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.brightest",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "spacecraft",
+            "category": "spacecraft",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          }
+        ],
+        "geometries": 19,
+        "gpuAttributes": 86,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 0,
+            "visible": false
+          },
+          {
+            "id": "planet:mars",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": false
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": false
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": false
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": false
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": false
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": false
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": false
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": false
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": false
+          }
+        ],
+        "pointLayers": 7,
+        "orbits": [
+          {
+            "id": "planet:mercury",
+            "epoch": 843723854.8653619,
+            "vertices": 219,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:venus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:earth",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:moon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:mars",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:jupiter",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:saturn",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:uranus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:neptune",
+            "epoch": 843723854.8653619,
+            "vertices": 254,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:pluto",
+            "epoch": 843723854.8653619,
+            "vertices": 193,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:ceres",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:phobos",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:deimos",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:io",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:europa",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:ganymede",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:callisto",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:titan",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:triton",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:charon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          }
+        ],
+        "cameraWorld": [
+          83433507.09816453,
+          -301950897.47761047,
+          544717545.3624417
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "star:sun",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452
+        },
+        "ready": true
+      },
+      {
+        "view": "Earth close",
+        "fps": 164.68812186912598,
+        "p95Ms": 6.200000001117587,
+        "medianMs": 6.099999999627471,
+        "backend": "webgl2",
+        "tier": "medium",
+        "gpuBytes": 27263424,
+        "pendingTextures": 0,
+        "textureCount": 27,
+        "entities": 21,
+        "sourcePoints": 0,
+        "sources": [],
+        "layers": [
+          {
+            "id": "planets",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "moons",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "dwarfs",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "orbits",
+            "category": "orbits",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "neo",
+            "category": "small-bodies",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.stations",
+            "category": "satellites",
+            "requested": true,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.starlink",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.gnss",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.weather",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.science",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.brightest",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "spacecraft",
+            "category": "spacecraft",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          }
+        ],
+        "geometries": 21,
+        "gpuAttributes": 94,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 3,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mars",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": true
+          }
+        ],
+        "pointLayers": 7,
+        "orbits": [
+          {
+            "id": "planet:mercury",
+            "epoch": 843723854.8653619,
+            "vertices": 219,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:venus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:earth",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 2
+          },
+          {
+            "id": "moon:moon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:mars",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:jupiter",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:saturn",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:uranus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:neptune",
+            "epoch": 843723854.8653619,
+            "vertices": 254,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:pluto",
+            "epoch": 843723854.8653619,
+            "vertices": 193,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:ceres",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:phobos",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:deimos",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:io",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:europa",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:ganymede",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:callisto",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:titan",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:triton",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:charon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          }
+        ],
+        "cameraWorld": [
+          149942516.5989103,
+          -3976318.8231390114,
+          -1681464.4649593867
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "planet:earth",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452.0000000000001
+        },
+        "ready": true
+      },
+      {
+        "view": "Earth LEO",
+        "fps": 164.68812186912598,
+        "p95Ms": 6.200000001117587,
+        "medianMs": 6.099999999627471,
+        "backend": "webgl2",
+        "tier": "medium",
+        "gpuBytes": 27263424,
+        "pendingTextures": 0,
+        "textureCount": 27,
+        "entities": 21,
+        "sourcePoints": 0,
+        "sources": [],
+        "layers": [
+          {
+            "id": "planets",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "moons",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "dwarfs",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "orbits",
+            "category": "orbits",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "neo",
+            "category": "small-bodies",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.stations",
+            "category": "satellites",
+            "requested": true,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.starlink",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.gnss",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.weather",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.science",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.brightest",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "spacecraft",
+            "category": "spacecraft",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          }
+        ],
+        "geometries": 21,
+        "gpuAttributes": 94,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 3,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mars",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": true
+          }
+        ],
+        "pointLayers": 7,
+        "orbits": [
+          {
+            "id": "planet:mercury",
+            "epoch": 843723854.8653619,
+            "vertices": 219,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:venus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:earth",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 2
+          },
+          {
+            "id": "moon:moon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:mars",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:jupiter",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:saturn",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:uranus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:neptune",
+            "epoch": 843723854.8653619,
+            "vertices": 254,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:pluto",
+            "epoch": 843723854.8653619,
+            "vertices": 193,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:ceres",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:phobos",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:deimos",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:io",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:europa",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:ganymede",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:callisto",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:titan",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:triton",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:charon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          }
+        ],
+        "cameraWorld": [
+          149938978.15702263,
+          -3970869.916807207,
+          -1703506.3564652835
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "planet:earth",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452.0000000000009
+        },
+        "ready": true
+      },
+      {
+        "view": "Moon close",
+        "fps": 164.6994235521018,
+        "p95Ms": 6.200000001117587,
+        "medianMs": 6.099999999627471,
+        "backend": "webgl2",
+        "tier": "medium",
+        "gpuBytes": 27263424,
+        "pendingTextures": 0,
+        "textureCount": 27,
+        "entities": 21,
+        "sourcePoints": 0,
+        "sources": [],
+        "layers": [
+          {
+            "id": "planets",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "moons",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "dwarfs",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "orbits",
+            "category": "orbits",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "neo",
+            "category": "small-bodies",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.stations",
+            "category": "satellites",
+            "requested": true,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.starlink",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.gnss",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.weather",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.science",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.brightest",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "spacecraft",
+            "category": "spacecraft",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          }
+        ],
+        "geometries": 22,
+        "gpuAttributes": 97,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 2,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 3,
+            "visible": true
+          },
+          {
+            "id": "planet:mars",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": true
+          }
+        ],
+        "pointLayers": 7,
+        "orbits": [
+          {
+            "id": "planet:mercury",
+            "epoch": 843723854.8653619,
+            "vertices": 219,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:venus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:earth",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:moon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 2
+          },
+          {
+            "id": "planet:mars",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:jupiter",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:saturn",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:uranus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:neptune",
+            "epoch": 843723854.8653619,
+            "vertices": 254,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:pluto",
+            "epoch": 843723854.8653619,
+            "vertices": 193,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:ceres",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:phobos",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:deimos",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:io",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:europa",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:ganymede",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:callisto",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:titan",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:triton",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:charon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          }
+        ],
+        "cameraWorld": [
+          150156428.2816005,
+          -4271429.013919271,
+          -1851243.4653443007
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "moon:moon",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452.0000000000002
+        },
+        "ready": true
+      },
+      {
+        "view": "Mars close",
+        "fps": 164.68812186912598,
+        "p95Ms": 6.200000001117587,
+        "medianMs": 6.099999999627471,
+        "backend": "webgl2",
+        "tier": "medium",
+        "gpuBytes": 27263424,
+        "pendingTextures": 0,
+        "textureCount": 27,
+        "entities": 21,
+        "sourcePoints": 0,
+        "sources": [],
+        "layers": [
+          {
+            "id": "planets",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "moons",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "dwarfs",
+            "category": "bodies",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "orbits",
+            "category": "orbits",
+            "requested": true,
+            "available": true,
+            "loaded": true,
+            "visible": true
+          },
+          {
+            "id": "neo",
+            "category": "small-bodies",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.stations",
+            "category": "satellites",
+            "requested": true,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.starlink",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.gnss",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.weather",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.science",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "sat.brightest",
+            "category": "satellites",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          },
+          {
+            "id": "spacecraft",
+            "category": "spacecraft",
+            "requested": false,
+            "available": false,
+            "loaded": false,
+            "visible": false
+          }
+        ],
+        "geometries": 25,
+        "gpuAttributes": 110,
+        "lod": [
+          {
+            "id": "star:sun",
+            "level": 1,
+            "visible": true
+          },
+          {
+            "id": "planet:mercury",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:venus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:earth",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:moon",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:mars",
+            "level": 3,
+            "visible": true
+          },
+          {
+            "id": "planet:jupiter",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:saturn",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:uranus",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "planet:neptune",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:pluto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "dwarf:ceres",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:phobos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:deimos",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:io",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:europa",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:ganymede",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:callisto",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:titan",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:triton",
+            "level": 0,
+            "visible": true
+          },
+          {
+            "id": "moon:charon",
+            "level": 0,
+            "visible": true
+          }
+        ],
+        "pointLayers": 7,
+        "orbits": [
+          {
+            "id": "planet:mercury",
+            "epoch": 843723854.8653619,
+            "vertices": 219,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:venus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:earth",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:moon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 2
+          },
+          {
+            "id": "planet:mars",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 2
+          },
+          {
+            "id": "planet:jupiter",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:saturn",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:uranus",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "planet:neptune",
+            "epoch": 843723854.8653619,
+            "vertices": 254,
+            "visible": true,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:pluto",
+            "epoch": 843723854.8653619,
+            "vertices": 193,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "dwarf:ceres",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:phobos",
+            "epoch": 843307269.1823883,
+            "vertices": 257,
+            "visible": true,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:deimos",
+            "epoch": 843307269.1823883,
+            "vertices": 257,
+            "visible": true,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:io",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:europa",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:ganymede",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:callisto",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": false,
+            "width": 1
+          },
+          {
+            "id": "moon:titan",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:triton",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          },
+          {
+            "id": "moon:charon",
+            "epoch": 843723854.8653619,
+            "vertices": 257,
+            "visible": false,
+            "dashed": true,
+            "width": 1
+          }
+        ],
+        "cameraWorld": [
+          36825455.63069135,
+          207297382.86026517,
+          94123956.15734713
+        ],
+        "cameraLocal": [
+          0,
+          0,
+          0
+        ],
+        "selected": "planet:mars",
+        "focusScreen": {
+          "x": 853.5,
+          "y": 452.0000000000001
+        },
+        "ready": true
+      }
+    ]
+  },
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.10767969251782006,
+    "thresholdPx": 0.5,
+    "depthResults": [
+      {
+        "scenario": "10 km cloud shell, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "10 km cloud shell, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Moon behind Earth",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit inside Earth, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit in front of Earth, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit inside Earth, altitude 30000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit in front of Earth, altitude 30000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit inside Earth, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit in front of Earth, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit from Earth center crossing the camera plane",
+        "pass": true
+      },
+      {
+        "scenario": "Oblique orbit visibility versus float64 ray-sphere intersections",
+        "pass": true,
+        "mismatches": []
+      }
+    ],
+    "pass": true,
+    "method": "GPU MSAA marker centroid versus float64 perspective projection; sphere, shell and orbit depth probes, including oblique ribbon visibility versus ray-sphere intersections",
+    "altitudeKm": 400
+  }
+}

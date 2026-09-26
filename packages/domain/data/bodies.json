@@ -268,10 +268,11 @@
     "importance": 89,
     "description": "The largest object in the asteroid belt, with bright salt deposits and a water-rich interior.",
     "provenance": {
-      "providerId": "jpl-mean-elements",
-      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
-      "method": "mean-elements",
-      "certainty": "approximate"
+      "providerId": "jpl-horizons-orbital-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+      "method": "kepler-2body",
+      "certainty": "approximate",
+      "uncertaintyNote": "Locally propagated orbits blended between JPL snapshots. Validated at independent sample dates; accuracy is not continuously bounded."
     },
     "tags": []
   },
@@ -289,10 +290,11 @@
     "importance": 88,
     "description": "Mars’s inner moon is a small, irregular body orbiting close to the planet.",
     "provenance": {
-      "providerId": "jpl-mean-elements",
-      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
-      "method": "mean-elements",
-      "certainty": "approximate"
+      "providerId": "jpl-horizons-orbital-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+      "method": "kepler-2body",
+      "certainty": "approximate",
+      "uncertaintyNote": "Locally propagated orbits blended between JPL snapshots. Validated at independent sample dates; accuracy is not continuously bounded."
     },
     "tags": []
   },
@@ -310,10 +312,11 @@
     "importance": 87,
     "description": "The smaller and more distant of Mars’s two moons.",
     "provenance": {
-      "providerId": "jpl-mean-elements",
-      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
-      "method": "mean-elements",
-      "certainty": "approximate"
+      "providerId": "jpl-horizons-orbital-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+      "method": "kepler-2body",
+      "certainty": "approximate",
+      "uncertaintyNote": "Locally propagated orbits blended between JPL snapshots. Validated at independent sample dates; accuracy is not continuously bounded."
     },
     "tags": []
   },
@@ -415,10 +418,11 @@
     "importance": 82,
     "description": "A hazy moon with methane lakes and a thick nitrogen atmosphere.",
     "provenance": {
-      "providerId": "jpl-mean-elements",
-      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
-      "method": "mean-elements",
-      "certainty": "approximate"
+      "providerId": "jpl-horizons-orbital-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+      "method": "kepler-2body",
+      "certainty": "approximate",
+      "uncertaintyNote": "Locally propagated orbits blended between JPL snapshots. Validated at independent sample dates; accuracy is not continuously bounded."
     },
     "tags": []
   },
@@ -436,10 +440,11 @@
     "importance": 81,
     "description": "Neptune’s largest moon orbits in the opposite direction to its planet’s rotation.",
     "provenance": {
-      "providerId": "jpl-mean-elements",
-      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
-      "method": "mean-elements",
-      "certainty": "approximate"
+      "providerId": "jpl-horizons-orbital-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+      "method": "kepler-2body",
+      "certainty": "approximate",
+      "uncertaintyNote": "Locally propagated orbits blended between JPL snapshots. Validated at independent sample dates; accuracy is not continuously bounded."
     },
     "tags": []
   },
@@ -457,10 +462,11 @@
     "importance": 80,
     "description": "Pluto’s large companion shares a mutual, tidally locked dance.",
     "provenance": {
-      "providerId": "jpl-mean-elements",
-      "sourceUrl": "https://ssd.jpl.nasa.gov/sats/elem/",
-      "method": "mean-elements",
-      "certainty": "approximate"
+      "providerId": "jpl-horizons-orbital-elements",
+      "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+      "method": "kepler-2body",
+      "certainty": "approximate",
+      "uncertaintyNote": "Locally propagated orbits blended between JPL snapshots. Validated at independent sample dates; accuracy is not continuously bounded."
     },
     "tags": []
   }

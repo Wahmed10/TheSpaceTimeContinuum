@@ -39,6 +39,7 @@ export function createPlanet(
   assets: AssetManager,
   segments: number,
   res: number,
+  useTexture = true,
 ) {
   const group = new Group();
   const geometry = new SphereGeometry(1, segments, segments / 2);
@@ -47,7 +48,7 @@ export function createPlanet(
   const cloudPhase = uniform(0);
   const detailStrength = uniform(res >= 4096 ? 1 : 0);
   const animationTime = uniform(0);
-  const albedo = body.texture
+  const albedo = body.texture && useTexture
     ? texture(assets.load(body.texture, res))
     : color(body.color);
   const light = normalWorld.dot(sunDirection).clamp(-1, 1);

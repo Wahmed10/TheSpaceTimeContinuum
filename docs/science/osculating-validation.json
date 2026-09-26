@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-09-24T22:30:31.986Z",
+  "method": "Independent off-grid Horizons vectors, including both ends of the 1900-2100 timeline. These samples were not used to generate element tables.",
+  "certainty": "approximate",
+  "continuousBound": false,
+  "results": [
+    {
+      "name": "phobos",
+      "samples": 50,
+      "bytes": 4111432,
+      "stepDays": 1,
+      "maxErrorKm": 24.612949886780243,
+      "rmsErrorKm": 11.442731468784007,
+      "limitKm": 100,
+      "pass": true,
+      "maxVelocityErrorKmPerSec": 0.004783559125173647
+    },
+    {
+      "name": "deimos",
+      "samples": 50,
+      "bytes": 1027960,
+      "stepDays": 4,
+      "maxErrorKm": 18.047500228569852,
+      "rmsErrorKm": 9.107187319376076,
+      "limitKm": 100,
+      "pass": true,
+      "maxVelocityErrorKmPerSec": 0.001023979439762714
+    },
+    {
+      "name": "titan",
+      "samples": 50,
+      "bytes": 1027960,
+      "stepDays": 4,
+      "maxErrorKm": 32.75127658338429,
+      "rmsErrorKm": 16.427343697292574,
+      "limitKm": 1000,
+      "pass": true,
+      "maxVelocityErrorKmPerSec": 0.0002460125653269361
+    },
+    {
+      "name": "triton",
+      "samples": 50,
+      "bytes": 1027960,
+      "stepDays": 4,
+      "maxErrorKm": 12.642963117356004,
+      "rmsErrorKm": 7.861528616014263,
+      "limitKm": 500,
+      "pass": true,
+      "maxVelocityErrorKmPerSec": 0.00013098224336603254
+    },
+    {
+      "name": "charon",
+      "samples": 50,
+      "bytes": 257120,
+      "stepDays": 16,
+      "maxErrorKm": 0.07572962796276797,
+      "rmsErrorKm": 0.026403582172370422,
+      "limitKm": 100,
+      "pass": true,
+      "maxVelocityErrorKmPerSec": 6.27853845066647e-7
+    },
+    {
+      "name": "ceres",
+      "samples": 50,
+      "bytes": 257120,
+      "stepDays": 16,
+      "maxErrorKm": 159.17597421108698,
+      "rmsErrorKm": 42.912613527406876,
+      "limitKm": 1000,
+      "pass": true,
+      "maxVelocityErrorKmPerSec": 0.0004265592417302866
+    }
+  ]
+}

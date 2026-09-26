@@ -24,6 +24,8 @@ for (const file of [
 ]) {
   const text = await readFile(file, 'utf8');
   const pkg = file.split('/')[1];
+  if (file.startsWith('apps/web/src/') && text.includes('.cameraController'))
+    errors.push(`${file}: camera internals outside the public engine API`);
   for (const match of text.matchAll(/(?:from\s+|import\s*\()['"]([^'"]+)/g)) {
     const imp = match[1]!;
     if (imp.startsWith('@space/')) {

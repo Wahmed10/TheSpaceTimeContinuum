@@ -1,0 +1,36 @@
+{
+  "threshold": 1.2,
+  "pass": true,
+  "checks": [
+    {
+      "path": "solar-orbit",
+      "meanRatio": 0.9965382958324205,
+      "p95Ratio": 1.1034482694834506,
+      "pass": true
+    },
+    {
+      "path": "earth-leo",
+      "meanRatio": 0.9635270541321062,
+      "p95Ratio": 0.9393939426779419,
+      "pass": true
+    },
+    {
+      "path": "moon-orbit",
+      "meanRatio": 0.9616690920927391,
+      "p95Ratio": 0.9629629650070181,
+      "pass": true
+    },
+    {
+      "path": "mars-orbit",
+      "meanRatio": 0.841321543382612,
+      "p95Ratio": 0.851851860028072,
+      "pass": true
+    },
+    {
+      "path": "earth-moon-zoom",
+      "meanRatio": 0.735365264019199,
+      "p95Ratio": 0.7407407440112288,
+      "pass": true
+    }
+  ]
+}

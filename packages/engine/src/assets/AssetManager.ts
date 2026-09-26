@@ -19,7 +19,7 @@ export class AssetManager {
   private loader: KTX2Loader;
   private disposed = false;
   constructor(
-    renderer: WebGPURenderer,
+    private renderer: WebGPURenderer,
     private manifest: ManifestEntry[],
   ) {
     this.loader = new KTX2Loader()
@@ -82,6 +82,9 @@ export class AssetManager {
         }
         const data = /normal|specular|cloud|height/.test(name);
         this.configure(texture, data);
+        // Catalog LOD may hide every sphere at startup. Keep the small hero
+        // texture set resident so first focus does not allocate new textures.
+        this.renderer.initTexture(texture);
         this.records.set(name, {
           texture,
           resolution: 1024,
@@ -116,6 +119,7 @@ export class AssetManager {
       record.texture.dispose();
       record.texture.copy(loaded);
       this.configure(record.texture, record.data);
+      this.renderer.initTexture(record.texture);
       record.resolution = entry.res;
       loaded.dispose();
     } catch (error) {

@@ -1,0 +1,34 @@
+{
+  "body": "ceres",
+  "source": "NASA/JPL Horizons",
+  "sourceUrl": "https://ssd.jpl.nasa.gov/horizons/",
+  "generatedAt": "2026-09-24T22:27:16.532Z",
+  "frame": "ICRF_HELIO",
+  "startJd": 2415004.5,
+  "stepDays": 16,
+  "count": 4591,
+  "bytes": 257120,
+  "format": "f64le:startTdb,stepSec,count; then 7 f64le per sample: aKm,e,iRad,nodeRad,periRad,meanAnomalyRad,meanMotionRadPerSec",
+  "provenance": [
+    {
+      "query": {
+        "format": "json",
+        "COMMAND": "'1;'",
+        "CENTER": "'500@10'",
+        "OBJ_DATA": "'NO'",
+        "MAKE_EPHEM": "'YES'",
+        "EPHEM_TYPE": "'ELEMENTS'",
+        "REF_SYSTEM": "'ICRF'",
+        "REF_PLANE": "'FRAME'",
+        "OUT_UNITS": "'KM-S'",
+        "TIME_TYPE": "'TDB'",
+        "CSV_FORMAT": "'YES'",
+        "START_TIME": "'JD2415004.5'",
+        "STOP_TIME": "'JD2488444.51'",
+        "STEP_SIZE": "'16 d'"
+      },
+      "version": "1.2"
+    }
+  ],
+  "note": "Adjacent osculating Kepler solutions are propagated and smoothly blended. Approximate; validation uses separate off-grid Horizons vectors. No extrapolation."
+}

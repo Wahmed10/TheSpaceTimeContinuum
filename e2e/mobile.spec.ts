@@ -14,6 +14,9 @@ test('touch layout, search, layers, and timeline remain operable', async ({
   });
   await expect(page.locator('.error-panel')).toHaveCount(0);
   await page.getByRole('button', { name: 'Find a world' }).tap();
+  await expect(page.locator('.search-result')).toHaveCount(21);
+  await page.locator('.search-result').last().scrollIntoViewIfNeeded();
+  await expect(page.locator('.search-result').last()).toBeInViewport();
   await page.getByPlaceholder('Where would you like to go?').fill('Moon');
   await page.locator('.search-result').tap();
   await expect(

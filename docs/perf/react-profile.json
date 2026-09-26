@@ -1,7 +1,7 @@
 {
-  "seconds": 30.031,
+  "seconds": 30.018,
   "playbackRate": 86400,
-  "commits": 82,
-  "commitsPerSecond": 2.7305118044687156,
+  "commits": 88,
+  "commitsPerSecond": 2.9315743887001133,
   "method": "React Profiler onRender covering the complete Explore subtree in the development lab"
 }

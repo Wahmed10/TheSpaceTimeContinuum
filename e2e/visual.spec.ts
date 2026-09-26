@@ -7,6 +7,9 @@ test('deterministic material reference views', async ({ page }) => {
     timeout: 60000,
   });
   await page.evaluate(() => window.__spaceEngine!.setQuality('medium'));
+  // Keep material references independent of evolving orbit geometry/styles.
+  // Orbit visibility and depth are covered by orbits.spec and GPU depth probes.
+  await page.evaluate(() => window.__spaceEngine!.setLayer('orbits', false));
   await expect
     .poll(
       () =>

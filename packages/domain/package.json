@@ -1,6 +1,7 @@
 {
   "name": "@space/domain",
   "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": "./src/index.ts"
   },

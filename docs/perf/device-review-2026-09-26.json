@@ -1,0 +1,56 @@
+[
+    {
+        "file":  "Android-BraveBrowser-auto-phase-one-webgl2-1790461501979.json",
+        "kind":  "five-view",
+        "backend":  "webgl2",
+        "tier":  "low",
+        "p95Max":  16.80000000000291,
+        "precision":  0.1047063330344713,
+        "depthPassed":  11,
+        "sha256":  "2E8F8C575EFDBD24343D99B795539B57E08191822188EABE8202102B789A6738"
+    },
+    {
+        "file":  "Android-BraveBrowser-auto-phase-two-points-webgl2-1790461511065.json",
+        "kind":  "points",
+        "backend":  "webgl2",
+        "fps":  60.01200240047993,
+        "p95Ms":  16.79999999998836,
+        "sha256":  "AB0821997C75CFE078A918079FF4A8B772A4EC32FA7D0918BA44312C3E486615"
+    },
+    {
+        "file":  "Laptop-Browser-High-phase-one-webgl2-1790461686565.json",
+        "kind":  "five-view",
+        "backend":  "webgl2",
+        "tier":  "medium",
+        "p95Max":  6.2000000011175871,
+        "precision":  0.10767969251782006,
+        "depthPassed":  11,
+        "sha256":  "F796063A14A05961A7CE629C2BDA9C11176A459A73360032ED2F7F9FEA2CE006"
+    },
+    {
+        "file":  "Laptop-Browser-high-phase-one-webgpu-1790461508838.json",
+        "kind":  "five-view",
+        "backend":  "webgpu",
+        "tier":  "high",
+        "p95Max":  6.2000000011175871,
+        "precision":  0.10767969251782006,
+        "depthPassed":  11,
+        "sha256":  "5F6975FCB7AD52AB36AC10258CA3F34A663F7298D0CEB407FACBCDD98E5333D9"
+    },
+    {
+        "file":  "Laptop-Browser-High-phase-two-points-webgl2-1790461719882.json",
+        "kind":  "points",
+        "backend":  "webgl2",
+        "fps":  164.71072678612407,
+        "p95Ms":  6.200000001117587,
+        "sha256":  "F30FD1FE7B6CCFF1AE4E5F0322251F24FA4BF42FC468982B4E62FE29C6C44B3C"
+    },
+    {
+        "file":  "Laptop-Browser-High-phase-two-points-webgpu-1790461585341.json",
+        "kind":  "points",
+        "backend":  "webgpu",
+        "fps":  164.6994235521018,
+        "p95Ms":  6.200000001117587,
+        "sha256":  "634AB785550E414EEFBBF085D3F862E513161A57721B6E938B4A7ED9296504D8"
+    }
+]

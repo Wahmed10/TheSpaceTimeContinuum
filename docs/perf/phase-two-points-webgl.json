@@ -1,0 +1,20 @@
+{
+  "count": 10000,
+  "frames": 120,
+  "warmupFrames": 30,
+  "drawCalls": 3,
+  "pointDrawCalls": 1,
+  "partialUploadVerified": true,
+  "fps": 5.598973521521055,
+  "p95Ms": 333.40000000000146,
+  "medianMs": 183.29999999999927,
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "method": "10k Earth-local sprites plus a sphere; 64 position/size updates per frame; requestAnimationFrame timing. Readback verifies a partial color upload.",
+  "backend": "webgl2",
+  "adapter": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "softwareRenderer": true,
+  "measuredAt": "2026-09-25T03:35:49.630Z"
+}

@@ -1,5 +1,16 @@
 import type { NextConfig } from 'next';
+import { networkInterfaces } from 'node:os';
 const config: NextConfig = {
+  // Next's dev client must connect before hydration. Allow this PC's exact
+  // LAN addresses for phone testing, without a wildcard dev-origin allowance.
+  allowedDevOrigins:
+    process.env.NODE_ENV === 'development'
+      ? Object.values(networkInterfaces()).flatMap((addresses) =>
+          (addresses ?? [])
+            .filter((address) => address.family === 'IPv4' && !address.internal)
+            .map((address) => address.address),
+        )
+      : [],
   images: { unoptimized: true },
   devIndicators: false,
   transpilePackages: [

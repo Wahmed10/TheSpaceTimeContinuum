@@ -1,0 +1,52 @@
+name: CPU performance evidence
+# Bootstrap manually: record and review a hosted baseline before comparison.
+# After approving a matching Linux baseline, enable pull_request/push triggers.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Record evidence for review, or compare against an approved baseline
+        type: choice
+        options: [compare, record]
+        default: compare
+permissions:
+  contents: read
+jobs:
+  cpu:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Run five deterministic camera paths
+        env:
+          CPU_MODE: ${{ inputs.mode }}
+        run: |
+          mkdir -p .tools
+          pnpm dev > .tools/cpu-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" || true' EXIT
+          ready=false
+          for attempt in $(seq 1 90); do
+            if curl --silent --fail http://localhost:3000 > /dev/null; then ready=true; break; fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then cat .tools/cpu-server.log; exit 1; fi
+          if [ "$CPU_MODE" = record ]; then
+            pnpm perf:cpu --output .tools/cpu-current.json
+          else
+            pnpm perf:cpu --output .tools/cpu-current.json --baseline docs/perf/cpu-baseline-linux-x64.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cpu-performance-evidence
+          path: |
+            .tools/cpu-current*.json
+            .tools/cpu-server.log
