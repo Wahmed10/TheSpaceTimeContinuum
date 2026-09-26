@@ -2,6 +2,8 @@
 
 Prepared September 26, 2026. Start here in a fresh session; this supersedes the old Phase 2 handoff for current implementation status.
 
+**Agent operating rule:** read the root [AGENTS.md](AGENTS.md). For long jobs, confirm launch, save the run link and next step, then end the turn. Do not spend tokens polling or waiting. Resume result review when the user returns.
+
 **CI setup update:** the user subsequently authorized using `Wahmed10/TheSpaceTimeContinuum`. `origin` now points to that initially empty GitHub repository. See [hosted CI status](docs/perf/hosted-ci.md) for current execution evidence; older statements below that no remote exists are historical. Phase 3 remains unstarted.
 
 **Latest evidence update:** [September 26 device review](docs/perf/device-review-2026-09-26.md) covers six new reports. Laptop WebGPU HIGH, laptop WebGL2 MEDIUM and Android Brave LOW pass their five-view thresholds and all 11 precision/depth probes. All three 10k-point reports pass. The user reports no visual issues and explicitly instructed **do not start Phase 3**. The laptop WebGL2 filename says High but the actual tier is MEDIUM. Exact WebGL2 HIGH, mobile MEDIUM, other-browser coverage, hosted CPU CI and upstream allocations remain open. This update supersedes older claims below that all device evidence predates the orbit changes; it does not grant Phase 3 implementation authorization.

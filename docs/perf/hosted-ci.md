@@ -13,6 +13,14 @@ The CPU uploader now explicitly includes hidden files, restricted to the two exi
 
 Next: download and review the fresh Linux artifact, preserve the candidate with its run/commit provenance, run a matching hosted comparison at the unchanged 20% threshold, then enable automatic CPU comparison. The record/compare workflow remains manual until that evidence exists.
 
-The user requests that long jobs be launched with a link and the turn ended; do not repeatedly poll while waiting. Resume result review when they return. This preference does not authorize calling queued/running work a pass.
+The root `AGENTS.md` makes the user's long-job preference a repository-wide instruction: launch, record the run link, end the turn, and review results when they return. Do not repeatedly poll while waiting or call queued/running work a pass.
+
+## Reviewed Linux baseline
+
+[CPU record run 36277869074](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36277869074), for `1a77315050f0407220cda1237f1284a30afeede1`, succeeded and retained artifact `10917702875` (`cpu-performance-evidence`). Its report is preserved byte-for-byte as `docs/perf/cpu-baseline-linux-x64.json`, SHA256 `1691E9CE887C2FCE900CB1BF4D305A1CAD4B09BF3858D7A29A3572519F4349BA`.
+
+Reviewed configuration: schema 2, Linux x64, AMD EPYC 7763, Chromium 153.0.8010.12, Node 24.21.0, WebGL2/SwiftShader LOW, 1440x1000 DPR 1, 21 entities, 120 measured plus 30 warmup frames per path. All five paths have eight clock events and eight UI updates. Mean CPU durations range 2.204-2.8025 ms; p95 ranges 4.5-6.0 ms. The report passes structural/configuration validation and is accepted as the initial hosted reference for a repeatability check, not as proof of an independent comparison pass.
+
+Next run must use mode `compare` against this reference at the unchanged 20% mean/p95 threshold. Automatic triggers remain pending its result. Do not re-record the baseline merely because a comparison fails or GitHub assigns a different CPU model.
 
 User originals under `test-results/`, local tools, dependencies and environment files remain ignored. Preserved device evidence copies and the implementation handoffs are part of the project.

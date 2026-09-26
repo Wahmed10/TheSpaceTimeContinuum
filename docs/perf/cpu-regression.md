@@ -23,6 +23,8 @@ This pair checks the runner and local comparison, not long-term variance or hard
 
 ## Hosted CI status
 
+Latest update: `origin` is now `Wahmed10/TheSpaceTimeContinuum`. Hosted Verify passed, including all 16 browser tests. The artifact uploader was fixed and Linux record run `36277869074` produced a reviewed schema 2 baseline at `docs/perf/cpu-baseline-linux-x64.json`. An independent comparison and automatic trigger activation remain pending. See [hosted CI status](hosted-ci.md) for provenance and the next run. The bootstrap discussion below describes the original setup; its no-remote/no-baseline statements are historical.
+
 This checkout has no Git remote. No hosted run or approved Linux baseline is claimed. `.github/workflows/cpu-perf.yml` is a manually dispatched bootstrap workflow on Ubuntu 24.04. Record mode uploads candidate evidence. Review it, preserve a matching `docs/perf/cpu-baseline-linux-x64.json`, and use compare mode to enforce the unchanged 20% threshold. Then enable push/pull-request triggers. Hosted runners can change CPU model; the comparator will reject a mismatched machine rather than silently compare unrelated hardware. A stable runner is preferable for an enforced gate.
 
 The existing Verify workflow remains unchanged. P2.10 hosted/automatic acceptance stays pending until this bootstrap is actually performed. A Windows SwiftShader report is local evidence and must not be renamed as a Linux CI baseline or physical GPU evidence.
