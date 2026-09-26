@@ -2,6 +2,8 @@
 
 Prepared September 26, 2026. Start here in a fresh session; this supersedes the old Phase 2 handoff for current implementation status.
 
+**Latest CI result:** hosted Verify and independent CPU comparison both passed. Comparison run `36278590782` matches the reviewed Linux baseline; all five paths pass, maximum p95 increase 6.38% against 20%. Reports are preserved under `docs/perf/cpu-linux-repeat*.json`. Automatic CPU comparisons are now configured for main pushes and PRs. See [hosted CI status](docs/perf/hosted-ci.md). This supersedes older CI-pending statements below. Upstream allocation acceptance and remaining exact tier/browser coverage remain open. The user explicitly says not to start Phase 3; this review does not authorize implementation.
+
 **Agent operating rule:** read the root [AGENTS.md](AGENTS.md). For long jobs, confirm launch, save the run link and next step, then end the turn. Do not spend tokens polling or waiting. Resume result review when the user returns.
 
 **CI setup update:** the user subsequently authorized using `Wahmed10/TheSpaceTimeContinuum`. `origin` now points to that initially empty GitHub repository. See [hosted CI status](docs/perf/hosted-ci.md) for current execution evidence; older statements below that no remote exists are historical. Phase 3 remains unstarted.

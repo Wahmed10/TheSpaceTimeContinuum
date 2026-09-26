@@ -21,8 +21,14 @@ The root `AGENTS.md` makes the user's long-job preference a repository-wide inst
 
 Reviewed configuration: schema 2, Linux x64, AMD EPYC 7763, Chromium 153.0.8010.12, Node 24.21.0, WebGL2/SwiftShader LOW, 1440x1000 DPR 1, 21 entities, 120 measured plus 30 warmup frames per path. All five paths have eight clock events and eight UI updates. Mean CPU durations range 2.204-2.8025 ms; p95 ranges 4.5-6.0 ms. The report passes structural/configuration validation and is accepted as the initial hosted reference for a repeatability check, not as proof of an independent comparison pass.
 
-Next run must use mode `compare` against this reference at the unchanged 20% mean/p95 threshold. Automatic triggers remain pending its result. Do not re-record the baseline merely because a comparison fails or GitHub assigns a different CPU model.
+## Independent hosted comparison: passed
 
-Pending review: [comparison run 36278590782](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36278590782), launched in `compare` mode for `a399d63f49a019c966f3f84d77955c7c395fdbef`. Confirmed queued at handoff; no comparison pass is claimed. Next session: review this run and its current/comparison JSON artifacts before launching another job.
+[Comparison run 36278590782](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36278590782) succeeded in `compare` mode for `a399d63f49a019c966f3f84d77955c7c395fdbef`. Artifact `10917843065` contains the full report and passing comparison, preserved as `cpu-linux-repeat.json` and `cpu-linux-repeat-comparison.json`. Recomputing the comparison locally matches the hosted artifact exactly. CPU model, browser, configuration and scheduled work match the baseline.
+
+All five mean/p95 checks pass the unchanged 20% threshold. Maximum mean increase: 1.12% (Solar System); maximum p95 increase: 6.38% (Earth-Moon zoom). This is hosted CPU regression evidence, not physical GPU performance evidence.
+
+The CPU workflow now runs in compare mode on pushes to `main` and pull requests, with explicit manual record/compare retained. The trigger-only change does not alter the already-tested measurement/comparison commands; its publication uses `[skip ci]` to avoid an unnecessary repeat of the same workload. Future eligible pushes/PRs will exercise automatic dispatch. No further long run is currently pending from this review.
+
+P2.10 hosted execution, saved baseline and independent comparison are verified. Do not re-record the baseline merely because a later comparison fails or GitHub assigns a different CPU model. Remaining Phase 2 allocation/device requirements are unchanged; Phase 3 remains unstarted.
 
 User originals under `test-results/`, local tools, dependencies and environment files remain ignored. Preserved device evidence copies and the implementation handoffs are part of the project.

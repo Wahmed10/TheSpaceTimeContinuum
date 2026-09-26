@@ -2,7 +2,7 @@
 
 ## Current update: September 26, 2026
 
-Hosted CI update: the repository is now `Wahmed10/TheSpaceTimeContinuum`, with local/remote `main` connected. [Verify passed](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36277070443), including all 16 browser tests. After fixing hidden-directory artifact exclusion, CPU record run `36277869074` succeeded with a saved, reviewed Linux baseline. Independent comparison and automatic CPU triggers remain pending. See [hosted CI status](perf/hosted-ci.md). Older no-remote/no-hosted-run statements below are historical.
+Hosted CI update: the repository is now `Wahmed10/TheSpaceTimeContinuum`, with local/remote `main` connected. [Verify passed](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36277070443), including all 16 browser tests. After fixing hidden-directory artifact exclusion, CPU record run `36277869074` succeeded with a saved, reviewed Linux baseline. Independent hosted comparison run 36278590782 passed all five paths; automatic CPU comparisons are configured for main pushes and pull requests. See [hosted CI status](perf/hosted-ci.md). Older no-remote/no-hosted-run statements below are historical.
 
 Latest device review: [six September 26 reports](perf/device-review-2026-09-26.md) pass at recorded tiers: laptop WebGPU HIGH, laptop WebGL2 MEDIUM and Android Brave LOW, including all 11 depth probes and three 10k-point runs. The user reports no visual issues and explicitly requests no Phase 3 implementation yet. This supersedes the older statement below that all supplied reports predate orbit/API changes. Remaining exact tiers/browser coverage and engineering acceptance are still open.
 
@@ -16,7 +16,7 @@ P2.10 has a five-camera-path CPU recorder, Playwright CLI and comparator that fa
 
 Current tests: 116 passed plus the same two expected rejected-model diagnostics; typecheck/lint and production build pass. Ten final browser regressions pass, covering mobile/LAN startup, picking, providers/sources, orbits, precision/depth, texture reuse and all eight unchanged material references. Precision is 0.134356 px against 0.5 px, with all 11 depth scenarios passing. Engine bundle is 368,185 / 450,000 gzip bytes. Physical Samsung S23 Ultra / Brave ULTRA and desktop WebGPU reports remain preserved with verified original hashes; they predate these registration changes.
 
-P2.2 upstream astronomy-engine allocation acceptance, hosted CPU CI calibration, remaining device tiers and visual/backend signoff are still pending. Phase 2 is not declared fully accepted. See [Phase 2 checkpoint](PHASE_2_CHECKPOINT.md) and [CPU evidence guide](perf/cpu-regression.md).
+P2.2 upstream astronomy-engine allocation acceptance and remaining exact device tiers/browser coverage are still pending. Hosted CPU CI comparison has passed; the user reports no visual issues on tested devices. Phase 2 is not declared fully accepted. See [Phase 2 checkpoint](PHASE_2_CHECKPOINT.md) and [CPU evidence guide](perf/cpu-regression.md).
 ## Historical Phase 1 checkpoint (September 23)
 
 Phase 1 implementation was ready for review. **Acceptance remained pending physical-device validation.** The user chose "Keep the gate strict" and requested finishing Phase 1. Phase 2 had not started at this historical checkpoint. The positive localhost visual review does not replace the device matrix.

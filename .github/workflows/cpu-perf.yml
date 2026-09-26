@@ -1,7 +1,9 @@
 name: CPU performance evidence
-# Bootstrap manually: record and review a hosted baseline before comparison.
-# After approving a matching Linux baseline, enable pull_request/push triggers.
+# Reviewed Linux baseline and independent hosted comparison are in docs/perf.
 on:
+  push:
+    branches: [main]
+  pull_request:
   workflow_dispatch:
     inputs:
       mode:
@@ -26,7 +28,7 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - name: Run five deterministic camera paths
         env:
-          CPU_MODE: ${{ inputs.mode }}
+          CPU_MODE: ${{ inputs.mode || 'compare' }}
         run: |
           mkdir -p .tools
           pnpm dev > .tools/cpu-server.log 2>&1 &
