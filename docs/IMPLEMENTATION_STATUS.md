@@ -1,5 +1,7 @@
 # Implementation status - 2026-09-23
 
+**Latest user decision:** the existing device reports and visual review are sufficient; further tier/browser coverage is waived as a prerequisite. Hosted CI has passed. Upstream allocation acceptance remains unresolved; no allocation exception or Phase 3 implementation is authorized.
+
 ## Current update: September 26, 2026
 
 Hosted CI update: the repository is now `Wahmed10/TheSpaceTimeContinuum`, with local/remote `main` connected. [Verify passed](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36277070443), including all 16 browser tests. After fixing hidden-directory artifact exclusion, CPU record run `36277869074` succeeded with a saved, reviewed Linux baseline. Independent hosted comparison run 36278590782 passed all five paths; automatic CPU comparisons are configured for main pushes and pull requests. See [hosted CI status](perf/hosted-ci.md). Older no-remote/no-hosted-run statements below are historical.

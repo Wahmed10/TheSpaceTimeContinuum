@@ -1,5 +1,7 @@
 # The Space Time Continuum: Phase 3 handoff
 
+**Latest user decision:** completed device coverage and visual review are accepted as sufficient. Further device-tier/browser runs are waived as phase-transition prerequisites; untested combinations remain untested, not passed. Hosted CI has passed. The upstream allocation requirement is the remaining named Phase 2 acceptance question; no allocation exception has been approved. Phase 3 remains unstarted and requires the user's instruction.
+
 Prepared September 26, 2026. Start here in a fresh session; this supersedes the old Phase 2 handoff for current implementation status.
 
 **Latest CI result:** hosted Verify and independent CPU comparison both passed. Comparison run `36278590782` matches the reviewed Linux baseline; all five paths pass, maximum p95 increase 6.38% against 20%. Reports are preserved under `docs/perf/cpu-linux-repeat*.json`. Automatic CPU comparisons are now configured for main pushes and PRs. See [hosted CI status](docs/perf/hosted-ci.md). This supersedes older CI-pending statements below. Upstream allocation acceptance and remaining exact tier/browser coverage remain open. The user explicitly says not to start Phase 3; this review does not authorize implementation.

@@ -1,4 +1,6 @@
-﻿# Phase 1 device matrix
+# Phase 1 device matrix
+
+**Latest user decision:** the user accepts completed device coverage as sufficient. Additional tier/browser runs are waived as phase-transition prerequisites. Pending rows below remain untested, not passed; do not request those runs to unblock Phase 3. This does not waive the separate allocation requirement or authorize Phase 3 implementation.
 
 | Environment | Backend / tier | Status |
 |---|---|---|
