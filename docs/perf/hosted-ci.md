@@ -23,4 +23,6 @@ Reviewed configuration: schema 2, Linux x64, AMD EPYC 7763, Chromium 153.0.8010.
 
 Next run must use mode `compare` against this reference at the unchanged 20% mean/p95 threshold. Automatic triggers remain pending its result. Do not re-record the baseline merely because a comparison fails or GitHub assigns a different CPU model.
 
+Pending review: [comparison run 36278590782](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36278590782), launched in `compare` mode for `a399d63f49a019c966f3f84d77955c7c395fdbef`. Confirmed queued at handoff; no comparison pass is claimed. Next session: review this run and its current/comparison JSON artifacts before launching another job.
+
 User originals under `test-results/`, local tools, dependencies and environment files remain ignored. Preserved device evidence copies and the implementation handoffs are part of the project.
