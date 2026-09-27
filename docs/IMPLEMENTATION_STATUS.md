@@ -1,5 +1,7 @@
 # Implementation status - 2026-09-23
 
+Latest September 27 update: allocation patch hosted Verify and paired CPU comparison `36293066482` passed. All five camera paths meet the 20% regression threshold; the largest p95 increase is 8.33%. Device coverage is already accepted by the user. The remaining decision is ADR 0010's proposed exception for upstream temporary objects versus a broader zero-allocation rewrite; no exception is approved and Phase 3 has not started. No investigation job remains pending.
+
 Allocation investigation update: a pinned astronomy-engine 2.1.19 patch reduces sampled upstream allocation by 71-85% in the investigated Earth/Moon/Galilean workloads. Exact parity checks cover 495 original upstream states through both package entrypoints. Local typecheck/lint and 118 tests plus two expected diagnostics pass; the 100k-call retained-growth checks still pass. See [ADR 0010](adr/0010-astronomy-allocation-patch.md). Hosted verification is next. Remaining upstream result/time allocations mean literal zero-allocation acceptance is still open; no exception or Phase 3 work is authorized.
 
 **Latest user decision:** the existing device reports and visual review are sufficient; further tier/browser coverage is waived as a prerequisite. Hosted CI has passed. Upstream allocation acceptance remains unresolved; no allocation exception or Phase 3 implementation is authorized.

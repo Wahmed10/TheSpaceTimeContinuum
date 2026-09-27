@@ -1,5 +1,11 @@
 # Hosted CI setup
 
+## September 27: allocation patch comparison verified
+
+[Same-runner comparison 36293066482](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36293066482) succeeded. Artifact `10922613287` is preserved in `cpu-allocation-paired-{reference,current,current-comparison,provenance}.json`. Reference commit is `1a77315050f0407220cda1237f1284a30afeede1`; candidate is `7603decd244c66d87053d778fbc247005f000c2f`. Both ran on the same Intel Xeon Platinum 8573C, Linux x64, Chromium 153. Recomputing the comparison locally exactly matches the hosted artifact. All five paths pass at 20%; all means decreased (0.53-19.44%), and the largest p95 increase was 8.33% (Earth LEO). These sampled timings do not establish zero allocation or a continuous performance bound.
+
+No jobs remain pending from this investigation. The prior CPU-model mismatch remains preserved as an incomparable run, not relabeled as a pass. The allocation optimization has passed hosted Verify and paired CPU comparison. ADR 0010 proposes a scoped exception to literal zero allocation for the remaining upstream objects; it is not approved. Phase 3 remains unstarted. This section supersedes the historical pending-run descriptions below.
+
 ## Pending allocation-patch verification
 
 Commit `134a6fa903db205ceab7e87da8f496128cbe200d` contains the allocation optimization described in ADR 0010. [Verify run 36292258154](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36292258154) passed its verification, memory-growth, build and browser jobs. [CPU comparison run 36292258142](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36292258142) failed with `Incomparable CPU environment: cpuModel`: the saved reference used AMD EPYC 7763, while GitHub assigned AMD EPYC 9V45. This is an environment mismatch, not a measured >20% regression or a comparison pass. Artifact `10922428434` is preserved as `cpu-allocation-patch-mismatched-runner.json`; the original baseline is unchanged.
