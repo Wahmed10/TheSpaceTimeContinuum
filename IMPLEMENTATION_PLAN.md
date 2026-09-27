@@ -960,6 +960,8 @@ Scope (§69): Sun, Earth, Moon, Mars. Every step adds tests or a visual check. C
 Tests vs Horizons fixtures (extend the P0.8 fetch list for moons).
 *Accept:* all within §28 tolerances; zero allocations per `stateAt` (verified by a test that runs 1e5 calls and checks heap growth < 1 MB).
 
+**Accepted amendment (September 27, 2026):** the user approved a scoped exception to literal zero transient allocations inside the pinned, optimized astronomy-engine dependency. Preserve first-party output-buffer contracts, scientific tolerances, <1 MB retained growth after 100,000 calls, and the 20% CPU regression gate. Literal zero allocation is a future enhancement, not a Phase 3 prerequisite. See ADR 0010 and docs/ENHANCEMENTS.md. Phase 2 is accepted with this exception and the user's acceptance of completed device coverage.
+
 **P2.3 Catalog & registry**: `packages/domain/data/bodies.json` (Sun, planets, Pluto, Ceres, 10 moons: id, name, aliases, parentId, radii, rotation source, visual spec keys, importance). A `buildCatalog()` Zod-validates it. `EntityRegistry.loadCatalog()` creates render entities with providers.
 *Accept:* all bodies are positioned. The overlay lists 21 entities.
 

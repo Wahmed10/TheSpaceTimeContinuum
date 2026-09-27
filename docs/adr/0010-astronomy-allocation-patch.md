@@ -1,6 +1,6 @@
 # ADR 0010: reduce upstream astronomy allocation without changing ephemerides
 
-Status: optimization implemented and verified; full zero-allocation acceptance is **not** claimed. Hosted Verify (including science, memory and browser jobs) passed in run `36292258154`. CPU comparison run `36292258142` was rejected because GitHub assigned a different CPU model. Same-runner reference/candidate run `36293066482` subsequently passed all five paths at the unchanged 20% threshold; see `docs/perf/hosted-ci.md`. No scoped exception has been approved by the user.
+Status: optimization implemented and verified; full zero-allocation acceptance is **not** claimed. Hosted Verify (including science, memory and browser jobs) passed in run `36292258154`. CPU comparison run `36292258142` was rejected because GitHub assigned a different CPU model. Same-runner reference/candidate run `36293066482` subsequently passed all five paths at the unchanged 20% threshold; see `docs/perf/hosted-ci.md`. The user explicitly approved the scoped exception on September 27, 2026; Phase 2 acceptance is closed under that exception. Literal zero allocation is a deferred enhancement, not an achieved property.
 
 ## Investigation
 
@@ -34,8 +34,10 @@ An independent fixture captures the **unmodified** upstream implementation at 33
 
 Regenerate this fixture only with `node tools/fixtures/capture-astronomy-parity.mjs <unmodified-astronomy.js>`. The generator rejects any source except SHA256 `729c0ce37cc1a8096034a689039a5f04585ee8184177c638e8c74dec4fa3185a`, the original npm 2.1.19 CommonJS file. Never regenerate from the patched dependency to make a failure disappear. Keep the pinned patch and parity fixture when updating the lockfile; review/rebase explicitly when upgrading astronomy-engine.
 
-## Remaining decision
+## Approved scoped exception — September 27, 2026
 
-Proposed scoped acceptance exception, awaiting explicit user approval: permit the remaining temporary state/time/intermediate objects inside the pinned, optimized astronomy-engine dependency. Keep the first-party output-buffer contracts, unchanged scientific tests, existing <1 MB retained growth after 100,000 calls, and hosted 20% CPU regression limit. Reassess the exception when changing the dependency or patch. This is a change to the literal P2.2 wording, not a claim that a retained-growth test proves zero allocation. It does not authorize Phase 3.
+The user explicitly approved permitting the remaining temporary state/time/intermediate objects inside the pinned, optimized astronomy-engine dependency and requested that literal zero allocation be recorded as a future improvement. Phase 2 acceptance is closed with this exception and the separately accepted device coverage.
 
-Upstream `StateVector`, `AstroTime`, VSOP intermediate vectors and other return objects still allocate. This patch materially reduces the identified overhead but **does not satisfy literal zero transient allocations**. Finishing that literal goal requires a broader output-buffer API/internal rewrite, including Moon and Pluto paths, while preserving existing public ownership and all science results. Alternatively, the user may explicitly approve a measured, documented exception for the remaining upstream objects. Do not infer that exception from authorization to investigate or from passing performance tests. Device coverage has separately been accepted as sufficient; Phase 3 remains unstarted.
+Keep the first-party output-buffer contracts, unchanged scientific tests, existing <1 MB retained growth after 100,000 calls, and hosted 20% CPU regression limit. Reassess the exception when changing the dependency or patch. This changes the literal P2.2 requirement; it does not claim zero allocation or reinterpret retained-growth measurements as allocation counts.
+
+Upstream StateVector, AstroTime, VSOP intermediate vectors and other return objects still allocate. A broader output-buffer API/internal rewrite, including Moon and Pluto paths, is now tracked in [future enhancements](../ENHANCEMENTS.md). It is not a prerequisite for Phase 3. Phase 3 implementation was not started in this acceptance/documentation turn.

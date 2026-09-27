@@ -1,36 +1,22 @@
 # The Space Time Continuum: Phase 3 handoff
 
-**Latest September 27 result:** the allocation patch passed hosted Verify and same-runner CPU comparison `36293066482` (all five paths pass; maximum p95 increase 8.33%, unchanged 20% limit). Evidence and provenance are preserved in `docs/perf/cpu-allocation-paired-*.json`. No job remains pending from this investigation. Literal zero allocation remains unachieved; ADR 0010 contains a concrete, unapproved scoped exception for remaining upstream objects. The user must approve that requirement change or retain the broader rewrite requirement. Phase 3 remains unstarted. This supersedes older pending-run notes below.
-
-**Allocation investigation in progress:** read [ADR 0010](docs/adr/0010-astronomy-allocation-patch.md). A pinned pnpm patch removes dominant upstream iterator/lunar scratch allocations while preserving exact sampled upstream values. Local checks pass (118 tests plus two expected diagnostics). The 100k-call retained-growth gate also passes and now runs in hosted Verify. Literal zero allocation is not yet achieved: public time/state and intermediate vectors remain. Review the next hosted Verify/CPU comparison before any further rewrite or proposed exception. Phase 3 remains unstarted.
-
-**Latest user decision:** completed device coverage and visual review are accepted as sufficient. Further device-tier/browser runs are waived as phase-transition prerequisites; untested combinations remain untested, not passed. Hosted CI has passed. The upstream allocation requirement is the remaining named Phase 2 acceptance question; no allocation exception has been approved. Phase 3 remains unstarted and requires the user's instruction.
-
-Prepared September 26, 2026. Start here in a fresh session; this supersedes the old Phase 2 handoff for current implementation status.
-
-**Latest CI result:** hosted Verify and independent CPU comparison both passed. Comparison run `36278590782` matches the reviewed Linux baseline; all five paths pass, maximum p95 increase 6.38% against 20%. Reports are preserved under `docs/perf/cpu-linux-repeat*.json`. Automatic CPU comparisons are now configured for main pushes and PRs. See [hosted CI status](docs/perf/hosted-ci.md). This supersedes older CI-pending statements below. Upstream allocation acceptance and remaining exact tier/browser coverage remain open. The user explicitly says not to start Phase 3; this review does not authorize implementation.
-
-**Agent operating rule:** read the root [AGENTS.md](AGENTS.md). For long jobs, confirm launch, save the run link and next step, then end the turn. Do not spend tokens polling or waiting. Resume result review when the user returns.
-
-**CI setup update:** the user subsequently authorized using `Wahmed10/TheSpaceTimeContinuum`. `origin` now points to that initially empty GitHub repository. See [hosted CI status](docs/perf/hosted-ci.md) for current execution evidence; older statements below that no remote exists are historical. Phase 3 remains unstarted.
-
-**Latest evidence update:** [September 26 device review](docs/perf/device-review-2026-09-26.md) covers six new reports. Laptop WebGPU HIGH, laptop WebGL2 MEDIUM and Android Brave LOW pass their five-view thresholds and all 11 precision/depth probes. All three 10k-point reports pass. The user reports no visual issues and explicitly instructed **do not start Phase 3**. The laptop WebGL2 filename says High but the actual tier is MEDIUM. Exact WebGL2 HIGH, mobile MEDIUM, other-browser coverage, hosted CPU CI and upstream allocations remain open. This update supersedes older claims below that all device evidence predates the orbit changes; it does not grant Phase 3 implementation authorization.
+Updated September 27, 2026. **Phase 2 is accepted and ready for Phase 3.** This is the authoritative current transition status; older checkpoint statements about pending approval/gates are historical.
 
 ## 1. Status and user intent
 
-**Phase 2 functionality and local verification are complete. Full formal acceptance is not complete.** P2.2's upstream transient-allocation requirement, P2.10 hosted CI execution, and remaining device/backend acceptance are still open. Do not silently mark these passed.
+The user explicitly accepted the completed device coverage and visual review, and approved ADR 0010's scoped exception for remaining upstream temporary allocations. Literal zero allocation is a [future enhancement](docs/ENHANCEMENTS.md), not a blocker. Do not ask for those approvals again or silently relabel untested devices/remaining allocations as passed/absent.
 
-The user has just navigated the current app and reports that everything looks good. Earlier they accepted the dotted orbit styles and moon paths appearing when zoomed in. This is qualitative usability feedback; the latest message does not identify a device/backend/tier or supply a new quantitative report.
+Hosted Verify passed all 118 unit tests (plus two expected rejected-model diagnostics), science and retained-memory checks, production build, and all 16 browser tests. Same-runner CPU comparison 36293066482 passed all five paths at the unchanged 20% threshold; the largest p95 increase was 8.33%. Evidence is preserved in docs/perf/cpu-allocation-paired-*.json. No job is pending.
 
-The user requested this document to pass cleanly to a new session for Phase 3. They want continuation, not a restart. Their earlier concerns were missing Saturn rings and mostly single-color planets/moons beyond the original four hero bodies. Those are appropriate Phase 3 work. They prefer collecting cosmetic bugs after the phases, while blocking failures and verification regressions still need prompt fixes.
+The user wants Phase 3 in a new session. No Phase 3 code was started here. When that session is instructed to start, proceed without reopening accepted Phase 2 decisions. Saturn's rings and the missing planetary/moon detail are priorities within the existing Phase 3 plan.
 
-This turn creates a handoff; **Phase 3 implementation has not started**. The request was conditional on Phase 2 being complete, so do not interpret it as a waiver of the outstanding acceptance checks. Follow the next session's explicit instruction about starting Phase 3 with these named checks carried forward; once that instruction is given, do not repeatedly ask for permission. Preserve the user's prior strict-gate requirement and report unresolved evidence honestly.
+Read root [AGENTS.md](AGENTS.md): launch long jobs, record their links and next steps, then end the turn. Do not repeatedly poll or wait. Resume result review when the user returns.
 
 ## 2. Read in this order
 
 1. `IMPLEMENTATION_PLAN.md`: architecture contracts, material/asset/performance requirements, and the Phase 3 section. It remains the scope authority.
-2. `docs/IMPLEMENTATION_STATUS.md`: current September 26 summary; later sections are historical.
-3. `docs/PHASE_2_CHECKPOINT.md`: September 26 continuation and final "Resume here" section. Earlier test counts and next-step instructions are historical.
+2. `docs/IMPLEMENTATION_STATUS.md`: current September 27 accepted summary; later sections are historical.
+3. `docs/PHASE_2_CHECKPOINT.md`: September 27 final-acceptance banner and implementation details. Earlier pending gates, test counts and next-step instructions are historical.
 4. `packages/engine/README.md`: stable API v1, provider/source ownership, errors and lab boundaries.
 5. `docs/adr/0009-osculating-moon-models.md`, `docs/perf/device-review-2026-09-25.md`, `docs/perf/cpu-regression.md`.
 6. `assets/ASSET_LICENSES.md`, `docs/licensing/DATA_SOURCES.md`, existing asset tooling and manifests before adding textures.
@@ -41,8 +27,8 @@ This turn creates a handoff; **Phase 3 implementation has not started**. The req
 
 - Checkout: `C:\Users\waqar\Documents\TheSpaceTimeContinuum`.
 - Windows PowerShell; use `pnpm.cmd` if PowerShell blocks `pnpm.ps1`. Last recorded runtime: Node 24.12.0, pnpm 10.32.1, Next 16.3.6, Three 0.186.0. Recheck installed versions before changing dependencies.
-- There are many intentional modified and untracked files from the implementation. **They are the current product**, not disposable clutter. Inspect `git status`; do not reset, clean, overwrite, or assume the committed tree contains this work. No commits or push were made for this handoff.
-- No Git remote is configured as of this handoff. Do not invent a repository destination or claim hosted CI ran.
+- Do not assume a fresh session has a clean working tree. There may be intentional modified or untracked files from ongoing work. **They are the current product**, not disposable clutter. Inspect `git status`; do not reset, clean, overwrite, or assume the committed tree contains this work. The Phase 2 implementation, CI setup and subsequent acceptance documentation are committed/pushed; inspect current status before editing.
+- GitHub repository: https://github.com/Wahmed10/TheSpaceTimeContinuum. Local main tracks origin/main. Hosted CI is verified; see docs/perf/hosted-ci.md.
 - **Preserve `test-results/`**: it contains the user's original downloaded reports. Playwright clears its default output directory. Always supply `--output=.tools/<descriptive-name>`.
 - Development URL is `http://localhost:3000`. The earlier LAN address was `http://192.168.40.171:3000`; recheck interfaces because addresses can change. Start with `pnpm.cmd dev` only if the server is not already running.
 - `apps/web/AGENTS.md` requires reading relevant installed Next documentation before editing app code. Locate it under `apps/web/node_modules/next/dist/docs/`.
@@ -136,13 +122,13 @@ These results were obtained in the preceding implementation turn and preserved i
 
 | Check | Latest result |
 |---|---|
-| Typecheck, lint/boundaries, unit tests | PASS; 116 passed, 2 expected rejected-model diagnostics |
+| Typecheck, lint/boundaries, unit tests | PASS; 118 passed, 2 expected rejected-model diagnostics |
 | Production build | PASS; 21 catalog records validated |
 | Final browser regression subset | 10 tests passed; output `.tools/phase-two-api-final` |
 | Material references | All eight passed at unchanged 1.5% tolerance |
 | GPU readback precision | 600 samples, max 0.134355961 px against 0.5 px |
 | Depth | All 11 scenarios passed on local SwiftShader WebGL2 |
-| Standalone engine bundle | 368,185 / 450,000 gzip bytes, including lab code and dependencies |
+| Standalone engine bundle | 368,130 / 450,000 gzip bytes after the allocation patch, including lab code and dependencies |
 | CPU schema 2 repeat | All five paths passed unchanged 20% mean/p95 threshold; maximum p95 increase 10.34% |
 | User report integrity | All four original report hashes match preserved copies |
 
@@ -172,23 +158,15 @@ Read `docs/perf/cpu-regression.md` first. Schema 2 uses LOW/True, the unextended
 
 Keep `cpu-local-*` schema 1 evidence: its repeat failed Earth-Moon zoom p95 by 26.32%. Schema 1 paused simulation and varied scheduled work with RAF cadence; schema 2 corrects that protocol. Never compare the schemas or relabel the earlier failure as a pass. Do not raise the 20% threshold or overwrite a baseline merely because a later run fails.
 
-## 7. Outstanding acceptance ledger
+## 7. Accepted decisions and retained limitations
 
-| Open item | What is known / what is still required |
-|---|---|
-| P2.2 allocations | Provider functionality and retained-growth checks pass; upstream transient allocations remain. Resolve the requirement explicitly without calling a post-GC heap test proof of zero allocations. |
-| P2.10 hosted CI | Manual `.github/workflows/cpu-perf.yml` exists. No remote, hosted run or reviewed Linux baseline exists. Record/review a matching hosted baseline, then enforce comparison and enable automatic triggers. |
-| Device tiers | Submitted desktop WebGPU and Samsung S23 Ultra/Brave runs were ULTRA. Do not relabel them HIGH or LOW/MEDIUM. Exact remaining matrix rows remain open. |
-| Backend/visual parity | New orbit and future Phase 3 visual parity on actual WebGPU/WebGL2 hardware, plus LEO orbit jitter signoff, need evidence. Software readback does not establish every physical-device result. |
+- **Allocations:** user-approved scoped exception in ADR 0010. Keep the pinned patch, first-party buffer contracts, science tests, retained-memory gate and CPU regression gate. Literal zero allocation is deferred in docs/ENHANCEMENTS.md.
+- **Hosted CI:** Verify and the paired reference/candidate CPU comparison pass. Automatic CPU checks measure immutable reference commit 1a77315050f0407220cda1237f1284a30afeede1 and current code sequentially on the same runner; both reports and commit provenance are uploaded. Do not compare unrelated CPU models or overwrite a failing reference. See docs/perf/hosted-ci.md.
+- **Device coverage:** user accepts submitted reports and visual review as sufficient. Laptop WebGPU HIGH, laptop WebGL2 MEDIUM and Android Brave LOW pass their recorded checks, including all 11 depth scenarios; the three point runs also pass. Exact untested tiers/browsers remain untested, but further runs are not phase-transition prerequisites.
+- **Scientific limits:** sampled holdout accuracy is not a continuous bound. The two expected-failure mean-model diagnostics remain intentional. No scientific or performance tolerance was relaxed for this acceptance.
 
-Physical reports are summarized in `docs/perf/device-review-2026-09-25.md`. Desktop WebGPU points reached 164.71 average FPS; Samsung Brave WebGL2 points reached 60.003 FPS. Phone Phase 1 five-view p95 was 16.7-16.8 ms; precision was 0.104706333 px with the three original depth probes passing. These reports predate the new orbit/API changes. The latest navigation feedback does not expand their quantitative scope.
-
-The former Samsung/Brave infinite loader was reproduced at the LAN HTTP origin and fixed with exact development `allowedDevOrigins` plus startup timeout/retry handling. Do not replace it with a wildcard or assume viewport emulation alone verifies LAN startup.
+These are explicit accepted decisions, not a claim that literal zero allocations or exhaustive device coverage were achieved. Reopen them only for a demonstrated regression, relevant dependency change or a new user decision.
 
 ## 8. Fresh-session starting prompt
 
-Paste this if you want the next session to begin by reviewing the handoff:
-
-> Read PHASE_3_HANDOFF.md, the current September 26 sections of docs/PHASE_2_CHECKPOINT.md and docs/IMPLEMENTATION_STATUS.md, and the Phase 3 scope in IMPLEMENTATION_PLAN.md. Preserve the existing workspace and my test-results files. Phase 2 functionality and local checks are complete, but the handoff names outstanding formal acceptance items. Start by confirming that status and the Phase 3 implementation sequence; do not restart Phase 2 or silently mark pending gates passed.
-
-If authorizing Phase 3 implementation in that session, say explicitly that it may proceed while the named acceptance items remain tracked. No implementation changes were made by this handoff task.
+> Read AGENTS.md, PHASE_3_HANDOFF.md and the Phase 3 section of IMPLEMENTATION_PLAN.md. Start Phase 3 implementation. Phase 2 is accepted: I approved the upstream allocation exception and accepted the completed device coverage. Literal zero allocation is a future enhancement, not a blocker. Preserve all current scientific/performance checks and my test-results files. Follow the handoff, including Saturn's rings and detailed planetary/moon appearance. Launch long jobs and end the turn with their links instead of repeatedly polling.

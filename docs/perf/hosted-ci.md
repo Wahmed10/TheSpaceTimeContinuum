@@ -1,5 +1,7 @@
 # Hosted CI setup
 
+**Final acceptance — September 27, 2026:** the user explicitly approved ADR 0010's scoped upstream allocation exception and accepted existing device coverage. Phase 2 is accepted; Phase 3 may begin in a new session on the user's instruction. Literal zero allocation is tracked in docs/ENHANCEMENTS.md as a future improvement, not a blocker. No Phase 3 code was started and no job is pending. Older unresolved/pending statements below are historical.
+
 ## September 27: allocation patch comparison verified
 
 [Same-runner comparison 36293066482](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36293066482) succeeded. Artifact `10922613287` is preserved in `cpu-allocation-paired-{reference,current,current-comparison,provenance}.json`. Reference commit is `1a77315050f0407220cda1237f1284a30afeede1`; candidate is `7603decd244c66d87053d778fbc247005f000c2f`. Both ran on the same Intel Xeon Platinum 8573C, Linux x64, Chromium 153. Recomputing the comparison locally exactly matches the hosted artifact. All five paths pass at 20%; all means decreased (0.53-19.44%), and the largest p95 increase was 8.33% (Earth LEO). These sampled timings do not establish zero allocation or a continuous performance bound.

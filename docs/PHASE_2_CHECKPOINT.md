@@ -1,5 +1,7 @@
 # Phase 2 checkpoint - September 26, 2026
 
+**Final acceptance — September 27, 2026:** the user explicitly approved ADR 0010's scoped upstream allocation exception and accepted existing device coverage. Phase 2 is accepted; Phase 3 may begin in a new session on the user's instruction. Literal zero allocation is tracked in docs/ENHANCEMENTS.md as a future improvement, not a blocker. No Phase 3 code was started and no job is pending. Older unresolved/pending statements below are historical.
+
 The user explicitly authorized Phase 2 and repeated continuation through usage-limit resets. Continue without asking again. Missing Phase 1 physical-device evidence remains pending in `perf/gate-report.md`; it was not silently passed.
 
 ## Current state
