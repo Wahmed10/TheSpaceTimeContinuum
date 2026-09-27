@@ -2,6 +2,31 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
+## Current: P3.3 first surface increment accepted; remaining maps next
+
+Resumed review: `.tools/phase-three-surfaces/result.json` records browser and production build exit 0. Browser report has four expected passes, zero failures/skips/flakes and no report errors. Reviewed all 16 LOW/HIGH day/quarter captures in `contact.png`; user also explicitly approved Venus, Pluto, Charon and Titan. Local automation remains WebGL2/SwiftShader, not hardware WebGPU evidence. This increment is accepted for commit; P3.3 and Phase 3 remain incomplete.
+
+Next source work: Ceres, Phobos, Deimos, Io, Europa, Ganymede, Callisto and Triton. Remaining asset headroom is 2,136,957 bytes; preserve the 80,000,000-byte gate and use source-limited compressed maps.
+
+### Historical launch record (completed and reviewed above)
+
+P3.2 is committed as `b4b2e87ada789c62bcd01b739f1847cb84de263d`. The corrected six-test ring/visual/precision/startup regression passed and the user confirms Saturn looks good. No duplicate ring-fix job is needed. Older job statuses below are historical.
+
+Uncommitted P3.3 changes: softened opaque Venus cloud deck, procedural opaque Titan haze and atmosphere rims; sourced New Horizons Pluto color and Charon grayscale basemap textures at 1k/2k. Neutral gray explicitly marks missing southern coverage. Scientific orientation for Charon and the other missing bodies remains pending P3.4. New Horizons conversion is reproducible, uses ETC1S compression and publishes staged files after budget checks; sources/hashes and limitations are in `docs/licensing/new-horizons-assets.json` and `docs/science/phase-three-surfaces.md`. The app data page has credits and appearance explanations. Four new compressed assets total 680,604 bytes; all textures total 77,863,043 / 80,000,000 bytes.
+
+Verified before launch: typecheck, lint/boundaries, 120 unit tests plus two expected diagnostics; asset checks pass including block alignment; 72 production dependency licenses pass. Visual results are not yet reviewed. Original hero maps/references and scientific fixtures are unchanged. Existing generated next-env.d.ts and earlier performance output changes are preserved, not included in the P3.2 commit.
+
+### Running job to review next
+
+- Persistent hidden Node PID **26484**; startup confirmed. Launcher `.tools/phase-three-surfaces/run.mjs`, PID record `pid.txt` in that directory.
+- Tested base `b4b2e87ada789c62bcd01b739f1847cb84de263d` plus current uncommitted P3.3 changes.
+- First: `pnpm.cmd exec playwright test e2e/body-detail.spec.ts e2e/visual.spec.ts e2e/startup.spec.ts --output=.tools/phase-three-surfaces/browser --reporter=json`.
+- If browser succeeds: `pnpm.cmd build`, sequentially, not during browser measurements.
+- Browser report `.tools/phase-three-surfaces/report.json`, stderr `browser-stderr.log`, captures/traces `browser/`; build logs `build.log` and `build-stderr.log`; completion/progress `result.json`.
+- Persistent user dev server remains independent (root PID 3640, `.tools/saturn-fix/dev.pid`, http://localhost:3000). Do not stop it when tests finish.
+
+Next: review job report and all 16 new-body LOW/HIGH day/quarter captures, then fix failures before committing this P3.3 increment. Continue Ceres, Phobos/Deimos, Galilean moon and Triton appearance, followed by all-body orientations and full performance/scientific exit evidence. P3.3 and Phase 3 remain incomplete.
+
 ## Latest user-reported Saturn/load fix
 
 Supersedes the job status below. The original P3.2 report finished with six passing tests and one failed ring-shadow visibility assertion. Its fixture looked at the wrong hemisphere; fixed sunward camera views now check the south surface at the June 2020 epoch. Original material references, precision/depth and startup checks passed in that run. Keep its failed report as evidence.

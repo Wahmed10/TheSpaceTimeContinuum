@@ -244,6 +244,7 @@
       "periodDays": 90560
     },
     "color": "#c9b7a7",
+    "texture": "pluto",
     "importance": 90,
     "description": "A complex icy world in the Kuiper belt, explored by New Horizons in 2015.",
     "provenance": {
@@ -459,6 +460,7 @@
       "periodDays": 6.387
     },
     "color": "#b0a5a1",
+    "texture": "charon",
     "importance": 80,
     "description": "Pluto’s large companion shares a mutual, tidally locked dance.",
     "provenance": {

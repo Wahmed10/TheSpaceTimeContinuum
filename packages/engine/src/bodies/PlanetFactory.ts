@@ -40,6 +40,8 @@ const GIANT_RIMS: Record<string, string> = {
   'planet:saturn': '#e1cd9a',
   'planet:uranus': '#9ddddd',
   'planet:neptune': '#608ddd',
+  'planet:venus': '#eee0b4',
+  'moon:titan': '#dba665',
 };
 export function createPlanet(
   body: BodySpec,
@@ -66,6 +68,24 @@ export function createPlanet(
     metalness: 0,
   });
   material.colorNode = albedo.rgb;
+  if (body.id === 'planet:venus') {
+    // An opaque cloud deck: no radar surface is exposed through the clouds.
+    // The source map's contrast/color is illustrative, softened for visible light.
+    material.colorNode = mix(albedo.rgb, color('#eee3c3'), float(0.38));
+    material.roughness = 1;
+  }
+  if (body.id === 'moon:titan') {
+    // Visible-light haze obscures Titan's terrain. Broad, low-contrast haze
+    // variations are procedural illustration, not a measured surface map.
+    const haze = mx_noise_float(positionLocal.mul(vec3(3, 9, 3)))
+      .mul(0.025)
+      .add(0.975);
+    const polar = smoothstep(0.35, 0.95, normalLocal.y.abs()).mul(0.16);
+    material.colorNode = mix(color('#d5ad6d'), color('#987b57'), polar).mul(
+      haze,
+    );
+    material.roughness = 1;
+  }
   if (body.id === 'planet:mars')
     material.normalNode = normalMap(
       texture(assets.load('mars_normal', 1024, true)),
@@ -99,6 +119,8 @@ export function createPlanet(
     SphereGeometry,
     MeshStandardNodeMaterial | MeshBasicNodeMaterial
   >(geometry, material);
+  if (body.id === 'planet:venus' || body.id === 'moon:titan')
+    mesh.name = 'opaque-cloud-deck';
   if (body.id === 'moon:moon') {
     const lunar = new MeshBasicNodeMaterial();
     lunar.normalNode = normalMap(
@@ -241,7 +263,13 @@ export function createPlanet(
     }
     const shell = new Mesh(geometry, atmosphere);
     shell.name = 'atmosphere';
-    shell.scale.setScalar(body.id === 'planet:earth' ? 1.012 : 1.008);
+    shell.scale.setScalar(
+      body.id === 'planet:earth'
+        ? 1.012
+        : body.id === 'moon:titan' || body.id === 'planet:venus'
+          ? 1.015
+          : 1.008,
+    );
     group.add(shell);
   }
   if (body.id === 'star:sun') {

@@ -54,6 +54,8 @@ export class AssetManager {
         'saturn_ring_alpha',
         'uranus',
         'neptune',
+        'pluto',
+        'charon',
         'stars_milky_way',
       ]);
       return manager;

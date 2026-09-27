@@ -350,5 +350,37 @@
     "bytes": 1580706,
     "license": "NASA-media-guidelines",
     "credit": "NASA SVS / Ernie Wright"
+  },
+  {
+    "name": "pluto",
+    "res": 1024,
+    "file": "/assets/textures/pluto_1024.ktx2",
+    "bytes": 89705,
+    "license": "NASA/JPL image use policy",
+    "credit": "NASA/JHUAPL/SwRI"
+  },
+  {
+    "name": "pluto",
+    "res": 2048,
+    "file": "/assets/textures/pluto_2048.ktx2",
+    "bytes": 284712,
+    "license": "NASA/JPL image use policy",
+    "credit": "NASA/JHUAPL/SwRI"
+  },
+  {
+    "name": "charon",
+    "res": 1024,
+    "file": "/assets/textures/charon_1024.ktx2",
+    "bytes": 75839,
+    "license": "NASA/JPL image use policy",
+    "credit": "NASA/JHUAPL/SwRI"
+  },
+  {
+    "name": "charon",
+    "res": 2048,
+    "file": "/assets/textures/charon_2048.ktx2",
+    "bytes": 230348,
+    "license": "NASA/JPL image use policy",
+    "credit": "NASA/JHUAPL/SwRI"
   }
 ]

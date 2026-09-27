@@ -1,0 +1,26 @@
+[
+  {
+    "name": "pluto",
+    "source": "pluto_nh_color.jpg",
+    "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926",
+    "page": "https://science.nasa.gov/resource/pluto-global-color-map/",
+    "sha256": "1c13296bb0d2678224f3579033c4fe4cd302dc2a0afa02c94a0ff1baa56d53c9",
+    "width": 5926,
+    "height": 2963,
+    "acquiredOn": "2026-09-27",
+    "credit": "NASA/Johns Hopkins University Applied Physics Laboratory/Southwest Research Institute",
+    "modification": "South-edge connected black no-data replaced by uniform neutral gray; 180-degree longitude shift; 1k/2k ETC1S KTX2 with mipmaps. No terrain synthesized."
+  },
+  {
+    "name": "charon",
+    "source": "charon_nh_basemap.jpg",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21860/figures/PIA21860_fig1_full.jpg",
+    "page": "https://www.jpl.nasa.gov/images/pia21860-charons-surface-in-detail/",
+    "sha256": "45880a94d2787a408fb461e16059f843155d57db9f0fbca4c3cebd5f7669151d",
+    "width": 12693,
+    "height": 6347,
+    "acquiredOn": "2026-09-27",
+    "credit": "NASA/Johns Hopkins University Applied Physics Laboratory/Southwest Research Institute",
+    "modification": "South-edge connected black no-data replaced by uniform neutral gray; 180-degree longitude shift; 1k/2k ETC1S KTX2 with mipmaps. No terrain synthesized."
+  }
+]

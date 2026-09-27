@@ -2,6 +2,8 @@
 
 | Source | Use | Credit / limitations |
 |---|---|---|
+| https://science.nasa.gov/resource/pluto-global-color-map/ | Pluto surface mosaic | NASA/JHUAPL/SwRI; New Horizons color mosaic, varying resolution, neutral gray for unmapped south; 1k/2k ETC1S derivatives |
+| https://www.jpl.nasa.gov/images/pia21860-charons-surface-in-detail/ | Charon surface basemap | NASA/JHUAPL/SwRI; unannotated grayscale basemap, not topography overlay; neutral unmapped south; original hashes in new-horizons-assets.json |
 | https://github.com/cosinekitty/astronomy | Analytic ephemerides and IAU rotations | MIT; exact pinned version required for residual tables |
 | https://ssd.jpl.nasa.gov/horizons/ | Weekly residual corrections and separate reference vectors | NASA/JPL; sequential server-side acquisition, cached locally |
 | https://ssd.jpl.nasa.gov/horizons/ | Phase 2 moon/NEO/spacecraft test fixtures and four-day Callisto residuals | NASA/JPL; recorded queries, API versions and acquisition dates; sampled validation is not a continuous accuracy guarantee |

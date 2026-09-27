@@ -26,6 +26,27 @@ export default function Data() {
       <h2>Sources & credits</h2>
       <ul>
         <li>
+          <a href="https://science.nasa.gov/resource/pluto-global-color-map/">
+            Pluto color map
+          </a>
+          {' and '}
+          <a href="https://www.jpl.nasa.gov/images/pia21860-charons-surface-in-detail/">
+            Charon basemap
+          </a>
+          {
+            ' — NASA/Johns Hopkins University Applied Physics Laboratory/Southwest Research Institute. '
+          }
+          New Horizons mosaics, resized and compressed for display. Resolution
+          varies across each map; unmapped southern terrain is neutral gray,
+          with no invented surface detail. Charon uses the grayscale basemap,
+          not the color-coded topography overlay.
+        </li>
+        <li>
+          Venus is shown with an opaque, illustrative cloud map. Titan uses
+          illustrative orange haze rather than visible surface terrain.
+          Atmosphere rims and Saturn ring scattering are display approximations.
+        </li>
+        <li>
           <a href="https://svs.gsfc.nasa.gov/4851/">Deep Star Maps 2020</a> —
           NASA GSFC Scientific Visualization Studio, Ernie Wright. Faint-star
           background tone-mapped and compressed for display, aligned with the
@@ -84,8 +105,8 @@ export default function Data() {
       <h2>Architecture preview</h2>
       <p>
         This release includes 21 catalog bodies: the Sun, eight planets, Pluto,
-        Ceres and ten moons. Additional bodies currently use simple lit colors;
-        detailed materials and rings are still in development. Scientific
+        Ceres and ten moons. Saturn has rings and analytic shadows; remaining
+        moon and dwarf-planet detail is still in development. Scientific
         validation and physical-device performance evidence are tracked in the
         repository. Live satellite feeds, spacecraft trajectories and news are
         not yet available.
