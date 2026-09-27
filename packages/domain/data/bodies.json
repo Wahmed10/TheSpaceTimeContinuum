@@ -332,6 +332,7 @@
       "periodDays": 1.769
     },
     "color": "#dbc978",
+    "texture": "io",
     "importance": 86,
     "description": "A volcanic moon heated by Jupiter’s immense tidal forces.",
     "provenance": {
@@ -353,6 +354,7 @@
       "periodDays": 3.551
     },
     "color": "#d6cbb0",
+    "texture": "europa",
     "importance": 85,
     "description": "A fractured ice shell may conceal a global ocean.",
     "provenance": {
@@ -374,6 +376,7 @@
       "periodDays": 7.155
     },
     "color": "#aea899",
+    "texture": "ganymede",
     "importance": 84,
     "description": "The largest moon in the solar system, with its own magnetic field.",
     "provenance": {
@@ -395,6 +398,7 @@
       "periodDays": 16.689
     },
     "color": "#979186",
+    "texture": "callisto",
     "importance": 83,
     "description": "A heavily cratered world on the outskirts of Jupiter’s main moon system.",
     "provenance": {

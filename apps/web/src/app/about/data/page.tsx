@@ -42,6 +42,27 @@ export default function Data() {
           not the color-coded topography overlay.
         </li>
         <li>
+          <a href="https://science.nasa.gov/resource/europa-3d-model/">
+            Europa
+          </a>{' '}
+          / <a href="https://science.nasa.gov/resource/ganymede-3d-model/">Ganymede</a>
+          {' / '}
+          <a href="https://science.nasa.gov/resource/callisto-3d-model/">Callisto</a>
+          {' '}color maps — NASA Visualization Technology Applications and
+          Development (VTAD). Extracted from NASA's published 3D models and
+          compressed for display. These visualization textures retain source
+          colors and varying regional detail; they are not calibrated albedo
+          measurements. No terrain heights are inferred from them.
+        </li>
+        <li>
+          <a href="https://astrogeology.usgs.gov/search/map/io_galileo_ssi_global_color_merge_mosaic_1km">
+            Io color-merge mosaic
+          </a>{' '}
+          — USGS/NASA/JPL. Galileo color combined with Voyager/Galileo detail.
+          Colors are enhanced and resolution varies across the surface; this
+          is not a natural-color photograph.
+        </li>
+        <li>
           Venus is shown with an opaque, illustrative cloud map. Titan uses
           illustrative orange haze rather than visible surface terrain.
           Atmosphere rims and Saturn ring scattering are display approximations.

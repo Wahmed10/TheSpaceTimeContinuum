@@ -1,5 +1,9 @@
 # Future enhancements
 
+## Io surface mosaic detail
+
+September 27, 2026: user accepts the improved USGS color-merge Io map for now, but reports remaining blurry/smudged regions. Preserve this as a known visual limitation. Uneven spacecraft image resolution and mosaic processing leave some regions softer than others, especially near poles. Future work should evaluate improved licensed source coverage and seam/pole treatment, without inventing measured terrain or merely upsampling. This accepted limitation does not block the rest of Phase 3.
+
 ## Allocation-free upstream ephemeris calculation
 
 Status: deferred enhancement, explicitly approved by the user on September 27, 2026. **Not a Phase 2 acceptance blocker or a prerequisite for Phase 3.**

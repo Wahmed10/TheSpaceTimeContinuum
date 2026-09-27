@@ -2,7 +2,58 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: P3.3 first surface increment accepted; remaining maps next
+## Current: color variants installed; rendered review running
+
+Completed review on resume: `.tools/moon-color/result.json` records browser/build exit 0, and the user approved the colored moons. Galilean appearance increment accepted, including Io's documented blur exception. Next implementation is Ceres/Triton cylindrical textures; Phobos/Deimos require a separate matching mesh/atlas integration. Historical running notes below are superseded.
+
+Latest resume: user visually approves the three colored moons ("they look beautiful"). Existing PID 35576 was still running on entry, with no completed browser report yet; do not treat visual approval as a completed automated run or launch a duplicate. No runtime/assets were changed during that run.
+
+Prepared the remaining-body sources independently under `.tools/remaining-bodies/`: cached NASA GLBs in ignored `assets/source/{ceres,triton,phobos,deimos}_vtad.glb`, extracted model JSON and preview PNGs, and inspected all four base-color images. Ceres has a separate normal map: select material baseColorTexture (image index 1), not image 0. Its 4096x2048 base color is gray in the published NASA model; prefer this observed/display source to invented color. Triton's 4096x2048 base color includes an explicitly plain unmapped northern region, which must be documented rather than filled with invented detail.
+
+NASA pages: `https://science.nasa.gov/resource/ceres-3d-model/`, `https://science.nasa.gov/resource/triton-3d-model/`, `https://science.nasa.gov/resource/phobos-mars-moon-3d-model/`, `https://science.nasa.gov/resource/deimos-mars-moon-3d-model/`. GLB URLs are captured in discovery output/scripts and cached page HTML. Phobos texture is 2048x2048, Deimos 1024x1024: square UV atlases for their irregular meshes, NOT cylindrical maps. Do not put these on sphere geometry. Next implementation should preserve mesh/UV correspondence or source suitable cylindrical maps plus justified shape approximation. Check model geometry units/orientation before import. Only 651,316 bytes remain in the texture budget; measure compressed derivatives before publication. Source collection does not count as implemented appearance.
+
+Io correction completed successfully: asset conversion/checks, verify (120 passes plus two expected diagnostics), five browser tests with no failures/flakes/skips, and production build. User accepts remaining blurry/smudged areas for now; documented under `docs/ENHANCEMENTS.md` (Io surface mosaic detail). The temporary user screenshot was already removed; no new user screenshots were created or retained.
+
+User requests color variants for Europa, Ganymede and Callisto. Replaced grayscale with embedded base-color PNGs extracted reproducibly from NASA VTAD published glTF models. All three source images inspected. Source dimensions Europa 4096x2048, other two 2048x1024; compressed 1024/1440 distribution tiers retained for budget. No tint or invented color added. Builder validates expected container/material/image structure and records both container and embedded-image hashes. Source URLs, NASA credits, usage terms and visualization limitations updated in provenance, science docs and app. These are visualization textures, not calibrated true-color measurements; landmark/rotation validation remains P3.4.
+
+Published texture package: **79,348,684 / 80,000,000 bytes**, leaving 651,316 bytes for remaining assets. Typecheck, lint/boundaries, 120 unit tests (+2 expected diagnostics), asset checks and 72 dependency license checks passed. Local server PID 3640 remains independent and returned HTTP 200.
+
+### Existing color validation job — review first on resume
+
+- Persistent hidden Node PID **35576**, startup confirmed; `.tools/moon-color/pid.txt`, launcher `run.mjs`.
+- Base `2fd73e83ab1af9f36e17a675e022864527f08dbc` plus all uncommitted Galilean, Io and color-replacement changes. No new implementation commit yet.
+- Browser: `pnpm.cmd exec playwright test e2e/body-detail.spec.ts e2e/visual.spec.ts e2e/startup.spec.ts --output=.tools/moon-color/browser --reporter=json`; production `pnpm.cmd build` follows only on browser success.
+- `.tools/moon-color/result.json`: progress/completion; `browser.log`: JSON report; `browser-stderr.log`; `browser/`: captures/traces; `build.log` and `build-stderr.log`.
+- Next review rendered colors at LOW/HIGH day/quarter, shader/resource errors and original reference regressions. If passed and visually sound, commit Galilean increment, excluding unrelated generated performance artifacts. Continue Ceres/Phobos/Deimos/Triton appearance, sourced orientations and Phase 3 exit evidence. Do not duplicate the existing job. Software WebGL evidence is not hardware WebGPU evidence.
+
+## Previous: Io source correction (completed)
+
+The prior Galilean run completed successfully: five browser tests passed (zero skipped/flaky/unexpected/errors), production build exit 0. User approved Europa, Ganymede and Callisto but reported Io's texture as strange. Inspected `temp-pics/IO.png`: obvious patchwork joins, large blurred regions and radial polar streaking match the legacy Io map. Deleted that exact temporary screenshot after analysis as requested; folder retained. The three other maps are intentionally grayscale source products, not full-color representations.
+
+New correction uses USGS's higher-detail Io color-merge mosaic; browse image reviewed with substantially better continuity. Full TIFF acquisition/conversion and validation are running under persistent hidden Node PID **15920**, launcher `.tools/io-correction/run.mjs`, PID file `pid.txt`. Base remains `2fd73e83ab1af9f36e17a675e022864527f08dbc` plus uncommitted Galilean and correction changes. No correction pass or rendered acceptance claimed yet.
+
+Sequence: `pnpm.cmd exec tsx tools/assets/build-galilean.ts`; `pnpm.cmd exec tsx tools/check-assets.ts`; `pnpm.cmd verify`; `pnpm.cmd exec playwright test e2e/body-detail.spec.ts e2e/visual.spec.ts e2e/startup.spec.ts --output=.tools/io-correction/browser --reporter=json`; then `pnpm.cmd build`. Stops on any failure. Logs `<step>.log` / `<step>-stderr.log`, browser captures `browser/`, and completion `result.json`, all in `.tools/io-correction/`. Io now targets 1024/2048; others stay 1024/1440. Budget checked before publication, obsolete Io 1440 removed afterward. Full source metadata and final bytes are emitted by the builder.
+
+Next: review this existing job first, fix failures without duplicate launch, inspect replacement source and Io captures (especially polar/seam artifacts), then commit accepted Galilean increment. Original user server remains independent. Ceres/Phobos/Deimos/Triton, scientific orientations/registration and Phase 3 exit gates remain pending. Do not claim realistic natural color: USGS identifies Io's map as enhanced/false color.
+
+## Previous: Galilean surface increment implemented; browser/build completed
+
+Approved Venus/Titan/Pluto/Charon increment committed as `2fd73e83ab1af9f36e17a675e022864527f08dbc`. New uncommitted increment adds NASA-distributed USGS/JPL/Caltech Io color and Europa/Ganymede/Callisto grayscale visualization maps. Source TIFFs and 1024/native-1440 ETC1S builder, source hashes, credits and limitations are recorded. Eight new assets add 1,288,963 bytes; total 79,152,006 / 80,000,000 bytes (847,994 bytes remain). Source maps reviewed; rendered captures still pending. Scientific landmark registration and rotations remain P3.4.
+
+Short checks passed: typecheck, lint/package boundaries, 120 unit tests plus two expected diagnostics, all asset alignment/manifest/budget checks and 72 dependency licenses. Browser test now covers both groups of four bodies, checks successful 1024/1440 Galilean loads and saves LOW/HIGH day/quarter captures. Original visual references are unchanged. Old generated performance files remain outside this increment.
+
+### Existing job to review on resume — do not duplicate
+
+- Persistent hidden Node PID **34864**, process startup confirmed; `.tools/galilean-assets/pid.txt`.
+- Launcher `.tools/galilean-assets/run.mjs`; base `2fd73e83ab1af9f36e17a675e022864527f08dbc` plus uncommitted Galilean increment.
+- Browser: `pnpm.cmd exec playwright test e2e/body-detail.spec.ts e2e/visual.spec.ts e2e/startup.spec.ts --output=.tools/galilean-assets/browser --reporter=json`.
+- Then production `pnpm.cmd build` only if browser passes.
+- JSON browser report `browser.log`, browser stderr `browser-stderr.log`, captures/traces `browser/`, build logs `build.log` / `build-stderr.log`, progress/completion `result.json`, all under `.tools/galilean-assets/`.
+- Independent user server PID 3640 remains running; localhost:3000 returned HTTP 200 before launch.
+
+Next: review completion/report and all Galilean captures, fix failures before committing. Then Ceres, Phobos, Deimos, Triton; sourced scientific orientations/landmark registration; full Phase 3 science/performance/device exit evidence. Local browser automation is SwiftShader WebGL2 and does not verify hardware WebGPU. Phase 3 remains incomplete.
+
+## P3.3 first surface increment accepted
 
 Resumed review: `.tools/phase-three-surfaces/result.json` records browser and production build exit 0. Browser report has four expected passes, zero failures/skips/flakes and no report errors. Reviewed all 16 LOW/HIGH day/quarter captures in `contact.png`; user also explicitly approved Venus, Pluto, Charon and Titan. Local automation remains WebGL2/SwiftShader, not hardware WebGPU evidence. This increment is accepted for commit; P3.3 and Phase 3 remain incomplete.
 

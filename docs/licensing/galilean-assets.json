@@ -1,0 +1,58 @@
+[
+  {
+    "name": "io",
+    "page": "https://astrogeology.usgs.gov/search/map/io_galileo_ssi_global_color_merge_mosaic_1km",
+    "url": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_ClrMerge_1km.tif",
+    "source": "assets/source/io_usgs_color_merge.tif",
+    "width": 11445,
+    "height": 5723,
+    "sha256": "524dcabd247c889a4e7c2a1bfd9e5fcc545c6a039b2c765da9b741befdfd00bd",
+    "acquiredOn": "2026-09-27",
+    "imageSha256": "524dcabd247c889a4e7c2a1bfd9e5fcc545c6a039b2c765da9b741befdfd00bd",
+    "credit": "USGS/NASA/JPL",
+    "modification": "1024/2048-wide ETC1S KTX2 with mipmaps from USGS color-merge mosaic. Source pixel orientation and color retained; one-pixel aspect rounding normalized. No synthesized terrain or displacement.",
+    "limitation": "Enhanced/false-color Galileo and Voyager merged mosaic with varying spatial resolution; not natural eye color. See USGS product description."
+  },
+  {
+    "name": "europa",
+    "page": "https://science.nasa.gov/resource/europa-3d-model/",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/e/Europa_1_3138.glb",
+    "source": "assets/source/europa_vtad.glb",
+    "width": 4096,
+    "height": 2048,
+    "sha256": "fe88cbe326574a658c9d3b0885d1a38deea3ebfb354772eb3b95fe0f3f3d542c",
+    "acquiredOn": "2026-09-27",
+    "imageSha256": "cb13910e8f25b6163d395c52f61737b34d29655df5bc04b76e494f6f12f159dd",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+    "modification": "Extract embedded baseColorTexture from NASA VTAD glTF; resize to 1024/1440-wide ETC1S KTX2 with mipmaps. Source pixel orientation and color retained, no tint or synthesized terrain.",
+    "limitation": "NASA visualization texture, not a calibrated true-color or albedo measurement. Regional detail and source processing vary; landmark registration remains separately validated."
+  },
+  {
+    "name": "ganymede",
+    "page": "https://science.nasa.gov/resource/ganymede-3d-model/",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/g/Ganymede_1_5268.glb",
+    "source": "assets/source/ganymede_vtad.glb",
+    "width": 2048,
+    "height": 1024,
+    "sha256": "367bc128197bf1d25ef5af5269f2d1902aababaae167c3c8d6529443b0100d6f",
+    "acquiredOn": "2026-09-27",
+    "imageSha256": "58bf1a542191a68dea7f933ebfa97a83995fe4f3fa134727ead9e1d6173b2421",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+    "modification": "Extract embedded baseColorTexture from NASA VTAD glTF; resize to 1024/1440-wide ETC1S KTX2 with mipmaps. Source pixel orientation and color retained, no tint or synthesized terrain.",
+    "limitation": "NASA visualization texture, not a calibrated true-color or albedo measurement. Regional detail and source processing vary; landmark registration remains separately validated."
+  },
+  {
+    "name": "callisto",
+    "page": "https://science.nasa.gov/resource/callisto-3d-model/",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/c/Callisto_1_4821.glb",
+    "source": "assets/source/callisto_vtad.glb",
+    "width": 2048,
+    "height": 1024,
+    "sha256": "0bdbd5600a4be4bef4bd85e53f6226f49e73a66c85310219402627e59457c303",
+    "acquiredOn": "2026-09-27",
+    "imageSha256": "02843cfb31f1faf917c7d1090d6c73aa013fb073736393784adfa5061ba49971",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+    "modification": "Extract embedded baseColorTexture from NASA VTAD glTF; resize to 1024/1440-wide ETC1S KTX2 with mipmaps. Source pixel orientation and color retained, no tint or synthesized terrain.",
+    "limitation": "NASA visualization texture, not a calibrated true-color or albedo measurement. Regional detail and source processing vary; landmark registration remains separately validated."
+  }
+]

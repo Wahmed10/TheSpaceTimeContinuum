@@ -382,5 +382,69 @@
     "bytes": 230348,
     "license": "NASA/JPL image use policy",
     "credit": "NASA/JHUAPL/SwRI"
+  },
+  {
+    "name": "io",
+    "res": 1024,
+    "file": "/assets/textures/io_1024.ktx2",
+    "bytes": 121379,
+    "license": "Public domain (USGS)",
+    "credit": "USGS/NASA/JPL"
+  },
+  {
+    "name": "europa",
+    "res": 1024,
+    "file": "/assets/textures/europa_1024.ktx2",
+    "bytes": 110201,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+  },
+  {
+    "name": "europa",
+    "res": 1440,
+    "file": "/assets/textures/europa_1440.ktx2",
+    "bytes": 196986,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+  },
+  {
+    "name": "ganymede",
+    "res": 1024,
+    "file": "/assets/textures/ganymede_1024.ktx2",
+    "bytes": 115627,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+  },
+  {
+    "name": "ganymede",
+    "res": 1440,
+    "file": "/assets/textures/ganymede_1440.ktx2",
+    "bytes": 207573,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+  },
+  {
+    "name": "callisto",
+    "res": 1024,
+    "file": "/assets/textures/callisto_1024.ktx2",
+    "bytes": 119352,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+  },
+  {
+    "name": "callisto",
+    "res": 1440,
+    "file": "/assets/textures/callisto_1440.ktx2",
+    "bytes": 217038,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+  },
+  {
+    "name": "io",
+    "res": 2048,
+    "file": "/assets/textures/io_2048.ktx2",
+    "bytes": 397485,
+    "license": "Public domain (USGS)",
+    "credit": "USGS/NASA/JPL"
   }
 ]

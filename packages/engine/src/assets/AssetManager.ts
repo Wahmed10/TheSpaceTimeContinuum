@@ -56,6 +56,10 @@ export class AssetManager {
         'neptune',
         'pluto',
         'charon',
+        'io',
+        'europa',
+        'ganymede',
+        'callisto',
         'stars_milky_way',
       ]);
       return manager;

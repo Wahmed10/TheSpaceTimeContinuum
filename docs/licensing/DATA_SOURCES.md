@@ -1,5 +1,9 @@
 # Data sources
 
+Current Europa/Ganymede/Callisto color maps use embedded base-color PNGs from NASA VTAD [Europa](https://science.nasa.gov/resource/europa-3d-model/), [Ganymede](https://science.nasa.gov/resource/ganymede-3d-model/) and [Callisto](https://science.nasa.gov/resource/callisto-3d-model/) models, under NASA images and media usage guidelines. Container/image hashes and derivative details are in `galilean-assets.json`. These supersede the initial grayscale maps described below. Io uses the USGS Galileo SSI color-merge mosaic linked in that provenance file.
+
+Galilean moon display maps: NASA 3D Resources [Io](https://science.nasa.gov/3d-resources/jupiter-io-b/), [Europa](https://science.nasa.gov/3d-resources/jupiter-europa/), [Ganymede](https://science.nasa.gov/3d-resources/jupiter-ganymede/), [Callisto](https://science.nasa.gov/3d-resources/jupiter-callisto/), credited USGS/JPL/Caltech under NASA/JPL image-use guidelines. Legacy visualization products with variable coverage and upstream enhancements, not calibrated albedo. Acquisition hashes and conversion details: `galilean-assets.json`; limitations: `../science/phase-three-surfaces.md`.
+
 | Source | Use | Credit / limitations |
 |---|---|---|
 | https://science.nasa.gov/resource/pluto-global-color-map/ | Pluto surface mosaic | NASA/JHUAPL/SwRI; New Horizons color mosaic, varying resolution, neutral gray for unmapped south; 1k/2k ETC1S derivatives |
