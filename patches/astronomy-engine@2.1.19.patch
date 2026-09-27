@@ -1,0 +1,314 @@
+diff --git a/astronomy.js b/astronomy.js
+index ab660622e4111e8229ae57356648ac7af6964959..8e3701f94fb99ec2fe9e2f5f67d7c73645a85d7a 100644
+--- a/astronomy.js
++++ b/astronomy.js
+@@ -1391,49 +1391,28 @@ function ecl2equ_vec(time, pos) {
+     return obl_ecl2equ_vec(mean_obliq(time), pos);
+ }
+ exports.CalcMoonCount = 0;
++// Private synchronous scratch: no references escape CalcMoon and it has no callbacks.
++const moonCoScratch = new Float64Array(13 * 4);
++const moonSiScratch = new Float64Array(13 * 4);
+ function CalcMoon(time) {
+     ++exports.CalcMoonCount;
+     const T = time.tt / 36525;
+-    function DeclareArray1(xmin, xmax) {
+-        const array = [];
+-        let i;
+-        for (i = 0; i <= xmax - xmin; ++i) {
+-            array.push(0);
+-        }
+-        return { min: xmin, array: array };
+-    }
+-    function DeclareArray2(xmin, xmax, ymin, ymax) {
+-        const array = [];
+-        for (let i = 0; i <= xmax - xmin; ++i) {
+-            array.push(DeclareArray1(ymin, ymax));
+-        }
+-        return { min: xmin, array: array };
+-    }
+-    function ArrayGet2(a, x, y) {
+-        const m = a.array[x - a.min];
+-        return m.array[y - m.min];
+-    }
+-    function ArraySet2(a, x, y, v) {
+-        const m = a.array[x - a.min];
+-        m.array[y - m.min] = v;
+-    }
+     let S, MAX, ARG, FAC, I, J, T2, DGAM, DLAM, N, GAM1C, SINPI, L0, L, LS, F, D, DL0, DL, DLS, DF, DD, DS;
+-    let coArray = DeclareArray2(-6, 6, 1, 4);
+-    let siArray = DeclareArray2(-6, 6, 1, 4);
++    const coArray = moonCoScratch;
++    const siArray = moonSiScratch;
++    coArray.fill(0);
++    siArray.fill(0);
+     function CO(x, y) {
+-        return ArrayGet2(coArray, x, y);
++        return coArray[(x + 6) * 4 + y - 1];
+     }
+     function SI(x, y) {
+-        return ArrayGet2(siArray, x, y);
++        return siArray[(x + 6) * 4 + y - 1];
+     }
+     function SetCO(x, y, v) {
+-        return ArraySet2(coArray, x, y, v);
++        coArray[(x + 6) * 4 + y - 1] = v;
+     }
+     function SetSI(x, y, v) {
+-        return ArraySet2(siArray, x, y, v);
+-    }
+-    function AddThe(c1, s1, c2, s2, func) {
+-        func(c1 * c2 - s1 * s2, s1 * c2 + c1 * s2);
++        siArray[(x + 6) * 4 + y - 1] = v;
+     }
+     function Sine(phi) {
+         return Math.sin(PI2 * phi);
+@@ -1492,20 +1471,29 @@ function CalcMoon(time) {
+         SetSI(0, I, 0);
+         SetSI(1, I, Math.sin(ARG) * FAC);
+         for (J = 2; J <= MAX; ++J) {
+-            AddThe(CO(J - 1, I), SI(J - 1, I), CO(1, I), SI(1, I), (c, s) => (SetCO(J, I, c), SetSI(J, I, s)));
++            const c1 = CO(J - 1, I), s1 = SI(J - 1, I), c2 = CO(1, I), s2 = SI(1, I);
++            SetCO(J, I, c1 * c2 - s1 * s2);
++            SetSI(J, I, s1 * c2 + c1 * s2);
+         }
+         for (J = 1; J <= MAX; ++J) {
+             SetCO(-J, I, CO(J, I));
+             SetSI(-J, I, -SI(J, I));
+         }
+     }
++    const termResult = { x: 1, y: 0 };
+     function Term(p, q, r, s) {
+-        var result = { x: 1, y: 0 };
+-        var I = [0, p, q, r, s]; // I[0] is not used; it is a placeholder
+-        for (var k = 1; k <= 4; ++k)
+-            if (I[k] !== 0)
+-                AddThe(result.x, result.y, CO(I[k], k), SI(I[k], k), (c, s) => (result.x = c, result.y = s));
+-        return result;
++        let x = 1, y = 0;
++        for (let k = 1; k <= 4; ++k) {
++            const index = k === 1 ? p : k === 2 ? q : k === 3 ? r : s;
++            if (index !== 0) {
++                const c = CO(index, k), sn = SI(index, k), previousX = x;
++                x = previousX * c - y * sn;
++                y = y * c + previousX * sn;
++            }
++        }
++        termResult.x = x;
++        termResult.y = y;
++        return termResult;
+     }
+     function AddSol(coeffl, coeffs, coeffg, coeffp, p, q, r, s) {
+         var result = Term(p, q, r, s);
+@@ -2920,8 +2908,10 @@ function VsopFormula(formula, t, clamp_angle) {
+     let coord = 0;
+     for (let series of formula) {
+         let sum = 0;
+-        for (let [ampl, phas, freq] of series)
+-            sum += ampl * Math.cos(phas + (t * freq));
++        for (let i = 0; i < series.length; ++i) {
++            const term = series[i];
++            sum += term[0] * Math.cos(term[1] + (t * term[2]));
++        }
+         let incr = tpower * sum;
+         if (clamp_angle)
+             incr %= PI2; // improve precision for longitudes: they can be hundreds of radians
+@@ -2938,7 +2928,8 @@ function VsopDeriv(formula, t) {
+     for (let series of formula) {
+         let sin_sum = 0;
+         let cos_sum = 0;
+-        for (let [ampl, phas, freq] of series) {
++        for (let i = 0; i < series.length; ++i) {
++            const term = series[i], ampl = term[0], phas = term[1], freq = term[2];
+             let angle = phas + (t * freq);
+             sin_sum += ampl * freq * Math.sin(angle);
+             if (s > 0)
+@@ -3561,19 +3552,25 @@ function CalcJupiterMoon(time, m) {
+     const t = time.tt + 18262.5; // number of days since 1950-01-01T00:00:00Z
+     // Calculate 6 orbital elements at the given time t
+     const elem = [0, m.al[0] + (t * m.al[1]), 0, 0, 0, 0];
+-    for (let [amplitude, phase, frequency] of m.a)
+-        elem[0] += amplitude * Math.cos(phase + (t * frequency));
+-    for (let [amplitude, phase, frequency] of m.l)
+-        elem[1] += amplitude * Math.sin(phase + (t * frequency));
++    for (let i = 0; i < m.a.length; ++i) {
++        const term = m.a[i];
++        elem[0] += term[0] * Math.cos(term[1] + (t * term[2]));
++    }
++    for (let i = 0; i < m.l.length; ++i) {
++        const term = m.l[i];
++        elem[1] += term[0] * Math.sin(term[1] + (t * term[2]));
++    }
+     elem[1] %= PI2;
+     if (elem[1] < 0)
+         elem[1] += PI2;
+-    for (let [amplitude, phase, frequency] of m.z) {
++    for (let i = 0; i < m.z.length; ++i) {
++        const term = m.z[i], amplitude = term[0], phase = term[1], frequency = term[2];
+         const arg = phase + (t * frequency);
+         elem[2] += amplitude * Math.cos(arg);
+         elem[3] += amplitude * Math.sin(arg);
+     }
+-    for (let [amplitude, phase, frequency] of m.zeta) {
++    for (let i = 0; i < m.zeta.length; ++i) {
++        const term = m.zeta[i], amplitude = term[0], phase = term[1], frequency = term[2];
+         const arg = phase + (t * frequency);
+         elem[4] += amplitude * Math.cos(arg);
+         elem[5] += amplitude * Math.sin(arg);
+diff --git a/esm/astronomy.js b/esm/astronomy.js
+index 6b73063bbc90bafe1ad9a712cfd9e9b958a54d60..911e4ec8edb53954f0129e9920273c6563573907 100644
+--- a/esm/astronomy.js
++++ b/esm/astronomy.js
+@@ -1377,49 +1377,28 @@ function ecl2equ_vec(time, pos) {
+     return obl_ecl2equ_vec(mean_obliq(time), pos);
+ }
+ export let CalcMoonCount = 0;
++// Private synchronous scratch: no references escape CalcMoon and it has no callbacks.
++const moonCoScratch = new Float64Array(13 * 4);
++const moonSiScratch = new Float64Array(13 * 4);
+ function CalcMoon(time) {
+     ++CalcMoonCount;
+     const T = time.tt / 36525;
+-    function DeclareArray1(xmin, xmax) {
+-        const array = [];
+-        let i;
+-        for (i = 0; i <= xmax - xmin; ++i) {
+-            array.push(0);
+-        }
+-        return { min: xmin, array: array };
+-    }
+-    function DeclareArray2(xmin, xmax, ymin, ymax) {
+-        const array = [];
+-        for (let i = 0; i <= xmax - xmin; ++i) {
+-            array.push(DeclareArray1(ymin, ymax));
+-        }
+-        return { min: xmin, array: array };
+-    }
+-    function ArrayGet2(a, x, y) {
+-        const m = a.array[x - a.min];
+-        return m.array[y - m.min];
+-    }
+-    function ArraySet2(a, x, y, v) {
+-        const m = a.array[x - a.min];
+-        m.array[y - m.min] = v;
+-    }
+     let S, MAX, ARG, FAC, I, J, T2, DGAM, DLAM, N, GAM1C, SINPI, L0, L, LS, F, D, DL0, DL, DLS, DF, DD, DS;
+-    let coArray = DeclareArray2(-6, 6, 1, 4);
+-    let siArray = DeclareArray2(-6, 6, 1, 4);
++    const coArray = moonCoScratch;
++    const siArray = moonSiScratch;
++    coArray.fill(0);
++    siArray.fill(0);
+     function CO(x, y) {
+-        return ArrayGet2(coArray, x, y);
++        return coArray[(x + 6) * 4 + y - 1];
+     }
+     function SI(x, y) {
+-        return ArrayGet2(siArray, x, y);
++        return siArray[(x + 6) * 4 + y - 1];
+     }
+     function SetCO(x, y, v) {
+-        return ArraySet2(coArray, x, y, v);
++        coArray[(x + 6) * 4 + y - 1] = v;
+     }
+     function SetSI(x, y, v) {
+-        return ArraySet2(siArray, x, y, v);
+-    }
+-    function AddThe(c1, s1, c2, s2, func) {
+-        func(c1 * c2 - s1 * s2, s1 * c2 + c1 * s2);
++        siArray[(x + 6) * 4 + y - 1] = v;
+     }
+     function Sine(phi) {
+         return Math.sin(PI2 * phi);
+@@ -1478,20 +1457,29 @@ function CalcMoon(time) {
+         SetSI(0, I, 0);
+         SetSI(1, I, Math.sin(ARG) * FAC);
+         for (J = 2; J <= MAX; ++J) {
+-            AddThe(CO(J - 1, I), SI(J - 1, I), CO(1, I), SI(1, I), (c, s) => (SetCO(J, I, c), SetSI(J, I, s)));
++            const c1 = CO(J - 1, I), s1 = SI(J - 1, I), c2 = CO(1, I), s2 = SI(1, I);
++            SetCO(J, I, c1 * c2 - s1 * s2);
++            SetSI(J, I, s1 * c2 + c1 * s2);
+         }
+         for (J = 1; J <= MAX; ++J) {
+             SetCO(-J, I, CO(J, I));
+             SetSI(-J, I, -SI(J, I));
+         }
+     }
++    const termResult = { x: 1, y: 0 };
+     function Term(p, q, r, s) {
+-        var result = { x: 1, y: 0 };
+-        var I = [0, p, q, r, s]; // I[0] is not used; it is a placeholder
+-        for (var k = 1; k <= 4; ++k)
+-            if (I[k] !== 0)
+-                AddThe(result.x, result.y, CO(I[k], k), SI(I[k], k), (c, s) => (result.x = c, result.y = s));
+-        return result;
++        let x = 1, y = 0;
++        for (let k = 1; k <= 4; ++k) {
++            const index = k === 1 ? p : k === 2 ? q : k === 3 ? r : s;
++            if (index !== 0) {
++                const c = CO(index, k), sn = SI(index, k), previousX = x;
++                x = previousX * c - y * sn;
++                y = y * c + previousX * sn;
++            }
++        }
++        termResult.x = x;
++        termResult.y = y;
++        return termResult;
+     }
+     function AddSol(coeffl, coeffs, coeffg, coeffp, p, q, r, s) {
+         var result = Term(p, q, r, s);
+@@ -2882,8 +2870,10 @@ function VsopFormula(formula, t, clamp_angle) {
+     let coord = 0;
+     for (let series of formula) {
+         let sum = 0;
+-        for (let [ampl, phas, freq] of series)
+-            sum += ampl * Math.cos(phas + (t * freq));
++        for (let i = 0; i < series.length; ++i) {
++            const term = series[i];
++            sum += term[0] * Math.cos(term[1] + (t * term[2]));
++        }
+         let incr = tpower * sum;
+         if (clamp_angle)
+             incr %= PI2; // improve precision for longitudes: they can be hundreds of radians
+@@ -2900,7 +2890,8 @@ function VsopDeriv(formula, t) {
+     for (let series of formula) {
+         let sin_sum = 0;
+         let cos_sum = 0;
+-        for (let [ampl, phas, freq] of series) {
++        for (let i = 0; i < series.length; ++i) {
++            const term = series[i], ampl = term[0], phas = term[1], freq = term[2];
+             let angle = phas + (t * freq);
+             sin_sum += ampl * freq * Math.sin(angle);
+             if (s > 0)
+@@ -3522,19 +3513,25 @@ function CalcJupiterMoon(time, m) {
+     const t = time.tt + 18262.5; // number of days since 1950-01-01T00:00:00Z
+     // Calculate 6 orbital elements at the given time t
+     const elem = [0, m.al[0] + (t * m.al[1]), 0, 0, 0, 0];
+-    for (let [amplitude, phase, frequency] of m.a)
+-        elem[0] += amplitude * Math.cos(phase + (t * frequency));
+-    for (let [amplitude, phase, frequency] of m.l)
+-        elem[1] += amplitude * Math.sin(phase + (t * frequency));
++    for (let i = 0; i < m.a.length; ++i) {
++        const term = m.a[i];
++        elem[0] += term[0] * Math.cos(term[1] + (t * term[2]));
++    }
++    for (let i = 0; i < m.l.length; ++i) {
++        const term = m.l[i];
++        elem[1] += term[0] * Math.sin(term[1] + (t * term[2]));
++    }
+     elem[1] %= PI2;
+     if (elem[1] < 0)
+         elem[1] += PI2;
+-    for (let [amplitude, phase, frequency] of m.z) {
++    for (let i = 0; i < m.z.length; ++i) {
++        const term = m.z[i], amplitude = term[0], phase = term[1], frequency = term[2];
+         const arg = phase + (t * frequency);
+         elem[2] += amplitude * Math.cos(arg);
+         elem[3] += amplitude * Math.sin(arg);
+     }
+-    for (let [amplitude, phase, frequency] of m.zeta) {
++    for (let i = 0; i < m.zeta.length; ++i) {
++        const term = m.zeta[i], amplitude = term[0], phase = term[1], frequency = term[2];
+         const arg = phase + (t * frequency);
+         elem[4] += amplitude * Math.cos(arg);
+         elem[5] += amplitude * Math.sin(arg);

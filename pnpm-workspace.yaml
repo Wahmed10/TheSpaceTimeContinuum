@@ -3,3 +3,5 @@ packages:
   - packages/*
 ignoredOptionalDependencies:
   - sharp
+patchedDependencies:
+  astronomy-engine@2.1.19: patches/astronomy-engine@2.1.19.patch

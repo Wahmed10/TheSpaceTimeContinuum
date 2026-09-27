@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  astronomy-engine@2.1.19:
+    hash: 7c0bdea845ac7e045963b13ab832c9fa4227bcfbbd6e498002e1448cf7b7a6b0
+    path: patches/astronomy-engine@2.1.19.patch
+
 importers:
 
   .:
@@ -95,7 +100,7 @@ importers:
         version: link:../domain
       astronomy-engine:
         specifier: 2.1.19
-        version: 2.1.19
+        version: 2.1.19(patch_hash=7c0bdea845ac7e045963b13ab832c9fa4227bcfbbd6e498002e1448cf7b7a6b0)
       satellite.js:
         specifier: 7.1.0
         version: 7.1.0
@@ -3535,7 +3540,7 @@ snapshots:
       estree-walker: 3.0.3
       js-tokens: 10.0.0
 
-  astronomy-engine@2.1.19: {}
+  astronomy-engine@2.1.19(patch_hash=7c0bdea845ac7e045963b13ab832c9fa4227bcfbbd6e498002e1448cf7b7a6b0): {}
 
   balanced-match@1.0.2: {}
 

@@ -16,6 +16,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm verify
+      - run: node --expose-gc --import tsx tools/profile-phase-two.ts
       - run: pnpm licenses:check
       - run: pnpm exec tsx tools/check-assets.ts
       - run: node tools/measure-engine.mjs

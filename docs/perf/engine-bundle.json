@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-26T15:34:44.521Z",
+  "generatedAt": "2026-09-27T03:43:31.365Z",
   "method": "Standalone tree-shaken public engine entry, including all transitively bundled dependencies and lab probes; gzip level 9. Excludes separately fetched assets and transcoder.",
-  "bytes": 1292390,
-  "gzipBytes": 368185,
+  "bytes": 1292293,
+  "gzipBytes": 368130,
   "budgetBytes": 450000,
   "inputs": [
     "node_modules/.pnpm/three@0.186.0/node_modules/three/build/three.core.js",
@@ -111,7 +111,7 @@
     "packages/domain/src/moonElements.ts",
     "packages/domain/src/index.ts",
     "packages/astro/src/time/constants.ts",
-    "node_modules/.pnpm/astronomy-engine@2.1.19/node_modules/astronomy-engine/esm/astronomy.js",
+    "node_modules/.pnpm/astronomy-engine@2.1.19_pat_1a8aa2222367cd80ed15b677846ffc70/node_modules/astronomy-engine/esm/astronomy.js",
     "packages/astro/src/time/leapSeconds.ts",
     "packages/astro/src/time/scales.ts",
     "packages/astro/src/clock/SimulationClock.ts",

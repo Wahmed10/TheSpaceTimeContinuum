@@ -1,0 +1,231 @@
+{
+  "generatedAt": "2026-09-26T23:28:55.865Z",
+  "node": "v24.12.0",
+  "method": "Warmed providers at changing one-second epochs near J2000. Separate uninstrumented 100k-call timing/GC observation and 10k-call V8 allocation sampling including collected objects. Sampling is statistical, not a proof of zero allocations; no browser frame-pause claim. Explicit GC excluded from observed-workload counts. Retained growth includes measurement bookkeeping.",
+  "samples": [
+    {
+      "provider": "astronomy:Earth",
+      "timedCalls": 100000,
+      "elapsedMs": 1235.3874999999998,
+      "retainedGrowthBytes": -857536,
+      "observedGcCount": 792,
+      "observedGcTotalMs": 47.9958997964859,
+      "observedGcMaxMs": 0.37439998984336853,
+      "profiledCalls": 10000,
+      "estimatedSampledAllocationBytes": 338920280,
+      "sites": [
+        {
+          "site": "astronomy-engine/astronomy.js:2895 VsopDeriv",
+          "estimatedBytes": 149423024
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:2880 VsopFormula",
+          "estimatedBytes": 148787488
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:2943 CalcVsopPosVel",
+          "estimatedBytes": 17820032
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:3128 major_bodies_t",
+          "estimatedBytes": 9604248
+        },
+        {
+          "site": "packages/astro/src/ephemeris/AstronomyEngineProvider.ts:1 stateAt",
+          "estimatedBytes": 6169680
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:3085 mul",
+          "estimatedBytes": 2948656
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:3879 BaryState",
+          "estimatedBytes": 2716128
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:3052 TerseVector",
+          "estimatedBytes": 474816
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1015 DeltaT_EspenakMeeus",
+          "estimatedBytes": 428304
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1179 AstroTime",
+          "estimatedBytes": 179280
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:3099 body_state_t",
+          "estimatedBytes": 169264
+        },
+        {
+          "site": "packages/astro/src/ephemeris/AstronomyEngineProvider.ts:1 toAstroTime",
+          "estimatedBytes": 77280
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:2080 StateVector",
+          "estimatedBytes": 55784
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:2920 VsopRotate",
+          "estimatedBytes": 23616
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:3115 AdjustBarycenterPosVel",
+          "estimatedBytes": 17552
+        }
+      ]
+    },
+    {
+      "provider": "astronomy:Moon",
+      "timedCalls": 100000,
+      "elapsedMs": 2653.7221,
+      "retainedGrowthBytes": -18910208,
+      "observedGcCount": 126,
+      "observedGcTotalMs": 164.4699000120163,
+      "observedGcMaxMs": 7.155200004577637,
+      "profiledCalls": 10000,
+      "estimatedSampledAllocationBytes": 798497848,
+      "sites": [
+        {
+          "site": "astronomy-engine/astronomy.js:1496 AddSol",
+          "estimatedBytes": 249631800
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:2895 VsopDeriv",
+          "estimatedBytes": 149360304
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:2880 VsopFormula",
+          "estimatedBytes": 149167576
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1391 DeclareArray2",
+          "estimatedBytes": 125385736
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1380 CalcMoon",
+          "estimatedBytes": 44793272
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:2943 CalcVsopPosVel",
+          "estimatedBytes": 17808824
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1607 ADDN",
+          "estimatedBytes": 14238224
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:3128 major_bodies_t",
+          "estimatedBytes": 9330560
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1424 Sine",
+          "estimatedBytes": 6697808
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1778 precession_rot",
+          "estimatedBytes": 6376640
+        },
+        {
+          "site": "packages/astro/src/ephemeris/AstronomyEngineProvider.ts:1 stateAt",
+          "estimatedBytes": 6296336
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:2764 GeoMoon",
+          "estimatedBytes": 4539320
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:2848 GeoMoonState",
+          "estimatedBytes": 3098304
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1179 AstroTime",
+          "estimatedBytes": 2958864
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:3879 BaryState",
+          "estimatedBytes": 2950592
+        }
+      ]
+    },
+    {
+      "provider": "astronomy:callisto",
+      "timedCalls": 100000,
+      "elapsedMs": 341.4431000000004,
+      "retainedGrowthBytes": -41995200,
+      "observedGcCount": 23,
+      "observedGcTotalMs": 6.750699937343597,
+      "observedGcMaxMs": 0.6191000044345856,
+      "profiledCalls": 10000,
+      "estimatedSampledAllocationBytes": 158370912,
+      "sites": [
+        {
+          "site": "astronomy-engine/astronomy.js:3519 CalcJupiterMoon",
+          "estimatedBytes": 140935728
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:6465 RotateState",
+          "estimatedBytes": 6979104
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1220 FromTerrestrialTime",
+          "estimatedBytes": 6018128
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:3484 JupiterMoon_elem2pv",
+          "estimatedBytes": 2416304
+        },
+        {
+          "site": "packages/astro/src/ephemeris/JupiterMoonsProvider.ts:1 stateAt",
+          "estimatedBytes": 1516904
+        },
+        {
+          "site": "astronomy-engine/astronomy.js:1015 DeltaT_EspenakMeeus",
+          "estimatedBytes": 501568
+        },
+        {
+          "site": "#onMessage:84 #onMessage",
+          "estimatedBytes": 1080
+        },
+        {
+          "site": ":22 (anonymous)",
+          "estimatedBytes": 1056
+        },
+        {
+          "site": "post:115 post",
+          "estimatedBytes": 1040
+        }
+      ]
+    },
+    {
+      "provider": "allocation-control",
+      "timedCalls": 100000,
+      "elapsedMs": 14.463000000001557,
+      "retainedGrowthBytes": -8038568,
+      "observedGcCount": 0,
+      "observedGcTotalMs": 0,
+      "observedGcMaxMs": 0,
+      "profiledCalls": 10000,
+      "estimatedSampledAllocationBytes": 514112,
+      "sites": [
+        {
+          "site": "packages/astro/src/ephemeris/KeplerProvider.ts:1 stateAt",
+          "estimatedBytes": 355008
+        },
+        {
+          "site": "packages/astro/src/ephemeris/KeplerProvider.ts:1 solveKepler",
+          "estimatedBytes": 156864
+        },
+        {
+          "site": "Promise:0 Promise",
+          "estimatedBytes": 1176
+        },
+        {
+          "site": "post:22 post",
+          "estimatedBytes": 1064
+        }
+      ]
+    }
+  ]
+}
