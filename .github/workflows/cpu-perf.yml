@@ -16,7 +16,7 @@ permissions:
 jobs:
   cpu:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -26,25 +26,21 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
+      - name: Check out the reviewed immutable reference
+        if: ${{ inputs.mode != 'record' }}
+        uses: actions/checkout@v4
+        with:
+          ref: 1a77315050f0407220cda1237f1284a30afeede1
+          path: .tools/cpu-reference-checkout
+          persist-credentials: false
+      - name: Install reference dependencies
+        if: ${{ inputs.mode != 'record' }}
+        working-directory: .tools/cpu-reference-checkout
+        run: pnpm install --frozen-lockfile
       - name: Run five deterministic camera paths
         env:
           CPU_MODE: ${{ inputs.mode || 'compare' }}
-        run: |
-          mkdir -p .tools
-          pnpm dev > .tools/cpu-server.log 2>&1 &
-          server_pid=$!
-          trap 'kill "$server_pid" || true' EXIT
-          ready=false
-          for attempt in $(seq 1 90); do
-            if curl --silent --fail http://localhost:3000 > /dev/null; then ready=true; break; fi
-            sleep 1
-          done
-          if [ "$ready" != true ]; then cat .tools/cpu-server.log; exit 1; fi
-          if [ "$CPU_MODE" = record ]; then
-            pnpm perf:cpu --output .tools/cpu-current.json
-          else
-            pnpm perf:cpu --output .tools/cpu-current.json --baseline docs/perf/cpu-baseline-linux-x64.json
-          fi
+        run: bash tools/run-hosted-cpu.sh
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -53,4 +49,6 @@ jobs:
           if-no-files-found: error
           path: |
             .tools/cpu-current*.json
-            .tools/cpu-server.log
+            .tools/cpu-reference.json
+            .tools/cpu-provenance.json
+            .tools/cpu-*-server.log

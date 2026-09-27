@@ -2,7 +2,11 @@
 
 ## Pending allocation-patch verification
 
-Commit `134a6fa903db205ceab7e87da8f496128cbe200d` contains the allocation optimization described in ADR 0010. [Verify run 36292258154](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36292258154) and [CPU comparison run 36292258142](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36292258142) were confirmed in progress at handoff. Review these existing runs/artifacts when the user returns; do not launch duplicates. Local checks pass (118 tests plus two expected diagnostics, retained-growth checks and bundle budget). Hosted results are not yet claimed. Remaining literal zero-allocation work/decision is documented in ADR 0010; no exception or Phase 3 implementation is authorized.
+Commit `134a6fa903db205ceab7e87da8f496128cbe200d` contains the allocation optimization described in ADR 0010. [Verify run 36292258154](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36292258154) passed its verification, memory-growth, build and browser jobs. [CPU comparison run 36292258142](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36292258142) failed with `Incomparable CPU environment: cpuModel`: the saved reference used AMD EPYC 7763, while GitHub assigned AMD EPYC 9V45. This is an environment mismatch, not a measured >20% regression or a comparison pass. Artifact `10922428434` is preserved as `cpu-allocation-patch-mismatched-runner.json`; the original baseline is unchanged.
+
+The hosted workflow now measures the immutable reference commit `1a77315050f0407220cda1237f1284a30afeede1` and candidate sequentially on the **same runner**, using separate checkouts and ports. Both raw reports, comparison, server logs and commit provenance are uploaded. Reference server/browser processes stop before the candidate is measured. The same schema/configuration/environment checks and 20% mean/p95 threshold apply. This avoids retrying for a lucky CPU assignment, comparing unlike hardware or silently accepting the new implementation as its own baseline. The historical Linux baseline remains preserved as evidence. A fresh hosted run must verify this orchestration.
+
+Remaining literal zero-allocation work/decision is documented in ADR 0010; no exception or Phase 3 implementation is authorized.
 
 The user authorized using https://github.com/Wahmed10/TheSpaceTimeContinuum for Phase 2 CI. The initially empty public repository is now configured as `origin`. Phase 3 remains explicitly unstarted.
 

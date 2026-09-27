@@ -1,6 +1,6 @@
 # ADR 0010: reduce upstream astronomy allocation without changing ephemerides
 
-Status: optimization implemented; full zero-allocation acceptance is **not** claimed. Hosted regression verification pending. No scoped exception has been approved by the user.
+Status: optimization implemented; full zero-allocation acceptance is **not** claimed. Hosted Verify (including science, memory and browser jobs) passed in run `36292258154`. CPU comparison run `36292258142` was rejected because GitHub assigned a different CPU model. Same-runner reference/candidate orchestration is being verified; see `docs/perf/hosted-ci.md`. No scoped exception has been approved by the user.
 
 ## Investigation
 

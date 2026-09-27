@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "measuredAt": "2026-09-27T03:48:45.498Z",
+  "backend": "webgl2",
+  "adapter": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "softwareRenderer": true,
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "tier": "low",
+  "viewport": {
+    "width": 1440,
+    "height": 1000,
+    "dpr": 1
+  },
+  "entities": 21,
+  "clockRate": 1,
+  "startTime": "2026-09-22T00:00:00Z",
+  "frames": 120,
+  "warmupFrames": 30,
+  "method": "performance.now around complete engine frame, including ephemeris updates and render submission; fixed 60 Hz scheduling at 1x simulation time; RAF waits excluded; not GPU timing",
+  "results": [
+    {
+      "path": "solar-orbit",
+      "frames": 120,
+      "meanMs": 1.908333333332363,
+      "medianMs": 1.5,
+      "p95Ms": 4.400000000023283,
+      "maxMs": 14.39999999999418,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    },
+    {
+      "path": "earth-leo",
+      "frames": 120,
+      "meanMs": 2.143333333334643,
+      "medianMs": 1.6000000000349246,
+      "p95Ms": 4.699999999982538,
+      "maxMs": 8.799999999988358,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    },
+    {
+      "path": "moon-orbit",
+      "frames": 120,
+      "meanMs": 1.6491666666639504,
+      "medianMs": 1.400000000023283,
+      "p95Ms": 4,
+      "maxMs": 6.600000000034925,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    },
+    {
+      "path": "mars-orbit",
+      "frames": 120,
+      "meanMs": 1.635000000000582,
+      "medianMs": 1.400000000023283,
+      "p95Ms": 3.599999999976717,
+      "maxMs": 4.5,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    },
+    {
+      "path": "earth-moon-zoom",
+      "frames": 120,
+      "meanMs": 1.4624999999975747,
+      "medianMs": 1.2999999999883585,
+      "p95Ms": 2.5,
+      "maxMs": 4.600000000034925,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "arch": "x64",
+    "cpuModel": "AMD EPYC 9V45 96-Core Processor",
+    "browserMajor": "153",
+    "browserVersion": "153.0.8010.12",
+    "osRelease": "6.17.0-1022-azure",
+    "nodeVersion": "v24.21.0"
+  }
+}
