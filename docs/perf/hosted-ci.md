@@ -8,6 +8,8 @@ The hosted workflow now measures the immutable reference commit `1a77315050f0407
 
 Remaining literal zero-allocation work/decision is documented in ADR 0010; no exception or Phase 3 implementation is authorized.
 
+Pending review: [same-runner comparison 36293066482](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36293066482), dispatched for `7603decd244c66d87053d778fbc247005f000c2f` in compare mode and confirmed queued. It will run the reference and candidate sequentially and therefore takes longer than a single capture. End the turn while it runs. On return, review this run's artifact and provenance before starting anything else; no pass is yet claimed.
+
 The user authorized using https://github.com/Wahmed10/TheSpaceTimeContinuum for Phase 2 CI. The initially empty public repository is now configured as `origin`. Phase 3 remains explicitly unstarted.
 
 The Phase 2 checkout was published to `main` at `200ec29bfe73186bc40e407e5e4e4347cabcf064`. Local `main` tracks `origin/main`.
