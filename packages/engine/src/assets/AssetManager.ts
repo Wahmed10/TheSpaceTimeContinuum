@@ -51,6 +51,7 @@ export class AssetManager {
         'venus_atmosphere',
         'jupiter',
         'saturn',
+        'saturn_ring_alpha',
         'uranus',
         'neptune',
         'stars_milky_way',

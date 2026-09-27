@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, copyFile, stat } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, copyFile, stat, rename } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import sharp from 'sharp';
@@ -34,6 +34,8 @@ let credits = await readFile('assets/ASSET_LICENSES.md', 'utf8');
 await mkdir('apps/web/public/basis', { recursive: true });
 await mkdir('assets/source/ktx', { recursive: true });
 for (const name of maps) {
+  const only = process.argv.find((arg) => arg.startsWith('--only='))?.slice(7);
+  if (only && name !== only) continue;
   const high = [
     'sun',
     'earth_daymap',
@@ -75,9 +77,16 @@ for (const name of maps) {
     } catch {
       /* Build missing files only. */
     }
-    if (!exists || (process.argv.includes('--recompress') && res >= 4096)) {
+    const invalidBlocks = exists && name.includes('ring') &&
+      (await readFile(output)).readUInt32LE(24) % 4 !== 0;
+    if (!exists || invalidBlocks || (process.argv.includes('--recompress') && res >= 4096)) {
       const png = `assets/source/ktx/${name}_${res}.png`;
-      await sharp(data).resize({ width: res }).png().toFile(png);
+      const encoded = `${png}.ktx2`;
+      // Compressed WebGPU textures require a block-aligned base level. The
+      // radial ring strip is 2048x125; width-only resizing yielded 1024x63.
+      await sharp(data).resize({ width: res,
+        ...(name.includes('ring') ? { height: res / 16, fit: 'fill' as const } : {}),
+      }).png().toFile(png);
       await exec(
         toktx,
         [
@@ -93,11 +102,14 @@ for (const name of maps) {
           '--genmipmap',
           '--assign_oetf',
           /normal|specular|cloud/.test(name) ? 'linear' : 'srgb',
-          output,
+          encoded,
           png,
         ],
         { windowsHide: true, maxBuffer: 2e6 },
       );
+      // Publish after toktx closes its exclusive Windows file handle. Writing
+      // directly into public can panic Turbopack while it watches the asset.
+      await rename(encoded, output);
     }
     const bytes = (await stat(output)).size;
     const previous = manifest.findIndex((m) => m.file === file);

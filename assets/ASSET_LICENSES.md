@@ -65,8 +65,8 @@ Sources and modifications are recorded per file below. Solar System Scope maps u
 | /assets/textures/jupiter_2048.ktx2 | https://www.solarsystemscope.com/textures/download/2k_jupiter.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
 | /assets/textures/saturn_1024.ktx2 | https://www.solarsystemscope.com/textures/download/2k_saturn.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
 | /assets/textures/saturn_2048.ktx2 | https://www.solarsystemscope.com/textures/download/2k_saturn.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
-| /assets/textures/saturn_ring_alpha_1024.ktx2 | https://www.solarsystemscope.com/textures/download/2k_saturn_ring_alpha.png | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
-| /assets/textures/saturn_ring_alpha_2048.ktx2 | https://www.solarsystemscope.com/textures/download/2k_saturn_ring_alpha.png | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
+| /assets/textures/saturn_ring_alpha_1024.ktx2 | https://www.solarsystemscope.com/textures/download/2k_saturn_ring_alpha.png | CC BY 4.0 | Solar System Scope | Resize radial strip to 1024x64 block-aligned dimensions; UASTC KTX2; mipmaps; rebuilt 2026-09-27 |
+| /assets/textures/saturn_ring_alpha_2048.ktx2 | https://www.solarsystemscope.com/textures/download/2k_saturn_ring_alpha.png | CC BY 4.0 | Solar System Scope | Resize radial strip to 2048x128 block-aligned dimensions; UASTC KTX2; mipmaps; rebuilt 2026-09-27 |
 | /assets/textures/uranus_1024.ktx2 | https://www.solarsystemscope.com/textures/download/2k_uranus.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
 | /assets/textures/uranus_2048.ktx2 | https://www.solarsystemscope.com/textures/download/2k_uranus.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |
 | /assets/textures/neptune_1024.ktx2 | https://www.solarsystemscope.com/textures/download/2k_neptune.jpg | CC BY 4.0 | Solar System Scope | Resize; UASTC KTX2; mipmaps |

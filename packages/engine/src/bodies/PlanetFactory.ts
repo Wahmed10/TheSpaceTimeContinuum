@@ -34,6 +34,13 @@ import {
 } from 'three/tsl';
 import type { BodySpec } from '@space/domain';
 import type { AssetManager } from '../assets/AssetManager';
+import { SaturnRings } from './SaturnRings';
+const GIANT_RIMS: Record<string, string> = {
+  'planet:jupiter': '#c9b59d',
+  'planet:saturn': '#e1cd9a',
+  'planet:uranus': '#9ddddd',
+  'planet:neptune': '#608ddd',
+};
 export function createPlanet(
   body: BodySpec,
   assets: AssetManager,
@@ -48,9 +55,10 @@ export function createPlanet(
   const cloudPhase = uniform(0);
   const detailStrength = uniform(res >= 4096 ? 1 : 0);
   const animationTime = uniform(0);
-  const albedo = body.texture && useTexture
-    ? texture(assets.load(body.texture, res))
-    : color(body.color);
+  const albedo =
+    body.texture && useTexture
+      ? texture(assets.load(body.texture, res))
+      : color(body.color);
   const light = normalWorld.dot(sunDirection).clamp(-1, 1);
   const day = smoothstep(-0.08, 0.2, light);
   const material = new MeshStandardNodeMaterial({
@@ -116,6 +124,14 @@ export function createPlanet(
     material.dispose();
   }
   group.add(mesh);
+  const rings =
+    body.id === 'planet:saturn'
+      ? new SaturnRings(assets, body.physical.meanRadiusKm!, res)
+      : null;
+  if (rings) {
+    material.colorNode = albedo.rgb.mul(rings.surfaceTransmission);
+    group.add(rings.mesh);
+  }
   let clouds: Mesh | null = null;
   if (body.id === 'planet:earth') {
     const cm = new MeshStandardNodeMaterial({
@@ -157,7 +173,11 @@ export function createPlanet(
     clouds.scale.setScalar(1.003);
     group.add(clouds);
   }
-  if (body.id === 'planet:earth' || body.id === 'planet:mars') {
+  if (
+    body.id === 'planet:earth' ||
+    body.id === 'planet:mars' ||
+    GIANT_RIMS[body.id]
+  ) {
     const atmosphere = new MeshBasicNodeMaterial({
       transparent: true,
       side: BackSide,
@@ -170,7 +190,8 @@ export function createPlanet(
       .oneMinus()
       .pow(3);
     atmosphere.colorNode = color(
-      body.id === 'planet:earth' ? '#438ce8' : '#d49c77',
+      GIANT_RIMS[body.id] ??
+        (body.id === 'planet:earth' ? '#438ce8' : '#d49c77'),
     ).mul(1.2);
     atmosphere.opacityNode = fresnel
       .mul(smoothstep(-0.25, 0.6, light.negate()))
@@ -249,6 +270,7 @@ export function createPlanet(
     group,
     mesh,
     clouds,
+    rings,
     sunDirection,
     localSunDirection,
     cloudPhase,

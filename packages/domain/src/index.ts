@@ -4,3 +4,4 @@ export * from './schemas';
 export * from './catalog';
 export * from './buildCatalog';
 export * from './moonElements';
+export * from './rings';

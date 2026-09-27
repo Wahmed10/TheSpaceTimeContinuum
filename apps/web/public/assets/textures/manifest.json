@@ -259,7 +259,7 @@
     "name": "saturn_ring_alpha",
     "res": 1024,
     "file": "/assets/textures/saturn_ring_alpha_1024.ktx2",
-    "bytes": 16916,
+    "bytes": 19745,
     "license": "CC-BY-4.0",
     "credit": "Solar System Scope"
   },
@@ -267,7 +267,7 @@
     "name": "saturn_ring_alpha",
     "res": 2048,
     "file": "/assets/textures/saturn_ring_alpha_2048.ktx2",
-    "bytes": 31288,
+    "bytes": 44008,
     "license": "CC-BY-4.0",
     "credit": "Solar System Scope"
   },

@@ -1,0 +1,9 @@
+{
+  "sourceUrl": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/satringfact.html",
+  "checkedOn": "2026-09-27",
+  "innerRadiusKm": 74658,
+  "outerRadiusKm": 136780,
+  "cassiniInnerRadiusKm": 117507,
+  "cassiniOuterRadiusKm": 122340,
+  "description": "Main C/B/A rings only. Faint D/E/F/G rings omitted. Circular equatorial display approximation; texture color/opacity is illustrative, not an optical-depth measurement."
+}

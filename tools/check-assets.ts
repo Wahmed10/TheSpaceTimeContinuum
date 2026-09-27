@@ -11,16 +11,35 @@ async function walk(dir: string): Promise<string[]> {
 }
 let bytes = 0;
 const files = await walk('apps/web/public/assets');
-const manifest = JSON.parse(await readFile('apps/web/public/assets/textures/manifest.json','utf8')) as {file:string;bytes:number}[];
+const manifest = JSON.parse(
+  await readFile('apps/web/public/assets/textures/manifest.json', 'utf8'),
+) as { file: string; bytes: number }[];
 for (const file of files) {
   if (file.endsWith('manifest.json')) continue;
   if (!license.includes(file.replace('apps/web/public', '')))
     throw new Error(`Missing asset credit: ${file}`);
   const size = (await stat(file)).size;
+  if (file.endsWith('.ktx2')) {
+    const header = await readFile(file);
+    const width = header.readUInt32LE(20),
+      height = header.readUInt32LE(24);
+    if (width % 4 !== 0 || height % 4 !== 0)
+      throw new Error(
+        `Compressed texture base dimensions must be multiples of four: ${file} (${width}x${height})`,
+      );
+  }
   bytes += size;
-  const entry = manifest.find(m=>m.file===file.replace('apps/web/public',''));
-  if (!entry || entry.bytes !== size) throw new Error(`Stale asset manifest: ${file}`);
+  const entry = manifest.find(
+    (m) => m.file === file.replace('apps/web/public', ''),
+  );
+  if (!entry || entry.bytes !== size)
+    throw new Error(`Stale asset manifest: ${file}`);
 }
-for (const entry of manifest) if(!files.includes(`apps/web/public${entry.file}`))throw new Error(`Missing manifest asset: ${entry.file}`);
-if(bytes>80_000_000)throw new Error(`Texture budget exceeded: ${bytes} > 80 MB`);
-console.log(`Every distributed texture has a credit and matching manifest; ${(bytes/1e6).toFixed(2)} MB / 80 MB`);
+for (const entry of manifest)
+  if (!files.includes(`apps/web/public${entry.file}`))
+    throw new Error(`Missing manifest asset: ${entry.file}`);
+if (bytes > 80_000_000)
+  throw new Error(`Texture budget exceeded: ${bytes} > 80 MB`);
+console.log(
+  `Every distributed texture has a credit and matching manifest; ${(bytes / 1e6).toFixed(2)} MB / 80 MB`,
+);
