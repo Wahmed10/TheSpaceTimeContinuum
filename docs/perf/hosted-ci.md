@@ -1,5 +1,9 @@
 # Hosted CI setup
 
+## Pending allocation-patch verification
+
+Commit `134a6fa903db205ceab7e87da8f496128cbe200d` contains the allocation optimization described in ADR 0010. [Verify run 36292258154](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36292258154) and [CPU comparison run 36292258142](https://github.com/Wahmed10/TheSpaceTimeContinuum/actions/runs/36292258142) were confirmed in progress at handoff. Review these existing runs/artifacts when the user returns; do not launch duplicates. Local checks pass (118 tests plus two expected diagnostics, retained-growth checks and bundle budget). Hosted results are not yet claimed. Remaining literal zero-allocation work/decision is documented in ADR 0010; no exception or Phase 3 implementation is authorized.
+
 The user authorized using https://github.com/Wahmed10/TheSpaceTimeContinuum for Phase 2 CI. The initially empty public repository is now configured as `origin`. Phase 3 remains explicitly unstarted.
 
 The Phase 2 checkout was published to `main` at `200ec29bfe73186bc40e407e5e4e4347cabcf064`. Local `main` tracks `origin/main`.
