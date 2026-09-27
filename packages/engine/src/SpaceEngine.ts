@@ -81,6 +81,8 @@ const HERO_IDS = new Set([
   'planet:earth',
   'moon:moon',
   'planet:mars',
+  'planet:jupiter',
+  'planet:saturn',
 ]);
 function entityLayer(kind: BodySpec['kind']) {
   return kind === 'moon'
@@ -280,7 +282,7 @@ export class SpaceEngine {
         this.assets,
         hero ? q.segments : Math.min(64, q.segments),
         q.texture,
-        hero,
+        true,
       );
       this.scene.add(visual.group);
       // The procedural Sun glow is a local canvas map outside AssetManager.
@@ -552,7 +554,9 @@ export class SpaceEngine {
           ? this.mediumGeometry
           : e.highGeometry;
       for (const child of group.children) {
-        if (child instanceof Mesh) child.geometry = geometry;
+        // Only sphere shells share LOD geometry; rings retain their annulus.
+        if (child instanceof Mesh && child.geometry instanceof SphereGeometry)
+          child.geometry = geometry;
         if (child.name === 'atmosphere')
           child.visible = e.lod === 3 && this.quality.tier !== 'low';
       }

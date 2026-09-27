@@ -47,6 +47,12 @@ export class AssetManager {
         'moon_height',
         'mars',
         'mars_normal',
+        'mercury',
+        'venus_atmosphere',
+        'jupiter',
+        'saturn',
+        'uranus',
+        'neptune',
         'stars_milky_way',
       ]);
       return manager;
