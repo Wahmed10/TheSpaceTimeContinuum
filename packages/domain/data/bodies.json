@@ -259,6 +259,7 @@
     "id": "dwarf:ceres",
     "kind": "dwarf",
     "name": "Ceres",
+    "texture": "ceres",
     "aliases": [],
     "parentId": "star:sun",
     "physical": {
@@ -435,6 +436,7 @@
     "id": "moon:triton",
     "kind": "moon",
     "name": "Triton",
+    "texture": "triton",
     "aliases": [],
     "parentId": "planet:neptune",
     "physical": {

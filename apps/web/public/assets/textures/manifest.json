@@ -446,5 +446,21 @@
     "bytes": 397485,
     "license": "Public domain (USGS)",
     "credit": "USGS/NASA/JPL"
+  },
+  {
+    "name": "ceres",
+    "res": 1024,
+    "file": "/assets/textures/ceres_1024.ktx2",
+    "bytes": 105137,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+  },
+  {
+    "name": "triton",
+    "res": 1024,
+    "file": "/assets/textures/triton_1024.ktx2",
+    "bytes": 84115,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)"
   }
 ]

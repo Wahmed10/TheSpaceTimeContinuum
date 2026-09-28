@@ -2,7 +2,25 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: color variants installed; rendered review running
+## Current: Ceres/Triton appearance implemented; validation running
+
+September 28 resume: six browser tests and production build passed (result/report reviewed); user accepts Ceres/Triton appearance, with Ceres's muted color appropriate for this visualization. NASA explains natural-color differences are subtle: https://www.nasa.gov/image-article/hints-ceres-composition-from-color/ . Keep source gray map rather than substituting an enhanced infrared palette. Proceed to Phobos/Deimos matching meshes and atlases.
+
+Galilean increment committed as `eb605bcb7eb56338c44a34a7eb0e7a0049f4d884` after successful five-test browser/build run and user visual acceptance. Io blur remains accepted and tracked in ENHANCEMENTS. No duplicate color-map job is needed.
+
+Uncommitted Ceres/Triton increment: two NASA VTAD base-color maps, 1024x512 ETC1S with mipmaps on all quality tiers, added to catalog/preload and reproducible build (`tools/assets/build-galilean.ts --minor`). Ceres base color correctly selected instead of its separate normal map. Source colors retained; Ceres gray source and Triton unmapped plain north documented in app and `docs/science/minor-body-surfaces.md`. Hashes/URLs: `docs/licensing/minor-body-assets.json`. Combined 189,252 bytes; total 79,537,936 / 80,000,000 bytes. Remaining headroom 462,064 bytes.
+
+Short checks pass: typecheck, lint/boundaries, 120 unit tests plus two expected diagnostics, texture alignment/manifest/budget gate, 72 dependency licenses. Two-body LOW/HIGH day/quarter capture group and successful texture-load assertions added. New rendered captures remain unreviewed. Phobos/Deimos mesh/atlas integration, body orientations and full exit evidence are still pending.
+
+### Existing job to review first on resume
+
+- Persistent hidden Node PID **21708**, startup confirmed; `.tools/remaining-bodies/pid.txt`, launcher `run.mjs`.
+- Base `eb605bcb7eb56338c44a34a7eb0e7a0049f4d884` plus uncommitted Ceres/Triton files.
+- `pnpm.cmd exec playwright test e2e/body-detail.spec.ts e2e/visual.spec.ts e2e/startup.spec.ts --output=.tools/remaining-bodies/browser --reporter=json`; then `pnpm.cmd build` only if browser succeeds.
+- Logs under `.tools/remaining-bodies/`: `browser.log` (JSON report), `browser-stderr.log`, captures/traces `browser/`, `build.log`, `build-stderr.log`, progress/completion `result.json`.
+- Next: review result and eight new captures, fix failures, then commit increment. Continue Phobos/Deimos with their matching irregular meshes (cached source details below), preserve source units/UVs and budget checks. Independent user dev server remains active; local automated evidence is software WebGL only.
+
+## Previous: color variants (completed and accepted)
 
 Completed review on resume: `.tools/moon-color/result.json` records browser/build exit 0, and the user approved the colored moons. Galilean appearance increment accepted, including Io's documented blur exception. Next implementation is Ceres/Triton cylindrical textures; Phobos/Deimos require a separate matching mesh/atlas integration. Historical running notes below are superseded.
 

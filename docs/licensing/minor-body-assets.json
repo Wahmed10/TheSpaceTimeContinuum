@@ -1,0 +1,30 @@
+[
+  {
+    "name": "ceres",
+    "page": "https://science.nasa.gov/resource/ceres-3d-model/",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/c/Ceres_1_1000.glb",
+    "source": "assets/source/ceres_vtad.glb",
+    "width": 4096,
+    "height": 2048,
+    "sha256": "c43ec43aa8fb90aa8cf30660c2f2853cfac408d38149d1dc470490f4f4aa9899",
+    "acquiredOn": "2026-09-27",
+    "imageSha256": "04b130cd06ad9e5fd5923db20828940a96c60907b46145154d482c82ae8afbf8",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+    "modification": "Extract embedded baseColorTexture from NASA VTAD glTF; resize to 1024-wide ETC1S KTX2 with mipmaps. Source pixel orientation and color retained, no tint or synthesized terrain.",
+    "limitation": "NASA visualization texture, not a calibrated true-color or albedo measurement. Regional detail and source processing vary; landmark registration remains separately validated."
+  },
+  {
+    "name": "triton",
+    "page": "https://science.nasa.gov/resource/triton-3d-model/",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/t/Triton_1_2707.glb",
+    "source": "assets/source/triton_vtad.glb",
+    "width": 4096,
+    "height": 2048,
+    "sha256": "a25df7ee7fe8679e3da8cca7f1a09ec7241ad5e0c7ad97a39f057b8c1a0043ce",
+    "acquiredOn": "2026-09-27",
+    "imageSha256": "e6a871283e919c259fe7e5a0e573e1b339cc5df8d98444f5dcefe90dfb52fc30",
+    "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+    "modification": "Extract embedded baseColorTexture from NASA VTAD glTF; resize to 1024-wide ETC1S KTX2 with mipmaps. Source pixel orientation and color retained, no tint or synthesized terrain.",
+    "limitation": "NASA visualization texture, not a calibrated true-color or albedo measurement. Regional detail and source processing vary; landmark registration remains separately validated."
+  }
+]

@@ -13,7 +13,7 @@
     "perf:cpu": "node --import tsx tools/run-cpu-perf.mjs",
     "ingest:due": "tsx packages/ingest/src/runner.ts",
     "fixtures:horizons": "tsx tools/fixtures/fetch-horizons.ts",
-    "assets:build": "tsx tools/assets/build-ktx.ts && tsx tools/assets/build-moon.ts && tsx tools/assets/build-mars.ts && tsx tools/assets/build-sky.ts && tsx tools/assets/build-stars.ts && tsx tools/assets/build-new-horizons.ts && tsx tools/assets/build-galilean.ts",
+    "assets:build": "tsx tools/assets/build-ktx.ts && tsx tools/assets/build-moon.ts && tsx tools/assets/build-mars.ts && tsx tools/assets/build-sky.ts && tsx tools/assets/build-stars.ts && tsx tools/assets/build-new-horizons.ts && tsx tools/assets/build-galilean.ts && tsx tools/assets/build-galilean.ts --minor",
     "assets:preview": "tsx tools/assets/build-textures.ts",
     "licenses:check": "tsx tools/check-licenses.ts"
   },

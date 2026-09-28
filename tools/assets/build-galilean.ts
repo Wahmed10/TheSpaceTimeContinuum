@@ -5,11 +5,14 @@ import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 
 // NASA's republished JPL/USGS visualization maps, not calibrated albedo.
-const names = ['io', 'europa', 'ganymede', 'callisto'];
+const minorBodies = process.argv.includes('--minor');
+const names = minorBodies ? ['ceres', 'triton'] : ['io', 'europa', 'ganymede', 'callisto'];
 const modelFiles: Record<string, string> = {
   europa: 'e/Europa_1_3138.glb',
   ganymede: 'g/Ganymede_1_5268.glb',
   callisto: 'c/Callisto_1_4821.glb',
+  ceres: 'c/Ceres_1_1000.glb',
+  triton: 't/Triton_1_2707.glb',
 };
 
 // Extract the actual base-color image, never a normal/roughness texture.
@@ -61,7 +64,7 @@ for (const name of names) {
   }
   const pixels = name === 'io' ? original : baseColorImage(original);
   const meta = await sharp(pixels).metadata();
-  const dimensions = name === 'io' ? [11445, 5723] : name === 'europa' ? [4096, 2048] : [2048, 1024];
+  const dimensions = name === 'io' ? [11445, 5723] : name === 'europa' || minorBodies ? [4096, 2048] : [2048, 1024];
   if (meta.width !== dimensions[0] || meta.height !== dimensions[1]) throw new Error(`${name}: unexpected source dimensions`);
   provenance.push({ name, page, url, source, width: meta.width, height: meta.height,
     sha256: createHash('sha256').update(original).digest('hex'), acquiredOn: '2026-09-27',
@@ -69,12 +72,12 @@ for (const name of names) {
     credit,
     modification: name === 'io'
       ? '1024/2048-wide ETC1S KTX2 with mipmaps from USGS color-merge mosaic. Source pixel orientation and color retained; one-pixel aspect rounding normalized. No synthesized terrain or displacement.'
-      : 'Extract embedded baseColorTexture from NASA VTAD glTF; resize to 1024/1440-wide ETC1S KTX2 with mipmaps. Source pixel orientation and color retained, no tint or synthesized terrain.',
+      : `Extract embedded baseColorTexture from NASA VTAD glTF; resize to ${minorBodies ? '1024' : '1024/1440'}-wide ETC1S KTX2 with mipmaps. Source pixel orientation and color retained, no tint or synthesized terrain.`,
     limitation: name === 'io'
       ? 'Enhanced/false-color Galileo and Voyager merged mosaic with varying spatial resolution; not natural eye color. See USGS product description.'
       : 'NASA visualization texture, not a calibrated true-color or albedo measurement. Regional detail and source processing vary; landmark registration remains separately validated.' });
   // 1440x720 preserves budget headroom and satisfies compression alignment.
-  for (const res of [1024, name === 'io' ? 2048 : 1440]) {
+  for (const res of minorBodies ? [1024] : [1024, name === 'io' ? 2048 : 1440]) {
     const png = `${stage}/${name}_${res}.png`;
     const encoded = `${stage}/${name}_${res}.ktx2`;
     await sharp(pixels).resize(res, res / 2).removeAlpha().toColourspace('srgb').png().toFile(png);
@@ -102,5 +105,5 @@ credits = credits.split('\n').filter(line => !line.startsWith('| /assets/texture
 await writeFile(`${stage}/manifest.json`, JSON.stringify(manifest, null, 2));
 await rename(`${stage}/manifest.json`, manifestPath);
 await writeFile('assets/ASSET_LICENSES.md', credits);
-await writeFile('docs/licensing/galilean-assets.json', JSON.stringify(provenance, null, 2) + '\n');
+await writeFile(`docs/licensing/${minorBodies ? 'minor-body' : 'galilean'}-assets.json`, JSON.stringify(provenance, null, 2) + '\n');
 console.log(`Total textures: ${total} / 80000000 bytes`);

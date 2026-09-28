@@ -63,6 +63,15 @@ export default function Data() {
           is not a natural-color photograph.
         </li>
         <li>
+          <a href="https://science.nasa.gov/resource/ceres-3d-model/">Ceres</a>
+          {' and '}
+          <a href="https://science.nasa.gov/resource/triton-3d-model/">Triton</a>
+          {' '}use NASA VTAD model textures. Ceres retains the source's gray
+          surface appearance. Triton's plain northern region represents missing
+          image coverage, not featureless terrain. Detail varies across both
+          maps; colors are for visualization.
+        </li>
+        <li>
           Venus is shown with an opaque, illustrative cloud map. Titan uses
           illustrative orange haze rather than visible surface terrain.
           Atmosphere rims and Saturn ring scattering are display approximations.

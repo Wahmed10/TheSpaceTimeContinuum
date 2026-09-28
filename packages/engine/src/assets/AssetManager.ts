@@ -60,6 +60,8 @@ export class AssetManager {
         'europa',
         'ganymede',
         'callisto',
+        'ceres',
+        'triton',
         'stars_milky_way',
       ]);
       return manager;

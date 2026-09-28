@@ -2,6 +2,10 @@ import { test, expect } from '@playwright/test';
 
 for (const group of [
   {
+    name: 'Ceres and Triton maps',
+    ids: ['dwarf:ceres', 'moon:triton'],
+  },
+  {
     name: 'cloud decks and New Horizons maps',
     ids: ['planet:venus', 'moon:titan', 'dwarf:pluto', 'moon:charon'],
   },
@@ -84,6 +88,12 @@ for (const group of [
             ),
           ).toBe(true);
       }
+    }
+    if (group.name === 'Ceres and Triton maps') {
+      for (const name of ['ceres', 'triton'])
+        expect(loadedTextures.has(`/assets/textures/${name}_1024.ktx2`)).toBe(
+          true,
+        );
     }
     await testInfo.attach('resource-diagnostics', {
       body: JSON.stringify(
