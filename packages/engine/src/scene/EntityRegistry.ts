@@ -6,7 +6,7 @@ import {
 import type { createPlanet } from '../bodies/PlanetFactory';
 import type { LodLevel } from '../lod/LodSystem';
 import type { PointLayer } from '../layers/PointLayer';
-import type { SphereGeometry } from 'three/webgpu';
+import type { BufferGeometry } from 'three/webgpu';
 export interface RenderEntity {
   body: BodySpec;
   provider: PositionProvider;
@@ -21,7 +21,7 @@ export interface RenderEntity {
   lod: LodLevel | undefined;
   pointLayer?: PointLayer;
   pointIndex: number;
-  highGeometry: SphereGeometry;
+  highGeometry: BufferGeometry;
   frameId: `ICRF_BODY:${string}`;
 }
 export class EntityRegistry {

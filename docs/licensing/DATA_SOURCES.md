@@ -1,5 +1,7 @@
 # Data sources
 
+Phobos and Deimos: NASA/JPL-Caltech [Phobos model](https://science.nasa.gov/resource/phobos-mars-moon-3d-model/) and [Deimos model](https://science.nasa.gov/resource/deimos-mars-moon-3d-model/), NASA media usage guidelines. Simplified irregular meshes retain matching UV atlases; compressed geometry and texture derivatives are both counted in the asset budget. Provenance: `mars-moon-assets.json`; limitations: `../science/mars-moon-shapes.md`.
+
 Ceres and Triton: NASA VTAD [Ceres model](https://science.nasa.gov/resource/ceres-3d-model/) and [Triton model](https://science.nasa.gov/resource/triton-3d-model/), under NASA media usage guidelines. Base-color images extracted and compressed; source colors retained, including Ceres gray appearance and Triton's plain unmapped north. Hashes/conversion provenance: `minor-body-assets.json`; limitations: `../science/minor-body-surfaces.md`.
 
 Current Europa/Ganymede/Callisto color maps use embedded base-color PNGs from NASA VTAD [Europa](https://science.nasa.gov/resource/europa-3d-model/), [Ganymede](https://science.nasa.gov/resource/ganymede-3d-model/) and [Callisto](https://science.nasa.gov/resource/callisto-3d-model/) models, under NASA images and media usage guidelines. Container/image hashes and derivative details are in `galilean-assets.json`. These supersede the initial grayscale maps described below. Io uses the USGS Galileo SSI color-merge mosaic linked in that provenance file.

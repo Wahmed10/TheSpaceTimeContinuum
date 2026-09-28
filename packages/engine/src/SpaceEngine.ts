@@ -440,11 +440,7 @@ export class SpaceEngine {
         this.emit('sourceError', { layerId: id, message: layer.error });
     }
     const target = this.target(this.cameraController.targetId)!;
-    this.cameraController.update(
-      target.physical,
-      now,
-      target.body.physical.meanRadiusKm!,
-    );
+    this.cameraController.update(target.physical, now, this.focusRadius());
     this.canvas.style.opacity = String(
       1 - Math.max(this.clock.state.fade, this.cameraController.fade),
     );
@@ -539,7 +535,9 @@ export class SpaceEngine {
         .copy(e.visual.sunDirection.value)
         .applyQuaternion(this.inverseOrientation);
       if (e.visual.rings) {
-        e.visual.rings.localSunDirection.value.copy(e.visual.localSunDirection.value);
+        e.visual.rings.localSunDirection.value.copy(
+          e.visual.localSunDirection.value,
+        );
         e.visual.rings.sunDirection.value.copy(e.visual.sunDirection.value);
         e.visual.rings.scattering.value = this.quality.tier === 'low' ? 0 : 1;
       }
@@ -555,7 +553,9 @@ export class SpaceEngine {
       e.lod = selectLod(diameter, e.lod);
       group.visible = e.renderVisible && e.lod >= 2;
       const geometry =
-        e.lod === 2 && e.highGeometry.parameters.widthSegments > 64
+        e.lod === 2 &&
+        e.highGeometry instanceof SphereGeometry &&
+        e.highGeometry.parameters.widthSegments > 64
           ? this.mediumGeometry
           : e.highGeometry;
       for (const child of group.children) {
@@ -642,8 +642,17 @@ export class SpaceEngine {
     this.cpuTimings?.add(performance.now() - cpuStart);
   };
   private focusRadius() {
-    const e = this.target(this.cameraController.targetId)!;
-    return e.body.physical.meanRadiusKm!;
+    return this.viewRadius(this.cameraController.targetId);
+  }
+  private viewRadius(id: string) {
+    const e = this.target(id)!;
+    const geometry = this.registry.entries.get(id)?.highGeometry;
+    const extent =
+      geometry && !(geometry instanceof SphereGeometry)
+        ? geometry.boundingSphere!.radius +
+          geometry.boundingSphere!.center.length()
+        : 1;
+    return e.body.physical.meanRadiusKm! * extent;
   }
   private updateLabels(now: number) {
     this.labels?.begin();
@@ -1109,7 +1118,7 @@ export class SpaceEngine {
     this.cameraController.focus(
       id,
       e.physical,
-      id === 'planet:saturn' ? SATURN_RINGS.outerRadiusKm : e.body.physical.meanRadiusKm!,
+      id === 'planet:saturn' ? SATURN_RINGS.outerRadiusKm : this.viewRadius(id),
       performance.now(),
       opts.transition ?? true,
       opts.wide ?? false,
@@ -1128,7 +1137,7 @@ export class SpaceEngine {
       this.cameraController.restore(
         view,
         e.physical,
-        e.body.physical.meanRadiusKm!,
+        this.viewRadius(view.targetId),
         performance.now(),
       );
       this.select(view.targetId);
@@ -1161,7 +1170,10 @@ export class SpaceEngine {
         ? tier.segments
         : Math.min(64, tier.segments);
       e.visual.detailStrength.value = tier.texture >= 4096 ? 1 : 0;
-      if (old.parameters.widthSegments !== segments) {
+      if (
+        old instanceof SphereGeometry &&
+        old.parameters.widthSegments !== segments
+      ) {
         const geometry = new SphereGeometry(1, segments, segments / 2);
         e.highGeometry = geometry;
         e.visual.group.traverse((object) => {
@@ -1241,6 +1253,13 @@ export class SpaceEngine {
       })),
       layers: this.layers.snapshot(),
       geometries: this.renderer.info.memory.geometries,
+      shapes: Array.from(this.registry.entries.values())
+        .filter((e) => !(e.highGeometry instanceof SphereGeometry))
+        .map((e) => ({
+          id: e.body.id,
+          geometryId: e.highGeometry.uuid,
+          triangles: e.highGeometry.index!.count / 3,
+        })),
       gpuAttributes: (this.renderer.info.memory as { attributes?: number })
         .attributes,
       lod: Array.from(this.registry.entries.values(), (e) => ({
@@ -1249,14 +1268,17 @@ export class SpaceEngine {
         visible: e.renderVisible,
       })),
       pointLayers: this.pointLayers.size,
-      rings: Array.from(this.registry.entries.values()).filter(e => e.visual.rings).map(e => ({
-        id: e.body.id,
-        visible: e.visual.group.visible && e.visual.rings!.mesh.visible,
-        geometry: e.visual.rings!.mesh.geometry.type,
-        vertices: e.visual.rings!.mesh.geometry.getAttribute('position').count,
-        innerRadius: e.visual.rings!.mesh.geometry.parameters.innerRadius,
-        outerRadius: e.visual.rings!.mesh.geometry.parameters.outerRadius,
-      })),
+      rings: Array.from(this.registry.entries.values())
+        .filter((e) => e.visual.rings)
+        .map((e) => ({
+          id: e.body.id,
+          visible: e.visual.group.visible && e.visual.rings!.mesh.visible,
+          geometry: e.visual.rings!.mesh.geometry.type,
+          vertices:
+            e.visual.rings!.mesh.geometry.getAttribute('position').count,
+          innerRadius: e.visual.rings!.mesh.geometry.parameters.innerRadius,
+          outerRadius: e.visual.rings!.mesh.geometry.parameters.outerRadius,
+        })),
       orbits: this.orbits.map((orbit) => ({
         id: orbit.bodyId,
         epoch: orbit.epoch,
@@ -1289,11 +1311,24 @@ export class SpaceEngine {
       this.cameraController.distanceKm = body.body.physical.meanRadiusKm! * 2.8;
   }
   /** Lab-only ring views, in Saturn's equatorial frame; no API v1 addition. */
-  ringReferenceView(side: 'north' | 'south' | 'edge', planetShadow = true, ringShadow = true) {
+  ringReferenceView(
+    side: 'north' | 'south' | 'edge',
+    planetShadow = true,
+    ringShadow = true,
+  ) {
     this.focus('planet:saturn', { transition: false });
     const body = this.registry.entries.get('planet:saturn')!;
-    this.registry.frames.resolveTextureOrientation('FIXED:saturn', this.clock.state.tdbSec, this.quat);
-    this.inverseOrientation.set(this.quat[0]!, this.quat[1]!, this.quat[2]!, this.quat[3]!);
+    this.registry.frames.resolveTextureOrientation(
+      'FIXED:saturn',
+      this.clock.state.tdbSec,
+      this.quat,
+    );
+    this.inverseOrientation.set(
+      this.quat[0]!,
+      this.quat[1]!,
+      this.quat[2]!,
+      this.quat[3]!,
+    );
     // Aim from the sunward azimuth so shadow tests inspect the illuminated
     // hemisphere rather than a fixed longitude that can face the night side.
     const sun = this.registry.entries.get('star:sun')!;
@@ -1303,9 +1338,18 @@ export class SpaceEngine {
       sun.physical[2]! - body.physical[2]!,
     ).applyQuaternion(this.inverseOrientation.clone().invert());
     const horizontal = Math.hypot(localSun.x, localSun.z) || 1;
-    this.projected.set(localSun.x / horizontal, side === 'edge' ? 0 : side === 'north' ? 0.6 : -0.6, localSun.z / horizontal)
-      .normalize().applyQuaternion(this.inverseOrientation);
-    this.cameraController.azimuthRad = Math.atan2(this.projected.y, this.projected.x);
+    this.projected
+      .set(
+        localSun.x / horizontal,
+        side === 'edge' ? 0 : side === 'north' ? 0.6 : -0.6,
+        localSun.z / horizontal,
+      )
+      .normalize()
+      .applyQuaternion(this.inverseOrientation);
+    this.cameraController.azimuthRad = Math.atan2(
+      this.projected.y,
+      this.projected.x,
+    );
     this.cameraController.elevationRad = Math.asin(this.projected.z);
     this.cameraController.distanceKm = body.body.physical.meanRadiusKm! * 9;
     body.visual.rings!.shadows.value = planetShadow ? 1 : 0;

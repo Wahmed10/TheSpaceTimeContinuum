@@ -24,6 +24,8 @@ Files: `PlanetFactory.ts`, extracted material helpers as appropriate, `tools/ass
 
 Finish Venus clouds, Uranus/Neptune atmospheres, Mercury, Pluto, Charon, Ceres and all non-hero moons. Use reproducible, licensed KTX2 derivatives with source resolution limits and explicit illustrative/observed provenance. No new imagery is required for the original four heroes. Verify source terms before acquisition; retain originals and conversion provenance.
 
+User visual direction (September 28): use irregular meshes for bodies whose physical shapes warrant them, including future catalog additions. Prefer sourced shape models with matching UV atlases, preserve physical scale, and simplify for display budgets. Do not default such bodies to textured spheres or invent shape detail when suitable data is unavailable; document any necessary approximation.
+
 Accept: recognizable, reviewed close-ups for every body, coherent LOW/MEDIUM/HIGH fallback and asset-budget/license checks. Missing or unobserved terrain must not be presented as measured imagery.
 
 ## P3.4 — Orientation and moon-system behavior

@@ -72,6 +72,14 @@ export default function Data() {
           maps; colors are for visualization.
         </li>
         <li>
+          <a href="https://science.nasa.gov/resource/phobos-mars-moon-3d-model/">Phobos</a>
+          {' and '}
+          <a href="https://science.nasa.gov/resource/deimos-mars-moon-3d-model/">Deimos</a>
+          {' '}use NASA/JPL-Caltech irregular models with their matching surface
+          textures. Geometry is simplified for display; image shading and
+          uneven coverage remain in the source. These are visualization models.
+        </li>
+        <li>
           Venus is shown with an opaque, illustrative cloud map. Titan uses
           illustrative orange haze rather than visible surface terrain.
           Atmosphere rims and Saturn ring scattering are display approximations.

@@ -2,7 +2,27 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: Ceres/Triton appearance implemented; validation running
+## Current: Phobos/Deimos accepted; P3.4 orientation implementation
+
+September 28 resume: user accepts the shapes and all requested interaction checks (orbit views, clearance, quality changes and selection). Saved result.json confirms browser/build exit 0; browser report confirms 10 passed, zero failed/skipped/flaky. Shapes are accepted. User requests irregular meshes for bodies whose shapes warrant them, including future additions. P3.4 scientific rotations are next; mesh geographic registration remains a separate audit.
+
+P3.4 preparation progressed independently: downloaded and hashed NAIF PCK00011, located all ten missing bodies' pole/prime-meridian and periodic terms, and identified quadratic Mars phase angles plus the N0067 toolkit requirement. See `docs/science/phase-three-orientation-preparation.md` for source hash, parsing hazards, independent SPICE fixture requirements, and frame/mesh registration checks. Cached source `.tools/orientation/pck00011.tpc`. Review existing Mars-moon job first on next resume, then commit accepted shape work and implement sourced rotations.
+
+September 28: Ceres/Triton accepted and committed as `0dd0d02` after six browser tests and production build passed. User accepts Ceres's muted appearance; NASA natural-color explanation is recorded below. No duplicate Ceres/Triton run is needed.
+
+Uncommitted implementation: Phobos/Deimos matching NASA/JPL-Caltech meshes and UV atlases. Offline Three.js meshoptimizer simplification targets 20% triangles; compact quantized/gzip shape files decoded at startup. Non-spherical BufferGeometry survives LOD and quality switching; camera extent/zoom clearance includes shape bounds. Source origin/axes and atlas mapping retained; metalness set to zero. Physics/catalog radii remain unchanged. Geographic orientation is not yet scientifically validated. Credits, source hashes, conversion and limitations: `docs/licensing/mars-moon-assets.json`, `docs/science/mars-moon-shapes.md`.
+
+Whole public asset package INCLUDING compressed shapes is **79,961,515 / 80,000,000 bytes**, leaving 38,485 bytes. Four new files total 423,579 bytes. All tiers use 1024-square ETC1S atlases. Short checks passed: typecheck, lint/boundaries, 122 unit tests plus two expected diagnostics, alignment/manifest/budget checks and 72 dependency licenses. Decoder tests validate actual packaged geometry bounds/UVs and corrupt/truncated payload rejection. New browser group checks both moons' LOW/HIGH day/quarter views and stable geometry identity through quality transitions. Rendered results remain unreviewed.
+
+### Existing job — review first, do not duplicate
+
+- Persistent hidden Node PID **32764**, startup confirmed; `.tools/mars-moons/pid.txt`, launcher `run.mjs`.
+- Base commit `0dd0d02` plus current uncommitted Mars-moon shape/atlas changes.
+- `pnpm.cmd exec playwright test e2e/body-detail.spec.ts e2e/visual.spec.ts e2e/startup.spec.ts e2e/precision.spec.ts e2e/picking.spec.ts --output=.tools/mars-moons/browser --reporter=json`; followed by `pnpm.cmd build` only on success.
+- `.tools/mars-moons/`: `result.json` progress/completion, `browser.log` JSON report, `browser-stderr.log`, captures/traces `browser/`, `build.log`, `build-stderr.log`.
+- Next inspect report and both irregular-moon captures for UV alignment, silhouette, lighting, focus/quality changes; fix before commit. Then P3.4 sourced missing rotations/landmark registration and moon interaction review, followed by full Phase 3 scientific/performance/device exit gates. Sphere picking remains approximate and is documented for interaction review. Prior generated performance artifacts and temporary user files remain excluded from implementation commits. Local automated rendering is software WebGL, not hardware WebGPU evidence.
+
+## Previous: Ceres/Triton (completed and accepted)
 
 September 28 resume: six browser tests and production build passed (result/report reviewed); user accepts Ceres/Triton appearance, with Ceres's muted color appropriate for this visualization. NASA explains natural-color differences are subtle: https://www.nasa.gov/image-article/hints-ceres-composition-from-color/ . Keep source gray map rather than substituting an enhanced infrared palette. Proceed to Phobos/Deimos matching meshes and atlases.
 
@@ -157,3 +177,4 @@ The process has exited. The log confirms typecheck, lint/boundaries and 118 pass
 ## P3.2 reviewed checkpoint
 
 The corrected regression finished successfully: `.tools/saturn-fix/regression-result.json` exit 0; report has six passed, zero failed/skipped. This covers ring shadow toggles and both sides/edge/LOW/HIGH/MEDIUM views, original visual references, precision/depth and startup. Captures reviewed; user also confirms Saturn looks good. Implementation milestone is ready to commit; full Phase 3 performance and hardware evidence remain pending. Persistent development server remains independent of tests. Continuing P3.3 body detail.
+

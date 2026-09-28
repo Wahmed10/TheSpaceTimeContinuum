@@ -282,6 +282,7 @@
     "id": "moon:phobos",
     "kind": "moon",
     "name": "Phobos",
+    "texture": "phobos",
     "aliases": [],
     "parentId": "planet:mars",
     "physical": {
@@ -304,6 +305,7 @@
     "id": "moon:deimos",
     "kind": "moon",
     "name": "Deimos",
+    "texture": "deimos",
     "aliases": [],
     "parentId": "planet:mars",
     "physical": {

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "phobos",
+    "page": "https://science.nasa.gov/resource/phobos-mars-moon-3d-model/",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/mars/resources/gltf_files/24878_Phobos_1_1000.glb",
+    "source": "assets/source/phobos_vtad.glb",
+    "sha256": "757712101e4fbcf9527942ee664a3bc6dfe3ab460466b760f4bf51ee85dbd8d3",
+    "meanRadiusKm": 11.267,
+    "originalVertices": 16449,
+    "vertices": 3326,
+    "triangles": 6408,
+    "modification": "Three.js meshoptimizer simplification with normal/UV weights, target 20% triangles. Original origin/axes retained; source km positions divided by catalog mean radius. Positions quantized at 1/16384 radius, normals int8, UVs uint16; gzip. Source atlas resized to 1024 square ETC1S. No scientific orientation inferred."
+  },
+  {
+    "name": "deimos",
+    "page": "https://science.nasa.gov/resource/deimos-mars-moon-3d-model/",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/mars/resources/gltf_files/24879_Deimos_1_1000.glb",
+    "source": "assets/source/deimos_vtad.glb",
+    "sha256": "5d5da763970acffe88aac26d3c3bd0fa66c5bef251d1bb4bfe2ae5fd723507e4",
+    "meanRadiusKm": 6.2,
+    "originalVertices": 16649,
+    "vertices": 3417,
+    "triangles": 6502,
+    "modification": "Three.js meshoptimizer simplification with normal/UV weights, target 20% triangles. Original origin/axes retained; source km positions divided by catalog mean radius. Positions quantized at 1/16384 radius, normals int8, UVs uint16; gzip. Source atlas resized to 1024 square ETC1S. No scientific orientation inferred."
+  }
+]

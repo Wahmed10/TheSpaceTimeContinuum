@@ -2,6 +2,10 @@ import { test, expect } from '@playwright/test';
 
 for (const group of [
   {
+    name: 'Mars moon shapes',
+    ids: ['moon:phobos', 'moon:deimos'],
+  },
+  {
     name: 'Ceres and Triton maps',
     ids: ['dwarf:ceres', 'moon:triton'],
   },
@@ -40,6 +44,9 @@ for (const group of [
       timeout: 60000,
     });
     await page.evaluate(() => window.__spaceEngine!.setLayer('orbits', false));
+    const initialShapes = await page.evaluate(
+      () => window.__spaceEngine!.diagnostics().shapes,
+    );
     await page.addStyleTag({
       content:
         'body * { visibility: hidden !important; } canvas[role] { visibility: visible !important; }',
@@ -78,6 +85,9 @@ for (const group of [
         }
       }
       await page.evaluate(() => window.__spaceEngine!.setRendering(true));
+      expect(
+        await page.evaluate(() => window.__spaceEngine!.diagnostics().shapes),
+      ).toEqual(initialShapes);
     }
     if (group.name === 'Galilean moon maps') {
       for (const id of group.ids) {
@@ -91,6 +101,16 @@ for (const group of [
     }
     if (group.name === 'Ceres and Triton maps') {
       for (const name of ['ceres', 'triton'])
+        expect(loadedTextures.has(`/assets/textures/${name}_1024.ktx2`)).toBe(
+          true,
+        );
+    }
+    if (group.name === 'Mars moon shapes') {
+      expect(initialShapes.map((s) => s.id).sort()).toEqual([
+        'moon:deimos',
+        'moon:phobos',
+      ]);
+      for (const name of ['phobos', 'deimos'])
         expect(loadedTextures.has(`/assets/textures/${name}_1024.ktx2`)).toBe(
           true,
         );

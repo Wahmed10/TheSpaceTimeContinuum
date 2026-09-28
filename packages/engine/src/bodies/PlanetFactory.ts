@@ -2,6 +2,7 @@ import {
   Mesh,
   Group,
   SphereGeometry,
+  type BufferGeometry,
   MeshStandardNodeMaterial,
   MeshBasicNodeMaterial,
   Vector3,
@@ -51,7 +52,11 @@ export function createPlanet(
   useTexture = true,
 ) {
   const group = new Group();
-  const geometry = new SphereGeometry(1, segments, segments / 2);
+  const irregular =
+    useTexture && (body.id === 'moon:phobos' || body.id === 'moon:deimos');
+  const geometry = irregular
+    ? assets.createShape(body.id.split(':')[1]!)
+    : new SphereGeometry(1, segments, segments / 2);
   const sunDirection = uniform(new Vector3(1, 0, 0));
   const localSunDirection = uniform(new Vector3(1, 0, 0));
   const cloudPhase = uniform(0);
@@ -116,7 +121,7 @@ export function createPlanet(
     );
   }
   const mesh = new Mesh<
-    SphereGeometry,
+    BufferGeometry,
     MeshStandardNodeMaterial | MeshBasicNodeMaterial
   >(geometry, material);
   if (body.id === 'planet:venus' || body.id === 'moon:titan')

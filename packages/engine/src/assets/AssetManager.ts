@@ -1,6 +1,7 @@
 import { RepeatWrapping, SRGBColorSpace, NoColorSpace } from 'three/webgpu';
 import type { Texture, WebGPURenderer } from 'three/webgpu';
 import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
+import { decodeShape } from './ShapeGeometry';
 interface AssetRecord {
   texture: Texture;
   resolution: number;
@@ -15,6 +16,7 @@ interface ManifestEntry {
   file: string;
 }
 export class AssetManager {
+  private shapes = new Map<string, ArrayBuffer>();
   private records = new Map<string, AssetRecord>();
   private loader: KTX2Loader;
   private disposed = false;
@@ -35,6 +37,14 @@ export class AssetManager {
       (await response.json()) as ManifestEntry[],
     );
     try {
+      await Promise.all(['phobos', 'deimos'].map(async (name) => {
+        const response = await fetch(`/assets/shapes/${name}.bin.gz`);
+        if (!response.ok || !response.body) throw new Error(`Missing shape ${name}`);
+        const buffer = await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+        // Reject invalid assets during startup, not on first focus.
+        decodeShape(buffer).dispose();
+        manager.shapes.set(name, buffer);
+      }));
       await manager.preload([
         'sun',
         'earth_daymap',
@@ -62,6 +72,8 @@ export class AssetManager {
         'callisto',
         'ceres',
         'triton',
+        'phobos',
+        'deimos',
         'stars_milky_way',
       ]);
       return manager;
@@ -77,12 +89,18 @@ export class AssetManager {
       )
       .sort((a, b) => b.res - a.res)[0];
   }
-  private configure(texture: Texture, data: boolean) {
+  createShape(name: string) {
+    const buffer = this.shapes.get(name);
+    if (!buffer) throw new Error(`Shape not preloaded: ${name}`);
+    return decodeShape(buffer);
+  }
+  private configure(texture: Texture, data: boolean, name: string) {
     texture.colorSpace = data ? NoColorSpace : SRGBColorSpace;
     texture.wrapS = RepeatWrapping;
     texture.anisotropy = 4;
-    texture.repeat.y = -1;
-    texture.offset.y = 1;
+    const atlas = name === 'phobos' || name === 'deimos';
+    texture.repeat.y = atlas ? 1 : -1;
+    texture.offset.y = atlas ? 0 : 1;
     texture.needsUpdate = true;
   }
   async preload(names: string[]) {
@@ -96,7 +114,7 @@ export class AssetManager {
           return;
         }
         const data = /normal|specular|cloud|height/.test(name);
-        this.configure(texture, data);
+        this.configure(texture, data, name);
         // Catalog LOD may hide every sphere at startup. Keep the small hero
         // texture set resident so first focus does not allocate new textures.
         this.renderer.initTexture(texture);
@@ -133,7 +151,7 @@ export class AssetManager {
       }
       record.texture.dispose();
       record.texture.copy(loaded);
-      this.configure(record.texture, record.data);
+      this.configure(record.texture, record.data, name);
       this.renderer.initTexture(record.texture);
       record.resolution = entry.res;
       loaded.dispose();
@@ -172,6 +190,7 @@ export class AssetManager {
     this.loader.dispose();
     for (const r of this.records.values()) r.texture.dispose();
     this.records.clear();
+    this.shapes.clear();
   }
   get gpuBytes() {
     let bytes = 0;

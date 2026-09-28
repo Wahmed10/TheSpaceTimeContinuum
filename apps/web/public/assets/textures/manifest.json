@@ -462,5 +462,37 @@
     "bytes": 84115,
     "license": "NASA images and media usage guidelines",
     "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+  },
+  {
+    "name": "phobos_shape",
+    "res": 0,
+    "file": "/assets/shapes/phobos.bin.gz",
+    "bytes": 71605,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA/JPL-Caltech"
+  },
+  {
+    "name": "phobos",
+    "res": 1024,
+    "file": "/assets/textures/phobos_1024.ktx2",
+    "bytes": 145033,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA/JPL-Caltech"
+  },
+  {
+    "name": "deimos_shape",
+    "res": 0,
+    "file": "/assets/shapes/deimos.bin.gz",
+    "bytes": 73088,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA/JPL-Caltech"
+  },
+  {
+    "name": "deimos",
+    "res": 1024,
+    "file": "/assets/textures/deimos_1024.ktx2",
+    "bytes": 133853,
+    "license": "NASA images and media usage guidelines",
+    "credit": "NASA/JPL-Caltech"
   }
 ]
