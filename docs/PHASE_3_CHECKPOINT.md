@@ -2,7 +2,20 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## September 29: orientation retry passed; moon-system checks next
+## Reviewed: six moon-system interaction checks passed
+
+September 29: saved result and JSON report confirm 9 browser tests passed, zero failed/skipped/flaky, and production build passed. Jupiter Explore and Pluto True captures visually reviewed. All six systems pass scale/orbit/touch checks; labels/layers/registration regressions pass. User also reports the test passed. Assets pass at 79,961,515 / 80,000,000 bytes; 72 dependency licenses pass; measured engine gzip is 372,545 / 450,000 bytes (`docs/perf/engine-bundle.json`). Full browser regression is next; CPU comparison and surface registration audit remain outstanding.
+
+Orientation increment committed as `3b054cb`; reviewed retry has all 11 browser tests and production build passed. New `e2e/moon-systems.spec.ts` covers Earth/Mars/Jupiter/Saturn/Neptune/Pluto systems in True/Explore, moon visibility, selected orbit visibility, touch selection and invariant physical metrics across display-scale switches. Produces twelve system captures. New tests have passed lint and test discovery; execution results remain unreviewed. Geographic model/texture registration and full performance gates remain pending.
+
+- Persistent hidden Node PID **38972**, confirmed started; `.tools/moon-systems/pid.txt`, launcher `run.mjs`.
+- Base `3b054cb` plus new moon-system test and checkpoint edits.
+- Command: `pnpm.cmd exec playwright test e2e/moon-systems.spec.ts e2e/labels.spec.ts e2e/layers.spec.ts e2e/registration.spec.ts --output=.tools/moon-systems/browser --reporter=json`; then production build only on success.
+- Reports/logs: `.tools/moon-systems/result.json`, `browser.log`, `browser-stderr.log`, `build.log`, `build-stderr.log`; captures/traces `browser/`.
+- User status command: `node tools/phase-three-status.mjs`. Pointer `.tools/phase-three-active-job.txt` selects this run. FINISHED means automated completion, not reviewed phase acceptance.
+- Next resume: review this job first and fix any failures; inspect system captures, then continue registration audit and P3.5 evidence. Do not repeat completed orientation checks without a reason. Keep independent dev server and unrelated perf/user files intact.
+
+## September 29: orientation retry passed
 
 Reviewed `.tools/orientation/retry-1/result.json` and browser report: all 11 tests passed, zero failed/skipped/flaky; production build exit 0. User accepts the visual result. Phobos high/day capture inspected; surface/model geographic registration remains explicitly pending. The running-job notes below are historical.
 
@@ -213,6 +226,8 @@ The process has exited. The log confirms typecheck, lint/boundaries and 118 pass
 ## P3.2 reviewed checkpoint
 
 The corrected regression finished successfully: `.tools/saturn-fix/regression-result.json` exit 0; report has six passed, zero failed/skipped. This covers ring shadow toggles and both sides/edge/LOW/HIGH/MEDIUM views, original visual references, precision/depth and startup. Captures reviewed; user also confirms Saturn looks good. Implementation milestone is ready to commit; full Phase 3 performance and hardware evidence remain pending. Persistent development server remains independent of tests. Continuing P3.3 body detail.
+
+
 
 
 
