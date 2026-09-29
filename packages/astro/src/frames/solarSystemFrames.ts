@@ -1,4 +1,9 @@
 import * as Astronomy from 'astronomy-engine';
+import type { BodySpec, PositionProvider } from '@space/domain';
+import {
+  hasPckOrientation,
+  pckOrientation,
+} from '../orientation/pckOrientation';
 import {
   createBodyProvider,
   toAstroTime,
@@ -84,4 +89,22 @@ export function createSolarSystemFrameTree(): FrameTree {
     rotation: temeRotation,
   });
   return tree;
+}
+
+/** Add catalog frames after their ephemeris assets have loaded. */
+export function registerCatalogFrames(
+  tree: FrameTree,
+  body: BodySpec,
+  provider: PositionProvider,
+): void {
+  const slug = body.id.split(':')[1]!;
+  const id = `ICRF_BODY:${slug}` as const;
+  if (!tree.has(id))
+    tree.register({ id, parent: provider.frame, origin: provider });
+  if (hasPckOrientation(slug) && !tree.has(`FIXED:${slug}`))
+    tree.register({
+      id: `FIXED:${slug}`,
+      parent: id,
+      rotation: (tdbSec, out) => pckOrientation(slug, tdbSec, out),
+    });
 }

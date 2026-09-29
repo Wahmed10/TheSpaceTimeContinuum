@@ -504,9 +504,9 @@ export class SpaceEngine {
       );
       group.scale.setScalar(radius);
       if (
-        !e.body.astronomyBody ||
+        !e.fixedFrameId ||
         !this.registry.frames.resolveTextureOrientation(
-          `FIXED:${e.body.astronomyBody.toLowerCase()}`,
+          e.fixedFrameId,
           tdbSec,
           this.quat,
         )
@@ -1286,6 +1286,11 @@ export class SpaceEngine {
         visible: orbit.layer.line.visible,
         dashed: orbit.layer.line.material.dashed,
         width: orbit.layer.line.material.linewidth,
+      })),
+      orientations: Array.from(this.registry.entries.values()).map((e) => ({
+        id: e.body.id,
+        frame: e.fixedFrameId ?? null,
+        quaternion: e.visual.group.quaternion.toArray(),
       })),
       cameraWorld: Array.from(this.cameraController.world),
       cameraLocal: this.camera.position.toArray(),

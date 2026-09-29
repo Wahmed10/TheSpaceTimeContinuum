@@ -2,6 +2,7 @@ import type { BodySpec, PositionProvider } from '@space/domain';
 import {
   createCatalogProvider,
   createSolarSystemFrameTree,
+  registerCatalogFrames,
 } from '@space/astro';
 import type { createPlanet } from '../bodies/PlanetFactory';
 import type { LodLevel } from '../lod/LodSystem';
@@ -23,6 +24,7 @@ export interface RenderEntity {
   pointIndex: number;
   highGeometry: BufferGeometry;
   frameId: `ICRF_BODY:${string}`;
+  fixedFrameId?: `FIXED:${string}` | undefined;
 }
 export class EntityRegistry {
   readonly frames = createSolarSystemFrameTree();
@@ -41,10 +43,11 @@ export class EntityRegistry {
     if (this.entries.has(body.id))
       throw new Error(`Duplicate entity ${body.id}`);
     const provider = supplied ?? createCatalogProvider(body);
+    if (!supplied) registerCatalogFrames(this.frames, body, provider);
     const frameId = supplied
       ? (`ICRF_BODY:registered/${body.id}` as const)
       : (`ICRF_BODY:${body.id.split(':')[1]!}` as const);
-    if (supplied || !body.astronomyBody)
+    if (!this.frames.has(frameId))
       this.frames.register({
         id: frameId,
         parent: provider.frame,
@@ -54,6 +57,10 @@ export class EntityRegistry {
       body,
       provider,
       frameId,
+      fixedFrameId:
+        !supplied && this.frames.has(`FIXED:${body.id.split(':')[1]!}`)
+          ? `FIXED:${body.id.split(':')[1]!}`
+          : undefined,
       physical: new Float64Array(6),
       display: new Float64Array(3),
       visual,

@@ -2,7 +2,43 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: Phobos/Deimos accepted; P3.4 orientation implementation
+## September 29: orientation retry passed; moon-system checks next
+
+Reviewed `.tools/orientation/retry-1/result.json` and browser report: all 11 tests passed, zero failed/skipped/flaky; production build exit 0. User accepts the visual result. Phobos high/day capture inspected; surface/model geographic registration remains explicitly pending. The running-job notes below are historical.
+
+Check the latest job from the repository terminal with `node tools/phase-three-status.mjs`. It prints RUNNING or FINISHED and each recorded stage result; completion still requires agent review.
+
+### Previous retry launch
+
+User reports the new orientations look good and authorizes continuation. Scientific tilt verification is automated; geographic texture/mesh registration is still pending, so visual acceptance does not certify landmark alignment.
+
+The original orientation job failed before running tests: Node ESM required `with { type: 'json' }` on the new browser fixture import. Production build was skipped. Original failure evidence remains in `.tools/orientation/{result.json,browser.log,browser-stderr.log}`. Added the import attribute; Playwright `--list` now successfully discovers all 11 tests across six files and targeted ESLint exits 0.
+
+- Active persistent hidden Node PID **39704**, confirmed started; `.tools/orientation/retry-1/pid.txt`.
+- Launcher `.tools/orientation/retry-1/run.mjs`; base `2ee8013758cd85ca0fc149ab572ce0f6579f6abc` plus uncommitted orientation changes and import fix.
+- Command: `pnpm.cmd exec playwright test e2e/orientations.spec.ts e2e/body-detail.spec.ts e2e/visual.spec.ts e2e/startup.spec.ts e2e/precision.spec.ts e2e/picking.spec.ts --output=.tools/orientation/retry-1/browser --reporter=json`; production `pnpm.cmd build` follows only on browser success.
+- Outputs in `.tools/orientation/retry-1/`: `result.json`, `browser.log`, `browser-stderr.log`, `build.log`, `build-stderr.log`, captures/traces `browser/`.
+- Next resume: review this retry first (do not duplicate). Fix failures, inspect changed-body images and rendered rotation checks, then continue source-based landmark/mesh-axis registration and remaining P3.4/P3.5 gates. No browser/build pass or Phase 3 completion is claimed.
+- Independent user dev server root PID 3640 remains alive. Preserve it and unrelated user/performance files.
+
+## Previous: P3.4 rotations implemented
+
+September 28: accepted Mars-moon shape increment committed as `2ee8013`. Its saved browser report has 10 passed, zero failed/skipped/flaky; production build passed. User accepts appearance and requested interaction checks.
+
+Uncommitted P3.4 adds NAIF PCK00011 pole/prime-meridian rotations for Ceres and nine moons, registered through the existing scientific FrameTree after ephemeris loading. Existing hero orientations and orbital providers are unchanged. Independent CSPICE N0067 fixtures cover 60 matrices over 1900–2100; all match within 1e-9 component error. Full verify passes 124 tests plus two expected diagnostics, typecheck and lint/boundaries. After diagnostic/browser-test additions, targeted engine typecheck and lint pass too. See [pck-orientations.md](science/pck-orientations.md) for reproducibility and limitations.
+
+Geographic texture and irregular-mesh axis registration is STILL PENDING: model/atlas axes have not been silently corrected or declared scientifically aligned. This increment establishes scientific attitude and its renderer integration, not landmark accuracy or full P3.4 completion. No public asset bytes added; asset total remains 79,961,515 / 80,000,000. Full Phase 3 performance gates and remaining moon-system interactions remain pending.
+
+### Active job — review this first on resume
+
+- Persistent hidden Node PID **9232**; `.tools/orientation/pid.txt`; launcher `.tools/orientation/run.mjs`.
+- Base `2ee8013` plus uncommitted P3.4 source/data/test/doc files. Startup confirmed.
+- Command: `pnpm.cmd exec playwright test e2e/orientations.spec.ts e2e/body-detail.spec.ts e2e/visual.spec.ts e2e/startup.spec.ts e2e/precision.spec.ts e2e/picking.spec.ts --output=.tools/orientation/browser --reporter=json`, followed by `pnpm.cmd build` only after browser success.
+- `.tools/orientation/result.json` completion; `browser.log` JSON report, `browser-stderr.log`, `build.log`, `build-stderr.log`, captures/traces in `browser/`.
+- Next: inspect this existing job, review changed-body captures and two-epoch renderer rotation checks, fix failures before committing orientation increment. Continue landmark/model-axis registration and moon-system behavior, then Phase 3 exit evidence. Do not launch a duplicate job before review.
+- Persistent user dev server remains root PID 3640 at http://localhost:3000, separate from browser job. Do not stop it. Local automation is SwiftShader WebGL2, not hardware WebGPU evidence. Preserve unrelated generated perf artifacts and user temporary images.
+
+## Previous: Phobos/Deimos accepted
 
 September 28 resume: user accepts the shapes and all requested interaction checks (orbit views, clearance, quality changes and selection). Saved result.json confirms browser/build exit 0; browser report confirms 10 passed, zero failed/skipped/flaky. Shapes are accepted. User requests irregular meshes for bodies whose shapes warrant them, including future additions. P3.4 scientific rotations are next; mesh geographic registration remains a separate audit.
 
@@ -177,4 +213,7 @@ The process has exited. The log confirms typecheck, lint/boundaries and 118 pass
 ## P3.2 reviewed checkpoint
 
 The corrected regression finished successfully: `.tools/saturn-fix/regression-result.json` exit 0; report has six passed, zero failed/skipped. This covers ring shadow toggles and both sides/edge/LOW/HIGH/MEDIUM views, original visual references, precision/depth and startup. Captures reviewed; user also confirms Saturn looks good. Implementation milestone is ready to commit; full Phase 3 performance and hardware evidence remain pending. Persistent development server remains independent of tests. Continuing P3.3 body detail.
+
+
+
 
