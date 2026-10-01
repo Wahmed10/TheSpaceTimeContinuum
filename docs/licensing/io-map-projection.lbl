@@ -1,0 +1,68 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 138492
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 11445
+      Lines   = 5723
+      Bands   = 3
+    End_Group
+
+    Group = Pixels
+      Type       = UnsignedByte
+      ByteOrder  = Lsb
+      Base       = -0.0023622055999999998
+      Multiplier = 0.00472441130000000008
+    End_Group
+    ^Core     = Io_Galileo_SSI_Global_Mosaic_ClrMerge_1km.tif
+  End_Object
+
+  Group = Instrument
+    TargetName = Io
+  End_Group
+
+  Group = BandBin
+    Center       = (1.0, 1.0, 1.0)
+    OriginalBand = (1, 2, 3)
+  End_Group
+
+  Group = Mapping
+    ProjectionName     = SimpleCylindrical
+    CenterLongitude    = 0.0
+    TargetName         = Io
+    EquatorialRadius   = 1821460.0 <meters>
+    PolarRadius        = 1821460.0 <meters>
+    LatitudeType       = Planetocentric
+    LongitudeDirection = PositiveWest
+    LongitudeDomain    = 180
+    MinimumLatitude    = -90.0
+    MaximumLatitude    = 90.0
+    MinimumLongitude   = -180.0
+    MaximumLongitude   = 180.0
+    UpperLeftCornerX   = -5723000.0 <meters>
+    UpperLeftCornerY   = 2862000.0 <meters>
+    PixelResolution    = 1000.0 <meters/pixel>
+    Scale              = 31.7904739999999997 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1674             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 1059
+  ^History  = Io_Galileo_SSI_Global_Mosaic_ClrMerge_1km.History.IsisCube
+End_Object
+
+Object = OriginalLabel
+  Name           = IsisCube
+  StartByte      = 1
+  Bytes          = 3107
+  ^OriginalLabel = Io_Galileo_SSI_Global_Mosaic_ClrMerge_1km.OriginalLabel.Isi-
+                   sCube
+End_Object
+End

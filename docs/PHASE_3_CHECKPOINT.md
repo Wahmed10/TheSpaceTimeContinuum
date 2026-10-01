@@ -2,6 +2,23 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
+## October 1: full regression passed; surface audit and CPU comparison
+
+Reviewed full result and browser JSON: verify exit 0 (124 tests plus two expected diagnostics); all 29 browser tests pass, zero failed/skipped/flaky. Original reference tolerance remains unchanged. Latest React report records 3.097 commits/second; 10k point partial-upload check passes, but its 5.59 software FPS is not physical-device evidence. Build already passed at the prior unchanged runtime commit.
+
+Io registration now has an independent projection check using actual sphere vertices, published ISIS bounds and USGS projection behavior. Two new tests, targeted lint and engine typecheck pass. Source label archived; audit is in `docs/science/surface-registration-audit.md`. No visual asset or scientific attitude changes. Remaining NASA mesh/map prime-meridian registration is explicitly unresolved; no guessed corrections applied. Inspected and removed the last temporary Io screenshot under the user-authorized cleanup instruction.
+
+### Previous full regression launch
+
+Moon-system evidence committed as `bc79965`. Short asset/license/bundle checks pass (details below). Full verify and all browser specs are now running sequentially; no new production build is needed for test/document-only changes after the passed moon-system build.
+
+- Persistent hidden Node PID **13648**, startup confirmed; `.tools/phase-three-full/pid.txt`; launcher `run.mjs`.
+- Tested commit `bc79965` (plus checkpoint documentation); commands `pnpm.cmd verify`, then `pnpm.cmd exec playwright test --output=.tools/phase-three-full/browser --reporter=json` on verify success.
+- Status/results `.tools/phase-three-full/result.json`; logs `verify.log`, `verify-stderr.log`, `browser.log`, `browser-stderr.log`; captures/traces `browser/`.
+- `node tools/phase-three-status.mjs` points to this active run. No full-suite pass is claimed yet.
+- Existing tests also write docs/perf files. Entire pre-run docs/perf directory copied to `.tools/phase-three-full/perf-before` to preserve earlier evidence and unrelated local modifications. Do not blindly commit all generated reports. User test-results/ and temp-pics/ remain untouched.
+- Next: review this run first, fix failures without relaxing thresholds, review remaining captures. Then same-runner CPU comparison after all edits/builds stop; geographic map/model registration audit and physical rendering evidence remain explicitly separate outstanding work. Phase 3 is not yet complete.
+
 ## Reviewed: six moon-system interaction checks passed
 
 September 29: saved result and JSON report confirm 9 browser tests passed, zero failed/skipped/flaky, and production build passed. Jupiter Explore and Pluto True captures visually reviewed. All six systems pass scale/orbit/touch checks; labels/layers/registration regressions pass. User also reports the test passed. Assets pass at 79,961,515 / 80,000,000 bytes; 72 dependency licenses pass; measured engine gzip is 372,545 / 450,000 bytes (`docs/perf/engine-bundle.json`). Full browser regression is next; CPU comparison and surface registration audit remain outstanding.
@@ -226,6 +243,8 @@ The process has exited. The log confirms typecheck, lint/boundaries and 118 pass
 ## P3.2 reviewed checkpoint
 
 The corrected regression finished successfully: `.tools/saturn-fix/regression-result.json` exit 0; report has six passed, zero failed/skipped. This covers ring shadow toggles and both sides/edge/LOW/HIGH/MEDIUM views, original visual references, precision/depth and startup. Captures reviewed; user also confirms Saturn looks good. Implementation milestone is ready to commit; full Phase 3 performance and hardware evidence remain pending. Persistent development server remains independent of tests. Continuing P3.3 body detail.
+
+
 
 
 

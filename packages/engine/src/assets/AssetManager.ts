@@ -2,6 +2,7 @@ import { RepeatWrapping, SRGBColorSpace, NoColorSpace } from 'three/webgpu';
 import type { Texture, WebGPURenderer } from 'three/webgpu';
 import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
 import { decodeShape } from './ShapeGeometry';
+import { configureSurfaceMapping } from './SurfaceMapping';
 interface AssetRecord {
   texture: Texture;
   resolution: number;
@@ -98,9 +99,7 @@ export class AssetManager {
     texture.colorSpace = data ? NoColorSpace : SRGBColorSpace;
     texture.wrapS = RepeatWrapping;
     texture.anisotropy = 4;
-    const atlas = name === 'phobos' || name === 'deimos';
-    texture.repeat.y = atlas ? 1 : -1;
-    texture.offset.y = atlas ? 0 : 1;
+    configureSurfaceMapping(texture, name);
     texture.needsUpdate = true;
   }
   async preload(names: string[]) {
