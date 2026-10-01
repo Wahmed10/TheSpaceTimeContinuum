@@ -1,0 +1,28 @@
+{
+  "diagnosticOnly": true,
+  "includesWarmup": true,
+  "framesPerPath": 150,
+  "note": "Sampled self time below SpaceEngine.frame during Earth LEO, including warmup. Native compilation and profiler overhead prevent use as gate timing.",
+  "versions": {
+    "reference": {
+      "shaderCompilation": 597.9110000000001,
+      "physicalOrigins": 71.65399999999998,
+      "frameOwn": 9.26,
+      "labels": 9.889000000000001,
+      "renderSubmission": 184.63299999999998,
+      "orbits": 9,
+      "visualAttitude": 10.523000000000001,
+      "other": 13.172
+    },
+    "candidate": {
+      "shaderCompilation": 410.034,
+      "physicalOrigins": 70.803,
+      "frameOwn": 15.974,
+      "orbits": 20.885,
+      "visualAttitude": 12.962000000000002,
+      "renderSubmission": 189.47700000000023,
+      "labels": 5.851,
+      "other": 13.911
+    }
+  }
+}

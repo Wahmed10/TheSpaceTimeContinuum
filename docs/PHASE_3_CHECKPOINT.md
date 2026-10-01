@@ -2,6 +2,24 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
+## Current: visible-mesh surface update optimization ready for validation
+
+Reviewed `.tools/cpu-phase-three/profiling/result.json`: both reference/candidate diagnostic captures completed with exit 0. This is successful evidence collection, not a CPU gate pass. Earth LEO sampled attribution is preserved in `docs/perf/phase-three/cpu-profile-attribution.json`; the discussion and limitations are in `cpu-regression.md`. Physical-origin cost was similar; added attitude evaluation and mesh-only update work identify avoidable work, without establishing a unique p95 root cause. Orbit sampling differed too, but no speculative orbit rewrite is included in this change.
+
+`SpaceEngine.frame` now determines mesh visibility before refreshing attitude, cloud/material uniforms and mesh detail. Hidden meshes defer that work; current absolute epoch state is set synchronously when they become visible. Scientific positions, frame APIs, point representations, labels and orbits retain their update behavior. The orientation browser test focuses every new body and compares its visible mesh to independent SPICE fixtures, including hidden-time advancement and six-hour visible rotation. Tolerances and CPU configuration are unchanged.
+
+Local verification passed: typecheck, lint/boundaries, 128 unit tests plus two expected rejected-model diagnostics. Browser test discovery passes. Browser behavior, production build and unprofiled strict paired CPU acceptance remain pending. Launch these sequentially in a new `retry-2` directory and review that existing job first next turn; preserve both earlier failed comparisons.
+
+## Historical launch: diagnostic CPU profiles (now completed and reviewed)
+
+- Persistent hidden Node PID **5648**, startup confirmed; `.tools/cpu-phase-three/profiling/pid.txt`; launcher `run.mjs`.
+- Reference unchanged detached Phase 2 worktree `4409ef5`, port 3001. Candidate 2a780a7341ead234d136f27e5439b1300040fe0a at existing port 3000; runtime identical to failed optimized f57b42d trial. Documentation/profiling tool changes only.
+- Sequential commands from main checkout: `pnpm.cmd exec node tools/profile-cpu-paths.mjs http://localhost:3001 <profiling>/reference-profile`; stop only reference process tree; `pnpm.cmd exec node tools/profile-cpu-paths.mjs http://localhost:3000 <profiling>/candidate-profile`.
+- Each invokes the existing 120/30-frame, five-path LOW/True harness with Chrome CPU sampling at 100 microseconds. Profiler overhead included; these are DIAGNOSTIC runs, not gate comparisons. The CPU gate remains failed; no acceptance claimed even if capture stages exit 0.
+- Status/provenance `.tools/cpu-phase-three/profiling/result.json`; logs `referenceProfile.log`, `candidateProfile.log`, their stderr and reference-server.log. Each profile folder contains `browser.cpuprofile`, `diagnostic-paths.json`, `summary.json` with top function attribution and per-path self time.
+- Status command `node tools/phase-three-status.mjs` now labels diagnostic mode. Keep localhost idle while profiling. Independent candidate dev server remains preserved.
+- Next resume: inspect capture completion first, compare Earth LEO attribution/source functions and profiles, then select an evidence-supported fix. Validate science/browser behavior and fresh paired CPU gate after the fix. Preserve both failed comparisons; no threshold changes or repeated runs merely to obtain a pass.
+
 ## October 1: optimized CPU trial still fails; profiling required
 
 Reviewed retry-1: all 5 selected browser tests pass, reference capture passes, candidate CPU gate still fails Earth LEO. Mean ratio 1.1082 and p95 ratio 1.2105 (1.9ms -> 2.3ms); all four other paths pass. Environment/configuration still match. This is the same performance failure, not a new browser failure. Preserved the optimized trial's three raw reports under `docs/perf/phase-three/`; original failures remain untouched.
@@ -90,11 +108,11 @@ The original orientation job failed before running tests: Node ESM required `wit
 
 September 28: accepted Mars-moon shape increment committed as `2ee8013`. Its saved browser report has 10 passed, zero failed/skipped/flaky; production build passed. User accepts appearance and requested interaction checks.
 
-Uncommitted P3.4 adds NAIF PCK00011 pole/prime-meridian rotations for Ceres and nine moons, registered through the existing scientific FrameTree after ephemeris loading. Existing hero orientations and orbital providers are unchanged. Independent CSPICE N0067 fixtures cover 60 matrices over 1900–2100; all match within 1e-9 component error. Full verify passes 124 tests plus two expected diagnostics, typecheck and lint/boundaries. After diagnostic/browser-test additions, targeted engine typecheck and lint pass too. See [pck-orientations.md](science/pck-orientations.md) for reproducibility and limitations.
+Uncommitted P3.4 adds NAIF PCK00011 pole/prime-meridian rotations for Ceres and nine moons, registered through the existing scientific FrameTree after ephemeris loading. Existing hero orientations and orbital providers are unchanged. Independent CSPICE N0067 fixtures cover 60 matrices over 1900â€“2100; all match within 1e-9 component error. Full verify passes 124 tests plus two expected diagnostics, typecheck and lint/boundaries. After diagnostic/browser-test additions, targeted engine typecheck and lint pass too. See [pck-orientations.md](science/pck-orientations.md) for reproducibility and limitations.
 
 Geographic texture and irregular-mesh axis registration is STILL PENDING: model/atlas axes have not been silently corrected or declared scientifically aligned. This increment establishes scientific attitude and its renderer integration, not landmark accuracy or full P3.4 completion. No public asset bytes added; asset total remains 79,961,515 / 80,000,000. Full Phase 3 performance gates and remaining moon-system interactions remain pending.
 
-### Active job — review this first on resume
+### Active job â€” review this first on resume
 
 - Persistent hidden Node PID **9232**; `.tools/orientation/pid.txt`; launcher `.tools/orientation/run.mjs`.
 - Base `2ee8013` plus uncommitted P3.4 source/data/test/doc files. Startup confirmed.
@@ -278,6 +296,7 @@ The process has exited. The log confirms typecheck, lint/boundaries and 118 pass
 ## P3.2 reviewed checkpoint
 
 The corrected regression finished successfully: `.tools/saturn-fix/regression-result.json` exit 0; report has six passed, zero failed/skipped. This covers ring shadow toggles and both sides/edge/LOW/HIGH/MEDIUM views, original visual references, precision/depth and startup. Captures reviewed; user also confirms Saturn looks good. Implementation milestone is ready to commit; full Phase 3 performance and hardware evidence remain pending. Persistent development server remains independent of tests. Continuing P3.3 body detail.
+
 
 
 

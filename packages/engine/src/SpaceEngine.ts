@@ -503,44 +503,6 @@ export class SpaceEngine {
         e.display[2]! - world[2]!,
       );
       group.scale.setScalar(radius);
-      if (
-        !e.fixedFrameId ||
-        !this.registry.frames.resolveTextureOrientation(
-          e.fixedFrameId,
-          tdbSec,
-          this.quat,
-        )
-      ) {
-        this.quat[0] = this.quat[1] = this.quat[2] = 0;
-        this.quat[3] = 1;
-      }
-      group.quaternion.set(
-        this.quat[0]!,
-        this.quat[1]!,
-        this.quat[2]!,
-        this.quat[3]!,
-      );
-      if (e.visual.clouds)
-        e.visual.clouds.rotation.y = ((tdbSec / 86400) * 0.015) % (2 * Math.PI);
-      e.visual.cloudPhase.value = e.visual.clouds?.rotation.y ?? 0;
-      e.visual.sunDirection.value
-        .set(
-          sun.physical[0]! - e.physical[0]!,
-          sun.physical[1]! - e.physical[1]!,
-          sun.physical[2]! - e.physical[2]!,
-        )
-        .normalize();
-      this.inverseOrientation.copy(group.quaternion).invert();
-      e.visual.localSunDirection.value
-        .copy(e.visual.sunDirection.value)
-        .applyQuaternion(this.inverseOrientation);
-      if (e.visual.rings) {
-        e.visual.rings.localSunDirection.value.copy(
-          e.visual.localSunDirection.value,
-        );
-        e.visual.rings.sunDirection.value.copy(e.visual.sunDirection.value);
-        e.visual.rings.scattering.value = this.quality.tier === 'low' ? 0 : 1;
-      }
       e.renderVisible =
         e.visible &&
         (e.body.kind === 'star' || this.layers.has(entityLayer(e.body.kind)));
@@ -552,22 +514,65 @@ export class SpaceEngine {
       );
       e.lod = selectLod(diameter, e.lod);
       group.visible = e.renderVisible && e.lod >= 2;
-      const geometry =
-        e.lod === 2 &&
-        e.highGeometry instanceof SphereGeometry &&
-        e.highGeometry.parameters.widthSegments > 64
-          ? this.mediumGeometry
-          : e.highGeometry;
-      for (const child of group.children) {
-        // Only sphere shells share LOD geometry; rings retain their annulus.
-        if (child instanceof Mesh && child.geometry instanceof SphereGeometry)
-          child.geometry = geometry;
-        if (child.name === 'atmosphere')
-          child.visible = e.lod === 3 && this.quality.tier !== 'low';
+      // Point representations use position/size/color only. Refresh the surface
+      // attitude and material state before a mesh becomes visible in this frame.
+      if (group.visible) {
+        if (
+          !e.fixedFrameId ||
+          !this.registry.frames.resolveTextureOrientation(
+            e.fixedFrameId,
+            tdbSec,
+            this.quat,
+          )
+        ) {
+          this.quat[0] = this.quat[1] = this.quat[2] = 0;
+          this.quat[3] = 1;
+        }
+        group.quaternion.set(
+          this.quat[0]!,
+          this.quat[1]!,
+          this.quat[2]!,
+          this.quat[3]!,
+        );
+        if (e.visual.clouds)
+          e.visual.clouds.rotation.y =
+            ((tdbSec / 86400) * 0.015) % (2 * Math.PI);
+        e.visual.cloudPhase.value = e.visual.clouds?.rotation.y ?? 0;
+        e.visual.sunDirection.value
+          .set(
+            sun.physical[0]! - e.physical[0]!,
+            sun.physical[1]! - e.physical[1]!,
+            sun.physical[2]! - e.physical[2]!,
+          )
+          .normalize();
+        this.inverseOrientation.copy(group.quaternion).invert();
+        e.visual.localSunDirection.value
+          .copy(e.visual.sunDirection.value)
+          .applyQuaternion(this.inverseOrientation);
+        if (e.visual.rings) {
+          e.visual.rings.localSunDirection.value.copy(
+            e.visual.localSunDirection.value,
+          );
+          e.visual.rings.sunDirection.value.copy(e.visual.sunDirection.value);
+          e.visual.rings.scattering.value = this.quality.tier === 'low' ? 0 : 1;
+        }
+        const geometry =
+          e.lod === 2 &&
+          e.highGeometry instanceof SphereGeometry &&
+          e.highGeometry.parameters.widthSegments > 64
+            ? this.mediumGeometry
+            : e.highGeometry;
+        for (const child of group.children) {
+          // Only sphere shells share LOD geometry; rings retain their annulus.
+          if (child instanceof Mesh && child.geometry instanceof SphereGeometry)
+            child.geometry = geometry;
+          if (child.name === 'atmosphere')
+            child.visible = e.lod === 3 && this.quality.tier !== 'low';
+        }
+        if (e.visual.clouds) e.visual.clouds.visible = e.lod === 3;
+        e.visual.detailStrength.value =
+          e.lod === 3 && QUALITY[this.quality.tier].texture >= 4096 ? 1 : 0;
       }
-      if (e.visual.clouds) e.visual.clouds.visible = e.lod === 3;
-      e.visual.detailStrength.value =
-        e.lod === 3 && QUALITY[this.quality.tier].texture >= 4096 ? 1 : 0;
       const layer = e.pointLayer!;
       const parent = this.registry.entries.get(e.body.parentId ?? e.body.id)!;
       const i = e.pointIndex;
@@ -1290,6 +1295,7 @@ export class SpaceEngine {
       orientations: Array.from(this.registry.entries.values()).map((e) => ({
         id: e.body.id,
         frame: e.fixedFrameId ?? null,
+        rendered: e.visual.group.visible,
         quaternion: e.visual.group.quaternion.toArray(),
       })),
       cameraWorld: Array.from(this.cameraController.world),
