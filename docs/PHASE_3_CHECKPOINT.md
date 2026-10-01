@@ -2,6 +2,24 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
+## October 1: optimized CPU trial still fails; profiling required
+
+Reviewed retry-1: all 5 selected browser tests pass, reference capture passes, candidate CPU gate still fails Earth LEO. Mean ratio 1.1082 and p95 ratio 1.2105 (1.9ms -> 2.3ms); all four other paths pass. Environment/configuration still match. This is the same performance failure, not a new browser failure. Preserved the optimized trial's three raw reports under `docs/perf/phase-three/`; original failures remain untouched.
+
+The attitude derivative fix is correctness-verified but not accepted as a complete performance fix. Added `tools/profile-cpu-paths.mjs` (syntax/lint checked) for independent function-level and per-path CPU sampling of reference/candidate. Profiles are diagnostic only and cannot replace gate evidence. No new runtime fix is chosen until those profiles are reviewed.
+
+## Previous: optimized frame rendering validation and paired CPU retry
+
+Fix committed as f57b42d41ba5df389f784ecf7ed51a774e05c0d0. Full verify passed before launch: 128 tests plus two expected diagnostics, typecheck and lint/boundaries. Initial CPU failure remains retained; no optimized performance pass is claimed yet.
+
+- Persistent hidden Node PID **33452**, confirmed started; `.tools/cpu-phase-three/retry-1/pid.txt`; launcher `run.mjs`.
+- Command first: `pnpm.cmd exec playwright test e2e/orientations.spec.ts e2e/visual.spec.ts e2e/precision.spec.ts e2e/registration.spec.ts --output=.tools/cpu-phase-three/retry-1/browser --reporter=json`.
+- Only after browser success: use existing detached Phase 2 `4409ef5` worktree and dependencies, start reference at port 3001; capture fresh reference via `pnpm.cmd perf:cpu --url http://localhost:3001 --output <retry>/reference.json`; stop only reference tree; capture candidate at port 3000 with `--output <retry>/current.json --baseline <retry>/reference.json`.
+- Both captures fresh/sequential/same machine, immutable Phase 2 reference, unchanged schema/configuration and 20% mean/p95 gate. Candidate f57b42d41ba5df389f784ecf7ed51a774e05c0d0. No benchmark overlap with browser tests, edits or builds.
+- Logs/result `.tools/cpu-phase-three/retry-1/`: `result.json`, `browser.log`, `browser-stderr.log`, `reference-server.log`, `referenceCpu.log`, `candidateCpu.log`, corresponding stderr; raw reports `reference.json`, `current.json`, `current-comparison.json`; browser captures/traces `browser/`.
+- Status command `node tools/phase-three-status.mjs` now points here. Next resume review this existing run first; inspect browser/fixture parity, comparison/environment and any failure before another run. Preserve all original failed reports and thresholds. Source registration and physical rendering evidence remain subsequent Phase 3 work.
+- Independent user dev server remains at 3000. Keep localhost idle while measuring.
+
 ## October 1: CPU failure investigated; redundant attitude derivatives removed
 
 The initial paired job finished with verify/install/reference capture passed, candidate CPU comparison failed. Earth LEO p95 ratio 1.2222 (1.8ms -> 2.2ms), mean ratio 1.1879; other four paths pass. Matching environment/configuration confirmed. Original failure is preserved in `.tools/cpu-phase-three/` and tracked raw reports under `docs/perf/phase-three/`. No threshold or baseline changed.
@@ -260,6 +278,8 @@ The process has exited. The log confirms typecheck, lint/boundaries and 118 pass
 ## P3.2 reviewed checkpoint
 
 The corrected regression finished successfully: `.tools/saturn-fix/regression-result.json` exit 0; report has six passed, zero failed/skipped. This covers ring shadow toggles and both sides/edge/LOW/HIGH/MEDIUM views, original visual references, precision/depth and startup. Captures reviewed; user also confirms Saturn looks good. Implementation milestone is ready to commit; full Phase 3 performance and hardware evidence remain pending. Persistent development server remains independent of tests. Continuing P3.3 body detail.
+
+
 
 
 

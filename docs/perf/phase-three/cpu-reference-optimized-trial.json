@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "measuredAt": "2026-10-01T22:24:17.878Z",
+  "backend": "webgl2",
+  "adapter": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "softwareRenderer": true,
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "tier": "low",
+  "viewport": {
+    "width": 1440,
+    "height": 1000,
+    "dpr": 1
+  },
+  "entities": 21,
+  "clockRate": 1,
+  "startTime": "2026-09-22T00:00:00Z",
+  "frames": 120,
+  "warmupFrames": 30,
+  "method": "performance.now around complete engine frame, including ephemeris updates and render submission; fixed 60 Hz scheduling at 1x simulation time; RAF waits excluded; not GPU timing",
+  "results": [
+    {
+      "path": "solar-orbit",
+      "frames": 120,
+      "meanMs": 1.3000000029802323,
+      "medianMs": 1.2000000476837158,
+      "p95Ms": 2.0999999046325684,
+      "maxMs": 2.4000000953674316,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    },
+    {
+      "path": "earth-leo",
+      "frames": 120,
+      "meanMs": 1.4166666676600774,
+      "medianMs": 1.3000000715255737,
+      "p95Ms": 1.9000000953674316,
+      "maxMs": 2.799999952316284,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    },
+    {
+      "path": "moon-orbit",
+      "frames": 120,
+      "meanMs": 1.3349999954303107,
+      "medianMs": 1.2000000476837158,
+      "p95Ms": 2.100000023841858,
+      "maxMs": 2.600000023841858,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    },
+    {
+      "path": "mars-orbit",
+      "frames": 120,
+      "meanMs": 1.2866666674613954,
+      "medianMs": 1.2000000476837158,
+      "p95Ms": 2,
+      "maxMs": 2.399999976158142,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    },
+    {
+      "path": "earth-moon-zoom",
+      "frames": 120,
+      "meanMs": 1.244999995827675,
+      "medianMs": 1.1999999284744263,
+      "p95Ms": 1.899999976158142,
+      "maxMs": 2,
+      "clockEvents": 8,
+      "uiUpdates": 8
+    }
+  ],
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "cpuModel": "AMD Ryzen 7 8845HS w/ Radeon 780M Graphics     ",
+    "browserMajor": "153",
+    "browserVersion": "153.0.8010.12",
+    "osRelease": "10.0.26200",
+    "nodeVersion": "v24.12.0"
+  }
+}
