@@ -4,6 +4,88 @@ import { FrameTree } from '../src/frames/FrameTree';
 import { bodyOrientation } from '../src/orientation/bodyOrientation';
 import { isoToTdb, utcMsToTdb } from '../src/time/scales';
 
+it('samples a render attitude once, then computes transport velocity lazily at the same epoch', () => {
+  const tree = new FrameTree();
+  let calls = 0;
+  tree.register({
+    id: 'FIXED:lazy',
+    parent: 'ICRF_SSB',
+    rotation: (t, out) => {
+      calls++;
+      const c = Math.cos(t * 0.001),
+        s = Math.sin(t * 0.001);
+      out.set([c, -s, 0, s, c, 0, 0, 0, 1]);
+    },
+  });
+  const q = new Float64Array(4),
+    state = new Float64Array(6);
+  expect(tree.resolveTextureOrientation('FIXED:lazy', 10, q)).toBe(true);
+  const saved = Array.from(q);
+  tree.resolveTextureOrientation('FIXED:lazy', 10, q);
+  expect(calls).toBe(1);
+  expect(
+    tree.transformState(
+      'FIXED:lazy',
+      'ICRF_SSB',
+      10,
+      new Float64Array([100, 0, 0, 0, 0, 0]),
+      state,
+    ),
+  ).toBe(true);
+  expect(calls).toBe(3); // Central sample reused; ±0.5 s still evaluated.
+  expect(state[0]).toBeCloseTo(100 * Math.cos(0.01), 10);
+  expect(state[1]).toBeCloseTo(100 * Math.sin(0.01), 10);
+  expect(state[3]).toBeCloseTo(-0.1 * Math.sin(0.01), 8);
+  expect(state[4]).toBeCloseTo(0.1 * Math.cos(0.01), 8);
+  tree.resolveTextureOrientation('FIXED:lazy', 10, q);
+  expect(Array.from(q)).toEqual(saved);
+  expect(calls).toBe(3);
+  tree.beginFrame(10, 123);
+  tree.resolveTextureOrientation('FIXED:lazy', 10, q);
+  expect(calls).toBe(4); // Explicit invalidation even at an unchanged epoch.
+});
+
+it('render-attitude caching still refuses unavailable parent origins without changing output', () => {
+  const tree = new FrameTree();
+  let calls = 0;
+  tree.register({
+    id: 'ICRF_BODY:limited',
+    parent: 'ICRF_SSB',
+    origin: {
+      id: 'limited',
+      frame: 'ICRF_SSB',
+      method: 'static',
+      validity: 'unbounded',
+      certaintyAt: () => 'computed',
+      stateAt: (t, out) => {
+        if (t > 10) return { ok: false, reason: 'out-of-validity' };
+        out.fill(0);
+        return {
+          ok: true,
+          frame: 'ICRF_SSB',
+          certainty: 'computed',
+          stale: false,
+        };
+      },
+    },
+  });
+  tree.register({
+    id: 'FIXED:limited',
+    parent: 'ICRF_BODY:limited',
+    rotation: (_t, out) => {
+      calls++;
+      out.set([1, 0, 0, 0, 1, 0, 0, 0, 1]);
+    },
+  });
+  const q = new Float64Array(4);
+  expect(tree.resolveTextureOrientation('FIXED:limited', 10, q)).toBe(true);
+  const saved = Array.from(q);
+  expect(tree.resolveTextureOrientation('FIXED:limited', 11, q)).toBe(false);
+  expect(tree.resolveTextureOrientation('FIXED:limited', NaN, q)).toBe(false);
+  expect(Array.from(q)).toEqual(saved);
+  expect(calls).toBe(1);
+});
+
 it('memoizes origins, invalidates on frame stamps and composes nested rotating origins', () => {
   const tree = new FrameTree();
   let calls = 0;

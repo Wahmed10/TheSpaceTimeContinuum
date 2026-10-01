@@ -2,7 +2,24 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## October 1: full regression passed; surface audit and CPU comparison
+## October 1: CPU failure investigated; redundant attitude derivatives removed
+
+The initial paired job finished with verify/install/reference capture passed, candidate CPU comparison failed. Earth LEO p95 ratio 1.2222 (1.8ms -> 2.2ms), mean ratio 1.1879; other four paths pass. Matching environment/configuration confirmed. Original failure is preserved in `.tools/cpu-phase-three/` and tracked raw reports under `docs/perf/phase-three/`. No threshold or baseline changed.
+
+FrameTree renderer requests now calculate only the central attitude for zero-origin frames; full derivatives and transport velocity are calculated lazily when state transforms need them. Parent coverage/failure checks remain intact. Unit tests cover call reduction, same-epoch derivative upgrade, cache invalidation, numeric transport velocity, unavailable parents and unchanged SPICE matrix results. Details: `docs/perf/phase-three/cpu-regression.md`. Full verify now passes: typecheck, lint/boundaries, 128 tests plus two expected diagnostics. Measured correction is still unverified; another paired run is required before accepting this fix.
+
+## Previous: October 1 initial paired CPU job
+
+Latest implementation is `1868950` (Io projection audit and mapping tests). Full browser suite passed at `bc79965`; the later cold-path transform extraction preserves rendering behavior and passed both projection tests, engine typecheck and targeted lint. Further source map/irregular-mesh registration remains unresolved as detailed in the audit. Phase 3 is still incomplete.
+
+- Persistent hidden Node PID **14452**, startup confirmed; `.tools/cpu-phase-three/pid.txt`, launcher `run.mjs`.
+- Commands: candidate `pnpm.cmd verify`; detached accepted Phase 2 worktree `.tools/cpu-phase-three/reference` at `4409ef5d8f97299d9058360c97d560493d067c1c`, `pnpm.cmd install --offline --frozen-lockfile`; reference dev server PORT=3001; reference `pnpm.cmd perf:cpu --url http://localhost:3001 --output <root>/.tools/cpu-phase-three/reference.json`; stop reference process tree; candidate `pnpm.cmd perf:cpu --url http://localhost:3000 --output <root>/.tools/cpu-phase-three/current.json --baseline <root>/.tools/cpu-phase-three/reference.json`.
+- Candidate commit `1868950`; source provenance and stage exit codes in `result.json`. Fresh sequential captures on the same machine, schema 2, unchanged 120/30 frames, five paths and 20% gate. Historical baselines remain intact. This compares Phase 3 with accepted Phase 2; hosted CI's older immutable reference remains separate.
+- Reports: `.tools/cpu-phase-three/{reference.json,current.json,current-comparison.json}`; logs `verify.log`, `referenceInstall.log`, `reference-server.log`, `referenceCpu.log`, `candidateCpu.log` and respective stderr logs. Startup/installation/measurement failure is preserved and prevents a pass.
+- Reference server PID is recorded separately and only that process tree is stopped. Independent user dev server root PID 3640 at port 3000 is preserved. Keep app interaction, builds and source edits out of measurement execution.
+- Status: `node tools/phase-three-status.mjs`. Review this existing job first on resume; do not duplicate it. Next inspect all stages, five path comparisons and matching environment/configuration. Fix a measured regression without changing thresholds. Then remaining source registration and physical rendering evidence/Phase 3 handoff; no Phase 4 work.
+
+## October 1: full regression passed; surface audit
 
 Reviewed full result and browser JSON: verify exit 0 (124 tests plus two expected diagnostics); all 29 browser tests pass, zero failed/skipped/flaky. Original reference tolerance remains unchanged. Latest React report records 3.097 commits/second; 10k point partial-upload check passes, but its 5.59 software FPS is not physical-device evidence. Build already passed at the prior unchanged runtime commit.
 
@@ -243,6 +260,9 @@ The process has exited. The log confirms typecheck, lint/boundaries and 118 pass
 ## P3.2 reviewed checkpoint
 
 The corrected regression finished successfully: `.tools/saturn-fix/regression-result.json` exit 0; report has six passed, zero failed/skipped. This covers ring shadow toggles and both sides/edge/LOW/HIGH/MEDIUM views, original visual references, precision/depth and startup. Captures reviewed; user also confirms Saturn looks good. Implementation milestone is ready to commit; full Phase 3 performance and hardware evidence remain pending. Persistent development server remains independent of tests. Continuing P3.3 body detail.
+
+
+
 
 
 

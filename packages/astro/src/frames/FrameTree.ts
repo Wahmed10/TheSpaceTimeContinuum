@@ -32,6 +32,7 @@ function component(
 }
 class ResolvedNode {
   stamp = -1;
+  orientationStamp = -1;
   valid = false;
   readonly state = new Float64Array(6);
   readonly localState = new Float64Array(6);
@@ -94,7 +95,8 @@ export class FrameTree {
     if (spec.origin && !spec.origin.stateAt(this.epoch, node.localState).ok)
       return undefined;
     if (spec.rotation) {
-      spec.rotation(this.epoch, node.localRotation);
+      if (node.orientationStamp !== this.stamp)
+        spec.rotation(this.epoch, node.localRotation);
       // Symmetric one-second derivative; Earth rotation truncation <1e-9 relative.
       spec.rotation(this.epoch - 0.5, node.before);
       spec.rotation(this.epoch + 0.5, node.after);
@@ -102,6 +104,7 @@ export class FrameTree {
         node.localDerivative[i] = node.after[i]! - node.before[i]!;
     }
     multiply(parent.rotation, node.localRotation, node.rotation);
+    node.orientationStamp = this.stamp;
     multiply(parent.derivative, node.localRotation, node.derivative);
     multiply(parent.rotation, node.localDerivative, node.product);
     for (let i = 0; i < 9; i++)
@@ -118,6 +121,25 @@ export class FrameTree {
     node.valid = true;
     return node;
   }
+  /** A zero-origin frame needs only one attitude sample for rendering.
+   * Resolve its parent normally to preserve provider coverage/failure semantics.
+   * State transforms still compute the full derivative lazily on first demand.
+   */
+  private resolveOrientation(id: FrameId): ResolvedNode | undefined {
+    const node = this.nodes.get(id);
+    if (!node || !Number.isFinite(this.epoch)) return undefined;
+    if (node.stamp === this.stamp) return node.valid ? node : undefined;
+    const spec = node.spec;
+    if (!spec || spec.origin) return this.resolve(id);
+    const parent = this.resolve(spec.parent);
+    if (!parent) return undefined;
+    if (node.orientationStamp !== this.stamp) {
+      if (spec.rotation) spec.rotation(this.epoch, node.localRotation);
+      multiply(parent.rotation, node.localRotation, node.rotation);
+      node.orientationStamp = this.stamp;
+    }
+    return node;
+  }
   resolveOrigin(id: FrameId, tdbSec: number, out: Float64Array): boolean {
     this.beginFrame(tdbSec);
     const node = this.resolve(id);
@@ -132,7 +154,7 @@ export class FrameTree {
     out: Float64Array,
   ): boolean {
     this.beginFrame(tdbSec);
-    const node = this.resolve(id);
+    const node = this.resolveOrientation(id);
     if (!node) return false;
     const r = node.rotation;
     const m00 = r[0]!,
