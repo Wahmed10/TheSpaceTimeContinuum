@@ -1,6 +1,16 @@
 import { expect, it } from 'vitest';
-import { SphereGeometry, Texture, Vector2 } from 'three/webgpu';
+import {
+  SphereGeometry,
+  Texture,
+  Vector2,
+  Vector3,
+  Mesh,
+  MeshBasicMaterial,
+  Raycaster,
+  RepeatWrapping,
+} from 'three/webgpu';
 import { configureSurfaceMapping } from '../src/assets/SurfaceMapping';
+import landmarks from './fixtures/surface-landmarks.json';
 
 it('registers Io raster coordinates against actual sphere vertices and ISIS projection units', () => {
   const geometry = new SphereGeometry(1, 32, 24);
@@ -43,5 +53,46 @@ it('preserves source atlas coordinates for both irregular moons', () => {
       uv.toArray(),
     );
   }
+  texture.dispose();
+});
+
+it('places independently identified landmarks at their USGS geographic directions', () => {
+  const geometry = new SphereGeometry(1, 128, 64),
+    material = new MeshBasicMaterial();
+  const mesh = new Mesh(geometry, material),
+    texture = new Texture();
+  texture.wrapS = RepeatWrapping;
+  texture.flipY = false; // KTX2Loader's compressed textures have native row order.
+  const direction = new Vector3(),
+    origin = new Vector3(),
+    raycaster = new Raycaster();
+  for (const landmark of landmarks.records) {
+    const lat = (landmark.latitude * Math.PI) / 180,
+      lon = (landmark.east * Math.PI) / 180;
+    direction.set(
+      Math.cos(lat) * Math.cos(lon),
+      Math.sin(lat),
+      -Math.cos(lat) * Math.sin(lon),
+    );
+    origin.copy(direction).multiplyScalar(2);
+    raycaster.set(origin, direction.negate());
+    const uv = raycaster.intersectObject(mesh)[0]!.uv!;
+    configureSurfaceMapping(texture, landmark.body);
+    texture.updateMatrix();
+    texture.transformUv(uv);
+    const observedU =
+      (landmark.pixel[0]! / 2048 + (landmark.preparedHalfShift ? 0.5 : 0)) % 1;
+    const delta = Math.abs(uv.x - observedU);
+    expect(
+      Math.min(delta, 1 - delta) * 360,
+      `${landmark.body}/${landmark.feature} longitude`,
+    ).toBeLessThan(2);
+    expect(
+      Math.abs(uv.y - landmark.pixel[1]! / 1024) * 180,
+      `${landmark.body}/${landmark.feature} latitude`,
+    ).toBeLessThan(2);
+  }
+  geometry.dispose();
+  material.dispose();
   texture.dispose();
 });

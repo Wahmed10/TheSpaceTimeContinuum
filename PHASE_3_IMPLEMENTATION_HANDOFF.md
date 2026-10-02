@@ -4,9 +4,9 @@ Updated October 1, 2026 (latest review October 2 UTC). This supersedes the origi
 
 ## Current outcome
 
-All 21 catalog bodies have reviewed appearance and scientific frame integration. Local renderer regression, science checks, production builds and the unchanged same-machine CPU gate pass. The new Phase 3 hardware-check button is implemented and functionally validated. **The user's laptop HIGH/WebGPU Phase 3 report now passes** all 24 views, measured rendering budgets and precision/depth; no repeat is pending. Geographic registration of several source images/models remains explicitly unresolved; scientific attitude tests do not certify image longitude or model pole registration.
+All 21 catalog bodies have reviewed appearance and scientific frame integration. The previously reviewed local renderer regression, science checks, production builds and unchanged same-machine CPU gate pass. The Phase 3 hardware-check button and **the user's laptop HIGH/WebGPU report pass** all 24 views, measured rendering budgets and precision/depth; no device repeat is pending. The user subsequently authorized the surface geographic audit. It found and corrected four registrations: Ceres and Charon longitude offsets, and Phobos/Deimos source geometry frames. New independent shape rays and twelve USGS landmarks pass; current verify is **131 passed plus two expected rejected-model diagnostics**. Corrected runtime browser/build and visual review are pending before Phase 3 closure. Fine control-network/model-generation limitations are recorded as enhancements, not survey-accuracy claims.
 
-No background job is pending. `.tools/phase-three-active-job.txt` selects the completed `.tools/phase-three-device` job. `node tools/phase-three-status.mjs` should report FINISHED. Do not relaunch either completed validation simply because a new session starts.
+Current validation launch details are recorded at the top of `docs/PHASE_3_CHECKPOINT.md`. `.tools/phase-three-active-job.txt` identifies the latest job; use `node tools/phase-three-status.mjs` and review that existing job first on resume. Do not relaunch completed historical validations simply because a new session starts.
 
 ## Source and milestones
 
@@ -60,7 +60,7 @@ Review the actual backend/adapter and every view's p95 against existing hardware
 
 ## Scientific source limitations and accepted appearance choices
 
-`docs/science/surface-registration-audit.md` verifies Io registration independently using its archived ISIS label and USGS projection behavior. It retains open prime-meridian/landmark registration for NASA sphere maps, Pluto/Charon per-feature registration, and exact Phobos/Deimos pole/subplanet-facing alignment. Their source models lack declared cartographic frames; preserve axes until controlled source data or identified landmarks establish a correction. Do not guess a 90-degree rotation or claim scientific geographic alignment merely because attitude tests pass.
+`docs/science/surface-registration-audit.md` verifies Io using its ISIS projection, six other solid-body maps using twelve independent USGS landmarks, Triton's gross mapping using independent projection/image comparison, and the two Mars moon frames using independent shape models. Four cold-path corrections are implemented and unit verified. Source models still lack declared cartographic frames; registration is inferred from the recorded evidence rather than attributed to nonexistent metadata. Fine geodetic accuracy, model-generation differences and source coverage remain limitations in `docs/ENHANCEMENTS.md`. Review corrected browser captures before Phase 3 closure.
 
 The user accepted remaining Io blur/smearing as a future improvement, recorded in `docs/ENHANCEMENTS.md`. They accepted Ceres's naturally muted appearance and the existing gray source map; do not substitute enhanced spectral false color as natural color. Imagery/color/coverage and atmosphere approximations remain documented in the scientific and licensing files. Literal zero upstream transient allocation remains deferred under accepted ADR 0010.
 
@@ -74,4 +74,4 @@ The user accepted remaining Io blur/smearing as a future improvement, recorded i
 - Temporary screenshots were inspected and removed under the user's instruction; the prior temporary folder was empty at last review. Inspect any newly supplied pictures before removing them.
 - Do not regenerate ephemeris data, change scientific tolerances or loosen performance/asset budgets to resolve a visual failure. No database, keys, deployment or Phase 4 work is required here.
 
-Resume by reviewing any new user hardware report, then address actual failures or the explicitly open registration audit. Record accurate remaining limitations and obtain Phase 3 acceptance only after required new rendering evidence has been reviewed.
+Resume by reviewing the active surface-audit browser/build job first, including failures and corrected captures. Retain the passed laptop/CPU evidence; no repeat is pending for these cold-path changes. Record accurate source limits and obtain Phase 3 acceptance only after corrected rendering evidence is reviewed. Do not start Phase 4.

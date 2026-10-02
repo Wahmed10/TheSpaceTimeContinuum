@@ -2,7 +2,13 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: laptop HIGH/WebGPU Phase 3 report passed
+## Current: surface registration corrections ready for browser validation
+
+October 1: user explicitly authorized completing the geographic audit, with Phase 4 still prohibited. The source audit found and corrected Ceres's 180-degree map seam, Charon's incorrect legacy 180-degree shift and the independent Phobos/Deimos source geometry frames. Europa/Ganymede/Callisto/Pluto mappings agree with twelve independent USGS landmarks; Triton's source/projection comparison supports keeping its existing mapping. Mesh frame inference compares all signed axis permutations to PDS grids and Phobos additionally to an explicit IAU_PHOBOS JPL DSK. Details, input hashes, full candidate scores, scripts and precision limits are in [the audit](science/surface-registration-audit.md).
+
+Local verify passes typecheck, lint/boundaries and **131 tests plus two expected rejected-model diagnostics**. Assets remain **79,961,515 / 80,000,000 bytes**; no runtime files were rebaked. The corrections happen only at asset/mesh creation, with normals rotated alongside positions and unchanged atlas UVs. Previous accepted CPU and laptop evidence remains preserved. Corrected browser regression/build and visual review are the next checks; no complete Phase 3 acceptance is claimed yet.
+
+## Previously reviewed: laptop HIGH/WebGPU Phase 3 report passed
 
 Reviewed the user-supplied `test-results/phase-three-webgpu-1790908597477.json`: all 21 body close-ups and three Saturn ring views, HIGH throughout, 240 samples per view, settled textures, focused meshes and ring views visible. Worst p95 **6.20 ms** against 16.7 ms; mean FPS range **161.33–164.71**. Maximum draw calls **36 / 300**, detailed meshes **3 / 12**, compressed asset mip storage **119,844,112 bytes / 350 MB**. Precision **0.107680 px / 0.5 px** over 600 samples; all **11 depth probes pass**. Windows Chrome 153, WebGPU, 1707×904 at DPR 1.5. User identifies the device as their laptop; adapter string is blank, so no particular GPU is asserted.
 
@@ -10,7 +16,7 @@ Original download untouched; byte-identical copy and per-view review preserved i
 
 The submitted laptop HIGH/WebGPU performance/precision evidence is accepted. No fix or duplicate run is needed. Earlier full browser/build/strict CPU evidence remains accepted; Phase 2 coverage is unchanged. No new mobile or forced-WebGL2 physical result is claimed. No background job is pending.
 
-Next implementation work remains the explicitly open source geographic registration audit, with source-axis/prime-meridian limits preserved until authoritative evidence permits a correction. Do not conflate scientific SPICE attitude agreement with geographic imagery/mesh alignment. Phase 4 has not been authorized. See `PHASE_3_IMPLEMENTATION_HANDOFF.md` for the updated scope/evidence/constraints.
+The subsequently authorized surface audit and corrections are recorded above. Do not conflate scientific SPICE attitude agreement with geographic imagery/mesh alignment. Phase 4 has not been authorized. See `PHASE_3_IMPLEMENTATION_HANDOFF.md` for the updated scope/evidence/constraints.
 
 ## Previous: device-report validation passed; hardware report was pending
 

@@ -1,0 +1,620 @@
+{
+  "records": [
+    {
+      "body": "phobos",
+      "referenceFile": "phobos_2014_09_22.bds",
+      "referenceSha256": "8f8fe4ea2dc97355d37279ee8136a974015a0d1b5f1199f43678ba5ad03fd2b6",
+      "frame": "IAU_PHOBOS",
+      "rays": [
+        {
+          "latitude": -60,
+          "east": 0,
+          "radiusKm": 8.88787042
+        },
+        {
+          "latitude": -60,
+          "east": 30,
+          "radiusKm": 8.74496824
+        },
+        {
+          "latitude": -60,
+          "east": 60,
+          "radiusKm": 8.54098318
+        },
+        {
+          "latitude": -60,
+          "east": 90,
+          "radiusKm": 8.84200317
+        },
+        {
+          "latitude": -60,
+          "east": 120,
+          "radiusKm": 9.944891
+        },
+        {
+          "latitude": -60,
+          "east": 150,
+          "radiusKm": 10.78789903
+        },
+        {
+          "latitude": -60,
+          "east": 180,
+          "radiusKm": 10.55551596
+        },
+        {
+          "latitude": -60,
+          "east": 210,
+          "radiusKm": 10.38801079
+        },
+        {
+          "latitude": -60,
+          "east": 240,
+          "radiusKm": 9.57625108
+        },
+        {
+          "latitude": -60,
+          "east": 270,
+          "radiusKm": 9.14281463
+        },
+        {
+          "latitude": -60,
+          "east": 300,
+          "radiusKm": 8.91172146
+        },
+        {
+          "latitude": -60,
+          "east": 330,
+          "radiusKm": 8.52666192
+        },
+        {
+          "latitude": -30,
+          "east": 0,
+          "radiusKm": 12.32828458
+        },
+        {
+          "latitude": -30,
+          "east": 30,
+          "radiusKm": 11.03973147
+        },
+        {
+          "latitude": -30,
+          "east": 60,
+          "radiusKm": 10.13015281
+        },
+        {
+          "latitude": -30,
+          "east": 90,
+          "radiusKm": 10.54750988
+        },
+        {
+          "latitude": -30,
+          "east": 120,
+          "radiusKm": 11.03356423
+        },
+        {
+          "latitude": -30,
+          "east": 150,
+          "radiusKm": 11.40637809
+        },
+        {
+          "latitude": -30,
+          "east": 180,
+          "radiusKm": 11.97498292
+        },
+        {
+          "latitude": -30,
+          "east": 210,
+          "radiusKm": 12.32864256
+        },
+        {
+          "latitude": -30,
+          "east": 240,
+          "radiusKm": 10.96295187
+        },
+        {
+          "latitude": -30,
+          "east": 270,
+          "radiusKm": 9.82248299
+        },
+        {
+          "latitude": -30,
+          "east": 300,
+          "radiusKm": 10.83016064
+        },
+        {
+          "latitude": -30,
+          "east": 330,
+          "radiusKm": 12.39279689
+        },
+        {
+          "latitude": 0,
+          "east": 0,
+          "radiusKm": 12.227
+        },
+        {
+          "latitude": 0,
+          "east": 30,
+          "radiusKm": 11.8313498
+        },
+        {
+          "latitude": 0,
+          "east": 60,
+          "radiusKm": 11.15130355
+        },
+        {
+          "latitude": 0,
+          "east": 90,
+          "radiusKm": 11.452
+        },
+        {
+          "latitude": 0,
+          "east": 120,
+          "radiusKm": 11.4736761
+        },
+        {
+          "latitude": 0,
+          "east": 150,
+          "radiusKm": 11.80902167
+        },
+        {
+          "latitude": 0,
+          "east": 180,
+          "radiusKm": 13.025
+        },
+        {
+          "latitude": 0,
+          "east": 210,
+          "radiusKm": 13.86148576
+        },
+        {
+          "latitude": 0,
+          "east": 240,
+          "radiusKm": 12.54159071
+        },
+        {
+          "latitude": 0,
+          "east": 270,
+          "radiusKm": 11.657
+        },
+        {
+          "latitude": 0,
+          "east": 300,
+          "radiusKm": 10.98292129
+        },
+        {
+          "latitude": 0,
+          "east": 330,
+          "radiusKm": 13.72568899
+        },
+        {
+          "latitude": 30,
+          "east": 0,
+          "radiusKm": 10.92683511
+        },
+        {
+          "latitude": 30,
+          "east": 30,
+          "radiusKm": 10.87617124
+        },
+        {
+          "latitude": 30,
+          "east": 60,
+          "radiusKm": 10.87365697
+        },
+        {
+          "latitude": 30,
+          "east": 90,
+          "radiusKm": 10.90140278
+        },
+        {
+          "latitude": 30,
+          "east": 120,
+          "radiusKm": 10.93962664
+        },
+        {
+          "latitude": 30,
+          "east": 150,
+          "radiusKm": 11.11142244
+        },
+        {
+          "latitude": 30,
+          "east": 180,
+          "radiusKm": 11.36137811
+        },
+        {
+          "latitude": 30,
+          "east": 210,
+          "radiusKm": 11.66291264
+        },
+        {
+          "latitude": 30,
+          "east": 240,
+          "radiusKm": 11.07427364
+        },
+        {
+          "latitude": 30,
+          "east": 270,
+          "radiusKm": 10.37510753
+        },
+        {
+          "latitude": 30,
+          "east": 300,
+          "radiusKm": 11.20548079
+        },
+        {
+          "latitude": 30,
+          "east": 330,
+          "radiusKm": 11.37888412
+        },
+        {
+          "latitude": 60,
+          "east": 0,
+          "radiusKm": 9.62663557
+        },
+        {
+          "latitude": 60,
+          "east": 30,
+          "radiusKm": 9.67242068
+        },
+        {
+          "latitude": 60,
+          "east": 60,
+          "radiusKm": 9.59673405
+        },
+        {
+          "latitude": 60,
+          "east": 90,
+          "radiusKm": 9.86995056
+        },
+        {
+          "latitude": 60,
+          "east": 120,
+          "radiusKm": 10.09482193
+        },
+        {
+          "latitude": 60,
+          "east": 150,
+          "radiusKm": 10.19720871
+        },
+        {
+          "latitude": 60,
+          "east": 180,
+          "radiusKm": 9.92124757
+        },
+        {
+          "latitude": 60,
+          "east": 210,
+          "radiusKm": 10.00793117
+        },
+        {
+          "latitude": 60,
+          "east": 240,
+          "radiusKm": 10.54166171
+        },
+        {
+          "latitude": 60,
+          "east": 270,
+          "radiusKm": 9.66037279
+        },
+        {
+          "latitude": 60,
+          "east": 300,
+          "radiusKm": 9.98756715
+        },
+        {
+          "latitude": 60,
+          "east": 330,
+          "radiusKm": 9.86153813
+        }
+      ]
+    },
+    {
+      "body": "deimos",
+      "referenceFile": "m2deimos.tab",
+      "referenceSha256": "9a4dbc132c7546acb2ef26a386d306f155519f0988c8052acb2276ddeb7ca2fd",
+      "frame": "Thomas planetocentric, west-positive grid",
+      "rays": [
+        {
+          "latitude": -60,
+          "east": 0,
+          "radiusKm": 5.9651
+        },
+        {
+          "latitude": -60,
+          "east": 30,
+          "radiusKm": 5.84
+        },
+        {
+          "latitude": -60,
+          "east": 60,
+          "radiusKm": 4.9093
+        },
+        {
+          "latitude": -60,
+          "east": 90,
+          "radiusKm": 3.8921
+        },
+        {
+          "latitude": -60,
+          "east": 120,
+          "radiusKm": 3.6574
+        },
+        {
+          "latitude": -60,
+          "east": 150,
+          "radiusKm": 3.7734
+        },
+        {
+          "latitude": -60,
+          "east": 180,
+          "radiusKm": 4.0343
+        },
+        {
+          "latitude": -60,
+          "east": 210,
+          "radiusKm": 4.2586
+        },
+        {
+          "latitude": -60,
+          "east": 240,
+          "radiusKm": 4.4338
+        },
+        {
+          "latitude": -60,
+          "east": 270,
+          "radiusKm": 5.0764
+        },
+        {
+          "latitude": -60,
+          "east": 300,
+          "radiusKm": 5.2076
+        },
+        {
+          "latitude": -60,
+          "east": 330,
+          "radiusKm": 5.5706
+        },
+        {
+          "latitude": -30,
+          "east": 0,
+          "radiusKm": 6.9006
+        },
+        {
+          "latitude": -30,
+          "east": 30,
+          "radiusKm": 7.0596
+        },
+        {
+          "latitude": -30,
+          "east": 60,
+          "radiusKm": 6.2612
+        },
+        {
+          "latitude": -30,
+          "east": 90,
+          "radiusKm": 4.4977
+        },
+        {
+          "latitude": -30,
+          "east": 120,
+          "radiusKm": 4.4425
+        },
+        {
+          "latitude": -30,
+          "east": 150,
+          "radiusKm": 5.9284
+        },
+        {
+          "latitude": -30,
+          "east": 180,
+          "radiusKm": 7.3894
+        },
+        {
+          "latitude": -30,
+          "east": 210,
+          "radiusKm": 6.6228
+        },
+        {
+          "latitude": -30,
+          "east": 240,
+          "radiusKm": 6.0711
+        },
+        {
+          "latitude": -30,
+          "east": 270,
+          "radiusKm": 5.8568
+        },
+        {
+          "latitude": -30,
+          "east": 300,
+          "radiusKm": 5.8544
+        },
+        {
+          "latitude": -30,
+          "east": 330,
+          "radiusKm": 6.1311
+        },
+        {
+          "latitude": 0,
+          "east": 0,
+          "radiusKm": 7.5466
+        },
+        {
+          "latitude": 0,
+          "east": 30,
+          "radiusKm": 6.6809
+        },
+        {
+          "latitude": 0,
+          "east": 60,
+          "radiusKm": 5.6839
+        },
+        {
+          "latitude": 0,
+          "east": 90,
+          "radiusKm": 5.778
+        },
+        {
+          "latitude": 0,
+          "east": 120,
+          "radiusKm": 6.4464
+        },
+        {
+          "latitude": 0,
+          "east": 150,
+          "radiusKm": 7.0775
+        },
+        {
+          "latitude": 0,
+          "east": 180,
+          "radiusKm": 8.0775
+        },
+        {
+          "latitude": 0,
+          "east": 210,
+          "radiusKm": 6.9897
+        },
+        {
+          "latitude": 0,
+          "east": 240,
+          "radiusKm": 6.582
+        },
+        {
+          "latitude": 0,
+          "east": 270,
+          "radiusKm": 6.6203
+        },
+        {
+          "latitude": 0,
+          "east": 300,
+          "radiusKm": 6.5438
+        },
+        {
+          "latitude": 0,
+          "east": 330,
+          "radiusKm": 7.1538
+        },
+        {
+          "latitude": 30,
+          "east": 0,
+          "radiusKm": 7.2413
+        },
+        {
+          "latitude": 30,
+          "east": 30,
+          "radiusKm": 6.5083
+        },
+        {
+          "latitude": 30,
+          "east": 60,
+          "radiusKm": 5.7035
+        },
+        {
+          "latitude": 30,
+          "east": 90,
+          "radiusKm": 5.926
+        },
+        {
+          "latitude": 30,
+          "east": 120,
+          "radiusKm": 6.5857
+        },
+        {
+          "latitude": 30,
+          "east": 150,
+          "radiusKm": 6.5814
+        },
+        {
+          "latitude": 30,
+          "east": 180,
+          "radiusKm": 6.3529
+        },
+        {
+          "latitude": 30,
+          "east": 210,
+          "radiusKm": 6.6771
+        },
+        {
+          "latitude": 30,
+          "east": 240,
+          "radiusKm": 6.5349
+        },
+        {
+          "latitude": 30,
+          "east": 270,
+          "radiusKm": 6.0571
+        },
+        {
+          "latitude": 30,
+          "east": 300,
+          "radiusKm": 5.8597
+        },
+        {
+          "latitude": 30,
+          "east": 330,
+          "radiusKm": 6.5445
+        },
+        {
+          "latitude": 60,
+          "east": 0,
+          "radiusKm": 6.5101
+        },
+        {
+          "latitude": 60,
+          "east": 30,
+          "radiusKm": 6.261
+        },
+        {
+          "latitude": 60,
+          "east": 60,
+          "radiusKm": 6.1301
+        },
+        {
+          "latitude": 60,
+          "east": 90,
+          "radiusKm": 5.8113
+        },
+        {
+          "latitude": 60,
+          "east": 120,
+          "radiusKm": 5.6935
+        },
+        {
+          "latitude": 60,
+          "east": 150,
+          "radiusKm": 5.8033
+        },
+        {
+          "latitude": 60,
+          "east": 180,
+          "radiusKm": 5.7843
+        },
+        {
+          "latitude": 60,
+          "east": 210,
+          "radiusKm": 5.8153
+        },
+        {
+          "latitude": 60,
+          "east": 240,
+          "radiusKm": 5.9147
+        },
+        {
+          "latitude": 60,
+          "east": 270,
+          "radiusKm": 5.8145
+        },
+        {
+          "latitude": 60,
+          "east": 300,
+          "radiusKm": 5.9251
+        },
+        {
+          "latitude": 60,
+          "east": 330,
+          "radiusKm": 6.3128
+        }
+      ]
+    }
+  ]
+}

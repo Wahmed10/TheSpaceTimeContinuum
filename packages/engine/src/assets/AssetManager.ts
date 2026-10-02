@@ -1,7 +1,7 @@
 import { RepeatWrapping, SRGBColorSpace, NoColorSpace } from 'three/webgpu';
 import type { Texture, WebGPURenderer } from 'three/webgpu';
 import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
-import { decodeShape } from './ShapeGeometry';
+import { decodeShape, registerShapeGeometry } from './ShapeGeometry';
 import { configureSurfaceMapping } from './SurfaceMapping';
 interface AssetRecord {
   texture: Texture;
@@ -93,7 +93,7 @@ export class AssetManager {
   createShape(name: string) {
     const buffer = this.shapes.get(name);
     if (!buffer) throw new Error(`Shape not preloaded: ${name}`);
-    return decodeShape(buffer);
+    return registerShapeGeometry(decodeShape(buffer), name);
   }
   private configure(texture: Texture, data: boolean, name: string) {
     texture.colorSpace = data ? NoColorSpace : SRGBColorSpace;

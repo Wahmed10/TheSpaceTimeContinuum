@@ -1,4 +1,21 @@
-import { BufferGeometry, BufferAttribute } from 'three/webgpu';
+import { BufferGeometry, BufferAttribute, Matrix4 } from 'three/webgpu';
+
+/** Cold-path source frame -> texture frame (+X prime, +Y north, -Z east).
+ * Registration inferred against independent PDS/JPL shapes; see the audit.
+ * Rotate positions and normals together, preserving the original UV atlas.
+ */
+export function registerShapeGeometry(geometry: BufferGeometry, name: string): BufferGeometry {
+  if (name === 'phobos') {
+    // Source -> IAU: (z,x,y); IAU -> texture: (x,z,-y).
+    geometry.applyMatrix4(new Matrix4().set(0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 0, 1));
+  } else if (name === 'deimos') {
+    // Source -> IAU: (-x,y,-z); IAU -> texture: (x,z,-y).
+    geometry.applyMatrix4(new Matrix4().set(-1, 0, 0, 0, 0, 0, -1, 0, 0, -1, 0, 0, 0, 0, 0, 1));
+  } else {
+    throw new Error(`Unknown shape registration: ${name}`);
+  }
+  return geometry;
+}
 
 /** Decode the offline-normalized, quantized NASA mesh without changing its UV atlas. */
 export function decodeShape(buffer: ArrayBuffer): BufferGeometry {

@@ -1,0 +1,65 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 170322
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 14138
+      Lines   = 7069
+      Bands   = 3
+    End_Group
+
+    Group = Pixels
+      Type       = UnsignedByte
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+    ^Core     = Triton_Voyager2_ClrMosaic_GlobalFill_600m.tif
+  End_Object
+
+  Group = Archive
+    DataSetId               = PIA18668
+    ProducerInstitutionName = "Lunar and Planetary Institute"
+    ProducerId              = LPI
+    ProducerFullName        = LPI
+    ProductId               = PIA18668
+    ProductVersionId        = 2014-08-21
+    InstrumentHostName      = "Voyager 2"
+    InstrumentName          = "Imaging Science Subsystem"
+    InstrumentId            = "ISS - Narrow Angle"
+    TargetName              = Triton
+  End_Group
+
+  Group = Mapping
+    ProjectionName     = Equirectangular
+    CenterLongitude    = 0.0
+    TargetName         = Triton
+    EquatorialRadius   = 1350000.0 <meters>
+    PolarRadius        = 1350000.0 <meters>
+    LatitudeType       = Planetocentric
+    LongitudeDirection = PositiveEast
+    LongitudeDomain    = 180
+    MinimumLatitude    = -90.0
+    MaximumLatitude    = 90.0
+    MinimumLongitude   = -180.0
+    MaximumLongitude   = 180.0
+    UpperLeftCornerX   = -4241150.08234599978 <meters>
+    UpperLeftCornerY   = 2120575.04117299989 <meters>
+    PixelResolution    = 600.0 <meters/pixel>
+    Scale              = 39.2698999999999998 <pixel/degree>
+    CenterLatitude     = 0.0
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1791             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 1928
+  ^History  = Triton_Voyager2_ClrMosaic_GlobalFill_600m.History.IsisCube
+End_Object
+End

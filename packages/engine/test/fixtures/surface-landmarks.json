@@ -1,0 +1,17 @@
+{
+  "description": "Independent USGS coordinates and manually identified centers in 2048x1024 source-image previews. These constrain pole/seam/direction at two-degree scale, not survey accuracy. preparedHalfShift records asset conversion, not the runtime correction.",
+  "records": [
+    { "body": "europa", "feature": "Tyre", "featureId": 6170, "latitude": 33.60, "east": 213.40, "pixel": [190, 321], "preparedHalfShift": false },
+    { "body": "europa", "feature": "Pwyll", "featureId": 4878, "latitude": -25.20, "east": 88.60, "pixel": [1528, 655], "preparedHalfShift": false },
+    { "body": "ganymede", "feature": "Tros", "featureId": 6091, "latitude": 11.14, "east": 332.74, "pixel": [868, 449], "preparedHalfShift": false },
+    { "body": "ganymede", "feature": "Osiris", "featureId": 4509, "latitude": -38.00, "east": 193.69, "pixel": [78, 729], "preparedHalfShift": false },
+    { "body": "callisto", "feature": "Asgard", "featureId": 420, "latitude": 32.20, "east": 220.10, "pixel": [225, 330], "preparedHalfShift": false },
+    { "body": "callisto", "feature": "Valhalla", "featureId": 6284, "latitude": 14.70, "east": 304.00, "pixel": [703, 425], "preparedHalfShift": false },
+    { "body": "ceres", "feature": "Occator", "featureId": 15341, "latitude": 19.82, "east": 239.33, "pixel": [1367, 398], "preparedHalfShift": false },
+    { "body": "ceres", "feature": "Haulani", "featureId": 15338, "latitude": 5.80, "east": 10.77, "pixel": [61, 478], "preparedHalfShift": false },
+    { "body": "pluto", "feature": "Burney", "featureId": 15680, "latitude": 45.68, "east": 133.79, "pixel": [761, 253], "preparedHalfShift": true },
+    { "body": "pluto", "feature": "Sputnik Planitia", "featureId": 15669, "latitude": 19.51, "east": 178.69, "pixel": [1017, 400], "preparedHalfShift": true },
+    { "body": "charon", "feature": "Nemo", "featureId": 15743, "latitude": -15.70, "east": 314.10, "pixel": [763, 601], "preparedHalfShift": true },
+    { "body": "charon", "feature": "Nasreddin", "featureId": 15739, "latitude": 25.50, "east": 308.60, "pixel": [731, 367], "preparedHalfShift": true }
+  ]
+}

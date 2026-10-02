@@ -49,7 +49,8 @@ for (const source of sources) {
         pixels[i] = pixels[i + 1] = pixels[i + 2] = 145;
       }
     }
-    // Sources have 180 E at center; engine texture center is longitude zero.
+    // Preserve the published asset layout: Pluto's source is centered at 180 E,
+    // Charon's at 0 E. Charon's legacy baked shift is cancelled by SurfaceMapping.
     const shifted = Buffer.alloc(pixels.length);
     const half = res / 2 * 3;
     for (let y = 0; y < height; y++) {
