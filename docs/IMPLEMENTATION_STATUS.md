@@ -1,6 +1,16 @@
-# Implementation status — September 27, 2026
+# Implementation status — October 1, 2026
 
-## Current status: Phase 2 accepted; Phase 3 ready to begin
+## Current: Phase 3 rendering implemented; local regression accepted
+
+All 21 bodies now have reviewed appearance, with Saturn rings/shadows, giant atmosphere rims, Venus/Titan cloud or haze treatments, sourced dwarf/moon maps, Phobos/Deimos irregular meshes and the ten previously missing scientific attitudes. Moon-system True/Explore, orbit and touch interactions pass. Phase 2 remains accepted with ADR 0010 and documented device coverage.
+
+The reviewed `f74242a` run passes 128 unit tests plus two expected rejected-model diagnostics, all 29 browser tests, production build and the strict five-path same-machine CPU comparison against accepted Phase 2 `4409ef5`. CPU mean/p95 increases are at most 13.33%/10.53%, below the unchanged 20% gate. Original material references and scientific tolerances are unchanged. All 77 new regression captures were reviewed. Evidence: [Phase 3 CPU investigation](perf/phase-three/cpu-regression.md), [validation record](perf/phase-three/validation-final.json), and [checkpoint](PHASE_3_CHECKPOINT.md).
+
+Local automation is SwiftShader WebGL2. Phase 3 hardware rendering/performance evidence is pending. The new all-body device-report button is implemented and awaiting functional browser/build review; see [device checks](perf/phase-three/device-checks.md). Some source images/meshes lack geographic frame metadata; the [surface registration audit](science/surface-registration-audit.md) retains those limitations. No complete Phase 3 acceptance or Phase 4 start is claimed.
+
+Everything below is historical acceptance context.
+
+## September 27: Phase 2 accepted; Phase 3 ready to begin
 
 The user explicitly accepted the existing device coverage/visual review and approved ADR 0010's scoped upstream allocation exception. No further Phase 2 acceptance decision is pending. Literal zero allocation remains unachieved and is tracked as a future enhancement in docs/ENHANCEMENTS.md; it is not a Phase 3 prerequisite.
 

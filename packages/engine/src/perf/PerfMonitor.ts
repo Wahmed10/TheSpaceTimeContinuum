@@ -23,6 +23,9 @@ export class PerfMonitor {
     this.index = 0;
     this.count = 0;
   }
+  get sampleCount() {
+    return this.count;
+  }
   stats() {
     let total = 0;
     for (let i = 0; i < this.count; i++) {

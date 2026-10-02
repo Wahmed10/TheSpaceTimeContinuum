@@ -13,7 +13,7 @@ function recordCommit() {
 export default function PhaseOneLab() {
   const [status, setStatus] = useState(''),
     [busy, setBusy] = useState(false);
-  async function run() {
+  async function run(phase: 'phase-one' | 'phase-three' = 'phase-one') {
     const engine = window.__spaceEngine;
     if (!engine) {
       setStatus('Wait for the renderer to finish loading.');
@@ -21,8 +21,9 @@ export default function PhaseOneLab() {
     }
     setBusy(true);
     try {
-      const benchmark = await engine.benchmark((view) =>
-        setStatus(`Measuring ${view}... Keep this tab visible.`),
+      const benchmark = await engine.benchmark(
+        (view) => setStatus(`Measuring ${view}... Keep this tab visible.`),
+        phase,
       );
       setStatus('Measuring GPU precision...');
       const precision = await engine.measurePrecision();
@@ -33,7 +34,7 @@ export default function PhaseOneLab() {
       );
       const link = document.createElement('a');
       link.href = url;
-      link.download = `phase-one-${benchmark.backend}-${Date.now()}.json`;
+      link.download = `${phase}-${benchmark.backend}-${Date.now()}.json`;
       link.click();
       URL.revokeObjectURL(url);
       setStatus(
@@ -92,12 +93,15 @@ export default function PhaseOneLab() {
         <button disabled={busy} onClick={() => void run()}>
           {busy ? 'Benchmark running' : 'Run Phase 1 device checks'}
         </button>
+        <button disabled={busy} onClick={() => void run('phase-three')}>
+          Run Phase 3 device checks
+        </button>
         <button disabled={busy} onClick={() => void runPoints()}>
           Run Phase 2 point checks
         </button>
         <p role="status">
           {status ||
-            'Select a quality tier first. Five views and GPU precision take 1-4 minutes. Keep the tab visible and avoid interacting until the report downloads.'}
+            'Select a quality tier first. Phase 1 takes 1-4 minutes. Phase 3 checks all 21 bodies and three Saturn ring views, then GPU precision; allow 5-10 minutes. Keep this tab visible and avoid interacting until the report downloads.'}
         </p>
       </aside>
     </>

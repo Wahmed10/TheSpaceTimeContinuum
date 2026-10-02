@@ -2,7 +2,26 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: visible-mesh surface update optimization ready for validation
+## Current: local renderer/CPU regression accepted; device-report validation next
+
+Reviewed retry-2: full browser **29 passed, zero failed/skipped/flaky**, production build and both CPU captures exit 0. All report environment/configuration fields match. Every path passes the strict 20% gate; largest mean/p95 increases 13.33%/10.53%. Earth LEO p95 is 2.0 ms for both versions. Source candidate `f74242aa1c8971b2ffa23da51b477a057b26a1f6`; reference `4409ef5d8f97299d9058360c97d560493d067c1c`. No profiler or threshold changes. Both earlier failures remain retained.
+
+Reviewed all **77** new screenshots in four contact sheets: no visible regression in accepted surfaces, irregular silhouettes, ring shadows/quality switches or moon systems. Original eight references also pass unchanged. Ring shadow differences: 337 planet-to-ring pixels and 18,455 ring-to-planet pixels. Precision max error 0.134356 px against 0.5 px; all eleven depth probes pass. React commits 3.0656/sec against four/sec. LOW texture storage remains 16,516,088 bytes with 33 textures after twenty focus changes. All assets 79,961,515 / 80,000,000 bytes; 72 production dependency licenses pass. Raw final CPU/browser/build records, checksummed capture inventory and contact sheets are now preserved under `docs/perf/phase-three/`.
+
+Next implementation adds lab-only Phase 3 device measurement: all 21 close-up bodies plus three Saturn ring views, texture/frame/visible-mesh validity guards, backend/quality/draw/mesh/storage reporting and the existing 600-sample precision/depth check. Progress is numbered out of 24 and the download is explicitly named `phase-three`. Original Phase 1 defaults remain five views; API v1 and frame/render paths are unchanged. Full local verify passes 128 tests plus two expected diagnostics; both new browser tests discover successfully. Current engine bundle is 373,041 / 450,000 gzip bytes.
+
+The new device-button download, measurement coverage and restored focus/scale/layers/playback/quality must be validated in the next browser/build job before asking the user to run it on hardware. Original benchmark coverage, visible attitude integration, original references and precision also run. No duplicate CPU capture is needed for these lab-only changes. New report tests are functional SwiftShader evidence only. Exact source geographic registration limitations remain in `docs/science/surface-registration-audit.md`; do not claim fully registered NASA models or complete Phase 3 acceptance.
+
+## Historical launch: full browser/build/paired CPU (completed and reviewed above)
+
+- Persistent hidden Node PID **22132**, startup confirmed with `result.json` recording `status: running`, `activeStage: browser`. Launcher `.tools/cpu-phase-three/retry-2/run.mjs`; PID record `pid.txt`.
+- Candidate **f74242aa1c8971b2ffa23da51b477a057b26a1f6**; unchanged detached reference **4409ef5d8f97299d9058360c97d560493d067c1c**. No profiler enabled. Same schema 2 five-path LOW/True timing configuration and strict 20% gate.
+- Sequential commands: `pnpm.cmd exec playwright test --output=.tools/cpu-phase-three/retry-2/browser --reporter=json`; `pnpm.cmd build`; reference `pnpm.cmd perf:cpu --url http://localhost:3001 --output <retry-2>/reference.json`; stop reference process tree only; candidate `pnpm.cmd perf:cpu --url http://localhost:3000 --output <retry-2>/current.json --baseline <retry-2>/reference.json`.
+- Job provenance/results `.tools/cpu-phase-three/retry-2/result.json`; stage logs `browser.log` (JSON report), `build.log`, `referenceCpu.log`, `candidateCpu.log`, and matching `*-stderr.log`; captures/traces `browser/`; reference-server startup log `reference-server.log`.
+- `.tools/phase-three-active-job.txt` points to this job. Status command `node tools/phase-three-status.mjs`. Keep localhost idle during the timing stages. User dev server PID 3640 remains independent and preserved.
+- Next resume: inspect this existing result first, review complete browser counts/failures and captures, build results, both raw CPU reports/environment compatibility and every path's strict comparison. Preserve failures. Do not launch a duplicate job or claim Phase 3/performance accepted before review. Older generated `docs/perf` outputs remain outside implementation commits; pre-suite backup `.tools/phase-three-full/perf-before/` remains available.
+
+## Visible-mesh surface update optimization submitted for validation
 
 Reviewed `.tools/cpu-phase-three/profiling/result.json`: both reference/candidate diagnostic captures completed with exit 0. This is successful evidence collection, not a CPU gate pass. Earth LEO sampled attribution is preserved in `docs/perf/phase-three/cpu-profile-attribution.json`; the discussion and limitations are in `cpu-regression.md`. Physical-origin cost was similar; added attitude evaluation and mesh-only update work identify avoidable work, without establishing a unique p95 root cause. Orbit sampling differed too, but no speculative orbit rewrite is included in this change.
 
@@ -296,17 +315,3 @@ The process has exited. The log confirms typecheck, lint/boundaries and 118 pass
 ## P3.2 reviewed checkpoint
 
 The corrected regression finished successfully: `.tools/saturn-fix/regression-result.json` exit 0; report has six passed, zero failed/skipped. This covers ring shadow toggles and both sides/edge/LOW/HIGH/MEDIUM views, original visual references, precision/depth and startup. Captures reviewed; user also confirms Saturn looks good. Implementation milestone is ready to commit; full Phase 3 performance and hardware evidence remain pending. Persistent development server remains independent of tests. Continuing P3.3 body detail.
-
-
-
-
-
-
-
-
-
-
-
-
-
-

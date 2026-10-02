@@ -1540,19 +1540,41 @@ export class SpaceEngine {
       if (!this.disposed) this.start();
     }
   }
-  async benchmark(onView: (name: string) => void = () => {}) {
+  async benchmark(
+    onView: (name: string) => void = () => {},
+    phase: 'phase-one' | 'phase-three' = 'phase-one',
+  ) {
     let wasHidden = document.hidden;
     const visibility = () => {
       wasHidden ||= document.hidden;
     };
     document.addEventListener('visibilitychange', visibility);
-    const views = [
-      { name: 'Solar System', id: 'star:sun', wide: true },
-      { name: 'Earth close', id: 'planet:earth' },
-      { name: 'Earth LEO', id: 'planet:earth', distance: 6771.0084 },
-      { name: 'Moon close', id: 'moon:moon' },
-      { name: 'Mars close', id: 'planet:mars' },
-    ];
+    const views: {
+      name: string;
+      id: string;
+      wide?: boolean;
+      distance?: number;
+      ringSide?: 'north' | 'south' | 'edge';
+    }[] =
+      phase === 'phase-three'
+        ? [
+            ...EXPLORABLE_BODIES.map((body) => ({
+              name: `${body.name} close`,
+              id: body.id,
+            })),
+            ...(['north', 'south', 'edge'] as const).map((side) => ({
+              name: `Saturn rings ${side}`,
+              id: 'planet:saturn',
+              ringSide: side,
+            })),
+          ]
+        : [
+            { name: 'Solar System', id: 'star:sun', wide: true },
+            { name: 'Earth close', id: 'planet:earth' },
+            { name: 'Earth LEO', id: 'planet:earth', distance: 6771.0084 },
+            { name: 'Moon close', id: 'moon:moon' },
+            { name: 'Mars close', id: 'planet:mars' },
+          ];
     const results = [];
     const wait = (ms: number) =>
       new Promise<void>((resolve) => setTimeout(resolve, ms));
@@ -1564,11 +1586,21 @@ export class SpaceEngine {
       this.clock.setTime(isoToTdb('2026-09-22T00:00:00Z'));
       this.setScale('true');
       this.setQuality(setting === 'auto' ? this.quality.tier : setting);
+      if (phase === 'phase-three') {
+        for (const layer of ['planets', 'moons', 'dwarfs', 'orbits'])
+          this.setLayer(layer, true);
+      }
       for (const view of views) {
         if (this.disposed)
           throw new Error('Renderer was disposed during benchmark');
-        onView(view.name);
+        onView(
+          phase === 'phase-three'
+            ? `${results.length + 1}/${views.length}: ${view.name}`
+            : view.name,
+        );
         this.focus(view.id, { transition: false, wide: view.wide ?? false });
+        if (phase === 'phase-three') this.referenceView(view.id, 'day');
+        if (view.ringSide) this.ringReferenceView(view.ringSide);
         if (view.distance) {
           this.referenceView(view.id, 'quarter');
           this.cameraController.distanceKm = view.distance;
@@ -1587,13 +1619,33 @@ export class SpaceEngine {
           throw new Error(
             'Benchmark invalid: the tab was hidden. Run again with this tab visible.',
           );
+        const diagnostics = this.diagnostics();
+        if (
+          phase === 'phase-three' &&
+          (this.perf.sampleCount < 30 ||
+            diagnostics.pendingTextures ||
+            !diagnostics.orientations.find((row) => row.id === view.id)
+              ?.rendered)
+        )
+          throw new Error(
+            `Incomplete measurement for ${view.name}. Wait for loading and run again.`,
+          );
         results.push({
           view: view.name,
-          ...this.diagnostics(),
+          bodyId: view.id,
+          ringSide: view.ringSide ?? null,
+          ...diagnostics,
+          samples: this.perf.sampleCount,
+          drawCalls: this.renderer.info.render.drawCalls,
+          detailedMeshes: diagnostics.orientations.filter((row) => row.rendered)
+            .length,
           pendingTextures: this.assets.pending,
         });
       }
       return {
+        phase,
+        method:
+          'Three-second warmup then ten-second visible-tab observation per view; statistics cover the last up to 240 RAF intervals, not GPU execution time or a sustained thermal test. Texture bytes count compressed asset mip storage, not total VRAM.',
         measuredAt: new Date().toISOString(),
         userAgent: navigator.userAgent,
         viewport: {

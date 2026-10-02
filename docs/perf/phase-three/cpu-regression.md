@@ -37,3 +37,17 @@ Source inspection confirms that the surface attitude, cloud/material uniforms an
 The renderer now selects LOD/layer visibility first and updates surface state only for visible mesh groups. Every entity's scientific position, display position, size, point buffers, labels and orbits still update. On a transition to a visible mesh, its current absolute-time attitude/material/detail state is refreshed synchronously before rendering, so no accumulated spin or stale-frame catch-up is required. Scientific FIXED frames remain callable at every supported epoch.
 
 The orientation browser test now checks actual visible meshes for all ten added bodies against the independent fixture epoch, then checks six-hour advancement. It also verifies hidden mesh attitudes are not refreshed merely because time advances. Original references, rings, body-detail/quality transitions and moon-system views must pass alongside a fresh unprofiled same-machine CPU comparison before this change is accepted. The two earlier failures remain preserved.
+
+## Final measured trial: all five paths pass
+
+Reviewed retry-2 for candidate `f74242aa1c8971b2ffa23da51b477a057b26a1f6` against the unchanged accepted Phase 2 commit. Both captures are fresh, sequential and unprofiled, with matching schema, adapter, machine, browser, Node, viewport, tier, clock and frame configuration. Every path passes the unchanged 20% mean and p95 gate. The largest mean increase is 13.33%, and the largest p95 increase is 10.53%, both on Moon orbit. Earth LEO mean improves by 4.00%; its p95 is 2.0 ms in both captures.
+
+| Path | Mean ratio | p95 ratio | Result |
+|---|---:|---:|---|
+| Solar orbit | 0.8809 | 0.9048 | Pass |
+| Earth LEO | 0.9600 | 1.0000 | Pass |
+| Moon orbit | 1.1333 | 1.1053 | Pass |
+| Mars orbit | 1.0262 | 1.0500 | Pass |
+| Earth–Moon zoom | 0.9750 | 0.9444 | Pass |
+
+The full browser suite passes 29 tests with zero failures, skips or flakes, including visible SPICE attitudes, hidden-time advancement, rings, mesh quality transitions, moon systems, all eight original references and precision checks. Production build also passes. Raw final captures/comparison and browser/build records are retained alongside both earlier failures. This accepts the renderer optimization and local CPU gate; it does not establish hardware GPU throughput or complete the remaining geographic registration audit.

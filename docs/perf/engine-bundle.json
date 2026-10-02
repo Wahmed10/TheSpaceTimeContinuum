@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-29T22:54:05.550Z",
+  "generatedAt": "2026-10-02T00:13:51.006Z",
   "method": "Standalone tree-shaken public engine entry, including all transitively bundled dependencies and lab probes; gzip level 9. Excludes separately fetched assets and transcoder.",
-  "bytes": 1305970,
-  "gzipBytes": 372545,
+  "bytes": 1307638,
+  "gzipBytes": 373041,
   "budgetBytes": 450000,
   "inputs": [
     "node_modules/.pnpm/three@0.186.0/node_modules/three/build/three.core.js",
@@ -142,6 +142,7 @@
     "node_modules/.pnpm/three@0.186.0/node_modules/three/examples/jsm/math/ColorSpaces.js",
     "node_modules/.pnpm/three@0.186.0/node_modules/three/examples/jsm/loaders/KTX2Loader.js",
     "packages/engine/src/assets/ShapeGeometry.ts",
+    "packages/engine/src/assets/SurfaceMapping.ts",
     "packages/engine/src/assets/AssetManager.ts",
     "packages/engine/src/bodies/SaturnRings.ts",
     "packages/engine/src/bodies/PlanetFactory.ts",
