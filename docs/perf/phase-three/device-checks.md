@@ -2,7 +2,7 @@
 
 The local renderer regression and same-machine five-path CPU comparison pass at `f74242a`. That automation uses SwiftShader WebGL2. Phase 2 device coverage stays accepted; the new Phase 3 materials, irregular meshes and Saturn shaders need their own rendering record.
 
-The lab now adds **Run Phase 3 device checks** at [localhost lab](http://localhost:3000/lab/poc?perf=1). Its functional download/restore test is pending in the current checkpoint. Run it on hardware after that test has been reviewed.
+The lab now adds **Run Phase 3 device checks** at [localhost lab](http://localhost:3000/lab/poc?perf=1). Its functional download/restore test is reviewed and passed at `749a506`, along with the original five-view benchmark, orientations, precision and original references: six tests, zero failures/skips/flakes; production build passes. The hardware check is ready to run. Preserved software evidence is in `device-software.json`, `device-browser.json` and `device-validation.json`; its approximately five FPS is software rendering, not a hardware performance pass.
 
 Select HIGH in settings, press the Phase 3 button and leave the tab visible without interacting. It measures all 21 close-up body views, then Saturn's north, south and edge ring views, then 600 GPU precision samples and depth probes. Allow 5–10 minutes; progress says `1/24` through `24/24`, followed by precision measurement. Completion says **Report downloaded** and saves `phase-three-<backend>-<timestamp>.json`. Preserve the file under `test-results/` for review. The report includes actual backend, adapter description, software detection, selected tier, viewport/DPR, sample count, draw calls, mesh count and compressed asset mip bytes per view.
 

@@ -1,0 +1,449 @@
+{
+  "reviewedAt": "2026-10-02T02:16:57.658Z",
+  "sourceCommit": "749a506ac1a04af91920201a4900b061fd4fcf50",
+  "scope": "Functional SwiftShader WebGL2; hardware acceptance pending",
+  "browserStats": {
+    "startTime": "2026-10-02T00:17:14.575Z",
+    "duration": 496543.75899999996,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "file": "orientations.spec.ts",
+      "title": "all ten new body orientations reach the renderer and advance with simulation time",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "phase-three-device.spec.ts",
+      "title": "the original device benchmark retains its five views",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "phase-three-device.spec.ts",
+      "title": "Phase 3 device report measures all bodies and ring views and restores settings",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "precision.spec.ts",
+      "title": "GPU readback keeps a LEO surface marker below half a pixel",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "precision.spec.ts",
+      "title": "LOW stays below the texture budget after twenty focus changes",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "visual.spec.ts",
+      "title": "deterministic material reference views",
+      "status": [
+        "expected"
+      ]
+    }
+  ],
+  "benchmark": {
+    "phase": "phase-three",
+    "backend": "webgl2",
+    "adapter": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "softwareRenderer": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "dpr": 1
+    },
+    "firstFrameMs": 970,
+    "method": "Three-second warmup then ten-second visible-tab observation per view; statistics cover the last up to 240 RAF intervals, not GPU execution time or a sustained thermal test. Texture bytes count compressed asset mip storage, not total VRAM.",
+    "results": [
+      {
+        "view": "Sun close",
+        "bodyId": "star:sun",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 48,
+        "p95Ms": 399.89999999999964,
+        "fps": 4.881521407505339,
+        "gpuBytes": 16516088,
+        "drawCalls": 20,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Mercury close",
+        "bodyId": "planet:mercury",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 52,
+        "p95Ms": 366.7000000000007,
+        "fps": 5.182948100748537,
+        "gpuBytes": 16516088,
+        "drawCalls": 19,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Venus close",
+        "bodyId": "planet:venus",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 53,
+        "p95Ms": 383.3999999999942,
+        "fps": 5.129247355534264,
+        "gpuBytes": 16516088,
+        "drawCalls": 19,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Earth close",
+        "bodyId": "planet:earth",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 44,
+        "p95Ms": 416.6999999999971,
+        "fps": 4.459670389815736,
+        "gpuBytes": 16516088,
+        "drawCalls": 21,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Moon close",
+        "bodyId": "moon:moon",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 52,
+        "p95Ms": 383.3000000000029,
+        "fps": 5.148718761139056,
+        "gpuBytes": 16516088,
+        "drawCalls": 19,
+        "detailedMeshes": 3,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Mars close",
+        "bodyId": "planet:mars",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 53,
+        "p95Ms": 366.6000000000058,
+        "fps": 5.187788142478195,
+        "gpuBytes": 16516088,
+        "drawCalls": 21,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Jupiter close",
+        "bodyId": "planet:jupiter",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 51,
+        "p95Ms": 383.40000000000873,
+        "fps": 5.083276021887984,
+        "gpuBytes": 16516088,
+        "drawCalls": 23,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Saturn close",
+        "bodyId": "planet:saturn",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 51,
+        "p95Ms": 366.6999999999971,
+        "fps": 5.1001530045901395,
+        "gpuBytes": 16516088,
+        "drawCalls": 21,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Uranus close",
+        "bodyId": "planet:uranus",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 54,
+        "p95Ms": 366.6999999999971,
+        "fps": 5.329175260784181,
+        "gpuBytes": 16516088,
+        "drawCalls": 19,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Neptune close",
+        "bodyId": "planet:neptune",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 51,
+        "p95Ms": 383.29999999998836,
+        "fps": 5.100204008160331,
+        "gpuBytes": 16516088,
+        "drawCalls": 20,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Pluto close",
+        "bodyId": "dwarf:pluto",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 53,
+        "p95Ms": 349.8999999999942,
+        "fps": 5.34478933462416,
+        "gpuBytes": 16516088,
+        "drawCalls": 20,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Ceres close",
+        "bodyId": "dwarf:ceres",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 53,
+        "p95Ms": 366.5999999999767,
+        "fps": 5.291375058654399,
+        "gpuBytes": 16516088,
+        "drawCalls": 20,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Phobos close",
+        "bodyId": "moon:phobos",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 52,
+        "p95Ms": 283.30000000001746,
+        "fps": 5.208907231365639,
+        "gpuBytes": 16516088,
+        "drawCalls": 21,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Deimos close",
+        "bodyId": "moon:deimos",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 53,
+        "p95Ms": 366.6000000000058,
+        "fps": 5.2304868300289185,
+        "gpuBytes": 16516088,
+        "drawCalls": 21,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Io close",
+        "bodyId": "moon:io",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 52,
+        "p95Ms": 216.70000000001164,
+        "fps": 5.098289131820187,
+        "gpuBytes": 16516088,
+        "drawCalls": 23,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Europa close",
+        "bodyId": "moon:europa",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 52,
+        "p95Ms": 300,
+        "fps": 5.217583255571281,
+        "gpuBytes": 16516088,
+        "drawCalls": 23,
+        "detailedMeshes": 3,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Ganymede close",
+        "bodyId": "moon:ganymede",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 51,
+        "p95Ms": 383.30000000001746,
+        "fps": 5.125782686915192,
+        "gpuBytes": 16516088,
+        "drawCalls": 24,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Callisto close",
+        "bodyId": "moon:callisto",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 52,
+        "p95Ms": 383.30000000001746,
+        "fps": 5.106550132573898,
+        "gpuBytes": 16516088,
+        "drawCalls": 23,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Titan close",
+        "bodyId": "moon:titan",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 50,
+        "p95Ms": 316.69999999998254,
+        "fps": 4.98355427090601,
+        "gpuBytes": 16516088,
+        "drawCalls": 21,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Triton close",
+        "bodyId": "moon:triton",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 51,
+        "p95Ms": 383.29999999998836,
+        "fps": 5.008347245409015,
+        "gpuBytes": 16516088,
+        "drawCalls": 20,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Charon close",
+        "bodyId": "moon:charon",
+        "ringSide": null,
+        "tier": "low",
+        "samples": 52,
+        "p95Ms": 366.69999999995343,
+        "fps": 5.165751070403203,
+        "gpuBytes": 16516088,
+        "drawCalls": 19,
+        "detailedMeshes": 2,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Saturn rings north",
+        "bodyId": "planet:saturn",
+        "ringSide": "north",
+        "tier": "low",
+        "samples": 50,
+        "p95Ms": 383.4000000000233,
+        "fps": 4.910192577752916,
+        "gpuBytes": 16516088,
+        "drawCalls": 21,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Saturn rings south",
+        "bodyId": "planet:saturn",
+        "ringSide": "south",
+        "tier": "low",
+        "samples": 52,
+        "p95Ms": 300.0999999999767,
+        "fps": 5.131798399273642,
+        "gpuBytes": 16516088,
+        "drawCalls": 21,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      },
+      {
+        "view": "Saturn rings edge",
+        "bodyId": "planet:saturn",
+        "ringSide": "edge",
+        "tier": "low",
+        "samples": 49,
+        "p95Ms": 216.70000000001164,
+        "fps": 4.9248210983355944,
+        "gpuBytes": 16516088,
+        "drawCalls": 21,
+        "detailedMeshes": 1,
+        "pendingTextures": 0
+      }
+    ]
+  },
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.13435596144853434,
+    "thresholdPx": 0.5,
+    "depthResults": [
+      {
+        "scenario": "10 km cloud shell, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "10 km cloud shell, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Moon behind Earth",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit inside Earth, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit in front of Earth, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit inside Earth, altitude 30000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit in front of Earth, altitude 30000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit inside Earth, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit in front of Earth, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit from Earth center crossing the camera plane",
+        "pass": true
+      },
+      {
+        "scenario": "Oblique orbit visibility versus float64 ray-sphere intersections",
+        "pass": true,
+        "mismatches": []
+      }
+    ],
+    "pass": true,
+    "method": "GPU MSAA marker centroid versus float64 perspective projection; sphere, shell and orbit depth probes, including oblique ribbon visibility versus ray-sphere intersections",
+    "altitudeKm": 400
+  },
+  "buildExitCode": 0,
+  "summary": {
+    "views": 24,
+    "minSamples": 44,
+    "maxDrawCalls": 24,
+    "maxDetailedMeshes": 3,
+    "maxAssetMipBytes": 16516088,
+    "settingsRestorationTestPassed": true,
+    "hardwarePerformancePass": false
+  }
+}

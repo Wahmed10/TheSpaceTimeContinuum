@@ -2,7 +2,25 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: local renderer/CPU regression accepted; device-report validation next
+## Current: device-report validation passed; hardware report pending
+
+Reviewed `.tools/phase-three-device/result.json`, browser JSON and the actual downloaded report for source **749a506ac1a04af91920201a4900b061fd4fcf50**. All **six tests pass**, zero failures/skips/flakes/report errors; production build passes. The original benchmark retains five views. The new report covers all 21 bodies and north/south/edge Saturn rings, with valid sample counts, settled textures and visible focused meshes. Precision error is 0.134356 px against 0.5 px over 600 samples; all eleven depth checks pass. Focus/scale/layers/playback rate and quality restoration pass.
+
+Raw downloaded software report, browser report and summarized review are preserved in `docs/perf/phase-three/device-software.json`, `device-browser.json`, `device-validation.json`. This is SwiftShader WebGL2 functional evidence, not a hardware FPS pass. No local job is pending and the independent dev server is available. The status pointer still selects the completed job; FINISHED is expected. Do not launch another identical software or CPU run.
+
+Next user step: open `http://localhost:3000/lab/poc?perf=1`, select HIGH and click **Run Phase 3 device checks**. Keep the tab visible and leave it alone for 5–10 minutes, until **Report downloaded** appears. Preserve the downloaded `phase-three-<backend>-<timestamp>.json` in `test-results/`. Review its real backend/adapter, all 24 p95 values, draw/mesh/storage budgets and precision/depth before Phase 3 hardware acceptance. Existing Phase 2 coverage is accepted; this tests newly added rendering. Instructions are in `docs/perf/phase-three/device-checks.md`.
+
+Agent continuation: inspect a supplied hardware report first, preserve original downloads, fix actual failures without relaxing budgets, and retain geographic source-axis/landmark limitations as explicitly open rather than applying guessed corrections. See `PHASE_3_IMPLEMENTATION_HANDOFF.md` for current source/evidence/constraints. No Phase 4 authorization or complete Phase 3 acceptance is implied.
+
+## Historical launch: Phase 3 device-report browser/build (completed and reviewed)
+
+- Persistent hidden Node PID **40088**, startup confirmed; `.tools/phase-three-device/pid.txt`. Launcher `run.mjs`; result records `status: running`, `activeStage: browser`.
+- Tested commit **749a506ac1a04af91920201a4900b061fd4fcf50**. This commit preserves the reviewed renderer/CPU pass and adds lab-only measurement; no frame hot path, scientific provider, material asset or API v1 change.
+- Sequential commands: `pnpm.cmd exec playwright test e2e/phase-three-device.spec.ts e2e/orientations.spec.ts e2e/precision.spec.ts e2e/visual.spec.ts --output=.tools/phase-three-device/browser --reporter=json`; then `pnpm.cmd build` on success. Six selected tests, including the original five-view report and new all-body downloaded report with playback/layers/quality restoration.
+- Completion/provenance `.tools/phase-three-device/result.json`; JSON report `browser.log`, `browser-stderr.log`, `build.log`, `build-stderr.log`; browser output and downloaded `device-software.json` under `browser/`. No test-results directory cleanup. Independent user dev server remains preserved at port 3000.
+- Active pointer `.tools/phase-three-active-job.txt`; command `node tools/phase-three-status.mjs`. No automatic notification configured. Next resume: review this existing job first, inspect all six tests, downloaded 24-view coverage/sample/validity/restoration evidence and production build before handing the hardware check to the user. Functional software timings do not establish a device-performance pass. Do not rerun the accepted paired CPU job just because a new turn began.
+
+## Local renderer/CPU regression accepted; device-report instrumentation added
 
 Reviewed retry-2: full browser **29 passed, zero failed/skipped/flaky**, production build and both CPU captures exit 0. All report environment/configuration fields match. Every path passes the strict 20% gate; largest mean/p95 increases 13.33%/10.53%. Earth LEO p95 is 2.0 ms for both versions. Source candidate `f74242aa1c8971b2ffa23da51b477a057b26a1f6`; reference `4409ef5d8f97299d9058360c97d560493d067c1c`. No profiler or threshold changes. Both earlier failures remain retained.
 

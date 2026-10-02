@@ -1,5 +1,7 @@
 # The Space Time Continuum: Phase 3 handoff
 
+**October 1 continuation:** Phase 3 is now implemented with accepted local rendering/CPU evidence. The device-report validation also passes. Continue from [the implementation handoff](PHASE_3_IMPLEMENTATION_HANDOFF.md) and [the latest checkpoint](docs/PHASE_3_CHECKPOINT.md); the September 27 transition notes below are historical and must not restart Phase 3. A new Phase 3 hardware report and the documented source registration limitations remain open. Phase 2 acceptance is unchanged.
+
 Updated September 27, 2026. **Phase 2 is accepted and ready for Phase 3.** This is the authoritative current transition status; older checkpoint statements about pending approval/gates are historical.
 
 ## 1. Status and user intent
