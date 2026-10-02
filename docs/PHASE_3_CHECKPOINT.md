@@ -2,7 +2,17 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: device-report validation passed; hardware report pending
+## Current: laptop HIGH/WebGPU Phase 3 report passed
+
+Reviewed the user-supplied `test-results/phase-three-webgpu-1790908597477.json`: all 21 body close-ups and three Saturn ring views, HIGH throughout, 240 samples per view, settled textures, focused meshes and ring views visible. Worst p95 **6.20 ms** against 16.7 ms; mean FPS range **161.33–164.71**. Maximum draw calls **36 / 300**, detailed meshes **3 / 12**, compressed asset mip storage **119,844,112 bytes / 350 MB**. Precision **0.107680 px / 0.5 px** over 600 samples; all **11 depth probes pass**. Windows Chrome 153, WebGPU, 1707×904 at DPR 1.5. User identifies the device as their laptop; adapter string is blank, so no particular GPU is asserted.
+
+Original download untouched; byte-identical copy and per-view review preserved in `docs/perf/phase-three/device-laptop-webgpu-high.json` and `device-laptop-webgpu-high-review.json`. Human-readable review `device-laptop-review.md`; SHA256 `596614cc20b2af3d5ccc5f9621712b746d2e1fe813f8956c57457d7a58f13f90`. The report does not embed a git revision; renderer/lab code remains unchanged from validated `749a506`. Timing is a short rolling RAF sample; mip bytes are not total VRAM, and first-frame time excludes network navigation.
+
+The submitted laptop HIGH/WebGPU performance/precision evidence is accepted. No fix or duplicate run is needed. Earlier full browser/build/strict CPU evidence remains accepted; Phase 2 coverage is unchanged. No new mobile or forced-WebGL2 physical result is claimed. No background job is pending.
+
+Next implementation work remains the explicitly open source geographic registration audit, with source-axis/prime-meridian limits preserved until authoritative evidence permits a correction. Do not conflate scientific SPICE attitude agreement with geographic imagery/mesh alignment. Phase 4 has not been authorized. See `PHASE_3_IMPLEMENTATION_HANDOFF.md` for the updated scope/evidence/constraints.
+
+## Previous: device-report validation passed; hardware report was pending
 
 Reviewed `.tools/phase-three-device/result.json`, browser JSON and the actual downloaded report for source **749a506ac1a04af91920201a4900b061fd4fcf50**. All **six tests pass**, zero failures/skips/flakes/report errors; production build passes. The original benchmark retains five views. The new report covers all 21 bodies and north/south/edge Saturn rings, with valid sample counts, settled textures and visible focused meshes. Precision error is 0.134356 px against 0.5 px over 600 samples; all eleven depth checks pass. Focus/scale/layers/playback rate and quality restoration pass.
 

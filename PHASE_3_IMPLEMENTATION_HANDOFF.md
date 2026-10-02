@@ -4,7 +4,7 @@ Updated October 1, 2026 (latest review October 2 UTC). This supersedes the origi
 
 ## Current outcome
 
-All 21 catalog bodies have reviewed appearance and scientific frame integration. Local renderer regression, science checks, production builds and the unchanged same-machine CPU gate pass. The new Phase 3 hardware-check button is implemented and functionally validated. **Phase 3 hardware evidence remains pending.** Geographic registration of several source images/models also remains explicitly unresolved; scientific attitude tests do not certify image longitude or model pole registration.
+All 21 catalog bodies have reviewed appearance and scientific frame integration. Local renderer regression, science checks, production builds and the unchanged same-machine CPU gate pass. The new Phase 3 hardware-check button is implemented and functionally validated. **The user's laptop HIGH/WebGPU Phase 3 report now passes** all 24 views, measured rendering budgets and precision/depth; no repeat is pending. Geographic registration of several source images/models remains explicitly unresolved; scientific attitude tests do not certify image longitude or model pole registration.
 
 No background job is pending. `.tools/phase-three-active-job.txt` selects the completed `.tools/phase-three-device` job. `node tools/phase-three-status.mjs` should report FINISHED. Do not relaunch either completed validation simply because a new session starts.
 
@@ -48,7 +48,11 @@ The `.tools/phase-three-device` job tests `749a506`: **six browser tests pass**,
 
 Durable records: `docs/perf/phase-three/validation-final.json`, raw final CPU reports/comparison, `browser-final.json`, `build-final.log`, `visual-review-1.png` through `visual-review-4.png`, `device-software.json`, `device-browser.json`, `device-validation.json`, and `cpu-regression.md`. Raw profiles, original captures, wrapper launchers and logs remain under their `.tools/` job directories.
 
-## Next user/device step
+## Laptop device step completed and reviewed
+
+The user supplied `phase-three-webgpu-1790908597477.json`. HIGH/WebGPU throughout, 240 samples for each of 24 views, worst p95 6.20 ms, mean FPS range 161.33–164.71, maximum 36 draw calls, three detailed meshes and 119,844,112 compressed mip bytes. Precision error 0.107680 px; all eleven depth probes pass. Windows Chrome 153, viewport 1707×904/DPR 1.5; adapter identity is blank. This accepts that user-attested laptop/backend/tier result, without claiming a particular GPU or new physical mobile/forced-WebGL2 coverage. Original download is untouched; byte-identical preserved copy and review are linked in `docs/perf/phase-three/device-laptop-review.md`. No fix or repeat run is needed.
+
+The following device instructions are retained for reproduction, not an outstanding user request.
 
 Open `http://localhost:3000/lab/poc?perf=1`, select **HIGH**, and press **Run Phase 3 device checks**. Leave the tab visible without interacting for 5–10 minutes. Progress reaches `24/24`, then precision; completion says **Report downloaded**. Place `phase-three-<backend>-<timestamp>.json` in `test-results/` and return for review. This records new Phase 3 rendering, not a repeat acceptance request for Phase 2.
 

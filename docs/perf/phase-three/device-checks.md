@@ -1,6 +1,6 @@
 # Phase 3 device rendering checks
 
-The local renderer regression and same-machine five-path CPU comparison pass at `f74242a`. That automation uses SwiftShader WebGL2. Phase 2 device coverage stays accepted; the new Phase 3 materials, irregular meshes and Saturn shaders need their own rendering record.
+The local renderer regression and same-machine five-path CPU comparison pass at `f74242a`. That automation uses SwiftShader WebGL2. Phase 2 device coverage stays accepted. The user's new Windows laptop HIGH/WebGPU report now also passes all 24 views and precision/depth; see [the device review](device-laptop-review.md). No repeat of that passing run is pending. The instructions below remain available for reproduction or another backend/device.
 
 The lab now adds **Run Phase 3 device checks** at [localhost lab](http://localhost:3000/lab/poc?perf=1). Its functional download/restore test is reviewed and passed at `749a506`, along with the original five-view benchmark, orientations, precision and original references: six tests, zero failures/skips/flakes; production build passes. The hardware check is ready to run. Preserved software evidence is in `device-software.json`, `device-browser.json` and `device-validation.json`; its approximately five FPS is software rendering, not a hardware performance pass.
 
