@@ -1,0 +1,298 @@
+{
+  "reviewedAt": "2026-10-02T05:24:27.190Z",
+  "candidateCommit": "b277fce110f80ea1728f4d4d0e43f0ad64493181",
+  "status": "passed",
+  "scope": "Corrected surface registration browser/build regression and agent visual review; user visual sign-off pending. SwiftShader WebGL2 functional evidence, not another physical-device throughput report.",
+  "browser": {
+    "startTime": "2026-10-02T03:54:24.762Z",
+    "duration": 484563.918,
+    "expected": 17,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browserErrors": [],
+  "buildExitCode": 0,
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 131,
+    "expectedFail": 2,
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "assets": {
+    "exitCode": 0,
+    "bytes": 79961515,
+    "budget": 80000000
+  },
+  "engine": {
+    "exitCode": 0,
+    "gzipBytes": 373142,
+    "budget": 450000
+  },
+  "licenses": {
+    "exitCode": 0,
+    "dependencies": 72
+  },
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.13435596144853434,
+    "thresholdPx": 0.5,
+    "depthChecks": 11,
+    "allDepthPass": true
+  },
+  "visual": {
+    "captures": 60,
+    "reviewed": true,
+    "contactSheets": [
+      "surface-audit-review-1.png",
+      "surface-audit-review-2.png",
+      "surface-audit-review-3.png"
+    ],
+    "findings": "No new missing textures, holes or detached atlases in captured day/quarter LOW/HIGH views. Irregular silhouettes remain intact. Six True/Explore systems render; original eight references retain their existing tolerances. Existing soft/source coverage and processed-color limitations retained.",
+    "captureHashes": [
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Ceres-and-Trit-9dae2-through-quality-transitions/dwarf-ceres-high-day.png",
+        "sha256": "cb49b21ccc0b8c44dfab7b1ccd5fb0390a50bfcfbe41dde4f714f9042b1d4405"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Ceres-and-Trit-9dae2-through-quality-transitions/dwarf-ceres-high-quarter.png",
+        "sha256": "b5dbc8e1907ace9b11eb00903e4e00bda6c3afc41009c77be7cfd14f5f4ca7f9"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Ceres-and-Trit-9dae2-through-quality-transitions/dwarf-ceres-low-day.png",
+        "sha256": "984f9b795243d6559c4992f3a1775fcf1f752d1b1da2bd86c03c1dfac8f692cc"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Ceres-and-Trit-9dae2-through-quality-transitions/dwarf-ceres-low-quarter.png",
+        "sha256": "30f3de875a9d1651e68bcb7a3e1cd4d3c25fa75893abe9b147bc0fd7fa7af6ee"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Ceres-and-Trit-9dae2-through-quality-transitions/moon-triton-high-day.png",
+        "sha256": "28bc4879cf0c98a89a6e2d6a3aafa7aa08a61cae652c150d32763260a5b5393c"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Ceres-and-Trit-9dae2-through-quality-transitions/moon-triton-high-quarter.png",
+        "sha256": "cbd3996242c2a44ff8fea512052f609df092e73fd40f68753633c13029984e18"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Ceres-and-Trit-9dae2-through-quality-transitions/moon-triton-low-day.png",
+        "sha256": "851b9c0ec523743e385c2444abb51aedd65ed765eaa766fd0e1c52027dcba841"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Ceres-and-Trit-9dae2-through-quality-transitions/moon-triton-low-quarter.png",
+        "sha256": "9bf2244bc523967ff43315d342fb67ce65aa96a201fc466a8c8828e5f4cb58ee"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/dwarf-pluto-high-day.png",
+        "sha256": "17fba04c7cdce2978c6682ad092fd5646ccc8c8eb1738bc476699cd6905f80c3"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/dwarf-pluto-high-quarter.png",
+        "sha256": "765a116ab76c2786c0fda1400a9ed5791ae9317e8e245b14f2618c9fb04a0729"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/dwarf-pluto-low-day.png",
+        "sha256": "1b9bfbc9a8d25d968eff42f99f5d833c29a7082e42d93cbbf4b7661e4ef664bc"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/dwarf-pluto-low-quarter.png",
+        "sha256": "5e39f6a0df216b1995a1824b6349b39b6808e426bdfa507a1e1e158d831f756d"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/moon-charon-high-day.png",
+        "sha256": "f97d441648f043b671d208ccffccc5709528790ecd7d1423dd620c331d935213"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/moon-charon-high-quarter.png",
+        "sha256": "fb642d2332c4aded02367c12507e407d105402d2151c5d14ba04595f93d38719"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/moon-charon-low-day.png",
+        "sha256": "7d38c7e6f292d031bd7578d684c15dfe31749e7153f2515fe939e9e8bc2f3e8d"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/moon-charon-low-quarter.png",
+        "sha256": "7e93273d44356256ac5241b3e5a9d0228968c4d990e28f66b80b036ce2a563a7"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/moon-titan-high-day.png",
+        "sha256": "f0a9ed691c511dafb4cc3b3ddeaa4f05ff89deb912f5ed68a185971eedc93464"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/moon-titan-high-quarter.png",
+        "sha256": "6984e2c7235b2b2abd954d988d0ec62027957d07e238d05e4f722f50c82d38b7"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/moon-titan-low-day.png",
+        "sha256": "2ee7bac6d248398179b9fbdff4929fb20b09a702e3add04d0e7c1193511ade2c"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/moon-titan-low-quarter.png",
+        "sha256": "28c0f76fe86e0708d2189c66b9b474991b2bd6257245774807c226f6b83e1dff"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/planet-venus-high-day.png",
+        "sha256": "d0c090f8be3a36bc2dd776b12e7710646ca6531dd5f4f27d475d1ba0c287a9fc"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/planet-venus-high-quarter.png",
+        "sha256": "2a337127b51d2fd6aa1fde24a44696eba2d97b2795beda7b9b20aa959adabe48"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/planet-venus-low-day.png",
+        "sha256": "6a2d526876b735236a40b50523b3b8dcfca494d37106d98923a3f797a0fdf6e4"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-cloud-decks-an-9a51e-through-quality-transitions/planet-venus-low-quarter.png",
+        "sha256": "5bc4af1bb79b7343bd2d9557b5e63a59fbc3548bb463f84328e6e1fb5da998ef"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-callisto-high-day.png",
+        "sha256": "e0ae930af40609af12b58d8da959d1af274852081d48378999b398152f8dffac"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-callisto-high-quarter.png",
+        "sha256": "29def21211c7ceadc45cfbd3feb1d83e9c70270039911f3d955b7c8ba9f5da3f"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-callisto-low-day.png",
+        "sha256": "170e766e933f52f5b358663decc7a2aa1f93d0f139fd652e43cddfe3d8ff988d"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-callisto-low-quarter.png",
+        "sha256": "fe617ecd1ae8c3efe780aa915c43aa6f69fd44f5419103db0bad6bc2354c1ec4"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-europa-high-day.png",
+        "sha256": "aa063a8bea8f5148237d11e6175d3bf7c20a1e5a457a4aed48d3bfe6d012fb7b"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-europa-high-quarter.png",
+        "sha256": "fe4e4ac965dc4b2c3911cd0fe05cc1ff08eac427f860deeeadbeefda27ebab40"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-europa-low-day.png",
+        "sha256": "0bbd418c4c783336f58094531857ef3637efe2aba8477aa0b96c426627844387"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-europa-low-quarter.png",
+        "sha256": "63d466d0eda77f898e7fd749c2f817d95e6f8926c405af3d311f54854ba54364"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-ganymede-high-day.png",
+        "sha256": "aaf5f377bb089f2c3f1f3889ab09fb84cb576c28639b5e67fe3dc2031f95ffb5"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-ganymede-high-quarter.png",
+        "sha256": "15315a14c24e94bb42c1a1d76b8df09df5f468fcbb27beedf78918add15f3009"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-ganymede-low-day.png",
+        "sha256": "7d237cec1b3a33b5c84f68ff946344d7f91d01c1f92bc5e5f9bdbc72158deee6"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-ganymede-low-quarter.png",
+        "sha256": "419fb79a84a8b24a0ff7b7e251dd8f75114c2e795239db4ea55bd25aa00dcaac"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-io-high-day.png",
+        "sha256": "ed0dd3b3da56e02df50ba0b3d0c0049a579b025171a2c324d5c6db1237930729"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-io-high-quarter.png",
+        "sha256": "478aa134781ba26faaeb6390cea7155a3a1171b5a80508e546e3f18b94d9642c"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-io-low-day.png",
+        "sha256": "d25fd5a130915b6f71e504022708cabcf436862f17db9e81d88cf15be5f9e4fa"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Galilean-moon--13f5f-through-quality-transitions/moon-io-low-quarter.png",
+        "sha256": "5e866cda88caa32bb514e57c49cc91092d76e0eb4010621ab8d55c75fef674e3"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Mars-moon-shap-41db7-through-quality-transitions/moon-deimos-high-day.png",
+        "sha256": "1eea1af1ccd1ecf781ef06edf61188b2d02ba12734d65c72aac068d8545b9be3"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Mars-moon-shap-41db7-through-quality-transitions/moon-deimos-high-quarter.png",
+        "sha256": "9a3f2927e64239f129d8cb523599caadfb5d6af1ee1fca5c19e7d02c0d4524a1"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Mars-moon-shap-41db7-through-quality-transitions/moon-deimos-low-day.png",
+        "sha256": "6d90368884a8acd77588ad08fe806cc381d654748c6c8afef2ab3d5e1a63311e"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Mars-moon-shap-41db7-through-quality-transitions/moon-deimos-low-quarter.png",
+        "sha256": "c8e11585d32cbbc7b805f59e2ae3fd5c3889767dab64438c695c7b2474326428"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Mars-moon-shap-41db7-through-quality-transitions/moon-phobos-high-day.png",
+        "sha256": "67d179efd8b730b55d267bd2c046e6800ce38bc553e5baa6150a4f5617351cf4"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Mars-moon-shap-41db7-through-quality-transitions/moon-phobos-high-quarter.png",
+        "sha256": "ea085e77108466e140ddae8d08f90401bc88fa76a98375e8d045a79dbacff064"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Mars-moon-shap-41db7-through-quality-transitions/moon-phobos-low-day.png",
+        "sha256": "4ec3b75dedd83772d19712da1eef4d14ac92aaf45c9e7c10fa33419cacc69ff8"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/body-detail-Mars-moon-shap-41db7-through-quality-transitions/moon-phobos-low-quarter.png",
+        "sha256": "d6f94784f310c7f7c21201581f5dee2aac3808ac84feb3753daad6c771a3570c"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-dwarf-pluto-m-23d89-scale-orbit-and-touch-focus/explore-system.png",
+        "sha256": "127ea64c293ce09024e9ee2b27e1b010d8562d21a14176bec482889839f79e0a"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-dwarf-pluto-m-23d89-scale-orbit-and-touch-focus/true-system.png",
+        "sha256": "f40a8ca8b18757ddb7ee1bb15cd435fbcf4ed441ea3af4f3992c1b9acc6a64b4"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-earth--9b313-scale-orbit-and-touch-focus/explore-system.png",
+        "sha256": "66b6a9b990ba701a9db184dfd593904c506a95fd6d7faa3a5ba29ea396a2bdc3"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-earth--9b313-scale-orbit-and-touch-focus/true-system.png",
+        "sha256": "9413709e483c7259e590fb6ed40eefb1b26834b9c1634224f929d1ead06c0838"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-jupite-9cb24-scale-orbit-and-touch-focus/explore-system.png",
+        "sha256": "e14beaa33b833ab3a6127e4fba7d0fc6c801026925dae9750573be47c97821a1"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-jupite-9cb24-scale-orbit-and-touch-focus/true-system.png",
+        "sha256": "cdd120fce753825b88b0f867210d3beef7fa557ce59a9c70882f6964316938b1"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-mars-m-6646c-scale-orbit-and-touch-focus/explore-system.png",
+        "sha256": "1f9e7f118018b9af4b20327f655633c8c186fd75f18fccf4a8b205f9dae6842a"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-mars-m-6646c-scale-orbit-and-touch-focus/true-system.png",
+        "sha256": "7bca6ae1535b3568e11c0857e6a100cc3fe356cdf5854995e91df1c0d37329dd"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-neptun-10162-scale-orbit-and-touch-focus/explore-system.png",
+        "sha256": "224de41562cf5e39ce78c65828a4afdd301373c891acfac66d05c2434cee7502"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-neptun-10162-scale-orbit-and-touch-focus/true-system.png",
+        "sha256": "d51b81d995614a9fc8da952d92bab63cb28ada2dbd0d06339255d07b69c98a34"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-saturn-cdf07-scale-orbit-and-touch-focus/explore-system.png",
+        "sha256": "b17dc6cae71f1870ad5799a6a9b47408a9c67b249e87c83e21057e77816a0559"
+      },
+      {
+        "path": ".tools/surface-audit/regression/browser/moon-systems-planet-saturn-cdf07-scale-orbit-and-touch-focus/true-system.png",
+        "sha256": "b19b0e75d4b52b252e4fdbbb6a86cafa73b3b3ce26173a593789891584e2e520"
+      }
+    ]
+  },
+  "manualReview": "docs/science/surface-registration-manual-review.md",
+  "historicalCpuDeviceEvidence": "Preserved; no repeated measurement requested for cold-path geometry/texture configuration."
+}

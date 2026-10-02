@@ -2,13 +2,21 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: surface registration corrections ready for browser validation
+## Current: surface audit validation passed; user appearance sign-off pending
+
+October 2 review: the existing `.tools/surface-audit/regression` job finished successfully for source `b277fce110f80ea1728f4d4d0e43f0ad64493181`. All **17 browser tests pass**, zero failed/skipped/flaky and zero report errors; production build passes. Original eight material references retain their existing tolerances. Precision is **0.134356 px / 0.5 px** over 600 samples, with all **11 depth probes passing**. LOW compressed mip storage remains **16,516,088 bytes**, with 33 textures before/after twenty focus changes. This is local SwiftShader WebGL2 functional evidence; prior CPU/laptop acceptance remains preserved.
+
+All **60 new captures** were visually reviewed in three archived contact sheets: corrected Phobos/Deimos silhouettes and atlases, Ceres/Charon maps, twelve LOW/HIGH day/quarter body views and six True/Explore systems. No new rendering defect was found. Raw browser/build results, precision/storage reports, per-capture hashes and review are preserved in `docs/perf/phase-three/surface-audit-{browser,validation,precision,texture-stability}.json`, `surface-audit-build.log` and `surface-audit-review-{1,2,3}.png`. The dev site responds HTTP 200. No job is pending; do not rerun it.
+
+The geographic audit and corrected implementation are complete within the recorded source-accuracy limits. The remaining user step is a brief visual sign-off on **Ceres, Charon, Phobos and Deimos**, with camera orbit and LOW/HIGH changes. Instructions: [manual review](science/surface-registration-manual-review.md). The user need not assess scientific pole/longitude coordinates or repeat a benchmark. Phase 3 final user sign-off is pending; Phase 4 remains unstarted and prohibited without explicit authorization.
+
+### Historical: source audit implementation and launch
 
 October 1: user explicitly authorized completing the geographic audit, with Phase 4 still prohibited. The source audit found and corrected Ceres's 180-degree map seam, Charon's incorrect legacy 180-degree shift and the independent Phobos/Deimos source geometry frames. Europa/Ganymede/Callisto/Pluto mappings agree with twelve independent USGS landmarks; Triton's source/projection comparison supports keeping its existing mapping. Mesh frame inference compares all signed axis permutations to PDS grids and Phobos additionally to an explicit IAU_PHOBOS JPL DSK. Details, input hashes, full candidate scores, scripts and precision limits are in [the audit](science/surface-registration-audit.md).
 
 Local verify passes typecheck, lint/boundaries and **131 tests plus two expected rejected-model diagnostics**. Assets remain **79,961,515 / 80,000,000 bytes**; no runtime files were rebaked. The corrections happen only at asset/mesh creation, with normals rotated alongside positions and unchanged atlas UVs. Previous accepted CPU and laptop evidence remains preserved. Corrected browser regression/build and visual review are the next checks; no complete Phase 3 acceptance is claimed yet.
 
-### Active launch: corrected surface regression and build
+### Completed launch: corrected surface regression and build
 
 - Runtime/source commit: `b277fce110f80ea1728f4d4d0e43f0ad64493181`. Any subsequent handoff commit is documentation only.
 - Persistent hidden Node launcher PID **36948**, `.tools/surface-audit/regression/run.mjs`; PID recorded in `pid.txt`. Startup confirmed at the browser stage; this is not a pass.
