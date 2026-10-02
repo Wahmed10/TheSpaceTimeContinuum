@@ -6,7 +6,7 @@ October 1, 2026: the Phase 3 surface audit resolves gross poles, longitude direc
 
 ## Charon surface mosaic detail
 
-October 2, 2026: user reports a blurry/smudged region beside sharper terrain. Inspection reproduces the region in the original 12693 by 6347 NASA New Horizons basemap before resizing/compression. Spacecraft coverage has uneven resolution; a larger texture cannot recover absent detail. Preserve the corrected geographic registration and observed imagery. Future source replacement must provide demonstrably better licensed coverage rather than upsampling or invented terrain. See [the investigation](science/surface-registration-audit.md#october-2-user-report-charons-blurry-region). The user has not yet accepted this limitation; do not mark Phase 3 finally accepted from the other three passing appearance checks.
+October 2, 2026: user reports a blurry/smudged region beside sharper terrain. Inspection reproduces the region in the original 12693 by 6347 NASA New Horizons basemap before resizing/compression. Spacecraft coverage has uneven resolution; a larger texture cannot recover absent detail. Preserve the corrected geographic registration and observed imagery. Future source replacement must provide demonstrably better licensed coverage rather than upsampling or invented terrain. See [the investigation](science/surface-registration-audit.md#october-2-user-report-charons-blurry-region). The user subsequently accepted the explained limitation and confirmed Phase 4 readiness. Phase 3 is closed; preserve this source-imagery enhancement without claiming the blur was repaired.
 
 ## Io surface mosaic detail
 
