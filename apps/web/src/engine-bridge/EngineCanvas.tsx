@@ -1,7 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { isoToTdb, tdbToIso } from '@space/astro';
+import { LAYERS } from '@space/domain';
 import { useEngineStore } from './useEngineStore';
+import { parseExploreLocation } from '../lib/routeState';
 import type { SpaceEngine } from '@space/engine';
 declare global {
   interface Window {
@@ -37,31 +39,32 @@ export default function EngineCanvas() {
     host.current!.prepend(canvas);
     async function init() {
       try {
+        const { state, selectedId, debug, issues } = parseExploreLocation(
+          location.pathname,
+          location.search,
+        );
+        // Frame commands arrive in P4.2. Until then, report partial restoration.
+        if (state.frame)
+          issues.push({
+            field: 'frame',
+            code: 'unsupported',
+            message: 'The reference-frame setting could not be restored.',
+          });
+        useEngineStore.setState({ linkIssues: issues });
         const { SpaceEngine } = await import('@space/engine');
         if (disposed || expired) return;
-        const q = new URLSearchParams(location.search);
         engine = await SpaceEngine.create(canvas, {
-          forceWebGL: generation > 0 || q.get('renderer') === 'webgl',
+          forceWebGL: generation > 0 || debug.forceWebGL,
           labels: labels.current!,
-          test: q.has('test'),
-          ...(q.get('t') ? { tdbSec: isoToTdb(q.get('t')!) } : {}),
+          test: debug.test,
+          ...(state.t ? { tdbSec: isoToTdb(state.t) } : {}),
         });
         if (disposed || expired) {
           engine.dispose();
           return;
         }
         window.clearTimeout(startupDeadline);
-        useEngineStore.setState({
-          engine,
-          backend: engine.backend,
-          ready: true,
-          error: null,
-        });
-        if (
-          q.has('test') ||
-          q.has('perf') ||
-          location.pathname.startsWith('/lab/')
-        )
+        if (debug.test || debug.perf || location.pathname.startsWith('/lab/'))
           window.__spaceEngine = engine;
         unsubs.push(
           engine.on('select', (id) =>
@@ -86,21 +89,31 @@ export default function EngineCanvas() {
           }),
           engine.on('tier', (tier) => useEngineStore.setState({ tier })),
         );
-        const focus = q.get('focus');
-        if (focus) engine.focus(focus, { transition: false });
-        if (q.get('scale') === 'true') {
-          engine.setScale('true');
-          useEngineStore.setState({ scale: 'true' });
+        if (selectedId || state.camera.preset === 'close') {
+          engine.focus(state.focus, {
+            transition: false,
+            wide: state.camera.preset === 'wide',
+          });
+          if (!selectedId) engine.select(null);
         }
-        if (q.has('layers')) {
-          const enabled = new Set(q.get('layers')!.split(','));
-          for (const id of ['planets', 'moons', 'dwarfs', 'orbits'])
-            engine.setLayer(id, enabled.has(id));
-        }
-        if (q.get('scenario') === 'leo') {
+        engine.setScale(state.scale);
+        const enabled = new Set<string>(state.layers);
+        for (const { id } of LAYERS) engine.setLayer(id, enabled.has(id));
+        if (debug.scenario === 'leo') {
           engine.focus('planet:earth', { transition: false });
           engine.setReferenceDistance(6771.0084);
         }
+        useEngineStore.setState({
+          engine,
+          backend: engine.backend,
+          ready: true,
+          error: null,
+          scale: state.scale,
+          mode: engine.clock.mode,
+          rate: engine.clock.rate,
+          following: engine.isFollowing,
+          selectedId: debug.scenario === 'leo' ? 'planet:earth' : selectedId,
+        });
       } catch (error) {
         window.clearTimeout(startupDeadline);
         if (!disposed && !expired)

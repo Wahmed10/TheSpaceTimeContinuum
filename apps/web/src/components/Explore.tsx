@@ -6,11 +6,16 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { EXPLORABLE_BODIES } from '@space/domain';
 import type { QualitySetting } from '@space/engine';
 import { useEngineStore } from '../engine-bridge/useEngineStore';
+import LinkStateNotice from './LinkStateNotice';
 const EngineCanvas = dynamic(() => import('../engine-bridge/EngineCanvas'), {
   ssr: false,
 });
 const bodies = EXPLORABLE_BODIES;
-const destinations = bodies.filter(body => ['planet:earth', 'moon:moon', 'planet:mars', 'planet:jupiter'].includes(body.id));
+const destinations = bodies.filter((body) =>
+  ['planet:earth', 'moon:moon', 'planet:mars', 'planet:jupiter'].includes(
+    body.id,
+  ),
+);
 const rates = [1, 10, 60, 100, 3600, 86400, 2629800, 31557600];
 const rateLabels = [
   '1×',
@@ -152,6 +157,7 @@ export default function Explore() {
   return (
     <main className="explore">
       <EngineCanvas />
+      <LinkStateNotice />
       <header className="topbar">
         <a className="brand" href="/" aria-label="Space Time Continuum home">
           <span className="brand-mark">✳</span>
@@ -345,20 +351,30 @@ export default function Explore() {
                     ? 'Positions use approximate orbital models between JPL Horizons snapshots.'
                     : 'Positions use a local analytic ephemeris.'}{' '}
                 These are calculated positions, not spacecraft telemetry.
-                {body.provenance.uncertaintyNote && ` ${body.provenance.uncertaintyNote}`}
+                {body.provenance.uncertaintyNote &&
+                  ` ${body.provenance.uncertaintyNote}`}
               </p>
               <a
                 href={body.provenance.sourceUrl}
                 target="_blank"
                 rel="noreferrer"
               >
-                {body.provenance.providerId === 'jpl-horizons-orbital-elements' ? 'NASA/JPL' : 'astronomy-engine'} · method & source ↗
+                {body.provenance.providerId === 'jpl-horizons-orbital-elements'
+                  ? 'NASA/JPL'
+                  : 'astronomy-engine'}{' '}
+                · method & source ↗
               </a>
             </div>
           )}
           <div className="provenance">
             <span className="provenance-dot" /> CALCULATED POSITION{' '}
-            <span>{body.astronomyBody || body.id === 'moon:callisto' ? 'JPL-corrected ephemeris' : body.provenance.certainty === 'approximate' ? 'Approximate orbit' : 'Analytic ephemeris'}</span>
+            <span>
+              {body.astronomyBody || body.id === 'moon:callisto'
+                ? 'JPL-corrected ephemeris'
+                : body.provenance.certainty === 'approximate'
+                  ? 'Approximate orbit'
+                  : 'Analytic ephemeris'}
+            </span>
           </div>
         </aside>
       )}

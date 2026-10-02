@@ -4,12 +4,19 @@ export const idSchema = z
   .min(3)
   .max(100)
   .regex(/^[a-z]+:[a-z0-9-]+$/);
+/** Syntax only: registered frames need not belong to the static body catalog. */
+export const frameIdSchema = z
+  .string()
+  .max(80)
+  .regex(
+    /^(?:ICRF_SSB|ICRF_HELIO|ICRF_EMB|TEME_EARTH|(?:ICRF_BODY|FIXED):[a-z0-9]+(?:[-_:/][a-z0-9]+)*)$/,
+  );
 export const mapStateSchema = z.object({
   focus: idSchema,
   t: z.iso.datetime({ offset: true }).optional(),
   scale: z.enum(['true', 'explore']).optional(),
   layers: z.array(z.string().max(40)).max(20).optional(),
-  frame: z.string().max(80).optional(),
+  frame: frameIdSchema.optional(),
   secondary: idSchema.optional(),
   camera: z
     .object({ preset: z.enum(['close', 'wide', 'fit-both']) })
