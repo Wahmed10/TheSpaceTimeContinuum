@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-02T00:13:51.006Z",
+  "generatedAt": "2026-10-02T03:52:56.079Z",
   "method": "Standalone tree-shaken public engine entry, including all transitively bundled dependencies and lab probes; gzip level 9. Excludes separately fetched assets and transcoder.",
-  "bytes": 1307638,
-  "gzipBytes": 373041,
+  "bytes": 1307923,
+  "gzipBytes": 373142,
   "budgetBytes": 450000,
   "inputs": [
     "node_modules/.pnpm/three@0.186.0/node_modules/three/build/three.core.js",

@@ -8,6 +8,16 @@ October 1: user explicitly authorized completing the geographic audit, with Phas
 
 Local verify passes typecheck, lint/boundaries and **131 tests plus two expected rejected-model diagnostics**. Assets remain **79,961,515 / 80,000,000 bytes**; no runtime files were rebaked. The corrections happen only at asset/mesh creation, with normals rotated alongside positions and unchanged atlas UVs. Previous accepted CPU and laptop evidence remains preserved. Corrected browser regression/build and visual review are the next checks; no complete Phase 3 acceptance is claimed yet.
 
+### Active launch: corrected surface regression and build
+
+- Runtime/source commit: `b277fce110f80ea1728f4d4d0e43f0ad64493181`. Any subsequent handoff commit is documentation only.
+- Persistent hidden Node launcher PID **36948**, `.tools/surface-audit/regression/run.mjs`; PID recorded in `pid.txt`. Startup confirmed at the browser stage; this is not a pass.
+- Browser command: `pnpm.cmd exec playwright test e2e/body-detail.spec.ts e2e/orientations.spec.ts e2e/moon-systems.spec.ts e2e/visual.spec.ts e2e/precision.spec.ts e2e/startup.spec.ts e2e/picking.spec.ts --output=.tools/surface-audit/regression/browser --reporter=json` (**17 discovered tests**), followed by `pnpm.cmd build` if browser passes.
+- Status/results: `.tools/surface-audit/regression/result.json`; `browser.log` is the JSON report, `browser-stderr.log`, `build.log`, `build-stderr.log` and launcher logs are alongside it. Status command: `node tools/phase-three-status.mjs`.
+- Existing generated performance outputs were copied to `.tools/surface-audit/regression/perf-before/`; user downloads in `test-results/` remain intact. User dev server PID 3640 remains independent. Prior completed CPU/device jobs are not relaunched.
+- Standalone engine measurement passes **373,142 / 450,000 gzip bytes**; 72 production dependency licenses pass. No corrected-browser or build pass has been reviewed yet.
+- On resume, inspect this existing job first. Review all failures/skips/flakiness, build result, original references/precision and captures, especially Phobos/Deimos, Ceres and Charon. Archive the reviewed evidence and assess Phase 3 closure. Phase 4 remains prohibited.
+
 ## Previously reviewed: laptop HIGH/WebGPU Phase 3 report passed
 
 Reviewed the user-supplied `test-results/phase-three-webgpu-1790908597477.json`: all 21 body close-ups and three Saturn ring views, HIGH throughout, 240 samples per view, settled textures, focused meshes and ring views visible. Worst p95 **6.20 ms** against 16.7 ms; mean FPS range **161.33–164.71**. Maximum draw calls **36 / 300**, detailed meshes **3 / 12**, compressed asset mip storage **119,844,112 bytes / 350 MB**. Precision **0.107680 px / 0.5 px** over 600 samples; all **11 depth probes pass**. Windows Chrome 153, WebGPU, 1707×904 at DPR 1.5. User identifies the device as their laptop; adapter string is blank, so no particular GPU is asserted.
