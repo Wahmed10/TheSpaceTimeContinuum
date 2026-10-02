@@ -1,0 +1,111 @@
+{
+  "status": "finished",
+  "startedAt": "2026-10-02T21:54:44.137Z",
+  "pid": 14460,
+  "candidateCommit": "cd64f74491a33d1010f3928374f5bbb73111899f",
+  "server": {
+    "url": "http://localhost:3000",
+    "listeningPid": 23516,
+    "reused": true
+  },
+  "method": "Five focused startup cases on the existing development server; no build/output overlap. SwiftShader functional evidence. The tested source is committed and must remain unchanged during this run.",
+  "localVerify": {
+    "exitCode": 0,
+    "testFiles": 35,
+    "passed": 241,
+    "expectedRejections": 2,
+    "log": ".tools/phase-four/p4-1/unit/verify.log"
+  },
+  "command": [
+    "pnpm.cmd",
+    "exec",
+    "playwright",
+    "test",
+    "e2e/startup.spec.ts",
+    "e2e/phase-four-url.spec.ts",
+    "--output=.tools/phase-four/p4-1/startup/browser",
+    "--reporter=json"
+  ],
+  "launch": {
+    "preservedEvidence": [
+      {
+        "sha256": "19e7e80b4e8ce6810d1bd609797619333bee126d817d95f01416dbd6b5e1a5e9",
+        "file": "docs/perf/phase-two-points-webgl.json"
+      },
+      {
+        "sha256": "8eccec2902485757b043a7731d8bba6109270e41e8f26dd14306416a357ff3a6",
+        "file": "docs/perf/react-profile.json"
+      },
+      {
+        "sha256": "c94b389d41bdb0dfdf9354e041aa98bb236009f6b2e24d3a8818e0058edcf418",
+        "file": "docs/perf/texture-stability.json"
+      },
+      {
+        "sha256": "c507646ec528777172f12b8217f0eb20ec7e9b9d76f9d0506ddd16a0aaea7eb4",
+        "file": "docs/perf/screens/earth-webgl.png"
+      },
+      {
+        "sha256": "4d89fc002284e15f70042ee10e1a8934a5a0b0ac18d39287e2980865af7c5d44",
+        "file": "docs/perf/screens/mars-webgl.png"
+      },
+      {
+        "sha256": "a2d111367805def0a0aabf336f091669ac20d39a862062067e85eb0283ef8d8b",
+        "file": "docs/perf/screens/mobile-webgl.png"
+      },
+      {
+        "sha256": "1e7be2a201b39227c9c35e4797b5a8afece0a2597ecaad9c84620d0e775354ff",
+        "file": "docs/perf/screens/phase-two-ceres.png"
+      },
+      {
+        "sha256": "c286150003b233da12d89930cfa2b38ad8d082a8f6c6a6281caa4ebf741a08fb",
+        "file": "docs/perf/screens/phase-two-europa.png"
+      },
+      {
+        "sha256": "7a3374f0bfb1df9231e49c1399965aa76070c9e46311377133075ddde655efdb",
+        "file": "docs/perf/screens/phase-two-jupiter.png"
+      },
+      {
+        "sha256": "78453ed75e16ea6d084fb0d9628782d04d226fff8b749aea1baaa98d3e99a4fe",
+        "file": "docs/perf/screens/phase-two-orbits-ceres.png"
+      },
+      {
+        "sha256": "cd6fe0e6b92b42529ed4a21dd5bc712d78e864d18f754fa3e5a3cf16b37bc394",
+        "file": "docs/perf/screens/phase-two-orbits-earth.png"
+      },
+      {
+        "sha256": "08c36ba5dab66a08e3a0bc216db8628e06ec99ff0ea6b795cb163f3e3bc6c2c1",
+        "file": "docs/perf/screens/phase-two-pluto.png"
+      },
+      {
+        "sha256": "93109ecaa0114f3900dbff69587a610441fa5145df1a0f871e12d84fb15ecbaf",
+        "file": "docs/perf/screens/phase-two-titan.png"
+      },
+      {
+        "sha256": "78860e6bfce42289712ca22a81d830f9a20ae679224be8f087b251ca4f82e8d1",
+        "file": "docs/perf/screens/solar-system-webgl.png"
+      }
+    ],
+    "candidateCommit": "cd64f74491a33d1010f3928374f5bbb73111899f",
+    "server": {
+      "url": "http://localhost:3000",
+      "listeningPid": 23516,
+      "reused": true
+    },
+    "preparedAt": "2026-10-02T21:54:10.1318967Z"
+  },
+  "activeStage": null,
+  "browser": {
+    "exitCode": 0,
+    "stats": {
+      "startTime": "2026-10-02T21:54:45.351Z",
+      "duration": 36166.654,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "preservedEvidenceUnchanged": true,
+  "verdict": "passed-awaiting-review",
+  "finishedAt": "2026-10-02T21:55:21.641Z"
+}
