@@ -2,13 +2,13 @@
 
 Phase 3 is authorized and started. Phase 2 remains accepted with ADR 0010 and documented device coverage. File-level work and the 21-body audit are in [PHASE_3_PLAN.md](PHASE_3_PLAN.md).
 
-## Current: surface audit validation passed; user appearance sign-off pending
+## Current: surface audit passed; Charon source detail investigated
 
 October 2 review: the existing `.tools/surface-audit/regression` job finished successfully for source `b277fce110f80ea1728f4d4d0e43f0ad64493181`. All **17 browser tests pass**, zero failed/skipped/flaky and zero report errors; production build passes. Original eight material references retain their existing tolerances. Precision is **0.134356 px / 0.5 px** over 600 samples, with all **11 depth probes passing**. LOW compressed mip storage remains **16,516,088 bytes**, with 33 textures before/after twenty focus changes. This is local SwiftShader WebGL2 functional evidence; prior CPU/laptop acceptance remains preserved.
 
 All **60 new captures** were visually reviewed in three archived contact sheets: corrected Phobos/Deimos silhouettes and atlases, Ceres/Charon maps, twelve LOW/HIGH day/quarter body views and six True/Explore systems. No new rendering defect was found. Raw browser/build results, precision/storage reports, per-capture hashes and review are preserved in `docs/perf/phase-three/surface-audit-{browser,validation,precision,texture-stability}.json`, `surface-audit-build.log` and `surface-audit-review-{1,2,3}.png`. The dev site responds HTTP 200. No job is pending; do not rerun it.
 
-The geographic audit and corrected implementation are complete within the recorded source-accuracy limits. The remaining user step is a brief visual sign-off on **Ceres, Charon, Phobos and Deimos**, with camera orbit and LOW/HIGH changes. Instructions: [manual review](science/surface-registration-manual-review.md). The user need not assess scientific pole/longitude coordinates or repeat a benchmark. Phase 3 final user sign-off is pending; Phase 4 remains unstarted and prohibited without explicit authorization.
+The geographic audit and corrected implementation are complete within the recorded source-accuracy limits. October 2 user feedback passes **Ceres, Phobos and Deimos**, but reports a blurry/smudged Charon region. The inspected screenshot matches soft regions already in the original NASA source, before resizing/compression. Original SHA256 matches provenance; no runtime/asset change is justified by this source limitation. Details: [Charon investigation](science/surface-registration-audit.md#october-2-user-report-charons-blurry-region). The temporary screenshot was removed as requested. No repeat checks are needed on the three approved bodies or accepted laptop/CPU results. Charon limitation acceptance remains pending; Phase 3 is not finally accepted yet. Phase 4 remains unstarted and prohibited without explicit authorization.
 
 ### Historical: source audit implementation and launch
 

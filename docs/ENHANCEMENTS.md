@@ -4,6 +4,10 @@
 
 October 1, 2026: the Phase 3 surface audit resolves gross poles, longitude direction and seam offsets, including Ceres/Charon and the two Mars moon model frames. It does not certify survey accuracy. NASA visualization GLBs lack scientific frame declarations; Mars moon registration is inferred against independent PDS/JPL shapes from different generations, and Triton's processed visualization agrees with its independent browse mosaic only at coarse angular scale. Future upgrades should use explicit source-frame metadata, controlled image networks and matched shape/texture versions. Preserve the independent landmark/ray tests and source hashes, and re-audit replacement models instead of assuming a common glTF axis convention. See `docs/science/surface-registration-audit.md` for evidence and accuracy limits.
 
+## Charon surface mosaic detail
+
+October 2, 2026: user reports a blurry/smudged region beside sharper terrain. Inspection reproduces the region in the original 12693 by 6347 NASA New Horizons basemap before resizing/compression. Spacecraft coverage has uneven resolution; a larger texture cannot recover absent detail. Preserve the corrected geographic registration and observed imagery. Future source replacement must provide demonstrably better licensed coverage rather than upsampling or invented terrain. See [the investigation](science/surface-registration-audit.md#october-2-user-report-charons-blurry-region). The user has not yet accepted this limitation; do not mark Phase 3 finally accepted from the other three passing appearance checks.
+
 ## Io surface mosaic detail
 
 September 27, 2026: user accepts the improved USGS color-merge Io map for now, but reports remaining blurry/smudged regions. Preserve this as a known visual limitation. Uneven spacecraft image resolution and mosaic processing leave some regions softer than others, especially near poles. Future work should evaluate improved licensed source coverage and seam/pole treatment, without inventing measured terrain or merely upsampling. This accepted limitation does not block the rest of Phase 3.

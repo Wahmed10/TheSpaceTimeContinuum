@@ -2,7 +2,9 @@
 
 October 2, 2026. Automated checks for source commit `b277fce` pass: 131 unit tests plus two expected rejected-model diagnostics, 17 browser tests, production build, unchanged original material references and precision/depth. The agent reviewed all 60 new captures with no new rendering defect found. Scientific frame/seam checks are recorded in `surface-registration-audit.md`; the user does not need to judge pole angles or verify feature coordinates manually. No benchmark repeat is pending.
 
-The remaining user step is a short visual sign-off on the four corrected bodies, usually about five minutes:
+The user completed the checks below on October 2: **Ceres, Phobos and Deimos look good**. A supplied Charon screenshot shows a smudged region beside sharper terrain. Comparison with the original NASA map confirms that regional softness is already in the source; see [the investigation](surface-registration-audit.md#october-2-user-report-charons-blurry-region). The screenshot was removed after inspection as requested. Charon's source limitation has not yet been accepted. No additional manual verification or repeated benchmark is needed to establish the cause, and the other three bodies do not need another review.
+
+The completed review procedure is retained here for reference:
 
 1. Open `http://localhost:3000/`, refresh with **Ctrl+Shift+R**, and choose **Settings → Graphics → high**. Pause time with the bottom playback control or **Space**.
 2. Use **Find a world** to visit **Ceres**, **Charon**, **Phobos** and **Deimos**. Zoom with the wheel and drag to orbit the camera. Inspect several sides, including a partly lit view. Look for blank or flashing textures, visible gaps, detached markings, severe texture stretching or obviously broken lighting. Phobos and Deimos should retain their irregular silhouettes. A different initial face or shape orientation is expected after these geographic corrections; scientific north is not necessarily screen-up.
@@ -13,4 +15,4 @@ Ceres's muted gray appearance and existing source softness or coverage gaps are 
 
 Report either **“All four look good”** or the body, action and visible problem. If a screenshot helps, put it in the existing temporary screenshot folder; it will be inspected and removed as previously requested. An additional console check is optional: if you encounter an error, preserve its text with the body/action rather than diagnosing its scientific coordinates yourself.
 
-User visual sign-off remains pending. Phase 4 is unstarted and still requires explicit authorization.
+Only acceptance of Charon's documented source-imagery limitation remains pending. Phase 4 is unstarted and still requires explicit authorization.
