@@ -1,0 +1,146 @@
+{
+  "reviewedAt": "2026-10-03T19:38:07.231Z",
+  "verdict": "reviewed-failure",
+  "candidateCommit": "b9e47bb0e4537b5c90a388f5eda5bddd40646921",
+  "sourceSha256": "c067f6888bbacc41ea37e8ffa34ad07afd5db1db6735da62782509710e8280f5",
+  "artifacts": [
+    {
+      "file": "p4-6-first-launch.json",
+      "sha256": "4fb7f3159024cd1db38344eb6e2eabd2a89443b77716748b0b80f93149621307"
+    },
+    {
+      "file": "p4-6-first-result.json",
+      "sha256": "238f343bbf7adac87be852f85967aaec57586226cd6feee2ebe6aae2c2ad83ee"
+    },
+    {
+      "file": "p4-6-first-browser.json",
+      "sha256": "de4895eaf6756c758dfbbc0cb1316a4df8f2cfd58d3c64e681f0cfc0a2bfb01a"
+    },
+    {
+      "file": "p4-6-first-local-search.json",
+      "sha256": "bd819fdfb6da578e1e61ac636f5e1dba51149521947a23afa4646c8f703cedce"
+    },
+    {
+      "file": "p4-6-first-engine-bundle.json",
+      "sha256": "c7ea9a2e58ac1b1413c00938e2627437dbccc378b5c1af4bd95e56bd127cce93"
+    },
+    {
+      "file": "p4-6-first-search-response-desktop.json",
+      "sha256": "ff7c61ff6572a966f576708c6933ca2df2f70fa64021a4fc504093348c0cfb0d"
+    },
+    {
+      "file": "p4-6-first-search-response-phone.json",
+      "sha256": "6fcd8aae58f0f068c00d3296daf8ce2da45d83414c6fb8e5fd01a4676d2644d8"
+    },
+    {
+      "file": "p4-6-first-tracked-source.patch",
+      "sha256": "da38e46272f5606d3b44529710d3ef76a4856ae82725bf9aa53b87fec70ca787"
+    },
+    {
+      "file": "p4-6-first-verify.log",
+      "sha256": "ef278958866a95c9e0dec3a2628a5bb33b1c57bb8eead2bbca7e6b40341b0fda"
+    },
+    {
+      "file": "p4-6-first-unconfigured-server.log",
+      "sha256": "5dda4155e40fb550a3dfea89d8a8ec6c862ec04dce0d70feca1fdca09dab16e1"
+    }
+  ],
+  "browser": {
+    "startTime": "2026-10-03T19:09:45.621Z",
+    "duration": 525098.919,
+    "expected": 48,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  },
+  "independentRootAndCandidateSourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 303,
+    "preservedEvidence": 14
+  },
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "failures": [
+    {
+      "file": "phase-four-cards.spec.ts",
+      "title": "all 21 catalog cards show correct classifications, certainty, periods and provider provenance",
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts",
+            "column": 30,
+            "line": 65
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('complementary', { name: 'Sun details', exact: true }).getByRole('button', { name: /More about this world/ })\nExpected: focused\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" getByRole('complementary', { name: 'Sun details', exact: true }).getByRole('button', { name: /More about this world/ }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('complementary', { name: 'Sun details', exact: true }).getByRole('button', { name: /More about this world/ })\u001b[22m\n\n\n  63 |     });\n  64 |     await disclosure.click();\n> 65 |     await expect(disclosure).toBeFocused();\n     |                              ^\n  66 |     await expect(disclosure).toHaveAttribute('aria-expanded', 'true');\n  67 |     await expect(details.locator('.source-details')).toContainText(\n  68 |       body.provenance.providerId,\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts:65:30"
+        }
+      ]
+    },
+    {
+      "file": "phase-four-cards.spec.ts",
+      "title": "physical measurements stay identical in True and Explore scale and convert km, mi and AU",
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts",
+            "column": 55,
+            "line": 111
+          },
+          "message": "TimeoutError: locator.selectOption: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Distances', { exact: true })\u001b[22m\n\n\n  109 |   ).toEqual(raw);\n  110 |   await page.getByRole('button', { name: 'Settings', exact: true }).click();\n> 111 |   await page.getByLabel('Distances', { exact: true }).selectOption('mi');\n      |                                                       ^\n  112 |   await expect(details.getByTestId('metric-diameter')).toHaveText(\n  113 |     '4,212.28 mi',\n  114 |   );\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts:111:55"
+        }
+      ]
+    },
+    {
+      "file": "phase-four-cards.spec.ts",
+      "title": "keyboard snap controls, disclosure and internal scroll leave the timeline and camera usable",
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts",
+            "column": 29,
+            "line": 281
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('complementary', { name: 'Charon details', exact: true })\nExpected: \u001b[32m\"full\"\u001b[39m\nReceived: \u001b[31m\"peek\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('complementary', { name: 'Charon details', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('complementary', { name: 'Charon details', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <aside data-snap=\"peek\" class=\"object-card\" aria-label=\"Charon details\">…</aside>\u001b[22m\n\u001b[2m       - unexpected value \"peek\"\u001b[22m\n\n\n  279 |       await group.getByRole('button', { name: 'Full', exact: true }).focus();\n  280 |       await page.keyboard.press('Space');\n> 281 |       await expect(details).toHaveAttribute('data-snap', 'full');\n      |                             ^\n  282 |       expect(await page.evaluate(() => window.__spaceEngine!.clock.mode)).toBe(\n  283 |         'paused',\n  284 |       );\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts:281:29"
+        }
+      ]
+    },
+    {
+      "file": "phase-four-cards.spec.ts",
+      "title": "keyboard snap controls, disclosure and internal scroll leave the timeline and camera usable",
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts",
+            "column": 29,
+            "line": 281
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('complementary', { name: 'Charon details', exact: true })\nExpected: \u001b[32m\"full\"\u001b[39m\nReceived: \u001b[31m\"peek\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('complementary', { name: 'Charon details', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('complementary', { name: 'Charon details', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <aside data-snap=\"peek\" class=\"object-card\" aria-label=\"Charon details\">…</aside>\u001b[22m\n\u001b[2m       - unexpected value \"peek\"\u001b[22m\n\n\n  279 |       await group.getByRole('button', { name: 'Full', exact: true }).focus();\n  280 |       await page.keyboard.press('Space');\n> 281 |       await expect(details).toHaveAttribute('data-snap', 'full');\n      |                             ^\n  282 |       expect(await page.evaluate(() => window.__spaceEngine!.clock.mode)).toBe(\n  283 |         'paused',\n  284 |       );\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts:281:29"
+        }
+      ]
+    },
+    {
+      "file": "phase-four-cards.spec.ts",
+      "title": "keyboard snap controls, disclosure and internal scroll leave the timeline and camera usable",
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts",
+            "column": 29,
+            "line": 281
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('complementary', { name: 'Charon details', exact: true })\nExpected: \u001b[32m\"full\"\u001b[39m\nReceived: \u001b[31m\"peek\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('complementary', { name: 'Charon details', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('complementary', { name: 'Charon details', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <aside data-snap=\"peek\" class=\"object-card\" aria-label=\"Charon details\">…</aside>\u001b[22m\n\u001b[2m       - unexpected value \"peek\"\u001b[22m\n\n\n  279 |       await group.getByRole('button', { name: 'Full', exact: true }).focus();\n  280 |       await page.keyboard.press('Space');\n> 281 |       await expect(details).toHaveAttribute('data-snap', 'full');\n      |                             ^\n  282 |       expect(await page.evaluate(() => window.__spaceEngine!.clock.mode)).toBe(\n  283 |         'paused',\n  284 |       );\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\candidate\\e2e\\phase-four-cards.spec.ts:281:29"
+        }
+      ]
+    }
+  ],
+  "diagnosis": [
+    "Disclosure locator uses More in its accessible name, then tries to resolve that same locator after clicking changes the name to Less. Snapshot confirms expanded source content. Keep the focus/expanded assertions using a name that matches both states.",
+    "Exact getByLabel Distances includes the nested options in the wrapping label text (DistanceskmmiAU). Browser probe confirms zero matches but an accessible combobox named Distances. Use the role and exact accessible name.",
+    "All three mobile Space activations are a real shortcut defect. Browser event probe confirms document shortcut prevents the default Space key and toggles playback despite the sheet synthetic stopPropagation. Guard native shortcuts from object-card targets and preserve native button Space activation. Enter works. Keep all mobile activation, paused-clock, focus and scroll assertions."
+  ],
+  "next": "Fix native shortcut target guard and the two locator assumptions; run card cases before full 53-case production regression. No acceptance until every required assertion and capture is reviewed."
+}

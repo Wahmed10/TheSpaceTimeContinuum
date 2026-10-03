@@ -1,0 +1,414 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\retry-1\\candidate\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-cards.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\retry-1\\card-probe",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-6\\retry-1\\candidate\\phase-four.playwright.config.ts",
+    "rootDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-6/retry-1/candidate/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-6/retry-1/card-probe",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-6/retry-1/candidate/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "phase-four-cards.spec.ts",
+      "file": "phase-four-cards.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "all 21 catalog cards show correct classifications, certainty, periods and provider provenance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19865,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T19:42:31.277Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cc12b93dbc9b9cd89e29-af98fe2e5f45641b7c6b",
+          "file": "phase-four-cards.spec.ts",
+          "line": 29,
+          "column": 1
+        },
+        {
+          "title": "physical measurements stay identical in True and Explore scale and convert km, mi and AU",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5839,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T19:42:51.341Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cc12b93dbc9b9cd89e29-bdc704cefaca97f96760",
+          "file": "phase-four-cards.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "simulation UTC changes across past and future dates without inventing source timestamps",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7198,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T19:42:57.200Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cc12b93dbc9b9cd89e29-b09911cc58fd635464de",
+          "file": "phase-four-cards.spec.ts",
+          "line": 132,
+          "column": 1
+        },
+        {
+          "title": "follow, refocus, closing and Back keep card and route ownership coherent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8259,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T19:43:04.412Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cc12b93dbc9b9cd89e29-2f860372a2860e93bf8a",
+          "file": "phase-four-cards.spec.ts",
+          "line": 156,
+          "column": 1
+        },
+        {
+          "title": "card layer controls retain focus, requested state and URL without another history entry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8581,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T19:43:12.685Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cc12b93dbc9b9cd89e29-0bda0866c30141a16e7c",
+          "file": "phase-four-cards.spec.ts",
+          "line": 195,
+          "column": 1
+        },
+        {
+          "title": "card sharing uses the public semantic link and the existing clipboard fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6240,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-03T19:43:21.280Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cc12b93dbc9b9cd89e29-abaedcb0f51f2257707c",
+          "file": "phase-four-cards.spec.ts",
+          "line": 224,
+          "column": 1
+        }
+      ],
+      "suites": [
+        {
+          "title": "mobile card 390x844",
+          "file": "phase-four-cards.spec.ts",
+          "line": 266,
+          "column": 8,
+          "specs": [
+            {
+              "title": "keyboard snap controls, disclosure and internal scroll leave the timeline and camera usable",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9852,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-03T19:43:27.532Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "cc12b93dbc9b9cd89e29-6a2c256e2f7bd4a7325f",
+              "file": "phase-four-cards.spec.ts",
+              "line": 268,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "mobile card 390x430",
+          "file": "phase-four-cards.spec.ts",
+          "line": 266,
+          "column": 8,
+          "specs": [
+            {
+              "title": "keyboard snap controls, disclosure and internal scroll leave the timeline and camera usable",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6093,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-03T19:43:37.396Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "cc12b93dbc9b9cd89e29-c69944296b94a20199ba",
+              "file": "phase-four-cards.spec.ts",
+              "line": 268,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "mobile card 844x390",
+          "file": "phase-four-cards.spec.ts",
+          "line": 266,
+          "column": 8,
+          "specs": [
+            {
+              "title": "keyboard snap controls, disclosure and internal scroll leave the timeline and camera usable",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8339,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-03T19:43:43.501Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "cc12b93dbc9b9cd89e29-a5d2278df88f15c28fee",
+              "file": "phase-four-cards.spec.ts",
+              "line": 268,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-03T19:42:30.762Z",
+    "duration": 82674.93400000001,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

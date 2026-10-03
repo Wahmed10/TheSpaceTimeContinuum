@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-10-03T20:02:50.663Z",
+  "sourceSha256": "811b6950c0fceb9f3aed060c76ebac3cfa0106cd11fbb59fd59620fd01107aea",
+  "verdict": "passed",
+  "captures": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "review-peek-settled-390x844.png",
+      "snap": "peek",
+      "peekPressed": "true"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 430
+      },
+      "file": "review-peek-settled-390x430.png",
+      "snap": "peek",
+      "peekPressed": "true"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "file": "review-peek-settled-844x390.png",
+      "snap": "peek",
+      "peekPressed": "true"
+    }
+  ]
+}

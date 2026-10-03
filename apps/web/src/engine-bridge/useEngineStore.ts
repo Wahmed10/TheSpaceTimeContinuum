@@ -3,6 +3,7 @@ import type { EngineApi, PerfSample, QualitySetting } from '@space/engine';
 import type { ExploreMapState, RouteIssue } from '../lib/routeState';
 import type { RouteStateController } from './routeStateController';
 import type { MapState } from '@space/domain';
+import type { DistanceUnit } from '../lib/formatEntity';
 interface Store {
   engine: EngineApi | null;
   selectedId: string | null;
@@ -13,6 +14,7 @@ interface Store {
   quality: QualitySetting;
   scale: 'true' | 'explore';
   following: boolean;
+  distanceUnit: DistanceUnit;
   perf: PerfSample | null;
   error: string | null;
   ready: boolean;
@@ -33,6 +35,7 @@ export const useEngineStore = create<Store>(() => ({
   quality: 'auto',
   scale: 'explore',
   following: true,
+  distanceUnit: 'km',
   perf: null,
   error: null,
   ready: false,

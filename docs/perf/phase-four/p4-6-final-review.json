@@ -1,0 +1,114 @@
+{
+  "reviewedAt": "2026-10-03T20:06:26.283Z",
+  "verdict": "reviewed-pass",
+  "candidateCommit": "b9e47bb0e4537b5c90a388f5eda5bddd40646921",
+  "sourceSha256": "811b6950c0fceb9f3aed060c76ebac3cfa0106cd11fbb59fd59620fd01107aea",
+  "resultSha256": "18bd53accdc4fd907d2c6689bf665727b44a3fd67d9c353a7e85d91b7562aa15",
+  "browserSha256": "365af67491758c789c9a2e4e5aa64a04d5b70781463b630999c6cab392b96bf8",
+  "browser": {
+    "startTime": "2026-10-03T19:43:54.553Z",
+    "duration": 513361.5,
+    "expected": 53,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cardProbe": {
+    "startTime": "2026-10-03T19:42:30.762Z",
+    "duration": 82674.93400000001,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "independentRootAndCandidateSourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 303,
+    "preservedEvidence": 14
+  },
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "lookup": {
+    "samples": 1000,
+    "maxMs": 1.4992000000000303
+  },
+  "response": {
+    "desktop": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 26,
+      "selectionSamples": 6,
+      "maxInputMs": 41.700000047683716,
+      "maxSelectionMs": 31.100000023841858,
+      "maxLongTaskMs": 181
+    },
+    "phone": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 26,
+      "selectionSamples": 6,
+      "maxInputMs": 16.300000071525574,
+      "maxSelectionMs": 39.89999997615814,
+      "maxLongTaskMs": 0
+    }
+  },
+  "budgets": {
+    "engineGzip": 374840,
+    "engineLimit": 450000,
+    "assets": 79961515,
+    "assetLimit": 80000000,
+    "dependencyLicenses": 72
+  },
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.13435596144853434,
+    "depthProbes": 11
+  },
+  "storage": {
+    "focusChanges": 20,
+    "textures": 33,
+    "compressedTextureMips": 16516088,
+    "pending": 0
+  },
+  "inspectedCaptures": [
+    {
+      "file": "docs/perf/screens/p4-6-all-21-ca-2a2f4-ods-and-provider-provenance-charon-provenance-card.png",
+      "sha256": "f853758d67c33209cd433a7950fe7b10130fda041adb13f7c05ed4299bf1e14a"
+    },
+    {
+      "file": "docs/perf/screens/p4-6-mobile-ca-659be--timeline-and-camera-usable-mobile-full-card.png",
+      "sha256": "d3e0ca543b0a41813d9c76ec9b43fca776eccaf5f11473367c15edc6cf80da2e"
+    },
+    {
+      "file": "docs/perf/screens/p4-6-mobile-ca-83a35--timeline-and-camera-usable-mobile-full-card.png",
+      "sha256": "5f26e9b0fab2e67860cddd5c918b06dd45dde18dc5121380985e3085ab2a7570"
+    },
+    {
+      "file": "docs/perf/screens/p4-6-mobile-ca-9df2b--timeline-and-camera-usable-mobile-full-card.png",
+      "sha256": "1a350cb10ad5c548bfa3c2cb3e9f3daf0b865c14b2a058d2f05aca489f56d6c7"
+    },
+    {
+      "file": "docs/perf/screens/p4-6-review-peek-settled-390x844.png",
+      "sha256": "c5cc005413c47286d8f196cb7cee81e26dcc08c98622887e7bcf470e233490d1"
+    },
+    {
+      "file": "docs/perf/screens/p4-6-review-peek-settled-390x430.png",
+      "sha256": "a0b7549f6255fe9ceb6b4d7d77a8afdfbae8190f444f78066fb720a392e86f7d"
+    },
+    {
+      "file": "docs/perf/screens/p4-6-review-peek-settled-844x390.png",
+      "sha256": "5d1aa44809d5798b15fcc82fdd44c4193f04a1edd5095fb28c36e84de38aeae5"
+    }
+  ],
+  "limitations": [
+    "Phone is viewport/touch emulation on desktop GPU; functional cases use SwiftShader.",
+    "Short-height card details require internal scrolling; P4.7 removes surrounding clutter and moves mobile time above the sheet.",
+    "Original Peek captures overlapped CSS background transition. Supplementary unchanged production capture explicitly checks Peek ARIA/snap, waits finite card CSS transitions and preserves settled captures.",
+    "Navigation long tasks and complete-subtree React/shell/physical device gates remain P4.9. Accepted P4.2 CPU pair remains separate; no hot-loop/provider/physics changes."
+  ]
+}

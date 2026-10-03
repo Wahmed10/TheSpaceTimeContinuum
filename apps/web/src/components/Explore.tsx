@@ -11,6 +11,7 @@ import { useSearchRendering } from '../engine-bridge/useSearchRendering';
 import LinkStateNotice from './LinkStateNotice';
 import Icon from './ui/Icon';
 import ShareViewDialog from './ShareViewDialog';
+import ObjectCard from './objects/ObjectCard';
 import { parseExploreLocation, serializeExploreState } from '../lib/routeState';
 import {
   focusObject,
@@ -57,7 +58,7 @@ export default function Explore({
     mode = useEngineStore((s) => s.mode),
     rate = useEngineStore((s) => s.rate),
     scale = useEngineStore((s) => s.scale),
-    following = useEngineStore((s) => s.following),
+    unit = useEngineStore((s) => s.distanceUnit),
     mapState = useEngineStore((s) => s.mapState),
     routeState = useEngineStore((s) => s.routeState),
     utcDate = useEngineStore((s) => s.utcDate);
@@ -66,9 +67,7 @@ export default function Explore({
     [notice, setNotice] = useState(''),
     [dateDraft, setDateDraft] = useState<string | null>(null),
     [shareUrl, setShareUrl] = useState<string | null>(null),
-    [details, setDetails] = useState(false),
-    [reduced, setReduced] = useState(false),
-    [unit, setUnit] = useState<'km' | 'mi' | 'AU'>('km');
+    [reduced, setReduced] = useState(false);
   useSearchRendering(searchOpen);
   const body = bodies.find((b) => b.id === selectedId);
   const dateRef = useRef<HTMLInputElement>(null);
@@ -96,7 +95,6 @@ export default function Explore({
     if (onChoose) onChoose(id);
     else engine?.focus(id);
     setSearchOpen(false);
-    setDetails(false);
   }
   useEffect(() => {
     function key(e: KeyboardEvent) {
@@ -107,7 +105,7 @@ export default function Explore({
         e.metaKey ||
         e.altKey ||
         (e.target as HTMLElement).closest(
-          'input,select,textarea,[contenteditable="true"],[role="dialog"]',
+          'input,select,textarea,[contenteditable="true"],[role="dialog"],.object-card',
         )
       )
         return;
@@ -236,7 +234,11 @@ export default function Explore({
                   Distances
                   <select
                     value={unit}
-                    onChange={(e) => setUnit(e.target.value as typeof unit)}
+                    onChange={(e) =>
+                      useEngineStore.setState({
+                        distanceUnit: e.target.value as typeof unit,
+                      })
+                    }
                   >
                     <option>km</option>
                     <option>mi</option>
@@ -326,98 +328,12 @@ export default function Explore({
         </span>
       </div>
       {body && (
-        <aside className="object-card" aria-label={`${body.name} details`}>
-          <div className="card-top">
-            <span className="eyebrow">
-              {body.kind === 'star'
-                ? 'OUR STAR'
-                : body.kind === 'moon'
-                  ? 'NATURAL SATELLITE'
-                  : 'TERRESTRIAL PLANET'}
-            </span>
-            <button
-              className="icon-button"
-              aria-label="Close object card"
-              onClick={() => engine?.select(null)}
-            >
-              <Icon name="close" />
-            </button>
-          </div>
-          <h2>
-            {body.name}
-            <span style={{ background: body.color }} />
-          </h2>
-          <p className="description">{body.description}</p>
-          <Metrics id={body.id} unit={unit} />
-          <div className="card-actions">
-            <button
-              className="primary-button"
-              onClick={() => focusObject(body.id)}
-            >
-              <Icon name="focus" /> Get closer
-            </button>
-            <button
-              className={'secondary-button ' + (following ? 'active' : '')}
-              onClick={() => {
-                mapCommand((engine) =>
-                  engine.follow(following ? null : body.id),
-                );
-              }}
-            >
-              {following ? '◎ Following' : '○ Follow'}
-            </button>
-          </div>
-          <button
-            className="detail-toggle"
-            onClick={() => setDetails(!details)}
-          >
-            {details ? 'Less' : 'More'} about this world{' '}
-            <span>{details ? '−' : '+'}</span>
-          </button>
-          {details && (
-            <div className="detail-body">
-              <p>
-                Mean radius: {body.physical.meanRadiusKm?.toLocaleString()} km
-              </p>
-              {body.physical.periodDays && (
-                <p>
-                  Orbital period: {body.physical.periodDays.toLocaleString()}{' '}
-                  Earth days
-                </p>
-              )}
-              <p>
-                {body.astronomyBody || body.id === 'moon:callisto'
-                  ? 'Positions combine an analytic ephemeris with JPL Horizons corrections.'
-                  : body.provenance.certainty === 'approximate'
-                    ? 'Positions use approximate orbital models between JPL Horizons snapshots.'
-                    : 'Positions use a local analytic ephemeris.'}{' '}
-                These are calculated positions, not spacecraft telemetry.
-                {body.provenance.uncertaintyNote &&
-                  ` ${body.provenance.uncertaintyNote}`}
-              </p>
-              <a
-                href={body.provenance.sourceUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {body.provenance.providerId === 'jpl-horizons-orbital-elements'
-                  ? 'NASA/JPL'
-                  : 'astronomy-engine'}{' '}
-                · method & source ↗
-              </a>
-            </div>
-          )}
-          <div className="provenance">
-            <span className="provenance-dot" /> CALCULATED POSITION{' '}
-            <span>
-              {body.astronomyBody || body.id === 'moon:callisto'
-                ? 'JPL-corrected ephemeris'
-                : body.provenance.certainty === 'approximate'
-                  ? 'Approximate orbit'
-                  : 'Analytic ephemeris'}
-            </span>
-          </div>
-        </aside>
+        <ObjectCard
+          key={body.id}
+          body={body}
+          onShare={share}
+          returnFocus={searchRef}
+        />
       )}
       <div className="view-tools">
         <button
@@ -628,36 +544,6 @@ export default function Explore({
         </Dialog.Portal>
       </Dialog.Root>
     </main>
-  );
-}
-function Metrics({ id, unit }: { id: string; unit: 'km' | 'mi' | 'AU' }) {
-  const engine = useEngineStore((s) => s.engine);
-  useEngineStore((s) => s.perf);
-  const m = engine?.getMetrics(id);
-  const format = (km: number) => {
-    const n =
-      unit === 'mi' ? km * 0.621371 : unit === 'AU' ? km / 149597870.7 : km;
-    return `${n > 1e6 ? (n / 1e6).toFixed(2) + ' M' : n.toLocaleString(undefined, { maximumFractionDigits: unit === 'AU' ? 3 : 0 })} ${unit}`;
-  };
-  return (
-    <dl className="metrics">
-      <div>
-        <dt>FROM THE SUN</dt>
-        <dd>{m ? format(m.distanceSunKm) : '—'}</dd>
-      </div>
-      <div>
-        <dt>FROM EARTH</dt>
-        <dd>{m ? format(m.distanceEarthKm) : '—'}</dd>
-      </div>
-      <div>
-        <dt>ORBITAL SPEED · SSB</dt>
-        <dd>{m ? m.speedKmPerSec.toFixed(2) + ' km/s' : '—'}</dd>
-      </div>
-      <div>
-        <dt>MEAN DIAMETER</dt>
-        <dd>{m ? format(m.radiusKm * 2) : '—'}</dd>
-      </div>
-    </dl>
   );
 }
 function RenderStatus() {

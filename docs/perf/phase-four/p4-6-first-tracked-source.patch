@@ -1,0 +1,438 @@
+diff --git a/apps/web/src/app/globals.css b/apps/web/src/app/globals.css
+index be195fd..4323b19 100644
+--- a/apps/web/src/app/globals.css
++++ b/apps/web/src/app/globals.css
+@@ -517,9 +517,11 @@ p {
+   border: 1px solid #9aafb325;
+   border-radius: 12px;
+   box-shadow: 0 20px 60px #0004;
+-  padding: 15px 23px 0;
+-  max-height: calc(100dvh - 390px);
+-  overflow-y: auto;
++  padding: 0;
++  max-height: calc(100dvh - 430px);
++  display: flex;
++  flex-direction: column;
++  overflow: hidden;
+ }
+ .card-top {
+   display: flex;
+@@ -1260,3 +1262,175 @@ p {
+     transition: none !important;
+   }
+ }
++
++.object-card-header {
++  padding: 15px 20px 10px;
++  flex-shrink: 0;
++}
++.object-card-scroll {
++  padding: 0 20px;
++  min-height: 0;
++  overflow-y: auto;
++  overscroll-behavior: contain;
++  touch-action: pan-y;
++}
++.object-card .metrics {
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++}
++.object-card .metrics dt {
++  font-size: 8px;
++}
++.object-card .metrics dd {
++  font-size: 12px;
++  overflow-wrap: anywhere;
++}
++.object-card .metrics > div:last-child {
++  grid-column: 1 / -1;
++}
++.object-card .position-certainty {
++  color: var(--accent);
++  font-size: 10px;
++}
++.object-card .card-top .icon-button {
++  width: 32px;
++  height: 32px;
++}
++.object-card .provenance {
++  margin: 14px -20px 0;
++  font-size: 8px;
++  letter-spacing: 0;
++}
++.object-card .provenance-dot {
++  margin: 0;
++  flex-shrink: 0;
++}
++.object-layer-status {
++  display: flex;
++  align-items: center;
++  gap: 8px;
++  margin: 12px 0 0;
++  color: #a1b4ba;
++  font-size: 10px;
++}
++.object-layer-status > span {
++  flex: 1;
++}
++.object-layer-status button {
++  flex-shrink: 0;
++}
++.object-card .card-share {
++  display: inline-flex;
++  gap: 8px;
++  align-items: center;
++  margin-bottom: 4px;
++}
++.card-share svg {
++  width: 14px;
++  height: 14px;
++}
++.source-details {
++  margin: 14px 0;
++}
++.source-details > div {
++  margin: 9px 0;
++}
++.source-details dt {
++  color: #9ebbb0;
++  font-size: 9px;
++}
++.source-details dd {
++  margin: 2px 0 0;
++  overflow-wrap: anywhere;
++}
++.correction-source {
++  display: block;
++  margin-top: 10px;
++}
++.sheet-snap-controls {
++  display: none;
++}
++.object-card :focus-visible {
++  outline: 2px solid var(--accent);
++  outline-offset: -2px;
++  border-radius: 5px;
++}
++@media (max-width: 700px), (max-width: 1000px) and (max-height: 600px) {
++  .object-card {
++    top: auto;
++    left: 14px;
++    right: 14px;
++    bottom: 250px;
++    width: auto;
++    padding: 0;
++    max-height: calc(100dvh - 340px);
++  }
++  .object-card[data-snap='half'] {
++    max-height: min(40dvh, calc(100dvh - 340px));
++  }
++  .object-card[data-snap='peek'] .object-card-scroll {
++    display: none;
++  }
++  .object-card-header {
++    padding: 4px 18px 8px;
++  }
++  .object-card-scroll {
++    padding: 0 18px;
++  }
++  .object-card h2 {
++    font-size: 28px;
++    margin: 2px 0 5px;
++  }
++  .object-card .provenance {
++    margin-left: -18px;
++    margin-right: -18px;
++  }
++  .sheet-snap-controls {
++    display: flex;
++    justify-content: center;
++    gap: 12px;
++    padding: 6px 12px;
++    border-bottom: 1px solid var(--border);
++    flex-shrink: 0;
++  }
++  .sheet-snap-controls button {
++    min-width: 50px;
++    min-height: 30px;
++    font-size: 10px;
++    color: #a8bdb4;
++    border-radius: 5px;
++  }
++  .sheet-snap-controls [aria-pressed='true'] {
++    background: #ffffff12;
++    color: var(--accent);
++  }
++}
++@media (max-width: 1000px) and (max-height: 600px) {
++  .explore {
++    min-height: 100dvh;
++  }
++  .topbar {
++    height: 72px;
++  }
++  .explore:has(.object-card) .destinations,
++  .dock-foot,
++  .map-footer,
++  .map-caption {
++    display: none;
++  }
++  .bottom-dock {
++    bottom: max(18px, env(safe-area-inset-bottom));
++  }
++  .timeline {
++    height: 64px;
++  }
++  .view-tools {
++    bottom: 92px;
++  }
++  .object-card {
++    bottom: 140px;
++    max-height: calc(100dvh - 220px);
++  }
++  .object-card[data-snap='half'] {
++    max-height: min(40dvh, calc(100dvh - 220px));
++  }
++}
+diff --git a/apps/web/src/components/Explore.tsx b/apps/web/src/components/Explore.tsx
+index 4b7ad25..976a8f7 100644
+--- a/apps/web/src/components/Explore.tsx
++++ b/apps/web/src/components/Explore.tsx
+@@ -11,6 +11,7 @@ import { useSearchRendering } from '../engine-bridge/useSearchRendering';
+ import LinkStateNotice from './LinkStateNotice';
+ import Icon from './ui/Icon';
+ import ShareViewDialog from './ShareViewDialog';
++import ObjectCard from './objects/ObjectCard';
+ import { parseExploreLocation, serializeExploreState } from '../lib/routeState';
+ import {
+   focusObject,
+@@ -57,7 +58,7 @@ export default function Explore({
+     mode = useEngineStore((s) => s.mode),
+     rate = useEngineStore((s) => s.rate),
+     scale = useEngineStore((s) => s.scale),
+-    following = useEngineStore((s) => s.following),
++    unit = useEngineStore((s) => s.distanceUnit),
+     mapState = useEngineStore((s) => s.mapState),
+     routeState = useEngineStore((s) => s.routeState),
+     utcDate = useEngineStore((s) => s.utcDate);
+@@ -66,9 +67,7 @@ export default function Explore({
+     [notice, setNotice] = useState(''),
+     [dateDraft, setDateDraft] = useState<string | null>(null),
+     [shareUrl, setShareUrl] = useState<string | null>(null),
+-    [details, setDetails] = useState(false),
+-    [reduced, setReduced] = useState(false),
+-    [unit, setUnit] = useState<'km' | 'mi' | 'AU'>('km');
++    [reduced, setReduced] = useState(false);
+   useSearchRendering(searchOpen);
+   const body = bodies.find((b) => b.id === selectedId);
+   const dateRef = useRef<HTMLInputElement>(null);
+@@ -96,7 +95,6 @@ export default function Explore({
+     if (onChoose) onChoose(id);
+     else engine?.focus(id);
+     setSearchOpen(false);
+-    setDetails(false);
+   }
+   useEffect(() => {
+     function key(e: KeyboardEvent) {
+@@ -236,7 +234,11 @@ export default function Explore({
+                   Distances
+                   <select
+                     value={unit}
+-                    onChange={(e) => setUnit(e.target.value as typeof unit)}
++                    onChange={(e) =>
++                      useEngineStore.setState({
++                        distanceUnit: e.target.value as typeof unit,
++                      })
++                    }
+                   >
+                     <option>km</option>
+                     <option>mi</option>
+@@ -326,98 +328,12 @@ export default function Explore({
+         </span>
+       </div>
+       {body && (
+-        <aside className="object-card" aria-label={`${body.name} details`}>
+-          <div className="card-top">
+-            <span className="eyebrow">
+-              {body.kind === 'star'
+-                ? 'OUR STAR'
+-                : body.kind === 'moon'
+-                  ? 'NATURAL SATELLITE'
+-                  : 'TERRESTRIAL PLANET'}
+-            </span>
+-            <button
+-              className="icon-button"
+-              aria-label="Close object card"
+-              onClick={() => engine?.select(null)}
+-            >
+-              <Icon name="close" />
+-            </button>
+-          </div>
+-          <h2>
+-            {body.name}
+-            <span style={{ background: body.color }} />
+-          </h2>
+-          <p className="description">{body.description}</p>
+-          <Metrics id={body.id} unit={unit} />
+-          <div className="card-actions">
+-            <button
+-              className="primary-button"
+-              onClick={() => focusObject(body.id)}
+-            >
+-              <Icon name="focus" /> Get closer
+-            </button>
+-            <button
+-              className={'secondary-button ' + (following ? 'active' : '')}
+-              onClick={() => {
+-                mapCommand((engine) =>
+-                  engine.follow(following ? null : body.id),
+-                );
+-              }}
+-            >
+-              {following ? '◎ Following' : '○ Follow'}
+-            </button>
+-          </div>
+-          <button
+-            className="detail-toggle"
+-            onClick={() => setDetails(!details)}
+-          >
+-            {details ? 'Less' : 'More'} about this world{' '}
+-            <span>{details ? '−' : '+'}</span>
+-          </button>
+-          {details && (
+-            <div className="detail-body">
+-              <p>
+-                Mean radius: {body.physical.meanRadiusKm?.toLocaleString()} km
+-              </p>
+-              {body.physical.periodDays && (
+-                <p>
+-                  Orbital period: {body.physical.periodDays.toLocaleString()}{' '}
+-                  Earth days
+-                </p>
+-              )}
+-              <p>
+-                {body.astronomyBody || body.id === 'moon:callisto'
+-                  ? 'Positions combine an analytic ephemeris with JPL Horizons corrections.'
+-                  : body.provenance.certainty === 'approximate'
+-                    ? 'Positions use approximate orbital models between JPL Horizons snapshots.'
+-                    : 'Positions use a local analytic ephemeris.'}{' '}
+-                These are calculated positions, not spacecraft telemetry.
+-                {body.provenance.uncertaintyNote &&
+-                  ` ${body.provenance.uncertaintyNote}`}
+-              </p>
+-              <a
+-                href={body.provenance.sourceUrl}
+-                target="_blank"
+-                rel="noreferrer"
+-              >
+-                {body.provenance.providerId === 'jpl-horizons-orbital-elements'
+-                  ? 'NASA/JPL'
+-                  : 'astronomy-engine'}{' '}
+-                · method & source ↗
+-              </a>
+-            </div>
+-          )}
+-          <div className="provenance">
+-            <span className="provenance-dot" /> CALCULATED POSITION{' '}
+-            <span>
+-              {body.astronomyBody || body.id === 'moon:callisto'
+-                ? 'JPL-corrected ephemeris'
+-                : body.provenance.certainty === 'approximate'
+-                  ? 'Approximate orbit'
+-                  : 'Analytic ephemeris'}
+-            </span>
+-          </div>
+-        </aside>
++        <ObjectCard
++          key={body.id}
++          body={body}
++          onShare={share}
++          returnFocus={searchRef}
++        />
+       )}
+       <div className="view-tools">
+         <button
+@@ -630,36 +546,6 @@ export default function Explore({
+     </main>
+   );
+ }
+-function Metrics({ id, unit }: { id: string; unit: 'km' | 'mi' | 'AU' }) {
+-  const engine = useEngineStore((s) => s.engine);
+-  useEngineStore((s) => s.perf);
+-  const m = engine?.getMetrics(id);
+-  const format = (km: number) => {
+-    const n =
+-      unit === 'mi' ? km * 0.621371 : unit === 'AU' ? km / 149597870.7 : km;
+-    return `${n > 1e6 ? (n / 1e6).toFixed(2) + ' M' : n.toLocaleString(undefined, { maximumFractionDigits: unit === 'AU' ? 3 : 0 })} ${unit}`;
+-  };
+-  return (
+-    <dl className="metrics">
+-      <div>
+-        <dt>FROM THE SUN</dt>
+-        <dd>{m ? format(m.distanceSunKm) : '—'}</dd>
+-      </div>
+-      <div>
+-        <dt>FROM EARTH</dt>
+-        <dd>{m ? format(m.distanceEarthKm) : '—'}</dd>
+-      </div>
+-      <div>
+-        <dt>ORBITAL SPEED · SSB</dt>
+-        <dd>{m ? m.speedKmPerSec.toFixed(2) + ' km/s' : '—'}</dd>
+-      </div>
+-      <div>
+-        <dt>MEAN DIAMETER</dt>
+-        <dd>{m ? format(m.radiusKm * 2) : '—'}</dd>
+-      </div>
+-    </dl>
+-  );
+-}
+ function RenderStatus() {
+   const backend = useEngineStore((s) => s.backend),
+     perf = useEngineStore((s) => s.perf);
+diff --git a/apps/web/src/engine-bridge/useEngineStore.ts b/apps/web/src/engine-bridge/useEngineStore.ts
+index b0d7b8c..0a24a45 100644
+--- a/apps/web/src/engine-bridge/useEngineStore.ts
++++ b/apps/web/src/engine-bridge/useEngineStore.ts
+@@ -3,6 +3,7 @@ import type { EngineApi, PerfSample, QualitySetting } from '@space/engine';
+ import type { ExploreMapState, RouteIssue } from '../lib/routeState';
+ import type { RouteStateController } from './routeStateController';
+ import type { MapState } from '@space/domain';
++import type { DistanceUnit } from '../lib/formatEntity';
+ interface Store {
+   engine: EngineApi | null;
+   selectedId: string | null;
+@@ -13,6 +14,7 @@ interface Store {
+   quality: QualitySetting;
+   scale: 'true' | 'explore';
+   following: boolean;
++  distanceUnit: DistanceUnit;
+   perf: PerfSample | null;
+   error: string | null;
+   ready: boolean;
+@@ -33,6 +35,7 @@ export const useEngineStore = create<Store>(() => ({
+   quality: 'auto',
+   scale: 'explore',
+   following: true,
++  distanceUnit: 'km',
+   perf: null,
+   error: null,
+   ready: false,
+diff --git a/docs/adr/0011-consumer-route-state.md b/docs/adr/0011-consumer-route-state.md
+index a9b05a1..6541306 100644
+--- a/docs/adr/0011-consumer-route-state.md
++++ b/docs/adr/0011-consumer-route-state.md
+@@ -61,3 +61,15 @@ Safe legacy startup now consumes the codec for time/focus/layers/scale/view and
+ P4.2 applies parsed frame settings and is reviewed accepted. P4.3 routes/metadata/lifetime are reviewed accepted and committed as `1f778e3`. P4.4 synchronization/sharing is reviewed accepted. No providers, physical models, assets or scientific tolerances change. P4.2's exact orbit sampling endpoint correction preserves strict provider validity without changing those bounds or model output.
+ 
+ Retry-4 passes both hardware timing cases and all other cases except that history precondition: it counts Next's internal same-URL replacement as another command. The installed app-router HistoryUpdater and native history patch explain the two calls. The corrected test records the incoming __NA marker without modifying history data, requires one external and one internal replacement of the same href, then requires zero further writes through playback/gestures. A focused immutable-production verification passes sharing and exact paused reload too. Runtime and thresholds remain unchanged; full exact-source validation is pending.
++
++P4.5 is reviewed accepted and committed locally as b9e47bb: all 44 production cases pass, warm lookup max 0.6099 ms and verified Radeon 780M response maxima 58.9 ms desktop / 27.9 ms phone viewport. Earlier software timing failures remain preserved; final shell long-task gates remain P4.9.
++
++P4.6 extracts ObjectCard/ObjectMetrics/ProvenanceDetails/MobileObjectSheet. Catalog kinds and explicit known giant/rocky IDs replace blanket terrestrial labels. Physical Sun/Earth distances and SSB speed use the public getMetrics getter; diameter/period use actual catalog values. Missing/nonfinite fields show Unavailable; small positive AU values retain scientific notation rather than rounding to zero. Miles use 1.609344 km and AU 149597870.7 km; speed uses mi/s for mile preference and km/s for AU.
++
++A small objectSnapshot adapter keeps astronomy UTC conversion inside the engine bridge, as required by package boundaries. The card samples public getters from the existing <=4 Hz perf bridge; no frame callback or new clock/render subscription is added. Distance preference moves into the current UI store for card/history coherence; versioned persistence remains P4.7.
++
++Provenance shows actual catalog provider/source URL, method, certainty, uncertainty note and simulation UTC. JPL residual corrections are identified only for the currently corrected astronomy bodies/Callisto; other Galilean moons retain analytic wording. Source timestamp, ingestion date and model epoch are shown only when supplied; simulation time is explicitly separate. No invented timestamps, telemetry or new provider/data source.
++
++One card DOM serves desktop and mobile. Keyboard reachable Peek/Half/Full controls retain focus; content scrolls internally and card pointer/touch/wheel/keyboard events stop at its boundary. Header/close and snap controls stay outside scrolling content. Short-height portrait/landscape layout keeps the card above the timeline and exposes full content by scrolling. Disclosure/follow/refocus/show-hide layer/share use public commands and the existing semantic route/share path. Closing returns focus to Find a world. Source values are independent of True/Explore display scale.
++
++P4.6 short verify passes 372 tests plus two existing expected rejections / 42 files, including 29 formatter/provenance tests. Initial verification caught an astronomy import in UI; moving UTC conversion to the bridge fixes it without weakening boundaries. Browser discovery is 53 cases in ten files: nine new card/mobile cases and all 44 prior checks. Production/budget/science/browser review is pending before P4.6 acceptance.
