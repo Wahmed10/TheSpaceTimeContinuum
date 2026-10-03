@@ -58,14 +58,12 @@ export default function EngineCanvas() {
           return;
         }
         unsubs.push(
-          engine.on('select', (id) =>
-            useEngineStore.setState({
-              selectedId: id,
-              following: engine!.isFollowing,
-            }),
-          ),
           engine.on('clock', (s) => {
-            useEngineStore.setState({ mode: s.mode, rate: s.rate });
+            useEngineStore.setState({
+              mode: s.mode,
+              rate: s.rate,
+              utcDate: tdbToIso(s.tdbSec).slice(0, 16),
+            });
             const el = document.getElementById('clock-readout');
             if (el)
               el.textContent =
@@ -79,13 +77,6 @@ export default function EngineCanvas() {
             else useEngineStore.setState({ error });
           }),
           engine.on('tier', (tier) => useEngineStore.setState({ tier })),
-          engine.on('mapStateChange', (mapState) =>
-            useEngineStore.setState({
-              mapState,
-              scale: mapState.scale ?? 'explore',
-              following: engine!.isFollowing,
-            }),
-          ),
           engine.on('commandError', ({ command, message }) =>
             useEngineStore.setState((current) => ({
               linkIssues: [
@@ -99,6 +90,24 @@ export default function EngineCanvas() {
             })),
           ),
         );
+        // Consumer cold subscriptions belong to RouteStateBridge. The standalone
+        // lab retains its own display adapter and never writes consumer history.
+        if (initialLocation.route.status === 'lab')
+          unsubs.push(
+            engine.on('select', (selectedId) =>
+              useEngineStore.setState({
+                selectedId,
+                following: engine!.isFollowing,
+              }),
+            ),
+            engine.on('mapStateChange', (mapState) =>
+              useEngineStore.setState({
+                mapState,
+                scale: mapState.scale ?? 'explore',
+                following: engine!.isFollowing,
+              }),
+            ),
+          );
         // Navigation can finish while assets are loading. Restore the latest
         // accepted location, including changes during requested-layer settling.
         let appliedLocation: string;
@@ -151,6 +160,7 @@ export default function EngineCanvas() {
             debug.scenario === 'leo' ? 'planet:earth' : latest.selectedId,
           mapState: engine.getMapState(),
           appliedLocation,
+          utcDate: tdbToIso(engine.clock.state.tdbSec).slice(0, 16),
         });
       } catch (error) {
         window.clearTimeout(startupDeadline);
@@ -176,6 +186,7 @@ export default function EngineCanvas() {
         ready: false,
         mapState: null,
         appliedLocation: null,
+        utcDate: '',
       });
     };
   }, [generation]);

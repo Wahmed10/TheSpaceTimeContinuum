@@ -1,0 +1,16 @@
+# P4.4 state, history and sharing: accepted
+
+October 3, 2026. Isolated candidate based on `1f778e3`, source SHA256 `a63139f0155f9646b10d4b3a2f76482bbf0b74a3dab4ab958142d992929a95bb`. Finished `2026-10-03T07:04:04.299Z`. All 284 source files, the deleted observer and fourteen preserved generated-evidence hashes independently match the root/candidate/manifest. Adjacent source/validation/browser/hashed review records preserve the exact source and results; raw logs and captures remain in `.tools/phase-four/p4-4/`.
+
+All required checks pass review:
+
+- Short verify: 306 tests plus two existing expected rejections, 38 files; typecheck/lint/package boundaries pass. Sixteen controller cases cover ownership, cancellation and command semantics.
+- Isolated production build, engine/asset budgets and 72 dependency licenses pass. Engine gzip is 374,764 / 450,000 bytes. Assets pass the unchanged 80 MB ceiling. Build/browser/wrapper/server error logs are clean; only the existing license checker emits Node DEP0190.
+- All 34 production browser cases pass, with zero failures/skips/flakes/report errors. Nine new cases cover Back/Forward across stateful selections, accepted controls and explicit UTC outside UTC timezone, old-entry flush, popstate debounce cancellation, accelerated playback/free gestures without history writes, captured-time sharing and paused reload, LIVE omission, Previous/Backspace camera restoration by replacement (including hidden targets), card closing/reselection and canvas selection, mobile clipboard denial/focus return, compatibility state preservation/diagnostic stripping, and obsolete asynchronous startup with the newest selection.
+- The existing 20-selection test now requires one focus and zero restoration feedback per choice. Engine/canvas identity, no additional subscriptions and one disposal on exit pass. All 21 unconfigured-origin metadata responses, redirects, genuine 404/no renderer, direct/refresh paths, legacy normalization and lab behavior remain green. Configured-origin handling is unchanged; P4.3's separately reviewed configured build/all-21 metadata evidence is retained.
+- Inspected desktop history-restored and mobile clipboard-fallback captures. The restored all-off view has consistent Earth card, True scale and paused UTC controls. The mobile fallback displays a labelled, selected public URL inside the viewport and usable Copy/Close controls; focus return is asserted. Later shell/card clutter and accessibility refinements remain in their approved steps.
+- The prior precision/storage/material cases pass unchanged thresholds: maximum GPU readback error 0.134356 px against 0.5 px, eleven passing depth probes, 33 textures and 16,516,088 compressed mip bytes before/after twenty LOW focus changes, zero pending textures. Original material references retain their thresholds.
+
+Only cold engine focus/back guards and the public semantic target getter changed. Physical models/providers/assets/frame loops are unchanged, so accepted P4.2 paired CPU evidence remains separate. This run establishes SwiftShader functional behavior, not physical GPU throughput or total VRAM.
+
+P4.4 is accepted. Commit its scoped implementation/docs/evidence locally and continue approved P4.5; preserve unrelated generated changes and the completed raw run.

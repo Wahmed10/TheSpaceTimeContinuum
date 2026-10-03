@@ -821,6 +821,18 @@ p {
   font-size: 30px;
   font-weight: 400;
 }
+.share-url {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #0a111b;
+  color: inherit;
+  font: inherit;
+  overflow-wrap: anywhere;
+}
 .help-dialog > p {
   color: #8fa1a7;
   font-size: 12px;

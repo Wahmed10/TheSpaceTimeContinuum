@@ -209,7 +209,7 @@ test('legacy root focus normalizes its path and metadata without a second restor
   expect(history.after).toEqual(history.before);
 });
 
-test('20 client selections keep one engine/canvas and one restoration per navigation, then dispose on exit', async ({
+test('20 client selections keep one engine/canvas and one focus per selection without restoration feedback, then dispose on exit', async ({
   page,
 }, info) => {
   test.setTimeout(180000);
@@ -225,16 +225,22 @@ test('20 client selections keep one engine/canvas and one restoration per naviga
       engine,
       canvas,
       restores: 0,
+      focuses: 0,
       subscriptions: 0,
       disposals: 0,
     };
     Object.assign(window, { __routeLifetime: metrics });
-    const apply = engine.applyMapState.bind(engine),
+    const focus = engine.focus.bind(engine),
+      apply = engine.applyMapState.bind(engine),
       on = engine.on.bind(engine),
       dispose = engine.dispose.bind(engine);
     engine.applyMapState = (...args) => {
       metrics.restores++;
       return apply(...args);
+    };
+    engine.focus = (...args) => {
+      metrics.focuses++;
+      return focus(...args);
     };
     engine.on = (...args) => {
       metrics.subscriptions++;
@@ -283,6 +289,7 @@ test('20 client selections keep one engine/canvas and one restoration per naviga
               engine: unknown;
               canvas: unknown;
               restores: number;
+              focuses: number;
               subscriptions: number;
               disposals: number;
             };
@@ -292,6 +299,7 @@ test('20 client selections keep one engine/canvas and one restoration per naviga
           sameEngine: metrics.engine === window.__spaceEngine,
           sameCanvas: metrics.canvas === document.querySelector('canvas'),
           restores: metrics.restores,
+          focuses: metrics.focuses,
           subscriptions: metrics.subscriptions,
           disposals: metrics.disposals,
         };
@@ -299,7 +307,8 @@ test('20 client selections keep one engine/canvas and one restoration per naviga
     ).toEqual({
       sameEngine: true,
       sameCanvas: true,
-      restores: selections,
+      restores: 0,
+      focuses: selections,
       subscriptions: 0,
       disposals: 0,
     });

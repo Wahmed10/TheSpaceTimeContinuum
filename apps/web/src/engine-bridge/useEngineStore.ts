@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { EngineApi, PerfSample, QualitySetting } from '@space/engine';
-import type { RouteIssue } from '../lib/routeState';
+import type { ExploreMapState, RouteIssue } from '../lib/routeState';
+import type { RouteStateController } from './routeStateController';
 import type { MapState } from '@space/domain';
 interface Store {
   engine: EngineApi | null;
@@ -18,6 +19,9 @@ interface Store {
   linkIssues: readonly RouteIssue[];
   mapState: MapState | null;
   appliedLocation: string | null;
+  routeState: ExploreMapState | null;
+  routeController: RouteStateController | null;
+  utcDate: string;
 }
 export const useEngineStore = create<Store>(() => ({
   engine: null,
@@ -35,4 +39,7 @@ export const useEngineStore = create<Store>(() => ({
   linkIssues: [],
   mapState: null,
   appliedLocation: null,
+  routeState: null,
+  routeController: null,
+  utcDate: '',
 }));

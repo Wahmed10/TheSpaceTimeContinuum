@@ -5,9 +5,23 @@ import { useEffect, useRef, useState } from 'react';
 import * as Popover from '@radix-ui/react-popover';
 import * as Dialog from '@radix-ui/react-dialog';
 import { EXPLORABLE_BODIES } from '@space/domain';
-import type { QualitySetting } from '@space/engine';
+import type { CameraFrame, QualitySetting } from '@space/engine';
 import { useEngineStore } from '../engine-bridge/useEngineStore';
 import LinkStateNotice from './LinkStateNotice';
+import ShareViewDialog from './ShareViewDialog';
+import { parseExploreLocation, serializeExploreState } from '../lib/routeState';
+import {
+  focusObject,
+  goLive,
+  mapCommand,
+  previousView,
+  publicViewHref,
+  reversePlayback,
+  setDateInput,
+  setPlaybackRate,
+  solarOverview,
+  togglePlayback,
+} from '../engine-bridge/timeCommands';
 const EngineCanvas = dynamic(() => import('../engine-bridge/EngineCanvas'), {
   ssr: false,
 });
@@ -68,34 +82,35 @@ export default function Explore({
     mode = useEngineStore((s) => s.mode),
     rate = useEngineStore((s) => s.rate),
     scale = useEngineStore((s) => s.scale),
-    following = useEngineStore((s) => s.following);
+    following = useEngineStore((s) => s.following),
+    mapState = useEngineStore((s) => s.mapState),
+    routeState = useEngineStore((s) => s.routeState),
+    utcDate = useEngineStore((s) => s.utcDate);
   const [searchOpen, setSearchOpen] = useState(false),
     [query, setQuery] = useState(''),
     [help, setHelp] = useState(false),
     [notice, setNotice] = useState(''),
-    [date, setDate] = useState('2026-09-22T00:00'),
+    [dateDraft, setDateDraft] = useState<string | null>(null),
+    [shareUrl, setShareUrl] = useState<string | null>(null),
     [details, setDetails] = useState(false),
-    [layers, setLayers] = useState<Record<string, boolean>>({
-      planets: true,
-      moons: true,
-      dwarfs: true,
-      orbits: true,
-    }),
     [reduced, setReduced] = useState(false),
     [unit, setUnit] = useState<'km' | 'mi' | 'AU'>('km');
   const body = bodies.find((b) => b.id === selectedId);
   const dateRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (engine) {
-      const enabled = new Set(engine.getMapState().layers);
-      setLayers({
-        planets: enabled.has('planets'),
-        moons: enabled.has('moons'),
-        dwarfs: enabled.has('dwarfs'),
-        orbits: enabled.has('orbits'),
-      });
-    }
-  }, [engine]);
+  const shareRef = useRef<HTMLButtonElement>(null);
+  const accepted = routeState ?? parseExploreLocation('/', '').state;
+  const enabled = new Set(mapState?.layers ?? accepted.layers);
+  const layers = ['planets', 'moons', 'dwarfs', 'orbits'].map((id) => ({
+    id,
+    on: enabled.has(id),
+  }));
+  const compatibilityHref = serializeExploreState(accepted, {
+    renderer: 'webgl',
+  });
+  function compatibility(event: React.MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    location.assign(publicViewHref(true));
+  }
   function choose(id: string) {
     if (onChoose) onChoose(id);
     else engine?.focus(id);
@@ -111,21 +126,20 @@ export default function Explore({
       }
       if (e.key === ' ') {
         e.preventDefault();
-        if (engine?.clock.mode === 'paused') engine.clock.play();
-        else engine?.clock.pause();
+        togglePlayback();
       }
-      if (e.key.toLowerCase() === 'l') engine?.clock.goLive();
-      if (e.key.toLowerCase() === 'f' && selectedId) engine?.focus(selectedId);
+      if (e.key.toLowerCase() === 'l') goLive();
+      if (e.key.toLowerCase() === 'f' && selectedId) focusObject(selectedId);
       if (e.key === 'Escape') engine?.select(null);
       if (e.key === 'Backspace') {
         e.preventDefault();
-        engine?.back();
+        previousView();
       }
       if (e.key === '[' || e.key === ']') {
         const index = rates.indexOf(Math.abs(engine?.clock.rate ?? 1));
-        engine?.clock.setRate(
+        setPlaybackRate(
           (rates[Math.max(0, Math.min(7, index + (e.key === ']' ? 1 : -1)))] ??
-            1) * Math.sign(engine.clock.rate || 1),
+            1) * Math.sign(engine?.clock.rate || 1),
         );
       }
     }
@@ -139,18 +153,12 @@ export default function Explore({
   }, [notice]);
   async function share() {
     if (!engine) return;
-    const s = engine.getMapState();
-    const url = new URL(location.href);
-    url.searchParams.set('focus', s.focus);
-    url.searchParams.set('scale', s.scale!);
-    if (s.t) url.searchParams.set('t', s.t);
-    else url.searchParams.delete('t');
-    url.searchParams.set('layers', s.layers!.join(','));
+    const url = new URL(publicViewHref(), location.origin);
     try {
       await navigator.clipboard.writeText(url.toString());
       setNotice('Link copied. A little piece of the universe, shared.');
     } catch {
-      setNotice(url.toString());
+      setShareUrl(url.toString());
     }
   }
   const filtered = bodies.filter((b) =>
@@ -193,7 +201,7 @@ export default function Explore({
               <Popover.Content className="popover" sideOffset={14} align="end">
                 <h3>Make space your own</h3>
                 <p>Choose what appears on the map.</p>
-                {Object.entries(layers).map(([id, on]) => (
+                {layers.map(({ id, on }) => (
                   <label className="setting-row" key={id}>
                     <span>
                       {id === 'orbits'
@@ -204,8 +212,9 @@ export default function Explore({
                       type="checkbox"
                       checked={on}
                       onChange={(e) => {
-                        setLayers({ ...layers, [id]: e.target.checked });
-                        engine?.setLayer(id, e.target.checked);
+                        mapCommand((engine) =>
+                          engine.setLayer(id, e.target.checked),
+                        );
                       }}
                     />
                   </label>
@@ -258,7 +267,47 @@ export default function Explore({
                     }}
                   />
                 </label>
-                <a className="small-link" href="?renderer=webgl">
+                <label className="setting-row">
+                  Reference frame
+                  <select
+                    aria-label="Reference frame"
+                    value={mapState?.frame ?? 'ICRF_SSB'}
+                    onChange={(event) =>
+                      mapCommand((engine) =>
+                        engine.setFrame(event.target.value as CameraFrame),
+                      )
+                    }
+                  >
+                    <option value="ICRF_SSB">Solar system barycentre</option>
+                    <option value="ICRF_HELIO">Sun centred</option>
+                    <option value="ICRF_BODY:earth">Earth inertial</option>
+                    <option value="FIXED:earth">Earth fixed</option>
+                  </select>
+                </label>
+                <label className="setting-row">
+                  View preset
+                  <select
+                    aria-label="View preset"
+                    value={mapState?.camera?.preset ?? 'wide'}
+                    onChange={(event) =>
+                      mapCommand((engine) =>
+                        engine.focus(engine.focusedId, {
+                          wide: event.target.value === 'wide',
+                          select: selectedId !== null,
+                          recordHistory: false,
+                        }),
+                      )
+                    }
+                  >
+                    <option value="close">Close</option>
+                    <option value="wide">Wide</option>
+                  </select>
+                </label>
+                <a
+                  className="small-link"
+                  href={compatibilityHref}
+                  onClick={compatibility}
+                >
                   Use WebGL2 compatibility mode ↗
                 </a>
               </Popover.Content>
@@ -316,15 +365,16 @@ export default function Explore({
           <div className="card-actions">
             <button
               className="primary-button"
-              onClick={() => engine?.focus(body.id)}
+              onClick={() => focusObject(body.id)}
             >
               <Icon name="focus" /> Get closer
             </button>
             <button
               className={'secondary-button ' + (following ? 'active' : '')}
               onClick={() => {
-                engine?.follow(following ? null : body.id);
-                useEngineStore.setState({ following: !following });
+                mapCommand((engine) =>
+                  engine.follow(following ? null : body.id),
+                );
               }}
             >
               {following ? '◎ Following' : '○ Follow'}
@@ -385,14 +435,14 @@ export default function Explore({
       <div className="view-tools">
         <button
           className="icon-button"
-          onClick={() => engine?.back()}
+          onClick={previousView}
           aria-label="Previous view"
         >
           <Icon name="back" />
         </button>
         <button
           className="icon-button"
-          onClick={() => engine?.focus('star:sun', { wide: true })}
+          onClick={solarOverview}
           aria-label="Solar system overview"
         >
           <Icon name="orbit" />
@@ -402,8 +452,7 @@ export default function Explore({
           className={'scale-button ' + (scale === 'explore' ? 'active' : '')}
           onClick={() => {
             const next = scale === 'explore' ? 'true' : 'explore';
-            engine?.setScale(next);
-            useEngineStore.setState({ scale: next });
+            mapCommand((engine) => engine.setScale(next));
           }}
           title="Explore scale enlarges distant bodies; physical distances stay unchanged"
         >
@@ -412,6 +461,7 @@ export default function Explore({
         <button
           className="icon-button"
           onClick={share}
+          ref={shareRef}
           aria-label="Share this view"
         >
           <Icon name="share" />
@@ -436,7 +486,7 @@ export default function Explore({
         <div className="timeline">
           <button
             className={'live-button ' + (mode === 'live' ? 'is-live' : '')}
-            onClick={() => engine?.clock.goLive()}
+            onClick={goLive}
           >
             <span /> LIVE
           </button>
@@ -457,34 +507,27 @@ export default function Explore({
             aria-label="Simulation date in UTC"
             min="1900-01-01T00:00"
             max="2100-12-31T23:59"
-            value={date}
+            value={dateDraft ?? utcDate}
             onChange={(e) => {
-              setDate(e.target.value);
-              if (e.target.value) {
-                const ms = Date.parse(e.target.value + 'Z');
-                if (Number.isFinite(ms)) {
-                  void import('../engine-bridge/timeCommands').then((m) =>
-                    m.setDateUtc(ms),
-                  );
-                }
-              }
+              const value = e.target.value;
+              setDateDraft(value);
+              if (setDateInput(value)) setDateDraft(null);
+              else setNotice('Choose a valid UTC date from 1900 through 2100.');
             }}
+            onBlur={() => setDateDraft(null)}
           />
           <div className="playback">
             <button
               className="icon-button"
               aria-label="Reverse time"
-              onClick={() => engine?.clock.setRate(-engine.clock.rate)}
+              onClick={reversePlayback}
             >
               ↶
             </button>
             <button
               className="play-button"
               aria-label={mode === 'paused' ? 'Play' : 'Pause'}
-              onClick={() => {
-                if (mode === 'paused') engine?.clock.play();
-                else engine?.clock.pause();
-              }}
+              onClick={togglePlayback}
             >
               {mode === 'paused' ? '▶' : 'Ⅱ'}
             </button>
@@ -492,9 +535,7 @@ export default function Explore({
               aria-label="Playback speed"
               value={Math.abs(rate)}
               onChange={(e) =>
-                engine?.clock.setRate(
-                  Number(e.target.value) * Math.sign(rate || 1),
-                )
+                setPlaybackRate(Number(e.target.value) * Math.sign(rate || 1))
               }
             >
               {rates.map((r, i) => (
@@ -534,7 +575,11 @@ export default function Explore({
           <h2>A different way to explore</h2>
           <p>Your graphics session could not start.</p>
           <p>{error}</p>
-          <a className="primary-button" href="?renderer=webgl">
+          <a
+            className="primary-button"
+            href={compatibilityHref}
+            onClick={compatibility}
+          >
             Try compatibility mode
           </a>
           <a href="/about/data">Read about the solar system data</a>
@@ -548,6 +593,11 @@ export default function Explore({
       <span className="sr-only" aria-live="polite">
         {body ? `Selected ${body.name}. ${body.description}` : ''}
       </span>
+      <ShareViewDialog
+        url={shareUrl}
+        onClose={() => setShareUrl(null)}
+        returnFocus={shareRef}
+      />
       <Dialog.Root open={searchOpen} onOpenChange={setSearchOpen}>
         <Dialog.Portal>
           <Dialog.Overlay className="dialog-overlay" />

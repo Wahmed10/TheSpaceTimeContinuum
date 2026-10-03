@@ -6,6 +6,7 @@ export type EngineApi = Pick<
   | 'clock'
   | 'backend'
   | 'isFollowing'
+  | 'focusedId'
   | 'select'
   | 'focus'
   | 'follow'

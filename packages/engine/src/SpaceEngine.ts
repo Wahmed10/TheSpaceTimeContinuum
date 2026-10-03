@@ -955,6 +955,10 @@ export class SpaceEngine {
   get isFollowing(): boolean {
     return this.cameraController.following;
   }
+  /** Semantic camera target, independent of the temporarily selected card. */
+  get focusedId(): string {
+    return this.cameraController.targetId;
+  }
   getEntity(id: string): Readonly<BodySpec> | null {
     const body = this.target(id)?.body;
     return body
@@ -1167,7 +1171,7 @@ export class SpaceEngine {
   }
   focus(id: string, opts: FocusOptions = {}) {
     const e = this.target(id);
-    if (!e || !e.visible) return;
+    if (!e) return;
     this.cameraController.focus(
       id,
       e.physical,
@@ -1189,7 +1193,7 @@ export class SpaceEngine {
     const view = this.cameraController.back();
     if (view) {
       const e = this.target(view.targetId);
-      if (!e || !e.visible) return;
+      if (!e) return;
       const result = this.cameraController.restore(
         view,
         e.physical,

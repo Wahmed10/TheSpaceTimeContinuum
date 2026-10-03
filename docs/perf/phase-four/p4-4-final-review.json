@@ -1,0 +1,46 @@
+{
+  "reviewedAt": "2026-10-03T14:13:17.124Z",
+  "candidateCommit": "1f778e3e9bb7dde4223b9d94cb3ea0a9eb6b7fcf",
+  "sourceSha256": "a63139f0155f9646b10d4b3a2f76482bbf0b74a3dab4ab958142d992929a95bb",
+  "resultSha256": "442d869b8cb545b5130751dc572579346ef790d5da68e9fc16b276e7b5afcb55",
+  "verdict": "reviewed-pass",
+  "browser": {
+    "startTime": "2026-10-03T06:57:46.441Z",
+    "duration": 377338.015,
+    "expected": 34,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "sourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceFiles": 284,
+  "preservedFiles": 14,
+  "serverErrors": [],
+  "capturesReviewed": [
+    "history-restored-empty-layers.png",
+    "mobile-share-fallback.png"
+  ],
+  "checks": "34 production browser cases: Back/Forward and accepted UTC/settings, debounce/pop cancellation, one focus/push per selection without restoration feedback, accelerated clock/free gesture no writes, share captured time/paused reload, LIVE omission, Previous/Backspace replacement with hidden target, close/reselect and canvas selection, clipboard fallback/focus return, compatibility state, obsolete async startup/latest route, 25 prior routing/state/startup/precision/visual regressions.",
+  "precision": {
+    "maxErrorPx": 0.13435596144853434,
+    "depthPassed": 11
+  },
+  "engineGzipBytes": 374764,
+  "textureStability": {
+    "focusChanges": 20,
+    "texturesBeforeAfter": [
+      33,
+      33
+    ],
+    "compressedMipBytesBeforeAfter": [
+      16516088,
+      16516088
+    ],
+    "pendingBeforeAfter": [
+      0,
+      0
+    ]
+  },
+  "limitations": "SwiftShader functional evidence; no physical GPU/CPU claim. No new providers/assets/science/frame-loop changes. P4.3 configured-origin acceptance retained because origin handling is unchanged. Later card/shell/a11y work remains in P4.6-P4.8."
+}
