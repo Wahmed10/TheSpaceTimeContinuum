@@ -20,6 +20,7 @@ export type EngineApi = Pick<
   | 'setScale'
   | 'setQuality'
   | 'setReducedMotion'
+  | 'suspendRendering'
   | 'getMetrics'
   | 'getEntity'
   | 'on'

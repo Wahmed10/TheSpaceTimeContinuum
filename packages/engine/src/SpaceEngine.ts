@@ -171,6 +171,7 @@ export class SpaceEngine {
   private last = 0;
   private lastUI = 0;
   private disposed = false;
+  private renderSuspensions = 0;
   private width = 1;
   private height = 1;
   private started = performance.now();
@@ -445,6 +446,7 @@ export class SpaceEngine {
     });
   }
   private start() {
+    if (this.disposed || document.hidden || this.renderSuspensions) return;
     this.renderer.setAnimationLoop(this.frame);
   }
   private frame = (now: number) => {
@@ -1487,6 +1489,23 @@ export class SpaceEngine {
     this.cameraController.distanceKm = body.body.physical.meanRadiusKm! * 9;
     body.visual.rings!.shadows.value = planetShadow ? 1 : 0;
     body.visual.rings!.surfaceShadows.value = ringShadow ? 1 : 0;
+  }
+  /** Hold the last rendered view while a modal owns interaction. Simulation
+   * time and camera commands continue; release is idempotent and leases nest.
+   * This is a cold scheduling command, with no additional per-frame work. */
+  suspendRendering(): () => void {
+    if (this.disposed) return () => {};
+    this.renderSuspensions++;
+    this.renderer.setAnimationLoop(null);
+    let released = false;
+    return () => {
+      if (released) return;
+      released = true;
+      this.renderSuspensions--;
+      if (this.disposed || this.renderSuspensions) return;
+      this.last = 0;
+      this.start();
+    };
   }
   setRendering(active: boolean) {
     if (this.disposed) return;

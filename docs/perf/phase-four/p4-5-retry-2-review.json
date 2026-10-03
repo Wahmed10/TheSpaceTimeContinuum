@@ -1,0 +1,58 @@
+{
+  "reviewedAt": "2026-10-03T16:41:35.273Z",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "sourceSha256": "837af947bf441ca3b29e2a8c126828b012fc68c94c6b99c83a5e9d55573a9ec0",
+  "resultSha256": "6e118dd39d73c467ba4208332284788d43d3e2b3d3705635f9cddcb9bd130611",
+  "browserSha256": "6dd7bdad971ac386c245ec3267e757fc4f301beb82fa12e650c6d1833643eb84",
+  "verdict": "reviewed-failure",
+  "browser": {
+    "passed": 43,
+    "failed": 1,
+    "skipped": 0,
+    "flaky": 0,
+    "reportErrors": 0
+  },
+  "originalSourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 295,
+    "preservedEvidence": 14
+  },
+  "lookup": {
+    "samples": 1000,
+    "maxMs": 0.5548000000000002
+  },
+  "response": {
+    "desktop": {
+      "inputSamples": 27,
+      "selectionSamples": 6,
+      "maxInputMs": 144.09999990463257,
+      "maxSelectionMs": 742.2999999523163
+    },
+    "phone": {
+      "inputSamples": 27,
+      "selectionSamples": 6,
+      "maxInputMs": 90,
+      "maxSelectionMs": 283.10000002384186
+    }
+  },
+  "budgets": {
+    "engineGzip": 374840,
+    "engineLimit": 450000,
+    "assets": 79961515,
+    "assetLimit": 80000000,
+    "dependencyLicenses": 72
+  },
+  "inspectedCaptures": [
+    "keyboard-active-result.png",
+    "phone-short-viewport-search.png"
+  ],
+  "findings": "All 42 functional cases and complete phone latency pass. Both input profiles pass. Desktop Charon selection still has 742.3 ms response, 71.9 ms semantic commitment plus 670.4 ms frame wait. No relaxed thresholds; rendering hold/continued-clock/release regression passes.",
+  "next": "Preserve this run, inspect focused renderer hold/release/UI timeline diagnostics, fix the remaining desktop response and validate an exact new source before P4.5 acceptance."
+}

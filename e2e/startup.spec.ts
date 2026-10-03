@@ -30,7 +30,14 @@ test('phone-sized LAN HTTP origin hydrates and starts the compatibility renderer
   });
   await expect(page.locator('.loading-screen')).toHaveCount(0);
   await page.getByRole('button', { name: 'Find a world' }).click();
-  await expect(page.locator('.search-result')).toHaveCount(21);
+  await expect(page.getByRole('option')).toHaveCount(8);
+  await page
+    .getByRole('combobox', { name: 'Find a world', exact: true })
+    .fill('Charon');
+  await expect(page.getByRole('option').first()).toHaveAttribute(
+    'data-entity-id',
+    'moon:charon',
+  );
   expect(errors).toEqual([]);
 });
 

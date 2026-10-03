@@ -163,28 +163,70 @@ test('accelerated playback and free camera gestures do not write URLs; share cap
   );
   await page.goto('/object/planet/earth' + query + '&perf=1');
   await ready(page);
+  const length = await page.evaluate(() => history.length);
+  await page.evaluate(() => {
+    const writes: { mode: string; href: string; nextInternal: boolean }[] = [];
+    Object.assign(window, { __timeWrites: writes });
+    for (const name of ['pushState', 'replaceState'] as const) {
+      const original = history[name].bind(history);
+      history[name] = (data, unused, url) => {
+        writes.push({
+          mode: name,
+          href: String(url),
+          nextInternal: data?.__NA === true,
+        });
+        return original(data, unused, url);
+      };
+    }
+  });
+  const writes = () =>
+    page.evaluate(
+      () =>
+        (
+          window as unknown as {
+            __timeWrites: {
+              mode: string;
+              href: string;
+              nextInternal: boolean;
+            }[];
+          }
+        ).__timeWrites,
+    );
   await page
     .getByRole('combobox', { name: 'Playback speed' })
     .selectOption('86400');
   await expect(
     page.getByRole('button', { name: 'Pause', exact: true }),
   ).toBeVisible();
-  await expect
-    .poll(() => new URL(page.url()).searchParams.get('t'))
-    .toMatch(/^2026-10-02T12:00:0/);
-  await page.waitForTimeout(650);
-  const anchored = page.url(),
-    length = await page.evaluate(() => history.length);
+  // The initial URL already contains t. Observe the command's replacement
+  // rather than matching that old value or assuming a timer ran after 650 ms.
+  // Pinned Next commits the same URL again with its internal history state
+  // after ACTION_RESTORE. Await that bookkeeping too; it is not another command.
+  await expect.poll(writes).toHaveLength(2);
+  const anchored = await page.evaluate(() => location.href);
+  await expect(page).toHaveURL(anchored);
+  const anchor = new URL(anchored);
+  expect(await writes()).toEqual([
+    {
+      mode: 'replaceState',
+      href: anchor.pathname + anchor.search,
+      nextInternal: false,
+    },
+    {
+      mode: 'replaceState',
+      href: anchor.pathname + anchor.search,
+      nextInternal: true,
+    },
+  ]);
+  const anchoredTime = Date.parse(anchor.searchParams.get('t')!);
+  expect(anchoredTime).toBeGreaterThanOrEqual(
+    Date.parse('2026-10-02T12:00:00Z') - 1,
+  );
+  expect(anchoredTime).toBeLessThanOrEqual(
+    Date.parse((await actual(page)).t!) + 1,
+  );
   await page.evaluate(() => {
-    const writes: string[] = [];
-    Object.assign(window, { __timeWrites: writes });
-    for (const name of ['pushState', 'replaceState'] as const) {
-      const original = history[name].bind(history);
-      history[name] = (data, unused, url) => {
-        writes.push(String(url));
-        return original(data, unused, url);
-      };
-    }
+    (window as unknown as { __timeWrites: unknown[] }).__timeWrites.length = 0;
   });
   const canvas = page.locator('canvas');
   await canvas.focus();
@@ -194,11 +236,7 @@ test('accelerated playback and free camera gestures do not write URLs; share cap
   await page.waitForTimeout(1500);
   expect(page.url()).toBe(anchored);
   expect(await page.evaluate(() => history.length)).toBe(length);
-  expect(
-    await page.evaluate(
-      () => (window as unknown as { __timeWrites: string[] }).__timeWrites,
-    ),
-  ).toEqual([]);
+  expect(await writes()).toEqual([]);
   const beforeShare = Date.parse((await actual(page)).t!);
   await page
     .getByRole('button', { name: 'Share this view', exact: true })

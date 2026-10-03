@@ -1,0 +1,57 @@
+{
+  "reviewedAt": "2026-10-03T17:20:27.831Z",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "sourceSha256": "abd8a57617e9d90b50f3ad45c3c9292e6ac18b21c331ba827414e27291e73b89",
+  "resultSha256": "fa92dfbe070f8c16f0e6b43665840ccdd1d20df3e699290d7a19fd1fe12d2a5b",
+  "browserSha256": "d3e82f2349e6d712143b8400704a8d5f84371a02b494489ae816f9f2b1d282e8",
+  "verdict": "reviewed-failure",
+  "browser": {
+    "passed": 43,
+    "failed": 1,
+    "skipped": 0,
+    "flaky": 0,
+    "reportErrors": 0
+  },
+  "independentRootAndCandidateSourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 295,
+    "preservedEvidence": 14
+  },
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "lookup": {
+    "samples": 1000,
+    "maxMs": 1.3998000000000275
+  },
+  "response": {
+    "desktop": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 25,
+      "selectionSamples": 6,
+      "maxInputMs": 49.200000047683716,
+      "maxSelectionMs": 30.200000047683716,
+      "maxLongTaskMs": 193
+    },
+    "phone": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 27,
+      "selectionSamples": 6,
+      "maxInputMs": 16.700000047683716,
+      "maxSelectionMs": 32.199999928474426,
+      "maxLongTaskMs": 0
+    }
+  },
+  "failure": {
+    "file": "e2e/phase-four-history.spec.ts",
+    "line": 195,
+    "detail": "Playback test sampled the original URL before the one debounced explicit rate anchor reached the browser; its precondition matched the already-present initial timestamp. Fixed 650 ms wait did not synchronize that URL commit. The failed observed replacement is t=2026-10-02T12:01:26.400Z, while the saved initial URL was 12:00:00Z. Both hardware timing cases pass; no runtime history regression is established by this race."
+  },
+  "next": "Observe the explicit command history replacement before capturing the anchored baseline, retain all no-tick/no-gesture-write and sharing/reload assertions, then validate the corrected exact source."
+}

@@ -1,0 +1,55 @@
+{
+  "reviewedAt": "2026-10-03T17:03:01.057Z",
+  "sourceSha256": "837af947bf441ca3b29e2a8c126828b012fc68c94c6b99c83a5e9d55573a9ec0",
+  "verdict": "diagnostic-only",
+  "comparisons": [
+    {
+      "variant": "retry-1",
+      "profile": "desktop",
+      "maxInputMs": 218.60000002384186,
+      "maxSelectionMs": 609.2999999523163,
+      "resultSha256": "eba877d7723021ded134e305d7f02da0f6a0026f51173a13136537dc5ae73205",
+      "responseSha256": "ca2b6e40c47d67112f0d7360aa3e6d1c44a309656e3a29eb06b1ce5813a5fdac"
+    },
+    {
+      "variant": "opaque",
+      "profile": "desktop",
+      "maxInputMs": 165.10000002384186,
+      "maxSelectionMs": 352.6999999284744,
+      "resultSha256": "09934912cf53d7c92adb1ecfb03c2bf3e0218bb0eff07f24160f13cb2ed7ad20",
+      "responseSha256": "265d464a4031b07517eaad5caa877cb3312b5d4aefb531f8517071081dcc8f6c"
+    },
+    {
+      "variant": "hidden",
+      "profile": "desktop",
+      "maxInputMs": 275.10000002384186,
+      "maxSelectionMs": 726.7999999523163,
+      "resultSha256": "2d247b09391cd7257e64e9ca12f7c0240ee48a98ff430a8fe01c2b4231a97f3b",
+      "responseSha256": "b5c39f387023706cc422e4e7e6693f6795595335ec221a3280081ce12b386ed6"
+    },
+    {
+      "variant": "hardware",
+      "profile": "desktop",
+      "maxInputMs": 44.89999997615814,
+      "maxSelectionMs": 55.199999928474426,
+      "resultSha256": "c200b249754e204e3cf39f8013d18244d1a21b62d28db310578e832d03923d00",
+      "responseSha256": "9d0b700e9a6ad828dea2619ae86b2b17e9c9c975928cb9bd68280da4152d9849"
+    },
+    {
+      "variant": "hardware",
+      "profile": "phone",
+      "maxInputMs": 15.400000095367432,
+      "maxSelectionMs": 40.40000009536743,
+      "resultSha256": "c200b249754e204e3cf39f8013d18244d1a21b62d28db310578e832d03923d00",
+      "responseSha256": "9565f9207fd3029e141528e61391def5c3f76d5cdc807da86ec598d7adcb762d"
+    }
+  ],
+  "findings": [
+    "The scene lease stays active through the slow desktop UI frame; no render-start occurs between coherent state and measured frame.",
+    "Opaque/filter-free panels and hidden canvas experiments still exceed 300 ms; neither is applied to production.",
+    "Default headless WebGL resolves to SwiftShader; --use-angle=d3d11 resolves to AMD Radeon 780M on this Windows machine, verified separately with unmasked context renderer.",
+    "Exact original response protocol and all samples pass in hardware-selected diagnostics: 55.2 ms desktop / 40.4 ms phone maximum selection. Diagnostic report did not include the actual scene adapter string; final required cases now capture it and reject missing/known software adapters.",
+    "44-case full validation must establish acceptance; preserve software timing failures and distinguish phone viewport emulation from physical phone throughput."
+  ],
+  "pending": "New source/calibrated full run required. 300 ms and 16 ms thresholds unchanged; no CSS/runtime change from experiments."
+}

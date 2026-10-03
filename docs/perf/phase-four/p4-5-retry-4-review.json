@@ -1,0 +1,55 @@
+{
+  "reviewedAt": "2026-10-03T17:47:48.618Z",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "sourceSha256": "e3338280eace591add66dd45b9efcba6da9d109846cd4a55caaaad97bf631a5d",
+  "resultSha256": "3dec355e3a817e802583a117fef43128d0aa658d05bfd01e417665de55728c8a",
+  "browserSha256": "f58217ddba5f7e8a9d62e74587752e25ab45e5f581d47b5e66f7790d651b0dac",
+  "verdict": "reviewed-failure",
+  "browser": {
+    "passed": 43,
+    "failed": 1,
+    "skipped": 0,
+    "flaky": 0,
+    "reportErrors": 0
+  },
+  "independentRootAndCandidateSourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 295,
+    "preservedEvidence": 14
+  },
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "lookup": {
+    "samples": 1000,
+    "maxMs": 1.0921999999999912
+  },
+  "response": {
+    "desktop": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 27,
+      "selectionSamples": 6,
+      "maxInputMs": 14.399999976158142,
+      "maxSelectionMs": 32.299999952316284
+    },
+    "phone": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 26,
+      "selectionSamples": 6,
+      "maxInputMs": 13.099999904632568,
+      "maxSelectionMs": 34.300000071525574
+    }
+  },
+  "failure": {
+    "file": "e2e/phase-four-history.spec.ts",
+    "line": 195,
+    "detail": "The new precondition counted two identical replaceState calls, rather than one. Pinned Next app-router.js native-history integration dispatches ACTION_RESTORE for an external replacement, then its HistoryUpdater calls replaceState with __NA internal history state for the same canonical href. The assertion conflates the command write and framework bookkeeping. Both physical-GPU response cases and all other 41 functional cases pass."
+  },
+  "next": "Distinguish the external command and internal Next write in recorded state, await both commits, retain zero further writes during playback/gestures, run focused verification before full validation."
+}

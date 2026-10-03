@@ -1,0 +1,113 @@
+{
+  "reviewedAt": "2026-10-03T15:53:24.750Z",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "sourceSha256": "4e47b79c40197ca2f8182cd3ee9af5af6bca1e94d9394fc58a5d38fa339ea214",
+  "resultSha256": "c20f2ccfe0c8a456f4e30630f1a557c42680cda5aac7f1b9b533f4906f48a059",
+  "browserSha256": "3389c5eef584311ac27cec8679d558fb0945b4014f3a03a84e064948e91fd2db",
+  "verdict": "reviewed-failure",
+  "browser": {
+    "passed": 41,
+    "failed": 2,
+    "skipped": 0,
+    "flaky": 0,
+    "reportErrors": 0
+  },
+  "originalCandidateUnchanged": true,
+  "rootSourceVerifiedBeforeEdits": true,
+  "preservedEvidenceUnchanged": true,
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 291,
+    "preservedEvidence": 14
+  },
+  "lookup": {
+    "samples": 1000,
+    "medianMs": 0.009999999999990905,
+    "p95Ms": 0.02960000000001628,
+    "maxMs": 0.6845000000000141
+  },
+  "response": {
+    "desktop": {
+      "inputSamples": 26,
+      "selectionSamples": 6,
+      "maxInputMs": 345,
+      "maxSelectionMs": 767,
+      "maxDomCommitMs": 4.199999928474426,
+      "maxSemanticCommitMs": 92.89999997615814,
+      "maxFrameWaitMs": 674.1000000238419,
+      "longTasks": [
+        {
+          "start": 10870.700000047684,
+          "duration": 610
+        },
+        {
+          "start": 11979.800000071526,
+          "duration": 518
+        },
+        {
+          "start": 12788.400000095367,
+          "duration": 483
+        },
+        {
+          "start": 14588.700000047684,
+          "duration": 1393
+        },
+        {
+          "start": 16313.300000071526,
+          "duration": 234
+        }
+      ]
+    },
+    "phone": {
+      "inputSamples": 24,
+      "selectionSamples": 6,
+      "maxInputMs": 253.20000004768372,
+      "maxSelectionMs": 759.5,
+      "maxDomCommitMs": 2.100000023841858,
+      "maxSemanticCommitMs": 153.10000002384186,
+      "maxFrameWaitMs": 703.6000000238419,
+      "longTasks": [
+        {
+          "start": 6462,
+          "duration": 441
+        },
+        {
+          "start": 7079.5,
+          "duration": 78
+        },
+        {
+          "start": 7249.699999928474,
+          "duration": 239
+        },
+        {
+          "start": 7595.5,
+          "duration": 79
+        },
+        {
+          "start": 7783.199999928474,
+          "duration": 300
+        },
+        {
+          "start": 9470.100000023842,
+          "duration": 507
+        },
+        {
+          "start": 10028.199999928474,
+          "duration": 60
+        },
+        {
+          "start": 10222.699999928474,
+          "duration": 113
+        }
+      ]
+    }
+  },
+  "diagnosis": "All functional cases pass. Tracing removal alone does not satisfy the unchanged 300 ms gate. Result DOM commits and semantic route/card/target commits are fast, but frame waits still exceed 300 ms and long tasks remain. Background rendering contention is the next production correction to validate.",
+  "correction": "Search leases pause renderer submission while the modal owns interaction, preserving simulation wall-time/commands and renderer identity. Retain hold until accepted canonical route/card paints, then release; test nested/idempotent leases, visibility/disposal and stale callback cancellation. No frame-loop/provider/physics change.",
+  "pending": "P4.5 remains unaccepted. Review a new exact isolated source; do not relax the 16/300 ms limits."
+}

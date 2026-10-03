@@ -1,0 +1,63 @@
+{
+  "reviewedAt": "2026-10-03T15:22:56.608Z",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "sourceSha256": "cf54f86a58fc5bbcf2e203d0b0ebcfbbcd75b0243792544ccfd6ca888aa7180f",
+  "resultSha256": "da50f7cb920c2416a6014fe4f37f42fa136327c5e04896d58164ae87314e024f",
+  "browserSha256": "49a1481496feedee2d7018a51138a7960eb6386a59df22bc0c83234ccc520484",
+  "verdict": "reviewed-failure",
+  "browser": {
+    "passed": 39,
+    "failed": 4,
+    "skipped": 0,
+    "flaky": 0,
+    "reportErrors": 0
+  },
+  "originalCandidateUnchanged": true,
+  "rootSourceVerifiedBeforeEdits": true,
+  "preservedEvidenceUnchanged": true,
+  "lookup": {
+    "samples": 1000,
+    "medianMs": 0.00960000000003447,
+    "p95Ms": 0.03190000000000737,
+    "maxMs": 0.4685000000000059
+  },
+  "responses": {
+    "desktop": {
+      "inputSamples": 24,
+      "selectionSamples": 6,
+      "maxInputMs": 385.2999999523163,
+      "maxSelectionMs": 1335.7999999523163
+    },
+    "phone": {
+      "inputSamples": 26,
+      "selectionSamples": 6,
+      "maxInputMs": 409.39999997615814,
+      "maxSelectionMs": 587.3999999761581
+    }
+  },
+  "failures": [
+    {
+      "case": "phase-four-search.spec.ts > desktop search latency > settled production input/results and semantic selection respond within 300 ms",
+      "error": "Error: expect(received).toBeLessThanOrEqual(expected)\n\nExpected: <= 300\nReceived:    385.2999999523163"
+    },
+    {
+      "case": "phase-four-search.spec.ts > phone search latency > settled production input/results and semantic selection respond within 300 ms",
+      "error": "Error: expect(received).toBeLessThanOrEqual(expected)\n\nExpected: <= 300\nReceived:    409.39999997615814"
+    },
+    {
+      "case": "phase-four-search.spec.ts > combobox arrows, Home and End keep input focus and Enter selects the active option rather than the first",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: 3\nReceived: 2"
+    },
+    {
+      "case": "startup.spec.ts > phone-sized LAN HTTP origin hydrates and starts the compatibility renderer",
+      "error": "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  locator('.search-result')\nExpected: 21\nReceived: 8\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveCount\" locator('.search-result') with timeout 5000ms\n  - waiting for locator('.search-result')\n    4 × locator resolved to 0 elements\n      - unexpected value \"0\"\n    10 × locator resolved to 8 elements\n       - unexpected value \"8\"\n"
+    }
+  ],
+  "productionServerLog": "Clean: no Error/Unhandled/NoFallbackError",
+  "corrections": [
+    "LAN startup assertion must expect eight bounded suggestions and verify Charon remains searchable.",
+    "History assertion must await the canonical Next route, then assert exactly one added entry. Engine/card selection occurs before asynchronous route commitment.",
+    "Isolate recorder overhead: timing cases disable trace/video/screenshots while live renderer and all input/selection samples retain the same maximum 300 ms gate. Functional cases keep traces. Record DOM/semantic commit, frame wait and long tasks. No performance acceptance inferred until retry."
+  ],
+  "pending": "P4.5 remains unaccepted; no engine/runtime performance change is justified yet. Preserve first source/raw results and review isolated retry."
+}

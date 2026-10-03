@@ -1,0 +1,149 @@
+{
+  "generatedAt": "2026-10-03T14:49:24.641Z",
+  "profile": "phone",
+  "method": "Warm production page, no network/CPU throttling. One cached local index. Renderer layers/textures settled, LOW/reduced-motion. Input event to first animation-frame opportunity after result DOM commit; Enter to canonical route/card/engine target at a frame opportunity. Browser automation transport and engine flight completion excluded. SwiftShader functional response, not hardware GPU throughput.",
+  "thresholdMs": 300,
+  "samples": {
+    "input": [
+      {
+        "query": "Mars",
+        "milliseconds": 31.5
+      },
+      {
+        "query": "Europa",
+        "milliseconds": 71.89999997615814
+      },
+      {
+        "query": "Pluto",
+        "milliseconds": 33.199999928474426
+      },
+      {
+        "query": "Charon",
+        "milliseconds": 46.09999990463257
+      },
+      {
+        "query": "Earth",
+        "milliseconds": 50
+      },
+      {
+        "query": "Mercury",
+        "milliseconds": 30.799999952316284
+      },
+      {
+        "query": "planet:jupiter",
+        "milliseconds": 71.39999997615814
+      },
+      {
+        "query": "Luna",
+        "milliseconds": 15.400000095367432
+      },
+      {
+        "query": "Terra",
+        "milliseconds": 45.39999997615814
+      },
+      {
+        "query": "Chraon",
+        "milliseconds": 409.39999997615814
+      },
+      {
+        "query": "Euorpa",
+        "milliseconds": 44.09999990463257
+      },
+      {
+        "query": "not available",
+        "milliseconds": 35.40000009536743
+      },
+      {
+        "query": "Mars",
+        "milliseconds": 96.69999992847443
+      },
+      {
+        "query": "Europa",
+        "milliseconds": 45.200000047683716
+      },
+      {
+        "query": "Pluto",
+        "milliseconds": 19.100000023841858
+      },
+      {
+        "query": "Charon",
+        "milliseconds": 148.30000007152557
+      },
+      {
+        "query": "Earth",
+        "milliseconds": 99.89999997615814
+      },
+      {
+        "query": "Mercury",
+        "milliseconds": 154.20000004768372
+      },
+      {
+        "query": "planet:jupiter",
+        "milliseconds": 50.300000071525574
+      },
+      {
+        "query": "Luna",
+        "milliseconds": 23.600000023841858
+      },
+      {
+        "query": "Terra",
+        "milliseconds": 89.30000007152557
+      },
+      {
+        "query": "Chraon",
+        "milliseconds": 87.20000004768372
+      },
+      {
+        "query": "Euorpa",
+        "milliseconds": 52.89999997615814
+      },
+      {
+        "query": "not available",
+        "milliseconds": 110.5
+      },
+      {
+        "query": "Europa",
+        "milliseconds": 25.5
+      },
+      {
+        "query": "Mercury",
+        "milliseconds": 14.200000047683716
+      }
+    ],
+    "selection": [
+      {
+        "id": "planet:mars",
+        "milliseconds": 153
+      },
+      {
+        "id": "moon:europa",
+        "milliseconds": 131.20000004768372
+      },
+      {
+        "id": "dwarf:pluto",
+        "milliseconds": 587.3999999761581
+      },
+      {
+        "id": "moon:charon",
+        "milliseconds": 132.70000004768372
+      },
+      {
+        "id": "planet:earth",
+        "milliseconds": 110.70000004768372
+      },
+      {
+        "id": "planet:mercury",
+        "milliseconds": 150.5
+      }
+    ]
+  },
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "hardwareConcurrency": 16,
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "devicePixelRatio": 1
+  },
+  "renderer": "webgl2",
+  "tier": "low"
+}

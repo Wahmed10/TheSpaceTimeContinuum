@@ -1,0 +1,16 @@
+{
+  "status": "finished",
+  "pid": 7296,
+  "startedAt": "2026-10-03T16:46:46.629Z",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "sourceSha256": "837af947bf441ca3b29e2a8c126828b012fc68c94c6b99c83a5e9d55573a9ec0",
+  "method": "Diagnostic only: immutable built retry-2, exact existing desktop benchmark sequence; runtime wrappers log rendering holds/releases, actual frame entry/duration, coherent UI and frame-opportunity timing. Does not establish acceptance.",
+  "serverPid": 33380,
+  "diagnostic": {
+    "exitCode": 1,
+    "report": "browser.json",
+    "response": "response.json"
+  },
+  "verdict": "diagnostic-awaiting-review",
+  "finishedAt": "2026-10-03T16:47:03.970Z"
+}

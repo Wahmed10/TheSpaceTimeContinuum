@@ -1,0 +1,1287 @@
+{
+  "preparedAt": "2026-10-03T17:07:55.233Z",
+  "root": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum",
+  "candidate": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\retry-3\\candidate",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "sourceSha256": "abd8a57617e9d90b50f3ad45c3c9292e6ac18b21c331ba827414e27291e73b89",
+  "candidateSource": "7199ddb45174ff58c442a9a6f18e6636594e3ffd + uncommitted P4.5 snapshot SHA256 abd8a57617e9d90b50f3ad45c3c9292e6ac18b21c331ba827414e27291e73b89",
+  "source": [
+    {
+      "file": ".env.example",
+      "sha256": "58d56901a5f8ff72ca6ee2da85bfe4ec9c0e689b315335f1e2f032e340d602d4"
+    },
+    {
+      "file": "README.md",
+      "sha256": "6d15c5ebea3d28999343ae09ac397184534b0faaa4a36d5bc0b21e825a7d13b5"
+    },
+    {
+      "file": "apps/web/next.config.ts",
+      "sha256": "d7aa94597e40839c65248243285f8f2ac08e6ed653c836e36c1654e156809098"
+    },
+    {
+      "file": "apps/web/package.json",
+      "sha256": "5f34f29396061e1cacda29fcbf17554ee217bd913de0710d972de72f507fdda2"
+    },
+    {
+      "file": "apps/web/postcss.config.mjs",
+      "sha256": "f50058e0d309cdb3e7c25a1123337338641fb71e988572607d57f47209db1fd1"
+    },
+    {
+      "file": "apps/web/src/app/(explore)/layout.tsx",
+      "sha256": "1d806e97712231b244d8bf0331ac2e73b1bb45b6ca62edbe7c92900ffd0a55be"
+    },
+    {
+      "file": "apps/web/src/app/(explore)/object/[kind]/[slug]/not-found.tsx",
+      "sha256": "a51c7028c5f38120820a3aec154ac424d695b993c80805978ca1b41088c4f09e"
+    },
+    {
+      "file": "apps/web/src/app/(explore)/object/[kind]/[slug]/page.tsx",
+      "sha256": "72bca2ba6db9e85c008be31f7d7828f4f5b89cd687c9f3cf45861af80512a806"
+    },
+    {
+      "file": "apps/web/src/app/(explore)/page.tsx",
+      "sha256": "7eecfc1b727648a28578633376b7d5479128a98b4014af2bdd17f497d361f51d"
+    },
+    {
+      "file": "apps/web/src/app/[alias]/page.tsx",
+      "sha256": "271aab465f6b37a625c81ca842ce89fbc8abdb049e475e202c15f3755e86c1d9"
+    },
+    {
+      "file": "apps/web/src/app/about/data/page.tsx",
+      "sha256": "153f95af2520fba98428273d1ccc9e9eecc5e2dcb7e660ad8439e0b0747791ca"
+    },
+    {
+      "file": "apps/web/src/app/event/[id]/not-found.tsx",
+      "sha256": "4133dad6a84ee84ef39b6d85c5dde1c4d3470a0c370c7665ae26c5e856ca6b91"
+    },
+    {
+      "file": "apps/web/src/app/event/[id]/page.tsx",
+      "sha256": "e29d6603a343752edda5d574153973bbaff996256d0e39b871c2b7e689f59d85"
+    },
+    {
+      "file": "apps/web/src/app/globals.css",
+      "sha256": "ca09bc8e4d5b3cd8b62d79a40370aa14c02dbd45df1e2e16ce1e06846614607b"
+    },
+    {
+      "file": "apps/web/src/app/lab/poc/page.tsx",
+      "sha256": "5598d438e7aabde823d0d97131a90d4a6889595fc942a9baaa42de0763ab5b7f"
+    },
+    {
+      "file": "apps/web/src/app/lab/precision/page.tsx",
+      "sha256": "3be3ba1c531eb9fa208172234dcf1f786c32b20055027a29a08805460dfa6a75"
+    },
+    {
+      "file": "apps/web/src/app/lab/probe/page.tsx",
+      "sha256": "957aec5e6e0d5126fc1351b68cb29ae9c02158f654636be6a6049199cc6d796e"
+    },
+    {
+      "file": "apps/web/src/app/layout.tsx",
+      "sha256": "64e0b8e6d6bbd864e22800e8e73405b6bfe51ad087a4b7bf4773b1019e5f804d"
+    },
+    {
+      "file": "apps/web/src/app/not-found.tsx",
+      "sha256": "596ca055dc6e782debd8a0815d9f8185ebaa09bbc51893e16dfbdeadd491197f"
+    },
+    {
+      "file": "apps/web/src/components/Explore.tsx",
+      "sha256": "fe3d45ac328381b9ae90e6c4a7b72e521a0a6fc79d945ee0ba262b78055c71ae"
+    },
+    {
+      "file": "apps/web/src/components/ExploreRouteShell.tsx",
+      "sha256": "0be9c28f3d87743b5adcc15a0cbdedd8dfbdbfebeab09c948172fbcd6e699928"
+    },
+    {
+      "file": "apps/web/src/components/LinkStateNotice.tsx",
+      "sha256": "762d0adef3ec43a6b92efb531f34990a7a71ea5fe4e0785c9567550e0fb8c3cd"
+    },
+    {
+      "file": "apps/web/src/components/PhaseOneLab.tsx",
+      "sha256": "50b96e8ac11c01e4276a3a0df2b8d1f9f1ce3a4ca6e2561cb29d0fed8ed5499c"
+    },
+    {
+      "file": "apps/web/src/components/ShareViewDialog.tsx",
+      "sha256": "e280589c81e3e3d6cdc0575723c30f8765c6a197d365d5a28dffcd700e695f21"
+    },
+    {
+      "file": "apps/web/src/components/UnavailablePage.tsx",
+      "sha256": "75b401cb483f6934ff2be9580508eec94b606ccd11a869c2e6fdc990cfbd0e5d"
+    },
+    {
+      "file": "apps/web/src/engine-bridge/EngineCanvas.tsx",
+      "sha256": "644c940088a6990b53eb7ee39a38c2cb2fd34e1da034189309e0f52b67381fbd"
+    },
+    {
+      "file": "apps/web/src/engine-bridge/RouteStateBridge.tsx",
+      "sha256": "6956ce5ae75fd23e2357344e0d82c6e553eb48774dec219bac044b7c6a323b16"
+    },
+    {
+      "file": "apps/web/src/engine-bridge/routeStateController.ts",
+      "sha256": "75b17e19a5e22c96de31e5c93f61ab09144769b269098cb9d9838e37b261766a"
+    },
+    {
+      "file": "apps/web/src/engine-bridge/timeCommands.ts",
+      "sha256": "692fc3740f2fc9f46795573416822c8f14c4412afc4f8f4850f01d36775df994"
+    },
+    {
+      "file": "apps/web/src/engine-bridge/useEngineStore.ts",
+      "sha256": "f09dc172fb093a5fd8095e067e8c9925db6236e74a8623f5dabb1a1494afc6ee"
+    },
+    {
+      "file": "apps/web/src/lib/exploreNavigation.ts",
+      "sha256": "1810a4a13d35469e9c1514d87577e3e08ba41438bf586c41da217ca5c8e5b410"
+    },
+    {
+      "file": "apps/web/src/lib/objectMetadata.ts",
+      "sha256": "0bb50edc6311a6b2b8ec27315d3fd14c68d7a8adbee312d81c6cb20e47364194"
+    },
+    {
+      "file": "apps/web/src/lib/routeState.ts",
+      "sha256": "0ea2a939e1f487a909c62eee0a68a8dff311f3e597cb6dbb900543c378c6e78f"
+    },
+    {
+      "file": "apps/web/src/lib/utcInput.ts",
+      "sha256": "41fca70c02237953db47abfdf48673409b4bb574e4f7a6af27cb3b204d5a1705"
+    },
+    {
+      "file": "apps/web/src/proxy.ts",
+      "sha256": "67f2c48c4854ebbb2eb904f745dbdd59b97a541cf9f477ddfcb068d9af47aa6c"
+    },
+    {
+      "file": "apps/web/test/objectMetadata.test.ts",
+      "sha256": "9013f5d004229fd8e0467ffa186c4349c12b8c41331ae350720d58f9cb1acd5f"
+    },
+    {
+      "file": "apps/web/test/routeState.test.ts",
+      "sha256": "d5e436b56771637a95a815b805cf21efe9d07c47c4af37db0c5363aec73f6f08"
+    },
+    {
+      "file": "apps/web/test/routeStateController.test.ts",
+      "sha256": "aab52f5f089f2f5a343b1b6ddd3451ae87cd64ea5b1884fb540757b21481e7c0"
+    },
+    {
+      "file": "apps/web/test/utcInput.test.ts",
+      "sha256": "4d2e4df30e4e1d30bb6bae68605c6259501fec5d9ab84589b0925ec393b958b8"
+    },
+    {
+      "file": "apps/web/tsconfig.json",
+      "sha256": "5de948d936ebd405c2819cb89a973907ac90b43f4650050f871ddfaeb7701b28"
+    },
+    {
+      "file": "docs/PHASE_4_PLAN.md",
+      "sha256": "ab92d921a7943e329301b5b0092c1d602dda3f6d2bbffc597fa18098a40e5a84"
+    },
+    {
+      "file": "docs/adr/0011-consumer-route-state.md",
+      "sha256": "efe2d9b9888a71658ab4d40d39788bd8230b708668033b16c8ed1029ada7784d"
+    },
+    {
+      "file": "e2e/body-detail.spec.ts",
+      "sha256": "463595ef9a716be5062269afb02b5f2af5a5ac4d3541c518d500413d6d337235"
+    },
+    {
+      "file": "e2e/catalog.spec.ts",
+      "sha256": "26241d76adc75dcda0ccf2c0862759e6459e8d3dc7e6aec2e9ee97a11a4d651c"
+    },
+    {
+      "file": "e2e/labels.spec.ts",
+      "sha256": "24019711b1e5316a019803705ed796e692c5d58916b65d1879104b11a07a8b9d"
+    },
+    {
+      "file": "e2e/layers.spec.ts",
+      "sha256": "f023cf33bde8d2518264c1d8df2c0c55f7c7a50730ccc785b2f31989134fae8e"
+    },
+    {
+      "file": "e2e/lod.spec.ts",
+      "sha256": "4cb7945c557a075df9b5173c49438abcea834e0486062426cabf55e1752788f0"
+    },
+    {
+      "file": "e2e/mobile.spec.ts",
+      "sha256": "60e35c5529486b243ead42e784ed806b35b8f8deb994ae076ccc4603f7873e4b"
+    },
+    {
+      "file": "e2e/moon-systems.spec.ts",
+      "sha256": "6ac8b4b7723cc0f26a33b3846386d6beafc833ad18986ebfbb6aecfd9fbaa770"
+    },
+    {
+      "file": "e2e/orbits.spec.ts",
+      "sha256": "4825530a7632d96c30ae4c60b80f234a0ffbce62ee9a7143bd59a6ea0a47d050"
+    },
+    {
+      "file": "e2e/orientations.spec.ts",
+      "sha256": "6415be320250c766262e3ddb135c10955dabb681356d69593b87f94629466261"
+    },
+    {
+      "file": "e2e/phase-four-history.spec.ts",
+      "sha256": "7931f2a8e540f31135bb2440a54e2bd9eaade809832722ba052b9b89b7f3a651"
+    },
+    {
+      "file": "e2e/phase-four-routing.spec.ts",
+      "sha256": "246e7721cf4f9f470931da2dbdc644fe644e2d4bdd7f5c60cce8f299ffe96b3d"
+    },
+    {
+      "file": "e2e/phase-four-state.spec.ts",
+      "sha256": "b3b4e07c56f77b9553888fe2f024473e1d6958b7b711a655157ecd08319d1b4c"
+    },
+    {
+      "file": "e2e/phase-four-url.spec.ts",
+      "sha256": "3dd9794c3ac11d249cd84b0e3984b69ac52466580191b49a438314ca66f89d33"
+    },
+    {
+      "file": "e2e/phase-three-device.spec.ts",
+      "sha256": "d320528dc39fd9f4ad5293dba5200546d2c517fe05bd1a7c9e4c22ae95d4697a"
+    },
+    {
+      "file": "e2e/phase-three-materials.spec.ts",
+      "sha256": "333e4b64ed8db5a340ad4ee30818acbaad1ddcf01f437692824c51157a5f1487"
+    },
+    {
+      "file": "e2e/picking.spec.ts",
+      "sha256": "419d3ccb3a37ccc8eb39cfbf2e0c9a1107fe65c76d22b8b18dfc5bc6593da3b8"
+    },
+    {
+      "file": "e2e/poc.spec.ts",
+      "sha256": "0811af86e1bacb1c401a54cb51147386eca9a00b3b2973b553c14b430a299fa6"
+    },
+    {
+      "file": "e2e/point-source.spec.ts",
+      "sha256": "4c0e6435e356f642f04ed972e7c95f5654beb25d09ac06c6e85f7ea27f03072d"
+    },
+    {
+      "file": "e2e/precision.spec.ts",
+      "sha256": "61d6e5adfc5510fd2b74ce862be87489ba7eefd4cfb56f61632987c93cb90a66"
+    },
+    {
+      "file": "e2e/react-profile.spec.ts",
+      "sha256": "76a713c611cf582f18bd74b49fbdcfca3b39f2143c75d516bce3ec5f242e2194"
+    },
+    {
+      "file": "e2e/registration.spec.ts",
+      "sha256": "e57c29f533c9a64c87feaab67145457876d48d3bf6d36e556e72fb51a38d6c53"
+    },
+    {
+      "file": "e2e/rings.spec.ts",
+      "sha256": "7dd5bceb9502a8c0f394ca965726d4b01e2f5852969c04b5668e45d4e65a9562"
+    },
+    {
+      "file": "e2e/startup.spec.ts",
+      "sha256": "b84c105e70a4b19e812c77c791004b4bc8d1eed78b3b4102750ef90b00077f83"
+    },
+    {
+      "file": "e2e/visual-reference/visual.spec.ts/earth-day.png",
+      "sha256": "a29582022535d05232b9c2e9e7180c09c5cfb93b47056d60f49d4d845f9cff79"
+    },
+    {
+      "file": "e2e/visual-reference/visual.spec.ts/earth-limb.png",
+      "sha256": "be3725c311573986b5ed78250052e63bca2cdd3893f65b5b9ead97f9e6f3dc12"
+    },
+    {
+      "file": "e2e/visual-reference/visual.spec.ts/earth-night.png",
+      "sha256": "b944b85bc6cda8735bd130baca7d35a44b98da4344d0c7f2773f9cedc1c83dd8"
+    },
+    {
+      "file": "e2e/visual-reference/visual.spec.ts/earth-terminator.png",
+      "sha256": "ec66661bf2748162d1776cda520ae761840890645ebbcdc9b23e71921b22b165"
+    },
+    {
+      "file": "e2e/visual-reference/visual.spec.ts/mars-close.png",
+      "sha256": "fd0eaf1b6b1a591ff8b26029a909d02cb7cfcc4b31e412cdc52122d806034e3d"
+    },
+    {
+      "file": "e2e/visual-reference/visual.spec.ts/moon-full.png",
+      "sha256": "c64dbcb9c13f821469f55dbfc963398496355bb051271783e4052b91c508aefc"
+    },
+    {
+      "file": "e2e/visual-reference/visual.spec.ts/moon-quarter.png",
+      "sha256": "f9c35754fe64410e7a2697c8831c53caa72a2e93f6e19a6f9eac8d652b7f615b"
+    },
+    {
+      "file": "e2e/visual-reference/visual.spec.ts/sun-bloom.png",
+      "sha256": "181cfca705e0bdfbd56cb201a048fa942a05e105067edcd5b31864ebeaacdbf3"
+    },
+    {
+      "file": "e2e/visual.spec.ts",
+      "sha256": "710b836749fcdd5d6740fbb2b4abaabb2698b7a97bd1487ef239e37cefa1a121"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "sha256": "57ad7c81f525887a30c12e6c068b89f888ded5466c945e89dfcb3ee6d335b7b0"
+    },
+    {
+      "file": "package.json",
+      "sha256": "e4b94532bf3f33c11f07f23267ce3f21c5c8913d34f858802332367187f8ba16"
+    },
+    {
+      "file": "packages/astro/package.json",
+      "sha256": "faff9c8d1445a0e0941ec5dcf8ad8c80d9ef531a1c18b1bd89a477e14f638caa"
+    },
+    {
+      "file": "packages/astro/src/clock/SimulationClock.ts",
+      "sha256": "36b006907366909e1662c66a9abd2b22b6ac1d0b1d4f15a1dc9d46f8bdeb8dbf"
+    },
+    {
+      "file": "packages/astro/src/ephemeris/AstronomyEngineProvider.ts",
+      "sha256": "045fbf98c5c799b2e69dfadb2d3905e9b62f0681bb73a7de6b1596723d647a36"
+    },
+    {
+      "file": "packages/astro/src/ephemeris/JupiterMoonsProvider.ts",
+      "sha256": "4d6dd9e3943a0c9b92101e13dd92ea2b866767fd5d53efd4a59872232050685e"
+    },
+    {
+      "file": "packages/astro/src/ephemeris/KeplerProvider.ts",
+      "sha256": "f5f2dde8242ac3d591dc0f66c2035d30d92ff6a1c329977138aa789a2db90e70"
+    },
+    {
+      "file": "packages/astro/src/ephemeris/MeanElementsProvider.ts",
+      "sha256": "a8122229ae57ae50088e4cffac86276c045138f65e6b4ba70219bdc343039b10"
+    },
+    {
+      "file": "packages/astro/src/ephemeris/OsculatingElementsProvider.ts",
+      "sha256": "1e040acd8fefc7a568b300ee9dd9b845385052c55fe3df12469efad5451d950d"
+    },
+    {
+      "file": "packages/astro/src/ephemeris/ResidualTable.ts",
+      "sha256": "eecb2a5ac4150fbc8fcb4504bddcc1d029e0d5d659f035574edb4d912a190607"
+    },
+    {
+      "file": "packages/astro/src/ephemeris/SampledEphemerisProvider.ts",
+      "sha256": "a71e6e757382e4d07f9f55abfad080b4b7408ed955510000fbdf75904578f329"
+    },
+    {
+      "file": "packages/astro/src/ephemeris/catalogProviders.ts",
+      "sha256": "b2fcb6ae1528626e7dcfe441d5b6be021104f2041e5e14902207e4df57202232"
+    },
+    {
+      "file": "packages/astro/src/ephemeris/createMeanMoonProvider.ts",
+      "sha256": "92595441aa3f17a72cf35c62d931bebe48b00bdb858fb90e65eebb6d04a1e5b2"
+    },
+    {
+      "file": "packages/astro/src/frames/FrameTree.ts",
+      "sha256": "3b3f74fab0efc1a006d850b7875410db93cb7c058ce6de78d4e17370b573b929"
+    },
+    {
+      "file": "packages/astro/src/frames/solarSystemFrames.ts",
+      "sha256": "370f0ad5979389abcce7bd32d8d31053cb7a95f6a0c8d61f4ad4e38097d481ca"
+    },
+    {
+      "file": "packages/astro/src/index.ts",
+      "sha256": "bc28a1faf3b66289646d04851e4f4d33037ec810cf0dddbd421f887b9538b0d8"
+    },
+    {
+      "file": "packages/astro/src/orientation/bodyOrientation.ts",
+      "sha256": "5b3f6eb21dde5dbc48d785da3beae6cc94e0a6a4fe074f92900d77cdd9b8f9c9"
+    },
+    {
+      "file": "packages/astro/src/orientation/pck-models.json",
+      "sha256": "bc46edf4536dc13f4a12d4c71272d30f09efc5cec7d74dbfb60b373b8a0a619d"
+    },
+    {
+      "file": "packages/astro/src/orientation/pckOrientation.ts",
+      "sha256": "a0f15b19fb0cea614961f4888516fe2fdd2ca299fce92f4fbf8899bac67ab2ea"
+    },
+    {
+      "file": "packages/astro/src/time/constants.ts",
+      "sha256": "b19617ff699f3c544654b7154bff8ccf53e32d62ca52eeca20755960c1bb9a7e"
+    },
+    {
+      "file": "packages/astro/src/time/leapSeconds.ts",
+      "sha256": "e44a7769a1a01488d0c6d154563752e7ffd62f36f735c21242ee430f6a323b18"
+    },
+    {
+      "file": "packages/astro/src/time/scales.ts",
+      "sha256": "a8346d5ead6564a787d3c161b86c6f813431dc697ca940f642ca378ffa9c294a"
+    },
+    {
+      "file": "packages/astro/test/allocation-parity.test.ts",
+      "sha256": "9a3d123c6b46fcc0930f426fd0a77e42a7d228ce18014c0f5946daa707412195"
+    },
+    {
+      "file": "packages/astro/test/catalog-providers.test.ts",
+      "sha256": "56c8dcb698e2fc31be0435b077c5baa497de7af1ca2409df288112dd6ee9c22e"
+    },
+    {
+      "file": "packages/astro/test/clock.test.ts",
+      "sha256": "eb8ce916786098f33240cb134b93a78e63c22c5ae55cee6614501dd17c97cdc3"
+    },
+    {
+      "file": "packages/astro/test/fixtures/astronomy-upstream-parity.json",
+      "sha256": "e2ba2a6e0325538553199823ddfd7768a328107b0cbaf8aae2b47b84fa7da264"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/10_0.json",
+      "sha256": "dc02221d9d9d6df1f1cafffbe892b1d745d6739162f086efcbc162f606e6355d"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/199_0.json",
+      "sha256": "f61f97e6a1313287d397fa2bce2e5f3ebb9e5e2b04dd2934070866ddb331aa23"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/299_0.json",
+      "sha256": "0d2c9994f1431ddda3cfb2c9b8f28b1b4b32bd7852498a86aa3889d181c3b84b"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/301_0.json",
+      "sha256": "63f46e17126c69a48072a30faa776ccd3d3e6d8a0b794ff4ebd897715e71d01f"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/399_0.json",
+      "sha256": "cb0d98b067a0d7a0282752ddab05d2a3c454a8160b7229d6021e558436b27479"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/499_0.json",
+      "sha256": "44774dd47a71c4d0c038b50b9b460a80e416153b65a4c1ee3e8ca9892bfcd3ae"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/599_0.json",
+      "sha256": "48e11aaffa0c84ecbc4af3e5871ec19f82aa4b0386a2098326f6db361a9865ab"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/699_0.json",
+      "sha256": "7c22e2163b30afb0fec5615d076f39b50442ae5fe38fbb5295dbbee7b13af8e2"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/799_0.json",
+      "sha256": "17d57ffa318715a2764fe545f762c33df49b26a7b2ae031f14c2574a3c23a5f4"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/899_0.json",
+      "sha256": "b0a71a2b6c87c0d9fde2ea1a86aef99e65a2631741f1a123e7293161112fd71c"
+    },
+    {
+      "file": "packages/astro/test/fixtures/holdout/999_0.json",
+      "sha256": "0bc1e8c379614ba6d852080013a0642cd06d86b415a8bdd92521632e730641c2"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/10_0.json",
+      "sha256": "07ea72e8f2ae5125531b3d23f8bff0111c1a1432803af647f1e56dcf810859dc"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/199_0.json",
+      "sha256": "f8b2f18ffaac7cd963bdce96e6f9994090447bc392fba6ec27d8bbacbb29e003"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/299_0.json",
+      "sha256": "9926ec2a6b9188ef0dea920ecadeaf0e94c3ce189ac8b540f9524924abcec24a"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/301_0.json",
+      "sha256": "90b1e20ebdd1a6f02a706315a83eebc603df0c3f96cadd4a304c89600d4286c4"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/399_0.json",
+      "sha256": "3fad2f09a0731883d43da18e2ead6fd6f1e2bd6cc409c7d75e8133a0059ed87f"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/499_0.json",
+      "sha256": "f0e837522100a9ecbeee322841ca1b2c8fd8f0be6ccdc80da8c88fb025ce7e46"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/599_0.json",
+      "sha256": "54f726f8e51c2b131f80ffce4808219a00fa449379fe9721a74d78701a6cdd63"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/699_0.json",
+      "sha256": "fe122abf2a2c1ef09ccb5e2e5c73db200cec8dcf9129ce32882c75b67ff44dea"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/799_0.json",
+      "sha256": "30f68611f6ac9046ecc0c9b4201c80b499f878978d0d869dbe8f244e0901a2ff"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/899_0.json",
+      "sha256": "cdaea021d63e40843a71a7ea4f2711c5c9191f4d259af9c8baa7637af70fec4c"
+    },
+    {
+      "file": "packages/astro/test/fixtures/horizons/999_0.json",
+      "sha256": "57d44712667fc610f058087463b737ca4fb107c59088d66dc060e1462dcdffcf"
+    },
+    {
+      "file": "packages/astro/test/fixtures/mars-orientation.json",
+      "sha256": "4c92dbe741f23636e7232713e7341262919ae62739df36996f3c829afbe144c5"
+    },
+    {
+      "file": "packages/astro/test/fixtures/pck-orientations.json",
+      "sha256": "4d23e260b20be0aa5f86b946d876647a2e57f7d1c75eaea1addb130173dd0457"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/apophis-encounter.json",
+      "sha256": "24ad127c68a6e1291ed778e5e49ca62e1c509e70faf112bf9e4ae1b5677a1721"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/callisto-holdout.json",
+      "sha256": "3f8afb4c545b58a21afbbe8ec01fbf5203358d4f60323f804afbe4bdafc81780"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/callisto.json",
+      "sha256": "21ab141a3790512690b5975cb80fd1892611048e473985665ade69fc14c3bef9"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/ceres-elements.json",
+      "sha256": "cad57c2f737a91228e4a6e2737f7169c87ff8382f37ac647c954f18879ea7ba3"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/ceres-osculating-holdout.json",
+      "sha256": "4cce3b71f2883f58269c9569ed88ebfec4365a3f6fe76c0139795ad52ad23f19"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/ceres-vectors.json",
+      "sha256": "eeec48b6a2120b611f4cbe760d9e146f77b8b9b033239ca6325bce76dfe8565d"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/charon-osculating-holdout.json",
+      "sha256": "70aeca21f00efd43a3b572d6ad53804282e139b781182657a115ee8326cf7ca6"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/charon.json",
+      "sha256": "56816c8d9de3eca135087f98160a96a38f7f4e3ecbd9a0b74998ea7bed2661fe"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/deimos-osculating-holdout.json",
+      "sha256": "1fa4933425737cb24591a5e291b9f5caa11ec35456e13912b464f22dbebfa694"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/deimos.json",
+      "sha256": "b93f26a1dda7d2e25f9a7b5b85c6f0031e732da22489ae7ad4ab95187f4df4fa"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/eros-elements.json",
+      "sha256": "bcde5d6cbfe969d57abf3a035c762a851f0da274c2ce1037468d4c26178cd323"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/eros-vectors.json",
+      "sha256": "c6e3ddc54a4534ece5cc8a3a4a8e9890e97318963489cc49291e5563ffb97f64"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/europa.json",
+      "sha256": "513df04abb3d47d1f37c3851a84c67391b5c020bc63925e71ac9d937d1111a5a"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/ganymede.json",
+      "sha256": "c95d310cad2a8a7120b251479793c60ed83075dbe6af7bc4e035ccc4a8393616"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/io.json",
+      "sha256": "0c5563a1b8b3a8cb9ba23975a367a9dc9bb2a024bbafe340c1d24712657b3e40"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/phobos-osculating-holdout.json",
+      "sha256": "b74ca1e84b459a01bebcd1a65fc4ac7f01dbb946f05e60c9ee18b676f8dbc736"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/phobos.json",
+      "sha256": "a2a1dbc65d16694bd00870c04a1bdcf0eb0d0368e85d26f3677d7a81191b76ec"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/titan-osculating-holdout.json",
+      "sha256": "54b1460368e193f5b558e414cd11db6816e52d33545d284342b0f5e4d485d85c"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/titan.json",
+      "sha256": "ecd4d5832993357aa7a9a318d133c4b8dfd20bcfa7dc89047276f2db458e331a"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/triton-osculating-holdout.json",
+      "sha256": "6ef5ed73c5f238d431f32db553375e3d278aa7800e11774d2991a4611b25ca02"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/triton.json",
+      "sha256": "c637decf51258eabf93bb503b7a21dd709c9cb68e349cdd9f8b5851cd654345e"
+    },
+    {
+      "file": "packages/astro/test/fixtures/phase-two/voyager-cruise.json",
+      "sha256": "d3e8f6721b0e0797c208c6a89ba2969cb26f2822a441151b179b2320f36333f5"
+    },
+    {
+      "file": "packages/astro/test/frames.test.ts",
+      "sha256": "1f7f6ac8d82f68ab8f0738e86f3ad100f3a096937c3abd67232b88dad5cc51ce"
+    },
+    {
+      "file": "packages/astro/test/holdout.test.ts",
+      "sha256": "3b27f9a3417a9f21c006a3d426d1d54de6eea6944dc0a6177e1cd0fc140e8a62"
+    },
+    {
+      "file": "packages/astro/test/horizons.test.ts",
+      "sha256": "7538b31c0b7e8faa4cb072c5d188607175c4393d1540346ed5ce1fe89d231944"
+    },
+    {
+      "file": "packages/astro/test/kepler.test.ts",
+      "sha256": "3db0e1f77a6bf9b4ec7855bf211dfee5932a69ea1cf4462e923fbee35aa13aee"
+    },
+    {
+      "file": "packages/astro/test/mean-elements.test.ts",
+      "sha256": "5763769d8c478ca6fb8a241580e3c8c39650077e04ffc2b7c71e8ac85b5a6a3d"
+    },
+    {
+      "file": "packages/astro/test/orientation.test.ts",
+      "sha256": "29a7e0e9e6bf38fb472681873debc978dd960ad7cd2481fa733c0df25024efd9"
+    },
+    {
+      "file": "packages/astro/test/osculating.test.ts",
+      "sha256": "0fc60f370045c4eff0599b82c539c1367ecc09125e268fb3ee1f56132b4be53f"
+    },
+    {
+      "file": "packages/astro/test/pck-orientation.test.ts",
+      "sha256": "8b0680d14ee7e456c2fc8b68511c2421a00426160cfeeef11710ae70e6f38872"
+    },
+    {
+      "file": "packages/astro/test/phase-two-science.test.ts",
+      "sha256": "ef82cdacf539d84a58606355c06cd1c92fd1f6ac6df714ae38c9eff1a5cf362e"
+    },
+    {
+      "file": "packages/astro/test/residual.test.ts",
+      "sha256": "c1ea06f3a20d3796832ce404cf721094e42fb36b0e6624d863f2da43881d076a"
+    },
+    {
+      "file": "packages/astro/test/sampled.test.ts",
+      "sha256": "ec234b157c54a8c8cd7a2ca400361a974fccf7d1a8cc3db4e385a1f6749fe53a"
+    },
+    {
+      "file": "packages/astro/test/time.test.ts",
+      "sha256": "1c3622040256b9ed7bc4ab597fef457a3fd850b21ec7c0a265b73e2b3a1ea306"
+    },
+    {
+      "file": "packages/astro/tsconfig.json",
+      "sha256": "2f3d07ee179d399782029221bdabd709e262fe4c9de2bf69c99f5e4e67e92275"
+    },
+    {
+      "file": "packages/db/package.json",
+      "sha256": "60aea356c1e0c6adfacaa247bae747e20cb20100293584eb85bf94bbdd557f5c"
+    },
+    {
+      "file": "packages/db/src/index.ts",
+      "sha256": "64e09ef10a40d8cebf6e0e169823dc71f5445391777c4fee3dcf5069f082002f"
+    },
+    {
+      "file": "packages/db/tsconfig.json",
+      "sha256": "2f3d07ee179d399782029221bdabd709e262fe4c9de2bf69c99f5e4e67e92275"
+    },
+    {
+      "file": "packages/domain/data/bodies.json",
+      "sha256": "5550a268a5374f8a410e5b4a2bb22d4ff056f97fb23cc0a8925e353203d45a63"
+    },
+    {
+      "file": "packages/domain/data/moon-elements.json",
+      "sha256": "54efbbf6125cab8568c4c5262bf3936ce205c2728cbed697994bc857f75cb395"
+    },
+    {
+      "file": "packages/domain/data/saturn-rings.json",
+      "sha256": "6adc96416f531d79504bb05458c8752dc60e47c9bce3bba91432a64aac21aa92"
+    },
+    {
+      "file": "packages/domain/package.json",
+      "sha256": "4f3cafe4013e9edb902b4dbc138ae855d760ad3b93f801c0b2f59e994997dee0"
+    },
+    {
+      "file": "packages/domain/src/buildCatalog.ts",
+      "sha256": "e7733f381ebec793dcb27adfe672d03ee754aa67e32cf84b261703f4361c3991"
+    },
+    {
+      "file": "packages/domain/src/catalog.ts",
+      "sha256": "77d97076f1c19731bf899c00fec2cc15f7108fbe0dcfaacede24e475d8964a55"
+    },
+    {
+      "file": "packages/domain/src/index.ts",
+      "sha256": "bb4ea73259f862ed7ee34b9031f39db608a737e033982833822a0ef03fde74c2"
+    },
+    {
+      "file": "packages/domain/src/moonElements.ts",
+      "sha256": "9bad2164466635bbfe7a19a01b1963a677eb91c54c798ab29dabd069a75cd0f9"
+    },
+    {
+      "file": "packages/domain/src/rings.ts",
+      "sha256": "ae78c24eab59a01826ad43e61d4237c387e275f14faee5a1d1ec2b8f81648fea"
+    },
+    {
+      "file": "packages/domain/src/schemas.ts",
+      "sha256": "e42ff2c59f5b79032e5ca06b86ef912d9dc429366446f015993b1caafa4c60c8"
+    },
+    {
+      "file": "packages/domain/src/types.ts",
+      "sha256": "2561d0faaff5a740431956bfcdde755327c61269157c558e2030083a1fae432a"
+    },
+    {
+      "file": "packages/domain/test/catalog.test.ts",
+      "sha256": "00b5c99b598563957412a7790fd11d95bc257b9232da5fefb684ad3009ebb128"
+    },
+    {
+      "file": "packages/domain/test/schemas.test.ts",
+      "sha256": "b6221f3a6ea709854ca3318933f13412529a9f0efe58f6574de6dd3ceb61ba9e"
+    },
+    {
+      "file": "packages/domain/tsconfig.json",
+      "sha256": "2f3d07ee179d399782029221bdabd709e262fe4c9de2bf69c99f5e4e67e92275"
+    },
+    {
+      "file": "packages/engine/README.md",
+      "sha256": "c5fc69f81f9135702a8052912aea9de922c22bd7a92bb29de43c92dade4eed92"
+    },
+    {
+      "file": "packages/engine/package.json",
+      "sha256": "8fe7fe6f51523c907557fd898bd64889a8c66b19f3992eba8b3d0c247df6cd30"
+    },
+    {
+      "file": "packages/engine/src/EngineApi.ts",
+      "sha256": "026b6233db14b70edf4fa901d95c79ccb3915799b67517ae19154a260ad0f54e"
+    },
+    {
+      "file": "packages/engine/src/SpaceEngine.ts",
+      "sha256": "0c1756c93b014f3207fc894bef804ac4e3b7a47cafc450583d66a6b2c6a4ddee"
+    },
+    {
+      "file": "packages/engine/src/assets/AssetManager.ts",
+      "sha256": "236f262f7814e44a075765f2316f2f214cc5fbee3ce399e6a7b157aa9f3e987c"
+    },
+    {
+      "file": "packages/engine/src/assets/ShapeGeometry.ts",
+      "sha256": "19e6dcf68a3dc869ee11c53d98714a1dd0d2ad48238ec47c493b0a51821fd661"
+    },
+    {
+      "file": "packages/engine/src/assets/SurfaceMapping.ts",
+      "sha256": "64035cbf3a1afbca6993ab6efb888d848be65073b7ac50174612f4736f76ec5b"
+    },
+    {
+      "file": "packages/engine/src/bodies/PlanetFactory.ts",
+      "sha256": "435bfc14841627575e03698afa6de246aea9f0e9329311b9d24d48f64399136b"
+    },
+    {
+      "file": "packages/engine/src/bodies/SaturnRings.ts",
+      "sha256": "a10b19b1419e56b056a852b8ed074b3f561d4b7de2e4f55737d53d297b0f3b92"
+    },
+    {
+      "file": "packages/engine/src/bodies/Starfield.ts",
+      "sha256": "2cb2dc9728af00ab32157d16d37d592ffa2fd889cc5e5ca40ab23d089ad2dc33"
+    },
+    {
+      "file": "packages/engine/src/camera/CameraController.ts",
+      "sha256": "af44c94fc7e379acb0302736a43636db57801208cdd9d4066a7cbcc29e52f2a8"
+    },
+    {
+      "file": "packages/engine/src/camera/CameraReference.ts",
+      "sha256": "f19aa6247aa9dcd73559a9d01eede897153c465e8b95caea20dc8e20ced16718"
+    },
+    {
+      "file": "packages/engine/src/camera/Input.ts",
+      "sha256": "92dfcb4c7772efbaed0f5c39b28d952c3d6b9f9276b8b6e7eb4617cc99862062"
+    },
+    {
+      "file": "packages/engine/src/camera/math.ts",
+      "sha256": "f632ae7d1e59a110b6f418beab152756e7586f09767c5feb02fad5a217b07898"
+    },
+    {
+      "file": "packages/engine/src/index.ts",
+      "sha256": "c658fdfc505d18dc8e79a560653c13b511b52ce8937dca42317ad5d518d4140f"
+    },
+    {
+      "file": "packages/engine/src/labels/LabelLayout.ts",
+      "sha256": "620f0ec4d0eceddb8f6778ada8b2b6bcdfc8b702f3db6567d77d61f4d4afe02d"
+    },
+    {
+      "file": "packages/engine/src/labels/LabelSystem.ts",
+      "sha256": "e95638b5afe92995d036bb13475c4af7667940dd3b35036a1c9fe8ce619e93e9"
+    },
+    {
+      "file": "packages/engine/src/layers/LayerRegistry.ts",
+      "sha256": "7e935a422c936a9941a56eca8feb1872852944c6b5a363a283ac63c041f0cd65"
+    },
+    {
+      "file": "packages/engine/src/layers/OrbitLayer.ts",
+      "sha256": "b31d1bf1e952567d43ebd1532aa8a816ba43e53de089aee805368ffa08533737"
+    },
+    {
+      "file": "packages/engine/src/layers/OrbitMaterial.ts",
+      "sha256": "b3c7cd2c7fc0de6892afad8807881ff3b71e95544884c78c3e76779d4a93f6f3"
+    },
+    {
+      "file": "packages/engine/src/layers/PointLayer.ts",
+      "sha256": "7f13aa92409ef045995d79815ec741a1327c781691739e79d3b261adef5e1ad1"
+    },
+    {
+      "file": "packages/engine/src/layers/PointSource.ts",
+      "sha256": "b9a039733c19627cac163296f1377aeb1462be3a35b0fe4deee3b76cb00890b8"
+    },
+    {
+      "file": "packages/engine/src/layers/SourcePointLayer.ts",
+      "sha256": "96236d4b0955751428bb60d8dddb2ed69385fdac0fa7fa17d5f1a1c32accd81d"
+    },
+    {
+      "file": "packages/engine/src/layers/sampleOrbit.ts",
+      "sha256": "a42c469637254688792ce7c60353123b1cdf22f34f8d2d38971820aa2f976999"
+    },
+    {
+      "file": "packages/engine/src/lod/LodSystem.ts",
+      "sha256": "9f278eb6cd1007ab4a3f9b82354ff1ea4b6c7f07f1b01fff61952990e8a1269c"
+    },
+    {
+      "file": "packages/engine/src/perf/CpuTimings.ts",
+      "sha256": "9e62fec5e82aa8c3f8b9186108d5b78d9ead3fd605c7a29bc02f0787a31a3835"
+    },
+    {
+      "file": "packages/engine/src/perf/PerfMonitor.ts",
+      "sha256": "010dc6656f069a2a00dcfb34dea749caff56abd47eaf9a375bbdd603034916d6"
+    },
+    {
+      "file": "packages/engine/src/perf/PointProbe.ts",
+      "sha256": "34bb2d0b0f0811f69dd6f9aef2e66ccb88f9231658fb6b422358db37852d86c6"
+    },
+    {
+      "file": "packages/engine/src/perf/PrecisionProbe.ts",
+      "sha256": "a7355f3fdba56a6a643acab38e0d3b6ae458a23c69e8f4f93a97f4faf3e5ca41"
+    },
+    {
+      "file": "packages/engine/src/perf/compareCpu.ts",
+      "sha256": "127cd3fa611d5093d0d82fff49affae3ec6d9d9b717072f1bb884f2b0f74dcdf"
+    },
+    {
+      "file": "packages/engine/src/picking/Picker.ts",
+      "sha256": "6ed88b4ed2d660f8d44a5c55775689223db9b5533a8f02259793b3df43bbefe8"
+    },
+    {
+      "file": "packages/engine/src/quality/QualityManager.ts",
+      "sha256": "80e0515380f0bd8d11aa412203ad36420001bd3edf730bbf62a4df889de9fbf8"
+    },
+    {
+      "file": "packages/engine/src/render/PostFX.ts",
+      "sha256": "391faef5f7e1500d0f0aabf2879c24c39159d1cdd0b8bf307ef0adf2481f8b47"
+    },
+    {
+      "file": "packages/engine/src/render/RendererFactory.ts",
+      "sha256": "9b2f657cbdde3611cd1beff1ad3dbe7546d942f7bf426489aa09933c75a3f254"
+    },
+    {
+      "file": "packages/engine/src/scene/DisplayTransform.ts",
+      "sha256": "535efabf6204abd4f7c63992150b281bbd8e435877128fff7d5b7a1cf1a2bd35"
+    },
+    {
+      "file": "packages/engine/src/scene/EntityRegistry.ts",
+      "sha256": "a1deeaa11ca32dead274cb00dcf7b671168b45c67b6a60c6f2b7654e8c781ea2"
+    },
+    {
+      "file": "packages/engine/src/scene/prepareEntities.ts",
+      "sha256": "ddd4d7ab40c8c9ed29e42a3ea79a7effc1a154f2aef31d1acc6f48eb8c9c3b78"
+    },
+    {
+      "file": "packages/engine/test/api.test.ts",
+      "sha256": "97e66bd0be1298ec27a94ad6d50466026f99e3736bf0869bddcc4b5256df481d"
+    },
+    {
+      "file": "packages/engine/test/camera-reference.test.ts",
+      "sha256": "309134e2f4984931738f145b9f4105295ae370319d05359e9edbbeae60e09b30"
+    },
+    {
+      "file": "packages/engine/test/cpu-perf.test.ts",
+      "sha256": "b3482cad60ea8190a3a7963d91edbbaf3f6c100af0447bcacb85364a0d647989"
+    },
+    {
+      "file": "packages/engine/test/fixtures/surface-landmarks.json",
+      "sha256": "f5bcf5ee30c0053ce5a45d2d9a4b82ebaccd458e31ed5bb59c2bb7841f835ac8"
+    },
+    {
+      "file": "packages/engine/test/fixtures/surface-shapes.json",
+      "sha256": "36a48dc0df043bd3ce124d6c988b67508adf2764b5f4896fe2a363695e68b397"
+    },
+    {
+      "file": "packages/engine/test/labels.test.ts",
+      "sha256": "3f1f6123cf23995d3f7186c5cb46c22e130638511f9fab11658e5526b0a97cf3"
+    },
+    {
+      "file": "packages/engine/test/layers.test.ts",
+      "sha256": "004389b382a9c1168b03747f114da2966f8dffe06112f99ab2cf2daf3c944ba2"
+    },
+    {
+      "file": "packages/engine/test/lod.test.ts",
+      "sha256": "491a9bbde4e5e72397c999779309e345b0bb43d5efa7dae0fe827799b5627580"
+    },
+    {
+      "file": "packages/engine/test/orbits.test.ts",
+      "sha256": "0ef064e64542c9ffda071716beb68cd932021c628ee6dcfbeef5886c9412aa68"
+    },
+    {
+      "file": "packages/engine/test/picker.test.ts",
+      "sha256": "e9de8d07d35e710d5eb90b70281a8c317e9c446030514681331d650af5900010"
+    },
+    {
+      "file": "packages/engine/test/point-layer.test.ts",
+      "sha256": "a81031931abd506ccaab5d207b8e33d54268a7b0b4a89f1aff2ee269667fe81c"
+    },
+    {
+      "file": "packages/engine/test/point-source.test.ts",
+      "sha256": "05fc1550b12f9f240620395f798f39bdbc45f48896977bfa5c0eae616fcbf29d"
+    },
+    {
+      "file": "packages/engine/test/precision.test.ts",
+      "sha256": "313ab47bb931bbfa335bca71a71c3e44ffe7ee2df87a298c8040662dd36ab8f7"
+    },
+    {
+      "file": "packages/engine/test/quality.test.ts",
+      "sha256": "5acead0713e3e2e54e30ac01e6322835e74f5dd068d3741b4b5423d141b3675a"
+    },
+    {
+      "file": "packages/engine/test/registration.test.ts",
+      "sha256": "ccc76466c35cdf3ba86dbe7442cd30e4d9b947615b4ae27c9b78913be4391f5f"
+    },
+    {
+      "file": "packages/engine/test/rings.test.ts",
+      "sha256": "d28583e87346a1381646a2c973c5dde1fd57a8d134d831cfbf51d36699a9151c"
+    },
+    {
+      "file": "packages/engine/test/shapes.test.ts",
+      "sha256": "0125a80956a0f427a8faa9296bdc1d7a576dad9eb2b1cb2c31c7a0806b71996e"
+    },
+    {
+      "file": "packages/engine/test/surface-mapping.test.ts",
+      "sha256": "60e181ffe69c6eda1efe78ed4f652a646579374ec7d4471c3de314af813749f4"
+    },
+    {
+      "file": "packages/engine/test/surface-registration.test.ts",
+      "sha256": "6d291a8ed0511fb1aabd34aa76f208c825d9bd9f2157c56ac1299e930aee4dab"
+    },
+    {
+      "file": "packages/engine/tsconfig.json",
+      "sha256": "2f3d07ee179d399782029221bdabd709e262fe4c9de2bf69c99f5e4e67e92275"
+    },
+    {
+      "file": "packages/ingest/package.json",
+      "sha256": "81b7bc2eddec47287eee98da379bf60c219e57034d8c51b41d3fd2443b41b984"
+    },
+    {
+      "file": "packages/ingest/src/index.ts",
+      "sha256": "64e09ef10a40d8cebf6e0e169823dc71f5445391777c4fee3dcf5069f082002f"
+    },
+    {
+      "file": "packages/ingest/src/runner.ts",
+      "sha256": "167ee12fa8d327c73349f5a9903e7cb3fb748736893aa140d1e1912dcbcbb9a4"
+    },
+    {
+      "file": "packages/ingest/tsconfig.json",
+      "sha256": "2f3d07ee179d399782029221bdabd709e262fe4c9de2bf69c99f5e4e67e92275"
+    },
+    {
+      "file": "patches/astronomy-engine@2.1.19.patch",
+      "sha256": "7c0bdea845ac7e045963b13ab832c9fa4227bcfbbd6e498002e1448cf7b7a6b0"
+    },
+    {
+      "file": "playwright.config.ts",
+      "sha256": "8f3f1ed8953d9bb759797546afce0495b65b637d0651474f4b0c9f80cf74dbfe"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "sha256": "ef99f9931383a289df7c8cd6ee148f56ad11aaca592aa862cafbabaa5b824460"
+    },
+    {
+      "file": "pnpm-workspace.yaml",
+      "sha256": "3e6b35ca7b9612442922e6bd18b006c35c9ca1ffba18d19d845c7c74f744375e"
+    },
+    {
+      "file": "tools/assets/build-galilean.ts",
+      "sha256": "6a6318cbe66acfd2d4941d2d11630a4615d32c82188bfcdd5c1815b6d5f75b88"
+    },
+    {
+      "file": "tools/assets/build-ktx.ts",
+      "sha256": "1981b97bae91ac97c67666c00fe0f47e69730fb838989275860515fc43c6c137"
+    },
+    {
+      "file": "tools/assets/build-mars-moons.ts",
+      "sha256": "cee45ad160397c141072067d5693631b2ac3ea97523f3a316daecd146a0fde9c"
+    },
+    {
+      "file": "tools/assets/build-mars.ts",
+      "sha256": "957019c567f394bd9e068899526fe6ae40cd2274bbb00c9142676953d4b69ced"
+    },
+    {
+      "file": "tools/assets/build-moon.ts",
+      "sha256": "3d2df94df9cdff1d1c365fb545ffc08b5bbac37abf5561d4ede6849ad0dd543f"
+    },
+    {
+      "file": "tools/assets/build-new-horizons.ts",
+      "sha256": "58b35153a798853c66ae98791c0223426131d2c75a3d59ad62f383f7ee60dc6e"
+    },
+    {
+      "file": "tools/assets/build-sky.ts",
+      "sha256": "b29ce3ffa770052de58065861e0616b735fb7cc315ed0bfbdd4e70a3023a77bc"
+    },
+    {
+      "file": "tools/assets/build-stars.ts",
+      "sha256": "1fe8cdea045dedca7a780ef6983e425d9fde885bddca3d6d4c3ce746b6c4ce31"
+    },
+    {
+      "file": "tools/assets/build-textures.ts",
+      "sha256": "a817d9e50198bc095ac834c10e52194bc8b09dc6dc309b781c6e55d6dc4954bb"
+    },
+    {
+      "file": "tools/browser-debug.mjs",
+      "sha256": "cb0706f20b1062e2ae654edcb8383ac143580d64f7a5dc9e53c78512bdfd7e50"
+    },
+    {
+      "file": "tools/build-catalog.ts",
+      "sha256": "d2f346d5f333e08b6dec8f7afbdf714b12bafbcf45e6ac304edf9047cea6e6c9"
+    },
+    {
+      "file": "tools/check-assets.ts",
+      "sha256": "999b0f1e78de55daa35d1bbdd56804be215f5e9ff5dc4904d20307a7a9d3f00b"
+    },
+    {
+      "file": "tools/check-boundaries.ts",
+      "sha256": "58a65fe95d2779ed9386859b20795799dbbe2f8ef22ba125ad1c38aa2e215066"
+    },
+    {
+      "file": "tools/check-licenses.ts",
+      "sha256": "3059aee164d606d3eebc5fd3209930df90315cfcd8aa3cec1f1403163af9a48e"
+    },
+    {
+      "file": "tools/fixtures/audit-phobos-dsk.py",
+      "sha256": "61e9df764581510b7062a1938047f3c231fdaadfd14790ef86998e2130cbbc95"
+    },
+    {
+      "file": "tools/fixtures/audit-shape-registration.py",
+      "sha256": "63184834444b33cb44d53a517b8be64c0d5285abb565c976e57237ccda8c4a79"
+    },
+    {
+      "file": "tools/fixtures/audit-source-shape-axes.mjs",
+      "sha256": "7bdab203b683f3504a0313839dfb50285c6c34c25ffc3de463463cdf8d907207"
+    },
+    {
+      "file": "tools/fixtures/build-callisto-correction.ts",
+      "sha256": "7971881c02857db5608594eb8adc43844ae62fb79fb5781c6d6db23461f73e97"
+    },
+    {
+      "file": "tools/fixtures/build-corrections.ts",
+      "sha256": "fc3070072ab8ba42c878cc5ae5a0882f5d954b29c40742032d004cfded3d1774"
+    },
+    {
+      "file": "tools/fixtures/build-orientation.ts",
+      "sha256": "56f1cf7d550ecfc0fe52481cbd8bce52f3932adc43db6f4342ba200c2f81ba61"
+    },
+    {
+      "file": "tools/fixtures/build-osculating-tables.ts",
+      "sha256": "dfb2914adb44ea196d0d8cb0a2cd31d33551a0827bcb704fb4fefca0b105043a"
+    },
+    {
+      "file": "tools/fixtures/build-pck-orientations.py",
+      "sha256": "ee57d27350d49e2bb88e75d70182a929b8c084ac23c143dac30a776a619d960e"
+    },
+    {
+      "file": "tools/fixtures/capture-astronomy-parity.mjs",
+      "sha256": "f3e689ed271e5a5304146ee0723981591735e7430a1a200ca38330a95b04650f"
+    },
+    {
+      "file": "tools/fixtures/fetch-horizons.ts",
+      "sha256": "f1cd88573a364e97806dad155f2ae6b25c0b1eaefc786458ec5e55f2ee7d9db7"
+    },
+    {
+      "file": "tools/fixtures/fetch-phase-two.ts",
+      "sha256": "43ce98122d839c5e243614ed134c02a18307959ed7bbe91cb88513ab4fbaa64a"
+    },
+    {
+      "file": "tools/fixtures/validate-horizons.ts",
+      "sha256": "56d53a9aa04d6967c384a57b5c911d3788c981248e213147ec1cc8f7d0dce42e"
+    },
+    {
+      "file": "tools/fixtures/validate-mean-moons.ts",
+      "sha256": "4bfecc7bc5540125447ff08bc732443b34355292593510a7b5c813cd08cd9c15"
+    },
+    {
+      "file": "tools/fixtures/validate-osculating-tables.ts",
+      "sha256": "485e2264ee0fdc1f1939271674ec250efd18a827f985511b18e8d080eb7ee1e0"
+    },
+    {
+      "file": "tools/measure-bundles.mjs",
+      "sha256": "0cd9f4b1978da946ddc6277b8547940860825cc750e38f873584db6432b1cdd8"
+    },
+    {
+      "file": "tools/measure-engine.mjs",
+      "sha256": "ff7e74a199696a93bbd7f3f89f84fe28a3dfc1a0d3a259694d79b5401b7cf9a8"
+    },
+    {
+      "file": "tools/phase-four-status.mjs",
+      "sha256": "20dbb5d9eb7528037a994fad8dae2fd79f8ad8694a0a34b07e1c275a735b78fa"
+    },
+    {
+      "file": "tools/phase-three-status.mjs",
+      "sha256": "552cd1f8319996d9a8706d3c1590ef0ade7d5b1dea4c9beeb5b2ed4471983774"
+    },
+    {
+      "file": "tools/probe-backends.mjs",
+      "sha256": "ff822b59bf4a411870bc2d5f27549dd7e39a3c609e74ccba0dd8db68d7c9f734"
+    },
+    {
+      "file": "tools/profile-allocations.mjs",
+      "sha256": "39cfa5f0ee7967df722220eda42fdb5178dc4fe71a889464aa22c1aa0d559bd7"
+    },
+    {
+      "file": "tools/profile-cpu-paths.mjs",
+      "sha256": "30fb497ff21431ce272668e71dcf2c650833ebf3907f3d74f7a8203de01c5a40"
+    },
+    {
+      "file": "tools/profile-ephemeris.ts",
+      "sha256": "c9ef42b79fa7513a8b1afaca5cb5ee157c6c706c8f99b578f4673dbedd10ca81"
+    },
+    {
+      "file": "tools/profile-phase-two.ts",
+      "sha256": "44d0643eff2b33686be07c6e1945fb6aede920f1cbf1afc1e6af7f1600ef3da6"
+    },
+    {
+      "file": "tools/run-cpu-perf.mjs",
+      "sha256": "e7e6cc9af8b660a0048a6487bb48a84f7fb29ccdee069a2145fb130c219de49b"
+    },
+    {
+      "file": "tools/run-device-checks.mjs",
+      "sha256": "c7506b9b8e3014867552555abdc90512c2e5ad8b6b6ef531517b122e10a3b5ab"
+    },
+    {
+      "file": "tools/run-hosted-cpu.sh",
+      "sha256": "ef8c7d8456164ec5fceaa6a8dc29dbc3251c37b228b8e415985423e0e2e6011b"
+    },
+    {
+      "file": "tools/validate-catalog.ts",
+      "sha256": "e31f0638911d537cc396f7443d2a60d991c74c088775eebe4f02348aef714462"
+    },
+    {
+      "file": "tsconfig.base.json",
+      "sha256": "895655445551bd3986a8a3352390237997967bac5eb29a17e0b615acd7b598d9"
+    },
+    {
+      "file": "vitest.config.ts",
+      "sha256": "71be06316a53e919e17575cc34208bc28e60d1f494d8ab53cd8a1b583e49d219"
+    },
+    {
+      "file": "apps/web/src/components/search/EntitySearch.tsx",
+      "sha256": "524de6ad74966d86b98aea29738b3a2bc1b14bc1f3cbf2023b3ab0d6785ab847"
+    },
+    {
+      "file": "apps/web/src/components/ui/Icon.tsx",
+      "sha256": "5623bbb15d6c5374fcb633d83bbca4ffd31bbdd1f84ab2059ff7835703f1f60d"
+    },
+    {
+      "file": "apps/web/src/engine-bridge/searchRenderingGate.ts",
+      "sha256": "4c919a4b67904ef733356456c3cfca89c22562d0ac8bf0d907e302d6d854cb03"
+    },
+    {
+      "file": "apps/web/src/engine-bridge/useSearchRendering.ts",
+      "sha256": "198e2bf75eec67c0758d76b80e830e217d02cf9bd4afcba13f1485500da5748a"
+    },
+    {
+      "file": "apps/web/src/lib/catalogSearch.ts",
+      "sha256": "3c686564ee85cecff0000f960380ac72f190a1b1b962ca12f2921692d159e045"
+    },
+    {
+      "file": "apps/web/test/catalogSearch.test.ts",
+      "sha256": "0b4becd23f5ec125ab96f0791790a28cbd4d6486cbebab56b0685a2ebeb70ffe"
+    },
+    {
+      "file": "apps/web/test/searchRenderingGate.test.ts",
+      "sha256": "e7df2156e4da0cf487dd558dcb09bc80cd67a2bd6f8cc6f87e11267882a95f15"
+    },
+    {
+      "file": "e2e/phase-four-search-latency.spec.ts",
+      "sha256": "df95c67e7a82a2cb47213d08841d590b8f2f27162afa55e3bbc4bdfd607aa792"
+    },
+    {
+      "file": "e2e/phase-four-search.spec.ts",
+      "sha256": "c9afc29260f9498a0d743d4ca7a51b50e327cc19426548b4d5cef09d2c69bd54"
+    },
+    {
+      "file": "packages/engine/test/render-suspension.test.ts",
+      "sha256": "e980cf923e18765378ccc5ad3bb58927998fabc2deb2ba93056d14c4c410845f"
+    },
+    {
+      "file": "tools/phase-four-search-perf.ts",
+      "sha256": "621524114d442c075338cf9cab4a8159a4644933c751ab7c68943c6cefc32dd9"
+    }
+  ],
+  "deleted": [],
+  "newFiles": [
+    "apps/web/src/components/search/EntitySearch.tsx",
+    "apps/web/src/components/ui/Icon.tsx",
+    "apps/web/src/engine-bridge/searchRenderingGate.ts",
+    "apps/web/src/engine-bridge/useSearchRendering.ts",
+    "apps/web/src/lib/catalogSearch.ts",
+    "apps/web/test/catalogSearch.test.ts",
+    "apps/web/test/searchRenderingGate.test.ts",
+    "e2e/phase-four-search-latency.spec.ts",
+    "e2e/phase-four-search.spec.ts",
+    "packages/engine/test/render-suspension.test.ts",
+    "tools/phase-four-search-perf.ts"
+  ],
+  "preservedEvidence": [
+    {
+      "sha256": "19e7e80b4e8ce6810d1bd609797619333bee126d817d95f01416dbd6b5e1a5e9",
+      "file": "docs/perf/phase-two-points-webgl.json"
+    },
+    {
+      "sha256": "8eccec2902485757b043a7731d8bba6109270e41e8f26dd14306416a357ff3a6",
+      "file": "docs/perf/react-profile.json"
+    },
+    {
+      "sha256": "c94b389d41bdb0dfdf9354e041aa98bb236009f6b2e24d3a8818e0058edcf418",
+      "file": "docs/perf/texture-stability.json"
+    },
+    {
+      "sha256": "c507646ec528777172f12b8217f0eb20ec7e9b9d76f9d0506ddd16a0aaea7eb4",
+      "file": "docs/perf/screens/earth-webgl.png"
+    },
+    {
+      "sha256": "4d89fc002284e15f70042ee10e1a8934a5a0b0ac18d39287e2980865af7c5d44",
+      "file": "docs/perf/screens/mars-webgl.png"
+    },
+    {
+      "sha256": "a2d111367805def0a0aabf336f091669ac20d39a862062067e85eb0283ef8d8b",
+      "file": "docs/perf/screens/mobile-webgl.png"
+    },
+    {
+      "sha256": "1e7be2a201b39227c9c35e4797b5a8afece0a2597ecaad9c84620d0e775354ff",
+      "file": "docs/perf/screens/phase-two-ceres.png"
+    },
+    {
+      "sha256": "c286150003b233da12d89930cfa2b38ad8d082a8f6c6a6281caa4ebf741a08fb",
+      "file": "docs/perf/screens/phase-two-europa.png"
+    },
+    {
+      "sha256": "7a3374f0bfb1df9231e49c1399965aa76070c9e46311377133075ddde655efdb",
+      "file": "docs/perf/screens/phase-two-jupiter.png"
+    },
+    {
+      "sha256": "78453ed75e16ea6d084fb0d9628782d04d226fff8b749aea1baaa98d3e99a4fe",
+      "file": "docs/perf/screens/phase-two-orbits-ceres.png"
+    },
+    {
+      "sha256": "cd6fe0e6b92b42529ed4a21dd5bc712d78e864d18f754fa3e5a3cf16b37bc394",
+      "file": "docs/perf/screens/phase-two-orbits-earth.png"
+    },
+    {
+      "sha256": "08c36ba5dab66a08e3a0bc216db8628e06ec99ff0ea6b795cb163f3e3bc6c2c1",
+      "file": "docs/perf/screens/phase-two-pluto.png"
+    },
+    {
+      "sha256": "93109ecaa0114f3900dbff69587a610441fa5145df1a0f871e12d84fb15ecbaf",
+      "file": "docs/perf/screens/phase-two-titan.png"
+    },
+    {
+      "sha256": "78860e6bfce42289712ca22a81d830f9a20ae679224be8f087b251ca4f82e8d1",
+      "file": "docs/perf/screens/solar-system-webgl.png"
+    }
+  ],
+  "node": "C:\\Program Files\\nodejs\\node.exe",
+  "pnpmCli": "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 343,
+    "expectedRejections": 2,
+    "testFiles": 41,
+    "log": "verify.log",
+    "finalMeasurementChecks": "Changed timing spec passes ESLint and 44-case discovery; runtime and unit sources unchanged since this verify"
+  },
+  "port": 3002,
+  "protocol": {
+    "browserCases": 44,
+    "localLookupSamples": 1000,
+    "localLookupThresholdMs": 16,
+    "responseThresholdMs": 300,
+    "responseProfiles": [
+      "desktop",
+      "phone"
+    ],
+    "timingRecorder": "trace/video/screenshot off only for latency cases; functional cases retain traces",
+    "presentation": "Production search modal holds last scene frame; time continues; resume after canonical route/card paint; no test-only rendering stop",
+    "renderer": "42 SwiftShader WebGL2 functional cases; two timing cases require a verified physical scene GPU (Windows ANGLE/D3D11), recording actual unmasked adapter; missing/software adapters fail. Phone is viewport/touch emulation on that desktop GPU, not physical phone throughput. Prior SwiftShader response failure remains preserved",
+    "cpu": "Not repeated: P4.5 adds cold rendering leases and scheduler guards; engine frame callback/providers unchanged; accepted P4.2 pair remains separately recorded"
+  }
+}

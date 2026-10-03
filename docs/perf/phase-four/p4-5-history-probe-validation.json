@@ -1,0 +1,16 @@
+{
+  "status": "finished",
+  "pid": 37196,
+  "startedAt": "2026-10-03T17:48:22.969Z",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "sourceSha256": "e3338280eace591add66dd45b9efcba6da9d109846cd4a55caaaad97bf631a5d",
+  "method": "Focused corrected playback/history test on immutable built retry-4 production runtime; instrument external app and internal Next writes before explicit command, then require zero further writes during playback/free camera and exact sharing/paused reload. Not full P4.5 acceptance.",
+  "serverPid": 2484,
+  "diagnostic": {
+    "exitCode": 0,
+    "report": "browser.json",
+    "response": "response.json"
+  },
+  "verdict": "diagnostic-awaiting-review",
+  "finishedAt": "2026-10-03T17:48:44.733Z"
+}

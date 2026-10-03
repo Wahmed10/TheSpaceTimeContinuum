@@ -1,0 +1,11 @@
+{
+  "reviewedAt": "2026-10-03T16:47:36.817Z",
+  "sourceSha256": "837af947bf441ca3b29e2a8c126828b012fc68c94c6b99c83a5e9d55573a9ec0",
+  "method": "Instrumented diagnostic only, exact desktop benchmark sequence on immutable production candidate. Runtime wrappers log actual submission and lease counts. No acceptance.",
+  "resultSha256": "eba877d7723021ded134e305d7f02da0f6a0026f51173a13136537dc5ae73205",
+  "responseSha256": "ca2b6e40c47d67112f0d7360aa3e6d1c44a309656e3a29eb06b1ce5813a5fdac",
+  "maxSelectionMs": 609.2999999523163,
+  "finding": "Charon semantic response 73.1 ms, subsequent frame wait 536.2 ms. Scene lease remains active at both coherent UI and measured frame; no render-start occurs between those events. An early release is ruled out in this reproduction. Next diagnostic removes sampled-backdrop filters with opaque card/timeline surfaces; original source and failed evidence are preserved.",
+  "shortDiagnostic": "Six fast direct selections respond in 26.2-37.6 ms with one lease at visible frame. Its wait policy differs, so the exact benchmark-sequence reproduction is required.",
+  "setupFailure": "Initial external diagnostic used candidate Playwright CLI with root-resolved test imports, creating two module instances. Retry uses root CLI/module consistently; setup-failed report remains in diagnostic-poll/."
+}

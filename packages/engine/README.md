@@ -4,6 +4,8 @@ Import from `@space/engine`; `API_VERSION` is `1`. `SpaceEngine.create(canvas, o
 
 The stable commands are `select(id|null)`, `focus(id,{transition?,wide?,select?,recordHistory?})`, `follow(id|null)`, `back()`, `applyMapState`, `getMapState`, `setFrame`, `setLayer`, `getLayerStates`, `whenLayersSettled`, `setScale`, `setQuality`, `setReducedMotion`, `resize`, and `dispose`. `clock` owns pause/play/rate/date/LIVE. `backend` and `isFollowing` are readable. `getMetrics(id)` returns physical metrics; `getEntity(id)` returns a metadata snapshot or null. Application code must treat metadata as read-only.
 
+`suspendRendering(): () => void` holds the last 3D frame while a modal owns interaction. Leases nest; call the returned idempotent release on dismissal/unmount. Time continues from the clock's wall-time anchor, commands still accept selections, and the next submitted frame samples current simulation time. Visibility changes cannot restart submission through an active lease. Release while hidden waits for the normal visible lifecycle; disposal cannot be reversed by a later release. This cold scheduler command adds no work inside the frame loop. Consumer search releases after its accepted canonical route/card gets a paint, so shader compilation and 3D submission do not block its visible response. The renderer remains resident.
+
 `on(event, callback)` returns an unsubscribe function. Core events are `select`, `hover`, `clock`, `perf`, `error`, and `tier`. `sourceError` additionally reports `{layerId,message}` for an external point source; it does not request a graphics-backend restart. Mouse/pen hover changes are emitted and cleared on drag/leave/zoom. Touch picking does not depend on hover.
 
 ## Camera references and restoring views

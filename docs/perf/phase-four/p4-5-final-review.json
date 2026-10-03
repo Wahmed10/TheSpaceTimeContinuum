@@ -1,0 +1,90 @@
+{
+  "reviewedAt": "2026-10-03T18:45:14.628Z",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "sourceSha256": "f1273522669d7fc286ab5a641dc2e31f2622430a1fe298a18d012f84484c6377",
+  "resultSha256": "219b7e9c4b8f0f0db42e624d647ea4408b3eb2bdd81da68c11ba376dacd060ce",
+  "browserSha256": "0fa3887de7142460e256059832a202c5a7c8dcb26bc326b9bbe85529e8836d9f",
+  "verdict": "reviewed-pass",
+  "browser": {
+    "passed": 44,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "reportErrors": 0
+  },
+  "independentRootAndCandidateSourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 295,
+    "preservedEvidence": 14
+  },
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "lookup": {
+    "samples": 1000,
+    "maxMs": 0.6098999999999819
+  },
+  "response": {
+    "desktop": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 27,
+      "selectionSamples": 6,
+      "maxInputMs": 47.39999997615814,
+      "maxSelectionMs": 58.90000009536743,
+      "maxLongTaskMs": 206
+    },
+    "phone": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 28,
+      "selectionSamples": 6,
+      "maxInputMs": 14.899999976158142,
+      "maxSelectionMs": 27.899999976158142,
+      "maxLongTaskMs": 143
+    }
+  },
+  "budgets": {
+    "engineGzip": 374840,
+    "engineLimit": 450000,
+    "assets": 79961515,
+    "assetLimit": 80000000,
+    "dependencyLicenses": 72
+  },
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.13435596144853434,
+    "depthProbes": 11
+  },
+  "storage": {
+    "focusChanges": 20,
+    "textures": 33,
+    "compressedTextureMips": 16516088,
+    "pending": 0
+  },
+  "inspectedCaptures": [
+    {
+      "file": "phase-four-search-combobox-b2350-ption-rather-than-the-first/keyboard-active-result.png",
+      "sha256": "da4ce96c91b2f9fbb6382124bdf69ddb6629e0517c05b895dd404fe993af0de0"
+    },
+    {
+      "file": "phase-four-search-empty-un-40d4a-esult-Enter-adds-no-history/search-no-results.png",
+      "sha256": "cd87ca904d3e961a3ef468850ba508baf1f8d6ad032f13edebbf4f0a184e65a5"
+    },
+    {
+      "file": "phase-four-search-phone-to-360cf-sable-in-a-shorter-viewport/phone-short-viewport-search.png",
+      "sha256": "fea2e0748f8a0bdc182243365dfd39ce4d4dac60fa641c10139f2bf29606a3c8"
+    }
+  ],
+  "limitations": [
+    "SwiftShader response failures preserved; its functional/science evidence is separate from physical-GPU mechanism timing.",
+    "Phone is viewport/touch emulation on recorded Radeon 780M, not physical phone throughput.",
+    "Post-resumption long tasks 206 ms desktop/143 ms phone viewport remain recorded for P4.9; this accepts P4.5 search gates, not final shell/navigation performance.",
+    "P4.2 CPU pair retained separately: cold scheduler leases added, engine frame callback/providers unchanged."
+  ],
+  "next": "Commit P4.5 locally, continue approved P4.6 object cards/provenance/mobile sheet."
+}

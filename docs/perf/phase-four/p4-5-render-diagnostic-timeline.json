@@ -1,0 +1,335 @@
+{
+  "events": [
+    {
+      "event": "hold",
+      "time": 2845.3000000715256,
+      "route": "/",
+      "leases": 1
+    },
+    {
+      "event": "choose",
+      "time": 3180.3000000715256,
+      "route": "/",
+      "id": "planet:mars",
+      "leases": 1
+    },
+    {
+      "event": "history",
+      "time": 3213.600000023842,
+      "route": "/object/planet/mars"
+    },
+    {
+      "event": "coherent",
+      "time": 3213.600000023842,
+      "route": "/object/planet/mars",
+      "id": "planet:mars",
+      "leases": 1
+    },
+    {
+      "event": "visible-frame",
+      "time": 3217.8000000715256,
+      "route": "/object/planet/mars",
+      "id": "planet:mars",
+      "leases": 1
+    },
+    {
+      "event": "release",
+      "time": 3242.399999976158,
+      "route": "/object/planet/mars",
+      "leases": 0
+    },
+    {
+      "event": "render-start",
+      "time": 3251.399999976158,
+      "route": "/object/planet/mars",
+      "leases": 0
+    },
+    {
+      "event": "render-end",
+      "time": 3253.100000023842,
+      "route": "/object/planet/mars",
+      "duration": 1.7999999523162842,
+      "leases": 0
+    },
+    {
+      "event": "hold",
+      "time": 3258.8000000715256,
+      "route": "/object/planet/mars",
+      "leases": 1
+    },
+    {
+      "event": "choose",
+      "time": 3274.5,
+      "route": "/object/planet/mars",
+      "id": "moon:europa",
+      "leases": 1
+    },
+    {
+      "event": "history",
+      "time": 3299.399999976158,
+      "route": "/object/moon/europa"
+    },
+    {
+      "event": "coherent",
+      "time": 3299.5,
+      "route": "/object/moon/europa",
+      "id": "moon:europa",
+      "leases": 1
+    },
+    {
+      "event": "visible-frame",
+      "time": 3301.8000000715256,
+      "route": "/object/moon/europa",
+      "id": "moon:europa",
+      "leases": 1
+    },
+    {
+      "event": "release",
+      "time": 3318,
+      "route": "/object/moon/europa",
+      "leases": 0
+    },
+    {
+      "event": "render-start",
+      "time": 3334.5,
+      "route": "/object/moon/europa",
+      "leases": 0
+    },
+    {
+      "event": "render-end",
+      "time": 3335.7000000476837,
+      "route": "/object/moon/europa",
+      "duration": 1.100000023841858,
+      "leases": 0
+    },
+    {
+      "event": "hold",
+      "time": 3339.600000023842,
+      "route": "/object/moon/europa",
+      "leases": 1
+    },
+    {
+      "event": "choose",
+      "time": 3358,
+      "route": "/object/moon/europa",
+      "id": "dwarf:pluto",
+      "leases": 1
+    },
+    {
+      "event": "history",
+      "time": 3371.600000023842,
+      "route": "/object/dwarf/pluto"
+    },
+    {
+      "event": "coherent",
+      "time": 3371.600000023842,
+      "route": "/object/dwarf/pluto",
+      "id": "dwarf:pluto",
+      "leases": 1
+    },
+    {
+      "event": "visible-frame",
+      "time": 3384.5,
+      "route": "/object/dwarf/pluto",
+      "id": "dwarf:pluto",
+      "leases": 1
+    },
+    {
+      "event": "release",
+      "time": 3402.2000000476837,
+      "route": "/object/dwarf/pluto",
+      "leases": 0
+    },
+    {
+      "event": "render-start",
+      "time": 3417.399999976158,
+      "route": "/object/dwarf/pluto",
+      "leases": 0
+    },
+    {
+      "event": "render-end",
+      "time": 3428.100000023842,
+      "route": "/object/dwarf/pluto",
+      "duration": 10.700000047683716,
+      "leases": 0
+    },
+    {
+      "event": "hold",
+      "time": 3434.3000000715256,
+      "route": "/object/dwarf/pluto",
+      "leases": 1
+    },
+    {
+      "event": "choose",
+      "time": 3455.399999976158,
+      "route": "/object/dwarf/pluto",
+      "id": "moon:charon",
+      "leases": 1
+    },
+    {
+      "event": "history",
+      "time": 3471.899999976158,
+      "route": "/object/moon/charon"
+    },
+    {
+      "event": "coherent",
+      "time": 3471.899999976158,
+      "route": "/object/moon/charon",
+      "id": "moon:charon",
+      "leases": 1
+    },
+    {
+      "event": "visible-frame",
+      "time": 3485.5,
+      "route": "/object/moon/charon",
+      "id": "moon:charon",
+      "leases": 1
+    },
+    {
+      "event": "release",
+      "time": 3501.600000023842,
+      "route": "/object/moon/charon",
+      "leases": 0
+    },
+    {
+      "event": "render-start",
+      "time": 3517.600000023842,
+      "route": "/object/moon/charon",
+      "leases": 0
+    },
+    {
+      "event": "render-end",
+      "time": 3519,
+      "route": "/object/moon/charon",
+      "duration": 1.399999976158142,
+      "leases": 0
+    },
+    {
+      "event": "hold",
+      "time": 3523.8000000715256,
+      "route": "/object/moon/charon",
+      "leases": 1
+    },
+    {
+      "event": "choose",
+      "time": 3541.5,
+      "route": "/object/moon/charon",
+      "id": "planet:earth",
+      "leases": 1
+    },
+    {
+      "event": "history",
+      "time": 3556.399999976158,
+      "route": "/object/planet/earth"
+    },
+    {
+      "event": "coherent",
+      "time": 3556.399999976158,
+      "route": "/object/planet/earth",
+      "id": "planet:earth",
+      "leases": 1
+    },
+    {
+      "event": "visible-frame",
+      "time": 3567.7000000476837,
+      "route": "/object/planet/earth",
+      "id": "planet:earth",
+      "leases": 1
+    },
+    {
+      "event": "release",
+      "time": 3584.899999976158,
+      "route": "/object/planet/earth",
+      "leases": 0
+    },
+    {
+      "event": "render-start",
+      "time": 3601.899999976158,
+      "route": "/object/planet/earth",
+      "leases": 0
+    },
+    {
+      "event": "render-end",
+      "time": 3602.899999976158,
+      "route": "/object/planet/earth",
+      "duration": 1,
+      "leases": 0
+    },
+    {
+      "event": "hold",
+      "time": 3606.8000000715256,
+      "route": "/object/planet/earth",
+      "leases": 1
+    },
+    {
+      "event": "choose",
+      "time": 3622.899999976158,
+      "route": "/object/planet/earth",
+      "id": "planet:mercury",
+      "leases": 1
+    },
+    {
+      "event": "history",
+      "time": 3641.7000000476837,
+      "route": "/object/planet/mercury"
+    },
+    {
+      "event": "coherent",
+      "time": 3641.7000000476837,
+      "route": "/object/planet/mercury",
+      "id": "planet:mercury",
+      "leases": 1
+    },
+    {
+      "event": "visible-frame",
+      "time": 3650.8000000715256,
+      "route": "/object/planet/mercury",
+      "id": "planet:mercury",
+      "leases": 1
+    }
+  ],
+  "samples": [
+    {
+      "id": "planet:mars",
+      "start": 3180.2000000476837,
+      "commit": 3213.600000023842,
+      "frame": 3217.8000000715256,
+      "leases": 1
+    },
+    {
+      "id": "moon:europa",
+      "start": 3274.5,
+      "commit": 3299.5,
+      "frame": 3301.8000000715256,
+      "leases": 1
+    },
+    {
+      "id": "dwarf:pluto",
+      "start": 3358,
+      "commit": 3371.600000023842,
+      "frame": 3384.5,
+      "leases": 1
+    },
+    {
+      "id": "moon:charon",
+      "start": 3455.399999976158,
+      "commit": 3471.899999976158,
+      "frame": 3485.5,
+      "leases": 1
+    },
+    {
+      "id": "planet:earth",
+      "start": 3541.5,
+      "commit": 3556.399999976158,
+      "frame": 3567.7000000476837,
+      "leases": 1
+    },
+    {
+      "id": "planet:mercury",
+      "start": 3622.899999976158,
+      "commit": 3641.7000000476837,
+      "frame": 3650.8000000715256,
+      "leases": 1
+    }
+  ]
+}

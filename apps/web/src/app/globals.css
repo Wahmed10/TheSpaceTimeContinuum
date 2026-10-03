@@ -775,8 +775,14 @@ p {
   border-radius: 8px;
 }
 .search-result:hover,
+.search-result[aria-selected='true'],
 .search-result:focus {
   background: #ffffff08;
+}
+.search-box input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+  border-radius: 3px;
 }
 .search-result i {
   height: 25px;

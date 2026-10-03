@@ -260,9 +260,8 @@ test('20 client selections keep one engine/canvas and one focus per selection wi
       .click();
     await page.getByPlaceholder('Where would you like to go?').fill(body.name);
     await page
-      .getByRole('button', {
-        name: `${body.name} ${body.kind} · Solar system`,
-        exact: true,
+      .getByRole('option', {
+        name: new RegExp(`^${body.name},`),
       })
       .click();
     selections++;

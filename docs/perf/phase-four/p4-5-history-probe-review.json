@@ -1,0 +1,32 @@
+{
+  "reviewedAt": "2026-10-03T17:49:50.438Z",
+  "verdict": "reviewed-focused-pass-not-phase-acceptance",
+  "resultSha256": "b6b295f2c5f56681e08791f5e5ddf53e4531a004f4a7312ae54a912edc9a31f5",
+  "browserSha256": "7c1cf20104f0a36bb2a412affc20cafb9c119325b06a9e867a808746bba42dcb",
+  "testSha256": "6ccc4b60438fdda96ed64909cb2a82a15c5e9017df89e30d7ff7494be99604c1",
+  "runtimeSourceSha256": "e3338280eace591add66dd45b9efcba6da9d109846cd4a55caaaad97bf631a5d",
+  "method": "Focused corrected playback/history test on immutable built retry-4 production runtime; instrument external app and internal Next writes before explicit command, then require zero further writes during playback/free camera and exact sharing/paused reload. Not full P4.5 acceptance.",
+  "stats": {
+    "startTime": "2026-10-03T17:48:24.959Z",
+    "duration": 19404.311,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "rootRuntimeAndCandidateUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "source": "Corrected root test equals probe.spec.ts; all original candidate source hashes remain intact. Root runtime unchanged; only history test and ADR differ.",
+  "findings": "Exactly one external replaceState and one pinned Next internal __NA replacement of the same href settle before the baseline. No further history writes during accelerated playback/free camera. Share current time, diagnostic stripping and exact paused reload pass. Original history retry failure was an instrumentation assumption; no runtime change.",
+  "inspectedRetry4Captures": [
+    "keyboard-active-result.png",
+    "search-no-results.png",
+    "phone-short-viewport-search.png"
+  ],
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.13435596144853434,
+    "depthProbes": 11
+  },
+  "next": "Full exact-source 44-case validation before P4.5 acceptance."
+}

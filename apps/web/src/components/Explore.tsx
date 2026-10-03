@@ -7,7 +7,9 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { EXPLORABLE_BODIES } from '@space/domain';
 import type { CameraFrame, QualitySetting } from '@space/engine';
 import { useEngineStore } from '../engine-bridge/useEngineStore';
+import { useSearchRendering } from '../engine-bridge/useSearchRendering';
 import LinkStateNotice from './LinkStateNotice';
+import Icon from './ui/Icon';
 import ShareViewDialog from './ShareViewDialog';
 import { parseExploreLocation, serializeExploreState } from '../lib/routeState';
 import {
@@ -23,6 +25,9 @@ import {
   togglePlayback,
 } from '../engine-bridge/timeCommands';
 const EngineCanvas = dynamic(() => import('../engine-bridge/EngineCanvas'), {
+  ssr: false,
+});
+const EntitySearch = dynamic(() => import('./search/EntitySearch'), {
   ssr: false,
 });
 const bodies = EXPLORABLE_BODIES;
@@ -42,36 +47,6 @@ const rateLabels = [
   '1 month / s',
   '1 year / s',
 ];
-function Icon({ name }: { name: string }) {
-  const paths: Record<string, string> = {
-    search: 'm21 21-4.5-4.5 M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0',
-    layers: 'm12 3 10 6-10 6L2 9z M2 14l10 6 10-6 M2 19l10 6 10-6',
-    settings:
-      'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M12 2v3 M12 19v3 M2 12h3 M19 12h3 M5 5l2 2 M17 17l2 2 M5 19l2-2 M17 7l2-2',
-    arrow: 'M5 12h14 M13 6l6 6-6 6',
-    close: 'm6 6 12 12 M6 18 18 6',
-    back: 'M19 12H5 M11 6l-6 6 6 6',
-    focus: 'M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5 M9 12h6 M12 9v6',
-    share: 'M12 16V3 M7 8l5-5 5 5 M5 13v8h14v-8',
-    help: 'M9 8a3 3 0 1 1 5 2c-2 1-2 2-2 3 M12 17v1 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',
-    orbit: 'M20 4C15-1-3 15 3 21S26 10 20 4 M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0',
-  };
-  return (
-    <svg
-      viewBox="0 0 24 26"
-      width="18"
-      height="18"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d={paths[name] ?? paths.orbit} />
-    </svg>
-  );
-}
 export default function Explore({
   onChoose,
 }: { onChoose?: (id: string) => void } = {}) {
@@ -87,7 +62,6 @@ export default function Explore({
     routeState = useEngineStore((s) => s.routeState),
     utcDate = useEngineStore((s) => s.utcDate);
   const [searchOpen, setSearchOpen] = useState(false),
-    [query, setQuery] = useState(''),
     [help, setHelp] = useState(false),
     [notice, setNotice] = useState(''),
     [dateDraft, setDateDraft] = useState<string | null>(null),
@@ -95,9 +69,16 @@ export default function Explore({
     [details, setDetails] = useState(false),
     [reduced, setReduced] = useState(false),
     [unit, setUnit] = useState<'km' | 'mi' | 'AU'>('km');
+  useSearchRendering(searchOpen);
   const body = bodies.find((b) => b.id === selectedId);
   const dateRef = useRef<HTMLInputElement>(null);
   const shareRef = useRef<HTMLButtonElement>(null);
+  const searchRef = useRef<HTMLButtonElement>(null);
+  const searchReturnFocus = useRef<HTMLElement | null>(null);
+  function openSearch() {
+    searchReturnFocus.current = searchRef.current;
+    setSearchOpen(true);
+  }
   const accepted = routeState ?? parseExploreLocation('/', '').state;
   const enabled = new Set(mapState?.layers ?? accepted.layers);
   const layers = ['planets', 'moons', 'dwarfs', 'orbits'].map((id) => ({
@@ -119,10 +100,20 @@ export default function Explore({
   }
   useEffect(() => {
     function key(e: KeyboardEvent) {
-      if ((e.target as HTMLElement).matches('input,select,textarea')) return;
+      if (
+        e.defaultPrevented ||
+        e.isComposing ||
+        e.ctrlKey ||
+        e.metaKey ||
+        e.altKey ||
+        (e.target as HTMLElement).closest(
+          'input,select,textarea,[contenteditable="true"],[role="dialog"]',
+        )
+      )
+        return;
       if (e.key === '/') {
         e.preventDefault();
-        setSearchOpen(true);
+        openSearch();
       }
       if (e.key === ' ') {
         e.preventDefault();
@@ -161,11 +152,6 @@ export default function Explore({
       setShareUrl(url.toString());
     }
   }
-  const filtered = bodies.filter((b) =>
-    `${b.name} ${b.aliases.join(' ')}`
-      .toLowerCase()
-      .includes(query.toLowerCase()),
-  );
   return (
     <main className="explore">
       <EngineCanvas />
@@ -187,7 +173,8 @@ export default function Explore({
           <button
             className="search-trigger"
             aria-label="Find a world"
-            onClick={() => setSearchOpen(true)}
+            ref={searchRef}
+            onClick={openSearch}
           >
             <Icon name="search" />
             <span>Find a world</span>
@@ -598,63 +585,13 @@ export default function Explore({
         onClose={() => setShareUrl(null)}
         returnFocus={shareRef}
       />
-      <Dialog.Root open={searchOpen} onOpenChange={setSearchOpen}>
-        <Dialog.Portal>
-          <Dialog.Overlay className="dialog-overlay" />
-          <Dialog.Content className="search-dialog">
-            <Dialog.Title className="sr-only">Find a world</Dialog.Title>
-            <Dialog.Description className="sr-only">
-              Search the four worlds available in this architecture preview.
-            </Dialog.Description>
-            <div className="search-box">
-              <Icon name="search" />
-              <input
-                autoFocus
-                placeholder="Where would you like to go?"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && filtered[0]) choose(filtered[0].id);
-                  if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    document
-                      .querySelector<HTMLButtonElement>('.search-result')
-                      ?.focus();
-                  }
-                }}
-              />
-              <Dialog.Close aria-label="Close search">
-                <kbd>esc</kbd>
-              </Dialog.Close>
-            </div>
-            <div className="search-heading">
-              WORLDS TO EXPLORE <span>{filtered.length} destinations</span>
-            </div>
-            {filtered.map((b) => (
-              <button
-                className="search-result"
-                key={b.id}
-                onClick={() => choose(b.id)}
-              >
-                <i style={{ background: b.color }} />
-                <span>
-                  {b.name}
-                  <small>{b.kind} · Solar system</small>
-                </span>
-                <Icon name="arrow" />
-              </button>
-            ))}
-            {!filtered.length && (
-              <p className="empty-search">
-                No worlds found. Try Jupiter, Europa, Pluto, or Earth.
-              </p>
-            )}
-            <div className="search-foot">
-              ↑ ↓ Tab to navigate <span>↵ to explore</span>
-            </div>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
+      {searchOpen && (
+        <EntitySearch
+          onChoose={choose}
+          onClose={() => setSearchOpen(false)}
+          returnFocus={searchReturnFocus}
+        />
+      )}
       <Dialog.Root open={help} onOpenChange={setHelp}>
         <Dialog.Portal>
           <Dialog.Overlay className="dialog-overlay" />

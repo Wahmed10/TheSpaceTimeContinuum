@@ -39,6 +39,9 @@ it('keeps consumer commands and source contracts independent of renderer interna
   expectTypeOf<EngineApi['whenLayersSettled']>().returns.toEqualTypeOf<
     Promise<void>
   >();
+  expectTypeOf<EngineApi['suspendRendering']>().toEqualTypeOf<
+    () => () => void
+  >();
   expectTypeOf<EngineEvents['mapStateChange']>().toEqualTypeOf<MapState>();
   expectTypeOf<EngineApi['getMapState']>().returns.toEqualTypeOf<MapState>();
   expectTypeOf<EngineApi['registerPointLayer']>().toEqualTypeOf<

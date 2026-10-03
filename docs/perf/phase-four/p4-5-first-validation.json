@@ -1,0 +1,160 @@
+{
+  "status": "finished",
+  "pid": 27336,
+  "startedAt": "2026-10-03T14:43:17.286Z",
+  "candidateCommit": "7199ddb45174ff58c442a9a6f18e6636594e3ffd",
+  "candidateSource": "7199ddb45174ff58c442a9a6f18e6636594e3ffd + uncommitted P4.5 snapshot SHA256 cf54f86a58fc5bbcf2e203d0b0ebcfbbcd75b0243792544ccfd6ca888aa7180f",
+  "sourceSha256": "cf54f86a58fc5bbcf2e203d0b0ebcfbbcd75b0243792544ccfd6ca888aa7180f",
+  "method": "Hashed isolated P4.5 source. Warm Node-only local lookup (1000 samples, maximum below 16 ms), unconfigured-origin production build/budgets/licenses and 43 production browser/HTTP/renderer cases. Nine new search cases include keyboard/IME/touch and settled desktop/phone input/result/semantic selection response (maximum at most 300 ms). Prior accepted configured-origin evidence retained. SwiftShader functional evidence only; no root output/server changes.",
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 335,
+    "expectedRejections": 2,
+    "testFiles": 39,
+    "log": "verify.log"
+  },
+  "protocol": {
+    "browserCases": 43,
+    "localLookupSamples": 1000,
+    "localLookupThresholdMs": 16,
+    "responseThresholdMs": 300,
+    "responseProfiles": [
+      "desktop",
+      "phone"
+    ],
+    "renderer": "SwiftShader WebGL2; functional evidence only",
+    "cpu": "Not repeated: P4.5 changes only local search/UI, not engine frame loops; accepted P4.2 pair remains separately recorded"
+  },
+  "launch": "launch.json",
+  "snapshot": "tracked-source.patch and new-source/",
+  "activeStage": null,
+  "install": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "install",
+      "--offline",
+      "--frozen-lockfile"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "install.log",
+    "stderr": "install-stderr.log"
+  },
+  "localSearch": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/phase-four-search-perf.ts",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\local-search.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "localSearch.log",
+    "stderr": "localSearch-stderr.log"
+  },
+  "build": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "build"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "build.log",
+    "stderr": "build-stderr.log"
+  },
+  "engineBundle": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "node",
+      "tools/measure-engine.mjs"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "engineBundle.log",
+    "stderr": "engineBundle-stderr.log"
+  },
+  "assets": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/check-assets.ts"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "assets.log",
+    "stderr": "assets-stderr.log"
+  },
+  "licenses": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "licenses:check"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "licenses.log",
+    "stderr": "licenses-stderr.log"
+  },
+  "unconfiguredServer": {
+    "pid": 22072,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\candidate",
+    "port": 3002,
+    "log": "unconfigured-server.log",
+    "mode": "production",
+    "siteOrigin": "(unconfigured)",
+    "startedAt": "2026-10-03T14:43:59.869Z"
+  },
+  "browser": {
+    "exitCode": 1,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-search.spec.ts",
+      "e2e/phase-four-history.spec.ts",
+      "e2e/phase-four-routing.spec.ts",
+      "e2e/phase-four-state.spec.ts",
+      "e2e/phase-four-url.spec.ts",
+      "e2e/startup.spec.ts",
+      "e2e/precision.spec.ts",
+      "e2e/visual.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\browser",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-5\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "browser.json",
+    "stderr": "browser-stderr.log",
+    "stats": {
+      "startTime": "2026-10-03T14:44:02.098Z",
+      "duration": 495077.417,
+      "expected": 39,
+      "skipped": 0,
+      "unexpected": 4,
+      "flaky": 0
+    },
+    "reportErrors": 0
+  },
+  "failure": {
+    "message": "browser failed: Incomplete/failed/skipped/flaky coverage; inspect browser.json and browser-stderr.log"
+  },
+  "verdict": "failed",
+  "finishedAt": "2026-10-03T14:52:17.483Z"
+}

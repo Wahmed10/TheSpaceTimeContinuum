@@ -1,0 +1,14 @@
+# P4.5 first production run: failed, preserved
+
+October 3, 2026. Base `7199ddb`; source SHA256 `cf54f86a58fc5bbcf2e203d0b0ebcfbbcd75b0243792544ccfd6ca888aa7180f`. Run `.tools/phase-four/p4-5/` finished at `2026-10-03T14:52:17.483Z`. Its 290 source files and fourteen earlier generated-evidence hashes were independently verified against both root and candidate before corrections. Original candidate still matches. The adjacent source/validation/browser/review JSON records bind this failed result to its exact source; captures and traces remain in the run folder.
+
+Short verify passed 335 tests plus two existing expected rejections, 39 files. Offline frozen install, production build, engine/assets/licenses and server logs passed. Warm lookup passed all 1000 samples: median 0.0096 ms, p95 0.0319 ms, maximum 0.4685 ms against the unchanged 16 ms ceiling.
+
+Browser coverage was **39 passed / 4 failed / 0 skipped / 0 flaky / 0 report errors**. P4.5 is unaccepted.
+
+- LAN startup still expected the previous 21-result list. The approved bounded combobox correctly shows eight suggestions. Update that assertion and verify a nondefault body, Charon, remains searchable; retain hydration/renderer/LAN/error checks.
+- The active-option test verified engine/card selection and immediately checked browser history before Next committed its asynchronous route. Await the correct canonical object URL, then assert exactly one added entry. Preserve all keyboard/ARIA/active-option/focus assertions.
+- Desktop timing exceeded the 300 ms limit: input maximum 385.3 ms and semantic selection maximum 1335.8 ms. Phone input maximum was 409.4 ms and selection maximum 587.4 ms. Both selection gates also fail even though the input assertion aborted before reaching them. All samples are preserved in adjacent response JSON files.
+- Trace network records show completed object-route requests took approximately 2–18 ms; cold search lookup is also fast. The recorder captures DOM snapshots and live-canvas screencasts during the timing cases. Its contribution to the observed delay is not established by this first run. The retry disables trace/video/screenshots only for the two timing cases, retains the live renderer and every-sample maximum 300 ms gate, and records DOM/semantic commit, subsequent frame wait and long tasks. Functional cases keep traces. This isolates instrumentation overhead before making engine changes.
+
+The first wrapper stopped its owned production server on failure. Its success-only trailing source checks/artifact copies did not run; review independently verified hashes and preserved the response artifacts. No production performance acceptance follows from the warm lookup result or from changing recorder settings. Review the corrected isolated retry before accepting or committing P4.5. P4.6 remains pending; no engine, astronomy, assets or frame-loop changes were made by these corrections.
