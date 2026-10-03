@@ -1,6 +1,9 @@
 import type { NextConfig } from 'next';
 import { networkInterfaces } from 'node:os';
 const config: NextConfig = {
+  // Friendly redirects must validate the original percent-encoded query.
+  // Next's default Proxy URL normalization reconstructs decoded parameters.
+  skipProxyUrlNormalize: true,
   // Next's dev client must connect before hydration. Allow this PC's exact
   // LAN addresses for phone testing, without a wildcard dev-origin allowance.
   allowedDevOrigins:

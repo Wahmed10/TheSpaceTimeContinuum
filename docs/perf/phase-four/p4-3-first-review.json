@@ -1,0 +1,35 @@
+{
+  "reviewedAt": "2026-10-03T06:12:50.365Z",
+  "candidateCommit": "0b4b9f42849d908208137446ec98c49741a0bfb9",
+  "sourceSha256": "a055da1a670a6e7fbc803c769f7d5337434250a0766e9149c88b78bb96effb9d",
+  "resultSha256": "08b41bd4ee8b705b674906a821c6bce869bf6b1bf6dd6f7681ecca00274638da",
+  "verdict": "reviewed-failure",
+  "browser": {
+    "passed": 22,
+    "failed": 3,
+    "skipped": 0,
+    "flaky": 0,
+    "reportErrors": 0
+  },
+  "originalCandidateUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "failures": [
+    {
+      "case": "friendly HTTP redirect",
+      "cause": "Default Next Proxy URL normalization reconstructed decoded query values, losing malformed UTF-8 evidence and retaining test=1.",
+      "correction": "Enable installed skipProxyUrlNormalize to deliver original request query to codec."
+    },
+    {
+      "case": "20 client selections",
+      "cause": "The hasText regexp assumed whitespace between name and nested small label; actual textContent concatenates them. First Sun selection never occurred.",
+      "correction": "Use exact accessible role/name; retain all 20 identity/restoration/subscription assertions."
+    },
+    {
+      "case": "startup selection",
+      "cause": "Header click waited behind loading overlay for 60 seconds; startup expired before requests were released.",
+      "correction": "Use existing slash search shortcut, dialog above overlay, while startup is actually pending; keep latest-route/lab assertions."
+    }
+  ],
+  "serverErrors": "Internal NoFallbackError on unknown object requests despite verified HTTP 404. Remove dynamicParams=false and keep catalog notFound checks; strict HTTP 404 and clean server logs require new production review.",
+  "pending": "P4.3 remains unaccepted. Configured-origin build/metadata stage did not run after browser gate failed. Preserve this run and launch corrected isolated source."
+}

@@ -1,6 +1,6 @@
 # The Space Time Continuum
 
-A working **Phase 3 Solar System renderer**, not the completed MVP. Phase 3 is accepted; [the detailed Phase 4 handoff](PHASE_4_HANDOFF.md) prepares the next session's Core Consumer UX plan. Phase 4 implementation has not started.
+A working **Phase 3 Solar System renderer**, not the completed MVP. Phase 3 is accepted and [the approved Phase 4 plan](docs/PHASE_4_PLAN.md) is being implemented. [The checkpoint](docs/PHASE_4_CHECKPOINT.md) records accepted steps and the active validation job.
 
 ```powershell
 pnpm install
@@ -8,6 +8,10 @@ pnpm dev
 ```
 
 Open http://localhost:3000. The application works locally without accounts, API keys, or a database. `?renderer=webgl` forces WebGL2; `?test=1` freezes the simulation at 2026-09-22; `?perf=1` exposes rendering diagnostics. `/lab/probe` reports browser capabilities.
+
+Object routes use catalog IDs, for example `/object/planet/mars`, `/object/moon/europa`, `/object/dwarf/pluto` and `/object/moon/charon`. Friendly paths such as `/mars` redirect with validated link settings. Optional `SITE_URL` must be an HTTP(S) origin with no credentials, path, query or fragment; set it in the web build environment (or `apps/web/.env.local`). Unconfigured/invalid origins omit absolute canonical and Open Graph URLs. Metadata uses catalog descriptions, with no invented live measurements. Event links currently return an unavailable-events 404.
+
+Check the recorded Phase 4 job from PowerShell with `node tools/phase-four-status.mjs`. This prints its source, stage outcomes and log directory without starting tests. Automated success remains pending until its review is recorded.
 
 Currently implemented: a Next.js/TypeScript workspace; a framework-free Three.js WebGPU/WebGL2 engine; all 21 catalog bodies with sourced maps/materials, Saturn rings and irregular Phobos/Deimos meshes; camera-relative float64 physics; orbit, zoom, pan, focus flights, follow, and history; a deterministic TDB clock with live/past/future/reverse playback; Explore/True scale; basic search, cards, layer controls, settings, and responsive UI. Reference data and attributed assets are committed. Phase 4 will complete consumer routing, share-state synchronization, search and accessibility rather than rebuild the accepted renderer.
 

@@ -1,5 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import * as Popover from '@radix-ui/react-popover';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -57,7 +58,9 @@ function Icon({ name }: { name: string }) {
     </svg>
   );
 }
-export default function Explore() {
+export default function Explore({
+  onChoose,
+}: { onChoose?: (id: string) => void } = {}) {
   const engine = useEngineStore((s) => s.engine),
     selectedId = useEngineStore((s) => s.selectedId),
     ready = useEngineStore((s) => s.ready),
@@ -94,7 +97,8 @@ export default function Explore() {
     }
   }, [engine]);
   function choose(id: string) {
-    engine?.focus(id);
+    if (onChoose) onChoose(id);
+    else engine?.focus(id);
     setSearchOpen(false);
     setDetails(false);
   }
@@ -159,17 +163,17 @@ export default function Explore() {
       <EngineCanvas />
       <LinkStateNotice />
       <header className="topbar">
-        <a className="brand" href="/" aria-label="Space Time Continuum home">
+        <Link className="brand" href="/" aria-label="Space Time Continuum home">
           <span className="brand-mark">✳</span>
           <span>
             CONTINUUM<small>SPACE & TIME, CONNECTED</small>
           </span>
-        </a>
+        </Link>
         <div className="nav-segment">
           <span className="nav-active">Explore</span>
-          <a href="/about/data">
+          <Link href="/about/data">
             About the data <span>↗</span>
-          </a>
+          </Link>
         </div>
         <div className="top-actions">
           <button

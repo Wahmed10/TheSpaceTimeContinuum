@@ -17,6 +17,7 @@ interface Store {
   ready: boolean;
   linkIssues: readonly RouteIssue[];
   mapState: MapState | null;
+  appliedLocation: string | null;
 }
 export const useEngineStore = create<Store>(() => ({
   engine: null,
@@ -33,4 +34,5 @@ export const useEngineStore = create<Store>(() => ({
   ready: false,
   linkIssues: [],
   mapState: null,
+  appliedLocation: null,
 }));

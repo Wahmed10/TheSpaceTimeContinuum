@@ -1,0 +1,196 @@
+{
+  "status": "finished",
+  "pid": 24620,
+  "startedAt": "2026-10-03T06:14:43.472Z",
+  "candidateCommit": "0b4b9f42849d908208137446ec98c49741a0bfb9",
+  "candidateSource": "0b4b9f42849d908208137446ec98c49741a0bfb9 + uncommitted P4.3 snapshot SHA256 b1f595fb4db7577e164d39ec705c184618e3a6adc3a10830720abd261dd7d41c",
+  "sourceSha256": "b1f595fb4db7577e164d39ec705c184618e3a6adc3a10830720abd261dd7d41c",
+  "method": "Hashed isolated corrected P4.3 source, retry after preserved first failure. Unconfigured-origin production build, budgets/licenses and 25 production browser/HTTP/renderer regression cases. Then a configured-origin production build and the all-21-object HTTP metadata case. No root server/build output touched. SwiftShader functional evidence; no physical performance acceptance.",
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 290,
+    "expectedRejections": 2,
+    "testFiles": 37,
+    "log": "verify.log"
+  },
+  "protocol": {
+    "browserCases": 25,
+    "configuredMetadataCases": 1,
+    "siteOrigin": "https://continuum.example",
+    "renderer": "SwiftShader WebGL2; functional evidence only",
+    "cpu": "Not repeated: P4.3 has no engine/frame-loop changes; accepted P4.2 pair remains separately recorded"
+  },
+  "launch": "launch.json",
+  "snapshot": "tracked-source.patch and new-source/",
+  "activeStage": null,
+  "install": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "install",
+      "--offline",
+      "--frozen-lockfile"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "install.log",
+    "stderr": "install-stderr.log"
+  },
+  "build": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "build"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "build.log",
+    "stderr": "build-stderr.log"
+  },
+  "engineBundle": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "node",
+      "tools/measure-engine.mjs"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "engineBundle.log",
+    "stderr": "engineBundle-stderr.log"
+  },
+  "assets": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/check-assets.ts"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "assets.log",
+    "stderr": "assets-stderr.log"
+  },
+  "licenses": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "licenses:check"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "licenses.log",
+    "stderr": "licenses-stderr.log"
+  },
+  "unconfiguredServer": {
+    "pid": 18920,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "port": 3002,
+    "log": "unconfigured-server.log",
+    "mode": "production",
+    "siteOrigin": "(unconfigured)",
+    "startedAt": "2026-10-03T06:15:14.275Z"
+  },
+  "browser": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-routing.spec.ts",
+      "e2e/phase-four-state.spec.ts",
+      "e2e/phase-four-url.spec.ts",
+      "e2e/startup.spec.ts",
+      "e2e/precision.spec.ts",
+      "e2e/visual.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\browser",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "browser.json",
+    "stderr": "browser-stderr.log",
+    "stats": {
+      "startTime": "2026-10-03T06:15:16.549Z",
+      "duration": 228069.042,
+      "expected": 25,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportErrors": 0
+  },
+  "unconfiguredServerLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "configuredBuild": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "build"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "siteOrigin": "https://continuum.example",
+    "output": "configuredBuild.log",
+    "stderr": "configuredBuild-stderr.log"
+  },
+  "configuredServer": {
+    "pid": 30444,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "port": 3002,
+    "log": "configured-server.log",
+    "mode": "production",
+    "siteOrigin": "https://continuum.example",
+    "startedAt": "2026-10-03T06:19:13.370Z"
+  },
+  "configuredMetadata": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-routing.spec.ts",
+      "--grep=production HTTP HTML",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\configured-browser",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-3\\retry-1\\candidate",
+    "siteOrigin": "https://continuum.example",
+    "output": "configuredMetadata.json",
+    "stderr": "configuredMetadata-stderr.log",
+    "stats": {
+      "startTime": "2026-10-03T06:19:15.372Z",
+      "duration": 1014.1309999999999,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportErrors": 0
+  },
+  "configuredServerLog": {
+    "exitCode": 0,
+    "output": "configured-server.log",
+    "errors": []
+  },
+  "sourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "verdict": "passed-awaiting-review",
+  "finishedAt": "2026-10-03T06:19:16.758Z"
+}

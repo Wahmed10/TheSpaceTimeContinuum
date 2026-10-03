@@ -39,11 +39,12 @@ export default function EngineCanvas() {
     host.current!.prepend(canvas);
     async function init() {
       try {
-        const { state, selectedId, debug, issues } = parseExploreLocation(
+        const initialLocation = parseExploreLocation(
           location.pathname,
           location.search,
         );
-        useEngineStore.setState({ linkIssues: issues });
+        const { state, debug } = initialLocation;
+        useEngineStore.setState({ linkIssues: initialLocation.issues });
         const { SpaceEngine } = await import('@space/engine');
         if (disposed || expired) return;
         engine = await SpaceEngine.create(canvas, {
@@ -56,8 +57,6 @@ export default function EngineCanvas() {
           engine.dispose();
           return;
         }
-        if (debug.test || debug.perf || location.pathname.startsWith('/lab/'))
-          window.__spaceEngine = engine;
         unsubs.push(
           engine.on('select', (id) =>
             useEngineStore.setState({
@@ -100,26 +99,40 @@ export default function EngineCanvas() {
             })),
           ),
         );
-        // An explicit diagnostic test mode retains its established fixed epoch.
-        // Ordinary consumer links without t restore LIVE.
-        const initialState =
-          debug.test && !state.t
-            ? { ...state, t: tdbToIso(engine.clock.state.tdbSec) }
-            : state;
-        engine.applyMapState(initialState, {
-          transition: false,
-          select: selectedId !== null,
-          recordHistory: false,
-        });
-        try {
-          await engine.whenLayersSettled();
-        } catch {
-          /* The commandError subscription exposes requested-load failures. */
-        }
-        if (disposed || expired) {
-          engine.dispose();
-          return;
-        }
+        // Navigation can finish while assets are loading. Restore the latest
+        // accepted location, including changes during requested-layer settling.
+        let appliedLocation: string;
+        let latest: ReturnType<typeof parseExploreLocation>;
+        do {
+          appliedLocation = location.pathname + location.search;
+          latest = parseExploreLocation(location.pathname, location.search);
+          useEngineStore.setState({ linkIssues: latest.issues });
+          // Explicit test mode retains its fixed epoch; absent consumer t is LIVE.
+          const restored =
+            latest.debug.test && !latest.state.t
+              ? { ...latest.state, t: tdbToIso(engine.clock.state.tdbSec) }
+              : latest.state;
+          engine.applyMapState(restored, {
+            transition: false,
+            select: latest.selectedId !== null,
+            recordHistory: false,
+          });
+          try {
+            await engine.whenLayersSettled();
+          } catch {
+            /* commandError exposes requested-load failures. */
+          }
+          if (disposed || expired) {
+            engine.dispose();
+            return;
+          }
+        } while (appliedLocation !== location.pathname + location.search);
+        if (
+          latest.debug.test ||
+          latest.debug.perf ||
+          location.pathname.startsWith('/lab/')
+        )
+          window.__spaceEngine = engine;
         window.clearTimeout(startupDeadline);
         if (debug.scenario === 'leo') {
           engine.focus('planet:earth', { transition: false });
@@ -130,12 +143,14 @@ export default function EngineCanvas() {
           backend: engine.backend,
           ready: true,
           error: null,
-          scale: state.scale,
+          scale: latest.state.scale,
           mode: engine.clock.mode,
           rate: engine.clock.rate,
           following: engine.isFollowing,
-          selectedId: debug.scenario === 'leo' ? 'planet:earth' : selectedId,
+          selectedId:
+            debug.scenario === 'leo' ? 'planet:earth' : latest.selectedId,
           mapState: engine.getMapState(),
+          appliedLocation,
         });
       } catch (error) {
         window.clearTimeout(startupDeadline);
@@ -156,7 +171,12 @@ export default function EngineCanvas() {
       engine?.dispose();
       canvas.remove();
       delete window.__spaceEngine;
-      useEngineStore.setState({ engine: null, ready: false, mapState: null });
+      useEngineStore.setState({
+        engine: null,
+        ready: false,
+        mapState: null,
+        appliedLocation: null,
+      });
     };
   }, [generation]);
   return (

@@ -1,0 +1,48 @@
+{
+  "reviewedAt": "2026-10-03T06:23:00.470Z",
+  "candidateCommit": "0b4b9f42849d908208137446ec98c49741a0bfb9",
+  "sourceSha256": "b1f595fb4db7577e164d39ec705c184618e3a6adc3a10830720abd261dd7d41c",
+  "resultSha256": "cc7e310eaf5398c220aa165a0a3c0561d4640806b9aca90aadacc82b35399356",
+  "verdict": "reviewed-pass",
+  "browser": {
+    "startTime": "2026-10-03T06:15:16.549Z",
+    "duration": 228069.042,
+    "expected": 25,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "configuredMetadata": {
+    "startTime": "2026-10-03T06:19:15.372Z",
+    "duration": 1014.1309999999999,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "sourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "serverErrors": [],
+  "capturesReviewed": [
+    "charon-canonical-navigation.png",
+    "events-unavailable.png"
+  ],
+  "checks": "All 21 HTTP metadata pages with/without origin, malformed redirects, genuine 404/no renderer, five direct/refresh paths, legacy root, 20 persistent selections/exact restoration/no subscription additions/dispose on exit, latest startup and lab; prior 14 renderer/state regressions.",
+  "precision": {
+    "maxErrorPx": 0.13435596144853434,
+    "depthPassed": 11
+  },
+  "engineGzipBytes": 374760,
+  "textureStability": {
+    "focusChanges": 20,
+    "texturesBeforeAfter": [
+      33,
+      33
+    ],
+    "compressedMipBytesBeforeAfter": [
+      16516088,
+      16516088
+    ]
+  },
+  "limitations": "SwiftShader functional evidence. No new physical GPU/CPU claim. Existing UI/card/clutter and full URL synchronization belong to later steps. First failure retained."
+}
