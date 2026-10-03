@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { isoToTdb, tdbToIso } from '@space/astro';
-import { LAYERS } from '@space/domain';
 import { useEngineStore } from './useEngineStore';
 import { parseExploreLocation } from '../lib/routeState';
+import type { RouteIssue } from '../lib/routeState';
 import type { SpaceEngine } from '@space/engine';
 declare global {
   interface Window {
@@ -43,13 +43,6 @@ export default function EngineCanvas() {
           location.pathname,
           location.search,
         );
-        // Frame commands arrive in P4.2. Until then, report partial restoration.
-        if (state.frame)
-          issues.push({
-            field: 'frame',
-            code: 'unsupported',
-            message: 'The reference-frame setting could not be restored.',
-          });
         useEngineStore.setState({ linkIssues: issues });
         const { SpaceEngine } = await import('@space/engine');
         if (disposed || expired) return;
@@ -63,7 +56,6 @@ export default function EngineCanvas() {
           engine.dispose();
           return;
         }
-        window.clearTimeout(startupDeadline);
         if (debug.test || debug.perf || location.pathname.startsWith('/lab/'))
           window.__spaceEngine = engine;
         unsubs.push(
@@ -88,17 +80,47 @@ export default function EngineCanvas() {
             else useEngineStore.setState({ error });
           }),
           engine.on('tier', (tier) => useEngineStore.setState({ tier })),
+          engine.on('mapStateChange', (mapState) =>
+            useEngineStore.setState({
+              mapState,
+              scale: mapState.scale ?? 'explore',
+              following: engine!.isFollowing,
+            }),
+          ),
+          engine.on('commandError', ({ command, message }) =>
+            useEngineStore.setState((current) => ({
+              linkIssues: [
+                ...current.linkIssues,
+                {
+                  field: command === 'layer' ? 'layers' : 'frame',
+                  code: 'unsupported',
+                  message,
+                } satisfies RouteIssue,
+              ].slice(-8),
+            })),
+          ),
         );
-        if (selectedId || state.camera.preset === 'close') {
-          engine.focus(state.focus, {
-            transition: false,
-            wide: state.camera.preset === 'wide',
-          });
-          if (!selectedId) engine.select(null);
+        // An explicit diagnostic test mode retains its established fixed epoch.
+        // Ordinary consumer links without t restore LIVE.
+        const initialState =
+          debug.test && !state.t
+            ? { ...state, t: tdbToIso(engine.clock.state.tdbSec) }
+            : state;
+        engine.applyMapState(initialState, {
+          transition: false,
+          select: selectedId !== null,
+          recordHistory: false,
+        });
+        try {
+          await engine.whenLayersSettled();
+        } catch {
+          /* The commandError subscription exposes requested-load failures. */
         }
-        engine.setScale(state.scale);
-        const enabled = new Set<string>(state.layers);
-        for (const { id } of LAYERS) engine.setLayer(id, enabled.has(id));
+        if (disposed || expired) {
+          engine.dispose();
+          return;
+        }
+        window.clearTimeout(startupDeadline);
         if (debug.scenario === 'leo') {
           engine.focus('planet:earth', { transition: false });
           engine.setReferenceDistance(6771.0084);
@@ -113,6 +135,7 @@ export default function EngineCanvas() {
           rate: engine.clock.rate,
           following: engine.isFollowing,
           selectedId: debug.scenario === 'leo' ? 'planet:earth' : selectedId,
+          mapState: engine.getMapState(),
         });
       } catch (error) {
         window.clearTimeout(startupDeadline);
@@ -133,7 +156,7 @@ export default function EngineCanvas() {
       engine?.dispose();
       canvas.remove();
       delete window.__spaceEngine;
-      useEngineStore.setState({ engine: null, ready: false });
+      useEngineStore.setState({ engine: null, ready: false, mapState: null });
     };
   }, [generation]);
   return (

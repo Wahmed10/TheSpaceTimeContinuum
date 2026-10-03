@@ -1,0 +1,629 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-state.spec.ts",
+      "e2e/phase-four-url.spec.ts",
+      "e2e/startup.spec.ts",
+      "e2e/precision.spec.ts",
+      "e2e/visual.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\browser",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate\\phase-four.playwright.config.ts",
+    "rootDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-2/candidate/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-2/browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-2/candidate/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "phase-four-state.spec.ts",
+      "file": "phase-four-state.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "earth restores the actual camera reference with a wide, hidden-layer selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2639,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:34:14.535Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "466890fb2e234fd0c69c-2aa2a0b439e13fc56605",
+          "file": "phase-four-state.spec.ts",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "title": "helio restores the actual camera reference with a wide, hidden-layer selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6008,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:34:17.362Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "466890fb2e234fd0c69c-b5277da9063c27529073",
+          "file": "phase-four-state.spec.ts",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "title": "earth-fixed restores the actual camera reference with a wide, hidden-layer selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5702,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:34:23.381Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "466890fb2e234fd0c69c-777b48fcece93a4294e6",
+          "file": "phase-four-state.spec.ts",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "title": "public restoration is one cold command and does not add camera history",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4848,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:34:29.094Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "466890fb2e234fd0c69c-d98a13924d742014d647",
+          "file": "phase-four-state.spec.ts",
+          "line": 47,
+          "column": 1
+        },
+        {
+          "title": "a fixed camera preserves pose when switched, then evolves the rendered view with time",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18670,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:34:33.952Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "466890fb2e234fd0c69c-204a4bbb02033da41daa",
+          "file": "phase-four-state.spec.ts",
+          "line": 95,
+          "column": 1
+        },
+        {
+          "title": "unsupported state reports a command error while retaining the live renderer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5837,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:34:52.647Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "466890fb2e234fd0c69c-db1669b713061d3497ea",
+          "file": "phase-four-state.spec.ts",
+          "line": 185,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "phase-four-url.spec.ts",
+      "file": "phase-four-url.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "invalid external time and settings recover to a LIVE overview",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11576,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:34:58.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8294e323568ead6aa44b-226c5883304545bf7633",
+          "file": "phase-four-url.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "an offset date restores paused time and known layers outside the UTC browser timezone",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10736,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:35:10.115Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8294e323568ead6aa44b-ea2181830bf26382788f",
+          "file": "phase-four-url.spec.ts",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "malformed query encoding does not fail graphics and layers= remains all off",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 65121,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('canvas')\nExpected: \u001b[32m\"true\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  60000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('canvas') with timeout 60000ms\u001b[22m\n\u001b[2m  - waiting for locator('canvas')\u001b[22m\n\u001b[2m    2 × locator resolved to <canvas tabindex=\"0\" role=\"application\" aria-label=\"Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Use the object buttons to select a world.\"></canvas>\u001b[22m\n\u001b[2m      - unexpected value \"null\"\u001b[22m\n\u001b[2m    118 × locator resolved to <canvas tabindex=\"0\" role=\"application\" data-engine=\"three.js r186 webgpu\" aria-label=\"Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Use the object buttons to select a world.\"></canvas>\u001b[22m\n\u001b[2m        - unexpected value \"null\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('canvas')\nExpected: \u001b[32m\"true\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  60000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('canvas') with timeout 60000ms\u001b[22m\n\u001b[2m  - waiting for locator('canvas')\u001b[22m\n\u001b[2m    2 × locator resolved to <canvas tabindex=\"0\" role=\"application\" aria-label=\"Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Use the object buttons to select a world.\"></canvas>\u001b[22m\n\u001b[2m      - unexpected value \"null\"\u001b[22m\n\u001b[2m    118 × locator resolved to <canvas tabindex=\"0\" role=\"application\" data-engine=\"three.js r186 webgpu\" aria-label=\"Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Use the object buttons to select a world.\"></canvas>\u001b[22m\n\u001b[2m        - unexpected value \"null\"\u001b[22m\n\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate\\e2e\\phase-four-url.spec.ts:79:40",
+                    "location": {
+                      "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate\\e2e\\phase-four-url.spec.ts",
+                      "column": 40,
+                      "line": 79
+                    },
+                    "snippet": "  77 |   // Rejecting the malformed query also drops debug flags. Read observable UI\n  78 |   // instead of weakening that policy just to expose a test hook.\n> 79 |   await expect(page.locator('canvas')).toHaveAttribute('data-ready', 'true', {\n     |                                        ^\n  80 |     timeout: 60000,\n  81 |   });\n  82 |   await expect(page.locator('.error-panel')).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate\\e2e\\phase-four-url.spec.ts",
+                        "column": 40,
+                        "line": 79
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('canvas')\nExpected: \u001b[32m\"true\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  60000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('canvas') with timeout 60000ms\u001b[22m\n\u001b[2m  - waiting for locator('canvas')\u001b[22m\n\u001b[2m    2 × locator resolved to <canvas tabindex=\"0\" role=\"application\" aria-label=\"Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Use the object buttons to select a world.\"></canvas>\u001b[22m\n\u001b[2m      - unexpected value \"null\"\u001b[22m\n\u001b[2m    118 × locator resolved to <canvas tabindex=\"0\" role=\"application\" data-engine=\"three.js r186 webgpu\" aria-label=\"Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Use the object buttons to select a world.\"></canvas>\u001b[22m\n\u001b[2m        - unexpected value \"null\"\u001b[22m\n\n\n  77 |   // Rejecting the malformed query also drops debug flags. Read observable UI\n  78 |   // instead of weakening that policy just to expose a test hook.\n> 79 |   await expect(page.locator('canvas')).toHaveAttribute('data-ready', 'true', {\n     |                                        ^\n  80 |     timeout: 60000,\n  81 |   });\n  82 |   await expect(page.locator('.error-panel')).toHaveCount(0);\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate\\e2e\\phase-four-url.spec.ts:79:40"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:35:20.883Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\browser\\phase-four-url-malformed-q-df662--and-layers-remains-all-off\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\browser\\phase-four-url-malformed-q-df662--and-layers-remains-all-off\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate\\e2e\\phase-four-url.spec.ts",
+                    "column": 40,
+                    "line": 79
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8294e323568ead6aa44b-15d4f090376f0e8ceddc",
+          "file": "phase-four-url.spec.ts",
+          "line": 73,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "precision.spec.ts",
+      "file": "precision.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "GPU readback keeps a LEO surface marker below half a pixel",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15904,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:36:27.894Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1d12243a82ca039cdce2-16629ca793f399a65c1f",
+          "file": "precision.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "LOW stays below the texture budget after twenty focus changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7922,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:36:43.987Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1d12243a82ca039cdce2-165bd976dc616b18f450",
+          "file": "precision.spec.ts",
+          "line": 20,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "startup.spec.ts",
+      "file": "startup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "phone-sized LAN HTTP origin hydrates and starts the compatibility renderer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7266,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:36:51.952Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d5cd95b3f2ad7194fa4-650768338c9135b89c32",
+          "file": "startup.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "a stalled startup shows a recoverable error instead of an endless loader",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1758,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:36:59.230Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d5cd95b3f2ad7194fa4-096169ab2811c66d70d6",
+          "file": "startup.spec.ts",
+          "line": 37,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "visual.spec.ts",
+      "file": "visual.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "deterministic material reference views",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 52661,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-02T22:37:01.007Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8324bb52c49185e48ff4-521ee15c31ad1bd90d87",
+          "file": "visual.spec.ts",
+          "line": 2,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-02T22:34:14.040Z",
+    "duration": 219824.063,
+    "expected": 13,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

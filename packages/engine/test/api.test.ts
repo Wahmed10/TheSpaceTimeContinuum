@@ -4,6 +4,11 @@ import type {
   EngineEvents,
   PointSource,
   PointSourceBuffers,
+  FocusOptions,
+  ApplyMapStateOptions,
+  CameraFrame,
+  CameraFrameResult,
+  EngineLayerState,
 } from '../src';
 import type { MapState } from '@space/domain';
 
@@ -17,11 +22,24 @@ it('keeps consumer commands and source contracts independent of renderer interna
     (id: string | null) => void
   >();
   expectTypeOf<EngineApi['focus']>().toEqualTypeOf<
-    (id: string, options?: { transition?: boolean; wide?: boolean }) => void
+    (id: string, options?: FocusOptions) => void
   >();
   expectTypeOf<EngineApi['applyMapState']>().toEqualTypeOf<
+    (state: MapState, options?: ApplyMapStateOptions) => void
+  >();
+  expectTypeOf<EngineApi['applyMapState']>().toExtend<
     (state: MapState) => void
   >();
+  expectTypeOf<EngineApi['setFrame']>().toEqualTypeOf<
+    (frame: CameraFrame) => CameraFrameResult
+  >();
+  expectTypeOf<EngineApi['getLayerStates']>().returns.toEqualTypeOf<
+    readonly EngineLayerState[]
+  >();
+  expectTypeOf<EngineApi['whenLayersSettled']>().returns.toEqualTypeOf<
+    Promise<void>
+  >();
+  expectTypeOf<EngineEvents['mapStateChange']>().toEqualTypeOf<MapState>();
   expectTypeOf<EngineApi['getMapState']>().returns.toEqualTypeOf<MapState>();
   expectTypeOf<EngineApi['registerPointLayer']>().toEqualTypeOf<
     (id: string, source: PointSource) => () => void
@@ -39,6 +57,8 @@ it('keeps consumer commands and source contracts independent of renderer interna
 
 // Compile-time rejection checks; this function is never executed.
 function invalidConsumerCalls(api: EngineApi) {
+  // @ts-expect-error provider frames are not all supported camera references
+  api.setFrame('TEME:earth');
   // @ts-expect-error unknown event names are not part of the v1 contract
   api.on('unknown', () => {});
   // @ts-expect-error selection payload is an ID or null, never a numeric index

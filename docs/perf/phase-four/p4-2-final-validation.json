@@ -1,0 +1,171 @@
+{
+  "status": "finished",
+  "pid": 42364,
+  "startedAt": "2026-10-03T05:11:29.588Z",
+  "candidateCommit": "508646c3d66f380eacb70f7e287c1e0373bf3786",
+  "candidateSource": "508646c3d66f380eacb70f7e287c1e0373bf3786 + uncommitted source snapshot SHA256 34f3b9e45ae924c3be93e1152c8fee8b03d9f9f5e34dcd2016ce73676313e3c3",
+  "sourceSha256": "34f3b9e45ae924c3be93e1152c8fee8b03d9f9f5e34dcd2016ce73676313e3c3",
+  "referenceCommit": "4409ef5d8f97299d9058360c97d560493d067c1c",
+  "method": "Isolated copy of hashed uncommitted P4.2 source. Production build and 14 browser cases (including eight original material references and precision), then fresh sequential reference/candidate CPU reports on the same Windows runner. Unchanged 20 percent mean/p95 gate. SwiftShader functional/CPU evidence; no physical device acceptance.",
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 255,
+    "expectedRejections": 2,
+    "testFiles": 36,
+    "log": ".tools/phase-four/p4-2-fixed-verify.log"
+  },
+  "launch": "launch.json",
+  "snapshot": "tracked-source.patch and new-source/",
+  "activeStage": null,
+  "install": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "install",
+      "--offline",
+      "--frozen-lockfile"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\candidate",
+    "output": "install.log",
+    "stderr": "install-stderr.log"
+  },
+  "build": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "build"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\candidate",
+    "output": "build.log",
+    "stderr": "build-stderr.log"
+  },
+  "engineBundle": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "node",
+      "tools/measure-engine.mjs"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\candidate",
+    "output": "engineBundle.log",
+    "stderr": "engineBundle-stderr.log"
+  },
+  "assets": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/check-assets.ts"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\candidate",
+    "output": "assets.log",
+    "stderr": "assets-stderr.log"
+  },
+  "licenses": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "licenses:check"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\candidate",
+    "output": "licenses.log",
+    "stderr": "licenses-stderr.log"
+  },
+  "browserCandidateServer": {
+    "pid": 9920,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\candidate",
+    "port": 3002,
+    "log": "browserCandidate-server.log",
+    "mode": "development",
+    "startedAt": "2026-10-03T05:12:15.293Z"
+  },
+  "browser": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-state.spec.ts",
+      "e2e/phase-four-url.spec.ts",
+      "e2e/startup.spec.ts",
+      "e2e/precision.spec.ts",
+      "e2e/visual.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\browser",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\candidate",
+    "output": "browser.json",
+    "stderr": "browser-stderr.log",
+    "stats": {
+      "startTime": "2026-10-03T05:12:23.507Z",
+      "duration": 158361.508,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportErrors": 0
+  },
+  "referenceServer": {
+    "pid": 2484,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\cpu-phase-three\\reference",
+    "port": 3001,
+    "log": "reference-server.log",
+    "mode": "development",
+    "startedAt": "2026-10-03T05:15:02.369Z"
+  },
+  "referenceCpu": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "perf:cpu",
+      "--url",
+      "http://localhost:3001",
+      "--output",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\reference.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\cpu-phase-three\\reference",
+    "output": "referenceCpu.log",
+    "stderr": "referenceCpu-stderr.log"
+  },
+  "cpuCandidateServer": {
+    "pid": 16304,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\candidate",
+    "port": 3002,
+    "log": "cpuCandidate-server.log",
+    "mode": "development",
+    "startedAt": "2026-10-03T05:17:51.142Z"
+  },
+  "candidateCpu": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "perf:cpu",
+      "--url",
+      "http://localhost:3002",
+      "--output",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\current.json",
+      "--baseline",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\reference.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\retry-1\\candidate",
+    "output": "candidateCpu.log",
+    "stderr": "candidateCpu-stderr.log"
+  },
+  "sourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "verdict": "passed-awaiting-review",
+  "finishedAt": "2026-10-03T05:20:38.955Z"
+}

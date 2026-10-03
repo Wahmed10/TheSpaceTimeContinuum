@@ -1,8 +1,8 @@
 # Implementation status — October 2, 2026
 
-## Current: Phase 4 approved; P4.1 verified, P4.2 next
+## Current: Phase 4 approved; P4.2 accepted, P4.3 next
 
-The user approved the nine-step [Phase 4 execution plan](PHASE_4_PLAN.md). P4.1 implements bounded URL/catalog resolution, strict UTC validation, safe legacy renderer startup and recoverable link-setting messages. Verify passes 241 tests plus two expected rejected-model diagnostics, typecheck/lint/boundaries. The five startup browser checks at `cd64f74` pass with no skips/flakes/report errors, and both captures are reviewed. No new production build, hardware or performance pass is claimed. See the [Phase 4 checkpoint](PHASE_4_CHECKPOINT.md) for evidence and continuation. `node tools/phase-four-status.mjs` reports the recorded active/latest run. P4.2 frame commands, P4.3 routes and later steps are next; Phase 4B is outside the authorization.
+The user approved the nine-step [Phase 4 execution plan](PHASE_4_PLAN.md). P4.1 URL/UTC/startup behavior is accepted. P4.2 camera references/history, MapState restoration, layer settling and command diagnostics now pass review: verify (255 tests plus two existing expected rejections), isolated build, all 14 browser cases, original eight screenshot references, precision/depth and fresh paired CPU comparison. Maximum mean/p95 increases are 3.41%/4.35%, below the unchanged 20% gate. Its initial LIVE orbit endpoint failure and exact-endpoint correction are preserved. See the [final review](perf/phase-four/p4-2-final-review.md) and [checkpoint](PHASE_4_CHECKPOINT.md). `node tools/phase-four-status.mjs` reports the latest reviewed run. P4.3 routes/persistent shell is next; Phase 4B is outside the authorization.
 
 All 21 bodies now have reviewed appearance, with Saturn rings/shadows, giant atmosphere rims, Venus/Titan cloud or haze treatments, sourced dwarf/moon maps, Phobos/Deimos irregular meshes and the ten previously missing scientific attitudes. Moon-system True/Explore, orbit and touch interactions pass. Phase 2 remains accepted with ADR 0010 and documented device coverage.
 

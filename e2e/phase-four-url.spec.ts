@@ -73,6 +73,9 @@ test('an offset date restores paused time and known layers outside the UTC brows
 test('malformed query encoding does not fail graphics and layers= remains all off', async ({
   page,
 }) => {
+  // Keep Date.now at the fractional LIVE epoch that exposed endpoint rounding.
+  // setFixedTime leaves RAF/timers running and does not enable diagnostic mode.
+  await page.clock.setFixedTime(new Date('2026-10-02T22:35:20.002Z'));
   await page.goto('/?renderer=webgl&perf=1&t=%FF');
   // Rejecting the malformed query also drops debug flags. Read observable UI
   // instead of weakening that policy just to expose a test hook.

@@ -1,0 +1,115 @@
+{
+  "status": "finished",
+  "pid": 38644,
+  "startedAt": "2026-10-02T22:33:24.090Z",
+  "candidateCommit": "508646c3d66f380eacb70f7e287c1e0373bf3786",
+  "candidateSource": "508646c3d66f380eacb70f7e287c1e0373bf3786 + uncommitted source snapshot SHA256 5158135bcc48366e5ce24f82141ee9632f84079e024e7b9a20e7e0d02bdcd8cc",
+  "sourceSha256": "5158135bcc48366e5ce24f82141ee9632f84079e024e7b9a20e7e0d02bdcd8cc",
+  "referenceCommit": "4409ef5d8f97299d9058360c97d560493d067c1c",
+  "method": "Isolated copy of hashed uncommitted P4.2 source. Production build and 14 browser cases (including eight original material references and precision), then fresh sequential reference/candidate CPU reports on the same Windows runner. Unchanged 20 percent mean/p95 gate. SwiftShader functional/CPU evidence; no physical device acceptance.",
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 254,
+    "expectedRejections": 2,
+    "testFiles": 36,
+    "log": ".tools/phase-four/p4-2-verify.log"
+  },
+  "launch": "launch.json",
+  "snapshot": "tracked-source.patch and new-source/",
+  "activeStage": null,
+  "install": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "install",
+      "--offline",
+      "--frozen-lockfile"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate",
+    "output": "install.log",
+    "stderr": "install-stderr.log"
+  },
+  "build": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "build"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate",
+    "output": "build.log",
+    "stderr": "build-stderr.log"
+  },
+  "engineBundle": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "node",
+      "tools/measure-engine.mjs"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate",
+    "output": "engineBundle.log",
+    "stderr": "engineBundle-stderr.log"
+  },
+  "assets": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/check-assets.ts"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate",
+    "output": "assets.log",
+    "stderr": "assets-stderr.log"
+  },
+  "licenses": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "licenses:check"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate",
+    "output": "licenses.log",
+    "stderr": "licenses-stderr.log"
+  },
+  "browserCandidateServer": {
+    "pid": 35612,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate",
+    "port": 3002,
+    "log": "browserCandidate-server.log",
+    "mode": "development",
+    "startedAt": "2026-10-02T22:34:07.681Z"
+  },
+  "browser": {
+    "exitCode": 1,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-state.spec.ts",
+      "e2e/phase-four-url.spec.ts",
+      "e2e/startup.spec.ts",
+      "e2e/precision.spec.ts",
+      "e2e/visual.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\browser",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-2\\candidate",
+    "output": "browser.json",
+    "stderr": "browser-stderr.log"
+  },
+  "failure": {
+    "message": "browser failed; inspect browser.json and browser-stderr.log"
+  },
+  "verdict": "failed",
+  "finishedAt": "2026-10-02T22:37:54.127Z"
+}

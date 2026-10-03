@@ -5,4 +5,6 @@ export type { PerfSample } from './perf/PerfMonitor';
 export type { ProviderFactory } from './scene/prepareEntities';
 export type { PointSource, PointSourceBuffers } from './layers/PointSource';
 export type { EngineApi } from './EngineApi';
+export type { CameraFrame, CameraFrameResult } from './camera/CameraReference';
+export type { EngineLayerState } from './layers/LayerRegistry';
 export const API_VERSION = 1 as const;

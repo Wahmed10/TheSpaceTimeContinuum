@@ -37,6 +37,11 @@ import { prepareBodies, prepareEntities } from './scene/prepareEntities';
 import type { ProviderFactory } from './scene/prepareEntities';
 import { radiusBoost, childDisplayPosition } from './scene/DisplayTransform';
 import { CameraController } from './camera/CameraController';
+import {
+  isCameraFrame,
+  type CameraFrame,
+  type CameraFrameResult,
+} from './camera/CameraReference';
 import { Input } from './camera/Input';
 import { LabelSystem } from './labels/LabelSystem';
 import { PointLayer } from './layers/PointLayer';
@@ -61,6 +66,19 @@ export interface EngineEvents {
   error: string;
   sourceError: { layerId: string; message: string };
   tier: string;
+  mapStateChange: MapState;
+  commandError: { command: 'frame' | 'mapState' | 'layer'; message: string };
+}
+export interface FocusOptions {
+  transition?: boolean;
+  wide?: boolean;
+  select?: boolean;
+  recordHistory?: boolean;
+}
+export interface ApplyMapStateOptions {
+  transition?: boolean;
+  select?: boolean;
+  recordHistory?: boolean;
 }
 export interface EngineOptions {
   forceWebGL?: boolean;
@@ -99,13 +117,15 @@ function entityLayer(kind: BodySpec['kind']) {
 }
 export class SpaceEngine {
   readonly clock = new SimulationClock();
-  readonly cameraController = new CameraController();
   readonly backend: string;
   private adapterDescription = 'unknown';
   private scene = new Scene();
   private camera = new PerspectiveCamera(45, 1, 0.1, 1e12);
   private assets: AssetManager;
   private registry = new EntityRegistry();
+  readonly cameraController = new CameraController(this.registry.frames);
+  private restoringMapState = false;
+  private frameUnavailable = false;
   private perf = new PerfMonitor();
   private cpuTimings: CpuTimings | null = null;
   private cpuRun = false;
@@ -359,6 +379,13 @@ export class SpaceEngine {
       performance.now(),
       false,
       focus === 'star:sun',
+      false,
+    );
+    this.cameraController.update(
+      e.physical,
+      performance.now(),
+      this.focusRadius(),
+      tdb,
     );
     this.cameraController.reducedMotion = matchMedia(
       '(prefers-reduced-motion: reduce)',
@@ -440,7 +467,21 @@ export class SpaceEngine {
         this.emit('sourceError', { layerId: id, message: layer.error });
     }
     const target = this.target(this.cameraController.targetId)!;
-    this.cameraController.update(target.physical, now, this.focusRadius());
+    const cameraResult = this.cameraController.update(
+      target.physical,
+      now,
+      this.focusRadius(),
+      tdbSec,
+    );
+    if (cameraResult?.ok === false) {
+      if (!this.frameUnavailable)
+        this.emit('commandError', {
+          command: 'frame',
+          message:
+            'The camera reference is unavailable at this time. The last valid pose was retained.',
+        });
+      this.frameUnavailable = true;
+    } else this.frameUnavailable = false;
     this.canvas.style.opacity = String(
       1 - Math.max(this.clock.state.fade, this.cameraController.fade),
     );
@@ -599,6 +640,8 @@ export class SpaceEngine {
     }
     this.sunLight.position.copy(sun.visual.group.position);
     const c = this.cameraController.center;
+    const up = this.cameraController.up;
+    this.camera.up.set(up[0]!, up[1]!, up[2]!);
     this.scratch.set(c[0]! - world[0]!, c[1]! - world[1]!, c[2]! - world[2]!);
     this.camera.lookAt(this.scratch);
     this.camera.near = Math.max(
@@ -898,11 +941,16 @@ export class SpaceEngine {
   private emit<K extends keyof EngineEvents>(name: K, value: EngineEvents[K]) {
     for (const cb of this.listeners.get(name) ?? []) cb(value as never);
   }
+  private mapStateChanged() {
+    if (!this.restoringMapState)
+      this.emit('mapStateChange', this.getMapState());
+  }
   select(id: string | null) {
     if (id && !this.target(id)) return;
     this.selected = id;
     this.ensurePointLabel(id);
     this.emit('select', id);
+    this.mapStateChanged();
   }
   get isFollowing(): boolean {
     return this.cameraController.following;
@@ -1117,7 +1165,7 @@ export class SpaceEngine {
     }
     this.registry.update(tdb);
   }
-  focus(id: string, opts: { transition?: boolean; wide?: boolean } = {}) {
+  focus(id: string, opts: FocusOptions = {}) {
     const e = this.target(id);
     if (!e || !e.visible) return;
     this.cameraController.focus(
@@ -1127,34 +1175,71 @@ export class SpaceEngine {
       performance.now(),
       opts.transition ?? true,
       opts.wide ?? false,
+      opts.recordHistory ?? true,
     );
-    this.select(id);
+    if (opts.select !== false) this.select(id);
+    else this.mapStateChanged();
   }
   follow(id: string | null) {
     if (id && id !== this.cameraController.targetId) this.focus(id);
     this.cameraController.following = id !== null;
+    this.mapStateChanged();
   }
   back() {
     const view = this.cameraController.back();
     if (view) {
       const e = this.target(view.targetId);
       if (!e || !e.visible) return;
-      this.cameraController.restore(
+      const result = this.cameraController.restore(
         view,
         e.physical,
         this.viewRadius(view.targetId),
         performance.now(),
+        this.clock.state.tdbSec,
       );
+      if (!result.ok) {
+        this.emit('commandError', {
+          command: 'frame',
+          message: 'The previous camera reference could not be restored.',
+        });
+        return;
+      }
       this.select(view.targetId);
     }
   }
   setLayer(id: string, on: boolean) {
     void this.layers
       .setVisible(id, on)
-      .catch((error) => this.emit('error', String(error)));
+      .catch((error) =>
+        this.emit('commandError', { command: 'layer', message: String(error) }),
+      );
+    this.mapStateChanged();
+  }
+  getLayerStates() {
+    return this.layers.snapshot();
+  }
+  whenLayersSettled(): Promise<void> {
+    return this.layers.whenSettled();
+  }
+  setFrame(frame: CameraFrame): CameraFrameResult {
+    const result = this.cameraController.setFrame(
+      frame,
+      this.clock.state.tdbSec,
+    );
+    if (!result.ok)
+      this.emit('commandError', {
+        command: 'frame',
+        message:
+          result.reason === 'unsupported-frame'
+            ? 'This camera reference is not supported.'
+            : 'The camera reference is unavailable at this time.',
+      });
+    else this.mapStateChanged();
+    return result;
   }
   setScale(scale: 'true' | 'explore') {
     this.scale = scale;
+    this.mapStateChanged();
   }
   setQuality(setting: QualitySetting) {
     this.quality.set(setting);
@@ -1204,19 +1289,52 @@ export class SpaceEngine {
         : {}),
       scale: this.scale,
       layers: this.layers.enabledIds(),
+      frame: this.cameraController.frameId,
+      camera: { preset: this.cameraController.preset },
     };
   }
-  applyMapState(state: MapState) {
-    if (state.t) this.clock.setTime(isoToTdb(state.t));
-    else this.clock.goLive({ animate: false });
-    if (state.scale) this.setScale(state.scale);
-    if (state.layers)
-      void this.layers
-        .restore(state.layers)
-        .catch((error) => this.emit('error', String(error)));
-    this.registry.update(this.clock.tick());
-    this.focus(state.focus, { wide: state.camera?.preset === 'wide' });
-    if (state.playback) this.clock.play(state.playback.rate);
+  applyMapState(state: MapState, opts: ApplyMapStateOptions = {}): void {
+    const frame = state.frame ?? 'ICRF_SSB';
+    if (
+      !isCameraFrame(frame) ||
+      state.secondary ||
+      state.camera?.preset === 'fit-both'
+    ) {
+      this.emit('commandError', {
+        command: 'mapState',
+        message:
+          'This view requests an unsupported camera reference or two-object view.',
+      });
+      return;
+    }
+    this.restoringMapState = true;
+    try {
+      if (state.t) this.clock.setTime(isoToTdb(state.t));
+      else this.clock.goLive({ animate: false });
+      if (state.scale) this.setScale(state.scale);
+      if (state.layers)
+        void this.layers
+          .restore(state.layers)
+          .catch((error) =>
+            this.emit('commandError', {
+              command: 'layer',
+              message: String(error),
+            }),
+          );
+      this.registry.update(this.clock.tick());
+      this.setFrame(frame);
+      this.focus(state.focus, {
+        wide: state.camera?.preset === 'wide',
+        transition: opts.transition ?? true,
+        select: opts.select ?? true,
+        recordHistory: opts.recordHistory ?? true,
+      });
+      if (opts.select === false) this.select(null);
+      if (state.playback) this.clock.play(state.playback.rate);
+    } finally {
+      this.restoringMapState = false;
+    }
+    this.mapStateChanged();
   }
   getMetrics(id: string): ObjectMetrics | null {
     const e = this.target(id),

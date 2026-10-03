@@ -1,0 +1,33 @@
+{
+  "reviewedAt": "2026-10-03T05:09:36.909841+00:00",
+  "verdict": "reviewed-fail",
+  "candidateCommit": "508646c3d66f380eacb70f7e287c1e0373bf3786",
+  "sourceSha256": "5158135bcc48366e5ce24f82141ee9632f84079e024e7b9a20e7e0d02bdcd8cc",
+  "resultSha256": "17709b4eeb616a3f76581df72ad51de5236da24472d30bb773234f2f6847952a",
+  "browserSha256": "87c988e0aeb4bd0351c6d89fd96237f16255aa37af75cb5e12b8980a58e50449",
+  "stats": {
+    "startTime": "2026-10-02T22:34:14.040Z",
+    "duration": 219824.063,
+    "expected": 13,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "hashAudit": {
+    "candidate": true,
+    "reference": true,
+    "preservedEvidence": true
+  },
+  "precision": {
+    "maxErrorPx": 0.13435596144853434,
+    "depthPasses": 11
+  },
+  "texture": {
+    "beforeCount": 33,
+    "afterCount": 33,
+    "beforeCompressedMipBytes": 16516088,
+    "afterCompressedMipBytes": 16516088
+  },
+  "failure": "Fractional final orbit seed exceeds strict provider validity by 0.477 microseconds at a reproducible LIVE epoch. Exact endpoint fix awaits new browser and CPU validation.",
+  "cpu": "not run"
+}

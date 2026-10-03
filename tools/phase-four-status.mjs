@@ -63,7 +63,8 @@ console.log(
         : 'FINISHED — no check results recorded; inspect the logs'
     : `RUNNING — ${result.activeStage ?? 'starting'}; results are not final`,
 );
-if (result.candidateCommit) console.log(`Source: ${result.candidateCommit}`);
+if (result.candidateSource ?? result.candidateCommit)
+  console.log(`Source: ${result.candidateSource ?? result.candidateCommit}`);
 if (result.pid) console.log(`Wrapper PID: ${result.pid}`);
 for (const [name, value] of stages) {
   const stats = value.stats;

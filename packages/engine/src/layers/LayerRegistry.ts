@@ -10,12 +10,22 @@ export interface LayerDefinition {
   setVisible(visible: boolean): void;
   dispose?(): void;
 }
+export interface EngineLayerState {
+  readonly id: string;
+  readonly label: string;
+  readonly category: LayerDefinition['category'];
+  readonly requested: boolean;
+  readonly available: boolean;
+  readonly loaded: boolean;
+  readonly visible: boolean;
+}
 interface Entry {
   definition: LayerDefinition;
   requested: boolean;
   loaded: boolean;
   visible: boolean;
   pending?: Promise<void> | undefined;
+  failure?: unknown;
 }
 
 /** Visibility never unloads resources. Concurrent enables share one load;
@@ -25,6 +35,11 @@ export class LayerRegistry {
   private entries = new Map<string, Entry>();
   private band: SemanticBand = 'solar';
   private disposed = false;
+  private waiters = new Set<() => void>();
+  private changed() {
+    for (const waiter of this.waiters) waiter();
+    this.waiters.clear();
+  }
 
   register(definition: LayerDefinition, loaded = false) {
     if (this.disposed) throw new Error('Layer registry disposed');
@@ -43,9 +58,11 @@ export class LayerRegistry {
     const entry = this.entries.get(id);
     if (!entry) throw new Error(`Unknown layer ${id}`);
     entry.requested = on;
+    this.changed();
     this.refresh(entry);
     if (!on || entry.loaded || entry.definition.available === false) return;
     if (!entry.pending) {
+      entry.failure = undefined;
       entry.pending = Promise.resolve()
         .then(() => {
           if (!this.disposed) return entry.definition.load();
@@ -56,6 +73,10 @@ export class LayerRegistry {
           // A loader may create an object visible by default, even if the
           // requested state changed to hidden before completion.
           this.refresh(entry, true);
+        })
+        .catch((error: unknown) => {
+          entry.failure = error;
+          throw error;
         })
         .finally(() => {
           entry.pending = undefined;
@@ -89,6 +110,7 @@ export class LayerRegistry {
     if (!entry) throw new Error(`Unknown layer ${id}`);
     entry.definition.available = true;
     entry.loaded = true;
+    this.changed();
     this.refresh(entry, true);
   }
   deactivate(id: string) {
@@ -96,6 +118,7 @@ export class LayerRegistry {
     if (!entry || this.disposed) return;
     entry.definition.available = false;
     entry.loaded = false;
+    this.changed();
     this.refresh(entry, true);
   }
   enabledIds(): string[] {
@@ -112,9 +135,43 @@ export class LayerRegistry {
       ),
     );
   }
-  snapshot() {
+  /** Only current requested/available resources participate. New enables made
+   * while waiting are also drained; completed failures remain observable.
+   */
+  async whenSettled(): Promise<void> {
+    while (!this.disposed) {
+      const requested = Array.from(this.entries.values()).filter(
+        (entry) => entry.requested && entry.definition.available !== false,
+      );
+      for (const entry of requested)
+        if (entry.failure !== undefined) throw entry.failure;
+      const pending = requested.flatMap((entry) =>
+        entry.pending
+          ? [
+              entry.pending.catch((error: unknown) => {
+                if (entry.requested && entry.definition.available !== false)
+                  throw error;
+              }),
+            ]
+          : [],
+      );
+      if (!pending.length) return;
+      let changed!: () => void;
+      const revision = new Promise<void>((resolve) => {
+        changed = resolve;
+        this.waiters.add(resolve);
+      });
+      try {
+        await Promise.race([Promise.all(pending), revision]);
+      } finally {
+        this.waiters.delete(changed);
+      }
+    }
+  }
+  snapshot(): readonly EngineLayerState[] {
     return Array.from(this.entries.values(), (entry) => ({
       id: entry.definition.id,
+      label: entry.definition.label,
       category: entry.definition.category,
       requested: entry.requested,
       available: entry.definition.available !== false,
@@ -125,6 +182,7 @@ export class LayerRegistry {
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
+    this.changed();
     for (const entry of this.entries.values()) {
       if (entry.visible) entry.definition.setVisible(false);
       // Async loaders own cancellation and must honor disposal; release once.

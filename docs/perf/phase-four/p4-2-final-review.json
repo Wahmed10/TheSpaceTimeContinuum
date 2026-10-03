@@ -1,0 +1,35 @@
+{
+  "reviewedAt": "2026-10-03T05:28:56.674914+00:00",
+  "verdict": "reviewed-pass",
+  "candidateCommit": "508646c3d66f380eacb70f7e287c1e0373bf3786",
+  "sourceSha256": "34f3b9e45ae924c3be93e1152c8fee8b03d9f9f5e34dcd2016ce73676313e3c3",
+  "resultSha256": "dc6a3504f7178dd46ec0558756a7c252657f386c76794ba5e462c2edbf8b1768",
+  "browserSha256": "9319334ab71057f18fa05867375584a787622b7fe456b77444cc75620308b5ef",
+  "stats": {
+    "startTime": "2026-10-03T05:12:23.507Z",
+    "duration": 158361.508,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "hashAudit": {
+    "root": true,
+    "candidate": true,
+    "reference": true,
+    "preservedEvidence": true
+  },
+  "cpu": {
+    "referenceCommit": "4409ef5d8f97299d9058360c97d560493d067c1c",
+    "threshold": 1.2,
+    "maxMeanIncreasePercent": 3.405755081359141,
+    "maxP95IncreasePercent": 4.347827213698419,
+    "allFivePathsPass": true,
+    "physicalGpuClaim": false
+  },
+  "capturesReviewed": [
+    "fixed-before.png",
+    "fixed-after.png"
+  ],
+  "stderr": "License checker alone has existing DEP0190 shell warning; other stage and wrapper stderr empty. Server logs include existing Three TSL notices."
+}

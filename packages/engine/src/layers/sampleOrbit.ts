@@ -19,7 +19,9 @@ export function sampleOrbit(
     throw new Error('Invalid orbit interval');
   const times = Array.from(
     { length: 33 },
-    (_, i) => from + ((to - from) * i) / 32,
+    // Reconstructing the last seed can round beyond a strict provider boundary.
+    // Keep both caller endpoints exact; clipped trajectories must stay open.
+    (_, i) => (i === 0 ? from : i === 32 ? to : from + ((to - from) * i) / 32),
   );
   if (epoch > from && epoch < to && !times.includes(epoch)) times.push(epoch);
   times.sort((a, b) => a - b);

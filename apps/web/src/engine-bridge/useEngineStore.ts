@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { EngineApi, PerfSample, QualitySetting } from '@space/engine';
 import type { RouteIssue } from '../lib/routeState';
+import type { MapState } from '@space/domain';
 interface Store {
   engine: EngineApi | null;
   selectedId: string | null;
@@ -15,6 +16,7 @@ interface Store {
   error: string | null;
   ready: boolean;
   linkIssues: readonly RouteIssue[];
+  mapState: MapState | null;
 }
 export const useEngineStore = create<Store>(() => ({
   engine: null,
@@ -30,4 +32,5 @@ export const useEngineStore = create<Store>(() => ({
   error: null,
   ready: false,
   linkIssues: [],
+  mapState: null,
 }));

@@ -1,5 +1,11 @@
 import { AU_KM } from '@space/astro';
 import {
+  CameraReference,
+  type CameraFrame,
+  type CameraFrameTransforms,
+  type CameraFrameResult,
+} from './CameraReference';
+import {
   clamp,
   ease,
   exponentialZoom,
@@ -13,6 +19,12 @@ interface View {
   distanceKm: number;
   azimuthRad: number;
   elevationRad: number;
+  frame: CameraFrame;
+  preset: 'close' | 'wide';
+  following: boolean;
+  localCenter: Float64Array;
+  localUp: Float64Array;
+  pan: Float64Array;
 }
 export class CameraController {
   targetId = 'star:sun';
@@ -22,10 +34,14 @@ export class CameraController {
   following = true;
   reducedMotion = false;
   fade = 0;
+  preset: 'close' | 'wide' = 'wide';
+  private reference: CameraReference;
+  readonly up: Float64Array;
   readonly world = new Float64Array(3);
   readonly center = new Float64Array(3);
   private offset = new Float64Array(3);
   private panOffset = new Float64Array(3);
+  private stagedCenter = new Float64Array(3);
   private zoomTarget: number | null = null;
   private zoomVelocity = 0;
   private previousTime = 0;
@@ -40,6 +56,42 @@ export class CameraController {
     crossFade: boolean;
   } | null = null;
   private history: View[] = [];
+  constructor(transforms?: CameraFrameTransforms) {
+    this.reference = new CameraReference(transforms);
+    this.up = this.reference.upWorld;
+  }
+  get frameId() {
+    return this.reference.frameId;
+  }
+  setFrame(frame: string, tdbSec: number): CameraFrameResult {
+    for (let i = 0; i < 3; i++)
+      this.offset[i] = this.world[i]! - this.center[i]!;
+    const result = this.reference.setFrame(
+      frame,
+      tdbSec,
+      this.center,
+      this.offset,
+      this.offset,
+    );
+    if (!result.ok) return result;
+    this.distanceKm = Math.hypot(
+      this.offset[0]!,
+      this.offset[1]!,
+      this.offset[2]!,
+    );
+    this.azimuthRad = Math.atan2(this.offset[1]!, this.offset[0]!);
+    this.elevationRad = Math.atan2(
+      this.offset[2]!,
+      Math.hypot(this.offset[0]!, this.offset[1]!),
+    );
+    this.panOffset.fill(0);
+    this.zoomTarget = null;
+    this.zoomVelocity = 0;
+    // A frame change is a cold command; retain the current pose rather than
+    // allowing an old flight to overwrite it on the next frame.
+    this.flight = null;
+    return result;
+  }
   orbit(dx: number, dy: number) {
     this.azimuthRad -= dx * 0.006;
     this.elevationRad = clamp(this.elevationRad + dy * 0.006, -1.562, 1.562);
@@ -83,6 +135,12 @@ export class CameraController {
         distanceKm: this.distanceKm,
         azimuthRad: this.azimuthRad,
         elevationRad: this.elevationRad,
+        frame: this.frameId,
+        preset: this.preset,
+        following: this.following,
+        localCenter: this.reference.localCenter.slice(),
+        localUp: this.reference.localUp.slice(),
+        pan: this.panOffset.slice(),
       });
     const sep = Math.hypot(
       target[0]! - this.center[0]!,
@@ -104,6 +162,7 @@ export class CameraController {
         }
       : null;
     this.targetId = id;
+    this.preset = wide ? 'wide' : 'close';
     this.following = true;
     this.panOffset.fill(0);
     if (!transition) {
@@ -114,13 +173,41 @@ export class CameraController {
   back() {
     return this.history.pop();
   }
-  restore(view: View, target: Float64Array, radiusKm: number, now: number) {
-    this.focus(view.targetId, target, radiusKm, now, true, false, false);
+  restore(
+    view: View,
+    target: Float64Array,
+    radiusKm: number,
+    now: number,
+    tdbSec = 0,
+  ) {
+    const result = this.setFrame(view.frame, tdbSec);
+    if (!result.ok) return result;
+    this.focus(
+      view.targetId,
+      target,
+      radiusKm,
+      now,
+      view.following,
+      view.preset === 'wide',
+      false,
+    );
     if (this.flight) this.flight.endDistance = view.distanceKm;
+    else this.distanceKm = view.distanceKm;
     this.azimuthRad = view.azimuthRad;
     this.elevationRad = view.elevationRad;
+    this.following = view.following;
+    this.panOffset.set(view.pan);
+    this.reference.localCenter.set(view.localCenter);
+    this.reference.localUp.set(view.localUp);
+    if (!view.following && view.frame === 'ICRF_SSB')
+      this.center.set(view.localCenter);
+    return result;
   }
-  update(target: Float64Array, now: number, minRadiusKm: number) {
+  update(target: Float64Array, now: number, minRadiusKm: number, tdbSec = 0) {
+    const active = this.frameId !== 'ICRF_SSB';
+    const center = active ? this.stagedCenter : this.center;
+    if (active) center.set(this.center);
+    const tracking = this.following || this.flight !== null;
     const dt = this.previousTime
       ? Math.min(0.1, Math.max(0, (now - this.previousTime) / 1000))
       : 1 / 60;
@@ -148,8 +235,7 @@ export class CameraController {
       const e = f.crossFade ? (t < 0.5 ? 0 : 1) : ease(t);
       this.fade = f.crossFade ? Math.sin(t * Math.PI) : 0;
       for (let i = 0; i < 3; i++)
-        this.center[i] =
-          f.startCenter[i]! + (target[i]! - f.startCenter[i]!) * e;
+        center[i] = f.startCenter[i]! + (target[i]! - f.startCenter[i]!) * e;
       this.distanceKm = f.crossFade
         ? t < 0.5
           ? f.startDistance
@@ -157,7 +243,7 @@ export class CameraController {
         : transitionDistance(f.startDistance, f.endDistance, f.separationKm, t);
       if (t === 1) this.flight = null;
     } else if (this.following)
-      for (let i = 0; i < 3; i++) this.center[i] = target[i]!;
+      for (let i = 0; i < 3; i++) center[i] = target[i]!;
     this.distanceKm = Math.max(minRadiusKm * 1.05, this.distanceKm);
     sphericalToCartesian(
       this.distanceKm,
@@ -165,8 +251,25 @@ export class CameraController {
       this.elevationRad,
       this.offset,
     );
-    for (let i = 0; i < 3; i++)
+    if (active) {
+      const result = this.reference.compose(
+        tdbSec,
+        center,
+        this.offset,
+        this.panOffset,
+        this.world,
+        tracking,
+      );
+      if (result.ok) this.center.set(center);
+      return result;
+    }
+    // Preserve the original arithmetic and avoid FrameTree work on the SSB path.
+    for (let i = 0; i < 3; i++) {
       this.world[i] = this.center[i]! + this.offset[i]! + this.panOffset[i]!;
+      this.reference.localCenter[i] = this.center[i]!;
+      this.up[i] = this.reference.localUp[i]!;
+    }
+    return undefined;
   }
   get transitioning() {
     return this.flight !== null;

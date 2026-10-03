@@ -89,3 +89,49 @@ it('never reveals a load completed after disposal and cleans it up once', async 
   expect(layer.setVisible).not.toHaveBeenCalled();
   expect(layer.dispose).toHaveBeenCalledOnce();
 });
+
+it('settles the latest requested loads and surfaces a requested load failure', async () => {
+  let finish!: () => void;
+  const registry = new LayerRegistry();
+  registry.register(
+    definition({
+      load: () =>
+        new Promise<void>((resolve) => {
+          finish = resolve;
+        }),
+    }),
+  );
+  const loading = registry.setVisible('test', true);
+  await Promise.resolve();
+  let settled = false;
+  const waiting = registry.whenSettled().then(() => {
+    settled = true;
+  });
+  await Promise.resolve();
+  expect(settled).toBe(false);
+  await registry.setVisible('test', false);
+  await registry.whenSettled(); // An unrequested resource need not finish.
+  await waiting;
+  expect(settled).toBe(true);
+  finish();
+  await loading;
+  await waiting;
+  expect(registry.snapshot()[0]).toMatchObject({
+    label: 'Test',
+    requested: false,
+    loaded: true,
+    visible: false,
+  });
+  const broken = new LayerRegistry();
+  broken.register(
+    definition({
+      load: () => {
+        throw new Error('offline');
+      },
+    }),
+  );
+  await expect(broken.setVisible('test', true)).rejects.toThrow('offline');
+  await expect(broken.whenSettled()).rejects.toThrow('offline');
+  await broken.setVisible('test', false);
+  await broken.whenSettled();
+});

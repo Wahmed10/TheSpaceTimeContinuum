@@ -56,6 +56,25 @@ it('keeps validity-clipped arcs open and does not evaluate beyond their endpoint
   expect(() => sampleOrbit(() => {}, 1, 1, 1)).toThrow();
 });
 
+it('retains exact fractional endpoints across a large clipped interval', () => {
+  // A LIVE Neptune orbit at 2026-10-02T22:35:20.002Z previously rounded
+  // its final seed 0.477 microseconds beyond the 2100 provider boundary.
+  const from = -1755609810.8156552,
+    to = 3187252869.1828775;
+  const points = sampleOrbit(
+    (t, out) => {
+      expect(t).toBeGreaterThanOrEqual(from);
+      expect(t).toBeLessThanOrEqual(to);
+      out[0] = t;
+    },
+    from,
+    to,
+    844856120.002,
+  );
+  expect(points[0]).toBe(from);
+  expect(points[points.length - 3]).toBe(to);
+});
+
 it('subtracts camera coordinates in float64 before uploading nearby line endpoints', () => {
   const points = new Float64Array([149597870.7, 0, 0, 149597871.7, 0, 0]);
   const layer = new OrbitLayer(points, '#ffffff', 'computed');

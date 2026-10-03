@@ -2,9 +2,19 @@
 
 Import from `@space/engine`; `API_VERSION` is `1`. `SpaceEngine.create(canvas, options)` creates the implementation. Consumer UI stores an `EngineApi`, which excludes camera internals and lab helpers. Call `dispose()` when unmounting. Package-boundary checks reject deep imports and application access to `cameraController`.
 
-The stable commands are `select(id|null)`, `focus(id,{transition?,wide?})`, `follow(id|null)`, `back()`, `applyMapState`, `getMapState`, `setLayer`, `setScale`, `setQuality`, `setReducedMotion`, `resize`, and `dispose`. `clock` owns pause/play/rate/date/LIVE. `backend` and `isFollowing` are readable. `getMetrics(id)` returns physical metrics; `getEntity(id)` returns a metadata snapshot or null. Application code must treat metadata as read-only.
+The stable commands are `select(id|null)`, `focus(id,{transition?,wide?,select?,recordHistory?})`, `follow(id|null)`, `back()`, `applyMapState`, `getMapState`, `setFrame`, `setLayer`, `getLayerStates`, `whenLayersSettled`, `setScale`, `setQuality`, `setReducedMotion`, `resize`, and `dispose`. `clock` owns pause/play/rate/date/LIVE. `backend` and `isFollowing` are readable. `getMetrics(id)` returns physical metrics; `getEntity(id)` returns a metadata snapshot or null. Application code must treat metadata as read-only.
 
 `on(event, callback)` returns an unsubscribe function. Core events are `select`, `hover`, `clock`, `perf`, `error`, and `tier`. `sourceError` additionally reports `{layerId,message}` for an external point source; it does not request a graphics-backend restart. Mouse/pen hover changes are emitted and cleared on drag/leave/zoom. Touch picking does not depend on hover.
+
+## Camera references and restoring views
+
+`setFrame(CameraFrame)` supports `ICRF_SSB` (default), `ICRF_HELIO`, `ICRF_BODY:earth` and `FIXED:earth`. Its `CameraFrameResult` is `{ok:true}` or `{ok:false,reason:'unsupported-frame'|'unavailable-frame'}`. A switch preserves SSB position, look center and up direction. Follow tracks the current physical target; follow-off holds a reference-relative center, which moves with that frame's origin. Earth-fixed offsets/up rotate with the scientific Earth frame as time evolves or reverses. Physics, provider output and metrics retain ICRF/SSB km. Failed transforms preserve the last valid pose.
+
+`getMapState()` includes the actual frame and last semantic `close|wide` preset. Free zoom/orbit/pan coordinates and follow mode are not shared. Previous view also restores its frame, preset, follow state, pan and up axes. `applyMapState(state,{transition?,select?,recordHistory?})` retains the one-argument void call; restoration can disable animation, card selection and history recording. One application emits one final `mapStateChange`. Unsupported frame, secondary target and fit-both requests produce `commandError` and retain state. Event-window playback scheduling remains a later-phase contract; legacy playback rate behavior remains available.
+
+`mapStateChange` is emitted by cold view/layer/scale/selection commands, never by rendering, clock ticks or free gestures. Direct `clock` commands still use the clock subscription; capture current time with `getMapState()` when sharing. `commandError` carries `{command:'frame'|'mapState'|'layer',message}` and does not request graphics fallback. The existing `error` event retains its graphics handling.
+
+`getLayerStates()` returns copied, readonly status records with ID, label, category, requested, available, loaded and visible. Requests can remain on while a future layer is unavailable. `whenLayersSettled()` drains currently requested available resources, includes enables made while waiting, releases waiters on toggles off, and rejects requested load failures. It does not wait for texture-resolution upgrades. Selection/metadata remain accessible with all layers off.
 
 ## Provider-backed entities
 
