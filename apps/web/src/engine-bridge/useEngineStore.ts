@@ -4,6 +4,7 @@ import type { ExploreMapState, RouteIssue } from '../lib/routeState';
 import type { RouteStateController } from './routeStateController';
 import type { MapState } from '@space/domain';
 import type { DistanceUnit } from '../lib/formatEntity';
+import type { ReducedMotionSetting } from '../lib/userSettings';
 interface Store {
   engine: EngineApi | null;
   selectedId: string | null;
@@ -15,6 +16,9 @@ interface Store {
   scale: 'true' | 'explore';
   following: boolean;
   distanceUnit: DistanceUnit;
+  reducedMotion: ReducedMotionSetting;
+  systemReducedMotion: boolean;
+  clockClamped: boolean;
   perf: PerfSample | null;
   error: string | null;
   ready: boolean;
@@ -36,6 +40,9 @@ export const useEngineStore = create<Store>(() => ({
   scale: 'explore',
   following: true,
   distanceUnit: 'km',
+  reducedMotion: 'system',
+  systemReducedMotion: false,
+  clockClamped: false,
   perf: null,
   error: null,
   ready: false,

@@ -1,0 +1,210 @@
+{
+  "reviewedAt": "2026-10-04T00:12:09.009Z",
+  "verdict": "reviewed-pass",
+  "candidateCommit": "36f7a9852acf2e2a62be39fab4d24b5533572767",
+  "sourceSha256": "99ec507821146caba9ef7a06055214e3e6bd6dd53a9ccc994044988602489a51",
+  "resultSha256": "7a3699ae03a7000d5668d8d57842651549c03620e56b846e2690eda8063b7da3",
+  "browserSha256": "5e5220b3a6cc59dcb47031a7c78df7aa9e7da4a73d6e94d9c499e2110e722bfb",
+  "regressionProbe": {
+    "startTime": "2026-10-03T23:39:14.712Z",
+    "duration": 68553.13799999999,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "controlsProbe": {
+    "startTime": "2026-10-03T23:40:24.402Z",
+    "duration": 300806.563,
+    "expected": 20,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browser": {
+    "startTime": "2026-10-03T23:45:26.342Z",
+    "duration": 911639.5530000001,
+    "expected": 64,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 396,
+    "expectedRejections": 2,
+    "testFiles": 44,
+    "log": "verify.log",
+    "finalMeasurementChecks": "Full verification includes consumer shell, preference validation, throttled clamp retention, UTC/provenance and package boundary checks; 64 cases discovered in twelve specs"
+  },
+  "independentRootAndCandidateSourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 317,
+    "preservedEvidence": 14
+  },
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "lookup": {
+    "samples": 1000,
+    "maxMs": 0.6029000000000337
+  },
+  "response": {
+    "desktop": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 30,
+      "selectionSamples": 6,
+      "maxInputMs": 147,
+      "maxSelectionMs": 45.5,
+      "maxLongTaskMs": 265
+    },
+    "phone": {
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "softwareRenderer": false,
+      "inputSamples": 28,
+      "selectionSamples": 6,
+      "maxInputMs": 17.200000047683716,
+      "maxSelectionMs": 42,
+      "maxLongTaskMs": 52
+    }
+  },
+  "budgets": {
+    "engineGzip": 374840,
+    "engineLimit": 450000,
+    "assets": 79961515,
+    "assetLimit": 80000000,
+    "dependencyLicenses": 72
+  },
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.13435596144853434,
+    "depthProbes": 11
+  },
+  "storage": {
+    "focusChanges": 20,
+    "textures": 33,
+    "compressedTextureMips": 16516088,
+    "pending": 0
+  },
+  "inspectedCaptures": [
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-cards-all-21-ca-2a2f4-ods-and-provider-provenance-charon-provenance-card.png",
+      "sha256": "3e7b2c84b3a9e7e877107eb5db78de627dabf051b8ac73d25fb71c9c9dee8848"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-cards-mobile-ca-659be--timeline-and-camera-usable-mobile-full-card.png",
+      "sha256": "8e2a923cd2e53dccc88fca6bb9a38052bfe75b3b1dc10c6ac2cb1c330f124563"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-cards-mobile-ca-659be--timeline-and-camera-usable-mobile-peek-card.png",
+      "sha256": "5dc7d9c15fdb47924650b163ee3afbac83d849dfa4e5a5805dedca5ec01b38fc"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-cards-mobile-ca-83a35--timeline-and-camera-usable-mobile-full-card.png",
+      "sha256": "ef168eb11a43f1cd67f7a9ff5baddec55d87f284e3f1c37a0a0a0c2ed864bc41"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-cards-mobile-ca-83a35--timeline-and-camera-usable-mobile-peek-card.png",
+      "sha256": "0cff4579b8fb6ec4e0659da9cd9a8b5575ce0e6410974a9e42749c4ea10f8fb4"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-cards-mobile-ca-9df2b--timeline-and-camera-usable-mobile-full-card.png",
+      "sha256": "f946607a966b4cfea3232f80ce4b04427953d21d65e902acc359cf2f879f5e47"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-cards-mobile-ca-9df2b--timeline-and-camera-usable-mobile-peek-card.png",
+      "sha256": "0063ccb24300a625ee99e03ee48050404030e90ed7393834a030bd441acdba3f"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-controls-all-la-f6e4f-es-and-restore-URL-requests-requested-and-unavailable-layers.png",
+      "sha256": "3b8ab51938d925bb8c4c99de59d01199506dc4e21c6afc4e5e071b0ee8da0005"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-controls-the-de-c1481-honest-closed-events-drawer-honest-happening-now.png",
+      "sha256": "1f8c4abf69bac8b4d038220921db45a0e20aef907f3830e4050971b5343c2ecc"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-controls-the-de-c1481-honest-closed-events-drawer-six-control-default.png",
+      "sha256": "bfa246f820479ea914df7148027c6f785e6fafbb655ccbe543a61180408e903e"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-controls-UTC-co-c92ac-d-clamp-notice-are-coherent-utc-time-controls.png",
+      "sha256": "ee8922eccce72b0061b2e1d37ea481f6d6780cd1a01bd586413573c1d768d7d0"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-controls-UTC-co-fb81c-d-clamp-notice-are-coherent-utc-time-controls.png",
+      "sha256": "ee8922eccce72b0061b2e1d37ea481f6d6780cd1a01bd586413573c1d768d7d0"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-controls-valida-34c54-L-settings-retain-ownership-persisted-settings-and-active-tier.png",
+      "sha256": "315c6bcc1ffbcb8a167d02e449ebc16142bec112930ec2c24f474a2589422dbb"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-history-Back-an-e7129-ious-entry-before-selection-history-restored-empty-layers.png",
+      "sha256": "8a4e4128a086e0d8074e93210485f78cc2a105de0c8cd5870d7135200d28508c"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-history-clipboa-52d5e-and-returns-focus-on-mobile-mobile-share-fallback.png",
+      "sha256": "339a0ce9b9192fe6e6de4b9f8bf1bb0d9f8a53604d1cf58b7311ebbf9a466e18"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-mobile-consumer-145f0-ve-reachable-time-and-focus-mobile-time-above-sheet.png",
+      "sha256": "abb974d3760284f262cd1544ad911ac0c6a189c6b5f195a3db4c6cf94391b6be"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-mobile-consumer-722eb-ve-reachable-time-and-focus-mobile-time-above-sheet.png",
+      "sha256": "da7e89d1fdeb4cad0bc777b6515972bf6ea38a9ed7b813f7b970d98499921060"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-mobile-consumer-e4069-ve-reachable-time-and-focus-mobile-time-above-sheet.png",
+      "sha256": "4c0ed4b5774132d6fff0176684d521b69394169a852b895e2a12f09d4c5c6c7a"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-routing-20-clie-440d4-edback-then-dispose-on-exit-charon-canonical-navigation.png",
+      "sha256": "9bc83b029f2df97515250b5abe7dea4f3f5e50b6a4a2742a847b13b998eae03b"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-routing-unknown-b9eb5-e-HTTP-404-with-no-renderer-events-unavailable.png",
+      "sha256": "27444c0510d55160cb537335c44cb8c3a7f7e4421da62761a8e23911b727f05e"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-search-combobox-b2350-ption-rather-than-the-first-keyboard-active-result.png",
+      "sha256": "43070b353587efe1f13d8355d54c6c69698dac4558372c2374aa299715f2797f"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-search-empty-un-40d4a-esult-Enter-adds-no-history-search-no-results.png",
+      "sha256": "7c37e61853aaa258607a436aaac053294907fe72f31bc736b108062870b30359"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-search-phone-to-360cf-sable-in-a-shorter-viewport-phone-short-viewport-search.png",
+      "sha256": "9f49b79928753004a76f94621b024d11dd5eece05b9608d7de2cd83c67898010"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-state-a-fixed-c-e400b-the-rendered-view-with-time-fixed-after.png",
+      "sha256": "45693aa378263d97b1994d908ca678304acb38c0baa9fa1857248dee9b678bef"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-state-a-fixed-c-e400b-the-rendered-view-with-time-fixed-before.png",
+      "sha256": "8396dc7233312f71ccad285c71afeb276ed998b3344f45ad419fdf65b47bfeca"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-url-an-offset-d-0174e-de-the-UTC-browser-timezone-paused-offset-link.png",
+      "sha256": "9db1123096e9be23b5cd971464a50dc920845fd2ac719ca3b24801025d808d47"
+    },
+    {
+      "file": "docs/perf/screens/p4-7-phase-four-url-invalid-ext-bcc3f--recover-to-a-LIVE-overview-invalid-link-recovery.png",
+      "sha256": "617f466456f0bc0a083d2a957230f3fad8ea5e53f76b2aea78d32497d645b292"
+    }
+  ],
+  "limitations": [
+    "Phone is viewport/touch emulation on desktop GPU, not physical phone throughput; functional cases use SwiftShader.",
+    "Desktop maximum navigation long task 265 ms exceeds the final 50 ms target. P4.9 remains open; this is P4.7 controls/shell acceptance only.",
+    "Complete-subtree React, shell-byte, physical-device, cold startup and settled navigation gates remain P4.9. Accepted P4.2 CPU pair remains separate.",
+    "Short-height cards require internal scrolling; viewport captures during flights do not establish settled-scene performance. UTC input focus outline spacing is included in the P4.8 accessibility audit."
+  ]
+}

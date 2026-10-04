@@ -1,53 +1,34 @@
 'use client';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import * as Popover from '@radix-ui/react-popover';
-import * as Dialog from '@radix-ui/react-dialog';
 import { EXPLORABLE_BODIES } from '@space/domain';
-import type { CameraFrame, QualitySetting } from '@space/engine';
 import { useEngineStore } from '../engine-bridge/useEngineStore';
 import { useSearchRendering } from '../engine-bridge/useSearchRendering';
-import LinkStateNotice from './LinkStateNotice';
-import Icon from './ui/Icon';
-import ShareViewDialog from './ShareViewDialog';
-import ObjectCard from './objects/ObjectCard';
 import { parseExploreLocation, serializeExploreState } from '../lib/routeState';
 import {
   focusObject,
   goLive,
-  mapCommand,
+  PLAYBACK_RATES,
   previousView,
   publicViewHref,
-  reversePlayback,
-  setDateInput,
   setPlaybackRate,
-  solarOverview,
   togglePlayback,
 } from '../engine-bridge/timeCommands';
+import LinkStateNotice from './LinkStateNotice';
+import Icon from './ui/Icon';
+import ShareViewDialog from './ShareViewDialog';
+import ObjectCard from './objects/ObjectCard';
+import LayersPopover from './controls/LayersPopover';
+import SettingsPopover from './controls/SettingsPopover';
+import TimeBar from './controls/TimeBar';
+import FieldGuide from './controls/FieldGuide';
+import HappeningNow from './HappeningNow';
 const EngineCanvas = dynamic(() => import('../engine-bridge/EngineCanvas'), {
   ssr: false,
 });
 const EntitySearch = dynamic(() => import('./search/EntitySearch'), {
   ssr: false,
 });
-const bodies = EXPLORABLE_BODIES;
-const destinations = bodies.filter((body) =>
-  ['planet:earth', 'moon:moon', 'planet:mars', 'planet:jupiter'].includes(
-    body.id,
-  ),
-);
-const rates = [1, 10, 60, 100, 3600, 86400, 2629800, 31557600];
-const rateLabels = [
-  '1×',
-  '10×',
-  '1 min / s',
-  '100×',
-  '1 hour / s',
-  '1 day / s',
-  '1 month / s',
-  '1 year / s',
-];
 export default function Explore({
   onChoose,
 }: { onChoose?: (id: string) => void } = {}) {
@@ -55,45 +36,28 @@ export default function Explore({
     selectedId = useEngineStore((s) => s.selectedId),
     ready = useEngineStore((s) => s.ready),
     error = useEngineStore((s) => s.error),
-    mode = useEngineStore((s) => s.mode),
-    rate = useEngineStore((s) => s.rate),
-    scale = useEngineStore((s) => s.scale),
-    unit = useEngineStore((s) => s.distanceUnit),
-    mapState = useEngineStore((s) => s.mapState),
-    routeState = useEngineStore((s) => s.routeState),
-    utcDate = useEngineStore((s) => s.utcDate);
+    routeState = useEngineStore((s) => s.routeState);
   const [searchOpen, setSearchOpen] = useState(false),
     [help, setHelp] = useState(false),
     [notice, setNotice] = useState(''),
-    [dateDraft, setDateDraft] = useState<string | null>(null),
-    [shareUrl, setShareUrl] = useState<string | null>(null),
-    [reduced, setReduced] = useState(false);
+    [shareUrl, setShareUrl] = useState<string | null>(null);
+  const searchRef = useRef<HTMLButtonElement>(null),
+    settingsRef = useRef<HTMLButtonElement>(null),
+    searchReturnFocus = useRef<HTMLElement | null>(null),
+    shareReturnFocus = useRef<HTMLElement | null>(null);
   useSearchRendering(searchOpen);
-  const body = bodies.find((b) => b.id === selectedId);
-  const dateRef = useRef<HTMLInputElement>(null);
-  const shareRef = useRef<HTMLButtonElement>(null);
-  const searchRef = useRef<HTMLButtonElement>(null);
-  const searchReturnFocus = useRef<HTMLElement | null>(null);
+  const body = EXPLORABLE_BODIES.find((b) => b.id === selectedId);
+  const compatibilityHref = serializeExploreState(
+    routeState ?? parseExploreLocation('/', '').state,
+    { renderer: 'webgl' },
+  );
   function openSearch() {
     searchReturnFocus.current = searchRef.current;
     setSearchOpen(true);
   }
-  const accepted = routeState ?? parseExploreLocation('/', '').state;
-  const enabled = new Set(mapState?.layers ?? accepted.layers);
-  const layers = ['planets', 'moons', 'dwarfs', 'orbits'].map((id) => ({
-    id,
-    on: enabled.has(id),
-  }));
-  const compatibilityHref = serializeExploreState(accepted, {
-    renderer: 'webgl',
-  });
-  function compatibility(event: React.MouseEvent<HTMLAnchorElement>) {
-    event.preventDefault();
-    location.assign(publicViewHref(true));
-  }
   function choose(id: string) {
     if (onChoose) onChoose(id);
-    else engine?.focus(id);
+    else focusObject(id);
     setSearchOpen(false);
   }
   useEffect(() => {
@@ -104,8 +68,9 @@ export default function Explore({
         e.ctrlKey ||
         e.metaKey ||
         e.altKey ||
-        (e.target as HTMLElement).closest(
-          'input,select,textarea,[contenteditable="true"],[role="dialog"],.object-card',
+        !(e.target instanceof Element) ||
+        e.target.closest(
+          'input,select,textarea,button,a,[contenteditable="true"],[role="dialog"],[role="button"],.object-card',
         )
       )
         return;
@@ -125,10 +90,13 @@ export default function Explore({
         previousView();
       }
       if (e.key === '[' || e.key === ']') {
-        const index = rates.indexOf(Math.abs(engine?.clock.rate ?? 1));
+        const index = PLAYBACK_RATES.indexOf(
+          Math.abs(engine?.clock.rate ?? 1) as (typeof PLAYBACK_RATES)[number],
+        );
         setPlaybackRate(
-          (rates[Math.max(0, Math.min(7, index + (e.key === ']' ? 1 : -1)))] ??
-            1) * Math.sign(engine?.clock.rate || 1),
+          (PLAYBACK_RATES[
+            Math.max(0, Math.min(7, index + (e.key === ']' ? 1 : -1)))
+          ] ?? 1) * Math.sign(engine?.clock.rate || 1),
         );
       }
     }
@@ -136,12 +104,37 @@ export default function Explore({
     return () => document.removeEventListener('keydown', key);
   }, [engine, selectedId]);
   useEffect(() => {
+    const viewport = window.visualViewport;
+    function resize() {
+      document.documentElement.style.setProperty(
+        '--visible-height',
+        `${viewport?.height ?? innerHeight}px`,
+      );
+      document.documentElement.style.setProperty(
+        '--visible-top',
+        `${viewport?.offsetTop ?? 0}px`,
+      );
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    viewport?.addEventListener('resize', resize);
+    viewport?.addEventListener('scroll', resize);
+    return () => {
+      window.removeEventListener('resize', resize);
+      viewport?.removeEventListener('resize', resize);
+      viewport?.removeEventListener('scroll', resize);
+      document.documentElement.style.removeProperty('--visible-height');
+      document.documentElement.style.removeProperty('--visible-top');
+    };
+  }, []);
+  useEffect(() => {
     if (!notice) return;
     const timer = setTimeout(() => setNotice(''), 3500);
     return () => clearTimeout(timer);
   }, [notice]);
-  async function share() {
+  async function share(trigger?: HTMLElement) {
     if (!engine) return;
+    shareReturnFocus.current = trigger ?? settingsRef.current;
     const url = new URL(publicViewHref(), location.origin);
     try {
       await navigator.clipboard.writeText(url.toString());
@@ -151,321 +144,56 @@ export default function Explore({
     }
   }
   return (
-    <main className="explore">
+    <main className="explore consumer-shell">
       <EngineCanvas />
       <LinkStateNotice />
       <header className="topbar">
-        <Link className="brand" href="/" aria-label="Space Time Continuum home">
+        <div className="brand" aria-label="Space Time Continuum">
           <span className="brand-mark">✳</span>
           <span>
             CONTINUUM<small>SPACE & TIME, CONNECTED</small>
           </span>
-        </Link>
-        <div className="nav-segment">
-          <span className="nav-active">Explore</span>
-          <Link href="/about/data">
-            About the data <span>↗</span>
-          </Link>
         </div>
+        <button
+          className="search-trigger"
+          aria-label="Find a world"
+          ref={searchRef}
+          onClick={openSearch}
+        >
+          <Icon name="search" />
+          <span>Find a world</span>
+          <kbd>/</kbd>
+        </button>
         <div className="top-actions">
-          <button
-            className="search-trigger"
-            aria-label="Find a world"
-            ref={searchRef}
-            onClick={openSearch}
-          >
-            <Icon name="search" />
-            <span>Find a world</span>
-            <kbd>/</kbd>
-          </button>
-          <Popover.Root>
-            <Popover.Trigger className="icon-button" aria-label="Layers">
-              <Icon name="layers" />
-            </Popover.Trigger>
-            <Popover.Portal>
-              <Popover.Content className="popover" sideOffset={14} align="end">
-                <h3>Make space your own</h3>
-                <p>Choose what appears on the map.</p>
-                {layers.map(({ id, on }) => (
-                  <label className="setting-row" key={id}>
-                    <span>
-                      {id === 'orbits'
-                        ? 'Orbital paths'
-                        : id[0]!.toUpperCase() + id.slice(1)}
-                    </span>
-                    <input
-                      type="checkbox"
-                      checked={on}
-                      onChange={(e) => {
-                        mapCommand((engine) =>
-                          engine.setLayer(id, e.target.checked),
-                        );
-                      }}
-                    />
-                  </label>
-                ))}
-                <div className="popover-foot">
-                  More moons and small bodies are being validated.
-                </div>
-              </Popover.Content>
-            </Popover.Portal>
-          </Popover.Root>
-          <Popover.Root>
-            <Popover.Trigger className="icon-button" aria-label="Settings">
-              <Icon name="settings" />
-            </Popover.Trigger>
-            <Popover.Portal>
-              <Popover.Content className="popover" sideOffset={14} align="end">
-                <h3>Your observatory</h3>
-                <label className="setting-row">
-                  Graphics
-                  <select
-                    defaultValue="auto"
-                    onChange={(e) =>
-                      engine?.setQuality(e.target.value as QualitySetting)
-                    }
-                  >
-                    {['auto', 'low', 'medium', 'high', 'ultra'].map((v) => (
-                      <option key={v}>{v}</option>
-                    ))}
-                  </select>
-                </label>
-                <label className="setting-row">
-                  Distances
-                  <select
-                    value={unit}
-                    onChange={(e) =>
-                      useEngineStore.setState({
-                        distanceUnit: e.target.value as typeof unit,
-                      })
-                    }
-                  >
-                    <option>km</option>
-                    <option>mi</option>
-                    <option>AU</option>
-                  </select>
-                </label>
-                <label className="setting-row">
-                  Reduced motion
-                  <input
-                    type="checkbox"
-                    checked={reduced}
-                    onChange={(e) => {
-                      setReduced(e.target.checked);
-                      engine?.setReducedMotion(e.target.checked);
-                    }}
-                  />
-                </label>
-                <label className="setting-row">
-                  Reference frame
-                  <select
-                    aria-label="Reference frame"
-                    value={mapState?.frame ?? 'ICRF_SSB'}
-                    onChange={(event) =>
-                      mapCommand((engine) =>
-                        engine.setFrame(event.target.value as CameraFrame),
-                      )
-                    }
-                  >
-                    <option value="ICRF_SSB">Solar system barycentre</option>
-                    <option value="ICRF_HELIO">Sun centred</option>
-                    <option value="ICRF_BODY:earth">Earth inertial</option>
-                    <option value="FIXED:earth">Earth fixed</option>
-                  </select>
-                </label>
-                <label className="setting-row">
-                  View preset
-                  <select
-                    aria-label="View preset"
-                    value={mapState?.camera?.preset ?? 'wide'}
-                    onChange={(event) =>
-                      mapCommand((engine) =>
-                        engine.focus(engine.focusedId, {
-                          wide: event.target.value === 'wide',
-                          select: selectedId !== null,
-                          recordHistory: false,
-                        }),
-                      )
-                    }
-                  >
-                    <option value="close">Close</option>
-                    <option value="wide">Wide</option>
-                  </select>
-                </label>
-                <a
-                  className="small-link"
-                  href={compatibilityHref}
-                  onClick={compatibility}
-                >
-                  Use WebGL2 compatibility mode ↗
-                </a>
-              </Popover.Content>
-            </Popover.Portal>
-          </Popover.Root>
+          <LayersPopover />
+          <SettingsPopover
+            triggerRef={settingsRef}
+            onHelp={() => setHelp(true)}
+            onShare={() => void share()}
+          />
         </div>
       </header>
-      <section className="intro">
-        <div className="eyebrow">
-          <span className="tiny-line" /> YOUR WINDOW TO THE COSMOS
+      {!body && (
+        <div className="map-intro">
+          <p className="eyebrow">YOUR WINDOW TO THE COSMOS</p>
+          <h1>
+            A universe.
+            <br />
+            <em>Always in motion.</em>
+          </h1>
+          <p>Find a world. Travel through space and time.</p>
         </div>
-        <h1>
-          A universe.
-          <br />
-          <em>Always in motion.</em>
-        </h1>
-        <p>
-          Follow a world. Find a new perspective.
-          <br />
-          Travel through space, and through time.
-        </p>
-      </section>
-      <div className="map-caption">
-        <span className="status-dot" />{' '}
-        {mode === 'live' ? 'THE SOLAR SYSTEM, NOW' : 'TRAVELLING THROUGH TIME'}
-        <span className="caption-line" />
-        <span>
-          ICRF · {scale === 'explore' ? 'EXPLORE SCALE' : 'TRUE SCALE'}
-        </span>
-      </div>
+      )}
+      <HappeningNow />
       {body && (
         <ObjectCard
           key={body.id}
           body={body}
-          onShare={share}
+          onShare={(trigger) => void share(trigger)}
           returnFocus={searchRef}
         />
       )}
-      <div className="view-tools">
-        <button
-          className="icon-button"
-          onClick={previousView}
-          aria-label="Previous view"
-        >
-          <Icon name="back" />
-        </button>
-        <button
-          className="icon-button"
-          onClick={solarOverview}
-          aria-label="Solar system overview"
-        >
-          <Icon name="orbit" />
-        </button>
-        <span />
-        <button
-          className={'scale-button ' + (scale === 'explore' ? 'active' : '')}
-          onClick={() => {
-            const next = scale === 'explore' ? 'true' : 'explore';
-            mapCommand((engine) => engine.setScale(next));
-          }}
-          title="Explore scale enlarges distant bodies; physical distances stay unchanged"
-        >
-          {scale === 'explore' ? 'Explore scale' : 'True scale'}
-        </button>
-        <button
-          className="icon-button"
-          onClick={share}
-          ref={shareRef}
-          aria-label="Share this view"
-        >
-          <Icon name="share" />
-        </button>
-      </div>
-      <section className="bottom-dock">
-        <div className="destinations">
-          <span>GO SOMEWHERE</span>
-          {destinations.map((b) => (
-            <button
-              key={b.id}
-              className={selectedId === b.id ? 'chosen' : ''}
-              onClick={() => choose(b.id)}
-              disabled={!ready}
-            >
-              <i style={{ background: b.color }} />
-              {b.name}
-              <span>↗</span>
-            </button>
-          ))}
-        </div>
-        <div className="timeline">
-          <button
-            className={'live-button ' + (mode === 'live' ? 'is-live' : '')}
-            onClick={goLive}
-          >
-            <span /> LIVE
-          </button>
-          <div className="time-block">
-            <span className="time-label">UNIVERSAL TIME</span>
-            <button
-              id="clock-readout"
-              onClick={() => dateRef.current?.showPicker()}
-              aria-label="Choose simulation date"
-            >
-              Connecting to the cosmos…
-            </button>
-          </div>
-          <input
-            className="date-input"
-            ref={dateRef}
-            type="datetime-local"
-            aria-label="Simulation date in UTC"
-            min="1900-01-01T00:00"
-            max="2100-12-31T23:59"
-            value={dateDraft ?? utcDate}
-            onChange={(e) => {
-              const value = e.target.value;
-              setDateDraft(value);
-              if (setDateInput(value)) setDateDraft(null);
-              else setNotice('Choose a valid UTC date from 1900 through 2100.');
-            }}
-            onBlur={() => setDateDraft(null)}
-          />
-          <div className="playback">
-            <button
-              className="icon-button"
-              aria-label="Reverse time"
-              onClick={reversePlayback}
-            >
-              ↶
-            </button>
-            <button
-              className="play-button"
-              aria-label={mode === 'paused' ? 'Play' : 'Pause'}
-              onClick={togglePlayback}
-            >
-              {mode === 'paused' ? '▶' : 'Ⅱ'}
-            </button>
-            <select
-              aria-label="Playback speed"
-              value={Math.abs(rate)}
-              onChange={(e) =>
-                setPlaybackRate(Number(e.target.value) * Math.sign(rate || 1))
-              }
-            >
-              {rates.map((r, i) => (
-                <option key={r} value={r}>
-                  {rate < 0 ? '−' : ''}
-                  {rateLabels[i]}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className="dock-foot">
-          <span>
-            Drag to orbit <b>·</b> Scroll to explore <b>·</b> Double-click to
-            focus
-          </span>
-          <button onClick={() => setHelp(true)}>
-            <Icon name="help" /> Field guide
-          </button>
-        </div>
-      </section>
-      <footer className="map-footer">
-        <span>
-          THE SPACE TIME CONTINUUM <b>/</b> ARCHITECTURE PREVIEW
-        </span>
-        <RenderStatus />
-      </footer>
+      <TimeBar />
       {!ready && !error && (
         <div className="loading-screen">
           <span className="loader-orbit" />
@@ -481,7 +209,10 @@ export default function Explore({
           <a
             className="primary-button"
             href={compatibilityHref}
-            onClick={compatibility}
+            onClick={(e) => {
+              e.preventDefault();
+              location.assign(publicViewHref(true));
+            }}
           >
             Try compatibility mode
           </a>
@@ -499,7 +230,7 @@ export default function Explore({
       <ShareViewDialog
         url={shareUrl}
         onClose={() => setShareUrl(null)}
-        returnFocus={shareRef}
+        returnFocus={shareReturnFocus}
       />
       {searchOpen && (
         <EntitySearch
@@ -508,59 +239,11 @@ export default function Explore({
           returnFocus={searchReturnFocus}
         />
       )}
-      <Dialog.Root open={help} onOpenChange={setHelp}>
-        <Dialog.Portal>
-          <Dialog.Overlay className="dialog-overlay" />
-          <Dialog.Content className="help-dialog">
-            <Dialog.Title>Your field guide</Dialog.Title>
-            <Dialog.Description>
-              A few simple ways to travel.
-            </Dialog.Description>
-            {[
-              ['Drag / arrow keys', 'Orbit your destination'],
-              ['Scroll / + − / pinch', 'Move closer or farther away'],
-              ['Shift + drag', 'Pan the view'],
-              ['F', 'Focus the selected world'],
-              ['Space', 'Play or pause time'],
-              ['L', 'Return to live time'],
-              ['[ / ]', 'Change playback speed'],
-              ['Backspace', 'Return to your previous view'],
-              ['/', 'Find a world'],
-            ].map(([a, b]) => (
-              <div className="setting-row" key={a}>
-                <kbd>{a}</kbd>
-                <span>{b}</span>
-              </div>
-            ))}
-            <p>
-              Explore scale enlarges distant worlds for visibility. True scale
-              preserves their physical radii. Object card measurements always
-              use physical coordinates.
-            </p>
-            <Dialog.Close className="primary-button">
-              Ready to explore
-            </Dialog.Close>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
+      <FieldGuide
+        open={help}
+        onOpenChange={setHelp}
+        returnFocus={settingsRef}
+      />
     </main>
-  );
-}
-function RenderStatus() {
-  const backend = useEngineStore((s) => s.backend),
-    perf = useEngineStore((s) => s.perf);
-  const [debug, setDebug] = useState(false);
-  useEffect(
-    () => setDebug(new URLSearchParams(location.search).has('perf')),
-    [],
-  );
-  return (
-    <span className="render-status">
-      <i />
-      {backend.toUpperCase()}
-      {debug && perf
-        ? ` · ${perf.fps.toFixed(0)} FPS · p95 ${perf.p95Ms.toFixed(1)} ms · ${perf.drawCalls} draws · ${perf.tier}`
-        : ' · BUILT TO WANDER'}
-    </span>
   );
 }

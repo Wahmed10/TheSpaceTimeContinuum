@@ -1,0 +1,55 @@
+{
+  "samples": 600,
+  "maxErrorPx": 0.13435596144853434,
+  "thresholdPx": 0.5,
+  "depthResults": [
+    {
+      "scenario": "10 km cloud shell, altitude 400 km",
+      "pass": true
+    },
+    {
+      "scenario": "10 km cloud shell, altitude 1000000 km",
+      "pass": true
+    },
+    {
+      "scenario": "Moon behind Earth",
+      "pass": true
+    },
+    {
+      "scenario": "Orbit inside Earth, altitude 400 km",
+      "pass": true
+    },
+    {
+      "scenario": "Orbit in front of Earth, altitude 400 km",
+      "pass": true
+    },
+    {
+      "scenario": "Orbit inside Earth, altitude 30000 km",
+      "pass": true
+    },
+    {
+      "scenario": "Orbit in front of Earth, altitude 30000 km",
+      "pass": true
+    },
+    {
+      "scenario": "Orbit inside Earth, altitude 1000000 km",
+      "pass": true
+    },
+    {
+      "scenario": "Orbit in front of Earth, altitude 1000000 km",
+      "pass": true
+    },
+    {
+      "scenario": "Orbit from Earth center crossing the camera plane",
+      "pass": true
+    },
+    {
+      "scenario": "Oblique orbit visibility versus float64 ray-sphere intersections",
+      "pass": true,
+      "mismatches": []
+    }
+  ],
+  "pass": true,
+  "method": "GPU MSAA marker centroid versus float64 perspective projection; sphere, shell and orbit depth probes, including oblique ribbon visibility versus ray-sphere intersections",
+  "altitudeKm": 400
+}

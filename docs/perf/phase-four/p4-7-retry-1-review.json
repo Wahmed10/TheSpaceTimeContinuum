@@ -1,0 +1,317 @@
+{
+  "reviewedAt": "2026-10-03T23:37:29.240Z",
+  "verdict": "reviewed-failure",
+  "candidateCommit": "36f7a9852acf2e2a62be39fab4d24b5533572767",
+  "sourceSha256": "8c4688fa35813d1486bdd0c790253406b4f7d0bb469e326f8957276334e28377",
+  "resultSha256": "289fd5ed1b74cc02f895528b82eac91103a4b42344b0f7f2697e60987e7070ee",
+  "artifacts": [
+    {
+      "file": "p4-7-retry-1-launch.json",
+      "sha256": "50aef13eae76c3ace8650cf217b5dd3435cfcbb3d43fba690a5631c74426f39c"
+    },
+    {
+      "file": "p4-7-retry-1-result.json",
+      "sha256": "289fd5ed1b74cc02f895528b82eac91103a4b42344b0f7f2697e60987e7070ee"
+    },
+    {
+      "file": "p4-7-retry-1-browser.json",
+      "sha256": "81d787eb414cc5fd4315d0206188620f859aa246f21967c2009f697c53922f6d"
+    },
+    {
+      "file": "p4-7-retry-1-controlsProbe.json",
+      "sha256": "51547b2039f595d663ecbd77f6b4bf5fc49f3f2435c113edd3f5af321ea8d57a"
+    },
+    {
+      "file": "p4-7-retry-1-local-search.json",
+      "sha256": "a76ef54c5af29f74fe8c37b46a8302743eed0c5ba5b4970d283820adbfc816c1"
+    },
+    {
+      "file": "p4-7-retry-1-engine-bundle.json",
+      "sha256": "9263a4f6dc06eca287d4b6038c8176639e4354a26f729cd9aecd36e5b819c831"
+    },
+    {
+      "file": "p4-7-retry-1-search-response-desktop.json",
+      "sha256": "95f7898eb2c74ba21c718f1ded61c55097c545871288f23c4289fdc3bad02b20"
+    },
+    {
+      "file": "p4-7-retry-1-search-response-phone.json",
+      "sha256": "6476c545da1e2fb8f975a8aff954ada23ff3cbc3240aa27598ab3983e6dae882"
+    },
+    {
+      "file": "p4-7-retry-1-precision-webgl.json",
+      "sha256": "a6c9c99e5a72a03398450918c4a7b4519cad50be71cbf6caedbb48f46598fa3f"
+    },
+    {
+      "file": "p4-7-retry-1-texture-stability.json",
+      "sha256": "57ef4e116e053e0e2b041f1fa2051ca2e754f127d2b8b8dd70808f9421f853de"
+    },
+    {
+      "file": "p4-7-retry-1-tracked-source.patch",
+      "sha256": "2e7a0a9af7d9a97ace25ad803bdeebb3d5ec6a6d662cde69fb81e9a3fb991ac2"
+    },
+    {
+      "file": "p4-7-retry-1-verify.log",
+      "sha256": "bafde223f428a353727b7c058856861587dda899033013538d4cace0a6def188"
+    },
+    {
+      "file": "p4-7-retry-1-unconfigured-server.log",
+      "sha256": "032325c0508ee0ccb231f28924f20a365a865f793b2171e3d296a11ee1bd4a59"
+    },
+    {
+      "file": "p4-7-retry-1-diagnosis.json",
+      "sha256": "90ae8a21c90e86f553b4fdc5031e322f7b694c4f1cec3ce6914eb119e9054883"
+    },
+    {
+      "file": "p4-7-retry-1-diagnosis-corrected.json",
+      "sha256": "7b4de3860c3f4ec66bc1693e7231c83be5d15a3e076468bf8aeceedba02d1675"
+    }
+  ],
+  "controlsProbe": {
+    "startTime": "2026-10-03T23:07:43.569Z",
+    "duration": 226700.59600000002,
+    "expected": 20,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browser": {
+    "startTime": "2026-10-03T23:11:31.380Z",
+    "duration": 679282.488,
+    "expected": 61,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "independentRootAndCandidateSourceUnchangedBeforeFixes": true,
+  "independentCheckAt": "2026-10-03T23:28:28.186Z",
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 316,
+    "preservedEvidence": 14
+  },
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "failures": [
+    {
+      "file": "phase-four-history.spec.ts",
+      "title": "Back and Forward restore settings and UTC controls, flushing the previous entry before selection",
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate\\e2e\\helpers\\consumerControls.ts",
+            "column": 6,
+            "line": 34
+          },
+          "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Explore scale', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button aria-pressed=\"false\" class=\"secondary-button\" aria-label=\"Explore scale\">Explore scale</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\n\n   at helpers\\consumerControls.ts:34\n\n  32 |   await page\n  33 |     .getByRole('button', { name: current + ' scale', exact: true })\n> 34 |     .click();\n     |      ^\n  35 |   await expect(\n  36 |     page.getByRole('button', {\n  37 |       name: (current === 'Explore' ? 'True' : 'Explore') + ' scale',\n    at toggleScale (C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate\\e2e\\helpers\\consumerControls.ts:34:6)\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate\\e2e\\phase-four-history.spec.ts:53:3"
+        }
+      ],
+      "attachments": [
+        {
+          "name": "error-context",
+          "contentType": "text/markdown",
+          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\browser\\phase-four-history-Back-an-e7129-ious-entry-before-selection\\error-context.md"
+        },
+        {
+          "name": "trace",
+          "contentType": "application/zip",
+          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\browser\\phase-four-history-Back-an-e7129-ious-entry-before-selection\\trace.zip"
+        }
+      ]
+    },
+    {
+      "file": "phase-four-history.spec.ts",
+      "title": "LIVE clears dated anchors through its transition; explicit pause/play and reverse record one anchor",
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate\\e2e\\phase-four-history.spec.ts",
+            "column": 22,
+            "line": 304
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"http://localhost:3002/object/planet/earth?t=2026-10-03T23%3A15%3A\u001b[7m49.902\u001b[27mZ&renderer=webgl&test=1\"\u001b[39m\nReceived: \u001b[31m\"http://localhost:3002/object/planet/earth?t=2026-10-03T23%3A15%3A\u001b[7m50.991\u001b[27mZ&renderer=webgl&test=1\"\u001b[39m\n\n  302 |   const playing = page.url();\n  303 |   await page.waitForTimeout(750);\n> 304 |   expect(page.url()).toBe(playing);\n      |                      ^\n  305 |   expect(await page.evaluate(() => history.length)).toBe(length);\n  306 | });\n  307 |\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate\\e2e\\phase-four-history.spec.ts:304:22"
+        }
+      ],
+      "attachments": [
+        {
+          "name": "error-context",
+          "contentType": "text/markdown",
+          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\browser\\phase-four-history-LIVE-cl-51583-d-reverse-record-one-anchor\\error-context.md"
+        },
+        {
+          "name": "trace",
+          "contentType": "application/zip",
+          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\browser\\phase-four-history-LIVE-cl-51583-d-reverse-record-one-anchor\\trace.zip"
+        }
+      ]
+    },
+    {
+      "file": "phase-four-routing.spec.ts",
+      "title": "a selection during startup restores the latest route, and the standalone lab still works",
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate\\e2e\\phase-four-routing.spec.ts",
+            "column": 6,
+            "line": 371
+          },
+          "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Mars' }).first()\u001b[22m\n\n\n  369 |     .getByRole('button', { name: 'Mars', exact: false })\n  370 |     .first()\n> 371 |     .click();\n      |      ^\n  372 |   expect(\n  373 |     await page.evaluate(() => window.__spaceEngine!.getMapState().focus),\n  374 |   ).toBe('planet:mars');\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate\\e2e\\phase-four-routing.spec.ts:371:6"
+        }
+      ],
+      "attachments": [
+        {
+          "name": "error-context",
+          "contentType": "text/markdown",
+          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\browser\\phase-four-routing-a-selec-27fb4--standalone-lab-still-works\\error-context.md"
+        },
+        {
+          "name": "trace",
+          "contentType": "application/zip",
+          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\browser\\phase-four-routing-a-selec-27fb4--standalone-lab-still-works\\trace.zip"
+        }
+      ]
+    }
+  ],
+  "inspectedCaptures": [
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-cards-all-21-ca-2a2f4-ods-and-provider-provenance/charon-provenance-card.png",
+      "sha256": "f34d4ea12937a1499d81eb25d914e5840e3990874c565781b1553f70a51e1d67",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-cards-mobile-ca-659be--timeline-and-camera-usable/mobile-full-card.png",
+      "sha256": "8e2a923cd2e53dccc88fca6bb9a38052bfe75b3b1dc10c6ac2cb1c330f124563",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-cards-mobile-ca-659be--timeline-and-camera-usable/mobile-peek-card.png",
+      "sha256": "5dc7d9c15fdb47924650b163ee3afbac83d849dfa4e5a5805dedca5ec01b38fc",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-cards-mobile-ca-83a35--timeline-and-camera-usable/mobile-full-card.png",
+      "sha256": "ef168eb11a43f1cd67f7a9ff5baddec55d87f284e3f1c37a0a0a0c2ed864bc41",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-cards-mobile-ca-83a35--timeline-and-camera-usable/mobile-peek-card.png",
+      "sha256": "0cff4579b8fb6ec4e0659da9cd9a8b5575ce0e6410974a9e42749c4ea10f8fb4",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-cards-mobile-ca-9df2b--timeline-and-camera-usable/mobile-full-card.png",
+      "sha256": "f946607a966b4cfea3232f80ce4b04427953d21d65e902acc359cf2f879f5e47",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-cards-mobile-ca-9df2b--timeline-and-camera-usable/mobile-peek-card.png",
+      "sha256": "0063ccb24300a625ee99e03ee48050404030e90ed7393834a030bd441acdba3f",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-controls-all-la-f6e4f-es-and-restore-URL-requests/requested-and-unavailable-layers.png",
+      "sha256": "666435152f0b4ffdd2297cfd6fca884483a478987813bff295c905b413c4136f",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-controls-the-de-c1481-honest-closed-events-drawer/honest-happening-now.png",
+      "sha256": "ff5f47ca6970d93aa3c025c406521f702fb87790f759b5d08cf18ead952ee2cf",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-controls-the-de-c1481-honest-closed-events-drawer/six-control-default.png",
+      "sha256": "bfa246f820479ea914df7148027c6f785e6fafbb655ccbe543a61180408e903e",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-controls-UTC-co-c92ac-d-clamp-notice-are-coherent/utc-time-controls.png",
+      "sha256": "b62af4578229296e4457cc85e7480365999bf39f735ed280187b9b8586522743",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-controls-UTC-co-fb81c-d-clamp-notice-are-coherent/utc-time-controls.png",
+      "sha256": "b62af4578229296e4457cc85e7480365999bf39f735ed280187b9b8586522743",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-controls-valida-34c54-L-settings-retain-ownership/persisted-settings-and-active-tier.png",
+      "sha256": "1f571725a31d1cf46cd821fddc9ffa3b6c2e885d5cc04b1591c514dfcbfc3ad2",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-history-clipboa-52d5e-and-returns-focus-on-mobile/mobile-share-fallback.png",
+      "sha256": "339a0ce9b9192fe6e6de4b9f8bf1bb0d9f8a53604d1cf58b7311ebbf9a466e18",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-mobile-consumer-145f0-ve-reachable-time-and-focus/mobile-time-above-sheet.png",
+      "sha256": "d3bbfb5ff8556ca9620309c28dc477ac9e307263918cd5dd108b1489b160de01",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-mobile-consumer-722eb-ve-reachable-time-and-focus/mobile-time-above-sheet.png",
+      "sha256": "b6e2e873731a7b625062a01493da5badcd47d4a0ac54ebd47826b99809c12636",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/retry-1/browser/phase-four-mobile-consumer-e4069-ve-reachable-time-and-focus/mobile-time-above-sheet.png",
+      "sha256": "2de492c542b1380b2c9c1b6d77a0aaea89b863ca8cd28cd3a148ffa87f177c8a",
+      "inspected": true
+    }
+  ],
+  "lookup": {
+    "samples": 1000,
+    "maxMs": 1.1636999999998352
+  },
+  "response": [
+    {
+      "profile": "desktop",
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "inputSamples": 27,
+      "inputMaxMs": 97.19999992847443,
+      "selectionSamples": 6,
+      "selectionMaxMs": 31.700000047683716,
+      "longTaskMaxMs": 179
+    },
+    {
+      "profile": "phone",
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "inputSamples": 27,
+      "inputMaxMs": 16.600000023841858,
+      "selectionSamples": 6,
+      "selectionMaxMs": 29.100000023841858,
+      "longTaskMaxMs": 104
+    }
+  ],
+  "budgets": {
+    "engineGzip": 374840,
+    "engineLimit": 450000,
+    "assetBytes": 79961515,
+    "assetLimit": 80000000,
+    "dependencyLicenses": 72
+  },
+  "precision": {
+    "samples": 600,
+    "maxErrorPx": 0.13435596144853434,
+    "depthProbes": 11
+  },
+  "storage": {
+    "focusChanges": 20,
+    "textureCount": 33,
+    "compressedTextureMips": 16516088,
+    "pendingTextures": 0
+  },
+  "findings": [
+    "Real focus race: closing Layers auto-focuses its trigger after Settings opened, dismissing Settings. Preserve a connected active element already on another surface; body fallback keeps ordinary close/Escape restoration.",
+    "Reverse URL test sampled after a fixed 650 ms delay before the debounced replacement committed. Await exactly one external and matching Next internal replacement, then require zero further writes during playback.",
+    "Lab test required a removed default Mars button. Use the existing local search, preserving public engine-target and unchanged lab-URL assertions."
+  ],
+  "limitations": [
+    "P4.7 is unaccepted until the corrected complete run is reviewed.",
+    "Phone is viewport/touch emulation on desktop GPU; functional cases use SwiftShader.",
+    "Final long-task/React/shell/device/accessibility gates remain P4.8-P4.9; recorded 179/104 ms navigation long tasks are not final-shell passes."
+  ]
+}

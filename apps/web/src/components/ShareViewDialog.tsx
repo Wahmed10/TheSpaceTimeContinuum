@@ -10,7 +10,7 @@ export default function ShareViewDialog({
 }: {
   url: string | null;
   onClose(): void;
-  returnFocus: RefObject<HTMLButtonElement | null>;
+  returnFocus: RefObject<HTMLElement | null>;
 }) {
   const input = useRef<HTMLTextAreaElement>(null);
   const [message, setMessage] = useState('');

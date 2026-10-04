@@ -1,0 +1,208 @@
+{
+  "generatedAt": "2026-10-03T23:33:45.568Z",
+  "source": "corrected root P4.7 popover focus; dev diagnostic, not acceptance",
+  "settings": {
+    "events": [
+      {
+        "at": 2176.5,
+        "type": "focus",
+        "target": "Layers"
+      },
+      {
+        "at": 2196.8000000715256,
+        "type": "focus",
+        "target": "INPUT"
+      },
+      {
+        "at": 2327.2000000476837,
+        "type": "focus",
+        "target": "INPUT"
+      },
+      {
+        "at": 2392.4000000953674,
+        "type": "focus",
+        "target": "INPUT"
+      },
+      {
+        "at": 2806.8000000715256,
+        "type": "focus",
+        "target": "INPUT"
+      },
+      {
+        "at": 3310.9000000953674,
+        "type": "replace",
+        "href": "/object/planet/earth?t=2026-10-02T12%3A00%3A00.000Z&layers=&renderer=webgl&test=1",
+        "internal": false,
+        "stack": "Error\n    at history.replaceState (eval at evaluate (:311:30), <anonymous>:8:90)\n    at RouteStateBridge.useMemo[controller] [as write] (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:2864:63)\n    at RouteStateController.write (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3191:19)\n    at RouteStateController.flush (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3210:14)\n    at http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3200:47"
+      },
+      {
+        "at": 3351.8000000715256,
+        "type": "replace",
+        "href": "/object/planet/earth?t=2026-10-02T12%3A00%3A00.000Z&layers=&renderer=webgl&test=1",
+        "internal": true,
+        "stack": "Error\n    at history.replaceState (eval at evaluate (:311:30), <anonymous>:8:90)\n    at http://localhost:3000/_next/static/chunks/209z_next_dist_client_1g0-1tf._.js:1416:28\n    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:14944:22)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:761:74)\n    at commitHookEffectListMount (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:7082:167)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8046:118)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8049:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8152:17)\n    at flushMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9618:21)\n    at commitRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9576:395)\n    at completeRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9541:13)\n    at completeRootWhenReady (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9017:9)\n    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8989:25)\n    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10085:9)\n    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_1gdtv0u._.js:2647:64)"
+      },
+      {
+        "at": 4229.200000047684,
+        "type": "focus",
+        "target": "Layers"
+      },
+      {
+        "at": 4238.600000023842,
+        "type": "focus",
+        "target": "Settings"
+      },
+      {
+        "at": 4254.300000071526,
+        "type": "focus",
+        "target": "Graphics"
+      },
+      {
+        "at": 4979.900000095367,
+        "type": "focus",
+        "target": "Explore scale"
+      }
+    ],
+    "active": "True scale",
+    "settingsOpen": true
+  },
+  "time": {
+    "events": [
+      {
+        "at": 11599,
+        "type": "focus",
+        "target": "Choose simulation date"
+      },
+      {
+        "at": 11632.600000023842,
+        "type": "focus",
+        "target": "LIVE"
+      },
+      {
+        "at": 11729.700000047684,
+        "type": "goLive",
+        "args": [
+          {
+            "animate": true
+          }
+        ],
+        "mode": "paused",
+        "rate": 1,
+        "stack": "Error\n    at clock.<computed> [as goLive] (eval at evaluate (:311:30), <anonymous>:15:81)\n    at http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3475:40\n    at apply (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3443:9)\n    at RouteStateController.guarded (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3143:13)\n    at RouteStateController.command (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3256:14)\n    at timeCommand (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3448:25)\n    at goLive (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3475:5)\n    at executeDispatch (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10159:13)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:761:74)\n    at processDispatchQueue (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10185:41)\n    at http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10462:13\n    at batchedUpdates$1 (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:2044:44)\n    at dispatchEventForPluginEventSystem (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10261:9)\n    at dispatchEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12858:37)\n    at dispatchDiscreteEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12840:64)"
+      },
+      {
+        "at": 13585.300000071526,
+        "type": "replace",
+        "href": "/object/planet/earth?renderer=webgl&test=1",
+        "internal": false,
+        "stack": "Error\n    at history.replaceState (eval at evaluate (:311:30), <anonymous>:8:90)\n    at RouteStateBridge.useMemo[controller] [as write] (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:2864:63)\n    at RouteStateController.write (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3191:19)\n    at RouteStateController.flush (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3210:14)\n    at http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3200:47"
+      },
+      {
+        "at": 13629,
+        "type": "replace",
+        "href": "/object/planet/earth?renderer=webgl&test=1",
+        "internal": true,
+        "stack": "Error\n    at history.replaceState (eval at evaluate (:311:30), <anonymous>:8:90)\n    at http://localhost:3000/_next/static/chunks/209z_next_dist_client_1g0-1tf._.js:1416:28\n    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:14944:22)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:761:74)\n    at commitHookEffectListMount (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:7082:167)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8046:118)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8049:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8152:17)\n    at flushMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9618:21)\n    at commitRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9576:395)\n    at completeRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9541:13)\n    at completeRootWhenReady (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9017:9)\n    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8989:25)\n    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10085:9)\n    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_1gdtv0u._.js:2647:64)"
+      },
+      {
+        "at": 14516.800000071526,
+        "type": "focus",
+        "target": "Close time controls"
+      },
+      {
+        "at": 14577.400000095367,
+        "type": "focus",
+        "target": "Choose simulation date"
+      },
+      {
+        "at": 15822.100000023842,
+        "type": "focus",
+        "target": "Pause"
+      },
+      {
+        "at": 15822.5,
+        "type": "pause",
+        "args": [],
+        "mode": "live",
+        "rate": 1,
+        "stack": "Error\n    at clock.<computed> [as pause] (eval at evaluate (:311:30), <anonymous>:15:81)\n    at http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3465:95\n    at apply (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3443:9)\n    at RouteStateController.guarded (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3143:13)\n    at RouteStateController.command (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3256:14)\n    at timeCommand (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3448:25)\n    at togglePlayback (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3465:5)\n    at executeDispatch (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10159:13)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:761:74)\n    at processDispatchQueue (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10185:41)\n    at http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10462:13\n    at batchedUpdates$1 (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:2044:44)\n    at dispatchEventForPluginEventSystem (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10261:9)\n    at dispatchEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12858:37)\n    at dispatchDiscreteEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12840:64)"
+      },
+      {
+        "at": 16328.700000047684,
+        "type": "replace",
+        "href": "/object/planet/earth?t=2026-10-03T23%3A34%3A06.392Z&renderer=webgl&test=1",
+        "internal": false,
+        "stack": "Error\n    at history.replaceState (eval at evaluate (:311:30), <anonymous>:8:90)\n    at RouteStateBridge.useMemo[controller] [as write] (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:2864:63)\n    at RouteStateController.write (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3191:19)\n    at RouteStateController.flush (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3210:14)\n    at http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3200:47"
+      },
+      {
+        "at": 16387.100000023842,
+        "type": "replace",
+        "href": "/object/planet/earth?t=2026-10-03T23%3A34%3A06.392Z&renderer=webgl&test=1",
+        "internal": true,
+        "stack": "Error\n    at history.replaceState (eval at evaluate (:311:30), <anonymous>:8:90)\n    at http://localhost:3000/_next/static/chunks/209z_next_dist_client_1g0-1tf._.js:1416:28\n    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:14944:22)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:761:74)\n    at commitHookEffectListMount (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:7082:167)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8046:118)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8049:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8152:17)\n    at flushMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9618:21)\n    at commitRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9576:395)\n    at completeRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9541:13)\n    at completeRootWhenReady (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9017:9)\n    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8989:25)\n    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10085:9)\n    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_1gdtv0u._.js:2647:64)"
+      },
+      {
+        "at": 19337.100000023842,
+        "type": "play",
+        "args": [],
+        "mode": "paused",
+        "rate": 1,
+        "stack": "Error\n    at clock.<computed> [as play] (eval at evaluate (:311:30), <anonymous>:15:81)\n    at http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3465:73\n    at apply (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3443:9)\n    at RouteStateController.guarded (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3143:13)\n    at RouteStateController.command (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3256:14)\n    at timeCommand (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3448:25)\n    at togglePlayback (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3465:5)\n    at executeDispatch (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10159:13)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:761:74)\n    at processDispatchQueue (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10185:41)\n    at http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10462:13\n    at batchedUpdates$1 (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:2044:44)\n    at dispatchEventForPluginEventSystem (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10261:9)\n    at dispatchEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12858:37)\n    at dispatchDiscreteEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12840:64)"
+      },
+      {
+        "at": 19337.300000071526,
+        "type": "setRate",
+        "args": [
+          1
+        ],
+        "mode": "paused",
+        "rate": 1,
+        "stack": "Error\n    at clock.<computed> [as setRate] (eval at evaluate (:311:30), <anonymous>:15:81)\n    at SimulationClock.play (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:4456:14)\n    at clock.<computed> [as play] (eval at evaluate (:311:30), <anonymous>:16:16)\n    at http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3465:73\n    at apply (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3443:9)\n    at RouteStateController.guarded (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3143:13)\n    at RouteStateController.command (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3256:14)\n    at timeCommand (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3448:25)\n    at togglePlayback (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3465:5)\n    at executeDispatch (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10159:13)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:761:74)\n    at processDispatchQueue (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10185:41)\n    at http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10462:13\n    at batchedUpdates$1 (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:2044:44)\n    at dispatchEventForPluginEventSystem (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10261:9)\n    at dispatchEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12858:37)\n    at dispatchDiscreteEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12840:64)"
+      },
+      {
+        "at": 20888.600000023842,
+        "type": "focus",
+        "target": "Choose simulation date"
+      },
+      {
+        "at": 20898.5,
+        "type": "focus",
+        "target": "LIVE"
+      },
+      {
+        "at": 23425.100000023842,
+        "type": "focus",
+        "target": "Reverse time"
+      },
+      {
+        "at": 23425.5,
+        "type": "setRate",
+        "args": [
+          -1
+        ],
+        "mode": "playing",
+        "rate": 1,
+        "stack": "Error\n    at clock.<computed> [as setRate] (eval at evaluate (:311:30), <anonymous>:15:81)\n    at http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3471:40\n    at apply (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3443:9)\n    at RouteStateController.guarded (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3143:13)\n    at RouteStateController.command (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3256:14)\n    at timeCommand (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3448:25)\n    at reversePlayback (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3471:5)\n    at executeDispatch (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10159:13)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:761:74)\n    at processDispatchQueue (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10185:41)\n    at http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10462:13\n    at batchedUpdates$1 (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:2044:44)\n    at dispatchEventForPluginEventSystem (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10261:9)\n    at dispatchEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12858:37)\n    at dispatchDiscreteEvent (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:12840:64)"
+      },
+      {
+        "at": 23933.700000047684,
+        "type": "replace",
+        "href": "/object/planet/earth?t=2026-10-03T23%3A34%3A10.480Z&renderer=webgl&test=1",
+        "internal": false,
+        "stack": "Error\n    at history.replaceState (eval at evaluate (:311:30), <anonymous>:8:90)\n    at RouteStateBridge.useMemo[controller] [as write] (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:2864:63)\n    at RouteStateController.write (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3191:19)\n    at RouteStateController.flush (http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3210:14)\n    at http://localhost:3000/_next/static/chunks/_0mus7xc._.js:3200:47"
+      },
+      {
+        "at": 23979.300000071526,
+        "type": "replace",
+        "href": "/object/planet/earth?t=2026-10-03T23%3A34%3A10.480Z&renderer=webgl&test=1",
+        "internal": true,
+        "stack": "Error\n    at history.replaceState (eval at evaluate (:311:30), <anonymous>:8:90)\n    at http://localhost:3000/_next/static/chunks/209z_next_dist_client_1g0-1tf._.js:1416:28\n    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:14944:22)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:761:74)\n    at commitHookEffectListMount (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:7082:167)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8046:118)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8049:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8044:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8233:17)\n    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8031:106)\n    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8152:17)\n    at flushMutationEffects (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9618:21)\n    at commitRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9576:395)\n    at completeRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9541:13)\n    at completeRootWhenReady (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:9017:9)\n    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:8989:25)\n    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_react-dom_0-0t60t._.js:10085:9)\n    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/209z_next_dist_compiled_1gdtv0u._.js:2647:64)"
+      }
+    ],
+    "href": "http://localhost:3000/object/planet/earth?t=2026-10-03T23%3A34%3A10.480Z&renderer=webgl&test=1",
+    "mode": "playing",
+    "rate": -1,
+    "before": "http://localhost:3000/object/planet/earth?t=2026-10-03T23%3A34%3A10.480Z&renderer=webgl&test=1",
+    "urlChanged": false
+  }
+}

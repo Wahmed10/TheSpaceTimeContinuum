@@ -5,6 +5,9 @@ import { useEngineStore } from './useEngineStore';
 import { parseExploreLocation } from '../lib/routeState';
 import type { RouteIssue } from '../lib/routeState';
 import type { SpaceEngine } from '@space/engine';
+import { initializeUserSettings } from './userSettingsBridge';
+import { prefersReducedMotion } from '../lib/userSettings';
+import { clockUiState } from './clockSnapshot';
 declare global {
   interface Window {
     __spaceEngine?: SpaceEngine;
@@ -44,6 +47,8 @@ export default function EngineCanvas() {
           location.search,
         );
         const { state, debug } = initialLocation;
+        if (initialLocation.route.status !== 'lab')
+          unsubs.push(initializeUserSettings());
         useEngineStore.setState({ linkIssues: initialLocation.issues });
         const { SpaceEngine } = await import('@space/engine');
         if (disposed || expired) return;
@@ -57,13 +62,19 @@ export default function EngineCanvas() {
           engine.dispose();
           return;
         }
+        if (initialLocation.route.status !== 'lab') {
+          const preferences = useEngineStore.getState();
+          engine.setQuality(preferences.quality);
+          engine.setReducedMotion(
+            prefersReducedMotion(
+              preferences.reducedMotion,
+              preferences.systemReducedMotion,
+            ),
+          );
+        }
         unsubs.push(
           engine.on('clock', (s) => {
-            useEngineStore.setState({
-              mode: s.mode,
-              rate: s.rate,
-              utcDate: tdbToIso(s.tdbSec).slice(0, 16),
-            });
+            useEngineStore.setState((current) => clockUiState(s, current));
             const el = document.getElementById('clock-readout');
             if (el)
               el.textContent =

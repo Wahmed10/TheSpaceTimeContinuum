@@ -21,7 +21,7 @@ export default function ObjectCard({
   returnFocus,
 }: {
   body: BodySpec;
-  onShare(): void;
+  onShare(trigger: HTMLButtonElement): void;
   returnFocus: RefObject<HTMLElement | null>;
 }) {
   const engine = useEngineStore((state) => state.engine),
@@ -138,7 +138,7 @@ export default function ObjectCard({
       <button
         className="card-share secondary-button"
         aria-label={`Share ${body.name} view`}
-        onClick={onShare}
+        onClick={(event) => onShare(event.currentTarget)}
       >
         <Icon name="share" /> Share view
       </button>

@@ -1,0 +1,1492 @@
+diff --git a/apps/web/src/app/globals.css b/apps/web/src/app/globals.css
+index 4323b19..3d22999 100644
+--- a/apps/web/src/app/globals.css
++++ b/apps/web/src/app/globals.css
+@@ -1434,3 +1434,339 @@ p {
+     max-height: min(40dvh, calc(100dvh - 220px));
+   }
+ }
++
++/* Consumer controls share a cold viewport/layout adapter, never a frame loop. */
++.consumer-shell {
++  height: var(--visible-height, 100dvh);
++  min-height: 0;
++}
++.consumer-shell .topbar {
++  top: 0;
++  height: 88px;
++  padding: 20px 24px;
++  gap: 24px;
++}
++.consumer-shell .brand {
++  flex-shrink: 0;
++}
++.consumer-shell .search-trigger {
++  margin-right: auto;
++}
++.consumer-shell .top-actions {
++  margin-left: auto;
++  gap: 8px;
++}
++.consumer-shell .icon-button,
++.consumer-shell .search-trigger {
++  min-width: 44px;
++  min-height: 44px;
++}
++.consumer-shell .map-intro {
++  position: absolute;
++  pointer-events: none;
++  top: 130px;
++  left: 32px;
++  max-width: 400px;
++}
++.consumer-shell .map-intro h1 {
++  font: 400 44px/1.15 var(--serif);
++  margin: 20px 0;
++}
++.consumer-shell .map-intro p {
++  color: #9cafa9;
++  font-size: 12px;
++  line-height: 1.7;
++}
++.consumer-shell .map-intro .eyebrow {
++  color: var(--accent);
++  font-size: 9px;
++}
++.consumer-shell .object-card {
++  top: 108px;
++  right: 24px;
++  max-height: calc(var(--visible-height, 100dvh) - 140px);
++}
++.happening-trigger {
++  position: absolute;
++  right: 24px;
++  top: 104px;
++  z-index: 12;
++  padding: 12px 16px;
++  min-height: 44px;
++  background: var(--panel);
++  border: 1px solid var(--border);
++  border-radius: 8px;
++  color: #b6c7c7;
++  font-size: 12px;
++}
++.consumer-shell:has(.object-card) .happening-trigger {
++  right: 354px;
++}
++.time-bar.timeline {
++  position: absolute;
++  left: 50%;
++  bottom: max(24px, env(safe-area-inset-bottom));
++  transform: translateX(-50%);
++  z-index: 8;
++  width: min(430px, calc(100% - 32px));
++  min-height: 64px;
++  height: auto;
++  display: flex;
++  gap: 8px;
++  padding: 8px;
++  margin: 0;
++  background: var(--panel);
++}
++.time-bar .play-toggle {
++  min-width: 48px;
++  min-height: 44px;
++  font-size: 18px;
++  color: var(--accent);
++  border-radius: 6px;
++}
++.time-trigger {
++  display: flex;
++  flex: 1;
++  align-items: center;
++  gap: 12px;
++  text-align: left;
++  min-height: 44px;
++  font-size: 12px;
++}
++.time-trigger > :last-child {
++  margin-left: auto;
++  padding: 0 8px;
++}
++.time-mode {
++  font-size: 9px;
++  letter-spacing: 0.08em;
++  color: var(--accent);
++}
++.popover {
++  max-width: calc(100vw - 24px);
++  max-height: min(
++    calc(var(--visible-height, 100dvh) - 24px),
++    var(
++      --radix-popover-content-available-height,
++      calc(var(--visible-height, 100dvh) - 24px)
++    )
++  );
++  overflow-y: auto;
++  overscroll-behavior: contain;
++}
++.settings-popover {
++  width: 330px;
++}
++.layers-popover {
++  width: 330px;
++}
++.layer-setting .setting-row {
++  padding-bottom: 6px;
++  border-bottom: 0;
++}
++.layer-state {
++  display: block;
++  font-size: 11px;
++  color: #a5b8bf;
++  padding-bottom: 10px;
++  border-bottom: 1px solid var(--border);
++}
++.setting-row input[type='checkbox'] {
++  width: 22px;
++  height: 22px;
++}
++.setting-row select {
++  max-width: 185px;
++  min-height: 36px;
++}
++.settings-actions {
++  display: grid;
++  gap: 8px;
++  margin-top: 16px;
++}
++.settings-actions > * {
++  min-height: 44px;
++  padding: 10px;
++  text-align: left;
++  font-size: 12px;
++  border-radius: 6px;
++}
++.settings-actions > a {
++  color: var(--accent);
++}
++.panel-close {
++  width: 100%;
++  min-height: 44px;
++  margin-top: 16px;
++}
++.time-panel {
++  width: 360px;
++}
++.time-actions {
++  display: flex;
++  gap: 12px;
++}
++.time-actions > button {
++  flex: 1;
++  min-height: 44px;
++}
++.utc-date-field {
++  display: grid;
++  gap: 10px;
++  margin-top: 18px;
++  font-size: 12px;
++}
++.utc-date-field input {
++  min-width: 0;
++  width: 100%;
++  min-height: 44px;
++  padding: 8px;
++  border: 1px solid var(--border);
++  border-radius: 6px;
++  background: #243039;
++}
++.happening-drawer {
++  position: fixed;
++  z-index: 41;
++  right: 16px;
++  top: calc(var(--visible-top, 0px) + 16px);
++  width: min(360px, calc(100vw - 32px));
++  max-height: calc(var(--visible-height, 100dvh) - 32px);
++  padding: 24px;
++  border: 1px solid var(--border);
++  border-radius: 12px;
++  background: #15202a;
++  overflow-y: auto;
++  line-height: 1.7;
++}
++.happening-drawer h2 {
++  font-family: var(--serif);
++  font-weight: 400;
++  font-size: 28px;
++}
++.happening-drawer p {
++  color: #afc0c7;
++}
++.happening-drawer button {
++  min-height: 44px;
++}
++.search-dialog,
++.help-dialog {
++  top: calc(var(--visible-top, 0px) + 16px);
++  max-height: calc(var(--visible-height, 100dvh) - 32px);
++  overflow-y: auto;
++  overscroll-behavior: contain;
++}
++.object-card .icon-button,
++.object-card .card-actions > button,
++.object-card .card-share {
++  min-height: 44px;
++}
++.object-card .sheet-snap-controls button {
++  min-height: 36px;
++  min-width: 56px;
++}
++html[data-reduced-motion='true'] .consumer-shell *,
++html[data-reduced-motion='true'] [role='dialog'] *,
++html[data-reduced-motion='true'] .space-label {
++  transition: none;
++  animation: none;
++}
++@media (max-width: 700px), (max-width: 1000px) and (max-height: 600px) {
++  .consumer-shell .topbar {
++    height: 72px;
++    padding: 10px 14px;
++    gap: 4px;
++  }
++  .consumer-shell .brand {
++    display: none;
++  }
++  .consumer-shell .search-trigger {
++    display: flex;
++    min-width: 44px;
++    padding: 10px;
++  }
++  .consumer-shell .search-trigger span {
++    display: none;
++    font-size: 12px;
++  }
++  .consumer-shell .search-trigger kbd {
++    display: none;
++  }
++  .consumer-shell .map-intro {
++    top: 150px;
++    left: 20px;
++    max-width: calc(100% - 40px);
++  }
++  .consumer-shell .map-intro h1 {
++    font-size: clamp(24px, 7vw, 40px);
++  }
++  .happening-trigger {
++    top: 14px;
++    right: 118px;
++    width: 100px;
++    min-height: 44px;
++    font-size: 10px;
++    padding: 8px 12px;
++  }
++  .consumer-shell:has(.object-card) .happening-trigger {
++    right: 118px;
++  }
++  .consumer-shell .object-card {
++    top: auto;
++    left: 14px;
++    right: 14px;
++    bottom: max(14px, env(safe-area-inset-bottom));
++    width: auto;
++    max-height: calc(var(--visible-height, 100dvh) - 202px);
++  }
++  .consumer-shell .object-card[data-snap='half'] {
++    max-height: min(40dvh, calc(var(--visible-height, 100dvh) - 202px));
++  }
++  .consumer-shell:has(.object-card) .time-bar {
++    bottom: calc(
++      var(--card-height, 154px) + max(14px, env(safe-area-inset-bottom)) + 12px
++    );
++  }
++  .time-bar.timeline {
++    width: calc(100% - 28px);
++    min-height: 60px;
++    bottom: max(14px, env(safe-area-inset-bottom));
++  }
++  .time-trigger {
++    gap: 8px;
++    font-size: 11px;
++  }
++  .time-mode {
++    font-size: 8px;
++  }
++  .consumer-shell:has(.object-card) .happening-trigger {
++    top: 14px;
++    min-height: 44px;
++    padding: 8px 12px;
++  }
++  .consumer-shell .object-card h2 {
++    font-size: 27px;
++  }
++  .consumer-shell .object-card-header {
++    padding-top: 0;
++  }
++}
++@media (max-width: 1000px) and (max-height: 600px) {
++  .consumer-shell .map-intro {
++    display: none;
++  }
++  .consumer-shell .object-card {
++    max-height: calc(var(--visible-height, 100dvh) - 188px);
++  }
++  .consumer-shell .object-card[data-snap='half'] {
++    max-height: min(40dvh, calc(var(--visible-height, 100dvh) - 188px));
++  }
++  .consumer-shell .object-card h2 {
++    margin: 0 0 3px;
++    font-size: 24px;
++  }
++  .consumer-shell .object-card .position-certainty {
++    margin: 0 0 5px;
++  }
++}
+diff --git a/apps/web/src/components/Explore.tsx b/apps/web/src/components/Explore.tsx
+index 6ec8749..cee74d6 100644
+--- a/apps/web/src/components/Explore.tsx
++++ b/apps/web/src/components/Explore.tsx
+@@ -1,53 +1,34 @@
+ 'use client';
+ import dynamic from 'next/dynamic';
+-import Link from 'next/link';
+ import { useEffect, useRef, useState } from 'react';
+-import * as Popover from '@radix-ui/react-popover';
+-import * as Dialog from '@radix-ui/react-dialog';
+ import { EXPLORABLE_BODIES } from '@space/domain';
+-import type { CameraFrame, QualitySetting } from '@space/engine';
+ import { useEngineStore } from '../engine-bridge/useEngineStore';
+ import { useSearchRendering } from '../engine-bridge/useSearchRendering';
+-import LinkStateNotice from './LinkStateNotice';
+-import Icon from './ui/Icon';
+-import ShareViewDialog from './ShareViewDialog';
+-import ObjectCard from './objects/ObjectCard';
+ import { parseExploreLocation, serializeExploreState } from '../lib/routeState';
+ import {
+   focusObject,
+   goLive,
+-  mapCommand,
++  PLAYBACK_RATES,
+   previousView,
+   publicViewHref,
+-  reversePlayback,
+-  setDateInput,
+   setPlaybackRate,
+-  solarOverview,
+   togglePlayback,
+ } from '../engine-bridge/timeCommands';
++import LinkStateNotice from './LinkStateNotice';
++import Icon from './ui/Icon';
++import ShareViewDialog from './ShareViewDialog';
++import ObjectCard from './objects/ObjectCard';
++import LayersPopover from './controls/LayersPopover';
++import SettingsPopover from './controls/SettingsPopover';
++import TimeBar from './controls/TimeBar';
++import FieldGuide from './controls/FieldGuide';
++import HappeningNow from './HappeningNow';
+ const EngineCanvas = dynamic(() => import('../engine-bridge/EngineCanvas'), {
+   ssr: false,
+ });
+ const EntitySearch = dynamic(() => import('./search/EntitySearch'), {
+   ssr: false,
+ });
+-const bodies = EXPLORABLE_BODIES;
+-const destinations = bodies.filter((body) =>
+-  ['planet:earth', 'moon:moon', 'planet:mars', 'planet:jupiter'].includes(
+-    body.id,
+-  ),
+-);
+-const rates = [1, 10, 60, 100, 3600, 86400, 2629800, 31557600];
+-const rateLabels = [
+-  '1×',
+-  '10×',
+-  '1 min / s',
+-  '100×',
+-  '1 hour / s',
+-  '1 day / s',
+-  '1 month / s',
+-  '1 year / s',
+-];
+ export default function Explore({
+   onChoose,
+ }: { onChoose?: (id: string) => void } = {}) {
+@@ -55,45 +36,28 @@ export default function Explore({
+     selectedId = useEngineStore((s) => s.selectedId),
+     ready = useEngineStore((s) => s.ready),
+     error = useEngineStore((s) => s.error),
+-    mode = useEngineStore((s) => s.mode),
+-    rate = useEngineStore((s) => s.rate),
+-    scale = useEngineStore((s) => s.scale),
+-    unit = useEngineStore((s) => s.distanceUnit),
+-    mapState = useEngineStore((s) => s.mapState),
+-    routeState = useEngineStore((s) => s.routeState),
+-    utcDate = useEngineStore((s) => s.utcDate);
++    routeState = useEngineStore((s) => s.routeState);
+   const [searchOpen, setSearchOpen] = useState(false),
+     [help, setHelp] = useState(false),
+     [notice, setNotice] = useState(''),
+-    [dateDraft, setDateDraft] = useState<string | null>(null),
+-    [shareUrl, setShareUrl] = useState<string | null>(null),
+-    [reduced, setReduced] = useState(false);
++    [shareUrl, setShareUrl] = useState<string | null>(null);
++  const searchRef = useRef<HTMLButtonElement>(null),
++    settingsRef = useRef<HTMLButtonElement>(null),
++    searchReturnFocus = useRef<HTMLElement | null>(null),
++    shareReturnFocus = useRef<HTMLElement | null>(null);
+   useSearchRendering(searchOpen);
+-  const body = bodies.find((b) => b.id === selectedId);
+-  const dateRef = useRef<HTMLInputElement>(null);
+-  const shareRef = useRef<HTMLButtonElement>(null);
+-  const searchRef = useRef<HTMLButtonElement>(null);
+-  const searchReturnFocus = useRef<HTMLElement | null>(null);
++  const body = EXPLORABLE_BODIES.find((b) => b.id === selectedId);
++  const compatibilityHref = serializeExploreState(
++    routeState ?? parseExploreLocation('/', '').state,
++    { renderer: 'webgl' },
++  );
+   function openSearch() {
+     searchReturnFocus.current = searchRef.current;
+     setSearchOpen(true);
+   }
+-  const accepted = routeState ?? parseExploreLocation('/', '').state;
+-  const enabled = new Set(mapState?.layers ?? accepted.layers);
+-  const layers = ['planets', 'moons', 'dwarfs', 'orbits'].map((id) => ({
+-    id,
+-    on: enabled.has(id),
+-  }));
+-  const compatibilityHref = serializeExploreState(accepted, {
+-    renderer: 'webgl',
+-  });
+-  function compatibility(event: React.MouseEvent<HTMLAnchorElement>) {
+-    event.preventDefault();
+-    location.assign(publicViewHref(true));
+-  }
+   function choose(id: string) {
+     if (onChoose) onChoose(id);
+-    else engine?.focus(id);
++    else focusObject(id);
+     setSearchOpen(false);
+   }
+   useEffect(() => {
+@@ -104,8 +68,9 @@ export default function Explore({
+         e.ctrlKey ||
+         e.metaKey ||
+         e.altKey ||
+-        (e.target as HTMLElement).closest(
+-          'input,select,textarea,[contenteditable="true"],[role="dialog"],.object-card',
++        !(e.target instanceof Element) ||
++        e.target.closest(
++          'input,select,textarea,button,a,[contenteditable="true"],[role="dialog"],[role="button"],.object-card',
+         )
+       )
+         return;
+@@ -125,23 +90,51 @@ export default function Explore({
+         previousView();
+       }
+       if (e.key === '[' || e.key === ']') {
+-        const index = rates.indexOf(Math.abs(engine?.clock.rate ?? 1));
++        const index = PLAYBACK_RATES.indexOf(
++          Math.abs(engine?.clock.rate ?? 1) as (typeof PLAYBACK_RATES)[number],
++        );
+         setPlaybackRate(
+-          (rates[Math.max(0, Math.min(7, index + (e.key === ']' ? 1 : -1)))] ??
+-            1) * Math.sign(engine?.clock.rate || 1),
++          (PLAYBACK_RATES[
++            Math.max(0, Math.min(7, index + (e.key === ']' ? 1 : -1)))
++          ] ?? 1) * Math.sign(engine?.clock.rate || 1),
+         );
+       }
+     }
+     document.addEventListener('keydown', key);
+     return () => document.removeEventListener('keydown', key);
+   }, [engine, selectedId]);
++  useEffect(() => {
++    const viewport = window.visualViewport;
++    function resize() {
++      document.documentElement.style.setProperty(
++        '--visible-height',
++        `${viewport?.height ?? innerHeight}px`,
++      );
++      document.documentElement.style.setProperty(
++        '--visible-top',
++        `${viewport?.offsetTop ?? 0}px`,
++      );
++    }
++    resize();
++    window.addEventListener('resize', resize);
++    viewport?.addEventListener('resize', resize);
++    viewport?.addEventListener('scroll', resize);
++    return () => {
++      window.removeEventListener('resize', resize);
++      viewport?.removeEventListener('resize', resize);
++      viewport?.removeEventListener('scroll', resize);
++      document.documentElement.style.removeProperty('--visible-height');
++      document.documentElement.style.removeProperty('--visible-top');
++    };
++  }, []);
+   useEffect(() => {
+     if (!notice) return;
+     const timer = setTimeout(() => setNotice(''), 3500);
+     return () => clearTimeout(timer);
+   }, [notice]);
+-  async function share() {
++  async function share(trigger?: HTMLElement) {
+     if (!engine) return;
++    shareReturnFocus.current = trigger ?? settingsRef.current;
+     const url = new URL(publicViewHref(), location.origin);
+     try {
+       await navigator.clipboard.writeText(url.toString());
+@@ -151,321 +144,56 @@ export default function Explore({
+     }
+   }
+   return (
+-    <main className="explore">
++    <main className="explore consumer-shell">
+       <EngineCanvas />
+       <LinkStateNotice />
+       <header className="topbar">
+-        <Link className="brand" href="/" aria-label="Space Time Continuum home">
++        <div className="brand" aria-label="Space Time Continuum">
+           <span className="brand-mark">✳</span>
+           <span>
+             CONTINUUM<small>SPACE & TIME, CONNECTED</small>
+           </span>
+-        </Link>
+-        <div className="nav-segment">
+-          <span className="nav-active">Explore</span>
+-          <Link href="/about/data">
+-            About the data <span>↗</span>
+-          </Link>
+         </div>
++        <button
++          className="search-trigger"
++          aria-label="Find a world"
++          ref={searchRef}
++          onClick={openSearch}
++        >
++          <Icon name="search" />
++          <span>Find a world</span>
++          <kbd>/</kbd>
++        </button>
+         <div className="top-actions">
+-          <button
+-            className="search-trigger"
+-            aria-label="Find a world"
+-            ref={searchRef}
+-            onClick={openSearch}
+-          >
+-            <Icon name="search" />
+-            <span>Find a world</span>
+-            <kbd>/</kbd>
+-          </button>
+-          <Popover.Root>
+-            <Popover.Trigger className="icon-button" aria-label="Layers">
+-              <Icon name="layers" />
+-            </Popover.Trigger>
+-            <Popover.Portal>
+-              <Popover.Content className="popover" sideOffset={14} align="end">
+-                <h3>Make space your own</h3>
+-                <p>Choose what appears on the map.</p>
+-                {layers.map(({ id, on }) => (
+-                  <label className="setting-row" key={id}>
+-                    <span>
+-                      {id === 'orbits'
+-                        ? 'Orbital paths'
+-                        : id[0]!.toUpperCase() + id.slice(1)}
+-                    </span>
+-                    <input
+-                      type="checkbox"
+-                      checked={on}
+-                      onChange={(e) => {
+-                        mapCommand((engine) =>
+-                          engine.setLayer(id, e.target.checked),
+-                        );
+-                      }}
+-                    />
+-                  </label>
+-                ))}
+-                <div className="popover-foot">
+-                  More moons and small bodies are being validated.
+-                </div>
+-              </Popover.Content>
+-            </Popover.Portal>
+-          </Popover.Root>
+-          <Popover.Root>
+-            <Popover.Trigger className="icon-button" aria-label="Settings">
+-              <Icon name="settings" />
+-            </Popover.Trigger>
+-            <Popover.Portal>
+-              <Popover.Content className="popover" sideOffset={14} align="end">
+-                <h3>Your observatory</h3>
+-                <label className="setting-row">
+-                  Graphics
+-                  <select
+-                    defaultValue="auto"
+-                    onChange={(e) =>
+-                      engine?.setQuality(e.target.value as QualitySetting)
+-                    }
+-                  >
+-                    {['auto', 'low', 'medium', 'high', 'ultra'].map((v) => (
+-                      <option key={v}>{v}</option>
+-                    ))}
+-                  </select>
+-                </label>
+-                <label className="setting-row">
+-                  Distances
+-                  <select
+-                    value={unit}
+-                    onChange={(e) =>
+-                      useEngineStore.setState({
+-                        distanceUnit: e.target.value as typeof unit,
+-                      })
+-                    }
+-                  >
+-                    <option>km</option>
+-                    <option>mi</option>
+-                    <option>AU</option>
+-                  </select>
+-                </label>
+-                <label className="setting-row">
+-                  Reduced motion
+-                  <input
+-                    type="checkbox"
+-                    checked={reduced}
+-                    onChange={(e) => {
+-                      setReduced(e.target.checked);
+-                      engine?.setReducedMotion(e.target.checked);
+-                    }}
+-                  />
+-                </label>
+-                <label className="setting-row">
+-                  Reference frame
+-                  <select
+-                    aria-label="Reference frame"
+-                    value={mapState?.frame ?? 'ICRF_SSB'}
+-                    onChange={(event) =>
+-                      mapCommand((engine) =>
+-                        engine.setFrame(event.target.value as CameraFrame),
+-                      )
+-                    }
+-                  >
+-                    <option value="ICRF_SSB">Solar system barycentre</option>
+-                    <option value="ICRF_HELIO">Sun centred</option>
+-                    <option value="ICRF_BODY:earth">Earth inertial</option>
+-                    <option value="FIXED:earth">Earth fixed</option>
+-                  </select>
+-                </label>
+-                <label className="setting-row">
+-                  View preset
+-                  <select
+-                    aria-label="View preset"
+-                    value={mapState?.camera?.preset ?? 'wide'}
+-                    onChange={(event) =>
+-                      mapCommand((engine) =>
+-                        engine.focus(engine.focusedId, {
+-                          wide: event.target.value === 'wide',
+-                          select: selectedId !== null,
+-                          recordHistory: false,
+-                        }),
+-                      )
+-                    }
+-                  >
+-                    <option value="close">Close</option>
+-                    <option value="wide">Wide</option>
+-                  </select>
+-                </label>
+-                <a
+-                  className="small-link"
+-                  href={compatibilityHref}
+-                  onClick={compatibility}
+-                >
+-                  Use WebGL2 compatibility mode ↗
+-                </a>
+-              </Popover.Content>
+-            </Popover.Portal>
+-          </Popover.Root>
++          <LayersPopover />
++          <SettingsPopover
++            triggerRef={settingsRef}
++            onHelp={() => setHelp(true)}
++            onShare={() => void share()}
++          />
+         </div>
+       </header>
+-      <section className="intro">
+-        <div className="eyebrow">
+-          <span className="tiny-line" /> YOUR WINDOW TO THE COSMOS
++      {!body && (
++        <div className="map-intro">
++          <p className="eyebrow">YOUR WINDOW TO THE COSMOS</p>
++          <h1>
++            A universe.
++            <br />
++            <em>Always in motion.</em>
++          </h1>
++          <p>Find a world. Travel through space and time.</p>
+         </div>
+-        <h1>
+-          A universe.
+-          <br />
+-          <em>Always in motion.</em>
+-        </h1>
+-        <p>
+-          Follow a world. Find a new perspective.
+-          <br />
+-          Travel through space, and through time.
+-        </p>
+-      </section>
+-      <div className="map-caption">
+-        <span className="status-dot" />{' '}
+-        {mode === 'live' ? 'THE SOLAR SYSTEM, NOW' : 'TRAVELLING THROUGH TIME'}
+-        <span className="caption-line" />
+-        <span>
+-          ICRF · {scale === 'explore' ? 'EXPLORE SCALE' : 'TRUE SCALE'}
+-        </span>
+-      </div>
++      )}
++      <HappeningNow />
+       {body && (
+         <ObjectCard
+           key={body.id}
+           body={body}
+-          onShare={share}
++          onShare={(trigger) => void share(trigger)}
+           returnFocus={searchRef}
+         />
+       )}
+-      <div className="view-tools">
+-        <button
+-          className="icon-button"
+-          onClick={previousView}
+-          aria-label="Previous view"
+-        >
+-          <Icon name="back" />
+-        </button>
+-        <button
+-          className="icon-button"
+-          onClick={solarOverview}
+-          aria-label="Solar system overview"
+-        >
+-          <Icon name="orbit" />
+-        </button>
+-        <span />
+-        <button
+-          className={'scale-button ' + (scale === 'explore' ? 'active' : '')}
+-          onClick={() => {
+-            const next = scale === 'explore' ? 'true' : 'explore';
+-            mapCommand((engine) => engine.setScale(next));
+-          }}
+-          title="Explore scale enlarges distant bodies; physical distances stay unchanged"
+-        >
+-          {scale === 'explore' ? 'Explore scale' : 'True scale'}
+-        </button>
+-        <button
+-          className="icon-button"
+-          onClick={share}
+-          ref={shareRef}
+-          aria-label="Share this view"
+-        >
+-          <Icon name="share" />
+-        </button>
+-      </div>
+-      <section className="bottom-dock">
+-        <div className="destinations">
+-          <span>GO SOMEWHERE</span>
+-          {destinations.map((b) => (
+-            <button
+-              key={b.id}
+-              className={selectedId === b.id ? 'chosen' : ''}
+-              onClick={() => choose(b.id)}
+-              disabled={!ready}
+-            >
+-              <i style={{ background: b.color }} />
+-              {b.name}
+-              <span>↗</span>
+-            </button>
+-          ))}
+-        </div>
+-        <div className="timeline">
+-          <button
+-            className={'live-button ' + (mode === 'live' ? 'is-live' : '')}
+-            onClick={goLive}
+-          >
+-            <span /> LIVE
+-          </button>
+-          <div className="time-block">
+-            <span className="time-label">UNIVERSAL TIME</span>
+-            <button
+-              id="clock-readout"
+-              onClick={() => dateRef.current?.showPicker()}
+-              aria-label="Choose simulation date"
+-            >
+-              Connecting to the cosmos…
+-            </button>
+-          </div>
+-          <input
+-            className="date-input"
+-            ref={dateRef}
+-            type="datetime-local"
+-            aria-label="Simulation date in UTC"
+-            min="1900-01-01T00:00"
+-            max="2100-12-31T23:59"
+-            value={dateDraft ?? utcDate}
+-            onChange={(e) => {
+-              const value = e.target.value;
+-              setDateDraft(value);
+-              if (setDateInput(value)) setDateDraft(null);
+-              else setNotice('Choose a valid UTC date from 1900 through 2100.');
+-            }}
+-            onBlur={() => setDateDraft(null)}
+-          />
+-          <div className="playback">
+-            <button
+-              className="icon-button"
+-              aria-label="Reverse time"
+-              onClick={reversePlayback}
+-            >
+-              ↶
+-            </button>
+-            <button
+-              className="play-button"
+-              aria-label={mode === 'paused' ? 'Play' : 'Pause'}
+-              onClick={togglePlayback}
+-            >
+-              {mode === 'paused' ? '▶' : 'Ⅱ'}
+-            </button>
+-            <select
+-              aria-label="Playback speed"
+-              value={Math.abs(rate)}
+-              onChange={(e) =>
+-                setPlaybackRate(Number(e.target.value) * Math.sign(rate || 1))
+-              }
+-            >
+-              {rates.map((r, i) => (
+-                <option key={r} value={r}>
+-                  {rate < 0 ? '−' : ''}
+-                  {rateLabels[i]}
+-                </option>
+-              ))}
+-            </select>
+-          </div>
+-        </div>
+-        <div className="dock-foot">
+-          <span>
+-            Drag to orbit <b>·</b> Scroll to explore <b>·</b> Double-click to
+-            focus
+-          </span>
+-          <button onClick={() => setHelp(true)}>
+-            <Icon name="help" /> Field guide
+-          </button>
+-        </div>
+-      </section>
+-      <footer className="map-footer">
+-        <span>
+-          THE SPACE TIME CONTINUUM <b>/</b> ARCHITECTURE PREVIEW
+-        </span>
+-        <RenderStatus />
+-      </footer>
++      <TimeBar />
+       {!ready && !error && (
+         <div className="loading-screen">
+           <span className="loader-orbit" />
+@@ -481,7 +209,10 @@ export default function Explore({
+           <a
+             className="primary-button"
+             href={compatibilityHref}
+-            onClick={compatibility}
++            onClick={(e) => {
++              e.preventDefault();
++              location.assign(publicViewHref(true));
++            }}
+           >
+             Try compatibility mode
+           </a>
+@@ -499,7 +230,7 @@ export default function Explore({
+       <ShareViewDialog
+         url={shareUrl}
+         onClose={() => setShareUrl(null)}
+-        returnFocus={shareRef}
++        returnFocus={shareReturnFocus}
+       />
+       {searchOpen && (
+         <EntitySearch
+@@ -508,59 +239,11 @@ export default function Explore({
+           returnFocus={searchReturnFocus}
+         />
+       )}
+-      <Dialog.Root open={help} onOpenChange={setHelp}>
+-        <Dialog.Portal>
+-          <Dialog.Overlay className="dialog-overlay" />
+-          <Dialog.Content className="help-dialog">
+-            <Dialog.Title>Your field guide</Dialog.Title>
+-            <Dialog.Description>
+-              A few simple ways to travel.
+-            </Dialog.Description>
+-            {[
+-              ['Drag / arrow keys', 'Orbit your destination'],
+-              ['Scroll / + − / pinch', 'Move closer or farther away'],
+-              ['Shift + drag', 'Pan the view'],
+-              ['F', 'Focus the selected world'],
+-              ['Space', 'Play or pause time'],
+-              ['L', 'Return to live time'],
+-              ['[ / ]', 'Change playback speed'],
+-              ['Backspace', 'Return to your previous view'],
+-              ['/', 'Find a world'],
+-            ].map(([a, b]) => (
+-              <div className="setting-row" key={a}>
+-                <kbd>{a}</kbd>
+-                <span>{b}</span>
+-              </div>
+-            ))}
+-            <p>
+-              Explore scale enlarges distant worlds for visibility. True scale
+-              preserves their physical radii. Object card measurements always
+-              use physical coordinates.
+-            </p>
+-            <Dialog.Close className="primary-button">
+-              Ready to explore
+-            </Dialog.Close>
+-          </Dialog.Content>
+-        </Dialog.Portal>
+-      </Dialog.Root>
++      <FieldGuide
++        open={help}
++        onOpenChange={setHelp}
++        returnFocus={settingsRef}
++      />
+     </main>
+   );
+ }
+-function RenderStatus() {
+-  const backend = useEngineStore((s) => s.backend),
+-    perf = useEngineStore((s) => s.perf);
+-  const [debug, setDebug] = useState(false);
+-  useEffect(
+-    () => setDebug(new URLSearchParams(location.search).has('perf')),
+-    [],
+-  );
+-  return (
+-    <span className="render-status">
+-      <i />
+-      {backend.toUpperCase()}
+-      {debug && perf
+-        ? ` · ${perf.fps.toFixed(0)} FPS · p95 ${perf.p95Ms.toFixed(1)} ms · ${perf.drawCalls} draws · ${perf.tier}`
+-        : ' · BUILT TO WANDER'}
+-    </span>
+-  );
+-}
+diff --git a/apps/web/src/components/ShareViewDialog.tsx b/apps/web/src/components/ShareViewDialog.tsx
+index f945c50..3732a4a 100644
+--- a/apps/web/src/components/ShareViewDialog.tsx
++++ b/apps/web/src/components/ShareViewDialog.tsx
+@@ -10,7 +10,7 @@ export default function ShareViewDialog({
+ }: {
+   url: string | null;
+   onClose(): void;
+-  returnFocus: RefObject<HTMLButtonElement | null>;
++  returnFocus: RefObject<HTMLElement | null>;
+ }) {
+   const input = useRef<HTMLTextAreaElement>(null);
+   const [message, setMessage] = useState('');
+diff --git a/apps/web/src/components/objects/MobileObjectSheet.tsx b/apps/web/src/components/objects/MobileObjectSheet.tsx
+index b4df505..16b2c89 100644
+--- a/apps/web/src/components/objects/MobileObjectSheet.tsx
++++ b/apps/web/src/components/objects/MobileObjectSheet.tsx
+@@ -1,5 +1,5 @@
+ 'use client';
+-import { useId, useState } from 'react';
++import { useId, useLayoutEffect, useRef, useState } from 'react';
+ import type { ReactNode } from 'react';
+ 
+ export default function MobileObjectSheet({
+@@ -15,8 +15,27 @@ export default function MobileObjectSheet({
+ }) {
+   const [snap, setSnap] = useState<'peek' | 'half' | 'full'>('half');
+   const contentId = useId();
++  const cardRef = useRef<HTMLElement>(null);
++  useLayoutEffect(() => {
++    const card = cardRef.current!;
++    const shell = card.closest<HTMLElement>('.consumer-shell');
++    if (!shell) return;
++    const update = () =>
++      shell.style.setProperty(
++        '--card-height',
++        `${card.getBoundingClientRect().height}px`,
++      );
++    const observer = new ResizeObserver(update);
++    observer.observe(card);
++    update();
++    return () => {
++      observer.disconnect();
++      shell.style.removeProperty('--card-height');
++    };
++  }, []);
+   return (
+     <aside
++      ref={cardRef}
+       className="object-card"
+       aria-label={`${name} details`}
+       data-snap={snap}
+diff --git a/apps/web/src/components/objects/ObjectCard.tsx b/apps/web/src/components/objects/ObjectCard.tsx
+index 288befb..c416e4a 100644
+--- a/apps/web/src/components/objects/ObjectCard.tsx
++++ b/apps/web/src/components/objects/ObjectCard.tsx
+@@ -21,7 +21,7 @@ export default function ObjectCard({
+   returnFocus,
+ }: {
+   body: BodySpec;
+-  onShare(): void;
++  onShare(trigger: HTMLButtonElement): void;
+   returnFocus: RefObject<HTMLElement | null>;
+ }) {
+   const engine = useEngineStore((state) => state.engine),
+@@ -138,7 +138,7 @@ export default function ObjectCard({
+       <button
+         className="card-share secondary-button"
+         aria-label={`Share ${body.name} view`}
+-        onClick={onShare}
++        onClick={(event) => onShare(event.currentTarget)}
+       >
+         <Icon name="share" /> Share view
+       </button>
+diff --git a/apps/web/src/engine-bridge/EngineCanvas.tsx b/apps/web/src/engine-bridge/EngineCanvas.tsx
+index b1148ed..b2877b5 100644
+--- a/apps/web/src/engine-bridge/EngineCanvas.tsx
++++ b/apps/web/src/engine-bridge/EngineCanvas.tsx
+@@ -5,6 +5,9 @@ import { useEngineStore } from './useEngineStore';
+ import { parseExploreLocation } from '../lib/routeState';
+ import type { RouteIssue } from '../lib/routeState';
+ import type { SpaceEngine } from '@space/engine';
++import { initializeUserSettings } from './userSettingsBridge';
++import { prefersReducedMotion } from '../lib/userSettings';
++import { clockUiState } from './clockSnapshot';
+ declare global {
+   interface Window {
+     __spaceEngine?: SpaceEngine;
+@@ -44,6 +47,8 @@ export default function EngineCanvas() {
+           location.search,
+         );
+         const { state, debug } = initialLocation;
++        if (initialLocation.route.status !== 'lab')
++          unsubs.push(initializeUserSettings());
+         useEngineStore.setState({ linkIssues: initialLocation.issues });
+         const { SpaceEngine } = await import('@space/engine');
+         if (disposed || expired) return;
+@@ -57,13 +62,19 @@ export default function EngineCanvas() {
+           engine.dispose();
+           return;
+         }
++        if (initialLocation.route.status !== 'lab') {
++          const preferences = useEngineStore.getState();
++          engine.setQuality(preferences.quality);
++          engine.setReducedMotion(
++            prefersReducedMotion(
++              preferences.reducedMotion,
++              preferences.systemReducedMotion,
++            ),
++          );
++        }
+         unsubs.push(
+           engine.on('clock', (s) => {
+-            useEngineStore.setState({
+-              mode: s.mode,
+-              rate: s.rate,
+-              utcDate: tdbToIso(s.tdbSec).slice(0, 16),
+-            });
++            useEngineStore.setState((current) => clockUiState(s, current));
+             const el = document.getElementById('clock-readout');
+             if (el)
+               el.textContent =
+diff --git a/apps/web/src/engine-bridge/timeCommands.ts b/apps/web/src/engine-bridge/timeCommands.ts
+index f142cd8..fbd86a6 100644
+--- a/apps/web/src/engine-bridge/timeCommands.ts
++++ b/apps/web/src/engine-bridge/timeCommands.ts
+@@ -4,19 +4,30 @@ import { parseUtcDateInput } from '../lib/utcInput';
+ import type { EngineApi } from '@space/engine';
+ import { LAYERS } from '@space/domain';
+ import { parseExploreLocation, serializeExploreState } from '../lib/routeState';
++import { prefersReducedMotion } from '../lib/userSettings';
++import { clockUiState } from './clockSnapshot';
++export const UTC_DATE_MIN = new Date(MIN_UTC_MS).toISOString().slice(0, 16);
++export const UTC_DATE_MAX = new Date(MAX_UTC_MS).toISOString().slice(0, 16);
++export const PLAYBACK_RATES = [
++  1, 10, 60, 100, 3600, 86400, 2629800, 31557600,
++] as const;
+ function timeCommand(action: (engine: EngineApi) => void, live = false) {
+   const { engine, routeController } = useEngineStore.getState();
+   if (!engine) return;
++  let commandedMode = engine.clock.mode;
++  const apply = () => {
++    action(engine);
++    // Route snapshots may tick again and clear the transient clamp flag.
++    commandedMode = engine.clock.mode;
++  };
+   if (routeController) {
+-    routeController.command(() => action(engine));
++    routeController.command(apply);
+     routeController.commitTime(live);
+-  } else action(engine);
+-  const t = engine.clock.tick();
+-  useEngineStore.setState({
+-    mode: engine.clock.mode,
+-    rate: engine.clock.rate,
+-    utcDate: tdbToIso(t).slice(0, 16),
+-  });
++  } else apply();
++  engine.clock.tick();
++  useEngineStore.setState((current) =>
++    clockUiState(engine.clock.state, current, commandedMode),
++  );
+ }
+ export function setDateUtc(ms: number) {
+   if (!Number.isFinite(ms) || ms < MIN_UTC_MS || ms > MAX_UTC_MS) return;
+@@ -40,7 +51,17 @@ export function reversePlayback() {
+   timeCommand((engine) => engine.clock.setRate(-engine.clock.rate));
+ }
+ export function goLive() {
+-  timeCommand((engine) => engine.clock.goLive(), true);
++  const state = useEngineStore.getState();
++  timeCommand(
++    (engine) =>
++      engine.clock.goLive({
++        animate: !prefersReducedMotion(
++          state.reducedMotion,
++          state.systemReducedMotion,
++        ),
++      }),
++    true,
++  );
+ }
+ export function previousView() {
+   const { engine, routeController } = useEngineStore.getState();
+diff --git a/apps/web/src/engine-bridge/useEngineStore.ts b/apps/web/src/engine-bridge/useEngineStore.ts
+index 0a24a45..7ae712b 100644
+--- a/apps/web/src/engine-bridge/useEngineStore.ts
++++ b/apps/web/src/engine-bridge/useEngineStore.ts
+@@ -4,6 +4,7 @@ import type { ExploreMapState, RouteIssue } from '../lib/routeState';
+ import type { RouteStateController } from './routeStateController';
+ import type { MapState } from '@space/domain';
+ import type { DistanceUnit } from '../lib/formatEntity';
++import type { ReducedMotionSetting } from '../lib/userSettings';
+ interface Store {
+   engine: EngineApi | null;
+   selectedId: string | null;
+@@ -15,6 +16,9 @@ interface Store {
+   scale: 'true' | 'explore';
+   following: boolean;
+   distanceUnit: DistanceUnit;
++  reducedMotion: ReducedMotionSetting;
++  systemReducedMotion: boolean;
++  clockClamped: boolean;
+   perf: PerfSample | null;
+   error: string | null;
+   ready: boolean;
+@@ -36,6 +40,9 @@ export const useEngineStore = create<Store>(() => ({
+   scale: 'explore',
+   following: true,
+   distanceUnit: 'km',
++  reducedMotion: 'system',
++  systemReducedMotion: false,
++  clockClamped: false,
+   perf: null,
+   error: null,
+   ready: false,
+diff --git a/docs/adr/0011-consumer-route-state.md b/docs/adr/0011-consumer-route-state.md
+index 2ce9db5..d5f9ce3 100644
+--- a/docs/adr/0011-consumer-route-state.md
++++ b/docs/adr/0011-consumer-route-state.md
+@@ -77,3 +77,13 @@ P4.6 short verify passes 372 tests plus two existing expected rejections / 42 fi
+ The first production review passes 48/53; all 44 prior checks pass. Two failures are locator assumptions (More changes to Less; exact wrapping-label text includes options). Three expose a native shortcut conflict: Space on a card button is consumed by the document listener before native activation, despite React stopPropagation. Native shortcuts now skip card targets explicitly; native button activation and card Escape handling retain ownership. Locator fixes retain focus/expanded/unit assertions, and mobile tests retain paused time and add Escape-close focus restoration. Verification remains 372 plus two expected rejections. A fresh production run checks the nine card cases before full regression. Failed evidence is preserved; P4.6 remains unaccepted.
+ 
+ P4.6 retry is reviewed accepted: nine focused and 53 full production cases pass, source/evidence/log checks and preserved precision/storage/budgets pass. Seven captures were inspected; supplementary unchanged-build Peek captures wait finite CSS transitions after asserting state, avoiding transient background colors in the original captures. Final hashed evidence is in docs/perf/phase-four/p4-6-final-review.json. No frame callback, scientific provider, physical model, engine assets or extra React cadence was introduced. Final shell/clutter and performance gates remain P4.7–P4.9.
++
++P4.6 is committed locally as 36f7a9852acf2e2a62be39fab4d24b5533572767. P4.7 implements the default six-control shell: search, layers, settings, honest closed Happening now, play/pause and date/time. Branding is static; secondary navigation, share, help, scale/frame/view and previous/overview commands live in Settings or the selected card. The unavailable Objects in view action is explicitly disabled until P4.8.
++
++Version-1 local preferences validate only distance units, requested quality and System/On/Off motion; semantic URL fields are excluded. Blocked/corrupt storage falls back to defaults/in-memory changes. The engine bridge restores preferences before the first scheduled consumer frame and owns the system-motion listener and cleanup. Labs retain their accepted setup. Requested quality and active adaptive tier are labelled separately. Reduced motion governs public camera commands and clock LIVE transitions; existing animated/fade behavior remains when motion is enabled. A clamp notice is retained while paused at the same boundary and clears after a valid explicit time command.
++
++The first P4.7 production probe passed 19/20 checks, with a missed clamp notice in the Tokyo timezone case; the full 64-case regression did not run. The simulation paused correctly, but the one-tick clamp flag could clear before a throttled event. The cold clock adapter now recognizes a paused outward boundary following playback, preserves explicit command intent across route snapshot ticks, and resets after a deliberate date/LIVE command. Six deterministic checks exercise the real clock at both boundaries and between its existing 4 Hz samples. No additional subscription, engine frame or scientific change is introduced. Acceptance requires a fresh isolated production retry.
++
++Layers read the public requested/available/loaded/visible snapshots through existing notifications and show every known label, including disabled future datasets. Time is UTC in every timezone; the expanded panel contains LIVE, reverse, eight speeds and supported date bounds. Native document shortcuts skip interactive/panel/card targets. Field guide and fallback share dialogs return focus to their actual trigger, or Settings when its action is no longer mounted. View-preset commands preserve selection and explicitly avoid camera-history entries.
++
++Mobile time sits above the bottom sheet; a card ResizeObserver updates a CSS height variable without React commits or a frame loop. A visual-viewport adapter keeps height/top bounds current for resizing/keyboard layouts and cleans up. Popover height also respects Radix's available collision space: an initial short-screen probe found the dismiss target below the viewport; capping to the available height restores internal scrolling and dismissal. Quick corrected probes at 390x844, 390x430 and 844x390 confirm UTC changes, touch controls and timeline/sheet separation. Production validation remains pending: verification is 390 plus two expected rejections in 43 files; twelve specs discover 64 cases, including eleven new controls/mobile cases and all 53 earlier regressions. Existing assertions are retained while opening controls from their new panels. No engine hot-loop/provider/physics/assets change, dependency addition, new independent React cadence or Phase 4B work.
+diff --git a/e2e/phase-four-cards.spec.ts b/e2e/phase-four-cards.spec.ts
+index 6d3faf8..37ed7cd 100644
+--- a/e2e/phase-four-cards.spec.ts
++++ b/e2e/phase-four-cards.spec.ts
+@@ -1,5 +1,6 @@
+ import { expect, test } from '@playwright/test';
+ import type { Page } from '@playwright/test';
++import { openTime, toggleScale, expectScale } from './helpers/consumerControls';
+ import bodies from '../packages/domain/data/bodies.json' with { type: 'json' };
+ 
+ test.use({ actionTimeout: 10000, timezoneId: 'America/Toronto' });
+@@ -95,12 +96,8 @@ test('physical measurements stay identical in True and Explore scale and convert
+   const raw = await page.evaluate(() =>
+     window.__spaceEngine!.getMetrics('planet:mars'),
+   );
+-  await page
+-    .getByRole('button', { name: 'Explore scale', exact: true })
+-    .click();
+-  await expect(
+-    page.getByRole('button', { name: 'True scale', exact: true }),
+-  ).toBeVisible();
++  await toggleScale(page, 'Explore');
++  await expectScale(page, 'True');
+   expect(await details.locator('.metrics dd').allTextContents()).toEqual(
+     before,
+   );
+@@ -139,6 +136,7 @@ test('simulation UTC changes across past and future dates without inventing sour
+   await expect(details.locator('.source-details')).toContainText(
+     'Two-body orbital propagation',
+   );
++  await openTime(page);
+   for (const value of ['1901-02-03T04:05', '2099-11-12T13:14']) {
+     await page.getByLabel('Simulation date in UTC').fill(value);
+     await expect(
+@@ -254,7 +252,10 @@ test('card sharing uses the public semantic link and the existing clipboard fall
+   expect(url.searchParams.has('renderer')).toBe(false);
+   await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+   await expect(
+-    page.getByRole('button', { name: 'Share this view', exact: true }),
++    card(page, 'Charon').getByRole('button', {
++      name: 'Share Charon view',
++      exact: true,
++    }),
+   ).toBeFocused();
+ });
+ 
+@@ -325,7 +326,7 @@ for (const viewport of [
+       expect(box!.y).toBeGreaterThanOrEqual(70);
+       expect(box!.x).toBeGreaterThanOrEqual(0);
+       expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width);
+-      expect(box!.y + box!.height).toBeLessThan(timeline!.y);
++      expect(timeline!.y + timeline!.height).toBeLessThan(box!.y);
+       expect(
+         await page.evaluate(
+           () => document.documentElement.scrollWidth <= innerWidth,
+@@ -333,6 +334,17 @@ for (const viewport of [
+       ).toBe(true);
+       await page.screenshot({ path: info.outputPath('mobile-full-card.png') });
+       await group.getByRole('button', { name: 'Peek', exact: true }).tap();
++      await expect(details).toHaveAttribute('data-snap', 'peek');
++      await expect(
++        group.getByRole('button', { name: 'Peek', exact: true }),
++      ).toHaveAttribute('aria-pressed', 'true');
++      await details.evaluate(async (element) => {
++        await Promise.allSettled(
++          element
++            .getAnimations({ subtree: true })
++            .map((animation) => animation.finished),
++        );
++      });
+       await page.screenshot({ path: info.outputPath('mobile-peek-card.png') });
+       if (viewport.height === 844) {
+         await group.getByRole('button', { name: 'Peek', exact: true }).focus();
+diff --git a/e2e/phase-four-history.spec.ts b/e2e/phase-four-history.spec.ts
+index 0168a7a..7589e89 100644
+--- a/e2e/phase-four-history.spec.ts
++++ b/e2e/phase-four-history.spec.ts
+@@ -1,5 +1,12 @@
+ import { expect, test } from '@playwright/test';
+ import type { Page, Route } from '@playwright/test';
++import {
++  openSettings,
++  openTime,
++  closeTime,
++  toggleScale,
++  expectScale,
++} from './helpers/consumerControls';
+ 
+ test.use({ timezoneId: 'America/Toronto', actionTimeout: 10000 });
+ const query = '?renderer=webgl&test=1&t=2026-10-02T12%3A00%3A00Z';
+@@ -40,19 +47,19 @@ test('Back and Forward restore settings and UTC controls, flushing the previous
+   await ready(page);
+   const length = await page.evaluate(() => history.length);
+   await page.getByRole('button', { name: 'Layers', exact: true }).click();
+-  for (const name of ['Planets', 'Moons', 'Dwarfs', 'Orbital paths'])
++  for (const name of ['Planets', 'Moons', 'Dwarf planets', 'Orbital paths'])
+     await page.getByLabel(name, { exact: true }).uncheck();
+   await page.getByRole('button', { name: 'Layers', exact: true }).click();
+-  await page
+-    .getByRole('button', { name: 'Explore scale', exact: true })
+-    .click();
++  await toggleScale(page, 'Explore');
+   await page.getByRole('button', { name: 'Settings', exact: true }).click();
+   await page
+     .getByLabel('Reference frame', { exact: true })
+     .selectOption('FIXED:earth');
+   await page.getByLabel('View preset', { exact: true }).selectOption('wide');
+   await page.getByRole('button', { name: 'Settings', exact: true }).click();
++  await openTime(page);
+   await page.getByLabel('Simulation date in UTC').fill('2027-03-04T15:06');
++  await closeTime(page);
+   await choose(page, 'Mars');
+   await expect(page).toHaveURL(/\/object\/planet\/mars\?/);
+   await choose(page, 'Europa');
+@@ -82,19 +89,19 @@ test('Back and Forward restore settings and UTC controls, flushing the previous
+       camera: { preset: 'wide' },
+       mode: 'paused',
+     });
++  await openTime(page);
+   await expect(page.getByLabel('Simulation date in UTC')).toHaveValue(
+     '2027-03-04T15:06',
+   );
++  await closeTime(page);
+   expect(
+     Math.abs(
+       Date.parse((await actual(page)).t!) - Date.parse('2027-03-04T15:06:00Z'),
+     ),
+   ).toBeLessThanOrEqual(1);
+-  await expect(
+-    page.getByRole('button', { name: 'True scale', exact: true }),
+-  ).toBeVisible();
++  await expectScale(page, 'True');
+   await page.getByRole('button', { name: 'Layers', exact: true }).click();
+-  for (const name of ['Planets', 'Moons', 'Dwarfs', 'Orbital paths'])
++  for (const name of ['Planets', 'Moons', 'Dwarf planets', 'Orbital paths'])
+     await expect(page.getByLabel(name, { exact: true })).not.toBeChecked();
+   await page.getByRole('button', { name: 'Layers', exact: true }).click();
+   await page.getByRole('button', { name: 'Settings', exact: true }).click();
+@@ -131,9 +138,7 @@ test('Back cancels an outstanding query replacement instead of corrupting the re
+   await ready(page);
+   await choose(page, 'Mars');
+   await expect(page).toHaveURL(/\/object\/planet\/mars\?/);
+-  await page
+-    .getByRole('button', { name: 'Explore scale', exact: true })
+-    .click();
++  await toggleScale(page, 'Explore');
+   await page.goBack();
+   await expect(page).toHaveURL(/\/object\/planet\/earth\?/);
+   const restored = page.url();
+@@ -143,9 +148,7 @@ test('Back cancels an outstanding query replacement instead of corrupting the re
+   await expect
+     .poll(() => actual(page))
+     .toMatchObject({ focus: 'planet:earth', scale: 'explore' });
+-  await expect(
+-    page.getByRole('button', { name: 'Explore scale', exact: true }),
+-  ).toBeVisible();
++  await expectScale(page, 'Explore');
+ });
+ 
+ test('accelerated playback and free camera gestures do not write URLs; share captures time and reloads paused', async ({
+@@ -192,6 +195,7 @@ test('accelerated playback and free camera gestures do not write URLs; share cap
+           }
+         ).__timeWrites,
+     );
++  await openTime(page);
+   await page
+     .getByRole('combobox', { name: 'Playback speed' })
+     .selectOption('86400');
+@@ -228,6 +232,7 @@ test('accelerated playback and free camera gestures do not write URLs; share cap
+   await page.evaluate(() => {
+     (window as unknown as { __timeWrites: unknown[] }).__timeWrites.length = 0;
+   });
++  await closeTime(page);
+   const canvas = page.locator('canvas');
+   await canvas.focus();
+   await page.keyboard.press('ArrowRight');
+@@ -238,6 +243,7 @@ test('accelerated playback and free camera gestures do not write URLs; share cap
+   expect(await page.evaluate(() => history.length)).toBe(length);
+   expect(await writes()).toEqual([]);
+   const beforeShare = Date.parse((await actual(page)).t!);
++  await openSettings(page);
+   await page
+     .getByRole('button', { name: 'Share this view', exact: true })
+     .click();
+@@ -270,6 +276,7 @@ test('LIVE clears dated anchors through its transition; explicit pause/play and
+ }) => {
+   await page.goto('/object/planet/earth' + query);
+   await ready(page);
++  await openTime(page);
+   await page.getByRole('button', { name: 'LIVE', exact: true }).click();
+   await expect
+     .poll(() => new URL(page.url()).searchParams.has('t'))
+@@ -279,12 +286,14 @@ test('LIVE clears dated anchors through its transition; explicit pause/play and
+     length = await page.evaluate(() => history.length);
+   await page.waitForTimeout(750);
+   expect(page.url()).toBe(live);
++  await closeTime(page);
+   await page.getByRole('button', { name: 'Pause', exact: true }).click();
+   await expect.poll(() => new URL(page.url()).searchParams.has('t')).toBe(true);
+   await expect(
+     page.getByRole('button', { name: 'Play', exact: true }),
+   ).toBeVisible();
+   await page.getByRole('button', { name: 'Play', exact: true }).click();
++  await openTime(page);
+   await page.getByRole('button', { name: 'Reverse time', exact: true }).click();
+   await expect
+     .poll(() => page.evaluate(() => window.__spaceEngine!.clock.rate))
+@@ -319,6 +328,7 @@ test('Previous view and Backspace restore camera history by replacement, includi
+     window.addEventListener('popstate', () => counts.pops++);
+     return history.length;
+   });
++  await openSettings(page);
+   await page
+     .getByRole('button', { name: 'Previous view', exact: true })
+     .click();
+@@ -411,6 +421,7 @@ test('clipboard denial exposes a labelled selectable link and returns focus on m
+       '&layers=moons&frame=helio&view=wide&scale=true',
+   );
+   await ready(page);
++  await openSettings(page);
+   const share = page.getByRole('button', {
+     name: 'Share this view',
+     exact: true,
+@@ -446,7 +457,9 @@ test('clipboard denial exposes a labelled selectable link and returns focus on m
+   expect(box!.x + box!.width).toBeLessThanOrEqual(390);
+   await page.screenshot({ path: info.outputPath('mobile-share-fallback.png') });
+   await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+-  await expect(share).toBeFocused();
++  await expect(
++    page.getByRole('button', { name: 'Settings', exact: true }),
++  ).toBeFocused();
+ });
+ 
+ test('compatibility navigation preserves semantic state and strips other diagnostics', async ({
+@@ -479,6 +492,7 @@ test('compatibility navigation preserves semantic state and strips other diagnos
+   await expect(
+     page.getByRole('heading', { name: 'Pluto', exact: true }),
+   ).toBeVisible();
++  await openTime(page);
+   await expect(page.getByLabel('Simulation date in UTC')).toHaveValue(
+     '2026-10-02T12:00',
+   );
+@@ -495,6 +509,7 @@ test('obsolete asynchronous startup cannot replace a newer canvas after leaving
+   await expect.poll(() => held.length).toBeGreaterThan(0);
+   const firstRequests = held.length;
+   // Keyboard activation is available while the graphics overlay blocks pointers.
++  await openSettings(page);
+   await page.getByRole('link', { name: 'About the data' }).focus();
+   await page.keyboard.press('Enter');
+   await expect(page).toHaveURL(/\/about\/data$/);
+@@ -502,10 +517,12 @@ test('obsolete asynchronous startup cannot replace a newer canvas after leaving
+   await page.goBack();
+   await expect(page).toHaveURL(/\/object\/planet\/earth\?/);
+   await expect.poll(() => held.length).toBeGreaterThan(firstRequests);
++  await page.locator('canvas').focus();
+   await page.keyboard.press('/');
+   await page.getByPlaceholder('Where would you like to go?').fill('Mars');
+   await page.locator('.search-result').click();
+   await expect(page).toHaveURL(/\/object\/planet\/mars\?/);
++  await page.locator('canvas').focus();
+   await page.keyboard.press('/');
+   await page.getByPlaceholder('Where would you like to go?').fill('Europa');
+   await page.locator('.search-result').click();
+diff --git a/e2e/phase-four-routing.spec.ts b/e2e/phase-four-routing.spec.ts
+index 88f9376..358ca60 100644
+--- a/e2e/phase-four-routing.spec.ts
++++ b/e2e/phase-four-routing.spec.ts
+@@ -1,4 +1,5 @@
+ import { expect, test } from '@playwright/test';
++import { openSettings } from './helpers/consumerControls';
+ import type { Page, Route } from '@playwright/test';
+ import { readFileSync } from 'node:fs';
+ import type { BodySpec } from '../packages/domain/src/types';
+@@ -317,6 +318,7 @@ test('20 client selections keep one engine/canvas and one focus per selection wi
+   await page.screenshot({
+     path: info.outputPath('charon-canonical-navigation.png'),
+   });
++  await openSettings(page);
+   await page.getByRole('link', { name: 'About the data' }).click();
+   await expect(page).toHaveURL(/\/about\/data$/);
+   await expect(page.locator('canvas')).toHaveCount(0);

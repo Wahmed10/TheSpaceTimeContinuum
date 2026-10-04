@@ -4,19 +4,30 @@ import { parseUtcDateInput } from '../lib/utcInput';
 import type { EngineApi } from '@space/engine';
 import { LAYERS } from '@space/domain';
 import { parseExploreLocation, serializeExploreState } from '../lib/routeState';
+import { prefersReducedMotion } from '../lib/userSettings';
+import { clockUiState } from './clockSnapshot';
+export const UTC_DATE_MIN = new Date(MIN_UTC_MS).toISOString().slice(0, 16);
+export const UTC_DATE_MAX = new Date(MAX_UTC_MS).toISOString().slice(0, 16);
+export const PLAYBACK_RATES = [
+  1, 10, 60, 100, 3600, 86400, 2629800, 31557600,
+] as const;
 function timeCommand(action: (engine: EngineApi) => void, live = false) {
   const { engine, routeController } = useEngineStore.getState();
   if (!engine) return;
+  let commandedMode = engine.clock.mode;
+  const apply = () => {
+    action(engine);
+    // Route snapshots may tick again and clear the transient clamp flag.
+    commandedMode = engine.clock.mode;
+  };
   if (routeController) {
-    routeController.command(() => action(engine));
+    routeController.command(apply);
     routeController.commitTime(live);
-  } else action(engine);
-  const t = engine.clock.tick();
-  useEngineStore.setState({
-    mode: engine.clock.mode,
-    rate: engine.clock.rate,
-    utcDate: tdbToIso(t).slice(0, 16),
-  });
+  } else apply();
+  engine.clock.tick();
+  useEngineStore.setState((current) =>
+    clockUiState(engine.clock.state, current, commandedMode),
+  );
 }
 export function setDateUtc(ms: number) {
   if (!Number.isFinite(ms) || ms < MIN_UTC_MS || ms > MAX_UTC_MS) return;
@@ -40,7 +51,17 @@ export function reversePlayback() {
   timeCommand((engine) => engine.clock.setRate(-engine.clock.rate));
 }
 export function goLive() {
-  timeCommand((engine) => engine.clock.goLive(), true);
+  const state = useEngineStore.getState();
+  timeCommand(
+    (engine) =>
+      engine.clock.goLive({
+        animate: !prefersReducedMotion(
+          state.reducedMotion,
+          state.systemReducedMotion,
+        ),
+      }),
+    true,
+  );
 }
 export function previousView() {
   const { engine, routeController } = useEngineStore.getState();

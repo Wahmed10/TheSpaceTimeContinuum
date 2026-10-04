@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { openSettings } from './helpers/consumerControls';
 import type { Page, Route } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import type { BodySpec } from '../packages/domain/src/types';
@@ -317,6 +318,7 @@ test('20 client selections keep one engine/canvas and one focus per selection wi
   await page.screenshot({
     path: info.outputPath('charon-canonical-navigation.png'),
   });
+  await openSettings(page);
   await page.getByRole('link', { name: 'About the data' }).click();
   await expect(page).toHaveURL(/\/about\/data$/);
   await expect(page.locator('canvas')).toHaveCount(0);
@@ -363,10 +365,9 @@ test('a selection during startup restores the latest route, and the standalone l
   await expect(
     page.getByRole('button', { name: 'Run Phase 3 device checks' }),
   ).toBeVisible();
-  await page
-    .getByRole('button', { name: 'Mars', exact: false })
-    .first()
-    .click();
+  await page.getByRole('button', { name: 'Find a world', exact: true }).click();
+  await page.getByPlaceholder('Where would you like to go?').fill('Mars');
+  await page.locator('.search-result').click();
   expect(
     await page.evaluate(() => window.__spaceEngine!.getMapState().focus),
   ).toBe('planet:mars');

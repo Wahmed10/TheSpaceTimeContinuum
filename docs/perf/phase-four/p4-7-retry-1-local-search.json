@@ -1,0 +1,5019 @@
+{
+  "generatedAt": "2026-10-03T23:07:17.377Z",
+  "method": "Warm synchronous catalog lookup only. One cached MiniSearch index; 250 warm-up queries then 1000 samples across every body name/ID/alias plus prefix/typo/empty/no-match inputs. Excludes module load, index creation, DOM, navigation and renderer.",
+  "environment": {
+    "node": "v24.12.0",
+    "platform": "win32",
+    "osRelease": "10.0.26200",
+    "arch": "x64",
+    "cpuModel": "AMD Ryzen 7 8845HS w/ Radeon 780M Graphics     ",
+    "miniSearch": "7.2.0",
+    "catalogBodies": 21
+  },
+  "thresholdMs": 16,
+  "samples": [
+    {
+      "query": "Sun",
+      "milliseconds": 0.02800000000002001,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.01880000000005566,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.017899999999826832,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.029899999999997817,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.016699999999900683,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.07569999999986976,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.019400000000132422,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.03230000000007749,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.019900000000006912,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.021900000000186992,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.022200000000111686,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.03150000000005093,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.011200000000144428,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.009900000000016007,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.036200000000008004,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.02490000000011605,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.032500000000027285,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.028500000000121872,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.028800000000046566,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.01830000000018117,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.03890000000001237,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.017500000000154614,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.06749999999988177,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.010299999999915599,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.015000000000100044,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.009700000000066211,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.013499999999794454,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.008799999999837382,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.0181999999999789,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.009900000000016007,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.05480000000011387,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.0072000000000116415,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.015299999999797365,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.013599999999996726,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.016499999999950887,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.010399999999890497,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.016000000000076398,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.010199999999940701,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.02119999999990796,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.01520000000004984,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.022300000000086584,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.028500000000121872,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.03690000000005966,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.01520000000004984,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.021600000000034925,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.018000000000029104,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.1111999999998261,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.03240000000005239,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.012200000000120781,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.009900000000016007,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.02359999999998763,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.02500000000009095,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.011700000000018917,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.016200000000026193,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.013999999999896318,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.02980000000002292,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.01319999999986976,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 1.1636999999998352,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.045900000000074215,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.03389999999990323,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.014599999999973079,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.02179999999998472,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.0363999999999578,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.02490000000011605,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.0079000000000633,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.007399999999961437,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.014900000000125146,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.013900000000148793,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.015300000000024738,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.00980000000004111,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.014300000000048385,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.00860000000011496,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.013799999999946522,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.008500000000140062,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.014400000000023283,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.00839999999993779,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.013599999999996726,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.00909999999998945,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.07100000000014006,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.009600000000091313,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.01410000000009859,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.007499999999936335,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.013999999999896318,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.0060000000000854925,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.012200000000120781,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.008599999999887586,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.013699999999971624,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.010800000000017462,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.01389999999992142,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.009500000000116415,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.014400000000023283,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.012500000000045475,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.0158000000001266,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.01040000000011787,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.01639999999997599,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.04250000000001819,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.02359999999998763,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.008400000000165164,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.03389999999990323,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.07099999999991269,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.009999999999990905,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.01340000000004693,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.0159000000001015,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.020300000000133878,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.006899999999859574,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.012199999999893407,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.009600000000091313,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.015700000000151704,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.007699999999886131,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.013699999999971624,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.009299999999939246,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.05559999999991305,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.008800000000064756,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.014499999999998181,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.11429999999995744,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.09500000000002728,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.03829999999993561,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.025300000000015643,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.051899999999932334,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.04619999999999891,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.03440000000000509,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.012600000000020373,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.017399999999952342,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.03399999999987813,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.0158000000001266,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.010600000000067666,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.018700000000080763,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.059700000000020736,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.033599999999978536,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.008900000000039654,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.012000000000170985,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.008100000000013097,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.014799999999922875,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.009299999999939246,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.01340000000004693,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.005799999999908323,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.011499999999841748,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.009200000000191721,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.1229000000000724,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.027600000000120417,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.1689000000001215,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.016699999999900683,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.017200000000002547,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.014300000000048385,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.02719999999999345,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.010199999999940701,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.014400000000023283,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.00839999999993779,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.013200000000097134,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.007800000000088403,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.011799999999993815,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.01499999999987267,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.012199999999893407,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.012199999999893407,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.07919999999990068,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.04049999999983811,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.02359999999998763,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.01869999999985339,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.014400000000023283,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.029999999999972715,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.03569999999990614,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.0261000000000422,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.01269999999999527,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.014400000000023283,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.009500000000116415,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.013599999999996726,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.015600000000176806,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.03770000000008622,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.008499999999912689,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.0072000000000116415,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.012999999999919964,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.009999999999990905,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.017200000000002547,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.008800000000064756,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.013300000000072032,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.007600000000138607,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.012899999999945067,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.007600000000138607,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.013200000000097134,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.008699999999862484,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.02119999999990796,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.009199999999964348,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.012499999999818101,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.00839999999993779,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.013700000000198997,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.007699999999886131,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.011999999999943611,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.005300000000033833,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.009999999999990905,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.008799999999837382,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.012499999999818101,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.008799999999837382,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.01269999999999527,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.008299999999962893,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.012799999999970169,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.010700000000042564,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.01410000000009859,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.009399999999914144,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.013999999999896318,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.007499999999936335,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.011899999999968713,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.008000000000038199,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.044999999999845386,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.020299999999906504,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.01209999999991851,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.009900000000016007,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.016499999999950887,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.020399999999881402,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.006899999999859574,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.010799999999790089,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.009999999999990905,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.0159000000001015,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.0072999999999865395,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.013200000000097134,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.0079000000000633,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.013099999999894862,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.007499999999936335,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.01160000000004402,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.013200000000097134,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.019000000000005457,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.006199999999807915,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.006300000000010186,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.011999999999943611,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.007700000000113505,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.01389999999992142,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.007899999999835927,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.012799999999970169,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.0072000000000116415,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.013000000000147338,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.007499999999936335,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.05920000000014625,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.009199999999964348,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.01499999999987267,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.007499999999936335,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.011200000000144428,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.007100000000036744,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.011899999999968713,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.014499999999998181,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.004999999999881766,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.009000000000014552,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.006900000000086948,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.050700000000006185,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.03279999999995198,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.02179999999998472,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.00930000000016662,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.017299999999977445,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.014799999999922875,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.015000000000100044,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.009000000000014552,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.0158000000001266,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.007700000000113505,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.020999999999958163,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.00930000000016662,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.009600000000091313,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.010700000000042564,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.010299999999915599,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.007800000000088403,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.016099999999823922,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.02119999999990796,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.007400000000188811,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.00980000000004111,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.008699999999862484,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.01679999999987558,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.006699999999909778,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.014299999999821011,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.04519999999979518,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.03220000000010259,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.015399999999999636,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.13999999999987267,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.023799999999937427,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.027100000000018554,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.005700000000160799,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.01209999999991851,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.009000000000014552,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.01269999999999527,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.0072999999999865395,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.012999999999919964,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.006999999999834472,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.03669999999988249,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.01110000000016953,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.016499999999950887,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.01040000000011787,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.015000000000100044,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.012600000000020373,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.02860000000009677,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.007100000000036744,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.022400000000061482,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.006600000000162254,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.01520000000004984,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.004400000000032378,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.009600000000091313,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.006899999999859574,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.011599999999816646,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.010299999999915599,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.012500000000045475,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.007600000000138607,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.01880000000005566,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.012300000000095679,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.04349999999999454,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.01630000000000109,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.024899999999888678,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.011499999999841748,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.016999999999825377,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.010399999999890497,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.00909999999998945,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.00909999999998945,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.007000000000061846,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.009199999999964348,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.025099999999838474,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.015899999999874126,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.005099999999856664,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.01110000000016953,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.0079000000000633,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.01389999999992142,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.006300000000010186,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.011899999999968713,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.017800000000079308,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.017500000000154614,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.008800000000064756,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.016200000000026193,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.02060000000005857,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.02500000000009095,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.014599999999973079,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.005800000000135697,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.015599999999949432,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.007699999999886131,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.012600000000020373,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.007000000000061846,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.012300000000095679,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.007000000000061846,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.014400000000023283,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.01209999999991851,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.006700000000137152,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.011999999999943611,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.009000000000014552,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.014099999999871216,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.015499999999974534,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.015499999999974534,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.007899999999835927,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.014200000000073487,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.004400000000032378,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.009999999999990905,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.007100000000036744,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.013699999999971624,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.007500000000163709,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.011899999999968713,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.007100000000036744,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.011500000000069122,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.011000000000194632,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.013099999999894862,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.008499999999912689,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.013200000000097134,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.008599999999887586,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.014599999999973079,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.008800000000064756,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.008500000000140062,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.009199999999964348,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.008499999999912689,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.009600000000091313,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.012500000000045475,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.014900000000125146,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.004100000000107684,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.010099999999965803,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.007600000000138607,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.01319999999986976,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.005899999999883221,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.01110000000016953,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.00909999999998945,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.012200000000120781,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.006899999999859574,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.009900000000016007,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.011999999999943611,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.025099999999838474,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.006999999999834472,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.006899999999859574,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.015500000000201908,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.00659999999993488,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.012199999999893407,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.007100000000036744,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.012100000000145883,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.013699999999971624,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.006400000000212458,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.012400000000070577,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.006300000000010186,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.014200000000073487,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.006699999999909778,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.011099999999942156,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.0059000000001105946,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.012500000000045475,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.014400000000023283,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.0060000000000854925,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.015499999999974534,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.007699999999886131,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.01700000000005275,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.0072000000000116415,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.011899999999968713,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.006799999999884676,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.011599999999816646,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.010099999999965803,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.012799999999970169,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.007699999999886131,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.012600000000020373,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.008500000000140062,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.011300000000119326,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.006499999999959982,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.004900000000134241,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.00659999999993488,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.014299999999821011,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.009699999999838838,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.015499999999974534,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.017200000000002547,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.0048000000001593435,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.010299999999915599,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.007000000000061846,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.013499999999794454,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.005799999999908323,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.01139999999986685,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.00930000000016662,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.012400000000070577,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.009499999999889042,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.013599999999996726,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.01689999999985048,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.005400000000008731,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.005100000000084037,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.01269999999999527,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.008000000000038199,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.020800000000008367,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.007700000000113505,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.015700000000151704,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.00959999999986394,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.011799999999993815,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.00659999999993488,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.011799999999993815,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.006099999999833017,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.013500000000021828,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.010099999999965803,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.006099999999833017,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.011099999999942156,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.0059000000001105946,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.013599999999996726,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.004100000000107684,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.008699999999862484,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.00659999999993488,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.013699999999971624,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.009299999999939246,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.015399999999999636,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.008500000000140062,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.01759999999990214,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.011899999999968713,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.01269999999999527,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.007799999999861029,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.012199999999893407,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.011799999999993815,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.018299999999953798,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.014300000000048385,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.0072999999999865395,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.008599999999887586,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.010600000000067666,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.006400000000212458,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.01160000000004402,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.014099999999871216,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.004500000000007276,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.010399999999890497,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.00909999999998945,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.016699999999900683,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.007799999999861029,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.014499999999998181,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.009699999999838838,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.012299999999868305,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.006799999999884676,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.009700000000066211,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.013699999999971624,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.01679999999987558,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.0052999999998064595,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.005599999999958527,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.012500000000045475,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.00659999999993488,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.012299999999868305,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.011199999999917054,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.006600000000162254,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.01569999999992433,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.008199999999987995,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.015099999999847569,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.008699999999862484,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.014699999999947977,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.010900000000219734,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.006099999999833017,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.011099999999942156,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.013500000000021828,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.0038999999999305146,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.008799999999837382,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.006300000000010186,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.013799999999946522,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.007500000000163709,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.011500000000069122,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.006899999999859574,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.011999999999943611,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.010700000000042564,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.02060000000005857,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.010599999999840293,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.01880000000005566,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.009699999999838838,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.011199999999917054,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.00659999999993488,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.004999999999881766,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.006999999999834472,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.008499999999912689,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.012299999999868305,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.013700000000198997,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.005000000000109139,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.00980000000004111,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.006899999999859574,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.013999999999896318,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.005899999999883221,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.01160000000004402,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.008900000000039654,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.01569999999992433,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.008400000000165164,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.01340000000004693,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.01700000000005275,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.01710000000002765,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.005000000000109139,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.005400000000008731,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.022699999999986176,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.006700000000137152,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.012100000000145883,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.011299999999891952,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.008100000000013097,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.01139999999986685,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.006699999999909778,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.01160000000004402,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.012799999999970169,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.007800000000088403,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.013500000000021828,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.007799999999861029,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.015099999999847569,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.007600000000138607,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.013999999999896318,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.0039999999999054126,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.008800000000064756,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.006300000000010186,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.013200000000097134,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.006799999999884676,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.010999999999967258,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.012800000000197542,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.009999999999990905,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.012600000000020373,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.008000000000038199,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.01340000000004693,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.008100000000013097,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.013699999999971624,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.008299999999962893,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.007999999999810825,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.008300000000190266,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.009700000000066211,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.01160000000004402,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.013599999999996726,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.004000000000132786,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.010399999999890497,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.0072999999999865395,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.012999999999919964,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.0059000000001105946,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.011500000000069122,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.008800000000064756,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.011700000000018917,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.006300000000010186,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.00959999999986394,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.4807999999998174,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.0543999999999869,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.010500000000092768,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.008499999999912689,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.02070000000003347,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.013999999999896318,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.019000000000005457,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.010500000000092768,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.01639999999997599,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.010200000000168075,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.01710000000002765,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.010499999999865395,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.01679999999987558,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.009500000000116415,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.0158000000001266,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.009199999999964348,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.014300000000048385,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.00860000000011496,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.0159000000001015,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.008599999999887586,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.01499999999987267,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.005499999999983629,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.01209999999991851,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.009799999999813735,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.014300000000048385,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.010299999999915599,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.01630000000000109,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.021500000000060027,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.01089999999999236,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.00980000000004111,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.012400000000070577,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.00839999999993779,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.011899999999968713,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.010199999999940701,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.006700000000137152,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.008900000000039654,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.007599999999911233,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.00680000000011205,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.02860000000009677,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.014699999999947977,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.005099999999856664,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.007700000000113505,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.007100000000036744,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.012899999999945067,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.17579999999998108,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.035700000000133514,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.013900000000148793,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.02289999999993597,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.014599999999973079,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.029600000000073123,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.026900000000068758,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.03600000000005821,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.010500000000092768,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.007100000000036744,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.014300000000048385,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.010199999999940701,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.015499999999974534,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.010600000000067666,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.014599999999973079,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.007800000000088403,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.015499999999974534,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.008199999999987995,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.01679999999987558,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.008300000000190266,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.014699999999947977,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.008500000000140062,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.012899999999945067,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.007400000000188811,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.016499999999950887,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.017200000000002547,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.06959999999980937,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.03770000000008622,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.040199999999913416,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.016200000000026193,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.025200000000040745,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.016200000000026193,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.02490000000011605,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.013200000000097134,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.026499999999941792,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.01859999999987849,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.07139999999981228,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.04769999999984975,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.03660000000013497,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.014200000000073487,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.022699999999986176,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.014800000000150249,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.018000000000029104,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.012800000000197542,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.011799999999993815,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.010500000000092768,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.023400000000037835,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.02959999999984575,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.009199999999964348,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.015599999999949432,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.014699999999947977,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.047100000000000364,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.03489999999987958,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.022900000000163345,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.010300000000142973,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.02229999999985921,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.012600000000020373,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.02320000000008804,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.028199999999969805,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.03819999999996071,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.013500000000021828,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.03780000000006112,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.03809999999998581,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.011700000000018917,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.017600000000129512,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.009199999999964348,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.020299999999906504,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.008100000000013097,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.01389999999992142,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.008700000000089858,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.022099999999909414,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.025599999999940337,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.06119999999987158,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.03209999999990032,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.020400000000108776,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.011400000000094224,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.025300000000015643,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.009200000000191721,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.015799999999899228,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.006199999999807915,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.01160000000004402,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.010700000000042564,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.03469999999992979,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.026399999999966894,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.02159999999980755,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.00959999999986394,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.01939999999990505,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.012100000000145883,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.01689999999985048,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.00980000000004111,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.018700000000080763,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.008900000000039654,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.014199999999846113,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.00980000000004111,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.01929999999993015,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.010500000000092768,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.008800000000064756,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.007600000000138607,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.01710000000002765,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.02060000000005857,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.011099999999942156,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.009600000000091313,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.018100000000004002,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.007600000000138607,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.01689999999985048,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.008599999999887586,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.024499999999989086,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.01319999999986976,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.01630000000000109,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.01749999999992724,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.02299999999991087,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.009500000000116415,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.00680000000011205,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.015100000000074942,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.008499999999912689,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.014800000000150249,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.008800000000064756,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.018000000000029104,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.008100000000013097,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.020500000000083674,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.013500000000021828,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.015399999999999636,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.01089999999999236,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.014699999999947977,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.04100000000016735,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.061399999999821375,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.0181999999999789,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.030600000000049477,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.013999999999896318,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.015300000000024738,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.005799999999908323,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.012899999999945067,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.019000000000005457,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.022600000000011278,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.011899999999968713,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.014699999999947977,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.008799999999837382,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.017200000000002547,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.012400000000070577,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.016700000000128057,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.010500000000092768,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.033599999999978536,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.015300000000024738,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.015100000000074942,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.010600000000067666,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 1.1278999999999542,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.030600000000049477,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.00980000000004111,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.008100000000013097,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.031199999999898864,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.019700000000057116,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.009600000000091313,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.022799999999961074,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.009299999999939246,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.015499999999974534,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.006699999999909778,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.018700000000080763,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.010700000000042564,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.018100000000004002,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.011599999999816646,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.011599999999816646,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.012600000000020373,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.016599999999925785,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.006600000000162254,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.005799999999908323,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.011299999999891952,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.008300000000190266,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.011899999999968713,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.0072999999999865395,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.011299999999891952,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.011300000000119326,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.00659999999993488,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.019800000000032014,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.007100000000036744,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.011099999999942156,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.009900000000016007,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.006199999999807915,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.01089999999999236,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.005799999999908323,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.010100000000193177,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.0036999999999807187,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.008199999999987995,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.007499999999936335,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.010600000000067666,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.007500000000163709,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.010999999999967258,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.0072999999999865395,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.010700000000042564,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.008300000000190266,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.01160000000004402,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.007999999999810825,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.01160000000004402,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.00659999999993488,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.01040000000011787,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.017299999999977445,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.007700000000113505,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.0072000000000116415,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.0059000000001105946,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.010600000000067666,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.018399999999928696,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.008500000000140062,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.009600000000091313,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.008900000000039654,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.015100000000074942,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.009000000000014552,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.013200000000097134,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.008299999999962893,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.015499999999974534,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.009900000000016007,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.012399999999843203,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.011999999999943611,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.016699999999900683,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.005099999999856664,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.005400000000008731,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.010599999999840293,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.006899999999859574,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.011200000000144428,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.01269999999999527,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.0072999999999865395,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.011099999999942156,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.011700000000018917,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.009999999999990905,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.005899999999883221,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.009900000000016007,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.005899999999883221,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.010100000000193177,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.005799999999908323,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.010700000000042564,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.0036999999999807187,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.008199999999987995,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.014499999999998181,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.010399999999890497,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.006699999999909778,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.011200000000144428,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.012500000000045475,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.008299999999962893,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.011799999999993815,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.007799999999861029,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.01929999999993015,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.006699999999909778,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.010299999999915599,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.005700000000160799,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.005099999999856664,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.00659999999993488,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.005899999999883221,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.005699999999933425,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.010299999999915599,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.013500000000021828,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.0041999999998552084,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.006799999999884676,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.007000000000061846,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.012600000000020373,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.005499999999983629,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.011700000000018917,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.011200000000144428,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.006099999999833017,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.00909999999998945,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.010499999999865395,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.016000000000076398,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.005000000000109139,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.004899999999906868,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.009900000000016007,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.006099999999833017,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.010999999999967258,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.005899999999883221,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.011099999999942156,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.0060000000000854925,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.010999999999967258,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.006900000000086948,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.010999999999967258,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.0072999999999865395,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.010299999999915599,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.0061000000000603904,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.010600000000067666,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.005899999999883221,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.010700000000042564,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.005499999999983629,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.010299999999915599,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.0036000000000058208,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.008100000000013097,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.006199999999807915,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.010300000000142973,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.00680000000011205,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.010800000000017462,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.006499999999959982,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.010999999999967258,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.007799999999861029,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.011899999999968713,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.007499999999936335,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.012400000000070577,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.010600000000067666,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.005699999999933425,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.004599999999982174,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.006999999999834472,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.005699999999933425,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.005599999999958527,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.010299999999915599,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.013100000000122236,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.0039999999999054126,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.0072000000000116415,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.006300000000010186,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.012500000000045475,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.005499999999983629,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.010600000000067666,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.006300000000010186,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.011099999999942156,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.0060000000000854925,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.008700000000089858,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.01160000000004402,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.019400000000132422,
+      "results": 8
+    },
+    {
+      "query": "Luna",
+      "milliseconds": 0.004699999999957072,
+      "results": 1
+    },
+    {
+      "query": "Mars",
+      "milliseconds": 0.005100000000084037,
+      "results": 1
+    },
+    {
+      "query": "planet:mars",
+      "milliseconds": 0.010099999999965803,
+      "results": 1
+    },
+    {
+      "query": "Jupiter",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "planet:jupiter",
+      "milliseconds": 0.011700000000018917,
+      "results": 1
+    },
+    {
+      "query": "Saturn",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "planet:saturn",
+      "milliseconds": 0.01139999999986685,
+      "results": 1
+    },
+    {
+      "query": "Uranus",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "planet:uranus",
+      "milliseconds": 0.011599999999816646,
+      "results": 1
+    },
+    {
+      "query": "Neptune",
+      "milliseconds": 0.006099999999833017,
+      "results": 1
+    },
+    {
+      "query": "planet:neptune",
+      "milliseconds": 0.011700000000018917,
+      "results": 1
+    },
+    {
+      "query": "Pluto",
+      "milliseconds": 0.006099999999833017,
+      "results": 1
+    },
+    {
+      "query": "dwarf:pluto",
+      "milliseconds": 0.00980000000004111,
+      "results": 1
+    },
+    {
+      "query": "Ceres",
+      "milliseconds": 0.0060000000000854925,
+      "results": 1
+    },
+    {
+      "query": "dwarf:ceres",
+      "milliseconds": 0.010200000000168075,
+      "results": 1
+    },
+    {
+      "query": "Phobos",
+      "milliseconds": 0.005499999999983629,
+      "results": 1
+    },
+    {
+      "query": "moon:phobos",
+      "milliseconds": 0.011099999999942156,
+      "results": 1
+    },
+    {
+      "query": "Deimos",
+      "milliseconds": 0.005899999999883221,
+      "results": 1
+    },
+    {
+      "query": "moon:deimos",
+      "milliseconds": 0.010200000000168075,
+      "results": 1
+    },
+    {
+      "query": "Io",
+      "milliseconds": 0.0040999999998803105,
+      "results": 1
+    },
+    {
+      "query": "moon:io",
+      "milliseconds": 0.008199999999987995,
+      "results": 1
+    },
+    {
+      "query": "Europa",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "moon:europa",
+      "milliseconds": 0.010299999999915599,
+      "results": 1
+    },
+    {
+      "query": "Ganymede",
+      "milliseconds": 0.006700000000137152,
+      "results": 1
+    },
+    {
+      "query": "moon:ganymede",
+      "milliseconds": 0.010600000000067666,
+      "results": 1
+    },
+    {
+      "query": "Callisto",
+      "milliseconds": 0.006399999999985084,
+      "results": 1
+    },
+    {
+      "query": "moon:callisto",
+      "milliseconds": 0.010700000000042564,
+      "results": 1
+    },
+    {
+      "query": "Titan",
+      "milliseconds": 0.008100000000013097,
+      "results": 2
+    },
+    {
+      "query": "moon:titan",
+      "milliseconds": 0.011899999999968713,
+      "results": 2
+    },
+    {
+      "query": "Triton",
+      "milliseconds": 0.007599999999911233,
+      "results": 2
+    },
+    {
+      "query": "moon:triton",
+      "milliseconds": 0.012199999999893407,
+      "results": 2
+    },
+    {
+      "query": "Charon",
+      "milliseconds": 0.006200000000035288,
+      "results": 1
+    },
+    {
+      "query": "moon:charon",
+      "milliseconds": 0.010500000000092768,
+      "results": 1
+    },
+    {
+      "query": "",
+      "milliseconds": 0.005499999999983629,
+      "results": 8
+    },
+    {
+      "query": "Eur",
+      "milliseconds": 0.005300000000033833,
+      "results": 1
+    },
+    {
+      "query": "Chraon",
+      "milliseconds": 0.007499999999936335,
+      "results": 1
+    },
+    {
+      "query": "Euorpa",
+      "milliseconds": 0.005999999999858119,
+      "results": 1
+    },
+    {
+      "query": "Jupitr",
+      "milliseconds": 0.0061000000000603904,
+      "results": 1
+    },
+    {
+      "query": "moon",
+      "milliseconds": 0.010600000000067666,
+      "results": 8
+    },
+    {
+      "query": "not a catalog body",
+      "milliseconds": 0.013599999999996726,
+      "results": 0
+    },
+    {
+      "query": "Sun",
+      "milliseconds": 0.004699999999957072,
+      "results": 1
+    },
+    {
+      "query": "star:sun",
+      "milliseconds": 0.008100000000013097,
+      "results": 1
+    },
+    {
+      "query": "Mercury",
+      "milliseconds": 0.007399999999961437,
+      "results": 1
+    },
+    {
+      "query": "planet:mercury",
+      "milliseconds": 0.016599999999925785,
+      "results": 1
+    },
+    {
+      "query": "Venus",
+      "milliseconds": 0.007400000000188811,
+      "results": 1
+    },
+    {
+      "query": "planet:venus",
+      "milliseconds": 0.012399999999843203,
+      "results": 1
+    },
+    {
+      "query": "Earth",
+      "milliseconds": 0.006900000000086948,
+      "results": 1
+    },
+    {
+      "query": "planet:earth",
+      "milliseconds": 0.011499999999841748,
+      "results": 1
+    },
+    {
+      "query": "Terra",
+      "milliseconds": 0.006199999999807915,
+      "results": 1
+    },
+    {
+      "query": "our planet",
+      "milliseconds": 0.008900000000039654,
+      "results": 1
+    },
+    {
+      "query": "Moon",
+      "milliseconds": 0.01089999999999236,
+      "results": 8
+    },
+    {
+      "query": "moon:moon",
+      "milliseconds": 0.014899999999897773,
+      "results": 8
+    }
+  ],
+  "medianMs": 0.011200000000144428,
+  "p95Ms": 0.03600000000005821,
+  "maxMs": 1.1636999999998352
+}

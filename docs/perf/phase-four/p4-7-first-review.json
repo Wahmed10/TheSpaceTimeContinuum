@@ -1,0 +1,173 @@
+{
+  "reviewedAt": "2026-10-03T23:05:26.488Z",
+  "verdict": "reviewed-failure",
+  "candidateCommit": "36f7a9852acf2e2a62be39fab4d24b5533572767",
+  "sourceSha256": "4dd7e60d7af5f51ef2038e63b89750ddbbefbffb6e882839454af108a04f50c2",
+  "resultSha256": "6e9012ad7b5a81c66e62721e5f68cbe1ea5eae29d28adcfcaaffaf8edeff867b",
+  "artifacts": [
+    {
+      "file": "p4-7-first-launch.json",
+      "sha256": "b1fbc8b97e3d6a163de82a90282a3085a47eb1a02b58f7e3b812395182b3b529"
+    },
+    {
+      "file": "p4-7-first-result.json",
+      "sha256": "6e9012ad7b5a81c66e62721e5f68cbe1ea5eae29d28adcfcaaffaf8edeff867b"
+    },
+    {
+      "file": "p4-7-first-controlsProbe.json",
+      "sha256": "138c78460faf60f24a8150010ad0d4bfa08b664ab0e43c6d817621ea73c4c3e5"
+    },
+    {
+      "file": "p4-7-first-local-search.json",
+      "sha256": "cfe42380b16240538bd4478a15e5af8a0575e5bc88cb20af72b09a0e11ca44ea"
+    },
+    {
+      "file": "p4-7-first-engine-bundle.json",
+      "sha256": "29bf1c9b74c368be29a3bc0047b334a550edc57ce7c637f08dfc99ec29093be9"
+    },
+    {
+      "file": "p4-7-first-tracked-source.patch",
+      "sha256": "48e7798a4d52d582f9bded005b2e4f507b1707435f094a73cfbcc2020b033c11"
+    },
+    {
+      "file": "p4-7-first-verify.log",
+      "sha256": "03989aaa039ec649f9729024d3a46e73a2517087bc6b6d3513c5ca04c1d17a13"
+    },
+    {
+      "file": "p4-7-first-unconfigured-server.log",
+      "sha256": "c3595ee4d9c81cdfcf386dcef16cca35d11dbe959fd51520c2cf6d7740a3f0d0"
+    }
+  ],
+  "controlsProbe": {
+    "startTime": "2026-10-03T20:35:22.089Z",
+    "duration": 215488.441,
+    "expected": 19,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "fullRegressionRan": false,
+  "independentRootAndCandidateSourceUnchangedBeforeFixes": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 314,
+    "preservedEvidence": 14
+  },
+  "serverLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "failures": [
+    {
+      "file": "phase-four-controls.spec.ts",
+      "title": "all speed signs, UTC date bounds and a retained clamp notice are coherent",
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\candidate\\e2e\\phase-four-controls.spec.ts",
+            "column": 9,
+            "line": 375
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.time-panel').getByRole('status')\nExpected substring: \u001b[32m\"supported date boundary and paused\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.time-panel').getByRole('status') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.time-panel').getByRole('status')\u001b[22m\n\n\n  373 |       await expect(\n  374 |         page.locator('.time-panel').getByRole('status'),\n> 375 |       ).toContainText('supported date boundary and paused');\n      |         ^\n  376 |       expect(await page.evaluate(() => window.__spaceEngine!.clock.mode)).toBe(\n  377 |         'paused',\n  378 |       );\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\candidate\\e2e\\phase-four-controls.spec.ts:375:9"
+        }
+      ],
+      "attachments": [
+        {
+          "name": "error-context",
+          "contentType": "text/markdown",
+          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\controls-probe\\phase-four-controls-UTC-co-c92ac-d-clamp-notice-are-coherent\\error-context.md"
+        },
+        {
+          "name": "trace",
+          "contentType": "application/zip",
+          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\controls-probe\\phase-four-controls-UTC-co-c92ac-d-clamp-notice-are-coherent\\trace.zip"
+        }
+      ]
+    }
+  ],
+  "inspectedCaptures": [
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-cards-all-21-ca-2a2f4-ods-and-provider-provenance/charon-provenance-card.png",
+      "sha256": "466cce80cfb7c43725c2538ef7198f00368ca1ac13258ac9c38f7bd576663159",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-cards-mobile-ca-659be--timeline-and-camera-usable/mobile-full-card.png",
+      "sha256": "8e2a923cd2e53dccc88fca6bb9a38052bfe75b3b1dc10c6ac2cb1c330f124563",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-cards-mobile-ca-659be--timeline-and-camera-usable/mobile-peek-card.png",
+      "sha256": "5dc7d9c15fdb47924650b163ee3afbac83d849dfa4e5a5805dedca5ec01b38fc",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-cards-mobile-ca-83a35--timeline-and-camera-usable/mobile-full-card.png",
+      "sha256": "ef168eb11a43f1cd67f7a9ff5baddec55d87f284e3f1c37a0a0a0c2ed864bc41",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-cards-mobile-ca-83a35--timeline-and-camera-usable/mobile-peek-card.png",
+      "sha256": "0cff4579b8fb6ec4e0659da9cd9a8b5575ce0e6410974a9e42749c4ea10f8fb4",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-cards-mobile-ca-9df2b--timeline-and-camera-usable/mobile-full-card.png",
+      "sha256": "f946607a966b4cfea3232f80ce4b04427953d21d65e902acc359cf2f879f5e47",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-cards-mobile-ca-9df2b--timeline-and-camera-usable/mobile-peek-card.png",
+      "sha256": "0063ccb24300a625ee99e03ee48050404030e90ed7393834a030bd441acdba3f",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-controls-all-la-f6e4f-es-and-restore-URL-requests/requested-and-unavailable-layers.png",
+      "sha256": "c10b259a8ba066b59f0e66323d02c0024da44e0d338512cc5cf4f47616a70f0c",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-controls-the-de-c1481-honest-closed-events-drawer/honest-happening-now.png",
+      "sha256": "ff5f47ca6970d93aa3c025c406521f702fb87790f759b5d08cf18ead952ee2cf",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-controls-the-de-c1481-honest-closed-events-drawer/six-control-default.png",
+      "sha256": "bfa246f820479ea914df7148027c6f785e6fafbb655ccbe543a61180408e903e",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-controls-UTC-co-fb81c-d-clamp-notice-are-coherent/utc-time-controls.png",
+      "sha256": "41b790c8a656a9ad111e8b984ecf68f063420d656163ea83609c4d3579bb167b",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-controls-valida-34c54-L-settings-retain-ownership/persisted-settings-and-active-tier.png",
+      "sha256": "1f571725a31d1cf46cd821fddc9ffa3b6c2e885d5cc04b1591c514dfcbfc3ad2",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-mobile-consumer-145f0-ve-reachable-time-and-focus/mobile-time-above-sheet.png",
+      "sha256": "c190bde96ff945f545536ce1ee29451e445a9f556926a9a27831d83c23c45067",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-mobile-consumer-722eb-ve-reachable-time-and-focus/mobile-time-above-sheet.png",
+      "sha256": "950920453cf7a8d0b2f97e622b6e7265ad2d3829dca7f51512f8bbc892c2566f",
+      "inspected": true
+    },
+    {
+      "file": ".tools/phase-four/p4-7/controls-probe/phase-four-mobile-consumer-e4069-ve-reachable-time-and-focus/mobile-time-above-sheet.png",
+      "sha256": "42208edf203bd187bd197b891c3904d392ee1c4aea82307f1104dc96a7071775",
+      "inspected": true
+    }
+  ],
+  "finding": "Actual UI timing defect: the transient one-tick clamp flag can clear between 4 Hz events. Engine playback correctly paused at the boundary; the notice disappeared. Clock bridge correction keeps playback intent across route snapshot ticks and retains a paused outward-boundary notice without another subscription.",
+  "limitations": [
+    "The complete 64-case suite and fresh physical-GPU latency/science/storage checks did not run.",
+    "Captures use SwiftShader. Mobile is viewport/touch emulation; short-height card/panels require internal scrolling.",
+    "Final shell performance/accessibility/device gates remain P4.8-P4.9."
+  ]
+}

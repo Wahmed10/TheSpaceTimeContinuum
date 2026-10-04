@@ -1,5 +1,12 @@
 import { expect, test } from '@playwright/test';
 import type { Page, Route } from '@playwright/test';
+import {
+  openSettings,
+  openTime,
+  closeTime,
+  toggleScale,
+  expectScale,
+} from './helpers/consumerControls';
 
 test.use({ timezoneId: 'America/Toronto', actionTimeout: 10000 });
 const query = '?renderer=webgl&test=1&t=2026-10-02T12%3A00%3A00Z';
@@ -40,19 +47,19 @@ test('Back and Forward restore settings and UTC controls, flushing the previous 
   await ready(page);
   const length = await page.evaluate(() => history.length);
   await page.getByRole('button', { name: 'Layers', exact: true }).click();
-  for (const name of ['Planets', 'Moons', 'Dwarfs', 'Orbital paths'])
+  for (const name of ['Planets', 'Moons', 'Dwarf planets', 'Orbital paths'])
     await page.getByLabel(name, { exact: true }).uncheck();
   await page.getByRole('button', { name: 'Layers', exact: true }).click();
-  await page
-    .getByRole('button', { name: 'Explore scale', exact: true })
-    .click();
+  await toggleScale(page, 'Explore');
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
   await page
     .getByLabel('Reference frame', { exact: true })
     .selectOption('FIXED:earth');
   await page.getByLabel('View preset', { exact: true }).selectOption('wide');
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
+  await openTime(page);
   await page.getByLabel('Simulation date in UTC').fill('2027-03-04T15:06');
+  await closeTime(page);
   await choose(page, 'Mars');
   await expect(page).toHaveURL(/\/object\/planet\/mars\?/);
   await choose(page, 'Europa');
@@ -82,19 +89,19 @@ test('Back and Forward restore settings and UTC controls, flushing the previous 
       camera: { preset: 'wide' },
       mode: 'paused',
     });
+  await openTime(page);
   await expect(page.getByLabel('Simulation date in UTC')).toHaveValue(
     '2027-03-04T15:06',
   );
+  await closeTime(page);
   expect(
     Math.abs(
       Date.parse((await actual(page)).t!) - Date.parse('2027-03-04T15:06:00Z'),
     ),
   ).toBeLessThanOrEqual(1);
-  await expect(
-    page.getByRole('button', { name: 'True scale', exact: true }),
-  ).toBeVisible();
+  await expectScale(page, 'True');
   await page.getByRole('button', { name: 'Layers', exact: true }).click();
-  for (const name of ['Planets', 'Moons', 'Dwarfs', 'Orbital paths'])
+  for (const name of ['Planets', 'Moons', 'Dwarf planets', 'Orbital paths'])
     await expect(page.getByLabel(name, { exact: true })).not.toBeChecked();
   await page.getByRole('button', { name: 'Layers', exact: true }).click();
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
@@ -131,9 +138,7 @@ test('Back cancels an outstanding query replacement instead of corrupting the re
   await ready(page);
   await choose(page, 'Mars');
   await expect(page).toHaveURL(/\/object\/planet\/mars\?/);
-  await page
-    .getByRole('button', { name: 'Explore scale', exact: true })
-    .click();
+  await toggleScale(page, 'Explore');
   await page.goBack();
   await expect(page).toHaveURL(/\/object\/planet\/earth\?/);
   const restored = page.url();
@@ -143,9 +148,7 @@ test('Back cancels an outstanding query replacement instead of corrupting the re
   await expect
     .poll(() => actual(page))
     .toMatchObject({ focus: 'planet:earth', scale: 'explore' });
-  await expect(
-    page.getByRole('button', { name: 'Explore scale', exact: true }),
-  ).toBeVisible();
+  await expectScale(page, 'Explore');
 });
 
 test('accelerated playback and free camera gestures do not write URLs; share captures time and reloads paused', async ({
@@ -192,6 +195,7 @@ test('accelerated playback and free camera gestures do not write URLs; share cap
           }
         ).__timeWrites,
     );
+  await openTime(page);
   await page
     .getByRole('combobox', { name: 'Playback speed' })
     .selectOption('86400');
@@ -228,6 +232,7 @@ test('accelerated playback and free camera gestures do not write URLs; share cap
   await page.evaluate(() => {
     (window as unknown as { __timeWrites: unknown[] }).__timeWrites.length = 0;
   });
+  await closeTime(page);
   const canvas = page.locator('canvas');
   await canvas.focus();
   await page.keyboard.press('ArrowRight');
@@ -238,6 +243,7 @@ test('accelerated playback and free camera gestures do not write URLs; share cap
   expect(await page.evaluate(() => history.length)).toBe(length);
   expect(await writes()).toEqual([]);
   const beforeShare = Date.parse((await actual(page)).t!);
+  await openSettings(page);
   await page
     .getByRole('button', { name: 'Share this view', exact: true })
     .click();
@@ -270,6 +276,7 @@ test('LIVE clears dated anchors through its transition; explicit pause/play and 
 }) => {
   await page.goto('/object/planet/earth' + query);
   await ready(page);
+  await openTime(page);
   await page.getByRole('button', { name: 'LIVE', exact: true }).click();
   await expect
     .poll(() => new URL(page.url()).searchParams.has('t'))
@@ -279,20 +286,64 @@ test('LIVE clears dated anchors through its transition; explicit pause/play and 
     length = await page.evaluate(() => history.length);
   await page.waitForTimeout(750);
   expect(page.url()).toBe(live);
+  await closeTime(page);
   await page.getByRole('button', { name: 'Pause', exact: true }).click();
   await expect.poll(() => new URL(page.url()).searchParams.has('t')).toBe(true);
   await expect(
     page.getByRole('button', { name: 'Play', exact: true }),
   ).toBeVisible();
   await page.getByRole('button', { name: 'Play', exact: true }).click();
+  await openTime(page);
+  await page.evaluate(() => {
+    const writes: { href: string; nextInternal: boolean }[] = [];
+    Object.assign(window, { __reverseWrites: writes });
+    const original = history.replaceState.bind(history);
+    history.replaceState = (data, unused, url) => {
+      writes.push({ href: String(url), nextInternal: data?.__NA === true });
+      return original(data, unused, url);
+    };
+    // Clear at the real click's capture phase, so any preceding Play anchor
+    // cannot be mistaken for the Reverse command's delayed replacement.
+    document.addEventListener(
+      'click',
+      (event) => {
+        if (
+          event.target instanceof Element &&
+          event.target.closest('[aria-label="Reverse time"]')
+        )
+          writes.length = 0;
+      },
+      true,
+    );
+  });
+  const reverseWrites = () =>
+    page.evaluate(
+      () =>
+        (
+          window as unknown as {
+            __reverseWrites: { href: string; nextInternal: boolean }[];
+          }
+        ).__reverseWrites,
+    );
   await page.getByRole('button', { name: 'Reverse time', exact: true }).click();
   await expect
     .poll(() => page.evaluate(() => window.__spaceEngine!.clock.rate))
     .toBe(-1);
-  await page.waitForTimeout(650);
-  const playing = page.url();
+  await expect.poll(reverseWrites).toHaveLength(2);
+  const playing = await page.evaluate(() => location.href);
+  const anchor = new URL(playing);
+  expect(await reverseWrites()).toEqual([
+    { href: anchor.pathname + anchor.search, nextInternal: false },
+    { href: anchor.pathname + anchor.search, nextInternal: true },
+  ]);
+  await page.evaluate(() => {
+    (
+      window as unknown as { __reverseWrites: unknown[] }
+    ).__reverseWrites.length = 0;
+  });
   await page.waitForTimeout(750);
   expect(page.url()).toBe(playing);
+  expect(await reverseWrites()).toEqual([]);
   expect(await page.evaluate(() => history.length)).toBe(length);
 });
 
@@ -319,6 +370,7 @@ test('Previous view and Backspace restore camera history by replacement, includi
     window.addEventListener('popstate', () => counts.pops++);
     return history.length;
   });
+  await openSettings(page);
   await page
     .getByRole('button', { name: 'Previous view', exact: true })
     .click();
@@ -411,6 +463,7 @@ test('clipboard denial exposes a labelled selectable link and returns focus on m
       '&layers=moons&frame=helio&view=wide&scale=true',
   );
   await ready(page);
+  await openSettings(page);
   const share = page.getByRole('button', {
     name: 'Share this view',
     exact: true,
@@ -446,7 +499,9 @@ test('clipboard denial exposes a labelled selectable link and returns focus on m
   expect(box!.x + box!.width).toBeLessThanOrEqual(390);
   await page.screenshot({ path: info.outputPath('mobile-share-fallback.png') });
   await dialog.getByRole('button', { name: 'Close', exact: true }).click();
-  await expect(share).toBeFocused();
+  await expect(
+    page.getByRole('button', { name: 'Settings', exact: true }),
+  ).toBeFocused();
 });
 
 test('compatibility navigation preserves semantic state and strips other diagnostics', async ({
@@ -479,6 +534,7 @@ test('compatibility navigation preserves semantic state and strips other diagnos
   await expect(
     page.getByRole('heading', { name: 'Pluto', exact: true }),
   ).toBeVisible();
+  await openTime(page);
   await expect(page.getByLabel('Simulation date in UTC')).toHaveValue(
     '2026-10-02T12:00',
   );
@@ -495,6 +551,7 @@ test('obsolete asynchronous startup cannot replace a newer canvas after leaving 
   await expect.poll(() => held.length).toBeGreaterThan(0);
   const firstRequests = held.length;
   // Keyboard activation is available while the graphics overlay blocks pointers.
+  await openSettings(page);
   await page.getByRole('link', { name: 'About the data' }).focus();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/about\/data$/);
@@ -502,10 +559,12 @@ test('obsolete asynchronous startup cannot replace a newer canvas after leaving 
   await page.goBack();
   await expect(page).toHaveURL(/\/object\/planet\/earth\?/);
   await expect.poll(() => held.length).toBeGreaterThan(firstRequests);
+  await page.locator('canvas').focus();
   await page.keyboard.press('/');
   await page.getByPlaceholder('Where would you like to go?').fill('Mars');
   await page.locator('.search-result').click();
   await expect(page).toHaveURL(/\/object\/planet\/mars\?/);
+  await page.locator('canvas').focus();
   await page.keyboard.press('/');
   await page.getByPlaceholder('Where would you like to go?').fill('Europa');
   await page.locator('.search-result').click();

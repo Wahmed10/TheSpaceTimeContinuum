@@ -1,0 +1,218 @@
+{
+  "status": "finished",
+  "pid": 42748,
+  "startedAt": "2026-10-03T23:07:00.942Z",
+  "candidateCommit": "36f7a9852acf2e2a62be39fab4d24b5533572767",
+  "candidateSource": "36f7a9852acf2e2a62be39fab4d24b5533572767 + uncommitted P4.7 snapshot SHA256 8c4688fa35813d1486bdd0c790253406b4f7d0bb469e326f8957276334e28377",
+  "sourceSha256": "8c4688fa35813d1486bdd0c790253406b4f7d0bb469e326f8957276334e28377",
+  "method": "Hashed isolated corrected P4.7 retry-1 source with boundary notice retention across throttled events, with 20 focused controls/mobile/card cases required before the full 64-case regression. Eleven new controls/mobile checks plus nine card checks cover all 21 classifications/provenance, units/physical scale invariance/missing timestamps, public commands/history/share, and 390x844, 390x430, 844x390 mobile snaps/scroll/focus/timeline boundaries, plus all 44 prior checks. Warm local lookup (1000 samples, maximum below 16 ms), production build/budgets/licenses and all 64 production browser/HTTP/renderer cases. Production search leases hold the resident last 3D frame during modal interaction and canonical route/card paint; simulation time continues. Ten search cases include keyboard/IME/touch/rendering ownership and desktop/phone maximum response at most 300 ms, without timing recorder overhead. The 62 functional cases keep traces and SwiftShader; the two timing cases select a physical GPU and reject missing/software scene adapters. Phone is desktop-GPU viewport/touch emulation. Prior software timing failures remain preserved. Existing configured-origin and CPU evidence remain separate; no root output/server changes.",
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 396,
+    "expectedRejections": 2,
+    "testFiles": 44,
+    "log": "verify.log",
+    "finalMeasurementChecks": "Full verification includes consumer shell, preference validation, throttled clamp retention, UTC/provenance and package boundary checks; 64 cases discovered in twelve specs"
+  },
+  "protocol": {
+    "browserCases": 64,
+    "localLookupSamples": 1000,
+    "localLookupThresholdMs": 16,
+    "responseThresholdMs": 300,
+    "responseProfiles": [
+      "desktop",
+      "phone"
+    ],
+    "timingRecorder": "trace/video/screenshot off only for latency cases; functional cases retain traces",
+    "presentation": "Production search modal holds last scene frame; time continues; resume after canonical route/card paint; no test-only rendering stop",
+    "renderer": "62 SwiftShader WebGL2 functional cases; two timing cases require a verified physical scene GPU (Windows ANGLE/D3D11), recording actual unmasked adapter; missing/software adapters fail. Phone is viewport/touch emulation on that desktop GPU, not physical phone throughput. Prior SwiftShader response failure remains preserved",
+    "cpu": "Not repeated: P4.7 samples existing public getters on the existing throttled bridge; no engine/frame/provider/physics changes. Accepted P4.2 pair remains separately recorded"
+  },
+  "launch": "launch.json",
+  "snapshot": "tracked-source.patch and new-source/",
+  "activeStage": null,
+  "install": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "install",
+      "--offline",
+      "--frozen-lockfile"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "install.log",
+    "stderr": "install-stderr.log"
+  },
+  "localSearch": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/phase-four-search-perf.ts",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\local-search.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "localSearch.log",
+    "stderr": "localSearch-stderr.log"
+  },
+  "build": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "build"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "build.log",
+    "stderr": "build-stderr.log"
+  },
+  "engineBundle": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "node",
+      "tools/measure-engine.mjs"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "engineBundle.log",
+    "stderr": "engineBundle-stderr.log"
+  },
+  "assets": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/check-assets.ts"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "assets.log",
+    "stderr": "assets-stderr.log"
+  },
+  "licenses": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "licenses:check"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "licenses.log",
+    "stderr": "licenses-stderr.log"
+  },
+  "unconfiguredServer": {
+    "pid": 15636,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate",
+    "port": 3002,
+    "log": "unconfigured-server.log",
+    "mode": "production",
+    "siteOrigin": "(unconfigured)",
+    "startedAt": "2026-10-03T23:07:41.315Z"
+  },
+  "controlsProbe": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-controls.spec.ts",
+      "e2e/phase-four-mobile.spec.ts",
+      "e2e/phase-four-cards.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\controls-probe",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "controlsProbe.json",
+    "stderr": "controlsProbe-stderr.log",
+    "stats": {
+      "startTime": "2026-10-03T23:07:43.569Z",
+      "duration": 226700.59600000002,
+      "expected": 20,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportErrors": 0
+  },
+  "browser": {
+    "exitCode": 1,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-controls.spec.ts",
+      "e2e/phase-four-mobile.spec.ts",
+      "e2e/phase-four-cards.spec.ts",
+      "e2e/phase-four-search.spec.ts",
+      "e2e/phase-four-search-latency.spec.ts",
+      "e2e/phase-four-history.spec.ts",
+      "e2e/phase-four-routing.spec.ts",
+      "e2e/phase-four-state.spec.ts",
+      "e2e/phase-four-url.spec.ts",
+      "e2e/startup.spec.ts",
+      "e2e/precision.spec.ts",
+      "e2e/visual.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\browser",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-7\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "browser.json",
+    "stderr": "browser-stderr.log",
+    "stats": {
+      "startTime": "2026-10-03T23:11:31.380Z",
+      "duration": 679282.488,
+      "expected": 61,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "reportErrors": 0
+  },
+  "failure": {
+    "message": "browser failed: Incomplete/failed/skipped/flaky coverage; inspect browser.json and browser-stderr.log"
+  },
+  "verdict": "failed",
+  "unconfiguredServerLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "sourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 316,
+    "preservedEvidence": 14
+  },
+  "responseArtifacts": [
+    {
+      "file": "search-response-desktop.json",
+      "sha256": "95f7898eb2c74ba21c718f1ded61c55097c545871288f23c4289fdc3bad02b20"
+    },
+    {
+      "file": "search-response-phone.json",
+      "sha256": "6476c545da1e2fb8f975a8aff954ada23ff3cbc3240aa27598ab3983e6dae882"
+    }
+  ],
+  "finishedAt": "2026-10-03T23:22:51.337Z"
+}

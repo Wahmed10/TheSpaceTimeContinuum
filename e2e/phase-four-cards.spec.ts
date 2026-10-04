@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
+import { openTime, toggleScale, expectScale } from './helpers/consumerControls';
 import bodies from '../packages/domain/data/bodies.json' with { type: 'json' };
 
 test.use({ actionTimeout: 10000, timezoneId: 'America/Toronto' });
@@ -95,12 +96,8 @@ test('physical measurements stay identical in True and Explore scale and convert
   const raw = await page.evaluate(() =>
     window.__spaceEngine!.getMetrics('planet:mars'),
   );
-  await page
-    .getByRole('button', { name: 'Explore scale', exact: true })
-    .click();
-  await expect(
-    page.getByRole('button', { name: 'True scale', exact: true }),
-  ).toBeVisible();
+  await toggleScale(page, 'Explore');
+  await expectScale(page, 'True');
   expect(await details.locator('.metrics dd').allTextContents()).toEqual(
     before,
   );
@@ -139,6 +136,7 @@ test('simulation UTC changes across past and future dates without inventing sour
   await expect(details.locator('.source-details')).toContainText(
     'Two-body orbital propagation',
   );
+  await openTime(page);
   for (const value of ['1901-02-03T04:05', '2099-11-12T13:14']) {
     await page.getByLabel('Simulation date in UTC').fill(value);
     await expect(
@@ -254,7 +252,10 @@ test('card sharing uses the public semantic link and the existing clipboard fall
   expect(url.searchParams.has('renderer')).toBe(false);
   await dialog.getByRole('button', { name: 'Close', exact: true }).click();
   await expect(
-    page.getByRole('button', { name: 'Share this view', exact: true }),
+    card(page, 'Charon').getByRole('button', {
+      name: 'Share Charon view',
+      exact: true,
+    }),
   ).toBeFocused();
 });
 
@@ -325,7 +326,7 @@ for (const viewport of [
       expect(box!.y).toBeGreaterThanOrEqual(70);
       expect(box!.x).toBeGreaterThanOrEqual(0);
       expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width);
-      expect(box!.y + box!.height).toBeLessThan(timeline!.y);
+      expect(timeline!.y + timeline!.height).toBeLessThan(box!.y);
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,
@@ -333,6 +334,17 @@ for (const viewport of [
       ).toBe(true);
       await page.screenshot({ path: info.outputPath('mobile-full-card.png') });
       await group.getByRole('button', { name: 'Peek', exact: true }).tap();
+      await expect(details).toHaveAttribute('data-snap', 'peek');
+      await expect(
+        group.getByRole('button', { name: 'Peek', exact: true }),
+      ).toHaveAttribute('aria-pressed', 'true');
+      await details.evaluate(async (element) => {
+        await Promise.allSettled(
+          element
+            .getAnimations({ subtree: true })
+            .map((animation) => animation.finished),
+        );
+      });
       await page.screenshot({ path: info.outputPath('mobile-peek-card.png') });
       if (viewport.height === 844) {
         await group.getByRole('button', { name: 'Peek', exact: true }).focus();

@@ -1434,3 +1434,339 @@ p {
     max-height: min(40dvh, calc(100dvh - 220px));
   }
 }
+
+/* Consumer controls share a cold viewport/layout adapter, never a frame loop. */
+.consumer-shell {
+  height: var(--visible-height, 100dvh);
+  min-height: 0;
+}
+.consumer-shell .topbar {
+  top: 0;
+  height: 88px;
+  padding: 20px 24px;
+  gap: 24px;
+}
+.consumer-shell .brand {
+  flex-shrink: 0;
+}
+.consumer-shell .search-trigger {
+  margin-right: auto;
+}
+.consumer-shell .top-actions {
+  margin-left: auto;
+  gap: 8px;
+}
+.consumer-shell .icon-button,
+.consumer-shell .search-trigger {
+  min-width: 44px;
+  min-height: 44px;
+}
+.consumer-shell .map-intro {
+  position: absolute;
+  pointer-events: none;
+  top: 130px;
+  left: 32px;
+  max-width: 400px;
+}
+.consumer-shell .map-intro h1 {
+  font: 400 44px/1.15 var(--serif);
+  margin: 20px 0;
+}
+.consumer-shell .map-intro p {
+  color: #9cafa9;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.consumer-shell .map-intro .eyebrow {
+  color: var(--accent);
+  font-size: 9px;
+}
+.consumer-shell .object-card {
+  top: 108px;
+  right: 24px;
+  max-height: calc(var(--visible-height, 100dvh) - 140px);
+}
+.happening-trigger {
+  position: absolute;
+  right: 24px;
+  top: 104px;
+  z-index: 12;
+  padding: 12px 16px;
+  min-height: 44px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #b6c7c7;
+  font-size: 12px;
+}
+.consumer-shell:has(.object-card) .happening-trigger {
+  right: 354px;
+}
+.time-bar.timeline {
+  position: absolute;
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 8;
+  width: min(430px, calc(100% - 32px));
+  min-height: 64px;
+  height: auto;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  margin: 0;
+  background: var(--panel);
+}
+.time-bar .play-toggle {
+  min-width: 48px;
+  min-height: 44px;
+  font-size: 18px;
+  color: var(--accent);
+  border-radius: 6px;
+}
+.time-trigger {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  min-height: 44px;
+  font-size: 12px;
+}
+.time-trigger > :last-child {
+  margin-left: auto;
+  padding: 0 8px;
+}
+.time-mode {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+.popover {
+  max-width: calc(100vw - 24px);
+  max-height: min(
+    calc(var(--visible-height, 100dvh) - 24px),
+    var(
+      --radix-popover-content-available-height,
+      calc(var(--visible-height, 100dvh) - 24px)
+    )
+  );
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.settings-popover {
+  width: 330px;
+}
+.layers-popover {
+  width: 330px;
+}
+.layer-setting .setting-row {
+  padding-bottom: 6px;
+  border-bottom: 0;
+}
+.layer-state {
+  display: block;
+  font-size: 11px;
+  color: #a5b8bf;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.setting-row input[type='checkbox'] {
+  width: 22px;
+  height: 22px;
+}
+.setting-row select {
+  max-width: 185px;
+  min-height: 36px;
+}
+.settings-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+.settings-actions > * {
+  min-height: 44px;
+  padding: 10px;
+  text-align: left;
+  font-size: 12px;
+  border-radius: 6px;
+}
+.settings-actions > a {
+  color: var(--accent);
+}
+.panel-close {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 16px;
+}
+.time-panel {
+  width: 360px;
+}
+.time-actions {
+  display: flex;
+  gap: 12px;
+}
+.time-actions > button {
+  flex: 1;
+  min-height: 44px;
+}
+.utc-date-field {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  font-size: 12px;
+}
+.utc-date-field input {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #243039;
+}
+.happening-drawer {
+  position: fixed;
+  z-index: 41;
+  right: 16px;
+  top: calc(var(--visible-top, 0px) + 16px);
+  width: min(360px, calc(100vw - 32px));
+  max-height: calc(var(--visible-height, 100dvh) - 32px);
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #15202a;
+  overflow-y: auto;
+  line-height: 1.7;
+}
+.happening-drawer h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+}
+.happening-drawer p {
+  color: #afc0c7;
+}
+.happening-drawer button {
+  min-height: 44px;
+}
+.search-dialog,
+.help-dialog {
+  top: calc(var(--visible-top, 0px) + 16px);
+  max-height: calc(var(--visible-height, 100dvh) - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.object-card .icon-button,
+.object-card .card-actions > button,
+.object-card .card-share {
+  min-height: 44px;
+}
+.object-card .sheet-snap-controls button {
+  min-height: 36px;
+  min-width: 56px;
+}
+html[data-reduced-motion='true'] .consumer-shell *,
+html[data-reduced-motion='true'] [role='dialog'] *,
+html[data-reduced-motion='true'] .space-label {
+  transition: none;
+  animation: none;
+}
+@media (max-width: 700px), (max-width: 1000px) and (max-height: 600px) {
+  .consumer-shell .topbar {
+    height: 72px;
+    padding: 10px 14px;
+    gap: 4px;
+  }
+  .consumer-shell .brand {
+    display: none;
+  }
+  .consumer-shell .search-trigger {
+    display: flex;
+    min-width: 44px;
+    padding: 10px;
+  }
+  .consumer-shell .search-trigger span {
+    display: none;
+    font-size: 12px;
+  }
+  .consumer-shell .search-trigger kbd {
+    display: none;
+  }
+  .consumer-shell .map-intro {
+    top: 150px;
+    left: 20px;
+    max-width: calc(100% - 40px);
+  }
+  .consumer-shell .map-intro h1 {
+    font-size: clamp(24px, 7vw, 40px);
+  }
+  .happening-trigger {
+    top: 14px;
+    right: 118px;
+    width: 100px;
+    min-height: 44px;
+    font-size: 10px;
+    padding: 8px 12px;
+  }
+  .consumer-shell:has(.object-card) .happening-trigger {
+    right: 118px;
+  }
+  .consumer-shell .object-card {
+    top: auto;
+    left: 14px;
+    right: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    width: auto;
+    max-height: calc(var(--visible-height, 100dvh) - 202px);
+  }
+  .consumer-shell .object-card[data-snap='half'] {
+    max-height: min(40dvh, calc(var(--visible-height, 100dvh) - 202px));
+  }
+  .consumer-shell:has(.object-card) .time-bar {
+    bottom: calc(
+      var(--card-height, 154px) + max(14px, env(safe-area-inset-bottom)) + 12px
+    );
+  }
+  .time-bar.timeline {
+    width: calc(100% - 28px);
+    min-height: 60px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+  }
+  .time-trigger {
+    gap: 8px;
+    font-size: 11px;
+  }
+  .time-mode {
+    font-size: 8px;
+  }
+  .consumer-shell:has(.object-card) .happening-trigger {
+    top: 14px;
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+  .consumer-shell .object-card h2 {
+    font-size: 27px;
+  }
+  .consumer-shell .object-card-header {
+    padding-top: 0;
+  }
+}
+@media (max-width: 1000px) and (max-height: 600px) {
+  .consumer-shell .map-intro {
+    display: none;
+  }
+  .consumer-shell .object-card {
+    max-height: calc(var(--visible-height, 100dvh) - 188px);
+  }
+  .consumer-shell .object-card[data-snap='half'] {
+    max-height: min(40dvh, calc(var(--visible-height, 100dvh) - 188px));
+  }
+  .consumer-shell .object-card h2 {
+    margin: 0 0 3px;
+    font-size: 24px;
+  }
+  .consumer-shell .object-card .position-certainty {
+    margin: 0 0 5px;
+  }
+}

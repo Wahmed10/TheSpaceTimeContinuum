@@ -1,5 +1,5 @@
 'use client';
-import { useId, useState } from 'react';
+import { useId, useLayoutEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 
 export default function MobileObjectSheet({
@@ -15,8 +15,27 @@ export default function MobileObjectSheet({
 }) {
   const [snap, setSnap] = useState<'peek' | 'half' | 'full'>('half');
   const contentId = useId();
+  const cardRef = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    const card = cardRef.current!;
+    const shell = card.closest<HTMLElement>('.consumer-shell');
+    if (!shell) return;
+    const update = () =>
+      shell.style.setProperty(
+        '--card-height',
+        `${card.getBoundingClientRect().height}px`,
+      );
+    const observer = new ResizeObserver(update);
+    observer.observe(card);
+    update();
+    return () => {
+      observer.disconnect();
+      shell.style.removeProperty('--card-height');
+    };
+  }, []);
   return (
     <aside
+      ref={cardRef}
       className="object-card"
       aria-label={`${name} details`}
       data-snap={snap}
