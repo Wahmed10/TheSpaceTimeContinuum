@@ -65,7 +65,7 @@ export default function TimeBar() {
             collisionPadding={12}
             onCloseAutoFocus={preserveActiveFocus}
           >
-            <h3>Travel through time</h3>
+            <h2>Travel through time</h2>
             <p>
               All dates and times are UTC, independent of your device timezone.
             </p>

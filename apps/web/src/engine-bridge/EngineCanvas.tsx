@@ -37,7 +37,7 @@ export default function EngineCanvas() {
     canvas.setAttribute('role', 'application');
     canvas.setAttribute(
       'aria-label',
-      'Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Use the object buttons to select a world.',
+      'Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Press O for the selectable Objects in view text list, slash to search every world, and question mark for help. These actions are also in Settings.',
     );
     host.current!.prepend(canvas);
     async function init() {
@@ -74,14 +74,28 @@ export default function EngineCanvas() {
         }
         unsubs.push(
           engine.on('clock', (s) => {
-            useEngineStore.setState((current) => clockUiState(s, current));
+            // Text follows the clock without React. Cold mode/rate/boundary
+            // changes remain immediate; recurring date snapshots are combined
+            // with perf below, avoiding two independent 4 Hz commit cadences.
+            const current = useEngineStore.getState();
+            const next = clockUiState(s, current);
+            if (
+              next.mode !== current.mode ||
+              next.rate !== current.rate ||
+              next.clockClamped !== current.clockClamped
+            )
+              useEngineStore.setState(next);
             const el = document.getElementById('clock-readout');
             if (el)
               el.textContent =
                 tdbToIso(s.tdbSec).replace('T', ' · ').slice(0, 21) + ' UTC';
           }),
           engine.on('perf', (perf) =>
-            useEngineStore.setState({ perf, tier: perf.tier }),
+            useEngineStore.setState((current) => ({
+              ...clockUiState(engine!.clock.state, current),
+              perf,
+              tier: perf.tier,
+            })),
           ),
           engine.on('error', (error) => {
             if (generation === 0) setGeneration(1);

@@ -92,6 +92,15 @@ export class Input {
     canvas.addEventListener(
       'keydown',
       (e) => {
+        if (
+          e.defaultPrevented ||
+          e.isComposing ||
+          e.keyCode === 229 ||
+          e.ctrlKey ||
+          e.metaKey ||
+          e.altKey
+        )
+          return;
         const move: Record<string, [number, number]> = {
           ArrowLeft: [-10, 0],
           ArrowRight: [10, 0],

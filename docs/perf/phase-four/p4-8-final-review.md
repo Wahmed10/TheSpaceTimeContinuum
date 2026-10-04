@@ -1,0 +1,7 @@
+# P4.8 reviewed acceptance
+
+Objects in view, shortcut ownership and integrated accessibility are accepted. Short verification passes411 tests plus two expected diagnostics/47files. Normal-production five regression probes,21 accessibility/list checks and85 browser cases pass with no skips/flakes/report errors. Fourteen whole-page axe scans have zero violations; incomplete rules retain computed-color, visible named-target and native modal-keyboard evidence. All43 captures have inspection identity. This does not establish full WCAG conformance.
+
+The fresh isolated production --profile retry passes all three profiles: overview and card/list each have live callbacks, complete30second windows and every one-second bin<=4 commits. Public playing86400/time advancement, actual card/list workload and zero measured URL writes pass. Lab remains under4/sec. Only the profiling test setup and ADR differ from the reviewed normal suite;328 other source files and86 inherited raw artifacts were independently checked. All330 fresh root/candidate hashes and14 preserved artifacts match.
+
+Normal-production budget/science/storage/verified-Radeon response checks remain green. They are inherited from immutable unchanged-runtime retry-2 and are separate from profiling overhead. Phone remains viewport emulation. P4.9 final gates and user changed-UX review remain pending, including the180ms desktop navigation long task. No Phase4B, push or deployment. [Hashed combined evidence](p4-8-final-review.json).

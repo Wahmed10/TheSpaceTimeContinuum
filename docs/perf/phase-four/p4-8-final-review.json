@@ -1,0 +1,3279 @@
+{
+  "reviewedAt": "2026-10-04T02:45:59.296Z",
+  "verdict": "reviewed-pass",
+  "step": "P4.8 only; final P4.9 phase acceptance remains pending",
+  "candidateCommit": "4927fc3adc9d5dbe1eb8ec356bf656514a5f4f39",
+  "sourceSha256": "f79eab35c09895d14c2f0ee5a94edbc093e09e02ad462f9996ad4274d5442fb8",
+  "resultSha256": "a206f813e45f3d2d744895e4299c8e3c27b58e2671d77b6dc2fcbbef09f3bd46",
+  "independentRootAndCandidateSourceUnchanged": true,
+  "sourceFiles": 330,
+  "preservedEvidenceUnchanged": true,
+  "preservedFiles": 14,
+  "inheritance": {
+    "baselineSourceSha256": "cd3e896fa846c65830ed340a7c2787b92cafb789ca3b42599b89266f15c620e1",
+    "baselineResultSha256": "3a65f2a492b4a13962ac0d5f52496454a43d243f3c20d6884146eb7e26bf5b00",
+    "baselineReviewSha256": "5aedf1d0a704ffe8e457d7547bd9c5cc5420b4aae9fa761398f645982349c4b4",
+    "allowedChangedFiles": [
+      "docs/adr/0011-consumer-route-state.md",
+      "e2e/phase-four-react-profile.spec.ts"
+    ],
+    "independentlyUnchangedSourceFiles": 328,
+    "independentlyCheckedRawArtifacts": 86,
+    "normalEvidence": "docs/perf/phase-four/p4-8-retry-2-review.json",
+    "method": "Only the consumer profiling test setup and ADR change. Every other328 inventoried source files, including all runtime/config/normal tests, are byte-identical to reviewed retry-2. Normal5/21/85, budgets/licenses/lookup/physical-GPU response/science/storage are inherited with independently hashed raw artifacts. Only fresh isolated install/profile-build/three-profile checks run here; no normal-production timing is inferred from profiling output.",
+    "stages": {
+      "localSearch": {
+        "exitCode": 0,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+          "exec",
+          "tsx",
+          "tools/phase-four-search-perf.ts",
+          "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\local-search.json"
+        ],
+        "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate",
+        "siteOrigin": "(unconfigured)",
+        "output": "localSearch.log",
+        "stderr": "localSearch-stderr.log"
+      },
+      "build": {
+        "exitCode": 0,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+          "build"
+        ],
+        "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate",
+        "siteOrigin": "(unconfigured)",
+        "output": "build.log",
+        "stderr": "build-stderr.log"
+      },
+      "engineBundle": {
+        "exitCode": 0,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+          "exec",
+          "node",
+          "tools/measure-engine.mjs"
+        ],
+        "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate",
+        "siteOrigin": "(unconfigured)",
+        "output": "engineBundle.log",
+        "stderr": "engineBundle-stderr.log"
+      },
+      "assets": {
+        "exitCode": 0,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+          "exec",
+          "tsx",
+          "tools/check-assets.ts"
+        ],
+        "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate",
+        "siteOrigin": "(unconfigured)",
+        "output": "assets.log",
+        "stderr": "assets-stderr.log"
+      },
+      "licenses": {
+        "exitCode": 0,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+          "licenses:check"
+        ],
+        "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate",
+        "siteOrigin": "(unconfigured)",
+        "output": "licenses.log",
+        "stderr": "licenses-stderr.log"
+      },
+      "regressionProbe": {
+        "exitCode": 0,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+          "exec",
+          "playwright",
+          "test",
+          "--config=phase-four.playwright.config.ts",
+          "e2e/phase-four-accessibility.spec.ts",
+          "e2e/phase-four-objects.spec.ts",
+          "--grep=open panels, IME|camera orbit, zoom|empty list is honest|keyboard-only search, selection",
+          "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\regression-probe",
+          "--reporter=json"
+        ],
+        "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate",
+        "siteOrigin": "(unconfigured)",
+        "output": "regressionProbe.json",
+        "stderr": "regressionProbe-stderr.log",
+        "stats": {
+          "startTime": "2026-10-04T01:22:46.357Z",
+          "duration": 47688.49,
+          "expected": 5,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "reportErrors": 0
+      },
+      "accessibilityProbe": {
+        "exitCode": 0,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+          "exec",
+          "playwright",
+          "test",
+          "--config=phase-four.playwright.config.ts",
+          "e2e/phase-four-accessibility.spec.ts",
+          "e2e/phase-four-objects.spec.ts",
+          "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe",
+          "--reporter=json"
+        ],
+        "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate",
+        "siteOrigin": "(unconfigured)",
+        "output": "accessibilityProbe.json",
+        "stderr": "accessibilityProbe-stderr.log",
+        "stats": {
+          "startTime": "2026-10-04T01:23:35.122Z",
+          "duration": 189338.877,
+          "expected": 21,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "reportErrors": 0
+      },
+      "browser": {
+        "exitCode": 0,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+          "exec",
+          "playwright",
+          "test",
+          "--config=phase-four.playwright.config.ts",
+          "e2e/phase-four-accessibility.spec.ts",
+          "e2e/phase-four-objects.spec.ts",
+          "e2e/phase-four-controls.spec.ts",
+          "e2e/phase-four-mobile.spec.ts",
+          "e2e/phase-four-cards.spec.ts",
+          "e2e/phase-four-search.spec.ts",
+          "e2e/phase-four-search-latency.spec.ts",
+          "e2e/phase-four-history.spec.ts",
+          "e2e/phase-four-routing.spec.ts",
+          "e2e/phase-four-state.spec.ts",
+          "e2e/phase-four-url.spec.ts",
+          "e2e/startup.spec.ts",
+          "e2e/precision.spec.ts",
+          "e2e/visual.spec.ts",
+          "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\browser",
+          "--reporter=json"
+        ],
+        "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate",
+        "siteOrigin": "(unconfigured)",
+        "output": "browser.json",
+        "stderr": "browser-stderr.log",
+        "stats": {
+          "startTime": "2026-10-04T01:26:45.559Z",
+          "duration": 851584.602,
+          "expected": 85,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "reportErrors": 0
+      },
+      "unconfiguredServerLog": {
+        "exitCode": 0,
+        "output": "unconfigured-server.log",
+        "errors": []
+      }
+    }
+  },
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 411,
+    "expectedRejections": 2,
+    "testFiles": 47,
+    "log": "verify.log",
+    "source": "fresh root verification after the two permitted profiling/ADR edits"
+  },
+  "freshStages": {
+    "install": {
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+        "install",
+        "--offline",
+        "--frozen-lockfile"
+      ],
+      "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-3\\candidate",
+      "siteOrigin": "(unconfigured)",
+      "output": "install.log",
+      "stderr": "install-stderr.log"
+    },
+    "profileBuild": {
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+        "--filter",
+        "web",
+        "exec",
+        "next",
+        "build",
+        "--profile"
+      ],
+      "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-3\\candidate",
+      "siteOrigin": "(unconfigured)",
+      "output": "profileBuild.log",
+      "stderr": "profileBuild-stderr.log"
+    },
+    "reactProfile": {
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+        "exec",
+        "playwright",
+        "test",
+        "--config=phase-four.playwright.config.ts",
+        "e2e/phase-four-react-profile.spec.ts",
+        "e2e/react-profile.spec.ts",
+        "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-3\\react-profile",
+        "--reporter=json"
+      ],
+      "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-3\\candidate",
+      "siteOrigin": "(unconfigured)",
+      "output": "reactProfile.json",
+      "stderr": "reactProfile-stderr.log",
+      "stats": {
+        "startTime": "2026-10-04T02:07:44.514Z",
+        "duration": 107411.74,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "reportErrors": 0
+    },
+    "profilingServerLog": {
+      "exitCode": 0,
+      "output": "profiling-server.log",
+      "errors": []
+    },
+    "sourceIntegrity": {
+      "exitCode": 0,
+      "files": 330,
+      "preservedEvidence": 14,
+      "independentlyComparedNormalSourceFiles": 328,
+      "inheritedArtifacts": 86
+    }
+  },
+  "artifacts": [
+    {
+      "file": "docs/perf/phase-four/p4-8-final-launch.json",
+      "sha256": "99c40b39c314af61d1377f64f3f10cb9b8a64ce85a78c2292b67b2138d800c4d"
+    },
+    {
+      "file": "docs/perf/phase-four/p4-8-final-result.json",
+      "sha256": "a206f813e45f3d2d744895e4299c8e3c27b58e2671d77b6dc2fcbbef09f3bd46"
+    },
+    {
+      "file": "docs/perf/phase-four/p4-8-final-reactProfile.json",
+      "sha256": "9f69a4083e15d821d859700c3a5976f5460240cacfe327403b7bb833e5c73c69"
+    },
+    {
+      "file": "docs/perf/phase-four/p4-8-final-lab-react-profile.json",
+      "sha256": "c4997306fe12af4d06a35b9faf9497bfc8f325dff2bec71688ddb53ac8f498fa"
+    },
+    {
+      "file": "docs/perf/phase-four/p4-8-final-tracked-source.patch",
+      "sha256": "08e99e8a1319f7ba7398896dfc388e63b42cd71b9c9695977f9b8616ce5fb217"
+    },
+    {
+      "file": "docs/perf/phase-four/p4-8-final-react-overview.json",
+      "sha256": "75b5a4732e529f836a5540f169b6801b17db9395524cb9f81503be067154d552"
+    },
+    {
+      "file": "docs/perf/phase-four/p4-8-final-react-card-and-list.json",
+      "sha256": "2d53196b32be8879ccc892cacd34dea327c169bb975cf993ef8df1d8ab606ed3"
+    }
+  ],
+  "profiles": [
+    {
+      "state": "overview",
+      "playbackRate": 86400,
+      "build": "isolated Next production --profile; separate from normal production timing/bundle gates",
+      "method": "React Profiler wraps complete Explore subtree, including portal children/card/list; active callback health check, actual external/Next-internal setup replacements and two paint callbacks, fixed 30sec window and thirty one-second bins. Public clock proves playing86400 and time advancement at both boundaries; no history writes during measurement.",
+      "start": 4574.100000023842,
+      "end": 34592.5,
+      "observedSeconds": 30.018399999976157,
+      "windowSeconds": 30,
+      "timestamps": [
+        4834.200000047684,
+        5440.399999976158,
+        5731.5,
+        6273.100000023842,
+        6527.5,
+        7117.300000071526,
+        7524,
+        7822.899999976158,
+        8919.399999976158,
+        8923.600000023842,
+        9348,
+        9723.600000023842,
+        10141.800000071526,
+        10407.800000071526,
+        10673.5,
+        10942.600000023842,
+        11208.399999976158,
+        11726.800000071526,
+        12001,
+        12405.700000047684,
+        12757.100000023842,
+        13109.200000047684,
+        14002.700000047684,
+        14176.399999976158,
+        14444.399999976158,
+        14713.300000071526,
+        15072.399999976158,
+        15418.899999976158,
+        15936.600000023842,
+        16256.600000023842,
+        16822.5,
+        17224.700000047684,
+        17601.800000071526,
+        17976.300000071526,
+        18279.100000023842,
+        18617.100000023842,
+        19299.5,
+        19301.800000071526,
+        19676.200000047684,
+        20055.399999976158,
+        20422.200000047684,
+        20799.600000023842,
+        21180.700000047684,
+        21731.5,
+        22119.300000071526,
+        22381.700000047684,
+        22688.800000071526,
+        23121.700000047684,
+        23389.100000023842,
+        23654.899999976158,
+        24055.399999976158,
+        24357.899999976158,
+        24622.100000023842,
+        24892.600000023842,
+        25173.200000047684,
+        25424.300000071526,
+        25684.800000071526,
+        25947.5,
+        26221.399999976158,
+        26474.700000047684,
+        26748.300000071526,
+        27013,
+        27280,
+        27545.5,
+        27888.700000047684,
+        28208.800000071526,
+        28472,
+        28733.600000023842,
+        28991,
+        29256.100000023842,
+        29601.800000071526,
+        30000.100000023842,
+        30261,
+        30526.899999976158,
+        30788.100000023842,
+        31096.200000047684,
+        31362.800000071526,
+        31712.5,
+        32021.899999976158,
+        32284.399999976158,
+        32551.600000023842,
+        32817.700000047684,
+        33078.5,
+        33342.89999997616,
+        33605.200000047684,
+        33873.300000071526,
+        34141.800000071526,
+        34404.5
+      ],
+      "bins": [
+        2,
+        3,
+        2,
+        1,
+        3,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        2,
+        2,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        3,
+        3,
+        4,
+        3,
+        4,
+        3,
+        4
+      ],
+      "commits": 88,
+      "commitsPerSecond": 2.933333333333333,
+      "maxPerSecond": 4,
+      "initial": {
+        "at": 4574.100000023842,
+        "mode": "playing",
+        "rate": 86400,
+        "tdbSec": 844350981.1823453,
+        "cardCount": 0,
+        "listCount": 0,
+        "setupWrites": [
+          {
+            "at": 3497.7000000476837,
+            "href": "/?t=2026-10-02T12%3A01%3A26.400Z&renderer=webgl&test=1",
+            "nextInternal": false
+          },
+          {
+            "at": 3502.899999976158,
+            "href": "/?t=2026-10-02T12%3A01%3A26.400Z&renderer=webgl&test=1",
+            "nextInternal": true
+          }
+        ],
+        "historyWriteCount": 2
+      },
+      "final": {
+        "mode": "playing",
+        "rate": 86400,
+        "tdbSec": 846944622.7823453,
+        "cardCount": 0,
+        "listCount": 0
+      },
+      "measuredHistoryWrites": []
+    },
+    {
+      "state": "card-and-list",
+      "playbackRate": 86400,
+      "build": "isolated Next production --profile; separate from normal production timing/bundle gates",
+      "method": "React Profiler wraps complete Explore subtree, including portal children/card/list; active callback health check, actual external/Next-internal setup replacements and two paint callbacks, fixed 30sec window and thirty one-second bins. Public clock proves playing86400 and time advancement at both boundaries; no history writes during measurement.",
+      "start": 4890.099999904633,
+      "end": 34917,
+      "observedSeconds": 30.026900000095367,
+      "windowSeconds": 30,
+      "timestamps": [
+        5227.899999976158,
+        5825.799999952316,
+        6406.199999928474,
+        6720.799999952316,
+        7309.899999976158,
+        7783.699999928474,
+        8087.199999928474,
+        9080.199999928474,
+        9098.699999928474,
+        9363.799999952316,
+        9861.699999928474,
+        10280.099999904633,
+        10730.5,
+        11240,
+        11528.199999928474,
+        11810.199999928474,
+        12234.399999976158,
+        12607.799999952316,
+        12969.799999952316,
+        13339.399999976158,
+        14083.399999976158,
+        14440.599999904633,
+        14525.5,
+        14817.699999928474,
+        15088.899999976158,
+        15355.5,
+        15904.699999928474,
+        16290.899999976158,
+        16624.199999928474,
+        17031.199999928474,
+        17422.399999976158,
+        17818.299999952316,
+        18215.5,
+        18531.699999928474,
+        19390.599999904633,
+        19408.399999976158,
+        19777.699999928474,
+        20080.299999952316,
+        20481.5,
+        20867.899999976158,
+        21337.699999928474,
+        21740.199999928474,
+        22057.699999928474,
+        22343.899999976158,
+        22621,
+        22995.599999904633,
+        23328.799999952316,
+        23613,
+        23901.799999952316,
+        24171.699999928474,
+        24456.399999976158,
+        24736.199999928474,
+        25014.599999904633,
+        25300.199999928474,
+        25570.399999976158,
+        25863,
+        26144.399999976158,
+        26427.099999904633,
+        26795.399999976158,
+        27116,
+        27480.399999976158,
+        27820.299999952316,
+        28144.5,
+        28422.799999952316,
+        28791.799999952316,
+        29163.399999976158,
+        29500.199999928474,
+        29774.599999904633,
+        30057.099999904633,
+        30336.599999904633,
+        30609.599999904633,
+        30887.699999928474,
+        31170.399999976158,
+        31579.299999952316,
+        31865.299999952316,
+        32193.799999952316,
+        32510.699999928474,
+        32806.89999997616,
+        33195.59999990463,
+        33431.699999928474,
+        33711.59999990463,
+        33993,
+        34364.89999997616,
+        34703.299999952316
+      ],
+      "bins": [
+        2,
+        2,
+        2,
+        1,
+        4,
+        2,
+        3,
+        2,
+        2,
+        4,
+        2,
+        3,
+        3,
+        2,
+        3,
+        3,
+        2,
+        3,
+        3,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        4,
+        3,
+        3,
+        3,
+        3
+      ],
+      "commits": 84,
+      "commitsPerSecond": 2.8,
+      "maxPerSecond": 4,
+      "initial": {
+        "at": 4890.099999904633,
+        "mode": "playing",
+        "rate": 86400,
+        "tdbSec": 844408696.3823453,
+        "cardCount": 1,
+        "listCount": 5,
+        "setupWrites": [
+          {
+            "at": 3151.0999999046326,
+            "href": "/object/planet/jupiter?t=2026-10-02T12%3A00%3A00.000Z&renderer=webgl&test=1",
+            "nextInternal": false
+          },
+          {
+            "at": 3158.0999999046326,
+            "href": "/object/planet/jupiter?t=2026-10-02T12%3A00%3A00.000Z&renderer=webgl&test=1",
+            "nextInternal": true
+          },
+          {
+            "at": 3744.399999976158,
+            "href": "/object/planet/jupiter?t=2026-10-02T12%3A00%3A00.000Z&scale=true&renderer=webgl&test=1",
+            "nextInternal": false
+          },
+          {
+            "at": 3748.1999999284744,
+            "href": "/object/planet/jupiter?t=2026-10-02T12%3A00%3A00.000Z&scale=true&renderer=webgl&test=1",
+            "nextInternal": true
+          }
+        ],
+        "historyWriteCount": 4
+      },
+      "final": {
+        "mode": "playing",
+        "rate": 86400,
+        "tdbSec": 847003029.1823453,
+        "cardCount": 1,
+        "listCount": 5
+      },
+      "measuredHistoryWrites": []
+    }
+  ],
+  "lab": {
+    "seconds": 30.015,
+    "playbackRate": 86400,
+    "commits": 89,
+    "commitsPerSecond": 2.965184074629352,
+    "method": "React Profiler onRender covering the complete Explore subtree in the isolated production --profile lab"
+  },
+  "accessibility": {
+    "scans": [
+      {
+        "profile": "desktop",
+        "state": "list",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-desktop-list.json",
+        "sha256": "fe465d0572fc6ec93810ae72e521905ddf53e1d1111ec6a5712dc5320af319d6",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 2
+          }
+        ],
+        "controlTargets": [],
+        "contrast": [
+          {
+            "target": ".space-label[data-visible=\"true\"][aria-hidden=\"true\"]:nth-child(5)",
+            "resolved": true,
+            "foreground": [
+              181,
+              192,
+              200
+            ],
+            "background": [
+              7,
+              11,
+              16,
+              1
+            ],
+            "ratio": 10.65275335556884,
+            "minimum": 4.5,
+            "symbol": false,
+            "fontSize": 11
+          },
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 12
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "settings",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-desktop-settings.json",
+        "sha256": "2cbfcbaad09bcbd14f012ddf0201941fafbcca86b113be1c29d57dddc48af274",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 2
+          }
+        ],
+        "controlTargets": [
+          {
+            "id": "radix-_R_mdivb_",
+            "role": "dialog",
+            "visible": true
+          }
+        ],
+        "contrast": [
+          {
+            "target": ".space-label[data-visible=\"true\"][aria-hidden=\"true\"]:nth-child(5)",
+            "resolved": true,
+            "foreground": [
+              181,
+              192,
+              200
+            ],
+            "background": [
+              7,
+              11,
+              16,
+              1
+            ],
+            "ratio": 10.65275335556884,
+            "minimum": 4.5,
+            "symbol": false,
+            "fontSize": 11
+          },
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 12
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "layers",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-desktop-layers.json",
+        "sha256": "18ec35016d7c10d9bc32fcbebb9c4f14748eb4742b1cfb51168288d7dfafbcc6",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 2
+          }
+        ],
+        "controlTargets": [
+          {
+            "id": "radix-_R_1edivb_",
+            "role": "dialog",
+            "visible": true
+          }
+        ],
+        "contrast": [
+          {
+            "target": ".space-label[data-visible=\"true\"][aria-hidden=\"true\"]:nth-child(5)",
+            "resolved": true,
+            "foreground": [
+              181,
+              192,
+              200
+            ],
+            "background": [
+              7,
+              11,
+              16,
+              1
+            ],
+            "ratio": 10.65275335556884,
+            "minimum": 4.5,
+            "symbol": false,
+            "fontSize": 11
+          },
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 12
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "time",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-desktop-time.json",
+        "sha256": "0548f36cd3a2ad190df9aa61d70bd0a4e8701ea1490880bd1d2d561860b94d3f",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 2
+          }
+        ],
+        "controlTargets": [
+          {
+            "id": "radix-_R_4tivb_",
+            "role": "dialog",
+            "visible": true
+          }
+        ],
+        "contrast": [
+          {
+            "target": ".space-label[data-visible=\"true\"][aria-hidden=\"true\"]:nth-child(5)",
+            "resolved": true,
+            "foreground": [
+              181,
+              192,
+              200
+            ],
+            "background": [
+              7,
+              11,
+              16,
+              1
+            ],
+            "ratio": 10.65275335556884,
+            "minimum": 4.5,
+            "symbol": false,
+            "fontSize": 11
+          },
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              255,
+              255,
+              255
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 18.05150698542056,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 12
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "default",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-desktop-default.json",
+        "sha256": "3dabc6252c9e74f2e20df7492c6f7467fc8cfb0db3501c26f5357f9aa80aed0f",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 2
+          }
+        ],
+        "controlTargets": [],
+        "contrast": [
+          {
+            "target": ".space-label[data-visible=\"true\"][aria-hidden=\"true\"]:nth-child(5)",
+            "resolved": true,
+            "foreground": [
+              181,
+              192,
+              200
+            ],
+            "background": [
+              7,
+              11,
+              16,
+              1
+            ],
+            "ratio": 10.65275335556884,
+            "minimum": 4.5,
+            "symbol": false,
+            "fontSize": 11
+          },
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 12
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "search",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-desktop-search.json",
+        "sha256": "0fa09ee39f186b40f4400f579d19ba5ecc272c015142233e92c964035f1f1f8a",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-hidden-focus",
+            "nodes": 6
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 2
+          }
+        ],
+        "controlTargets": [],
+        "contrast": [
+          {
+            "target": ".space-label[data-visible=\"true\"]:nth-child(5)",
+            "resolved": true,
+            "foreground": [
+              181,
+              192,
+              200
+            ],
+            "background": [
+              7,
+              11,
+              16,
+              1
+            ],
+            "ratio": 10.65275335556884,
+            "minimum": 4.5,
+            "symbol": false,
+            "fontSize": 11
+          },
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 12
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "card",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-desktop-card.json",
+        "sha256": "49ab2bda9000332c23a2a704ed6d76b87f07761cf0f0084169fa9bc5756b5453",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 2
+          }
+        ],
+        "controlTargets": [],
+        "contrast": [
+          {
+            "target": ".detail-toggle > span",
+            "resolved": true,
+            "foreground": [
+              255,
+              255,
+              255
+            ],
+            "background": [
+              17,
+              28,
+              37
+            ],
+            "ratio": 17.260510444869936,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 10
+          },
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 12
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "list",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-phone-list.json",
+        "sha256": "e8ff83ccb426693d189c4eadafa9d506185925935caed53c0c0ff57afd928eaa",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 2
+          }
+        ],
+        "controlTargets": [],
+        "contrast": [
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              255,
+              255,
+              255
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 18.05150698542056,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 11
+          },
+          {
+            "target": "#radix-_r_2_",
+            "resolved": true,
+            "foreground": [
+              181,
+              197,
+              204
+            ],
+            "background": [
+              21,
+              32,
+              42
+            ],
+            "ratio": 9.295506833846249,
+            "minimum": 4.5,
+            "symbol": false,
+            "fontSize": 12
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "default",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-phone-default.json",
+        "sha256": "e659ee0298f8801c192aaf10822756d8f51c51cc57fc318cbd6f6dd3ddf64583",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ],
+        "controlTargets": [],
+        "contrast": [
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 11
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "layers",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-phone-layers.json",
+        "sha256": "88ca149864d6770d4913b3975ad3aeac5c262dd2ff0db1c431a22d95bf779d5e",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ],
+        "controlTargets": [
+          {
+            "id": "radix-_R_1edivb_",
+            "role": "dialog",
+            "visible": true
+          }
+        ],
+        "contrast": [
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 11
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "search",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-phone-search.json",
+        "sha256": "8a96aa4abb9aeddc10e96cfe9dfb823b416a69b5798a50ed446cbff8e19b937b",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-hidden-focus",
+            "nodes": 6
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ],
+        "controlTargets": [],
+        "contrast": [
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 11
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "time",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-phone-time.json",
+        "sha256": "f2549274b0cda0bb0c6b4fa3662cf3a1ea51778b9cd0912e5bf96a17262b28b3",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ],
+        "controlTargets": [
+          {
+            "id": "radix-_R_4tivb_",
+            "role": "dialog",
+            "visible": true
+          }
+        ],
+        "contrast": [
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              255,
+              255,
+              255
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 18.05150698542056,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 11
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "card",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-phone-card.json",
+        "sha256": "5f9bf715e44c04b8f8d203da162a3493521fc9827dcae851d1d626f5ffc04aa0",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 3
+          }
+        ],
+        "controlTargets": [],
+        "contrast": [
+          {
+            "target": ".selected",
+            "resolved": true,
+            "foreground": [
+              255,
+              255,
+              255
+            ],
+            "background": [
+              7,
+              11,
+              16,
+              1
+            ],
+            "ratio": 19.72970056885048,
+            "minimum": 4.5,
+            "symbol": false,
+            "fontSize": 11
+          },
+          {
+            "target": ".detail-toggle > span",
+            "resolved": true,
+            "foreground": [
+              133,
+              153,
+              159
+            ],
+            "background": [
+              17,
+              28,
+              37
+            ],
+            "ratio": 5.798251640182864,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 10
+          },
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 11
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "settings",
+        "file": "docs/perf/phase-four/p4-8-retry-2-axe-phone-settings.json",
+        "sha256": "d72e9ea87b42884ca48f9b6bc62629c06e58889c2fe06b3746901c1f62a90568",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ],
+        "controlTargets": [
+          {
+            "id": "radix-_R_mdivb_",
+            "role": "dialog",
+            "visible": true
+          }
+        ],
+        "contrast": [
+          {
+            "target": "span:nth-child(3)",
+            "resolved": true,
+            "foreground": [
+              231,
+              235,
+              232
+            ],
+            "background": [
+              16,
+              23,
+              30
+            ],
+            "ratio": 14.996810531732065,
+            "minimum": 3,
+            "symbol": true,
+            "fontSize": 11
+          }
+        ]
+      }
+    ],
+    "keyboard": [
+      {
+        "profile": "desktop",
+        "traversal": [
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          }
+        ],
+        "selectedOnReturn": [
+          0,
+          2
+        ],
+        "nativeCaretKey": "ArrowRight",
+        "caret": [
+          2,
+          2
+        ]
+      },
+      {
+        "profile": "phone",
+        "traversal": [
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "BUTTON",
+            "label": "Close search"
+          },
+          {
+            "key": "Shift+Tab",
+            "inside": true,
+            "tag": "INPUT",
+            "label": "Find a world"
+          }
+        ],
+        "selectedOnReturn": [
+          0,
+          2
+        ],
+        "nativeCaretKey": "ArrowRight",
+        "caret": [
+          2,
+          2
+        ]
+      }
+    ],
+    "blockingViolations": 0,
+    "assessment": "All fourteen complete raw axe scans have zero violations. Incomplete contrast nodes retain actual computed-color proofs above unchanged text/symbol thresholds; open popup IDs retain visible named targets. Both native keyboard flows pass all sixteen forward/reverse confinement steps and native ArrowRight caret collapse before Space/Backspace/Enter/card/time/layer/list assertions. This supplements raw incomplete results and does not establish full WCAG conformance."
+  },
+  "inspectedCaptures": [
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-d-01f77-ous-or-WCAG-A-AA-violations-accessible-desktop-list.png",
+      "sha256": "d12cee8ccd1f30f7211efe4890f6776ed1a8b5c1b147c76a87bfa977507f70f4",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-d-01f77-ous-or-WCAG-A-AA-violations-accessible-desktop-list.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-d-0723e-ous-or-WCAG-A-AA-violations-accessible-desktop-settings.png",
+      "sha256": "03d24bddd6d82abd63746507f59531be619cfd88cc74ffd6fdd8d5a08bf105ad",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-d-0723e-ous-or-WCAG-A-AA-violations-accessible-desktop-settings.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-d-07b22-ous-or-WCAG-A-AA-violations-accessible-desktop-layers.png",
+      "sha256": "814e9f9332c2001b5cef505cf79991c802c27c552f4d1ee671e052fd0ef2eb0d",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-d-07b22-ous-or-WCAG-A-AA-violations-accessible-desktop-layers.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-d-150c8-ous-or-WCAG-A-AA-violations-accessible-desktop-time.png",
+      "sha256": "c295099902e5b342653c014026bcd0597b2e4f009882c4ae7b5fb90b3669bd5b",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-d-150c8-ous-or-WCAG-A-AA-violations-accessible-desktop-time.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-d-b2853-ous-or-WCAG-A-AA-violations-accessible-desktop-default.png",
+      "sha256": "13d20093f1bbbae1954820c3227016bc051c81aad16407ed4f840ec4a7f03baf",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-d-b2853-ous-or-WCAG-A-AA-violations-accessible-desktop-default.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-d-e7afa-ous-or-WCAG-A-AA-violations-accessible-desktop-search.png",
+      "sha256": "429523b23486712f3e79d52d9a80a99a52158f212dace930e1a62a0c2f7289fb",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-d-e7afa-ous-or-WCAG-A-AA-violations-accessible-desktop-search.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-d-f25b8-ous-or-WCAG-A-AA-violations-accessible-desktop-card.png",
+      "sha256": "03d87c8c691dabd588db170225dc37b5ed8e5798762a2c44187b479956aff295",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-d-f25b8-ous-or-WCAG-A-AA-violations-accessible-desktop-card.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-p-13646-ous-or-WCAG-A-AA-violations-accessible-phone-list.png",
+      "sha256": "36fbfbc2082aa6e97621d2846f07c86e908caea511d05fd35701863917fe7e09",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-p-13646-ous-or-WCAG-A-AA-violations-accessible-phone-list.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-p-38329-ous-or-WCAG-A-AA-violations-accessible-phone-default.png",
+      "sha256": "6cbb2c465648bdb345ede1f63cadca4daf4ab207e0253e14d0d6108149c6e7f6",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-p-38329-ous-or-WCAG-A-AA-violations-accessible-phone-default.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-p-74112-ous-or-WCAG-A-AA-violations-accessible-phone-layers.png",
+      "sha256": "c82fbe6509a22ee204a2ffdd44ab80a72b19c0aa117e15d01ef3aa6002cf91da",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-p-74112-ous-or-WCAG-A-AA-violations-accessible-phone-layers.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-p-b0b35-ous-or-WCAG-A-AA-violations-accessible-phone-search.png",
+      "sha256": "0e6333e1fbab419d48787c243a96827fabdcade859964b955ff44aa44f364d19",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-p-b0b35-ous-or-WCAG-A-AA-violations-accessible-phone-search.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-p-d029f-ous-or-WCAG-A-AA-violations-accessible-phone-time.png",
+      "sha256": "4eec8984c85b17ec0cd6536f0625f56e9d6dd520b64f587b307c62d27af04b49",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-p-d029f-ous-or-WCAG-A-AA-violations-accessible-phone-time.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-p-dcab6-ous-or-WCAG-A-AA-violations-accessible-phone-card.png",
+      "sha256": "ad479bf91ccc0180a43618c6a5f248a423d4da631886dbb5266217b609b8890a",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-p-dcab6-ous-or-WCAG-A-AA-violations-accessible-phone-card.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-accessibility-p-dfd47-ous-or-WCAG-A-AA-violations-accessible-phone-settings.png",
+      "sha256": "8b9c59285eecd16b423e80bb0b4846c0a5f036becd41dbfe75b5a3fab2ac02e7",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-accessibility-p-dfd47-ous-or-WCAG-A-AA-violations-accessible-phone-settings.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-cards-all-21-ca-2a2f4-ods-and-provider-provenance-charon-provenance-card.png",
+      "sha256": "43ae9a9321f8a0e389f4765ee75a4102b9fcf98131df5e7d7c70c5316b6e3508",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-cards-mobile-ca-659be--timeline-and-camera-usable-mobile-full-card.png",
+      "sha256": "8a915549c459d2593788c2b8c7bd473437ffed99e4d8684d014827ad86ca3e7e",
+      "inspection": "Visually inspected this review",
+      "note": "Internal scrolling keeps header/close/snap/time reachable; viewport captures show only the current scroll segment."
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-cards-mobile-ca-659be--timeline-and-camera-usable-mobile-peek-card.png",
+      "sha256": "5f23330c99e125675e718361f5a3a34c222594462776d1b408065941ac2bd402",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-cards-mobile-ca-83a35--timeline-and-camera-usable-mobile-full-card.png",
+      "sha256": "31b06dd681c5a723b87821bd876daac86379c418139b7ed1bec169a493c2c77d",
+      "inspection": "Visually inspected this review",
+      "note": "Internal scrolling keeps header/close/snap/time reachable; viewport captures show only the current scroll segment."
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-cards-mobile-ca-83a35--timeline-and-camera-usable-mobile-peek-card.png",
+      "sha256": "ebf18b1035c75415ceb5dbe5f5fc3aea9c095df64a455f1b7c150bf5a893e9cc",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-cards-mobile-ca-9df2b--timeline-and-camera-usable-mobile-full-card.png",
+      "sha256": "7c8a1b159788a852878e273c108bea216b2284fd01b22614bcd61d5a65f963e2",
+      "inspection": "Visually inspected this review",
+      "note": "Internal scrolling keeps header/close/snap/time reachable; viewport captures show only the current scroll segment."
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-cards-mobile-ca-9df2b--timeline-and-camera-usable-mobile-peek-card.png",
+      "sha256": "2d575932ebe0258b3fcec22d56a20fcbe63237be341903de41a8e07c15b3f7c5",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-controls-all-la-f6e4f-es-and-restore-URL-requests-requested-and-unavailable-layers.png",
+      "sha256": "33c7c848f757c1f45d967b94d2fb8f37ff67f28cfe8db0db6e21736875f88307",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-controls-the-de-c1481-honest-closed-events-drawer-honest-happening-now.png",
+      "sha256": "feae950fdf8171ed4419d989035b7273b481fdbbd13802b05cb99b99d50f8418",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-controls-the-de-c1481-honest-closed-events-drawer-six-control-default.png",
+      "sha256": "83f3caafb5887680bf6daf1a09d93cb919dffeedb772339207316070bdd10dfa",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-controls-UTC-co-c92ac-d-clamp-notice-are-coherent-utc-time-controls.png",
+      "sha256": "addf548a0b84b849ae95cbb838f23d87e79e0bcaa8046d5cbae978e3daedb3da",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-controls-UTC-co-fb81c-d-clamp-notice-are-coherent-utc-time-controls.png",
+      "sha256": "f72e177adac753331de96cc739fef03aae50fd93763c4632047e78a1ebe10e61",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-controls-valida-34c54-L-settings-retain-ownership-persisted-settings-and-active-tier.png",
+      "sha256": "ebd89020b25d152b62d203fb6eea9efc69c5da81391aa0cfadd265d875a95a9e",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-history-Back-an-e7129-ious-entry-before-selection-history-restored-empty-layers.png",
+      "sha256": "d141e2506eeff132ec036e77481b3ca4baa300fc48568f57624a199e5fe0f0d4",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-history-clipboa-52d5e-and-returns-focus-on-mobile-mobile-share-fallback.png",
+      "sha256": "77cafab5ed408960915f496028961697b65ac64f34362d420082bf1b05534d76",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-mobile-consumer-145f0-ve-reachable-time-and-focus-mobile-time-above-sheet.png",
+      "sha256": "49ca3ae72fef9537a4dac69201c0719bf8499be5271ca434cfc45a01f7693b46",
+      "inspection": "Visually inspected this review",
+      "note": "Internal scrolling keeps header/close/snap/time reachable; viewport captures show only the current scroll segment."
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-mobile-consumer-722eb-ve-reachable-time-and-focus-mobile-time-above-sheet.png",
+      "sha256": "7092fdc3ec63d337bcdb19884bcda6a990ebc5ed2f52fdad0af03890c0e2e275",
+      "inspection": "Visually inspected this review",
+      "note": "Internal scrolling keeps header/close/snap/time reachable; viewport captures show only the current scroll segment."
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-mobile-consumer-e4069-ve-reachable-time-and-focus-mobile-time-above-sheet.png",
+      "sha256": "c8ad6dd5dc83767793dd1a04747f9f62a6e7381b7283af3c4ebc80f5495f077b",
+      "inspection": "Visually inspected this review",
+      "note": "Internal scrolling keeps header/close/snap/time reachable; viewport captures show only the current scroll segment."
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-objects-all-qua-ff429--when-actual-labels-collide-collision-independent-list.png",
+      "sha256": "473737dad8c75f068d7ad62fa3f59ce70b7599b8b9421f96b26e20eeed50f69d",
+      "inspection": "Visually inspected this review",
+      "note": "Settled actual Get closer/follow/share actions fully painted; five qualifying Jupiter bodies remain in list despite label collisions."
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-objects-camera--3284f-rendered-catalog-membership-objects-in-view-moving-map.png",
+      "sha256": "5462eb88a614b871c0aadc2b3706e2f66a1afb109e0418a5c30664c03c59b30a",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-8-retry-1-phase-four-objects-camera--3284f-rendered-catalog-membership-objects-in-view-moving-map.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-routing-20-clie-440d4-edback-then-dispose-on-exit-charon-canonical-navigation.png",
+      "sha256": "674ae626bcad8f10a377cedab4d8ffa11f6115745cfa2bd0c305e32ab2be3b7e",
+      "inspection": "Visually inspected this review",
+      "note": "Captured during final fly transition after twenty selections: Charon card/canonical route are current, canvas retains preceding Triton view. Not settled Charon texture evidence."
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-routing-unknown-b9eb5-e-HTTP-404-with-no-renderer-events-unavailable.png",
+      "sha256": "27444c0510d55160cb537335c44cb8c3a7f7e4421da62761a8e23911b727f05e",
+      "inspection": "Byte-identical to previously inspected capture",
+      "prior": "docs/perf/screens/p4-7-phase-four-routing-unknown-b9eb5-e-HTTP-404-with-no-renderer-events-unavailable.png"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-search-combobox-b2350-ption-rather-than-the-first-keyboard-active-result.png",
+      "sha256": "da3fe5e223d18321f319b1605f1b5c847af049d3ef08dc3744bd5a95559c052e",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-search-empty-un-40d4a-esult-Enter-adds-no-history-search-no-results.png",
+      "sha256": "383c5d887bb865e3e10d28182e9c5fe46cce2b4571a6080de25d6d827e367c98",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-search-phone-to-360cf-sable-in-a-shorter-viewport-phone-short-viewport-search.png",
+      "sha256": "1c7117fdc20bcce2d53f36fc3266df0fa97d88208d0799a9217eba3ef8659982",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-state-a-fixed-c-e400b-the-rendered-view-with-time-fixed-after.png",
+      "sha256": "9cc530aa3a8c854d24e8a75b4d5b9417a8d32a4bb3c8d616fca559a2dc6879fd",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-state-a-fixed-c-e400b-the-rendered-view-with-time-fixed-before.png",
+      "sha256": "e866e1ec9ac351f5088fc855850f1153d3f940d74c71f9dbf8756bd580543798",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-url-an-offset-d-0174e-de-the-UTC-browser-timezone-paused-offset-link.png",
+      "sha256": "808b7c1c647ea06afe394d2c380beb4e1f8a84c63e72ce64bb87f65566b9b085",
+      "inspection": "Visually inspected this review"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-retry-2-phase-four-url-invalid-ext-bcc3f--recover-to-a-LIVE-overview-invalid-link-recovery.png",
+      "sha256": "9c44de39fa58d08c75c715585fcf543a51a04f11eb531a1f88446f816de9f488",
+      "inspection": "Visually inspected this review"
+    }
+  ],
+  "captureReview": {
+    "total": 43,
+    "byteIdenticalPriorInspections": 16,
+    "freshlyInspected": 27,
+    "assessment": "Default/search/keyboard/empty/list/panels/provenance/share/UTC/history/mobile captures are readable. Collision capture has complete settled actions. Short mobile cards intentionally scroll internally. Final rapid-selection routing capture remains transitional and cannot prove settled Charon visuals; accepted NASA-source softness remains required."
+  },
+  "budgets": {
+    "engineGzipBytes": 375251,
+    "engineBudgetBytes": 450000,
+    "assetBytes": 79961515,
+    "assetBudgetBytes": 80000000,
+    "runtimeLicenseEntries": 72,
+    "lookupMaxMs": 1.945099999999968,
+    "lookupThresholdMs": 16
+  },
+  "science": {
+    "samples": 600,
+    "maxErrorPx": 0.13435596144853434,
+    "thresholdPx": 0.5,
+    "depthResults": [
+      {
+        "scenario": "10 km cloud shell, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "10 km cloud shell, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Moon behind Earth",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit inside Earth, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit in front of Earth, altitude 400 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit inside Earth, altitude 30000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit in front of Earth, altitude 30000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit inside Earth, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit in front of Earth, altitude 1000000 km",
+        "pass": true
+      },
+      {
+        "scenario": "Orbit from Earth center crossing the camera plane",
+        "pass": true
+      },
+      {
+        "scenario": "Oblique orbit visibility versus float64 ray-sphere intersections",
+        "pass": true,
+        "mismatches": []
+      }
+    ],
+    "pass": true,
+    "method": "GPU MSAA marker centroid versus float64 perspective projection; sphere, shell and orbit depth probes, including oblique ribbon visibility versus ray-sphere intersections",
+    "altitudeKm": 400
+  },
+  "storage": {
+    "focusChanges": 20,
+    "before": {
+      "fps": 7.605848052057804,
+      "p95Ms": 499.9000000000001,
+      "medianMs": 33.40000000000009,
+      "backend": "webgl2",
+      "tier": "low",
+      "gpuBytes": 16516088,
+      "pendingTextures": 0,
+      "textureCount": 33,
+      "entities": 21,
+      "sourcePoints": 0,
+      "sources": [],
+      "layers": [
+        {
+          "id": "planets",
+          "label": "Planets",
+          "category": "bodies",
+          "requested": true,
+          "available": true,
+          "loaded": true,
+          "visible": true
+        },
+        {
+          "id": "moons",
+          "label": "Moons",
+          "category": "bodies",
+          "requested": true,
+          "available": true,
+          "loaded": true,
+          "visible": false
+        },
+        {
+          "id": "dwarfs",
+          "label": "Dwarf planets",
+          "category": "bodies",
+          "requested": true,
+          "available": true,
+          "loaded": true,
+          "visible": true
+        },
+        {
+          "id": "orbits",
+          "label": "Orbital paths",
+          "category": "orbits",
+          "requested": true,
+          "available": true,
+          "loaded": true,
+          "visible": true
+        },
+        {
+          "id": "neo",
+          "label": "Near-Earth asteroids",
+          "category": "small-bodies",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.stations",
+          "label": "Space stations",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.starlink",
+          "label": "Starlink",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.gnss",
+          "label": "Navigation satellites",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.weather",
+          "label": "Weather satellites",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.science",
+          "label": "Science satellites",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.brightest",
+          "label": "Brightest satellites",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "spacecraft",
+          "label": "Spacecraft",
+          "category": "spacecraft",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        }
+      ],
+      "geometries": 13,
+      "shapes": [
+        {
+          "id": "moon:phobos",
+          "geometryId": "d625aeab-3513-4c3b-8737-4e1c898bfe7a",
+          "triangles": 6408
+        },
+        {
+          "id": "moon:deimos",
+          "geometryId": "e98c31f1-747d-46f6-898a-9483a52ad2ca",
+          "triangles": 6502
+        }
+      ],
+      "gpuAttributes": 57,
+      "lod": [
+        {
+          "id": "star:sun",
+          "level": 2,
+          "visible": true
+        },
+        {
+          "id": "planet:mercury",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "planet:venus",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:earth",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "moon:moon",
+          "level": 0,
+          "visible": false
+        },
+        {
+          "id": "planet:mars",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "planet:jupiter",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:saturn",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:uranus",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:neptune",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "dwarf:pluto",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "dwarf:ceres",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:phobos",
+          "level": 0,
+          "visible": false
+        },
+        {
+          "id": "moon:deimos",
+          "level": 0,
+          "visible": false
+        },
+        {
+          "id": "moon:io",
+          "level": 0,
+          "visible": false
+        },
+        {
+          "id": "moon:europa",
+          "level": 0,
+          "visible": false
+        },
+        {
+          "id": "moon:ganymede",
+          "level": 0,
+          "visible": false
+        },
+        {
+          "id": "moon:callisto",
+          "level": 0,
+          "visible": false
+        },
+        {
+          "id": "moon:titan",
+          "level": 0,
+          "visible": false
+        },
+        {
+          "id": "moon:triton",
+          "level": 0,
+          "visible": false
+        },
+        {
+          "id": "moon:charon",
+          "level": 0,
+          "visible": false
+        }
+      ],
+      "pointLayers": 7,
+      "rings": [
+        {
+          "id": "planet:saturn",
+          "visible": false,
+          "geometry": "RingGeometry",
+          "vertices": 514,
+          "innerRadius": 1.2820785822228329,
+          "outerRadius": 2.348880340706141
+        }
+      ],
+      "orbits": [
+        {
+          "id": "planet:mercury",
+          "epoch": 843307269.1823883,
+          "vertices": 219,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:venus",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:earth",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:moon",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:mars",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:jupiter",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:saturn",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:uranus",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:neptune",
+          "epoch": 843307269.1823883,
+          "vertices": 254,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "dwarf:pluto",
+          "epoch": 843307269.1823883,
+          "vertices": 193,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "dwarf:ceres",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:phobos",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:deimos",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:io",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:europa",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:ganymede",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:callisto",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:titan",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:triton",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:charon",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        }
+      ],
+      "orientations": [
+        {
+          "id": "star:sun",
+          "frame": "FIXED:sun",
+          "rendered": true,
+          "quaternion": [
+            0.7345950075217192,
+            -0.19841619585535486,
+            -0.41461574589972694,
+            0.4990941508357595
+          ]
+        },
+        {
+          "id": "planet:mercury",
+          "frame": "FIXED:mercury",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:venus",
+          "frame": "FIXED:venus",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:earth",
+          "frame": "FIXED:earth",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:moon",
+          "frame": "FIXED:moon",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:mars",
+          "frame": "FIXED:mars",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:jupiter",
+          "frame": "FIXED:jupiter",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:saturn",
+          "frame": "FIXED:saturn",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:uranus",
+          "frame": "FIXED:uranus",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:neptune",
+          "frame": "FIXED:neptune",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "dwarf:pluto",
+          "frame": "FIXED:pluto",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "dwarf:ceres",
+          "frame": "FIXED:ceres",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:phobos",
+          "frame": "FIXED:phobos",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:deimos",
+          "frame": "FIXED:deimos",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:io",
+          "frame": "FIXED:io",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:europa",
+          "frame": "FIXED:europa",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:ganymede",
+          "frame": "FIXED:ganymede",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:callisto",
+          "frame": "FIXED:callisto",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:titan",
+          "frame": "FIXED:titan",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:triton",
+          "frame": "FIXED:triton",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:charon",
+          "frame": "FIXED:charon",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      ],
+      "cameraWorld": [
+        83433507.09816453,
+        -301950897.47761047,
+        544717545.3624417
+      ],
+      "cameraLocal": [
+        0,
+        0,
+        0
+      ],
+      "selected": null,
+      "focusScreen": {
+        "x": 720,
+        "y": 500
+      },
+      "ready": true
+    },
+    "after": {
+      "fps": 5.454754248966466,
+      "p95Ms": 600,
+      "medianMs": 83.29999999999973,
+      "backend": "webgl2",
+      "tier": "low",
+      "gpuBytes": 16516088,
+      "pendingTextures": 0,
+      "textureCount": 33,
+      "entities": 21,
+      "sourcePoints": 0,
+      "sources": [],
+      "layers": [
+        {
+          "id": "planets",
+          "label": "Planets",
+          "category": "bodies",
+          "requested": true,
+          "available": true,
+          "loaded": true,
+          "visible": true
+        },
+        {
+          "id": "moons",
+          "label": "Moons",
+          "category": "bodies",
+          "requested": true,
+          "available": true,
+          "loaded": true,
+          "visible": true
+        },
+        {
+          "id": "dwarfs",
+          "label": "Dwarf planets",
+          "category": "bodies",
+          "requested": true,
+          "available": true,
+          "loaded": true,
+          "visible": true
+        },
+        {
+          "id": "orbits",
+          "label": "Orbital paths",
+          "category": "orbits",
+          "requested": true,
+          "available": true,
+          "loaded": true,
+          "visible": true
+        },
+        {
+          "id": "neo",
+          "label": "Near-Earth asteroids",
+          "category": "small-bodies",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.stations",
+          "label": "Space stations",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.starlink",
+          "label": "Starlink",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.gnss",
+          "label": "Navigation satellites",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.weather",
+          "label": "Weather satellites",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.science",
+          "label": "Science satellites",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "sat.brightest",
+          "label": "Brightest satellites",
+          "category": "satellites",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        },
+        {
+          "id": "spacecraft",
+          "label": "Spacecraft",
+          "category": "spacecraft",
+          "requested": false,
+          "available": false,
+          "loaded": false,
+          "visible": false
+        }
+      ],
+      "geometries": 25,
+      "shapes": [
+        {
+          "id": "moon:phobos",
+          "geometryId": "d625aeab-3513-4c3b-8737-4e1c898bfe7a",
+          "triangles": 6408
+        },
+        {
+          "id": "moon:deimos",
+          "geometryId": "e98c31f1-747d-46f6-898a-9483a52ad2ca",
+          "triangles": 6502
+        }
+      ],
+      "gpuAttributes": 111,
+      "lod": [
+        {
+          "id": "star:sun",
+          "level": 3,
+          "visible": true
+        },
+        {
+          "id": "planet:mercury",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:venus",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:earth",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "moon:moon",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:mars",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:jupiter",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:saturn",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:uranus",
+          "level": 1,
+          "visible": true
+        },
+        {
+          "id": "planet:neptune",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "dwarf:pluto",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "dwarf:ceres",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:phobos",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:deimos",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:io",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:europa",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:ganymede",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:callisto",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:titan",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:triton",
+          "level": 0,
+          "visible": true
+        },
+        {
+          "id": "moon:charon",
+          "level": 0,
+          "visible": true
+        }
+      ],
+      "pointLayers": 7,
+      "rings": [
+        {
+          "id": "planet:saturn",
+          "visible": false,
+          "geometry": "RingGeometry",
+          "vertices": 514,
+          "innerRadius": 1.2820785822228329,
+          "outerRadius": 2.348880340706141
+        }
+      ],
+      "orbits": [
+        {
+          "id": "planet:mercury",
+          "epoch": 843307269.1823883,
+          "vertices": 219,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:venus",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:earth",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:moon",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:mars",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:jupiter",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:saturn",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:uranus",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "planet:neptune",
+          "epoch": 843307269.1823883,
+          "vertices": 254,
+          "visible": true,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "dwarf:pluto",
+          "epoch": 843307269.1823883,
+          "vertices": 193,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "dwarf:ceres",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:phobos",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:deimos",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:io",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:europa",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:ganymede",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:callisto",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": false,
+          "width": 1
+        },
+        {
+          "id": "moon:titan",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:triton",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        },
+        {
+          "id": "moon:charon",
+          "epoch": 843307269.1823883,
+          "vertices": 257,
+          "visible": false,
+          "dashed": true,
+          "width": 1
+        }
+      ],
+      "orientations": [
+        {
+          "id": "star:sun",
+          "frame": "FIXED:sun",
+          "rendered": true,
+          "quaternion": [
+            0.7345950075217192,
+            -0.19841619585535486,
+            -0.41461574589972694,
+            0.4990941508357595
+          ]
+        },
+        {
+          "id": "planet:mercury",
+          "frame": "FIXED:mercury",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:venus",
+          "frame": "FIXED:venus",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:earth",
+          "frame": "FIXED:earth",
+          "rendered": false,
+          "quaternion": [
+            0.7070919430755094,
+            0.0040279205437582025,
+            0.002179584390528966,
+            0.7071067877666557
+          ]
+        },
+        {
+          "id": "moon:moon",
+          "frame": "FIXED:moon",
+          "rendered": false,
+          "quaternion": [
+            0.3790353270016043,
+            0.5006133540179362,
+            0.7378437644520184,
+            0.24759860646411913
+          ]
+        },
+        {
+          "id": "planet:mars",
+          "frame": "FIXED:mars",
+          "rendered": false,
+          "quaternion": [
+            0.7806243560333944,
+            0.421299759062416,
+            0.30649167195165516,
+            0.34524626399959435
+          ]
+        },
+        {
+          "id": "planet:jupiter",
+          "frame": "FIXED:jupiter",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:saturn",
+          "frame": "FIXED:saturn",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:uranus",
+          "frame": "FIXED:uranus",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "planet:neptune",
+          "frame": "FIXED:neptune",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "dwarf:pluto",
+          "frame": "FIXED:pluto",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "dwarf:ceres",
+          "frame": "FIXED:ceres",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:phobos",
+          "frame": "FIXED:phobos",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:deimos",
+          "frame": "FIXED:deimos",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:io",
+          "frame": "FIXED:io",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:europa",
+          "frame": "FIXED:europa",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:ganymede",
+          "frame": "FIXED:ganymede",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:callisto",
+          "frame": "FIXED:callisto",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:titan",
+          "frame": "FIXED:titan",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:triton",
+          "frame": "FIXED:triton",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "moon:charon",
+          "frame": "FIXED:charon",
+          "rendered": false,
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      ],
+      "cameraWorld": [
+        361095.8639031451,
+        -2715561.612074958,
+        3326739.7034354755
+      ],
+      "cameraLocal": [
+        0,
+        0,
+        0
+      ],
+      "selected": "star:sun",
+      "focusScreen": {
+        "x": 720,
+        "y": 500.0000000000001
+      },
+      "ready": true
+    }
+  },
+  "response": [
+    {
+      "profile": "desktop",
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "inputMaxMs": 102.60000002384186,
+      "selectionMaxMs": 32.89999997615814,
+      "maxLongTaskMs": 180
+    },
+    {
+      "profile": "phone",
+      "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "inputMaxMs": 13.299999952316284,
+      "selectionMaxMs": 33.89999997615814,
+      "maxLongTaskMs": 0
+    }
+  ],
+  "limitations": [
+    "This accepts the P4.8 implementation only. P4.9 final shell, cold-start, geometry/storage, hardware/settled-navigation and user changed-UX review remain open.",
+    "Normal5/21/85 evidence is inherited from immutable retry-2 after proving every runtime/config/normal-test source byte-identical; the two permitted changes are profiling setup and ADR. Profiling build is separate from normal production timings.",
+    "Phone is viewport/touch emulation on desktop GPU. No new physical-phone throughput or thermal result.",
+    "Current180ms desktop navigation long task exceeds final50ms target and must be investigated in P4.9.",
+    "All43 normal captures have explicit review identity. Rapid Charon navigation capture is transitional over preceding Triton and cannot prove settled texture appearance; accepted NASA-source softness is preserved.",
+    "Fourteen unrelated root artifacts and every earlier failed report/source/trace remain preserved. No push/deploy/Phase4B/5."
+  ]
+}

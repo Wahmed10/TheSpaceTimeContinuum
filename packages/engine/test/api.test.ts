@@ -9,6 +9,7 @@ import type {
   CameraFrame,
   CameraFrameResult,
   EngineLayerState,
+  ObjectInView,
 } from '../src';
 import type { MapState } from '@space/domain';
 
@@ -39,6 +40,9 @@ it('keeps consumer commands and source contracts independent of renderer interna
   expectTypeOf<EngineApi['whenLayersSettled']>().returns.toEqualTypeOf<
     Promise<void>
   >();
+  expectTypeOf<EngineApi['getObjectsInView']>().returns.toEqualTypeOf<
+    readonly ObjectInView[]
+  >();
   expectTypeOf<EngineApi['suspendRendering']>().toEqualTypeOf<
     () => () => void
   >();
@@ -60,6 +64,9 @@ it('keeps consumer commands and source contracts independent of renderer interna
 
 // Compile-time rejection checks; this function is never executed.
 function invalidConsumerCalls(api: EngineApi) {
+  const objects = api.getObjectsInView();
+  // @ts-expect-error snapshots are read-only, not mutable renderer buffers
+  objects.push({ id: 'planet:mars', name: 'Mars', kind: 'planet' });
   // @ts-expect-error provider frames are not all supported camera references
   api.setFrame('TEME:earth');
   // @ts-expect-error unknown event names are not part of the v1 contract

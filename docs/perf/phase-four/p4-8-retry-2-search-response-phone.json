@@ -1,0 +1,222 @@
+{
+  "generatedAt": "2026-10-04T01:40:56.979Z",
+  "profile": "phone",
+  "method": "Warm production page on a verified physical WebGL2 GPU, no network/CPU throttling or trace/video/screenshot recorder. Windows selects ANGLE/D3D11; other platforms use the default adapter. Missing/known software adapters fail the gate. Phone is viewport/touch emulation on the recorded desktop GPU, not physical phone throughput. One cached local index. Renderer layers/textures settled, LOW/reduced-motion. Production search holds the last 3D frame during modal interaction, then resumes submission after canonical route/card paint; simulation time continues. No test-only rendering suspension. Input event to first animation-frame opportunity after result DOM commit; Enter to canonical route/card/engine target at a frame opportunity. Browser automation transport and flight completion excluded. DOM/semantic commit and subsequent frame wait diagnose the same total-response gate. Separate SwiftShader functional/failure evidence is retained.",
+  "instrumentation": {
+    "trace": "off",
+    "video": "off",
+    "screenshot": "off"
+  },
+  "thresholdMs": 300,
+  "samples": {
+    "input": [
+      {
+        "query": "Mars",
+        "milliseconds": 13.299999952316284,
+        "domCommitMs": 3.0999999046325684,
+        "frameWaitMs": 10.200000047683716
+      },
+      {
+        "query": "Europa",
+        "milliseconds": 10.700000047683716,
+        "domCommitMs": 1,
+        "frameWaitMs": 9.700000047683716
+      },
+      {
+        "query": "Pluto",
+        "milliseconds": 1.4000000953674316,
+        "domCommitMs": 1.100000023841858,
+        "frameWaitMs": 0.30000007152557373
+      },
+      {
+        "query": "Charon",
+        "milliseconds": 10,
+        "domCommitMs": 1.100000023841858,
+        "frameWaitMs": 9
+      },
+      {
+        "query": "Earth",
+        "milliseconds": 8.200000047683716,
+        "domCommitMs": 1.399999976158142,
+        "frameWaitMs": 6.800000071525574
+      },
+      {
+        "query": "Mercury",
+        "milliseconds": 3.4000000953674316,
+        "domCommitMs": 1,
+        "frameWaitMs": 2.4000000953674316
+      },
+      {
+        "query": "planet:jupiter",
+        "milliseconds": 2,
+        "domCommitMs": 1.5999999046325684,
+        "frameWaitMs": 0.40000009536743164
+      },
+      {
+        "query": "Luna",
+        "milliseconds": 5.699999928474426,
+        "domCommitMs": 1.2999999523162842,
+        "frameWaitMs": 4.399999976158142
+      },
+      {
+        "query": "Terra",
+        "milliseconds": 3.600000023841858,
+        "domCommitMs": 1.100000023841858,
+        "frameWaitMs": 2.5
+      },
+      {
+        "query": "Chraon",
+        "milliseconds": 12.899999976158142,
+        "domCommitMs": 1.100000023841858,
+        "frameWaitMs": 11.799999952316284
+      },
+      {
+        "query": "Euorpa",
+        "milliseconds": 4.199999928474426,
+        "domCommitMs": 0.6999999284744263,
+        "frameWaitMs": 3.5
+      },
+      {
+        "query": "not available",
+        "milliseconds": 12,
+        "domCommitMs": 0.5,
+        "frameWaitMs": 11.5
+      },
+      {
+        "query": "Mars",
+        "milliseconds": 8.5,
+        "domCommitMs": 1.2000000476837158,
+        "frameWaitMs": 7.299999952316284
+      },
+      {
+        "query": "Europa",
+        "milliseconds": 1.2000000476837158,
+        "domCommitMs": 1,
+        "frameWaitMs": 0.20000004768371582
+      },
+      {
+        "query": "Pluto",
+        "milliseconds": 9.5,
+        "domCommitMs": 0.8999999761581421,
+        "frameWaitMs": 8.600000023841858
+      },
+      {
+        "query": "Charon",
+        "milliseconds": 10.199999928474426,
+        "domCommitMs": 0.8999999761581421,
+        "frameWaitMs": 9.299999952316284
+      },
+      {
+        "query": "Earth",
+        "milliseconds": 1.1999999284744263,
+        "domCommitMs": 0.8999999761581421,
+        "frameWaitMs": 0.2999999523162842
+      },
+      {
+        "query": "Mercury",
+        "milliseconds": 9.600000023841858,
+        "domCommitMs": 2,
+        "frameWaitMs": 7.600000023841858
+      },
+      {
+        "query": "planet:jupiter",
+        "milliseconds": 9.899999976158142,
+        "domCommitMs": 0.7000000476837158,
+        "frameWaitMs": 9.199999928474426
+      },
+      {
+        "query": "Luna",
+        "milliseconds": 1.2999999523162842,
+        "domCommitMs": 1.100000023841858,
+        "frameWaitMs": 0.19999992847442627
+      },
+      {
+        "query": "Terra",
+        "milliseconds": 8.100000023841858,
+        "domCommitMs": 1.399999976158142,
+        "frameWaitMs": 6.700000047683716
+      },
+      {
+        "query": "Chraon",
+        "milliseconds": 10,
+        "domCommitMs": 0.8000000715255737,
+        "frameWaitMs": 9.199999928474426
+      },
+      {
+        "query": "Euorpa",
+        "milliseconds": 1,
+        "domCommitMs": 0.7000000476837158,
+        "frameWaitMs": 0.2999999523162842
+      },
+      {
+        "query": "not available",
+        "milliseconds": 9,
+        "domCommitMs": 0.6000000238418579,
+        "frameWaitMs": 8.399999976158142
+      },
+      {
+        "query": "Mars",
+        "milliseconds": 7.5,
+        "domCommitMs": 0.8999999761581421,
+        "frameWaitMs": 6.600000023841858
+      },
+      {
+        "query": "Earth",
+        "milliseconds": 6.5,
+        "domCommitMs": 1.0999999046325684,
+        "frameWaitMs": 5.400000095367432
+      }
+    ],
+    "selection": [
+      {
+        "id": "planet:mars",
+        "milliseconds": 33.89999997615814,
+        "semanticCommitMs": 26.699999928474426,
+        "frameWaitMs": 7.200000047683716
+      },
+      {
+        "id": "moon:europa",
+        "milliseconds": 17.200000047683716,
+        "semanticCommitMs": 13.300000071525574,
+        "frameWaitMs": 3.899999976158142
+      },
+      {
+        "id": "dwarf:pluto",
+        "milliseconds": 18.299999952316284,
+        "semanticCommitMs": 10.699999928474426,
+        "frameWaitMs": 7.600000023841858
+      },
+      {
+        "id": "moon:charon",
+        "milliseconds": 21.300000071525574,
+        "semanticCommitMs": 10.900000095367432,
+        "frameWaitMs": 10.399999976158142
+      },
+      {
+        "id": "planet:earth",
+        "milliseconds": 28.899999976158142,
+        "semanticCommitMs": 16.600000023841858,
+        "frameWaitMs": 12.299999952316284
+      },
+      {
+        "id": "planet:mercury",
+        "milliseconds": 17.699999928474426,
+        "semanticCommitMs": 9.599999904632568,
+        "frameWaitMs": 8.100000023841858
+      }
+    ]
+  },
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "hardwareConcurrency": 16,
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "devicePixelRatio": 1
+  },
+  "renderer": "webgl2",
+  "adapter": "ANGLE (AMD, AMD Radeon 780M Graphics (0x00001900) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "softwareRenderer": false,
+  "tier": "low",
+  "visibility": "visible",
+  "longTasks": []
+}

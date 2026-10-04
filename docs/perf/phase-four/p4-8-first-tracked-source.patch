@@ -1,0 +1,769 @@
+diff --git a/apps/web/src/app/globals.css b/apps/web/src/app/globals.css
+index 3d22999..7b1a679 100644
+--- a/apps/web/src/app/globals.css
++++ b/apps/web/src/app/globals.css
+@@ -807,7 +807,7 @@ p {
+ }
+ .search-foot {
+   padding: 18px 24px;
+-  color: #71878e;
++  color: #abbcc3;
+   font-size: 10px;
+   display: flex;
+   justify-content: space-between;
+@@ -1612,7 +1612,7 @@ p {
+ }
+ .utc-date-field {
+   display: grid;
+-  gap: 10px;
++  gap: 14px;
+   margin-top: 18px;
+   font-size: 12px;
+ }
+@@ -1625,6 +1625,76 @@ p {
+   border-radius: 6px;
+   background: #243039;
+ }
++.utc-date-field input:focus-visible {
++  outline-offset: 2px;
++}
++.objects-in-view {
++  position: fixed;
++  z-index: 35;
++  left: 16px;
++  top: calc(var(--visible-top, 0px) + 84px);
++  width: min(350px, calc(100vw - 32px));
++  max-height: calc(var(--visible-height, 100dvh) - 180px);
++  display: flex;
++  flex-direction: column;
++  background: #15202a;
++  border: 1px solid #819aa5;
++  border-radius: 12px;
++  padding: 20px;
++  box-shadow: 0 20px 60px #0009;
++  overflow-y: auto;
++  overscroll-behavior: contain;
++}
++.objects-heading {
++  display: flex;
++  gap: 12px;
++  justify-content: space-between;
++  align-items: center;
++}
++.objects-heading h2 {
++  font-family: var(--serif);
++  font-size: 24px;
++  font-weight: 400;
++}
++.objects-heading button {
++  min-height: 44px;
++  flex-shrink: 0;
++}
++.objects-in-view p {
++  color: #b5c5cc;
++  font-size: 12px;
++  line-height: 1.65;
++  margin: 12px 0;
++}
++.objects-in-view ul {
++  list-style: none;
++  padding: 6px;
++  margin: 0 -6px;
++}
++.object-list-choice {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 12px;
++  text-align: left;
++  width: 100%;
++  min-height: 44px;
++  padding: 10px;
++  border-radius: 6px;
++}
++.object-list-choice:hover {
++  background: #283c46;
++}
++.object-list-choice small {
++  color: #b5c5cc;
++  text-transform: capitalize;
++}
++@media (max-height: 450px) {
++  .objects-in-view {
++    top: calc(var(--visible-top, 0px) + 12px);
++    max-height: calc(var(--visible-height, 100dvh) - 24px);
++  }
++}
+ .happening-drawer {
+   position: fixed;
+   z-index: 41;
+diff --git a/apps/web/src/components/Explore.tsx b/apps/web/src/components/Explore.tsx
+index cee74d6..3c8e4ff 100644
+--- a/apps/web/src/components/Explore.tsx
++++ b/apps/web/src/components/Explore.tsx
+@@ -1,6 +1,6 @@
+ 'use client';
+ import dynamic from 'next/dynamic';
+-import { useEffect, useRef, useState } from 'react';
++import { Profiler, useEffect, useRef, useState } from 'react';
+ import { EXPLORABLE_BODIES } from '@space/domain';
+ import { useEngineStore } from '../engine-bridge/useEngineStore';
+ import { useSearchRendering } from '../engine-bridge/useSearchRendering';
+@@ -23,6 +23,18 @@ import SettingsPopover from './controls/SettingsPopover';
+ import TimeBar from './controls/TimeBar';
+ import FieldGuide from './controls/FieldGuide';
+ import HappeningNow from './HappeningNow';
++import ObjectsInView from './objects/ObjectsInView';
++import { pageOwnsShortcut } from '../lib/shortcutPolicy';
++
++declare global {
++  interface Window {
++    __spaceConsumerCommits?: number[];
++  }
++}
++function recordConsumerCommit() {
++  const commits = window.__spaceConsumerCommits;
++  if (commits && commits.length < 10000) commits.push(performance.now());
++}
+ const EngineCanvas = dynamic(() => import('../engine-bridge/EngineCanvas'), {
+   ssr: false,
+ });
+@@ -39,12 +51,14 @@ export default function Explore({
+     routeState = useEngineStore((s) => s.routeState);
+   const [searchOpen, setSearchOpen] = useState(false),
+     [help, setHelp] = useState(false),
++    [objectsOpen, setObjectsOpen] = useState(false),
+     [notice, setNotice] = useState(''),
+     [shareUrl, setShareUrl] = useState<string | null>(null);
+   const searchRef = useRef<HTMLButtonElement>(null),
+     settingsRef = useRef<HTMLButtonElement>(null),
+     searchReturnFocus = useRef<HTMLElement | null>(null),
+     shareReturnFocus = useRef<HTMLElement | null>(null);
++  const panelReturnFocus = useRef<HTMLElement | null>(null);
+   useSearchRendering(searchOpen);
+   const body = EXPLORABLE_BODIES.find((b) => b.id === selectedId);
+   const compatibilityHref = serializeExploreState(
+@@ -60,20 +74,25 @@ export default function Explore({
+     else focusObject(id);
+     setSearchOpen(false);
+   }
++  function openObjects(trigger: HTMLElement | null) {
++    panelReturnFocus.current = trigger;
++    setObjectsOpen(true);
++  }
++  function openHelp(trigger: HTMLElement | null) {
++    panelReturnFocus.current = trigger;
++    setHelp(true);
++  }
+   useEffect(() => {
+     function key(e: KeyboardEvent) {
+-      if (
+-        e.defaultPrevented ||
+-        e.isComposing ||
+-        e.ctrlKey ||
+-        e.metaKey ||
+-        e.altKey ||
+-        !(e.target instanceof Element) ||
+-        e.target.closest(
+-          'input,select,textarea,button,a,[contenteditable="true"],[role="dialog"],[role="button"],.object-card',
+-        )
+-      )
+-        return;
++      if (!pageOwnsShortcut(e)) return;
++      if (e.key.toLowerCase() === 'o') {
++        e.preventDefault();
++        openObjects(e.target as HTMLElement);
++      }
++      if (e.key === '?') {
++        e.preventDefault();
++        openHelp(e.target as HTMLElement);
++      }
+       if (e.key === '/') {
+         e.preventDefault();
+         openSearch();
+@@ -144,106 +163,116 @@ export default function Explore({
+     }
+   }
+   return (
+-    <main className="explore consumer-shell">
+-      <EngineCanvas />
+-      <LinkStateNotice />
+-      <header className="topbar">
+-        <div className="brand" aria-label="Space Time Continuum">
+-          <span className="brand-mark">✳</span>
+-          <span>
+-            CONTINUUM<small>SPACE & TIME, CONNECTED</small>
+-          </span>
+-        </div>
+-        <button
+-          className="search-trigger"
+-          aria-label="Find a world"
+-          ref={searchRef}
+-          onClick={openSearch}
+-        >
+-          <Icon name="search" />
+-          <span>Find a world</span>
+-          <kbd>/</kbd>
+-        </button>
+-        <div className="top-actions">
+-          <LayersPopover />
+-          <SettingsPopover
+-            triggerRef={settingsRef}
+-            onHelp={() => setHelp(true)}
+-            onShare={() => void share()}
++    <Profiler id="ConsumerExplore" onRender={recordConsumerCommit}>
++      <main className="explore consumer-shell">
++        <EngineCanvas />
++        <LinkStateNotice />
++        <header className="topbar">
++          <div className="brand" aria-label="Space Time Continuum">
++            <span className="brand-mark">✳</span>
++            <span>
++              CONTINUUM<small>SPACE & TIME, CONNECTED</small>
++            </span>
++          </div>
++          <button
++            className="search-trigger"
++            aria-label="Find a world"
++            ref={searchRef}
++            onClick={openSearch}
++          >
++            <Icon name="search" />
++            <span>Find a world</span>
++            <kbd>/</kbd>
++          </button>
++          <div className="top-actions">
++            <LayersPopover />
++            <SettingsPopover
++              triggerRef={settingsRef}
++              onHelp={() => openHelp(settingsRef.current)}
++              onObjects={() => openObjects(settingsRef.current)}
++              onShare={() => void share()}
++            />
++          </div>
++        </header>
++        {!body && (
++          <div className="map-intro">
++            <p className="eyebrow">YOUR WINDOW TO THE COSMOS</p>
++            <h1>
++              A universe.
++              <br />
++              <em>Always in motion.</em>
++            </h1>
++            <p>Find a world. Travel through space and time.</p>
++          </div>
++        )}
++        <HappeningNow />
++        {body && (
++          <ObjectCard
++            key={body.id}
++            body={body}
++            onShare={(trigger) => void share(trigger)}
++            returnFocus={searchRef}
+           />
+-        </div>
+-      </header>
+-      {!body && (
+-        <div className="map-intro">
+-          <p className="eyebrow">YOUR WINDOW TO THE COSMOS</p>
+-          <h1>
+-            A universe.
+-            <br />
+-            <em>Always in motion.</em>
+-          </h1>
+-          <p>Find a world. Travel through space and time.</p>
+-        </div>
+-      )}
+-      <HappeningNow />
+-      {body && (
+-        <ObjectCard
+-          key={body.id}
+-          body={body}
+-          onShare={(trigger) => void share(trigger)}
+-          returnFocus={searchRef}
++        )}
++        <TimeBar />
++        {!ready && !error && (
++          <div className="loading-screen">
++            <span className="loader-orbit" />
++            <p>Finding our place in the universe</p>
++            <small>Preparing the renderer and planetary maps</small>
++          </div>
++        )}
++        {error && (
++          <div className="error-panel" role="alert">
++            <h2>A different way to explore</h2>
++            <p>Your graphics session could not start.</p>
++            <p>{error}</p>
++            <a
++              className="primary-button"
++              href={compatibilityHref}
++              onClick={(e) => {
++                e.preventDefault();
++                location.assign(publicViewHref(true));
++              }}
++            >
++              Try compatibility mode
++            </a>
++            <a href="/about/data">Read about the solar system data</a>
++          </div>
++        )}
++        {notice && (
++          <div className="toast" role="status">
++            {notice}
++          </div>
++        )}
++        <span className="sr-only" aria-live="polite">
++          {body ? `Selected ${body.name}. ${body.description}` : ''}
++        </span>
++        <ShareViewDialog
++          url={shareUrl}
++          onClose={() => setShareUrl(null)}
++          returnFocus={shareReturnFocus}
+         />
+-      )}
+-      <TimeBar />
+-      {!ready && !error && (
+-        <div className="loading-screen">
+-          <span className="loader-orbit" />
+-          <p>Finding our place in the universe</p>
+-          <small>Preparing the renderer and planetary maps</small>
+-        </div>
+-      )}
+-      {error && (
+-        <div className="error-panel" role="alert">
+-          <h2>A different way to explore</h2>
+-          <p>Your graphics session could not start.</p>
+-          <p>{error}</p>
+-          <a
+-            className="primary-button"
+-            href={compatibilityHref}
+-            onClick={(e) => {
+-              e.preventDefault();
+-              location.assign(publicViewHref(true));
+-            }}
+-          >
+-            Try compatibility mode
+-          </a>
+-          <a href="/about/data">Read about the solar system data</a>
+-        </div>
+-      )}
+-      {notice && (
+-        <div className="toast" role="status">
+-          {notice}
+-        </div>
+-      )}
+-      <span className="sr-only" aria-live="polite">
+-        {body ? `Selected ${body.name}. ${body.description}` : ''}
+-      </span>
+-      <ShareViewDialog
+-        url={shareUrl}
+-        onClose={() => setShareUrl(null)}
+-        returnFocus={shareReturnFocus}
+-      />
+-      {searchOpen && (
+-        <EntitySearch
+-          onChoose={choose}
+-          onClose={() => setSearchOpen(false)}
+-          returnFocus={searchReturnFocus}
++        {searchOpen && (
++          <EntitySearch
++            onChoose={choose}
++            onClose={() => setSearchOpen(false)}
++            returnFocus={searchReturnFocus}
++          />
++        )}
++        <FieldGuide
++          open={help}
++          onOpenChange={setHelp}
++          returnFocus={panelReturnFocus}
+         />
+-      )}
+-      <FieldGuide
+-        open={help}
+-        onOpenChange={setHelp}
+-        returnFocus={settingsRef}
+-      />
+-    </main>
++        {objectsOpen && (
++          <ObjectsInView
++            onChoose={choose}
++            onClose={() => setObjectsOpen(false)}
++            returnFocus={panelReturnFocus}
++          />
++        )}
++      </main>
++    </Profiler>
+   );
+ }
+diff --git a/apps/web/src/components/controls/FieldGuide.tsx b/apps/web/src/components/controls/FieldGuide.tsx
+index 740c1bf..b6e0ff3 100644
+--- a/apps/web/src/components/controls/FieldGuide.tsx
++++ b/apps/web/src/components/controls/FieldGuide.tsx
+@@ -35,6 +35,8 @@ export default function FieldGuide({
+             ['[ / ]', 'Change playback speed'],
+             ['Backspace', 'Return to your previous view'],
+             ['/', 'Find a world'],
++            ['O', 'Open Objects in view'],
++            ['?', 'Open this field guide'],
+             ['Escape', 'Dismiss the active panel or card'],
+           ].map(([key, description]) => (
+             <div className="setting-row" key={key}>
+@@ -45,6 +47,9 @@ export default function FieldGuide({
+           <p>
+             Camera keys work when the map has focus. Page shortcuts leave
+             buttons, inputs and open panels in control of their own keys.
++            Objects in view is a selectable text alternative to the map and
++            remains open while you move the camera. Find a world searches the
++            complete catalog, including worlds outside the current view.
+           </p>
+           <p>
+             Explore scale enlarges distant worlds for visibility. True scale
+diff --git a/apps/web/src/components/controls/SettingsPopover.tsx b/apps/web/src/components/controls/SettingsPopover.tsx
+index f68106b..fa8403b 100644
+--- a/apps/web/src/components/controls/SettingsPopover.tsx
++++ b/apps/web/src/components/controls/SettingsPopover.tsx
+@@ -25,10 +25,12 @@ export default function SettingsPopover({
+   triggerRef,
+   onHelp,
+   onShare,
++  onObjects,
+ }: {
+   triggerRef: RefObject<HTMLButtonElement | null>;
+   onHelp(): void;
+   onShare(): void;
++  onObjects(): void;
+ }) {
+   const [open, setOpen] = useState(false);
+   const engine = useEngineStore((s) => s.engine),
+@@ -215,8 +217,14 @@ export default function SettingsPopover({
+             >
+               Field guide
+             </button>
+-            <button className="secondary-button" disabled>
+-              Objects in view — unavailable
++            <button
++              className="secondary-button"
++              onClick={() => {
++                setOpen(false);
++                onObjects();
++              }}
++            >
++              Objects in view
+             </button>
+             <Link href="/about/data" onClick={() => setOpen(false)}>
+               About the data ↗
+diff --git a/apps/web/src/engine-bridge/EngineCanvas.tsx b/apps/web/src/engine-bridge/EngineCanvas.tsx
+index b2877b5..042193f 100644
+--- a/apps/web/src/engine-bridge/EngineCanvas.tsx
++++ b/apps/web/src/engine-bridge/EngineCanvas.tsx
+@@ -37,7 +37,7 @@ export default function EngineCanvas() {
+     canvas.setAttribute('role', 'application');
+     canvas.setAttribute(
+       'aria-label',
+-      'Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Use the object buttons to select a world.',
++      'Interactive solar system. Drag to orbit, scroll to zoom. Arrow keys orbit, plus and minus zoom. Press O for the selectable Objects in view text list, slash to search every world, and question mark for help. These actions are also in Settings.',
+     );
+     host.current!.prepend(canvas);
+     async function init() {
+@@ -74,14 +74,28 @@ export default function EngineCanvas() {
+         }
+         unsubs.push(
+           engine.on('clock', (s) => {
+-            useEngineStore.setState((current) => clockUiState(s, current));
++            // Text follows the clock without React. Cold mode/rate/boundary
++            // changes remain immediate; recurring date snapshots are combined
++            // with perf below, avoiding two independent 4 Hz commit cadences.
++            const current = useEngineStore.getState();
++            const next = clockUiState(s, current);
++            if (
++              next.mode !== current.mode ||
++              next.rate !== current.rate ||
++              next.clockClamped !== current.clockClamped
++            )
++              useEngineStore.setState(next);
+             const el = document.getElementById('clock-readout');
+             if (el)
+               el.textContent =
+                 tdbToIso(s.tdbSec).replace('T', ' · ').slice(0, 21) + ' UTC';
+           }),
+           engine.on('perf', (perf) =>
+-            useEngineStore.setState({ perf, tier: perf.tier }),
++            useEngineStore.setState((current) => ({
++              ...clockUiState(engine!.clock.state, current),
++              perf,
++              tier: perf.tier,
++            })),
+           ),
+           engine.on('error', (error) => {
+             if (generation === 0) setGeneration(1);
+diff --git a/docs/adr/0011-consumer-route-state.md b/docs/adr/0011-consumer-route-state.md
+index 59c72ea..2de163c 100644
+--- a/docs/adr/0011-consumer-route-state.md
++++ b/docs/adr/0011-consumer-route-state.md
+@@ -92,3 +92,11 @@ Mobile time sits above the bottom sheet; a card ResizeObserver updates a CSS hei
+ 
+ 
+ P4.7 retry-2 is reviewed accepted: all three prior-failure probes, 20 focused cases and 64 full production cases pass without skips/flakes/errors. Independent 317 root/candidate hashes and fourteen preserved hashes match; all 27 captures inspected. Final hashed review: docs/perf/phase-four/p4-7-final-review.json. Verify passes 396 plus two expected diagnostics in 44 files. Desktop navigation long task 265 ms exceeds the later 50 ms target; P4.9 remains open. P4.8 adds the currently disabled objects list and integrated accessibility. No final phase acceptance or physical phone throughput is claimed.
++
++P4.7 is committed locally as 4927fc3. P4.8 adds a cold public getObjectsInView query: immutable id/name/kind catalog records, reusable homogeneous projection and membership buffers, stable array identity until contents change. It includes enabled rendered mesh/point centers inside the last camera clip volume, independently of label collision, relevance and occlusion; rejects invalid, behind-camera, disabled, unrendered, not-ready and disposed states. No frame-loop, provider, physical model or asset changes. The nonmodal selectable text list stays open during camera gestures and exposes truthful center/occlusion copy. O opens it; Settings remains the visible action. The shared selection command path and actual trigger focus return are retained.
++
++The list mounts one cold subscription to the existing perf store bridge, releases it on close/unmount, and notifies React only when ID/name/kind membership changes. It adds no independent timer, clock or engine-frame listener. Unified page shortcut policy yields to open dialogs/popovers, text/editable/interactive/card targets, prevented events, IME/229 and browser modifiers. Question mark opens help and both shortcut-opened panels restore their actual canvas/page trigger. Canvas arrows/zoom retain engine ownership, with composition/default/modifier guards added to Input.
++
++P4.8 pins test-only @axe-core/playwright4.13.0/axe-core4.13.0 (MPL-2.0) without changing runtime dependencies or the production allowlist. Seven actual states at desktop/phone widths retain all raw axe results including incomplete rules. Integrated keyboard flows, native Space/Enter/Backspace, list camera/layer/collision/empty/cleanup and focus checks are required. A Profiler wraps the complete Explore subtree, including portals/card/list. Separate isolated Next --profile validation proves callbacks active before two 30-second 1day/sec windows and also retains the original lab profile. Normal production response/budget evidence is kept separate. Short verify passes411 plus2 expected diagnostics/47files; initial directive placement failure is preserved. Production validation is pending, so P4.8 is unaccepted and final P4.9 gates remain open.
++
++P4.8 bridge audit also finds that recurring clock UTC snapshots and perf snapshots could independently schedule 4 Hz React work. The existing clock listener now writes clock text directly and publishes only changed mode/rate/boundary state immediately. The existing perf listener publishes UTC/date and perf together in one store update. Cold explicit time commands remain immediate; the retained clamp helper still covers missed transient boundary flags. No timer or engine frame subscription is added. The new complete-subtree profiling checks and all prior UTC/history/clamp cases must validate this cadence change before acceptance.
+diff --git a/e2e/react-profile.spec.ts b/e2e/react-profile.spec.ts
+index 0237dba..36c8f66 100644
+--- a/e2e/react-profile.spec.ts
++++ b/e2e/react-profile.spec.ts
+@@ -28,7 +28,9 @@ test('accelerated playback keeps React commits below four per second', async ({
+         commits: commits.length,
+         commitsPerSecond: commits.length / seconds,
+         method:
+-          'React Profiler onRender covering the complete Explore subtree in the development lab',
++          process.env.SPACE_PRODUCTION_PROFILING === '1'
++            ? 'React Profiler onRender covering the complete Explore subtree in the isolated production --profile lab'
++            : 'React Profiler onRender covering the complete Explore subtree in the development lab',
+       },
+       null,
+       2,
+diff --git a/package.json b/package.json
+index a89c28e..25a95f3 100644
+--- a/package.json
++++ b/package.json
+@@ -18,6 +18,7 @@
+     "licenses:check": "tsx tools/check-licenses.ts"
+   },
+   "devDependencies": {
++    "@axe-core/playwright": "4.13.0",
+     "@playwright/test": "1.63.0",
+     "@types/node": "^24.0.0",
+     "@vitest/coverage-v8": "5.0.1",
+diff --git a/packages/engine/README.md b/packages/engine/README.md
+index 7875e12..19e0cf7 100644
+--- a/packages/engine/README.md
++++ b/packages/engine/README.md
+@@ -6,6 +6,8 @@ The stable commands are `select(id|null)`, `focus(id,{transition?,wide?,select?,
+ 
+ `suspendRendering(): () => void` holds the last 3D frame while a modal owns interaction. Leases nest; call the returned idempotent release on dismissal/unmount. Time continues from the clock's wall-time anchor, commands still accept selections, and the next submitted frame samples current simulation time. Visibility changes cannot restart submission through an active lease. Release while hidden waits for the normal visible lifecycle; disposal cannot be reversed by a later release. This cold scheduler command adds no work inside the frame loop. Consumer search releases after its accepted canonical route/card gets a paint, so shader compilation and 3D submission do not block its visible response. The renderer remains resident.
+ 
++`getObjectsInView(): readonly ObjectInView[]` is a cold query for current catalog centers inside the last rendered camera clip volume. Records contain immutable `id`, `name` and `kind`; retained snapshots never mutate and keep their identity until membership changes. Enabled rendered point and mesh LODs qualify independently of label collisions, label relevance, UI overlays and occlusion. Some centers may be behind another body. Offscreen, behind-camera, invalid or disabled bodies are excluded. Startup and disposal return an empty list. The query reuses projection/membership buffers and adds no work to the engine frame callback; sample it from the existing throttled UI notification only while the text list is open. Future registered datasets are outside this catalog-only query.
++
+ `on(event, callback)` returns an unsubscribe function. Core events are `select`, `hover`, `clock`, `perf`, `error`, and `tier`. `sourceError` additionally reports `{layerId,message}` for an external point source; it does not request a graphics-backend restart. Mouse/pen hover changes are emitted and cleared on drag/leave/zoom. Touch picking does not depend on hover.
+ 
+ ## Camera references and restoring views
+diff --git a/packages/engine/src/EngineApi.ts b/packages/engine/src/EngineApi.ts
+index dbc27f3..2aac631 100644
+--- a/packages/engine/src/EngineApi.ts
++++ b/packages/engine/src/EngineApi.ts
+@@ -15,6 +15,7 @@ export type EngineApi = Pick<
+   | 'getMapState'
+   | 'setLayer'
+   | 'getLayerStates'
++  | 'getObjectsInView'
+   | 'whenLayersSettled'
+   | 'setFrame'
+   | 'setScale'
+diff --git a/packages/engine/src/SpaceEngine.ts b/packages/engine/src/SpaceEngine.ts
+index 90813fd..bcedaf3 100644
+--- a/packages/engine/src/SpaceEngine.ts
++++ b/packages/engine/src/SpaceEngine.ts
+@@ -2,6 +2,7 @@ import {
+   Scene,
+   PerspectiveCamera,
+   Vector3,
++  Vector4,
+   PointLight,
+   AmbientLight,
+   BufferGeometry,
+@@ -58,6 +59,8 @@ import { CpuTimings, CPU_PATHS } from './perf/CpuTimings';
+ import type { PerfSample } from './perf/PerfMonitor';
+ import { QualityManager, QUALITY } from './quality/QualityManager';
+ import type { QualitySetting } from './quality/QualityManager';
++import { centerInView, ObjectsInViewSnapshot } from './scene/ObjectsInView';
++import type { ObjectInView } from './scene/ObjectsInView';
+ export interface EngineEvents {
+   select: string | null;
+   hover: string | null;
+@@ -150,6 +153,8 @@ export class SpaceEngine {
+   private sunLight = new PointLight(0xfff5e4, 3, 0, 0);
+   private scratch = new Vector3();
+   private projected = new Vector3();
++  private inViewCenter = new Vector4();
++  private inViewSnapshot = new ObjectsInViewSnapshot(EXPLORABLE_BODIES);
+   private quat = new Float64Array(4);
+   private inverseOrientation = new Quaternion();
+   private pointLayers = new Map<string, PointLayer>();
+@@ -1224,6 +1229,30 @@ export class SpaceEngine {
+   getLayerStates() {
+     return this.layers.snapshot();
+   }
++  /** Cold catalog-center query against the last rendered camera/display pose.
++   * Mesh and point LODs both qualify; labels, UI panels and occlusion do not cull.
++   * Nothing is added to the frame loop, and retained snapshots are immutable.
++   */
++  getObjectsInView(): readonly ObjectInView[] {
++    this.inViewSnapshot.begin();
++    if (!this.disposed && this.initialReady) {
++      for (const e of this.registry.entries.values()) {
++        const rendered =
++          e.visible &&
++          e.renderVisible &&
++          (e.body.kind === 'star' || this.layers.has(entityLayer(e.body.kind)));
++        const p = e.visual.group.position;
++        this.inViewCenter
++          .set(p.x, p.y, p.z, 1)
++          .applyMatrix4(this.camera.matrixWorldInverse)
++          .applyMatrix4(this.camera.projectionMatrix);
++        const c = this.inViewCenter;
++        if (centerInView(rendered, c.x, c.y, c.z, c.w))
++          this.inViewSnapshot.include(e.body.id);
++      }
++    }
++    return this.inViewSnapshot.finish();
++  }
+   whenLayersSettled(): Promise<void> {
+     return this.layers.whenSettled();
+   }
+@@ -1319,14 +1348,12 @@ export class SpaceEngine {
+       else this.clock.goLive({ animate: false });
+       if (state.scale) this.setScale(state.scale);
+       if (state.layers)
+-        void this.layers
+-          .restore(state.layers)
+-          .catch((error) =>
+-            this.emit('commandError', {
+-              command: 'layer',
+-              message: String(error),
+-            }),
+-          );
++        void this.layers.restore(state.layers).catch((error) =>
++          this.emit('commandError', {
++            command: 'layer',
++            message: String(error),
++          }),
++        );
+       this.registry.update(this.clock.tick());
+       this.setFrame(frame);
+       this.focus(state.focus, {
+diff --git a/packages/engine/src/camera/Input.ts b/packages/engine/src/camera/Input.ts
+index e814b90..bc0f712 100644
+--- a/packages/engine/src/camera/Input.ts
++++ b/packages/engine/src/camera/Input.ts
+@@ -92,6 +92,15 @@ export class Input {
+     canvas.addEventListener(
+       'keydown',
+       (e) => {
++        if (
++          e.defaultPrevented ||
++          e.isComposing ||
++          e.keyCode === 229 ||
++          e.ctrlKey ||
++          e.metaKey ||
++          e.altKey
++        )
++          return;
+         const move: Record<string, [number, number]> = {
+           ArrowLeft: [-10, 0],
+           ArrowRight: [10, 0],
+diff --git a/packages/engine/src/index.ts b/packages/engine/src/index.ts
+index 319ea0c..efe6a65 100644
+--- a/packages/engine/src/index.ts
++++ b/packages/engine/src/index.ts
+@@ -7,4 +7,5 @@ export type { PointSource, PointSourceBuffers } from './layers/PointSource';
+ export type { EngineApi } from './EngineApi';
+ export type { CameraFrame, CameraFrameResult } from './camera/CameraReference';
+ export type { EngineLayerState } from './layers/LayerRegistry';
++export type { ObjectInView } from './scene/ObjectsInView';
+ export const API_VERSION = 1 as const;
+diff --git a/packages/engine/test/api.test.ts b/packages/engine/test/api.test.ts
+index 492732e..2067135 100644
+--- a/packages/engine/test/api.test.ts
++++ b/packages/engine/test/api.test.ts
+@@ -9,6 +9,7 @@ import type {
+   CameraFrame,
+   CameraFrameResult,
+   EngineLayerState,
++  ObjectInView,
+ } from '../src';
+ import type { MapState } from '@space/domain';
+ 
+@@ -39,6 +40,9 @@ it('keeps consumer commands and source contracts independent of renderer interna
+   expectTypeOf<EngineApi['whenLayersSettled']>().returns.toEqualTypeOf<
+     Promise<void>
+   >();
++  expectTypeOf<EngineApi['getObjectsInView']>().returns.toEqualTypeOf<
++    readonly ObjectInView[]
++  >();
+   expectTypeOf<EngineApi['suspendRendering']>().toEqualTypeOf<
+     () => () => void
+   >();
+@@ -60,6 +64,9 @@ it('keeps consumer commands and source contracts independent of renderer interna
+ 
+ // Compile-time rejection checks; this function is never executed.
+ function invalidConsumerCalls(api: EngineApi) {
++  const objects = api.getObjectsInView();
++  // @ts-expect-error snapshots are read-only, not mutable renderer buffers
++  objects.push({ id: 'planet:mars', name: 'Mars', kind: 'planet' });
+   // @ts-expect-error provider frames are not all supported camera references
+   api.setFrame('TEME:earth');
+   // @ts-expect-error unknown event names are not part of the v1 contract
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index dabd337..264ceef 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -13,6 +13,9 @@ importers:
+ 
+   .:
+     devDependencies:
++      '@axe-core/playwright':
++        specifier: 4.13.0
++        version: 4.13.0(playwright-core@1.63.0)
+       '@playwright/test':
+         specifier: 1.63.0
+         version: 1.63.0
+@@ -167,6 +170,11 @@ packages:
+     resolution: {integrity: sha512-U4+70Pc5ZS9osnCBCE5Jha/ciHM+Yp+CNMNC/7HvYbNRk1Ldd+f7qO65W5qfhu/TCv+/ozljlXXe9Nj8419DMA==}
+     engines: {node: '>=10'}
+ 
++  '@axe-core/playwright@4.13.0':
++    resolution: {integrity: sha512-6YLx+kxXu5GJceG4ozFg+33a2EMTdjYwWGloJ3sb9Kta5pp+ZNS53uxGVog5JetIY8s++P5UrtX+cri+u0VAVg==}
++    peerDependencies:
++      playwright-core: '>= 1.0.0'
++
+   '@babel/helper-string-parser@7.29.7':
+     resolution: {integrity: sha512-Pb5ijPrZ89GDH8223L4UP8i6QApWxs04RbPQJTeWDV0/keR2E36MeKnyr6LYmUUvqRRI+Iv87SuF1W6ErINzYw==}
+     engines: {node: '>=6.9.0'}
+@@ -1542,6 +1550,10 @@ packages:
+   astronomy-engine@2.1.19:
+     resolution: {integrity: sha512-8yWKNf7UeNbH458h3sAJ6ZgAjE5jTXp/mNNRFoC20j2SHwZIjAQeEsBB2Q3uCFRaTCCJRv33K2XhkhZQMXoX6w==}
+ 
++  axe-core@4.13.0:
++    resolution: {integrity: sha512-UzGt8zg7Ny8djbYMhxl2zuEevVa7r2gJjYY5Lwr1xM7+XU2nd6CkIWFTVcCIbAP63vSz71NaVyyuSk9lHKcy0A==}
++    engines: {node: '>=4'}
++
+   balanced-match@1.0.2:
+     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+ 
+@@ -2537,6 +2549,11 @@ snapshots:
+ 
+   '@alloc/quick-lru@5.3.0': {}
+ 
++  '@axe-core/playwright@4.13.0(playwright-core@1.63.0)':
++    dependencies:
++      axe-core: 4.13.0
++      playwright-core: 1.63.0
++
+   '@babel/helper-string-parser@7.29.7': {}
+ 
+   '@babel/helper-validator-identifier@7.29.7': {}
+@@ -3542,6 +3559,8 @@ snapshots:
+ 
+   astronomy-engine@2.1.19(patch_hash=7c0bdea845ac7e045963b13ab832c9fa4227bcfbbd6e498002e1448cf7b7a6b0): {}
+ 
++  axe-core@4.13.0: {}
++
+   balanced-match@1.0.2: {}
+ 
+   balanced-match@4.0.4: {}

@@ -25,10 +25,12 @@ export default function SettingsPopover({
   triggerRef,
   onHelp,
   onShare,
+  onObjects,
 }: {
   triggerRef: RefObject<HTMLButtonElement | null>;
   onHelp(): void;
   onShare(): void;
+  onObjects(): void;
 }) {
   const [open, setOpen] = useState(false);
   const engine = useEngineStore((s) => s.engine),
@@ -64,7 +66,7 @@ export default function SettingsPopover({
           collisionPadding={12}
           onCloseAutoFocus={preserveActiveFocus}
         >
-          <h3>Your observatory</h3>
+          <h2>Your observatory</h2>
           <label className="setting-row">
             Graphics
             <select
@@ -215,8 +217,14 @@ export default function SettingsPopover({
             >
               Field guide
             </button>
-            <button className="secondary-button" disabled>
-              Objects in view — unavailable
+            <button
+              className="secondary-button"
+              onClick={() => {
+                setOpen(false);
+                onObjects();
+              }}
+            >
+              Objects in view
             </button>
             <Link href="/about/data" onClick={() => setOpen(false)}>
               About the data ↗

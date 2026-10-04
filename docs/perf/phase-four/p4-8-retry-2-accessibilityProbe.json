@@ -1,0 +1,907 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-accessibility.spec.ts",
+      "e2e/phase-four-objects.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\phase-four.playwright.config.ts",
+    "rootDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-8/retry-2/candidate/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-8/retry-2/accessibility-probe",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-8/retry-2/candidate/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "phase-four-accessibility.spec.ts",
+      "file": "phase-four-accessibility.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "open panels, IME and browser modifiers protect page and canvas shortcuts; help returns focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5890,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T01:25:53.745Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "433eb8693ecf15b997a5-cb0c39a63387d264d6db",
+          "file": "phase-four-accessibility.spec.ts",
+          "line": 335,
+          "column": 1
+        }
+      ],
+      "suites": [
+        {
+          "title": "desktop",
+          "file": "phase-four-accessibility.spec.ts",
+          "line": 29,
+          "column": 8,
+          "specs": [
+            {
+              "title": "axe default: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9212,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:23:35.701Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-d-b2853-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-2f2a35d23f377e2bb945680c15fd5933a4976db0.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-03d010f27714abf75a28",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe search: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11493,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:23:45.100Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-d-e7afa-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-e7bdcc4405645814b920df8995dbb9d31a627e6e.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-9a3a455dd77fc8334b52",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe card: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9135,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:23:56.624Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-d-f25b8-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-6cfa70725e773f183a7e88834c6222183fd28647.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-d626417f4e7d70f51bdf",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe time: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13499,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:24:05.771Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-d-150c8-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-fde4cfaa7796787b0a604fe670804294215f959d.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-c7239aee4d7c891ecb65",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe settings: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13872,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:24:19.287Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-d-0723e-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-1dbb11221ae8a0ce5a5b2cd1ad268957cdae0415.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-173f061cd46fc0f0517c",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe layers: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13680,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:24:33.173Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-d-07b22-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-b9844baec82404b8ee59d27a8e8cfc8fc66cc920.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-5acb66dcb51228493669",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe list: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13124,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:24:46.869Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-d-01f77-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-7cfbfb3ad7080ba31037d1921557971ffb4b1e7c.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-aa49027a622ebd408d34",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "keyboard-only search, selection, card, time, layers, settings and list retain native keys and focus",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8354,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:25:00.009Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-67187c75e1fc604b02cb",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 166,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "phone",
+          "file": "phase-four-accessibility.spec.ts",
+          "line": 29,
+          "column": 8,
+          "specs": [
+            {
+              "title": "axe default: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8365,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:25:08.374Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-p-38329-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-f6e60dd27dfead096d6be4cf3abac52142b96140.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-63216c9337fe30f50c1d",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe search: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4192,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:25:16.751Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-p-b0b35-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-07526de973c1b03d86881d4410a55c70b776861d.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-d885a006a409099b9d35",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe card: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4211,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:25:20.956Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-p-dcab6-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-8d9090f6a094c93dc6a9f7ae829fab7580708bbc.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-d1e4c25fc26cc6da84c7",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe time: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5924,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:25:25.178Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-p-d029f-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-f9c2180aa4aab70397d5e809f13e3a5eebbc74c3.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-f79ed1ad518c972ef9da",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe settings: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6037,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:25:31.114Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-p-dfd47-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-56926d01453c976d05489fd95ceca8d10b94e4b3.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-92668407d2110cff05df",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe layers: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5820,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:25:37.163Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-p-74112-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-6640ea4008b7d3a95376d3531127522936253d67.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-d827f8175bd204f7005b",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "axe list: complete actual open page has no serious or WCAG A/AA violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5733,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:25:43.001Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "axe-full-result",
+                          "contentType": "application/json",
+                          "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\accessibility-probe\\phase-four-accessibility-p-13646-ous-or-WCAG-A-AA-violations\\attachments\\axe-full-result-02b45b314123ff66d16723474181c90b5d9f8233.json"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-33033cea204aa10c182f",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "keyboard-only search, selection, card, time, layers, settings and list retain native keys and focus",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 150000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4984,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-04T01:25:48.750Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "433eb8693ecf15b997a5-e295be1aeb49cba942cf",
+              "file": "phase-four-accessibility.spec.ts",
+              "line": 166,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "phase-four-objects.spec.ts",
+      "file": "phase-four-objects.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "camera orbit, zoom and disabled layers change the real rendered catalog membership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16252,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T01:25:59.663Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6321b9a364c168c8e6fd-6cdeb5d7e4ee6d7c70e4",
+          "file": "phase-four-objects.spec.ts",
+          "line": 24,
+          "column": 1
+        },
+        {
+          "title": "all qualifying Jupiter moons remain selectable when actual labels collide",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9860,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T01:26:15.926Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6321b9a364c168c8e6fd-325377603bbc16cec91b",
+          "file": "phase-four-objects.spec.ts",
+          "line": 77,
+          "column": 1
+        },
+        {
+          "title": "list selection uses one shared navigation/focus and returns focus to Settings",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6289,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T01:26:25.796Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6321b9a364c168c8e6fd-d9659c9a9d67a32dd4ea",
+          "file": "phase-four-objects.spec.ts",
+          "line": 135,
+          "column": 1
+        },
+        {
+          "title": "empty list is honest and closing or leaving Explore stops cold queries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12078,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T01:26:32.093Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6321b9a364c168c8e6fd-706765ba7ada815495f4",
+          "file": "phase-four-objects.spec.ts",
+          "line": 179,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T01:23:35.122Z",
+    "duration": 189338.877,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

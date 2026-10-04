@@ -38,7 +38,7 @@ export default function LayersPopover() {
           collisionPadding={12}
           onCloseAutoFocus={preserveActiveFocus}
         >
-          <h3>Make space your own</h3>
+          <h2>Make space your own</h2>
           <p>
             Explore 21 catalog worlds. Enabled layers may be hidden at this
             distance.

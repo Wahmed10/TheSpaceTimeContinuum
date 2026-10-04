@@ -1,0 +1,204 @@
+{
+  "status": "finished",
+  "pid": 42536,
+  "startedAt": "2026-10-04T01:04:17.170Z",
+  "candidateCommit": "4927fc3adc9d5dbe1eb8ec356bf656514a5f4f39",
+  "candidateSource": "4927fc3adc9d5dbe1eb8ec356bf656514a5f4f39 + uncommitted P4.8 snapshot SHA256 774abae8989723c5582881102bdf059b26ba3ef63be19d5f180eea328ae72bd2",
+  "sourceSha256": "774abae8989723c5582881102bdf059b26ba3ef63be19d5f180eea328ae72bd2",
+  "method": "Hashed isolated P4.8 retry-1 source. Three prior-failure regression cases precede twenty-one new integrated accessibility/list checks must pass before all85 normal production browser cases. Fourteen whole-page axe scans retain incomplete results and fail on serious/critical or WCAG A/AA issues; native keyboard/IME/focus/reduced-motion, real pan/zoom/layer/collision/empty/cleanup and shared selection are checked. Normal production build/lookup/budgets/licenses/science/storage/verified-hardware response remain required. A separate isolated next build --profile then runs three React profiles: two health-checked complete Explore 30sec accelerated scenarios and the existing lab. Phone remains desktop-GPU emulation. Prior failures, source and fourteen unrelated root artifacts are preserved; only owned port3002 is stopped. Final P4.9 gates remain pending.",
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 411,
+    "expectedRejections": 2,
+    "testFiles": 47,
+    "log": "verify.log",
+    "finalMeasurementChecks": "Typecheck/lint/boundaries and 411 plus two expected diagnostics; Three prior-failure probes, 85 production cases in fourteen files, three separate React profiling checks"
+  },
+  "protocol": {
+    "regressionProbeCases": 3,
+    "accessibilityProbeCases": 21,
+    "browserCases": 85,
+    "reactProfileCases": 3,
+    "axe": "14 complete actual page scans: default/search/card/time/settings/layers/list at desktop and phone widths. All raw results including incomplete checks retained. Actual computed-color contrast audit, named aria-controls targets and native search-modal focus traversal supplement axe; zero critical/serious, WCAG A/AA or heading-order violations; no rule or element exclusions.",
+    "objects": "Real camera orbit/pan/zoom/layer membership, collision-independent Jupiter moons, shared one-selection navigation/focus, honest empty list and subscription cleanup.",
+    "react": "Separate isolated Next build --profile; two callback-health-checked complete Explore subtree 30sec/1day-per-sec profiles (overview and open card+list), max four commits/sec, plus existing lab profile. Profiling overhead is separate from normal production timing/budgets.",
+    "localLookupSamples": 1000,
+    "localLookupThresholdMs": 16,
+    "responseThresholdMs": 300,
+    "responseProfiles": [
+      "desktop",
+      "phone"
+    ],
+    "timingRecorder": "trace/video/screenshot off only for latency cases; functional cases retain traces",
+    "renderer": "83 SwiftShader functional cases; two response cases require verified actual physical scene GPU. Phone is viewport/touch emulation, not physical phone throughput.",
+    "cpu": "No engine frame callback, providers, physics, assets or default camera math changed. List query is cold on existing UI cadence only while open; accepted P4.2 CPU pair remains separately recorded. Final P4.9 hardware/shell/cold-start/navigation gates remain open."
+  },
+  "launch": "launch.json",
+  "snapshot": "tracked-source.patch and new-source/",
+  "activeStage": null,
+  "install": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "install",
+      "--offline",
+      "--frozen-lockfile"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "install.log",
+    "stderr": "install-stderr.log"
+  },
+  "localSearch": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/phase-four-search-perf.ts",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\local-search.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "localSearch.log",
+    "stderr": "localSearch-stderr.log"
+  },
+  "build": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "build"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "build.log",
+    "stderr": "build-stderr.log"
+  },
+  "engineBundle": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "node",
+      "tools/measure-engine.mjs"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "engineBundle.log",
+    "stderr": "engineBundle-stderr.log"
+  },
+  "assets": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/check-assets.ts"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "assets.log",
+    "stderr": "assets-stderr.log"
+  },
+  "licenses": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "licenses:check"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "licenses.log",
+    "stderr": "licenses-stderr.log"
+  },
+  "unconfiguredServer": {
+    "pid": 20416,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\candidate",
+    "port": 3002,
+    "log": "unconfigured-server.log",
+    "mode": "production",
+    "siteOrigin": "(unconfigured)",
+    "startedAt": "2026-10-04T01:04:50.400Z"
+  },
+  "regressionProbe": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-accessibility.spec.ts",
+      "e2e/phase-four-objects.spec.ts",
+      "--grep=open panels, IME|camera orbit, zoom|empty list is honest",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\regression-probe",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "regressionProbe.json",
+    "stderr": "regressionProbe-stderr.log",
+    "stats": {
+      "startTime": "2026-10-04T01:04:52.660Z",
+      "duration": 32583.31,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportErrors": 0
+  },
+  "accessibilityProbe": {
+    "exitCode": 1,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-accessibility.spec.ts",
+      "e2e/phase-four-objects.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\accessibility-probe",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-1\\candidate",
+    "siteOrigin": "(unconfigured)",
+    "output": "accessibilityProbe.json",
+    "stderr": "accessibilityProbe-stderr.log",
+    "stats": {
+      "startTime": "2026-10-04T01:05:26.393Z",
+      "duration": 194221.287,
+      "expected": 19,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "reportErrors": 0
+  },
+  "failure": {
+    "message": "accessibilityProbe failed: Incomplete/failed/skipped/flaky coverage; inspect accessibilityProbe.json and accessibilityProbe-stderr.log"
+  },
+  "verdict": "failed",
+  "unconfiguredServerLog": {
+    "exitCode": 0,
+    "output": "unconfigured-server.log",
+    "errors": []
+  },
+  "sourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 330,
+    "preservedEvidence": 14
+  },
+  "responseArtifacts": [],
+  "finishedAt": "2026-10-04T01:08:41.224Z"
+}

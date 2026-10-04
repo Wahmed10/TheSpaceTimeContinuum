@@ -2,7 +2,7 @@
 :root {
   color-scheme: dark;
   --bg: #070b10;
-  --panel: rgba(16, 23, 30, 0.92);
+  --panel: #10171e;
   --border: rgba(182, 203, 214, 0.15);
   --text: #e7ebe8;
   --muted: #819098;
@@ -102,6 +102,9 @@ kbd {
   top: 0;
   left: 0;
   color: #b5c0c8;
+  background: #070b10;
+  border-radius: 3px;
+  padding: 2px 4px;
   font-size: 11px;
   letter-spacing: 0.06em;
   white-space: nowrap;
@@ -201,7 +204,7 @@ kbd {
   padding: 11px 13px;
   border: 1px solid var(--border);
   border-radius: 7px;
-  background: #121a20a0;
+  background: #121a20;
   color: #aeb9bc;
   font-size: 12px;
 }
@@ -654,14 +657,14 @@ p {
 .popover {
   z-index: 20;
   width: 284px;
-  background: #152029f5;
+  background: #152029;
   backdrop-filter: blur(16px);
   padding: 22px;
   border: 1px solid #8aa7ae33;
   border-radius: 10px;
   box-shadow: 0 15px 50px #0009;
 }
-.popover h3 {
+.popover h2 {
   font-weight: 400;
   font-family: var(--serif);
   font-size: 21px;
@@ -807,7 +810,7 @@ p {
 }
 .search-foot {
   padding: 18px 24px;
-  color: #71878e;
+  color: #abbcc3;
   font-size: 10px;
   display: flex;
   justify-content: space-between;
@@ -1448,6 +1451,8 @@ p {
 }
 .consumer-shell .brand {
   flex-shrink: 0;
+  background: var(--bg);
+  border-radius: 4px;
 }
 .consumer-shell .search-trigger {
   margin-right: auto;
@@ -1467,6 +1472,8 @@ p {
   top: 130px;
   left: 32px;
   max-width: 400px;
+  background: var(--bg);
+  border-radius: 4px;
 }
 .consumer-shell .map-intro h1 {
   font: 400 44px/1.15 var(--serif);
@@ -1485,6 +1492,7 @@ p {
   top: 108px;
   right: 24px;
   max-height: calc(var(--visible-height, 100dvh) - 140px);
+  background: #111c25;
 }
 .happening-trigger {
   position: absolute;
@@ -1612,7 +1620,7 @@ p {
 }
 .utc-date-field {
   display: grid;
-  gap: 10px;
+  gap: 14px;
   margin-top: 18px;
   font-size: 12px;
 }
@@ -1624,6 +1632,76 @@ p {
   border: 1px solid var(--border);
   border-radius: 6px;
   background: #243039;
+}
+.utc-date-field input:focus-visible {
+  outline-offset: 2px;
+}
+.objects-in-view {
+  position: fixed;
+  z-index: 35;
+  left: 16px;
+  top: calc(var(--visible-top, 0px) + 84px);
+  width: min(350px, calc(100vw - 32px));
+  max-height: calc(var(--visible-height, 100dvh) - 180px);
+  display: flex;
+  flex-direction: column;
+  background: #15202a;
+  border: 1px solid #819aa5;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 20px 60px #0009;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.objects-heading {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+.objects-heading h2 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+}
+.objects-heading button {
+  min-height: 44px;
+  flex-shrink: 0;
+}
+.objects-in-view p {
+  color: #b5c5cc;
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 12px 0;
+}
+.objects-in-view ul {
+  list-style: none;
+  padding: 6px;
+  margin: 0 -6px;
+}
+.object-list-choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  border-radius: 6px;
+}
+.object-list-choice:hover {
+  background: #283c46;
+}
+.object-list-choice small {
+  color: #b5c5cc;
+  text-transform: capitalize;
+}
+@media (max-height: 450px) {
+  .objects-in-view {
+    top: calc(var(--visible-top, 0px) + 12px);
+    max-height: calc(var(--visible-height, 100dvh) - 24px);
+  }
 }
 .happening-drawer {
   position: fixed;

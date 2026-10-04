@@ -1,0 +1,484 @@
+{
+  "reviewedAt": "2026-10-04T00:58:50.904Z",
+  "verdict": "reviewed-fail",
+  "candidateCommit": "4927fc3adc9d5dbe1eb8ec356bf656514a5f4f39",
+  "sourceSha256": "99b3ad47da196465a9381772cccb71f85b31b43cea9c001a13af745670fb6e04",
+  "resultSha256": "4e4e056259dc2c88083e644e03377704d8e7196710c89581f98b12784fcf4a5a",
+  "probeSha256": "e3101e4aba9bad83c06850a7441e53e6c467941a289b16aaa1bf04d5c30a6d9d",
+  "stats": {
+    "startTime": "2026-10-04T00:38:13.722Z",
+    "duration": 276141.545,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "independentRootAndCandidateSourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 329,
+    "preservedEvidence": 14
+  },
+  "localVerify": {
+    "exitCode": 0,
+    "passed": 411,
+    "expectedRejections": 2,
+    "testFiles": 47,
+    "log": "verify.log",
+    "finalMeasurementChecks": "Typecheck/lint/boundaries and 411 plus two expected diagnostics; 85 production cases discovered in fourteen files, three separate React profiling checks"
+  },
+  "stages": {
+    "install": {
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+        "install",
+        "--offline",
+        "--frozen-lockfile"
+      ],
+      "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\candidate",
+      "siteOrigin": "(unconfigured)",
+      "output": "install.log",
+      "stderr": "install-stderr.log"
+    },
+    "localSearch": {
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+        "exec",
+        "tsx",
+        "tools/phase-four-search-perf.ts",
+        "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\local-search.json"
+      ],
+      "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\candidate",
+      "siteOrigin": "(unconfigured)",
+      "output": "localSearch.log",
+      "stderr": "localSearch-stderr.log"
+    },
+    "build": {
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+        "build"
+      ],
+      "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\candidate",
+      "siteOrigin": "(unconfigured)",
+      "output": "build.log",
+      "stderr": "build-stderr.log"
+    },
+    "engineBundle": {
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+        "exec",
+        "node",
+        "tools/measure-engine.mjs"
+      ],
+      "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\candidate",
+      "siteOrigin": "(unconfigured)",
+      "output": "engineBundle.log",
+      "stderr": "engineBundle-stderr.log"
+    },
+    "assets": {
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+        "exec",
+        "tsx",
+        "tools/check-assets.ts"
+      ],
+      "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\candidate",
+      "siteOrigin": "(unconfigured)",
+      "output": "assets.log",
+      "stderr": "assets-stderr.log"
+    },
+    "licenses": {
+      "exitCode": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+        "licenses:check"
+      ],
+      "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\candidate",
+      "siteOrigin": "(unconfigured)",
+      "output": "licenses.log",
+      "stderr": "licenses-stderr.log"
+    },
+    "unconfiguredServerLog": {
+      "exitCode": 0,
+      "output": "unconfigured-server.log",
+      "errors": []
+    }
+  },
+  "failures": [
+    {
+      "test": "open panels, IME and browser modifiers protect page and canvas shortcuts; help returns focus",
+      "finding": "Test explicitly focuses body outside Time Radix popover, causing normal dismissal. Trace resolves Close time controls then detaches it. Dispatch a bubbling body keydown while retaining actual popover focus to test the independent open-panel guard, and assert the popover remains mounted."
+    },
+    {
+      "test": "camera orbit, zoom and disabled layers change the real rendered catalog membership",
+      "finding": "Disabling planets correctly retains Sun and dwarf Ceres. Assert removal of planets and exact preservation of all other preexisting membership rather than assuming Sun is the only remaining kind."
+    },
+    {
+      "test": "empty list is honest and closing or leaving Explore stops cold queries",
+      "finding": "Camera pan offsets the eye while still looking at its Sun center; zoom does not guarantee empty geometry. Focus the disabled Earth in True scale at its real close distance to create a real empty view; retain unmodified query and cleanup assertions."
+    }
+  ],
+  "accessibility": {
+    "scans": [
+      {
+        "profile": "desktop",
+        "state": "list",
+        "file": "docs/perf/phase-four/p4-8-first-axe-desktop-list.json",
+        "sha256": "623c1a99b86c15ae30a72118adc454dad653308c7c9988b73c4c7d353dfb5250",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 16
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "settings",
+        "file": "docs/perf/phase-four/p4-8-first-axe-desktop-settings.json",
+        "sha256": "5851801b460ead0c4d4d81d360091cb7ac54daa48fc8256bcb0e946d2aeddc53",
+        "violations": [
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "nodes": 1
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 34
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "layers",
+        "file": "docs/perf/phase-four/p4-8-first-axe-desktop-layers.json",
+        "sha256": "371be0bb8c8bfdd1faab3af9b42b4b1a21e53124d0a2d26ae050b96330244557",
+        "violations": [
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "nodes": 1
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 34
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "time",
+        "file": "docs/perf/phase-four/p4-8-first-axe-desktop-time.json",
+        "sha256": "2a4874407b238bab4657b9edd43640e907dca096d301078b7d1f739757978819",
+        "violations": [
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "nodes": 1
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 24
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "default",
+        "file": "docs/perf/phase-four/p4-8-first-axe-desktop-default.json",
+        "sha256": "c1c2730194df3d4f805fc512ba0fa2c52246c3c6a9b9b33a89bf2a587ab8d96f",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 16
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "search",
+        "file": "docs/perf/phase-four/p4-8-first-axe-desktop-search.json",
+        "sha256": "5d50fbca96291f05e74baf6856ca1a63e4cfebbbe934fa4e33b21b880f3a414d",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-hidden-focus",
+            "nodes": 6
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 16
+          }
+        ]
+      },
+      {
+        "profile": "desktop",
+        "state": "card",
+        "file": "docs/perf/phase-four/p4-8-first-axe-desktop-card.json",
+        "sha256": "bb286f19b58fae5cc408636cf312dd47193e7714d16ee6c690e4d2f7144853da",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 36
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "list",
+        "file": "docs/perf/phase-four/p4-8-first-axe-phone-list.json",
+        "sha256": "76fdf7055482b97551849275542eea13a2d98b65f72960190c6eaeda11d1cd98",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 13
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "default",
+        "file": "docs/perf/phase-four/p4-8-first-axe-phone-default.json",
+        "sha256": "1d94777f841e460f83452e14c92b97353645e63a9df968f598a4ca4b1bb1feb4",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 12
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "layers",
+        "file": "docs/perf/phase-four/p4-8-first-axe-phone-layers.json",
+        "sha256": "9c8be540a2546ad125a50a3c934bc9a300a8e65d85c95c35012a503975acbb59",
+        "violations": [
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "nodes": 1
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 28
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "search",
+        "file": "docs/perf/phase-four/p4-8-first-axe-phone-search.json",
+        "sha256": "c1c5d79b7f537e7c349c098e1e6524c74c7366d9a6bbfdc521166855d4383641",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "aria-hidden-focus",
+            "nodes": 6
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 12
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "time",
+        "file": "docs/perf/phase-four/p4-8-first-axe-phone-time.json",
+        "sha256": "e8609d123d5de779883044d3619702e6da4bcc30ab3e8d15fa06660c8be81ff1",
+        "violations": [
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "nodes": 1
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 20
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "card",
+        "file": "docs/perf/phase-four/p4-8-first-axe-phone-card.json",
+        "sha256": "ca8066c052a1293be96e6f46bfbd061007bfd351ab875198ad4ee8647e89163e",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 31
+          }
+        ]
+      },
+      {
+        "profile": "phone",
+        "state": "settings",
+        "file": "docs/perf/phase-four/p4-8-first-axe-phone-settings.json",
+        "sha256": "f4a8f76a5218708f9f86797749fcad1d5280b3fafa98f22f7ca4612fefe5b2e7",
+        "violations": [
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "nodes": 1
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "nodes": 1
+          },
+          {
+            "id": "color-contrast",
+            "nodes": 27
+          }
+        ]
+      }
+    ],
+    "blockingViolations": 0,
+    "moderateHeadingOrderStates": 6,
+    "assessment": "All fourteen raw scans, including incomplete checks, and fifteen captures inspected. Branding div aria-label lacks role; popover headings skip h2. Translucent/gradient surfaces and canvas backgrounds prevent automated contrast decisions. Search-modal focus guards and popover aria-controls require concrete DOM/native focus checks. Fix readable opaque text surfaces, role/headings, and assert current control targets and keyboard modal trapping; no axe exclusions. This is not a complete WCAG conformance assessment."
+  },
+  "inspectedCaptures": [
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-d-01f77-ous-or-WCAG-A-AA-violations-accessible-desktop-list.png",
+      "sha256": "d453f0c4544b8b67c6cc85892fff1a6d0c1f1ffa4992fc251e6086426efc5626"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-d-0723e-ous-or-WCAG-A-AA-violations-accessible-desktop-settings.png",
+      "sha256": "ea33b4d92e0b0516f8b6cd2556900a90b35752d49c3a63644d733698776bac31"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-d-07b22-ous-or-WCAG-A-AA-violations-accessible-desktop-layers.png",
+      "sha256": "62f5780929b2f50b032a1cccf815cd98af6d3f202a43ae32d23d7c831044062f"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-d-150c8-ous-or-WCAG-A-AA-violations-accessible-desktop-time.png",
+      "sha256": "5de83d0c356f6f3bee8f63f020fa5adbedf658453a33481c1c8eb66e41090c12"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-d-b2853-ous-or-WCAG-A-AA-violations-accessible-desktop-default.png",
+      "sha256": "5c3d22cba8eeea7e15c9f67bd30c71a2c8cda2884053d990ca099e0eb4dcb9d3"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-d-e7afa-ous-or-WCAG-A-AA-violations-accessible-desktop-search.png",
+      "sha256": "28525c750ae2b7802104373bef42ff92d281ae86de72f51ea451ffb8b95522d9"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-d-f25b8-ous-or-WCAG-A-AA-violations-accessible-desktop-card.png",
+      "sha256": "1e9616d867ee7d54d8a361c6917338533ab3966948e285a5663f7e503f05d6ee"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-p-13646-ous-or-WCAG-A-AA-violations-accessible-phone-list.png",
+      "sha256": "77f5043e93efedb54da07301e16ad2517da37a85e177bea0f65f8ab7de795aa5"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-p-38329-ous-or-WCAG-A-AA-violations-accessible-phone-default.png",
+      "sha256": "00c8fb8be23800c402cba7dd7e1ff7e28284d1eded6095daab64b5d3133cb20b"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-p-74112-ous-or-WCAG-A-AA-violations-accessible-phone-layers.png",
+      "sha256": "a2b0625ec31cd21e86dd5ccc40580647f2bcdadce7a64b5b1853bf008695d8a5"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-p-b0b35-ous-or-WCAG-A-AA-violations-accessible-phone-search.png",
+      "sha256": "c6e0907e59e768e0312f5031d20d7a17f21dc05c43289371c46b8d2ac5d6848e"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-p-d029f-ous-or-WCAG-A-AA-violations-accessible-phone-time.png",
+      "sha256": "86e532e3baa09905e6aa5a9cb23b9b9542131988cf84ebd165733e7cdc640d82"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-p-dcab6-ous-or-WCAG-A-AA-violations-accessible-phone-card.png",
+      "sha256": "1719838de2ea97749327c9b0f63e7854b718ff8f4ef7eee90b44497a561dfc78"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-accessibility-p-dfd47-ous-or-WCAG-A-AA-violations-accessible-phone-settings.png",
+      "sha256": "9da15e2cef8f93a15359c183322e0a94f51c8caef9e8236cd29bd42b05ec650d"
+    },
+    {
+      "file": "docs/perf/screens/p4-8-first-phase-four-objects-all-qua-ff429--when-actual-labels-collide-collision-independent-list.png",
+      "sha256": "6f7fa50aa89f50ae36781830f9dec94ffe0c05fbfbf78b69f3eafee8f3f157ee"
+    }
+  ],
+  "notRun": [
+    "85 full normal production browser cases",
+    "Separate profiling build and all three React profiles"
+  ],
+  "limitations": [
+    "P4.8 unaccepted; original source/failed traces remain intact in .tools/phase-four/p4-8.",
+    "Phone is viewport/touch emulation. Final P4.9 shell/hardware/cold-start/settled-navigation gates remain open; prior 265ms navigation concern remains."
+  ]
+}

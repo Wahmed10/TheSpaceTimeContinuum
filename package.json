@@ -18,6 +18,7 @@
     "licenses:check": "tsx tools/check-licenses.ts"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.63.0",
     "@types/node": "^24.0.0",
     "@vitest/coverage-v8": "5.0.1",

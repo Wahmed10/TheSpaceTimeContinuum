@@ -2,6 +2,7 @@ import {
   Scene,
   PerspectiveCamera,
   Vector3,
+  Vector4,
   PointLight,
   AmbientLight,
   BufferGeometry,
@@ -58,6 +59,8 @@ import { CpuTimings, CPU_PATHS } from './perf/CpuTimings';
 import type { PerfSample } from './perf/PerfMonitor';
 import { QualityManager, QUALITY } from './quality/QualityManager';
 import type { QualitySetting } from './quality/QualityManager';
+import { centerInView, ObjectsInViewSnapshot } from './scene/ObjectsInView';
+import type { ObjectInView } from './scene/ObjectsInView';
 export interface EngineEvents {
   select: string | null;
   hover: string | null;
@@ -150,6 +153,8 @@ export class SpaceEngine {
   private sunLight = new PointLight(0xfff5e4, 3, 0, 0);
   private scratch = new Vector3();
   private projected = new Vector3();
+  private inViewCenter = new Vector4();
+  private inViewSnapshot = new ObjectsInViewSnapshot(EXPLORABLE_BODIES);
   private quat = new Float64Array(4);
   private inverseOrientation = new Quaternion();
   private pointLayers = new Map<string, PointLayer>();
@@ -1224,6 +1229,30 @@ export class SpaceEngine {
   getLayerStates() {
     return this.layers.snapshot();
   }
+  /** Cold catalog-center query against the last rendered camera/display pose.
+   * Mesh and point LODs both qualify; labels, UI panels and occlusion do not cull.
+   * Nothing is added to the frame loop, and retained snapshots are immutable.
+   */
+  getObjectsInView(): readonly ObjectInView[] {
+    this.inViewSnapshot.begin();
+    if (!this.disposed && this.initialReady) {
+      for (const e of this.registry.entries.values()) {
+        const rendered =
+          e.visible &&
+          e.renderVisible &&
+          (e.body.kind === 'star' || this.layers.has(entityLayer(e.body.kind)));
+        const p = e.visual.group.position;
+        this.inViewCenter
+          .set(p.x, p.y, p.z, 1)
+          .applyMatrix4(this.camera.matrixWorldInverse)
+          .applyMatrix4(this.camera.projectionMatrix);
+        const c = this.inViewCenter;
+        if (centerInView(rendered, c.x, c.y, c.z, c.w))
+          this.inViewSnapshot.include(e.body.id);
+      }
+    }
+    return this.inViewSnapshot.finish();
+  }
   whenLayersSettled(): Promise<void> {
     return this.layers.whenSettled();
   }
@@ -1319,14 +1348,12 @@ export class SpaceEngine {
       else this.clock.goLive({ animate: false });
       if (state.scale) this.setScale(state.scale);
       if (state.layers)
-        void this.layers
-          .restore(state.layers)
-          .catch((error) =>
-            this.emit('commandError', {
-              command: 'layer',
-              message: String(error),
-            }),
-          );
+        void this.layers.restore(state.layers).catch((error) =>
+          this.emit('commandError', {
+            command: 'layer',
+            message: String(error),
+          }),
+        );
       this.registry.update(this.clock.tick());
       this.setFrame(frame);
       this.focus(state.focus, {

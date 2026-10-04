@@ -28,7 +28,9 @@ test('accelerated playback keeps React commits below four per second', async ({
         commits: commits.length,
         commitsPerSecond: commits.length / seconds,
         method:
-          'React Profiler onRender covering the complete Explore subtree in the development lab',
+          process.env.SPACE_PRODUCTION_PROFILING === '1'
+            ? 'React Profiler onRender covering the complete Explore subtree in the isolated production --profile lab'
+            : 'React Profiler onRender covering the complete Explore subtree in the development lab',
       },
       null,
       2,

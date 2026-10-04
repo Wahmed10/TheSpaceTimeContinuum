@@ -7,4 +7,5 @@ export type { PointSource, PointSourceBuffers } from './layers/PointSource';
 export type { EngineApi } from './EngineApi';
 export type { CameraFrame, CameraFrameResult } from './camera/CameraReference';
 export type { EngineLayerState } from './layers/LayerRegistry';
+export type { ObjectInView } from './scene/ObjectsInView';
 export const API_VERSION = 1 as const;

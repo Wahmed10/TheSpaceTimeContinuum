@@ -1,0 +1,268 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-react-profile.spec.ts",
+      "e2e/react-profile.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\react-profile",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\phase-four.playwright.config.ts",
+    "rootDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-8/retry-2/candidate/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-8/retry-2/react-profile",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-8/retry-2/candidate/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "phase-four-react-profile.spec.ts",
+      "file": "phase-four-react-profile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "complete Explore subtree stays at most four commits/sec during 30s accelerated overview",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 35019,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts:101:38",
+                    "location": {
+                      "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts",
+                      "column": 38,
+                      "line": 101
+                    },
+                    "snippet": "   99 |     expect(measurement.observedSeconds).toBeGreaterThanOrEqual(30);\n  100 |     expect(measurement.commitsPerSecond).toBeLessThanOrEqual(4);\n> 101 |     expect(measurement.maxPerSecond).toBeLessThanOrEqual(4);\n      |                                      ^\n  102 |     expect(measurement.commits).toBeGreaterThan(0);\n  103 |   });\n  104 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts",
+                        "column": 38,
+                        "line": 101
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m\n\n   99 |     expect(measurement.observedSeconds).toBeGreaterThanOrEqual(30);\n  100 |     expect(measurement.commitsPerSecond).toBeLessThanOrEqual(4);\n> 101 |     expect(measurement.maxPerSecond).toBeLessThanOrEqual(4);\n      |                                      ^\n  102 |     expect(measurement.commits).toBeGreaterThan(0);\n  103 |   });\n  104 | }\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts:101:38"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T01:41:09.561Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "complete-subtree-react-profile",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\react-profile\\phase-four-react-profile-c-2d58d-ng-30s-accelerated-overview\\attachments\\complete-subtree-react-profile-8b088c2ab17afc68cc01efdd9cb88158c8e88ff6.json"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\react-profile\\phase-four-react-profile-c-2d58d-ng-30s-accelerated-overview\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\react-profile\\phase-four-react-profile-c-2d58d-ng-30s-accelerated-overview\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts",
+                    "column": 38,
+                    "line": 101
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "94961ac33289512bc7c4-4c9280907528f720c847",
+          "file": "phase-four-react-profile.spec.ts",
+          "line": 12,
+          "column": 3
+        },
+        {
+          "title": "complete Explore subtree stays at most four commits/sec during 30s accelerated card-and-list",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11311,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"2026-10-02T12:00:00.000Z\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"2026-10-02T12:00:00.000Z\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts:54:12",
+                    "location": {
+                      "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts",
+                      "column": 12,
+                      "line": 54
+                    },
+                    "snippet": "  52 |     await expect\n  53 |       .poll(() => new URL(page.url()).searchParams.get('t'))\n> 54 |       .not.toBe('2026-10-02T12:00:00.000Z');\n     |            ^\n  55 |     const start = await page.evaluate(() => {\n  56 |       window.__spaceConsumerCommits = [];\n  57 |       return performance.now();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts",
+                        "column": 12,
+                        "line": 54
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"2026-10-02T12:00:00.000Z\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  52 |     await expect\n  53 |       .poll(() => new URL(page.url()).searchParams.get('t'))\n> 54 |       .not.toBe('2026-10-02T12:00:00.000Z');\n     |            ^\n  55 |     const start = await page.evaluate(() => {\n  56 |       window.__spaceConsumerCommits = [];\n  57 |       return performance.now();\n    at C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts:54:12"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T01:41:48.906Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\react-profile\\phase-four-react-profile-c-25997-s-accelerated-card-and-list\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\react-profile\\phase-four-react-profile-c-25997-s-accelerated-card-and-list\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-8\\retry-2\\candidate\\e2e\\phase-four-react-profile.spec.ts",
+                    "column": 12,
+                    "line": 54
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "94961ac33289512bc7c4-c21e629f40ee04d22eb8",
+          "file": "phase-four-react-profile.spec.ts",
+          "line": 12,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "react-profile.spec.ts",
+      "file": "react-profile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "accelerated playback keeps React commits below four per second",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 32416,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-04T01:42:04.869Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8665fed6a497dbddc97f-214596bae49336a5e820",
+          "file": "react-profile.spec.ts",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-04T01:41:09.012Z",
+    "duration": 90139.755,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

@@ -15,6 +15,7 @@ export type EngineApi = Pick<
   | 'getMapState'
   | 'setLayer'
   | 'getLayerStates'
+  | 'getObjectsInView'
   | 'whenLayersSettled'
   | 'setFrame'
   | 'setScale'

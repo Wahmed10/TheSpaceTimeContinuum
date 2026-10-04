@@ -35,6 +35,8 @@ export default function FieldGuide({
             ['[ / ]', 'Change playback speed'],
             ['Backspace', 'Return to your previous view'],
             ['/', 'Find a world'],
+            ['O', 'Open Objects in view'],
+            ['?', 'Open this field guide'],
             ['Escape', 'Dismiss the active panel or card'],
           ].map(([key, description]) => (
             <div className="setting-row" key={key}>
@@ -45,6 +47,9 @@ export default function FieldGuide({
           <p>
             Camera keys work when the map has focus. Page shortcuts leave
             buttons, inputs and open panels in control of their own keys.
+            Objects in view is a selectable text alternative to the map and
+            remains open while you move the camera. Find a world searches the
+            complete catalog, including worlds outside the current view.
           </p>
           <p>
             Explore scale enlarges distant worlds for visibility. True scale
