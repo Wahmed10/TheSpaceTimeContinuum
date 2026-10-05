@@ -1,7 +1,8 @@
 import { fileURLToPath } from 'node:url';
 import { migrate } from 'drizzle-orm/neon-serverless/migrator';
 import { createDatabase } from './connection';
-import { DatabaseConfigurationError, loadDatabaseEnvironment } from './config';
+import { DatabaseConfigurationError } from './config';
+import { loadDatabaseEnvironment } from './cliEnvironment';
 import { seedCatalog } from './seed';
 
 async function main() {

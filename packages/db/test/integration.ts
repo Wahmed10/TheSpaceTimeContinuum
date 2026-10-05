@@ -5,10 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { eq, sql } from 'drizzle-orm';
 import { migrate } from 'drizzle-orm/neon-serverless/migrator';
 import { createDatabase } from '../src/connection';
-import {
-  loadDatabaseEnvironment,
-  DatabaseConfigurationError,
-} from '../src/config';
+import { DatabaseConfigurationError } from '../src/config';
+import { loadDatabaseEnvironment } from '../src/cliEnvironment';
 import { seedCatalog } from '../src/seed';
 import {
   objects,
@@ -67,28 +65,24 @@ async function run() {
     assert.equal(await getObject(db, id), null);
     await assert.rejects(
       db.transaction(async (tx) => {
-        await tx
-          .insert(objectAliases)
-          .values({
-            objectId: id,
-            alias: 'orphan',
-            aliasNorm: 'orphan',
-            aliasType: 'test',
-          });
+        await tx.insert(objectAliases).values({
+          objectId: id,
+          alias: 'orphan',
+          aliasNorm: 'orphan',
+          aliasType: 'test',
+        });
       }),
     );
     // Duplicate snapshot identity must fail and roll back both inserts, even at different ingestion times.
     const source = `test-${randomUUID()}`;
     await assert.rejects(
       db.transaction(async (tx) => {
-        await tx
-          .insert(dataSources)
-          .values({
-            id: source,
-            name: 'Integration only',
-            license: 'test',
-            attribution: 'test',
-          });
+        await tx.insert(dataSources).values({
+          id: source,
+          name: 'Integration only',
+          license: 'test',
+          attribution: 'test',
+        });
         const snapshot = {
           layer: 'test',
           groupKey: source,

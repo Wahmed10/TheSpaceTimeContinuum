@@ -15,6 +15,10 @@ export function createDatabase(env: NodeJS.ProcessEnv = process.env) {
     idleTimeoutMillis: 10_000,
     statement_timeout: 30_000,
   });
+  // Idle server pools can emit errors outside a request's guarded query path.
+  pool.on('error', () =>
+    console.error('Database pool connection error; private details withheld.'),
+  );
   const db = drizzle({ client: pool, schema });
   return { db, close: () => pool.end() };
 }

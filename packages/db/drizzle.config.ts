@@ -1,5 +1,6 @@
 import { defineConfig } from 'drizzle-kit';
-import { loadDatabaseEnvironment, databaseUrl } from './src/config';
+import { databaseUrl } from './src/config';
+import { loadDatabaseEnvironment } from './src/cliEnvironment';
 
 loadDatabaseEnvironment();
 // Generation is offline; only commands that connect require credentials.

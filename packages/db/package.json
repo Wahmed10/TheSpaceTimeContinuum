@@ -2,7 +2,8 @@
   "name": "@space/db",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./cli-environment": "./src/cliEnvironment.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

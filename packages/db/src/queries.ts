@@ -1,7 +1,12 @@
 import { sql, eq, and, desc } from 'drizzle-orm';
 import type { EntityKind } from '@space/domain';
 import type { Database } from './connection';
-import { objects, layerSnapshots, providerState } from './schema';
+import {
+  objects,
+  objectAliases,
+  layerSnapshots,
+  providerState,
+} from './schema';
 
 const kinds: readonly EntityKind[] = [
   'star',
@@ -70,6 +75,16 @@ export async function getObject(db: Database, id: string) {
     null
   );
 }
+export async function getObjectAliases(db: Database, id: string) {
+  return (
+    await db
+      .select({ alias: objectAliases.alias })
+      .from(objectAliases)
+      .where(eq(objectAliases.objectId, id))
+      .orderBy(objectAliases.aliasNorm)
+      .limit(100)
+  ).map((row) => row.alias);
+}
 export async function latestSnapshot(
   db: Database,
   layer: string,
@@ -95,5 +110,9 @@ export async function latestSnapshot(
   );
 }
 export async function providerStatuses(db: Database) {
-  return db.select().from(providerState).orderBy(providerState.providerId);
+  return db
+    .select()
+    .from(providerState)
+    .orderBy(providerState.providerId)
+    .limit(100);
 }

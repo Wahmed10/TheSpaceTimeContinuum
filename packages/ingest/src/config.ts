@@ -1,4 +1,4 @@
-import { loadDatabaseEnvironment } from '@space/db';
+import { loadDatabaseEnvironment } from '@space/db/cli-environment';
 export interface IngestConfig {
   contact: string;
   timeoutMs: number;

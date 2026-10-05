@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { eq, sql } from 'drizzle-orm';
 import { createDatabase } from '../src/connection';
-import { loadDatabaseEnvironment } from '../src/config';
+import { loadDatabaseEnvironment } from '../src/cliEnvironment';
 import {
   createIngestionStore,
   IngestionLeaseLost,

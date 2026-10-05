@@ -32,7 +32,14 @@ for (const file of [
       const dep = imp.slice(7).split('/')[0]!;
       if (pkg && allowed[pkg] && !allowed[pkg]!.includes(dep))
         errors.push(`${file}: forbidden ${imp}`);
-      if (imp.slice(7).includes('/'))
+      // Explicit Node-only entry for ingestion CLI environment setup; never a web import.
+      if (
+        imp.slice(7).includes('/') &&
+        !(
+          imp === '@space/db/cli-environment' &&
+          file === 'packages/ingest/src/config.ts'
+        )
+      )
         errors.push(`${file}: deep import ${imp}`);
     }
     if (imp.startsWith('three') && !file.startsWith('packages/engine/'))

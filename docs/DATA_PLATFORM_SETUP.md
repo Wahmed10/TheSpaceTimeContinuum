@@ -47,6 +47,8 @@ Commands redact driver errors because driver messages can contain connection det
 
 The ingestion workflow and API/status will be implemented after the database gate passes. GitHub will need separately configured `DATABASE_URL` and `PROVIDER_CONTACT` secrets. The contact value must identify the project to data providers. No secret has been configured, no workflow has been dispatched and no notification delivery has been verified by this guide.
 
+This paragraph records the initial setup state. Current progress: database/ingestion foundations are reviewed and locally committed; the P4B.3 read-only API/status code is implemented and undergoing production validation. GitHub scheduled wiring remains P4B.4.
+
 ## P4B.2 ingestion runner
 
 The database foundation is reviewed accepted and committed as `4936a47`. Provider runner code is implemented and undergoing its own verification. The approved contact is `https://github.com/Wahmed10/TheSpaceTimeContinuum/issues`. A User-Agent identifies our app to the provider and supplies a contact route; it grants no access and sends no message. Local configuration now includes this contact and `INGEST_PROVIDERS=dummy`.
@@ -69,3 +71,17 @@ The resume is host-wide and audited. Never run it blindly just to clear a warnin
 Response bodies are capped at 16MiB with a 30-second request/body deadline. Database statements also have a 30-second timeout. Source snapshots/raw records are retained for at most 30 days with 100-row/32MiB budgets per source, preserving newest last-good groups only when that current set itself fits the budget. An over-budget replacement rolls back. Ingestion claims expire after ten minutes; overlapping processes cannot fetch the same host concurrently under an active lease. A worker whose lease expires cannot publish late results.
 
 GitHub workflow/secrets, API/status and actual scheduled persistence remain later gates; local runner code is not proof of those services.
+
+## P4B.3 read-only API and status
+
+The implemented endpoints are `GET /api/v1/objects/search?q=mars&kinds=planet&limit=20`, `GET /api/v1/objects/planet:mars`, and `GET /api/v1/status`. The human-readable provider page is `/status`. Production validation runs with a real development database and in a separate unconfigured server; results must be reviewed before this step is accepted.
+
+Search accepts one query of 1–120 characters, up to eight supported kinds and a limit of 1–50. Duplicate/unsupported query parameters, control characters and invalid bounds return a 400. Search queries are parameterized and literal percent/underscore characters do not become SQL wildcard scans. Unknown objects return 404; unconfigured/unavailable data returns sanitized 503. All errors use `Cache-Control: no-store`.
+
+Successful CDN TTLs are search 300 seconds, object 3600 seconds and status 60 seconds, each with stale-while-revalidate twice the TTL. These headers do not imply a local server/CDN exists or that Next handlers are automatically cached. Next routes run on Node and read data at request time; credentials are never sent to the client. Database connections open lazily, and pure planetary routes/builds still work without database configuration.
+
+DTOs expose owned entity/provenance fields and bounded aliases, never raw provider payloads, database columns, connection details or lease/resume internals. Curated spacecraft have identity metadata only and explicitly lack a position provider. Status separates last attempt, successful ingestion and next due; ingestion timestamps are not mislabeled as source timestamps. A persisted pause or a last success older than two hours is visible even if failure backoff moves next due farther away. Unexpected stored error text becomes a bounded public code.
+
+Currently the only provider is clearly marked proof/test data. A manual proof run used to validate API readback is not evidence of the later scheduled-ingestion exit. No satellite feed or spacecraft trajectory is available from this step.
+
+The database package exposes a separate `@space/db/cli-environment` entry for CLI-only local environment loading. Server routes import the main package, which uses process configuration and never bundles the ignored local secrets file. Next supplies its own environment loading; hosted runs use configured process variables.
