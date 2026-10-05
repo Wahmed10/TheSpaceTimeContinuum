@@ -1,0 +1,7 @@
+# P4B.4 workflow preparation review
+
+October 5, 2026. Reviewed source snapshot `0ef857c2fa47b37dd5adbacd0c0efcd57c12804419cd3a4e69878415e29cb006` against input HEAD `6eb5e7113f6c8f6622a7e58aca5bc71d74b32fdb`. All 3192 source files and 14 preserved artifacts matched. Offline install/full verify, YAML syntax and live proof readback pass: 518 tests and two expected diagnostics across 62 files. Original evidence remains in `.tools/phase-five/p4b-4-verify-2/`; the first preparation and its hidden-artifact correction remain in the prior run.
+
+Workflow: cron `17 */2 * * *`, read-only repository permissions, serialized/non-cancelling job, ten-minute limit, Node 24/pinned pnpm, secrets only in runtime step. No migration/seed/forced provider resume. Explicit hidden-file inclusion uploads only the sanitized proof JSON. The narrow proof readback matches successful run/state/counts and records GitHub source/event identity without raw payload/private state.
+
+**Preparation accepted; hosted scheduled gate remains open.** This readback has `event=local`, `newSuccessDuringInvocation=false` and earlier last success `2026-10-05T21:34:49.073Z`. It cannot establish a scheduled write. Remaining requirements: configured repository secrets, publication of the complete accepted baseline to default branch, new event=`schedule` run with reviewed source/run/artifact and matching API/status readback, and verified account notification settings. No hosted run, push or separate email was performed.

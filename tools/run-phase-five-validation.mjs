@@ -102,29 +102,39 @@ if (process.argv[2] === '--prepare') {
     sourceSha256: createHash('sha256')
       .update(JSON.stringify(source))
       .digest('hex'),
-    protocol: process.argv.includes('--api-validation')
-      ? 'P4B.3 full verify + credential-free build/budgets + real API proof setup + configured/unconfigured production browsers; not scheduled ingestion acceptance'
-      : process.argv.includes('--live-ingestion')
-        ? 'P4B.2 scoped offline install + pnpm verify + live Neon ingestion persistence; not scheduled ingestion or phase acceptance'
-        : 'P4B.1 scoped offline install + pnpm verify; not phase acceptance or a live database test',
+    protocol: process.argv.includes('--workflow-validation')
+      ? 'P4B.4 workflow preparation: full verify + YAML syntax + live persistence readback; not hosted scheduled acceptance'
+      : process.argv.includes('--api-validation')
+        ? 'P4B.3 full verify + credential-free build/budgets + real API proof setup + configured/unconfigured production browsers; not scheduled ingestion acceptance'
+        : process.argv.includes('--live-ingestion')
+          ? 'P4B.2 scoped offline install + pnpm verify + live Neon ingestion persistence; not scheduled ingestion or phase acceptance'
+          : 'P4B.1 scoped offline install + pnpm verify; not phase acceptance or a live database test',
     liveIngestion: process.argv.includes('--live-ingestion'),
+    workflowValidation: process.argv.includes('--workflow-validation'),
     apiValidation: process.argv.includes('--api-validation'),
     apiPorts: process.argv.includes('--api-validation') ? [3104, 3105] : [],
-    pendingGates: process.argv.includes('--api-validation')
+    pendingGates: process.argv.includes('--workflow-validation')
       ? [
-          'independent raw/source/budget/browser/capture review',
-          'P4B.3 scoped commit',
+          'independent preparation review',
+          'GitHub secrets and publication',
+          'actual scheduled run plus API/status readback',
+          'notification configuration verification',
         ]
-      : process.argv.includes('--live-ingestion')
+      : process.argv.includes('--api-validation')
         ? [
-            'independent raw-result/source review',
-            'P4B.2 scoped commit after reviewed live persistence',
+            'independent raw/source/budget/browser/capture review',
+            'P4B.3 scoped commit',
           ]
-        : [
-            'independent raw-result/source review',
-            'real Neon development-branch migration/seed/integration',
-            'P4B.1 commit after live gate',
-          ],
+        : process.argv.includes('--live-ingestion')
+          ? [
+              'independent raw-result/source review',
+              'P4B.2 scoped commit after reviewed live persistence',
+            ]
+          : [
+              'independent raw-result/source review',
+              'real Neon development-branch migration/seed/integration',
+              'P4B.1 commit after live gate',
+            ],
     createdAt: new Date().toISOString(),
   };
   save(resolve(folder, 'launch.json'), launch);
@@ -366,6 +376,25 @@ try {
   ];
   for (const [name, args, checkout] of stages) {
     runStage(name, args, checkout, {}, name === 'liveIngestion');
+  }
+  if (manifest.workflowValidation) {
+    runStage('workflowSyntax', [
+      'exec',
+      'prettier',
+      '--check',
+      '.github/workflows/ingest.yml',
+    ]);
+    runStage(
+      'proofReadback',
+      ['exec', 'tsx', 'packages/db/src/recordIngestionProof.ts'],
+      manifest.root,
+      { INGEST_INVOCATION_STARTED_AT: new Date().toISOString() },
+      true,
+    );
+    copyFileSync(
+      resolve(manifest.root, '.tools/ingestion-proof.json'),
+      resolve(folder, 'ingestion-proof.json'),
+    );
   }
   if (manifest.apiValidation) {
     runStage('build', ['build']);

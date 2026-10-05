@@ -85,3 +85,18 @@ DTOs expose owned entity/provenance fields and bounded aliases, never raw provid
 Currently the only provider is clearly marked proof/test data. A manual proof run used to validate API readback is not evidence of the later scheduled-ingestion exit. No satellite feed or spacecraft trajectory is available from this step.
 
 The database package exposes a separate `@space/db/cli-environment` entry for CLI-only local environment loading. Server routes import the main package, which uses process configuration and never bundles the ignored local secrets file. Next supplies its own environment loading; hosted runs use configured process variables.
+
+## P4B.4 hosted scheduled proof preparation
+
+The prepared workflow is `.github/workflows/ingest.yml`: UTC cron `17 */2 * * *`, manual dispatch, read-only repository permissions, one serialized ingestion job and a ten-minute timeout. It runs the due scheduler; there are no migrations, seeds, forced refreshes or automatic provider resumes on cron. Node 24 and repository-pinned pnpm are used. The proof artifact contains only bounded proof-provider identity, counts, timestamps, content hash, and workflow event/run/source identity. A due-suppressed invocation retains its earlier success and explicitly reports `newSuccessDuringInvocation: false`; it cannot satisfy the new scheduled-run gate.
+
+Before enabling it, add Actions repository secrets at https://github.com/Wahmed10/TheSpaceTimeContinuum/settings/secrets/actions:
+
+- `DATABASE_URL`: the Neon **development** branch connection string already used locally; paste it only into GitHub's secret form.
+- `PROVIDER_CONTACT`: `https://github.com/Wahmed10/TheSpaceTimeContinuum/issues`.
+
+Do not add the live test write-approval variables to cron. Workflow fixes must be checked before publishing. Publication must include the accepted Phase 4 runtime and current Phase 4B source, not just historical HEAD or a workflow file atop an incomplete baseline. This checkout still has accepted uncommitted Phase 4 work; do not stage/reset everything to publish the workflow. No publication has been authorized/performed by this preparation.
+
+GitHub schedules execute from the default branch, currently `main`, and can be delayed. A manual dispatch proves connectivity but does not substitute for event=`schedule`. Review the hosted run URL/source and `ingestion-proof-<run-id>-<attempt>` artifact. Require a new successful ingestion during that scheduled invocation, matching state/run/snapshot, then read the configured `/api/v1/status` and `/status` against the same development DB and compare their last-success timestamp and record count. Record run ID/URL, source SHA, snapshot hash, timestamps and API/browser evidence in the checkpoint before P4B.4 acceptance or P5.2 work. A local readback of earlier proof data is not that gate.
+
+GitHub Actions email notifications must be enabled in the account's notification settings; failure-only notifications are available. Scheduled notifications depend on the schedule actor. Verify those settings explicitly; YAML does not prove an email was delivered and this workflow sends no separate email. Official references: [schedule behavior](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule), [repository secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets), [workflow notifications](https://docs.github.com/en/actions/concepts/workflows-and-actions/notifications-for-workflow-runs).
