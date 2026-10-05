@@ -4,7 +4,7 @@
   "packageManager": "pnpm@10.32.1",
   "scripts": {
     "dev": "pnpm --filter web dev",
-    "build": "tsx tools/validate-catalog.ts && pnpm --filter web build",
+    "build": "tsx tools/validate-catalog.ts && tsx tools/fixtures/build-runtime-chunks.ts --check && pnpm --filter web build && node tools/check-startup-budget.mjs",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint . && tsx tools/check-boundaries.ts",
     "test": "vitest run",
@@ -12,15 +12,15 @@
     "test:e2e": "playwright test",
     "perf:cpu": "node --import tsx tools/run-cpu-perf.mjs",
     "ingest:due": "tsx packages/ingest/src/runner.ts",
-    "fixtures:horizons": "tsx tools/fixtures/fetch-horizons.ts",
-    "assets:build": "tsx tools/assets/build-ktx.ts && tsx tools/assets/build-moon.ts && tsx tools/assets/build-mars.ts && tsx tools/assets/build-sky.ts && tsx tools/assets/build-stars.ts && tsx tools/assets/build-new-horizons.ts && tsx tools/assets/build-galilean.ts && tsx tools/assets/build-galilean.ts --minor && tsx tools/assets/build-mars-moons.ts",
-    "assets:preview": "tsx tools/assets/build-textures.ts",
-    "licenses:check": "tsx tools/check-licenses.ts",
     "db:generate": "pnpm --filter @space/db generate",
     "db:migrate": "pnpm --filter @space/db migrate",
     "db:seed": "pnpm --filter @space/db seed",
     "db:check": "pnpm --filter @space/db check",
-    "db:test:integration": "pnpm --filter @space/db test:integration"
+    "db:test:integration": "pnpm --filter @space/db test:integration",
+    "fixtures:horizons": "tsx tools/fixtures/fetch-horizons.ts",
+    "assets:build": "tsx tools/assets/build-ktx.ts && tsx tools/assets/build-moon.ts && tsx tools/assets/build-mars.ts && tsx tools/assets/build-sky.ts && tsx tools/assets/build-stars.ts && tsx tools/assets/build-new-horizons.ts && tsx tools/assets/build-galilean.ts && tsx tools/assets/build-galilean.ts --minor && tsx tools/assets/build-mars-moons.ts",
+    "assets:preview": "tsx tools/assets/build-textures.ts",
+    "licenses:check": "tsx tools/check-licenses.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",

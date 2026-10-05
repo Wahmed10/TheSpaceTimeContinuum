@@ -50,17 +50,19 @@ function temeRotation(tdbSec: number, out: Float64Array): void {
 
 /** SSB providers attach directly to root; this is equivalent to the EMB hierarchy
  * without subtracting/re-adding large barycentric positions every frame. */
-export function createSolarSystemFrameTree(): FrameTree {
+export function createSolarSystemFrameTree(
+  analytic: (body: string) => PositionProvider = createBodyProvider,
+): FrameTree {
   const tree = new FrameTree();
   tree.register({
     id: 'ICRF_HELIO',
     parent: 'ICRF_SSB',
-    origin: createBodyProvider('Sun'),
+    origin: analytic('Sun'),
   });
   tree.register({
     id: 'ICRF_EMB',
     parent: 'ICRF_SSB',
-    origin: createBodyProvider('EMB'),
+    origin: analytic('EMB'),
   });
   for (const body of [
     'Sun',
@@ -76,7 +78,7 @@ export function createSolarSystemFrameTree(): FrameTree {
     'Pluto',
   ]) {
     const id = `ICRF_BODY:${body.toLowerCase()}` as const;
-    tree.register({ id, parent: 'ICRF_SSB', origin: createBodyProvider(body) });
+    tree.register({ id, parent: 'ICRF_SSB', origin: analytic(body) });
     tree.register({
       id: `FIXED:${body.toLowerCase()}`,
       parent: id,

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import {
   MAX_UTC_MS,
   MIN_UTC_MS,
@@ -6,6 +6,9 @@ import {
   utcMsToTdb,
 } from '@space/astro';
 import { clockUiState } from '../src/engine-bridge/clockSnapshot';
+import { loadUiTime } from '../src/engine-bridge/uiTimeAdapter';
+
+beforeAll(loadUiTime);
 
 const previous = { mode: 'playing', clockClamped: false } as const;
 

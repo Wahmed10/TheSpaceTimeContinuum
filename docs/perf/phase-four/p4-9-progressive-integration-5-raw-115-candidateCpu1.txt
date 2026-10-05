@@ -1,0 +1,20 @@
+
+> space-time-continuum@ perf:cpu C:\Users\waqar\Documents\TheSpaceTimeContinuum\.tools\phase-four\p4-9\progressive-integration-5\candidate
+> node --import tsx tools/run-cpu-perf.mjs "--url" "http://localhost:3002" "--output" "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-current-1.json" "--baseline" "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-reference-1.json"
+
+[cpu-path] solar-orbit
+[cpu-path] earth-leo
+[cpu-path] moon-orbit
+[cpu-path] mars-orbit
+[cpu-path] earth-moon-zoom
+CPU evidence saved to C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-current-1.json
+┌─────────┬───────────────────┬────────────────────┬────────────────────┐
+│ (index) │ path              │ meanMs             │ p95Ms              │
+├─────────┼───────────────────┼────────────────────┼────────────────────┤
+│ 0       │ 'solar-orbit'     │ 1.643333327770233  │ 2.899999976158142  │
+│ 1       │ 'earth-leo'       │ 1.5749999990065893 │ 2.5999999046325684 │
+│ 2       │ 'moon-orbit'      │ 1.4616666664679845 │ 2.399999976158142  │
+│ 3       │ 'mars-orbit'      │ 1.4291666676600774 │ 2.200000047683716  │
+│ 4       │ 'earth-moon-zoom' │ 1.3941666622956594 │ 2.100000023841858  │
+└─────────┴───────────────────┴────────────────────┴────────────────────┘
+CPU regression comparison passed at the unchanged 20% threshold.

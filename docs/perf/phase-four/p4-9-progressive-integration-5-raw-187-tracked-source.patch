@@ -1,0 +1,2678 @@
+diff --git a/README.md b/README.md
+index a7c18f0..e2e7f10 100644
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,6 @@
+ # The Space Time Continuum
+ 
+-A working **Phase 3 Solar System renderer**, not the completed MVP. Phase 3 is accepted and [the approved Phase 4 plan](docs/PHASE_4_PLAN.md) is being implemented. [The checkpoint](docs/PHASE_4_CHECKPOINT.md) records accepted steps and the active validation job.
++A working Solar System explorer with **P4.1–P4.8 consumer UX accepted**. The previous P4.9 source passes all99 browser tests, all3 profiles, shell size and desktop GPU throughput; cold startup fails the original targets. The user approved [progressive loading](docs/PHASE_4_PROGRESSIVE_LOADING_PLAN.md) on October 4; implementation and fresh validation are in progress. [The implementation handoff](PHASE_4_IMPLEMENTATION_HANDOFF.md) records current work and remaining gates. Check the active job with `node tools/phase-four-status.mjs`.
+ 
+ ```powershell
+ pnpm install
+@@ -11,9 +11,11 @@ Open http://localhost:3000. The application works locally without accounts, API
+ 
+ Object routes use catalog IDs, for example `/object/planet/mars`, `/object/moon/europa`, `/object/dwarf/pluto` and `/object/moon/charon`. Friendly paths such as `/mars` redirect with validated link settings. Optional `SITE_URL` must be an HTTP(S) origin with no credentials, path, query or fragment; set it in the web build environment (or `apps/web/.env.local`). Unconfigured/invalid origins omit absolute canonical and Open Graph URLs. Metadata uses catalog descriptions, with no invented live measurements. Event links currently return an unavailable-events 404.
+ 
+-Check the recorded Phase 4 job from PowerShell with `node tools/phase-four-status.mjs`. This prints its source, stage outcomes and log directory without starting tests. Automated success remains pending until its review is recorded.
++Check the recorded Phase 4 job from PowerShell with `node tools/phase-four-status.mjs`. This prints its source, stage outcomes, matching review and remaining decisions without starting tests. The progressive foundation is reviewed passed:467 unit/science tests plus2 expected diagnostics,102 browser cases and both physical GPU texture/throughput checks. [The foundation review](docs/perf/phase-four/p4-9-progressive-foundation-1-review.md) preserves the exact source and captures. Scene chunk integration and strict startup/date-jump validation are now in progress; the active-job command identifies the current run. [The earlier failed cold review](docs/perf/phase-four/p4-9-regression-1-review.md) remains unchanged.
+ 
+-Currently implemented: a Next.js/TypeScript workspace; a framework-free Three.js WebGPU/WebGL2 engine; all 21 catalog bodies with sourced maps/materials, Saturn rings and irregular Phobos/Deimos meshes; camera-relative float64 physics; orbit, zoom, pan, focus flights, follow, and history; a deterministic TDB clock with live/past/future/reverse playback; Explore/True scale; basic search, cards, layer controls, settings, and responsive UI. Reference data and attributed assets are committed. Phase 4 will complete consumer routing, share-state synchronization, search and accessibility rather than rebuild the accepted renderer.
++Consumer UX includes canonical links and Back/Forward restoration, local search across all21 bodies and aliases, physical measurements and source provenance, sharing, UTC date/eight-speed playback, requested/visible layer states, persisted distance/quality/motion settings, mobile card sheets and a selectable Objects in view list. The default shell has six controls; Settings contains secondary actions. Native keyboard flows, fourteen actual open-state accessibility scans and whole-Explore accelerated profiles pass review. These checks supplement manual accessibility assessment.
++
++The framework-free Three.js WebGPU/WebGL2 renderer retains the accepted21 sourced bodies, Saturn rings, irregular Phobos/Deimos meshes, camera-relative float64 physics, camera inputs/focus/follow/history and Explore/True scale. P4.9 measures production shell attribution, cold first frame, settled navigation, desktop throughput and geometry/storage. Phone viewport emulation remains distinct from physical-phone evidence. Reference data, assets and original tolerances are preserved.
+ 
+ **Phase 2 and Phase 3 are accepted.** Phase 2 retains ADR 0010's documented upstream allocation exception and accepted device coverage. Phase 3 passes local renderer/science/build, strict paired CPU regression, user laptop HIGH/WebGPU and final appearance review, including the explained Charon source-resolution limitation. Local browser automation is SwiftShader functional evidence; the separate laptop report supplies physical-device evidence. See [implementation status](docs/IMPLEMENTATION_STATUS.md) and [Phase 4 handoff](PHASE_4_HANDOFF.md) for exact scope and limitations.
+ 
+@@ -23,16 +25,16 @@ See [implementation status](docs/IMPLEMENTATION_STATUS.md) and [gate report](doc
+ 
+ Useful commands:
+ 
+-| Command | Purpose |
+-|---|---|
+-| `pnpm dev` | Start the application |
+-| `pnpm build` | Produce the Next.js production build |
+-| `pnpm verify` | Typecheck, lint/boundaries, all unit/science tests |
+-| `pnpm test:e2e` | UI, precision/depth, texture stability, React profile and visual regression |
+-| `pnpm exec tsx tools/fixtures/validate-horizons.ts` | Full error measurements, nonzero exit on failed gate |
+-| `pnpm fixtures:horizons` | Re-fetch independent JPL fixtures sequentially |
+-| `pnpm assets:build` | Build KTX2 tiers, NASA lunar/Mars/sky maps and BSC5 stars (requires toktx) |
+-| `node tools/measure-engine.mjs` | Check complete engine gzip against 450 KB |
+-| `pnpm licenses:check` | Audit runtime dependencies and regenerate notices |
++| Command                                             | Purpose                                                                     |
++| --------------------------------------------------- | --------------------------------------------------------------------------- |
++| `pnpm dev`                                          | Start the application                                                       |
++| `pnpm build`                                        | Produce the Next.js production build                                        |
++| `pnpm verify`                                       | Typecheck, lint/boundaries, all unit/science tests                          |
++| `pnpm test:e2e`                                     | UI, precision/depth, texture stability, React profile and visual regression |
++| `pnpm exec tsx tools/fixtures/validate-horizons.ts` | Full error measurements, nonzero exit on failed gate                        |
++| `pnpm fixtures:horizons`                            | Re-fetch independent JPL fixtures sequentially                              |
++| `pnpm assets:build`                                 | Build KTX2 tiers, NASA lunar/Mars/sky maps and BSC5 stars (requires toktx)  |
++| `node tools/measure-engine.mjs`                     | Check complete engine gzip against 450 KB                                   |
++| `pnpm licenses:check`                               | Audit runtime dependencies and regenerate notices                           |
+ 
+ The `db` and `ingest` packages are skeletons, not functioning services. There is no deployed site, provisioned Neon database, satellite ingestion, news pipeline, or telemetry. No fake live provider data is supplied.
+diff --git a/apps/web/next.config.ts b/apps/web/next.config.ts
+index e676e7f..2df43f9 100644
+--- a/apps/web/next.config.ts
++++ b/apps/web/next.config.ts
+@@ -1,6 +1,8 @@
+ import type { NextConfig } from 'next';
+ import { networkInterfaces } from 'node:os';
+ const config: NextConfig = {
++  // Isolated validation builds opt in to emitted module attribution maps.
++  productionBrowserSourceMaps: process.env.SPACE_BUILD_AUDIT === '1',
+   // Friendly redirects must validate the original percent-encoded query.
+   // Next's default Proxy URL normalization reconstructs decoded parameters.
+   skipProxyUrlNormalize: true,
+@@ -24,6 +26,15 @@ const config: NextConfig = {
+   ],
+   async headers() {
+     return [
++      {
++        source: '/data/chunks/:version([a-f0-9]{64})/:file',
++        headers: [
++          {
++            key: 'Cache-Control',
++            value: 'public, max-age=31536000, immutable',
++          },
++        ],
++      },
+       {
+         source: '/(.*)',
+         headers: [
+diff --git a/apps/web/src/components/objects/ObjectCard.tsx b/apps/web/src/components/objects/ObjectCard.tsx
+index c416e4a..31daeb3 100644
+--- a/apps/web/src/components/objects/ObjectCard.tsx
++++ b/apps/web/src/components/objects/ObjectCard.tsx
+@@ -71,9 +71,11 @@ export default function ObjectCard({
+             <span style={{ background: body.color }} />
+           </h2>
+           <p className="position-certainty">
+-            {certaintyLabel(
+-              snapshot.metrics?.certainty ?? body.provenance.certainty,
+-            )}{' '}
++            {snapshot.positionStatus === 'loading'
++              ? 'Loading'
++              : certaintyLabel(
++                  snapshot.metrics?.certainty ?? body.provenance.certainty,
++                )}{' '}
+             position
+           </p>
+         </>
+diff --git a/apps/web/src/engine-bridge/EngineCanvas.tsx b/apps/web/src/engine-bridge/EngineCanvas.tsx
+index 042193f..871fe03 100644
+--- a/apps/web/src/engine-bridge/EngineCanvas.tsx
++++ b/apps/web/src/engine-bridge/EngineCanvas.tsx
+@@ -1,6 +1,6 @@
+ 'use client';
+ import { useEffect, useRef, useState } from 'react';
+-import { isoToTdb, tdbToIso } from '@space/astro';
++import { loadUiTime, tdbToIso } from './uiTimeAdapter';
+ import { useEngineStore } from './useEngineStore';
+ import { parseExploreLocation } from '../lib/routeState';
+ import type { RouteIssue } from '../lib/routeState';
+@@ -11,6 +11,8 @@ import { clockUiState } from './clockSnapshot';
+ declare global {
+   interface Window {
+     __spaceEngine?: SpaceEngine;
++    /** Installed before navigation only by the production shell attribution audit. */
++    __spaceEngineStartGate?: Promise<void>;
+   }
+ }
+ export default function EngineCanvas() {
+@@ -50,12 +52,19 @@ export default function EngineCanvas() {
+         if (initialLocation.route.status !== 'lab')
+           unsubs.push(initializeUserSettings());
+         useEngineStore.setState({ linkIssues: initialLocation.issues });
+-        const { SpaceEngine } = await import('@space/engine');
++        if (debug.test && window.__spaceEngineStartGate)
++          await window.__spaceEngineStartGate;
++        if (disposed || expired) return;
++        const [{ SpaceEngine }, { isoToTdb }] = await Promise.all([
++          import('@space/engine'),
++          loadUiTime(),
++        ]);
+         if (disposed || expired) return;
+         engine = await SpaceEngine.create(canvas, {
+           forceWebGL: generation > 0 || debug.forceWebGL,
+           labels: labels.current!,
+           test: debug.test,
++          focus: state.focus,
+           ...(state.t ? { tdbSec: isoToTdb(state.t) } : {}),
+         });
+         if (disposed || expired) {
+diff --git a/apps/web/src/engine-bridge/RouteStateBridge.tsx b/apps/web/src/engine-bridge/RouteStateBridge.tsx
+index 0a80200..1a6fe64 100644
+--- a/apps/web/src/engine-bridge/RouteStateBridge.tsx
++++ b/apps/web/src/engine-bridge/RouteStateBridge.tsx
+@@ -1,7 +1,7 @@
+ 'use client';
+ import { useEffect, useMemo } from 'react';
+ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+-import { tdbToIso } from '@space/astro';
++import { tdbToIso } from './uiTimeAdapter';
+ import { RouteStateController } from './routeStateController';
+ import { useEngineStore } from './useEngineStore';
+ 
+diff --git a/apps/web/src/engine-bridge/clockSnapshot.ts b/apps/web/src/engine-bridge/clockSnapshot.ts
+index 75ef806..0c5a7ac 100644
+--- a/apps/web/src/engine-bridge/clockSnapshot.ts
++++ b/apps/web/src/engine-bridge/clockSnapshot.ts
+@@ -1,14 +1,5 @@
+-import {
+-  MAX_UTC_MS,
+-  MIN_UTC_MS,
+-  tdbToIso,
+-  utcMsToTdb,
+-  type ClockMode,
+-  type ClockSnapshot,
+-} from '@space/astro';
+-
+-const minTdb = utcMsToTdb(MIN_UTC_MS);
+-const maxTdb = utcMsToTdb(MAX_UTC_MS);
++import type { ClockMode, ClockSnapshot } from '@space/astro';
++import { uiTime } from './uiTimeAdapter';
+ 
+ /** Adapt the existing throttled clock sample without another subscription. */
+ export function clockUiState(
+@@ -16,6 +7,7 @@ export function clockUiState(
+   previous: { mode: ClockMode; clockClamped: boolean },
+   commandedMode?: ClockMode,
+ ) {
++  const { minTdb, maxTdb, tdbToIso } = uiTime();
+   // A clamp may happen between 4 Hz samples. Its one-tick flag can already be
+   // cleared when the next sample arrives, but the paused outward boundary and
+   // preceding playback intent still identify it. Explicit commands reset it.
+diff --git a/apps/web/src/engine-bridge/objectSnapshot.ts b/apps/web/src/engine-bridge/objectSnapshot.ts
+index 650c06b..5ee94f1 100644
+--- a/apps/web/src/engine-bridge/objectSnapshot.ts
++++ b/apps/web/src/engine-bridge/objectSnapshot.ts
+@@ -1,10 +1,11 @@
+ import type { EngineApi } from '@space/engine';
+-import { tdbToIso } from '@space/astro';
++import { tdbToIso } from './uiTimeAdapter';
+ 
+ /** Cold public getters sampled by the existing throttled UI bridge. */
+ export function readObjectSnapshot(engine: EngineApi | null, id: string) {
+   return {
+     metrics: engine?.getMetrics(id) ?? null,
++    positionStatus: engine?.getPositionStatus(id) ?? 'loading',
+     simulationUtc: engine ? tdbToIso(engine.clock.state.tdbSec) : null,
+   };
+ }
+diff --git a/apps/web/src/engine-bridge/timeCommands.ts b/apps/web/src/engine-bridge/timeCommands.ts
+index fbd86a6..be3172b 100644
+--- a/apps/web/src/engine-bridge/timeCommands.ts
++++ b/apps/web/src/engine-bridge/timeCommands.ts
+@@ -1,4 +1,5 @@
+-import { utcMsToTdb, tdbToIso, MIN_UTC_MS, MAX_UTC_MS } from '@space/astro';
++import { MIN_UTC_MS, MAX_UTC_MS } from '@space/domain';
++import { utcMsToTdb, tdbToIso } from './uiTimeAdapter';
+ import { useEngineStore } from './useEngineStore';
+ import { parseUtcDateInput } from '../lib/utcInput';
+ import type { EngineApi } from '@space/engine';
+diff --git a/apps/web/src/lib/utcInput.ts b/apps/web/src/lib/utcInput.ts
+index b7e09f2..9963082 100644
+--- a/apps/web/src/lib/utcInput.ts
++++ b/apps/web/src/lib/utcInput.ts
+@@ -1,4 +1,4 @@
+-import { MAX_UTC_MS, MIN_UTC_MS } from '@space/astro';
++import { MAX_UTC_MS, MIN_UTC_MS } from '@space/domain';
+ 
+ export type UtcInputResult =
+   | { ok: true; utcMs: number; iso: string }
+diff --git a/apps/web/test/clockSnapshot.test.ts b/apps/web/test/clockSnapshot.test.ts
+index 31f6095..6a51462 100644
+--- a/apps/web/test/clockSnapshot.test.ts
++++ b/apps/web/test/clockSnapshot.test.ts
+@@ -1,4 +1,4 @@
+-import { describe, expect, it } from 'vitest';
++import { beforeAll, describe, expect, it } from 'vitest';
+ import {
+   MAX_UTC_MS,
+   MIN_UTC_MS,
+@@ -6,6 +6,9 @@ import {
+   utcMsToTdb,
+ } from '@space/astro';
+ import { clockUiState } from '../src/engine-bridge/clockSnapshot';
++import { loadUiTime } from '../src/engine-bridge/uiTimeAdapter';
++
++beforeAll(loadUiTime);
+ 
+ const previous = { mode: 'playing', clockClamped: false } as const;
+ 
+diff --git a/docs/IMPLEMENTATION_STATUS.md b/docs/IMPLEMENTATION_STATUS.md
+index 85ab11c..5868a2f 100644
+--- a/docs/IMPLEMENTATION_STATUS.md
++++ b/docs/IMPLEMENTATION_STATUS.md
+@@ -1,16 +1,50 @@
+-# Implementation status — October 3, 2026
++# Implementation status - October 5, 2026 UTC
+ 
+-## Current: Phase 4 approved; P4.1–P4.3 accepted, P4.4 next
++## Current: P4.1-P4.8 accepted; P4.9 orbit upload optimization requires fresh full validation
+ 
+-The user approved the nine-step [Phase 4 execution plan](PHASE_4_PLAN.md). P4.1 URL/UTC/startup behavior is accepted. P4.2 camera references/history, MapState restoration, layer settling and command diagnostics pass review: verify (255 tests plus two existing expected rejections), isolated build, all 14 browser cases, original eight screenshot references, precision/depth and fresh paired CPU comparison. Maximum mean/p95 increases are 3.41%/4.35%, below the unchanged 20% gate. Its initial LIVE orbit endpoint failure and exact-endpoint correction are preserved. Local acceptance commit is `0b4b9f4`; see the [final review](perf/phase-four/p4-2-final-review.md).
++Integration4 is reviewed failed overall only on CPU: Earth LEO mean +21.137% and Moon p95 +26.316%, against the original 20% cap. All 477 unit/science checks plus two expected diagnostics, 108 browser cases, four performance cases and three production profiles pass at that prior source. Actual first-frame maxima are 899.3 ms desktop and 4008 ms simulated 4G; startup download max 929340 bytes and uncached desktop jump max 106.1 ms meet the original targets. [Reviewed integration4](perf/phase-four/p4-9-progressive-integration-4-review.md).
+ 
+-P4.3 catalog object/alias/event routes, catalog metadata and a persistent Explore layout pass review. Retry: both production builds, 25 main browser cases, configured all-21-object metadata check, clean server logs, source/evidence hashes and unchanged renderer budgets/precision/storage pass. Short verify is 290 tests plus two existing expected diagnostics. Twenty client selections retain one engine/canvas and dispose once on exit. [The first review](perf/phase-four/p4-3-first-review.md) preserves the initial failure; [the final review](perf/phase-four/p4-3-final-review.md) records acceptance. `node tools/phase-four-status.mjs` reads the reviewed result. [The checkpoint](PHASE_4_CHECKPOINT.md) records exact source/commands. Acceptance commit is next, then approved P4.4; Phase 4B remains excluded.
++All three CPU investigations are independently reviewed diagnostic captures, never CPU acceptance. The latest reconstructs 2400 raw measured frames across four predetermined captures with identical geometry/native call counts and no in-frame shader compilation, texture uploads, pending chunks or orbit builds. It does not reproduce the large spikes or establish their sole cause. Shared reference/candidate texture resolutions match; the candidate includes the already accepted additional Phase3 body maps. Earlier traces do not support callback-phase changes or garbage collection as a fix. The failed clean results remain failed. [Latest native-call review](perf/phase-four/p4-9-cpu-investigation-3-review.md).
++
++OrbitLayer now calculates each physical vertex once and writes the existing shared endpoint buffer directly, eliminating duplicate interior calculations and accessor calls. Float64 camera subtraction and multiply/add order, actual float32 upload bytes, geometry, materials, opacity, line widths, scientific samples and one dirty-buffer revision are preserved. Three new tests cover large/near-surface origins, scale changes, mutated points, signed zero, minimal segments and closed paths. All 16 focused orbit/label/in-view tests, engine typecheck and changed-file lint pass. An ignored Node microbenchmark with nine predetermined alternating pairs shows median upload ratio 0.458 with exact bytes in every pair; this is diagnostic evidence only, not browser CPU acceptance.
++
++The validation driver predeclares three clean CPU reference/candidate pairs with unique reports, sequentially on the same machine against immutable Phase2 4409ef5. Each pair must pass the original five-path mean and p95 <=1.20 limits; every failure is retained, and independent later pairs still run. There is no outlier filtering, cross-pair averaging or best-result selection. All five driver default/identity/failure-collection tests pass. Source integrity and setup prerequisites remain fail-closed.
++
++Fresh isolated full verification, generated-chunk/static budgets, normal build, shell/engine/assets/licenses/local lookup, all four startup/navigation/physical HIGH cases, 108 production browser cases, three separate production profiles and all three uninstrumented CPU pairs are required after this runtime change. No prior runtime-performance pass is inherited. Use `node tools/phase-four-status.mjs`; the checkpoint and implementation handoff record the active run, source/PID/logs and next review. Phase4 remains unaccepted until automatic review and changed-consumer-UX review. Accepted device/science/source/Charon boundaries remain closed; Phase4B/5 and deployment are excluded.
++## Earlier October4 evidence: integrated startup/jumps and material readiness
++
++
++Progressive-integration-3 finished October4 at20:16:45UTC and is reviewed **failed overall** on one material-reference capture:107/108 browser cases pass with no skipped/retried/flaky cases or report errors. All five uncached jumps now pass at44–97ms against1000ms; CDP peak texture requests is2. Both startup races pass. All four performance cases pass: desktop first paint max855ms/2500ms, simulated4G max4020.2ms/5000ms, actual startup max929325bytes/1500000. Physical HIGH p95 WebGL2 max12.1ms/WebGPU6.2ms; full verify474 plus2 expected diagnostics/55files, science/boundaries/budgets/shell/accessibility and other completed gates pass. All3085 root/candidate,220 reference and14 preserved hashes independently match before the test correction. All131 captures accounted:90 prior-identical and41 novel inspected. [Reviewed evidence](perf/phase-four/p4-9-progressive-integration-3-review.md).
++
++The failing screenshot shows the Sun rather than requested Earth after a fixed500ms wait and render freeze. Textures had settled. The test now requires two newly submitted stable frames, a ready centered detailed target, and matching current epoch/revision before freezing, with a readiness artifact for each view. All eight original images and the1.5% tolerance remain unchanged. This is a test-only correction awaiting confirmation; production code/config/data/science are unchanged. The later seven material comparisons and profile/CPU stages did not run, so no pass is inferred for them.
++
++A fresh focused job will rerun the entire eight-view material group, all three production profiles, and the previously unexecuted sequential same-machine reference/candidate CPU comparison. Its immutable manifests and reviewed-report hashes must prove the other107 browser cases, all4 performance cases and474 unit/science passes apply to identical production source. No duplicate full suite is needed for this test-only readiness change. Check `node tools/phase-four-status.mjs` for the recorded job; final combined evidence and changed-UX review remain required.
++
++Progressive-integration-2 finished October4 at18:59:33UTC and is independently reviewed **failed overall**:472 unit/science tests plus2 expected diagnostics in55files pass;105 of108 browser cases pass with no skipped/retried/flaky cases or report errors. All four performance cases pass. Five actual post-paint desktop samples max854.7ms against2500ms, and five simulated4G samples max4082.3ms against5000ms. Actual startup downloads max929178/1500000bytes; conservative build1074666bytes. Physical HIGH p95 WebGL2 max12.2ms/WebGPU6.2ms against16.7ms; shell, engine380308gzip, original references, exhaustive correction/six-model boundary science, accessibility and other required completed gates pass. All3085 root/candidate source hashes and14 preserved artifacts matched before fixes. All128 captures accounted:80 prior-identical and48 novel inspected. [Review and hashed raw evidence](perf/phase-four/p4-9-progressive-integration-2-review.md).
++
++Two failures still held obsolete full correction URLs; they now hold the critical star catalog to preserve their startup race scenarios. One of five uncached desktop jumps took1390.9ms against1000ms, with rendering continuing. Its trace indicates unrestricted KTX downloads occupying same-origin connections while the small date chunk waits. Texture loads are now bounded to two, all queued1K maps precede detail, and current quality is chosen when a queued load starts. Eight focused texture cases, engine typecheck and changed-file lint pass. The jump test retains all five uncached epochs/current-position/rendered-revision requirements and records CDP transfer timestamps, texture concurrency and readiness progress. No target or startup scenario is relaxed. The delayed-texture tests now hold two active loads while retaining all29 preview/1K/detail assertions.
++
++Fresh progressive-integration-3 is being prepared with full verification, all four startup/navigation/physical-GPU measurements,108 browser cases, three separate production profiles, and a new sequential same-machine CPU pair against the unchanged accepted Phase2 reference4409ef5. The optional CPU stage uses ordinary dev builds on both sides, as in accepted P4.2; it never benchmarks the profiling build. Check `node tools/phase-four-status.mjs` for the recorded run. The previous failed source is retained; no fresh pass or Phase4 acceptance is claimed. Final changed-UX review remains required.
++
++The approved progressive foundation finished October4 at17:29:11UTC and is independently reviewed passed:467 unit/science tests plus2 expected diagnostics,102 browser cases without skips/retries/flakes/errors, physical HIGH WebGL2/WebGPU and staged preview→1K→detail proofs. Source SHA25616c77125045acaeea17250e43151d6f3a2d567293d12f773a5e35aeb14f1799b;3082 frozen source files and14 preserved user artifacts independently checked. All126 captures are accounted:83 match previously inspected images and43 novel captures were inspected. [Reviewed evidence](perf/phase-four/p4-9-progressive-foundation-1-review.md) is separate from final phase acceptance.
++
++The scene now uses engine-owned streamed providers and frame origins, one current-date bundle in parallel with renderer startup, paused-date cache invalidation, per-object loading/fresh approximate fallback, guarded camera/metrics/labels/point layers, lower-priority asynchronous orbit curves and forward/reverse prefetch. Curve sampling matches the accepted synchronous algorithm exactly. The cache reserves a date-request slot and pins the current date within its8MiB cap. The build enforces a1,500,000-byte conservative startup budget; browser CDP checks actual cold transfers and a post-paint marker. Six new browser cases cover held/late/failed data, current-date metrics, five≤1s desktop jumps, fixed-range reuse and sustained forward/reverse one-year-per-second boundaries. The integrated source still needs fresh full verification, unchanged2.5s desktop/5s simulated4G startup, strict geometry/GPU/regression/profile gates, paired CPU comparison and changed-UX review. Check the existing active run first with `node tools/phase-four-status.mjs`. No Phase4 acceptance is claimed.
++
++The first integrated preflight stopped before build/browser stages:469 tests passed, two Objects in view fixture tests failed, two expected diagnostics remained. Its partial engine fixture lacked the clock/rendered-date/cache-revision fields required by the new freshness guard. All3085 root/candidate hashes and14 preserved artifacts independently matched. [Failed preflight review](perf/phase-four/p4-9-progressive-integration-1-review.md) retains the logs and failure. The fixture now initializes those fields and adds a stale-date/arriving-chunk test; all five membership cases pass. Runtime guards and thresholds are unchanged. Fresh isolated progressive-integration-2 repeats full verification and all planned measurements.
++
++The approved nine-step [Phase4 plan](PHASE_4_PLAN.md) is implemented through P4.8, committed locally as `035fc967ed9ba88550773ea8f757fd5ff905d23c`. Routing/history/share, local search, physical/provenance cards, UTC/layers/settings/mobile shell and Objects in view/shortcut/accessibility behavior are reviewed accepted. P4.8 short verification passes411 tests plus two expected diagnostics/47files, typecheck/lint/boundaries. P4.8 normal-production five regression probes,21 integrated accessibility/list checks and85 full browser cases pass; all three separate production profiles pass. Overview and card/list every one-second bin stay<=4 commits over actual30second86400playing windows, with public time/workload/history proof. Only profiling setup and ADR changed between the final normal/profile snapshots;328 other sources and86 inherited raw artifacts were independently matched. [Combined acceptance](perf/phase-four/p4-8-final-review.md) preserves previous failures and all43 capture inspection identities.
++
++P4.9 regression-1 finished October4 at06:01:53UTC and is reviewed **failed on cold startup**, source SHA256 `2454e8d96fa483144b73641ec91765cc0df16b2d6cae0e545ead6080611ff3e2`. All99 normal browser cases in20files and all3 isolated production profiles pass, with no skips/retries/flakes/report errors. The shell now passes: root196540gzip bytes, Earth/Charon192907 each versus200000. Existing exact astronomy time converters load at engine initialization; supported date bounds and scientific algorithms remain unchanged. Short verify passes413 tests plus two expected diagnostics/48files, typecheck/lint/boundaries. Engine375290/450000gzip and assets79961515/80000000bytes pass. Both physical desktop HIGH five-view cases pass16.7ms: worst WebGL2 p95 12.1ms and WebGPU6.2ms. Fully warmed target navigation has0longtasks in both50/100ms protocols; the separate first-use search-response flow retains168ms/78ms desktop tasks, while all input/semantic-selection samples meet300ms. This is not a blanket guarantee about first-use interactions.
++
++New-source cold first frames still take3.009–3.304seconds desktop versus2.5, and45.697–45.870seconds in4G viewport emulation versus5. The user approved progressive loading and the coefficient/approximate-fallback clarification on October 4. See [the amendment](PHASE_4_PROGRESSIVE_LOADING_PLAN.md); the original targets remain unchanged. All120captures are accounted:87inspected now,33identical to prior inspected captures. Fourteen whole-page axe scans have zero violations and retain incomplete contrast/native-keyboard supplements. Precision max0.134356px and all11depth probes pass. Complete Explore profiles average3.0667/2.9667commits/sec, every one-second bin<=4, actual86400playing/time/workload proof and zero measured history writes. All337root/candidate and14preserved artifact hashes match before documentation/status refresh. [Reviewed raw evidence](perf/phase-four/p4-9-regression-1-review.md) and [implementation handoff](../PHASE_4_IMPLEMENTATION_HANDOFF.md) record scope, exact source and continuation. The old run is finished and its owned3002servers stopped. New foundation work and its fresh job are recorded in the implementation handoff/checkpoint; userdev3000 is preserved. Accepted earlier device coverage is not reopened; new viewport results do not establish physical-phone throughput. Changed-UX user review remains open. `node tools/phase-four-status.mjs` reads recorded results without starting tests. Phase4B/5, deployment and database work remain excluded.
++
++P4.2's fresh same-machine camera/FrameTree CPU comparison remains accepted: maximum mean/p95 increases3.41%/4.35%, below the unchanged20% limit, [review](perf/phase-four/p4-2-final-review.md). P4.8 adds a cold list query on the existing UI cadence and changes no engine frame callback, scientific model/provider or asset. P4.9 startup attribution instrumentation adds no hot-loop work; any later hot-path fix requires the approved fresh sequential CPU comparison.
+ 
+ All 21 bodies now have reviewed appearance, with Saturn rings/shadows, giant atmosphere rims, Venus/Titan cloud or haze treatments, sourced dwarf/moon maps, Phobos/Deimos irregular meshes and the ten previously missing scientific attitudes. Moon-system True/Explore, orbit and touch interactions pass. Phase 2 remains accepted with ADR 0010 and documented device coverage.
+ 
+ The reviewed `f74242a` run passes 128 unit tests plus two expected rejected-model diagnostics, all 29 browser tests, production build and the strict five-path same-machine CPU comparison against accepted Phase 2 `4409ef5`. CPU mean/p95 increases are at most 13.33%/10.53%, below the unchanged 20% gate. Original material references and scientific tolerances are unchanged. All 77 new regression captures were reviewed. Evidence: [Phase 3 CPU investigation](perf/phase-three/cpu-regression.md), [validation record](perf/phase-three/validation-final.json), and [checkpoint](PHASE_3_CHECKPOINT.md).
+ 
+-Local automation is SwiftShader WebGL2. The user's laptop HIGH/WebGPU Phase 3 report passes all 24 views: worst p95 6.20 ms, maximum 36 draw calls/three detailed meshes, compressed mip storage 119.84 MB, precision error 0.107680 px and all eleven depth probes pass. Exact GPU identity is unavailable. See [the laptop review](perf/phase-three/device-laptop-review.md). The all-body device-report button is validated at `749a506`: six browser tests and production build pass, with coverage and settings restoration verified. No repeat of the passing laptop run is pending. The subsequently authorized [surface registration audit](science/surface-registration-audit.md) resolves gross geographic frames and corrects Ceres/Charon longitude offsets and Phobos/Deimos source axes. Current verify passes 131 tests plus two expected diagnostics; corrected runtime `b277fce` passes 17 browser tests, production build and agent review of 60 captures. Evidence is in `docs/perf/phase-three/surface-audit-*`. No job is pending. Ceres, Phobos and Deimos now have user appearance sign-off; the user subsequently accepted Charon's investigated source limitation and confirmed Phase 4 readiness. See [the completed review record](science/surface-registration-manual-review.md). See [the current handoff](../PHASE_3_IMPLEMENTATION_HANDOFF.md); source accuracy limits remain documented. Phase 4 implementation is unstarted; [the detailed handoff](../PHASE_4_HANDOFF.md) describes the planning/approval step.
++Local automation is SwiftShader WebGL2. The user's laptop HIGH/WebGPU Phase 3 report passes all 24 views: worst p95 6.20 ms, maximum 36 draw calls/three detailed meshes, compressed mip storage 119.84 MB, precision error 0.107680 px and all eleven depth probes pass. Exact GPU identity is unavailable. See [the laptop review](perf/phase-three/device-laptop-review.md). The all-body device-report button is validated at `749a506`: six browser tests and production build pass, with coverage and settings restoration verified. No repeat of the passing laptop run is pending. The subsequently authorized [surface registration audit](science/surface-registration-audit.md) resolves gross geographic frames and corrects Ceres/Charon longitude offsets and Phobos/Deimos source axes. Current verify passes 131 tests plus two expected diagnostics; corrected runtime `b277fce` passes 17 browser tests, production build and agent review of 60 captures. Evidence is in `docs/perf/phase-three/surface-audit-*`. No job is pending. Ceres, Phobos and Deimos now have user appearance sign-off; the user subsequently accepted Charon's investigated source limitation and confirmed Phase 4 readiness. See [the completed review record](science/surface-registration-manual-review.md). See [the current handoff](../PHASE_3_IMPLEMENTATION_HANDOFF.md); source accuracy limits remain documented. The subsequent Phase 4 work is recorded above and in [the approved execution plan](PHASE_4_PLAN.md).
+ 
+ October 2 appearance follow-up: the user passes Ceres, Phobos and Deimos. Charon's reported smudging is also present in the original NASA basemap before resizing/compression; [the investigation](science/surface-registration-audit.md#october-2-user-report-charons-blurry-region) records the source hash and coverage limitation. The temporary screenshot was inspected and removed. No runtime/asset changes or repeat tests were needed. The user subsequently accepted that limitation and confirmed Phase 4 readiness. Phase 3 is closed. [Phase 4 handoff](../PHASE_4_HANDOFF.md) is prepared; Phase 4 implementation remains unstarted.
+ 
+diff --git a/docs/adr/0011-consumer-route-state.md b/docs/adr/0011-consumer-route-state.md
+index 324d989..0f58a51 100644
+--- a/docs/adr/0011-consumer-route-state.md
++++ b/docs/adr/0011-consumer-route-state.md
+@@ -110,3 +110,14 @@ P4.8 retry-1 is reviewed failed: all three prior-failure probes pass and19/21 fo
+ P4.8 retry-2 passes all five previous-failure probes, all21 integrated accessibility/list checks and all85 normal-production cases with no skips/flakes/report errors. Both builds, budgets, licenses, actual-GPU response, precision/depth, storage and330 root/candidate source hashes/fourteen preserved hashes pass. All43 captures are accounted for:27 freshly inspected and16 byte-identical to previously inspected images. Fourteen complete axe scans have zero violations; both native keyboard flows and incomplete-rule supplements pass. Settled Jupiter actions are fully painted. The rapid final Charon selection capture is still in flight over the preceding Triton view and is not settled Charon visual evidence. Immutable review/raw evidence is in docs/perf/phase-four/p4-8-retry-2-*.
+ 
+ Separate profiling passes the lab but fails both consumer cases on setup. Overview averages3 commits/sec but includes three cold route/controller commits in its first second; a short unchanged-candidate diagnosis records the explicit external history replacement followed by Next's internal replacement. Card/list waits for a timestamp change that paused-to-playing does not guarantee; actual playback is healthy and continuous playback intentionally leaves the URL unchanged. Tests now await the real setup replacement pair and corresponding paint callbacks, prove public playing86400 and time advancement at both boundaries, and require zero measured-window history writes. Complete30second windows, thirty bins, active callback health and max4 commits/sec remain unchanged. Application/runtime and normal browser tests are unchanged; a fresh profile-only retry must prove every other source file byte-identical before inheriting the reviewed green normal-production evidence. P4.8 remains unaccepted pending all three corrected profiles; final P4.9 gates remain open.
++
++
++## P4.9: load scientific UI time helpers with engine initialization
++
++The production shell audit identifies31.1KB gzip of astronomy code loaded before the renderer only for UI UTC/TDB conversion and clock-boundary display. Shared MIN_UTC_MS/MAX_UTC_MS metadata moves to domain, with the same1900 through end2100 values re-exported by astro for existing callers. UI input validation needs only this metadata. The scientific clock, scales, leap-second table, DeltaT model, providers, interpolation and assets remain unchanged.
++
++The engine bridge owns a cached asynchronous UI time adapter using the existing public astro entry. EngineCanvas awaits the adapter and engine module after the diagnostic startup gate, before constructing or publishing an engine. Only then may synchronous clock/card/history helpers use the exact existing conversions. Premature access fails closed; import rejection releases the pending cache so another initialization can retry. Existing mount disposal/deadline handling applies. No new timer/subscription or frame callback is introduced. Clamp bounds are calculated once during adapter initialization; UTC/date/LIVE/leap-second behavior keeps its accepted algorithms. Unit guards and the full production startup/history/time/accessibility/science/profile checks must validate the changed loading boundary.
++
++Turbopack attribution follows each emitted sourceMappingURL and hashes the referenced map, rather than assuming JS-filename+.map. Source-free loader registrations require a whole-code match of literal generated dynamic-import references; their complete code and bytes remain in the report. Unknown code fails closed and all shell/shared/framework/search bytes still count toward200000gzip. The broader orbit-data/texture-loading change needed for the5-second4G target is a separate unanswered material scope choice; this UI module split does not approve or claim that change.
++
++The fresh P4.9 regression-1 review validates this initialization boundary:413unit/science tests plus2expected diagnostics, all99production browser cases and all3separate profiles pass. Shell root196540gzip and Earth/Charon192907 meet200000. All337root/candidate and14preserved evidence hashes match before post-run documentation/status refresh. Cold first frames remain3.009–3.304sec desktop and45.697–45.870sec4G viewport, failing2.5/5sec. These failures remain failures; no startup exception or progressive-data/texture scope extension is inferred. The settled target replay has0longtasks; separate first-use search-response tasks168/78ms remain recorded with all300ms response samples passing. Profiling overhead, emulated phone throughput and compressed mip storage remain distinct from normal timing, physical phone measurements and total VRAM. Review: docs/perf/phase-four/p4-9-regression-1-review.json/.md. P4.9 and final Phase4 acceptance remain pending the material startup decision and changed-UX user review.
+diff --git a/e2e/body-detail.spec.ts b/e2e/body-detail.spec.ts
+index 9b18f91..fa27d3a 100644
+--- a/e2e/body-detail.spec.ts
++++ b/e2e/body-detail.spec.ts
+@@ -1,4 +1,6 @@
+ import { test, expect } from '@playwright/test';
++import { writeFile } from 'node:fs/promises';
++import { freezeRenderedView } from './rendered-view';
+ 
+ for (const group of [
+   {
+@@ -67,15 +69,26 @@ for (const group of [
+         .toBe(0);
+       for (const id of group.ids) {
+         for (const phase of ['day', 'quarter'] as const) {
+-          await page.evaluate(
+-            ({ id, phase }) => {
+-              window.__spaceEngine!.referenceView(id, phase);
+-              window.__spaceEngine!.setRendering(true);
+-            },
+-            { id, phase },
++          const readiness = await freezeRenderedView(page, id, () =>
++            page.evaluate(
++              ({ id, phase }) => {
++                window.__spaceEngine!.referenceView(id, phase);
++                window.__spaceEngine!.setRendering(true);
++              },
++              { id, phase },
++            ),
++          );
++          await writeFile(
++            testInfo.outputPath(
++              id.replace(':', '-') +
++                '-' +
++                tier +
++                '-' +
++                phase +
++                '-readiness.json',
++            ),
++            JSON.stringify({ ...readiness, phase, tier }, null, 2),
+           );
+-          await page.waitForTimeout(600);
+-          await page.evaluate(() => window.__spaceEngine!.setRendering(false));
+           await canvas.screenshot({
+             path: testInfo.outputPath(
+               `${id.replace(':', '-')}-${tier}-${phase}.png`,
+diff --git a/e2e/phase-four-history.spec.ts b/e2e/phase-four-history.spec.ts
+index 71b0c6c..a36eeab 100644
+--- a/e2e/phase-four-history.spec.ts
++++ b/e2e/phase-four-history.spec.ts
+@@ -544,7 +544,7 @@ test('obsolete asynchronous startup cannot replace a newer canvas after leaving
+   page,
+ }) => {
+   const held: Route[] = [];
+-  await page.route('**/data/corrections/**', (route) => {
++  await page.route('**/data/stars.bin', (route) => {
+     held.push(route);
+   });
+   await page.goto('/object/planet/earth' + query);
+@@ -569,7 +569,7 @@ test('obsolete asynchronous startup cannot replace a newer canvas after leaving
+   await page.getByPlaceholder('Where would you like to go?').fill('Europa');
+   await page.locator('.search-result').click();
+   await expect(page).toHaveURL(/\/object\/moon\/europa\?/);
+-  await page.unroute('**/data/corrections/**');
++  await page.unroute('**/data/stars.bin');
+   await Promise.all(held.map((route) => route.continue().catch(() => {})));
+   await ready(page);
+   await expect(page.locator('canvas')).toHaveCount(1);
+diff --git a/e2e/phase-four-routing.spec.ts b/e2e/phase-four-routing.spec.ts
+index c059b79..a147c35 100644
+--- a/e2e/phase-four-routing.spec.ts
++++ b/e2e/phase-four-routing.spec.ts
+@@ -340,7 +340,7 @@ test('a selection during startup restores the latest route, and the standalone l
+   page,
+ }) => {
+   const held: Route[] = [];
+-  await page.route('**/data/corrections/**', (route) => {
++  await page.route('**/data/stars.bin', (route) => {
+     held.push(route);
+   });
+   await page.goto('/object/planet/earth' + datedQuery);
+@@ -351,7 +351,7 @@ test('a selection during startup restores the latest route, and the standalone l
+   await page.getByPlaceholder('Where would you like to go?').fill('Mars');
+   await page.locator('.search-result').click();
+   await expect(page).toHaveURL(/\/object\/planet\/mars\?/);
+-  await page.unroute('**/data/corrections/**');
++  await page.unroute('**/data/stars.bin');
+   await Promise.all(held.map((route) => route.continue().catch(() => {})));
+   await ready(page);
+   expect(
+diff --git a/e2e/rings.spec.ts b/e2e/rings.spec.ts
+index 1f9b7cd..e0954a4 100644
+--- a/e2e/rings.spec.ts
++++ b/e2e/rings.spec.ts
+@@ -1,6 +1,7 @@
+ import { test, expect } from '@playwright/test';
+ import sharp from 'sharp';
+ import { writeFile } from 'node:fs/promises';
++import { freezeRenderedView } from './rendered-view';
+ 
+ test('Saturn rings render both sides, shadows and stable quality geometry', async ({
+   page,
+@@ -50,15 +51,27 @@ test('Saturn rings render both sides, shadows and stable quality geometry', asyn
+     planetShadow: boolean,
+     ringShadow: boolean,
+   ) => {
+-    await page.evaluate(
+-      ({ side, planetShadow, ringShadow }) => {
+-        window.__spaceEngine!.ringReferenceView(side, planetShadow, ringShadow);
+-        window.__spaceEngine!.setRendering(true);
+-      },
+-      { side, planetShadow, ringShadow },
++    const readiness = await freezeRenderedView(
++      page,
++      'planet:saturn',
++      () =>
++        page.evaluate(
++          ({ side, planetShadow, ringShadow }) => {
++            window.__spaceEngine!.ringReferenceView(
++              side,
++              planetShadow,
++              ringShadow,
++            );
++            window.__spaceEngine!.setRendering(true);
++          },
++          { side, planetShadow, ringShadow },
++        ),
++      true,
++    );
++    await writeFile(
++      testInfo.outputPath(name + '-readiness.json'),
++      JSON.stringify({ ...readiness, side, planetShadow, ringShadow }, null, 2),
+     );
+-    await page.waitForTimeout(700);
+-    await page.evaluate(() => window.__spaceEngine!.setRendering(false));
+     return canvas.screenshot({ path: testInfo.outputPath(`${name}.png`) });
+   };
+   const none = await capture('north-no-shadows', 'north', false, false);
+diff --git a/e2e/startup.spec.ts b/e2e/startup.spec.ts
+index c06043f..87ff8bf 100644
+--- a/e2e/startup.spec.ts
++++ b/e2e/startup.spec.ts
+@@ -46,7 +46,7 @@ test('a stalled startup shows a recoverable error instead of an endless loader',
+ }) => {
+   const held: Route[] = [];
+   await page.clock.install();
+-  await page.route('**/data/corrections/**', (route) => {
++  await page.route('**/data/stars.bin', (route) => {
+     held.push(route);
+   });
+   await page.goto('/?renderer=webgl&test=1');
+diff --git a/e2e/visual.spec.ts b/e2e/visual.spec.ts
+index 26a5847..31694e4 100644
+--- a/e2e/visual.spec.ts
++++ b/e2e/visual.spec.ts
+@@ -1,5 +1,7 @@
+ import { test, expect } from '@playwright/test';
+-test('deterministic material reference views', async ({ page }) => {
++import { writeFile } from 'node:fs/promises';
++import { freezeRenderedView } from './rendered-view';
++test('deterministic material reference views', async ({ page }, info) => {
+   test.setTimeout(240000);
+   await page.goto('/?renderer=webgl&test=1');
+   const canvas = page.locator('canvas');
+@@ -23,40 +25,50 @@ test('deterministic material reference views', async ({ page }) => {
+     content:
+       'body * { visibility: hidden !important; } canvas[role] { visibility: visible !important; }',
+   });
+-  for (const [name, id] of [
+-    ['earth-terminator', 'planet:earth'],
+-    ['moon-quarter', 'moon:moon'],
+-    ['mars-close', 'planet:mars'],
+-    ['sun-bloom', 'star:sun'],
+-  ]) {
+-    await page.evaluate(
+-      (id) => window.__spaceEngine!.focus(id!, { transition: false }),
++  async function renderView(
++    name: string,
++    id: string,
++    phase?: 'day' | 'night' | 'quarter' | 'limb',
++  ) {
++    const readiness = await freezeRenderedView(
++      page,
+       id,
++      () =>
++        page.evaluate(
++          ({ id, phase }) => {
++            const engine = window.__spaceEngine!;
++            if (phase) engine.referenceView(id, phase);
++            else engine.focus(id, { transition: false });
++            engine.setRendering(true);
++          },
++          { id, phase },
++        ),
++      true,
++    );
++    await writeFile(
++      info.outputPath(`${name}-readiness.json`),
++      JSON.stringify({ ...readiness, phase }, null, 2),
+     );
+-    await page.waitForTimeout(500);
+-    await page.evaluate(() => window.__spaceEngine!.setRendering(false));
+     await expect(canvas).toHaveScreenshot(`${name}.png`, {
+       maxDiffPixelRatio: 0.015,
+       timeout: 30000,
+     });
+     await page.evaluate(() => window.__spaceEngine!.setRendering(true));
+   }
++  for (const [name, id] of [
++    ['earth-terminator', 'planet:earth'],
++    ['moon-quarter', 'moon:moon'],
++    ['mars-close', 'planet:mars'],
++    ['sun-bloom', 'star:sun'],
++  ]) {
++    await renderView(name!, id!);
++  }
+   for (const [name, id, phase] of [
+     ['earth-day', 'planet:earth', 'day'],
+     ['earth-night', 'planet:earth', 'night'],
+     ['earth-limb', 'planet:earth', 'limb'],
+     ['moon-full', 'moon:moon', 'day'],
+   ] as const) {
+-    await page.evaluate(
+-      ({ id, phase }) => window.__spaceEngine!.referenceView(id, phase),
+-      { id, phase },
+-    );
+-    await page.waitForTimeout(500);
+-    await page.evaluate(() => window.__spaceEngine!.setRendering(false));
+-    await expect(canvas).toHaveScreenshot(`${name}.png`, {
+-      maxDiffPixelRatio: 0.015,
+-      timeout: 30000,
+-    });
+-    await page.evaluate(() => window.__spaceEngine!.setRendering(true));
++    await renderView(name, id, phase);
+   }
+ });
+diff --git a/package.json b/package.json
+index 25a95f3..8e17298 100644
+--- a/package.json
++++ b/package.json
+@@ -4,7 +4,7 @@
+   "packageManager": "pnpm@10.32.1",
+   "scripts": {
+     "dev": "pnpm --filter web dev",
+-    "build": "tsx tools/validate-catalog.ts && pnpm --filter web build",
++    "build": "tsx tools/validate-catalog.ts && tsx tools/fixtures/build-runtime-chunks.ts --check && pnpm --filter web build && node tools/check-startup-budget.mjs",
+     "typecheck": "pnpm -r typecheck",
+     "lint": "eslint . && tsx tools/check-boundaries.ts",
+     "test": "vitest run",
+diff --git a/packages/astro/src/ephemeris/AstronomyEngineProvider.ts b/packages/astro/src/ephemeris/AstronomyEngineProvider.ts
+index c0a2856..b1bc227 100644
+--- a/packages/astro/src/ephemeris/AstronomyEngineProvider.ts
++++ b/packages/astro/src/ephemeris/AstronomyEngineProvider.ts
+@@ -7,7 +7,11 @@ import type {
+ } from '@space/domain';
+ import { AU_KM, SEC_PER_DAY, MIN_UTC_MS, MAX_UTC_MS } from '../time/constants';
+ import { utcMsToTdb, tdbMinusTt } from '../time/scales';
+-import {getEphemerisCorrection} from './ResidualTable';
++import { getEphemerisCorrection } from './ResidualTable';
++import type { EphemerisCorrection } from './PolynomialCorrection';
++export type CorrectionResolver = (
++  tdbSec: number,
++) => EphemerisCorrection | undefined;
+ let lastTdb = NaN;
+ let lastTime: Astronomy.AstroTime;
+ // Use TT directly: converting via UTC would substitute astronomy-engine's future
+@@ -35,12 +39,26 @@ export class AstronomyEngineProvider implements PositionProvider {
+     stale: false,
+   };
+   private failure: StateFailure = { ok: false, reason: 'out-of-validity' };
++  private readonly approximate: StateResult = {
++    ok: true,
++    frame: 'ICRF_SSB',
++    certainty: 'approximate',
++    stale: false,
++  };
+   readonly id: string;
+-  constructor(readonly body: Astronomy.Body) {
++  constructor(
++    readonly body: Astronomy.Body,
++    private readonly correctionAt: CorrectionResolver = () =>
++      getEphemerisCorrection(body),
++  ) {
+     this.id = `astronomy:${body}`;
+   }
+-  certaintyAt(_tdbSec: number): Certainty {
+-    return 'computed';
++  certaintyAt(tdbSec: number): Certainty {
++    return this.body === Astronomy.Body.EMB ||
++      this.body === Astronomy.Body.SSB ||
++      this.correctionAt(tdbSec)?.contains(tdbSec)
++      ? 'computed'
++      : 'approximate';
+   }
+   stateAt(
+     tdbSec: number,
+@@ -60,13 +78,21 @@ export class AstronomyEngineProvider implements PositionProvider {
+     out[offset + 3] = (s.vx * AU_KM) / SEC_PER_DAY;
+     out[offset + 4] = (s.vy * AU_KM) / SEC_PER_DAY;
+     out[offset + 5] = (s.vz * AU_KM) / SEC_PER_DAY;
+-    const correction=getEphemerisCorrection(this.body);
+-    if(correction&&!correction.addTo(tdbSec,out,offset))return this.failure;
+-    return this.result;
++    const correction = this.correctionAt(tdbSec);
++    // Missing/outside corrections never resurrect an earlier epoch's state.
++    // Fresh local analytics remain explicitly approximate and never stale.
++    return this.body === Astronomy.Body.EMB ||
++      this.body === Astronomy.Body.SSB ||
++      correction?.addTo(tdbSec, out, offset)
++      ? this.result
++      : this.approximate;
+   }
+ }
+-export function createBodyProvider(body: string): AstronomyEngineProvider {
++export function createBodyProvider(
++  body: string,
++  correctionAt?: CorrectionResolver,
++): AstronomyEngineProvider {
+   if (!Object.values(Astronomy.Body).includes(body as Astronomy.Body))
+     throw new Error(`Unknown body ${body}`);
+-  return new AstronomyEngineProvider(body as Astronomy.Body);
++  return new AstronomyEngineProvider(body as Astronomy.Body, correctionAt);
+ }
+diff --git a/packages/astro/src/ephemeris/JupiterMoonsProvider.ts b/packages/astro/src/ephemeris/JupiterMoonsProvider.ts
+index 3b659bc..19f8bb1 100644
+--- a/packages/astro/src/ephemeris/JupiterMoonsProvider.ts
++++ b/packages/astro/src/ephemeris/JupiterMoonsProvider.ts
+@@ -6,6 +6,7 @@ import type {
+   StateResult,
+ } from '@space/domain';
+ import { toAstroTime } from './AstronomyEngineProvider';
++import type { CorrectionResolver } from './AstronomyEngineProvider';
+ import { AU_KM, SEC_PER_DAY, MIN_UTC_MS, MAX_UTC_MS } from '../time/constants';
+ import { utcMsToTdb } from '../time/scales';
+ import { getEphemerisCorrection } from './ResidualTable';
+@@ -42,16 +43,27 @@ export class JupiterMoonsProvider implements PositionProvider {
+     ok: false,
+     reason: 'out-of-validity',
+   };
++  private readonly approximate: StateResult = {
++    ok: true,
++    frame: this.frame,
++    certainty: 'approximate',
++    stale: false,
++  };
+   constructor(
+     readonly moon: GalileanMoon,
+     private readonly cache = defaultCache,
++    private readonly correctionAt: CorrectionResolver = () =>
++      getEphemerisCorrection(moon),
+   ) {
+     if (!['io', 'europa', 'ganymede', 'callisto'].includes(moon))
+       throw new Error(`Unknown Galilean moon ${moon}`);
+     this.id = `astronomy:${moon}`;
+   }
+-  certaintyAt(_tdbSec: number): Certainty {
+-    return 'computed';
++  certaintyAt(tdbSec: number): Certainty {
++    return this.moon !== 'callisto' ||
++      this.correctionAt(tdbSec)?.contains(tdbSec)
++      ? 'computed'
++      : 'approximate';
+   }
+   stateAt(
+     tdbSec: number,
+@@ -71,9 +83,9 @@ export class JupiterMoonsProvider implements PositionProvider {
+     out[offset + 3] = (state.vx * AU_KM) / SEC_PER_DAY;
+     out[offset + 4] = (state.vy * AU_KM) / SEC_PER_DAY;
+     out[offset + 5] = (state.vz * AU_KM) / SEC_PER_DAY;
+-    const correction = getEphemerisCorrection(this.moon);
+-    if (correction && !correction.addTo(tdbSec, out, offset))
+-      return this.failure;
+-    return this.result;
++    const correction = this.correctionAt(tdbSec);
++    return this.moon !== 'callisto' || correction?.addTo(tdbSec, out, offset)
++      ? this.result
++      : this.approximate;
+   }
+ }
+diff --git a/packages/astro/src/ephemeris/OsculatingElementsProvider.ts b/packages/astro/src/ephemeris/OsculatingElementsProvider.ts
+index 1781de8..5719bba 100644
+--- a/packages/astro/src/ephemeris/OsculatingElementsProvider.ts
++++ b/packages/astro/src/ephemeris/OsculatingElementsProvider.ts
+@@ -6,6 +6,11 @@ import type {
+   StateResult,
+ } from '@space/domain';
+ import { solveKepler } from './KeplerProvider';
++export interface OsculatingGrid {
++  startTdbSec: number;
++  firstIndex: number;
++  fullCount: number;
++}
+ /** Locally propagated Horizons osculating ellipses, blended with smoothstep.
+  * This avoids angular unwrapping and preserves endpoint states and velocities.
+  * Blended velocity includes the time derivative of the blend weight. */
+@@ -15,6 +20,7 @@ export class OsculatingElementsProvider implements PositionProvider {
+   private readonly elements: Float64Array;
+   private readonly stepSec: number;
+   private readonly count: number;
++  private readonly grid: OsculatingGrid;
+   private readonly a = new Float64Array(6);
+   private readonly b = new Float64Array(6);
+   private readonly result: StateResult;
+@@ -26,6 +32,7 @@ export class OsculatingElementsProvider implements PositionProvider {
+     readonly id: string,
+     readonly frame: FrameId,
+     buffer: ArrayBuffer,
++    grid?: OsculatingGrid,
+   ) {
+     if (buffer.byteLength < 24) throw new Error('Truncated orbit table');
+     const view = new DataView(buffer),
+@@ -42,6 +49,22 @@ export class OsculatingElementsProvider implements PositionProvider {
+       buffer.byteLength !== 24 + this.count * 56
+     )
+       throw new Error('Invalid orbit table');
++    this.grid = grid ?? {
++      startTdbSec: start,
++      firstIndex: 0,
++      fullCount: this.count,
++    };
++    if (
++      !Number.isFinite(this.grid.startTdbSec) ||
++      !Number.isInteger(this.grid.firstIndex) ||
++      this.grid.firstIndex < 0 ||
++      !Number.isInteger(this.grid.fullCount) ||
++      this.grid.fullCount < 2 ||
++      this.grid.fullCount > 100000 ||
++      this.grid.firstIndex + this.count > this.grid.fullCount ||
++      start !== this.grid.startTdbSec + this.grid.firstIndex * this.stepSec
++    )
++      throw Error('Invalid original orbit grid');
+     this.elements = new Float64Array(this.count * 7);
+     for (let i = 0; i < this.elements.length; i++) {
+       const value = view.getFloat64(24 + i * 8, true);
+@@ -73,7 +96,9 @@ export class OsculatingElementsProvider implements PositionProvider {
+     const anomaly = solveKepler(
+       data[j + 5]! +
+         data[j + 6]! *
+-          (tdbSec - (this.validity.fromTdb + index * this.stepSec)),
++          (tdbSec -
++            (this.grid.startTdbSec +
++              (this.grid.firstIndex + index) * this.stepSec)),
+       e,
+     );
+     const ca = Math.cos(anomaly),
+@@ -106,11 +131,18 @@ export class OsculatingElementsProvider implements PositionProvider {
+     out: Float64Array,
+     offset = 0,
+   ): StateResult | StateFailure {
+-    const sample = (tdbSec - this.validity.fromTdb) / this.stepSec;
+-    if (!Number.isFinite(sample) || sample < 0 || sample > this.count - 1)
++    const sample = (tdbSec - this.grid.startTdbSec) / this.stepSec;
++    const globalIndex = Math.min(this.grid.fullCount - 2, Math.floor(sample));
++    const index = globalIndex - this.grid.firstIndex;
++    if (
++      !Number.isFinite(sample) ||
++      sample < 0 ||
++      sample > this.grid.fullCount - 1 ||
++      index < 0 ||
++      index + 1 >= this.count
++    )
+       return this.failure;
+-    const index = Math.min(this.count - 2, Math.floor(sample)),
+-      u = sample - index;
++    const u = sample - globalIndex;
+     this.propagate(index, tdbSec, this.a);
+     this.propagate(index + 1, tdbSec, this.b);
+     const weight = u * u * (3 - 2 * u),
+diff --git a/packages/astro/src/ephemeris/ResidualTable.ts b/packages/astro/src/ephemeris/ResidualTable.ts
+index 11b8a2f..7b563a4 100644
+--- a/packages/astro/src/ephemeris/ResidualTable.ts
++++ b/packages/astro/src/ephemeris/ResidualTable.ts
+@@ -1,12 +1,81 @@
+ /** Weekly NASA/JPL Horizons minus astronomy-engine states. Positions and their
+  * derivatives are interpolated together; no extrapolation is permitted. */
+-export class ResidualTable {
+- readonly startTdbSec:number;readonly stepSec:number;readonly count:number;private values:Float32Array;
+- constructor(buffer:ArrayBuffer){const view=new DataView(buffer);if(buffer.byteLength<24)throw new Error('Truncated ephemeris correction table');this.startTdbSec=view.getFloat64(0,true);this.stepSec=view.getFloat64(8,true);this.count=view.getFloat64(16,true);if(!Number.isFinite(this.startTdbSec)||this.stepSec<=0||!Number.isFinite(this.stepSec)||!Number.isInteger(this.count)||this.count<2||this.count>20000||buffer.byteLength!==24+24*this.count)throw new Error('Malformed ephemeris correction table');this.values=new Float32Array(this.count*6);for(let i=0;i<this.values.length;i++){const value=view.getFloat32(24+i*4,true);if(!Number.isFinite(value))throw new Error('Nonfinite ephemeris correction');this.values[i]=value;}}
+- addTo(tdbSec:number,out:Float64Array,offset=0):boolean {const s=(tdbSec-this.startTdbSec)/this.stepSec;if(s<0||s>this.count-1||!Number.isFinite(s))return false;const index=Math.min(this.count-2,Math.floor(s)),u=s-index,u2=u*u,u3=u2*u,h=this.stepSec;const a=index*6,b=a+6;
+- for(let j=0;j<3;j++){const p0=this.values[a+j]!,p1=this.values[b+j]!,v0=this.values[a+j+3]!,v1=this.values[b+j+3]!;out[offset+j]!+=(2*u3-3*u2+1)*p0+(u3-2*u2+u)*h*v0+(-2*u3+3*u2)*p1+(u3-u2)*h*v1;out[offset+j+3]!+=((6*u2-6*u)*p0+(-6*u2+6*u)*p1)/h+(3*u2-4*u+1)*v0+(3*u2-2*u)*v1;}return true;
+- }
+-}
+-const tables=new Map<string,ResidualTable>();
+-export function registerEphemerisCorrection(body:string,buffer:ArrayBuffer){tables.set(body,new ResidualTable(buffer));}
+-export function getEphemerisCorrection(body:string){return tables.get(body);}
++import type { EphemerisCorrection } from './PolynomialCorrection';
++export class ResidualTable implements EphemerisCorrection {
++  readonly startTdbSec: number;
++  readonly stepSec: number;
++  readonly count: number;
++  private values: Float32Array;
++  constructor(buffer: ArrayBuffer) {
++    const view = new DataView(buffer);
++    if (buffer.byteLength < 24)
++      throw new Error('Truncated ephemeris correction table');
++    this.startTdbSec = view.getFloat64(0, true);
++    this.stepSec = view.getFloat64(8, true);
++    this.count = view.getFloat64(16, true);
++    if (
++      !Number.isFinite(this.startTdbSec) ||
++      this.stepSec <= 0 ||
++      !Number.isFinite(this.stepSec) ||
++      !Number.isInteger(this.count) ||
++      this.count < 2 ||
++      this.count > 20000 ||
++      buffer.byteLength !== 24 + 24 * this.count
++    )
++      throw new Error('Malformed ephemeris correction table');
++    this.values = new Float32Array(this.count * 6);
++    for (let i = 0; i < this.values.length; i++) {
++      const value = view.getFloat32(24 + i * 4, true);
++      if (!Number.isFinite(value))
++        throw new Error('Nonfinite ephemeris correction');
++      this.values[i] = value;
++    }
++  }
++  contains(tdbSec: number): boolean {
++    const s = (tdbSec - this.startTdbSec) / this.stepSec;
++    return Number.isFinite(s) && s >= 0 && s <= this.count - 1;
++  }
++  addTo(tdbSec: number, out: Float64Array, offset = 0): boolean {
++    const s = (tdbSec - this.startTdbSec) / this.stepSec;
++    if (!this.contains(tdbSec)) return false;
++    const index = Math.min(this.count - 2, Math.floor(s)),
++      u = s - index,
++      u2 = u * u,
++      u3 = u2 * u,
++      h = this.stepSec;
++    const a = index * 6,
++      b = a + 6;
++    for (let j = 0; j < 3; j++) {
++      const p0 = this.values[a + j]!,
++        p1 = this.values[b + j]!,
++        v0 = this.values[a + j + 3]!,
++        v1 = this.values[b + j + 3]!;
++      out[offset + j]! +=
++        (2 * u3 - 3 * u2 + 1) * p0 +
++        (u3 - 2 * u2 + u) * h * v0 +
++        (-2 * u3 + 3 * u2) * p1 +
++        (u3 - u2) * h * v1;
++      out[offset + j + 3]! +=
++        ((6 * u2 - 6 * u) * p0 + (-6 * u2 + 6 * u) * p1) / h +
++        (3 * u2 - 4 * u + 1) * v0 +
++        (3 * u2 - 2 * u) * v1;
++    }
++    return true;
++  }
++}
++const tables = new Map<string, EphemerisCorrection>();
++export function registerEphemerisCorrection(body: string, buffer: ArrayBuffer) {
++  tables.set(body, new ResidualTable(buffer));
++}
++export function registerCorrectionProvider(
++  body: string,
++  correction: EphemerisCorrection,
++): () => void {
++  tables.set(body, correction);
++  return () => {
++    if (tables.get(body) === correction) tables.delete(body);
++  };
++}
++export function getEphemerisCorrection(body: string) {
++  return tables.get(body);
++}
+diff --git a/packages/astro/src/frames/FrameTree.ts b/packages/astro/src/frames/FrameTree.ts
+index 5a62226..d861fae 100644
+--- a/packages/astro/src/frames/FrameTree.ts
++++ b/packages/astro/src/frames/FrameTree.ts
+@@ -67,6 +67,15 @@ export class FrameTree {
+     if (frameStamp !== undefined) this.externalStamp = frameStamp;
+   }
+   private externalStamp: number | undefined;
++  /** Async coefficients may arrive while paused at an unchanged epoch. */
++  private revision = 0;
++  get cacheRevision(): number {
++    return this.revision;
++  }
++  invalidate(): void {
++    this.stamp++;
++    this.revision++;
++  }
+   has(id: FrameId): boolean {
+     return this.nodes.has(id);
+   }
+diff --git a/packages/astro/src/frames/solarSystemFrames.ts b/packages/astro/src/frames/solarSystemFrames.ts
+index be3129c..694171b 100644
+--- a/packages/astro/src/frames/solarSystemFrames.ts
++++ b/packages/astro/src/frames/solarSystemFrames.ts
+@@ -50,17 +50,19 @@ function temeRotation(tdbSec: number, out: Float64Array): void {
+ 
+ /** SSB providers attach directly to root; this is equivalent to the EMB hierarchy
+  * without subtracting/re-adding large barycentric positions every frame. */
+-export function createSolarSystemFrameTree(): FrameTree {
++export function createSolarSystemFrameTree(
++  analytic: (body: string) => PositionProvider = createBodyProvider,
++): FrameTree {
+   const tree = new FrameTree();
+   tree.register({
+     id: 'ICRF_HELIO',
+     parent: 'ICRF_SSB',
+-    origin: createBodyProvider('Sun'),
++    origin: analytic('Sun'),
+   });
+   tree.register({
+     id: 'ICRF_EMB',
+     parent: 'ICRF_SSB',
+-    origin: createBodyProvider('EMB'),
++    origin: analytic('EMB'),
+   });
+   for (const body of [
+     'Sun',
+@@ -76,7 +78,7 @@ export function createSolarSystemFrameTree(): FrameTree {
+     'Pluto',
+   ]) {
+     const id = `ICRF_BODY:${body.toLowerCase()}` as const;
+-    tree.register({ id, parent: 'ICRF_SSB', origin: createBodyProvider(body) });
++    tree.register({ id, parent: 'ICRF_SSB', origin: analytic(body) });
+     tree.register({
+       id: `FIXED:${body.toLowerCase()}`,
+       parent: id,
+diff --git a/packages/astro/src/index.ts b/packages/astro/src/index.ts
+index 2ce660e..0d398e2 100644
+--- a/packages/astro/src/index.ts
++++ b/packages/astro/src/index.ts
+@@ -13,3 +13,6 @@ export * from './ephemeris/JupiterMoonsProvider';
+ export * from './ephemeris/MeanElementsProvider';
+ export * from './ephemeris/catalogProviders';
+ export * from './ephemeris/OsculatingElementsProvider';
++export * from './ephemeris/PolynomialCorrection';
++export * from './ephemeris/RuntimeChunk';
++export * from './ephemeris/StreamedEphemeris';
+diff --git a/packages/astro/src/time/constants.ts b/packages/astro/src/time/constants.ts
+index 23c776c..756036e 100644
+--- a/packages/astro/src/time/constants.ts
++++ b/packages/astro/src/time/constants.ts
+@@ -4,5 +4,4 @@ export const TT_MINUS_TAI = 32.184;
+ export const AU_KM = 149597870.7;
+ export const J2000_UNIX_MS = 946728000000;
+ export const DEG_TO_RAD = Math.PI / 180;
+-export const MIN_UTC_MS = Date.UTC(1900, 0, 1);
+-export const MAX_UTC_MS = Date.UTC(2101, 0, 1) - 1;
++export { MIN_UTC_MS, MAX_UTC_MS } from '@space/domain';
+diff --git a/packages/domain/src/index.ts b/packages/domain/src/index.ts
+index 7f45bb7..1d3b308 100644
+--- a/packages/domain/src/index.ts
++++ b/packages/domain/src/index.ts
+@@ -5,3 +5,4 @@ export * from './catalog';
+ export * from './buildCatalog';
+ export * from './moonElements';
+ export * from './rings';
++export * from './timeBounds';
+diff --git a/packages/engine/src/EngineApi.ts b/packages/engine/src/EngineApi.ts
+index 2aac631..d33eba5 100644
+--- a/packages/engine/src/EngineApi.ts
++++ b/packages/engine/src/EngineApi.ts
+@@ -23,6 +23,7 @@ export type EngineApi = Pick<
+   | 'setReducedMotion'
+   | 'suspendRendering'
+   | 'getMetrics'
++  | 'getPositionStatus'
+   | 'getEntity'
+   | 'on'
+   | 'registerEntities'
+diff --git a/packages/engine/src/SpaceEngine.ts b/packages/engine/src/SpaceEngine.ts
+index bcedaf3..e9b2586 100644
+--- a/packages/engine/src/SpaceEngine.ts
++++ b/packages/engine/src/SpaceEngine.ts
+@@ -24,13 +24,16 @@ import {
+   SEC_PER_DAY,
+   tdbToIso,
+   isoToTdb,
+-  registerEphemerisCorrection,
+-  registerOsculatingTable,
++  utcMsToTdb,
++  StreamedEphemeris,
++  runtimeChunkIndex,
+ } from '@space/astro';
+-import type { ClockSnapshot } from '@space/astro';
++import type { ClockSnapshot, RuntimeChunkManifest } from '@space/astro';
+ import { createRenderer } from './render/RendererFactory';
+ import { PostFX } from './render/PostFX';
+ import { AssetManager } from './assets/AssetManager';
++import { RuntimeChunkCache } from './assets/RuntimeChunkCache';
++import chunkManifest from './assets/runtime-chunks.json';
+ import { createPlanet } from './bodies/PlanetFactory';
+ import { createStarfield } from './bodies/Starfield';
+ import { EntityRegistry } from './scene/EntityRegistry';
+@@ -51,7 +54,7 @@ import type { SourcePoint } from './layers/SourcePointLayer';
+ import type { PointSource } from './layers/PointSource';
+ import { LayerRegistry } from './layers/LayerRegistry';
+ import { OrbitLayer } from './layers/OrbitLayer';
+-import { sampleOrbit } from './layers/sampleOrbit';
++import { sampleOrbit, sampleOrbitAsync } from './layers/sampleOrbit';
+ import { Picker } from './picking/Picker';
+ import { projectedDiameter, selectLod } from './lod/LodSystem';
+ import { PerfMonitor } from './perf/PerfMonitor';
+@@ -125,8 +128,18 @@ export class SpaceEngine {
+   private scene = new Scene();
+   private camera = new PerspectiveCamera(45, 1, 0.1, 1e12);
+   private assets: AssetManager;
+-  private registry = new EntityRegistry();
+-  readonly cameraController = new CameraController(this.registry.frames);
++  private registry: EntityRegistry;
++  readonly cameraController: CameraController;
++  private pendingFocus: {
++    id: string;
++    opts: FocusOptions;
++    restore?: () => void;
++  } | null = null;
++  private pendingFrame: CameraFrame | null = null;
++  private sceneEpoch = NaN;
++  private sceneStamp = -1;
++  private sourceEpoch = NaN;
++  private progressiveReady = false;
+   private restoringMapState = false;
+   private frameUnavailable = false;
+   private perf = new PerfMonitor();
+@@ -172,7 +185,9 @@ export class SpaceEngine {
+   }[] = [];
+   private orbitRefreshQueued = false;
+   private lastOrbitRefresh = 0;
+-  private orbitRefreshCursor = 0;
++  private orbitBuild: { id: string; epoch: number; cancelled: boolean } | null =
++    null;
++  private orbitRetry = new Map<string, number>();
+   private last = 0;
+   private lastUI = 0;
+   private disposed = false;
+@@ -181,47 +196,45 @@ export class SpaceEngine {
+   private height = 1;
+   private started = performance.now();
+   private initialReady = false;
++  private renderedFrames = 0;
++  private renderedEpoch = NaN;
++  private renderedRevision = -1;
+   private deterministic = false;
+   private postFX: PostFX;
+   static async create(canvas: HTMLCanvasElement, options: EngineOptions = {}) {
+     const started = performance.now();
+-    await Promise.all(
+-      [
+-        ...EXPLORABLE_BODIES.flatMap((body) =>
+-          body.astronomyBody ? [body.astronomyBody] : [],
+-        ),
+-        'callisto',
+-      ].map(async (body) => {
+-        const response = await fetch(
+-          `/data/corrections/${body.toLowerCase()}.bin`,
+-        );
+-        if (!response.ok) throw new Error(`Ephemeris unavailable for ${body}`);
+-        registerEphemerisCorrection(body, await response.arrayBuffer());
+-      }),
+-    );
+-    await Promise.all(
+-      EXPLORABLE_BODIES.filter(
+-        (body) =>
+-          body.provenance.providerId === 'jpl-horizons-orbital-elements',
+-      ).map(async (body) => {
+-        const response = await fetch(
+-          `/data/orbits/${body.id.split(':')[1]}.bin`,
+-        );
+-        if (!response.ok)
+-          throw new Error(`Orbital data unavailable for ${body.name}`);
+-        registerOsculatingTable(body.id, await response.arrayBuffer());
+-      }),
+-    );
++    const chunks = new RuntimeChunkCache(chunkManifest as RuntimeChunkManifest);
++    const initialEpoch =
++      options.tdbSec ??
++      (options.test
++        ? isoToTdb('2026-09-22T00:00:00Z')
++        : utcMsToTdb(Date.now()));
++    // The one current bundle travels alongside renderer startup. Its absence
++    // never prevents fresh analytic positions or the first scene frame.
++    void chunks.load(runtimeChunkIndex(initialEpoch)).catch(() => {});
+     const { renderer, backend } = await createRenderer(canvas, {
+       forceWebGL: options.forceWebGL ?? false,
+       dpr: Math.min(devicePixelRatio, 2),
++    }).catch((error: unknown) => {
++      chunks.dispose();
++      throw error;
+     });
+     let assets: AssetManager | undefined;
+     try {
+-      assets = await AssetManager.create(renderer);
+-      const starsResponse = await fetch('/data/stars.bin');
+-      if (!starsResponse.ok) throw new Error('Star catalog unavailable');
+-      const stars = new Float32Array(await starsResponse.arrayBuffer());
++      const mobile =
++        matchMedia('(pointer: coarse)').matches || innerWidth < 760;
++      const [assetResult, starResult] = await Promise.allSettled([
++        AssetManager.create(renderer, mobile ? 1024 : Infinity),
++        (async () => {
++          const response = await fetch('/data/stars.bin');
++          if (!response.ok) throw new Error('Star catalog unavailable');
++          return new Float32Array(await response.arrayBuffer());
++        })(),
++      ]);
++      if (assetResult.status === 'fulfilled') assets = assetResult.value;
++      else throw assetResult.reason;
++      if (starResult.status === 'rejected') throw starResult.reason;
++      const stars = starResult.value;
+       const engine = new SpaceEngine(
+         canvas,
+         renderer,
+@@ -229,12 +242,14 @@ export class SpaceEngine {
+         options,
+         assets,
+         stars,
++        chunks,
+       );
+       engine.started = started;
+       engine.start();
+       return engine;
+     } catch (error) {
+       assets?.dispose();
++      chunks.dispose();
+       renderer.dispose();
+       throw error;
+     }
+@@ -246,8 +261,23 @@ export class SpaceEngine {
+     options: EngineOptions,
+     assets: AssetManager,
+     stars: Float32Array,
++    private chunks: RuntimeChunkCache,
+   ) {
+     this.assets = assets;
++    const ephemeris = new StreamedEphemeris(chunks.manifest, (t) =>
++      chunks.get(t),
++    );
++    this.registry = new EntityRegistry(
++      (body) => ephemeris.catalog(body),
++      (body) => ephemeris.analytic(body),
++    );
++    this.cameraController = new CameraController(this.registry.frames);
++    chunks.subscribe((index) => {
++      // FrameTree memoizes paused epochs. Newly available coefficients must
++      // invalidate the matching date even when the clock has not advanced.
++      if (index === runtimeChunkIndex(this.clock.state.tdbSec))
++        this.registry.frames.invalidate();
++    });
+     this.deterministic = options.test ?? false;
+     this.backend = backend;
+     const hardware = renderer.backend as unknown as {
+@@ -374,9 +404,16 @@ export class SpaceEngine {
+     if (options.test) this.clock.setTime(isoToTdb('2026-09-22T00:00:00Z'));
+     if (options.tdbSec !== undefined) this.clock.setTime(options.tdbSec);
+     const tdb = this.clock.tick();
+-    this.registry.update(tdb);
+-    this.createOrbits(tdb);
+-    const focus = options.focus ?? 'star:sun';
++    this.updateScene(tdb);
++    const requestedFocus = options.focus ?? 'star:sun';
++    const focus = this.registry.entries.get(requestedFocus)?.visible
++      ? requestedFocus
++      : 'star:sun';
++    if (focus !== requestedFocus)
++      this.pendingFocus = {
++        id: requestedFocus,
++        opts: { transition: false, recordHistory: false, select: false },
++      };
+     const e = this.registry.entries.get(focus)!;
+     this.cameraController.focus(
+       focus,
+@@ -454,6 +491,35 @@ export class SpaceEngine {
+     if (this.disposed || document.hidden || this.renderSuspensions) return;
+     this.renderer.setAnimationLoop(this.frame);
+   }
++  private updateScene(tdb: number) {
++    const stamp = this.registry.frames.cacheRevision;
++    if (this.sceneEpoch === tdb && this.sceneStamp === stamp) return;
++    this.registry.update(tdb);
++    this.sceneEpoch = tdb;
++    this.sceneStamp = stamp;
++  }
++  private applyPendingView(now: number) {
++    if (this.pendingFrame) {
++      const result = this.cameraController.setFrame(
++        this.pendingFrame,
++        this.clock.state.tdbSec,
++      );
++      if (result.ok) this.pendingFrame = null;
++    }
++    const pending = this.pendingFocus;
++    if (!pending || !this.positionReady(pending.id) || this.pendingFrame)
++      return;
++    this.pendingFocus = null;
++    if (pending.restore) pending.restore();
++    else this.focusReady(pending.id, pending.opts, now);
++  }
++  private positionReady(id: string) {
++    return (
++      !!this.target(id)?.visible &&
++      (this.registry.entries.has(id) ||
++        this.sourceEpoch === this.clock.state.tdbSec)
++    );
++  }
+   private frame = (now: number) => {
+     if (this.disposed) return;
+     const cpuStart = this.cpuTimings ? performance.now() : 0;
+@@ -461,7 +527,13 @@ export class SpaceEngine {
+     this.last = now;
+     this.perf.add(dt);
+     const tdbSec = this.clock.tick(this.cpuClockMs);
+-    this.registry.update(tdbSec);
++    if (this.progressiveReady)
++      this.chunks.prefetch(
++        tdbSec,
++        this.clock.mode === 'paused' ? 0 : this.clock.state.rate,
++        now,
++      );
++    this.updateScene(tdbSec);
+     for (const [id, layer] of this.sourceLayers) {
+       const priorError = layer.error;
+       layer.sample(
+@@ -473,13 +545,17 @@ export class SpaceEngine {
+       if (layer.error && !priorError)
+         this.emit('sourceError', { layerId: id, message: layer.error });
+     }
++    this.sourceEpoch = tdbSec;
++    this.applyPendingView(now);
+     const target = this.target(this.cameraController.targetId)!;
+-    const cameraResult = this.cameraController.update(
+-      target.physical,
+-      now,
+-      this.focusRadius(),
+-      tdbSec,
+-    );
++    const cameraResult = target.visible
++      ? this.cameraController.update(
++          target.physical,
++          now,
++          this.focusRadius(),
++          tdbSec,
++        )
++      : undefined;
+     if (cameraResult?.ok === false) {
+       if (!this.frameUnavailable)
+         this.emit('commandError', {
+@@ -489,9 +565,7 @@ export class SpaceEngine {
+         });
+       this.frameUnavailable = true;
+     } else this.frameUnavailable = false;
+-    this.canvas.style.opacity = String(
+-      1 - Math.max(this.clock.state.fade, this.cameraController.fade),
+-    );
++    this.canvas.style.opacity = String(1 - this.cameraController.fade);
+     const world = this.cameraController.world;
+     this.layers.setBand(
+       this.cameraController.distanceKm < 2e6
+@@ -505,6 +579,13 @@ export class SpaceEngine {
+       layer.render(world, this.layers.has(id));
+     for (const layer of this.pointLayers.values()) layer.object.visible = false;
+     for (const e of this.registry.entries.values()) {
++      if (!e.visible) {
++        e.visual.group.visible = false;
++        e.renderVisible = false;
++        e.pointLayer?.sizes.setX(e.pointIndex, 0);
++        this.labels?.hide(e.body.id);
++        continue;
++      }
+       const d = Math.hypot(
+         e.physical[0]! - world[0]!,
+         e.physical[1]! - world[1]!,
+@@ -534,7 +615,7 @@ export class SpaceEngine {
+       }
+       if (e.body.kind === 'moon' && e.body.parentId) {
+         const p = this.registry.entries.get(e.body.parentId);
+-        if (p)
++        if (p?.visible)
+           childDisplayPosition(
+             e.physical,
+             p.physical,
+@@ -638,6 +719,10 @@ export class SpaceEngine {
+     }
+     for (const [parentId, layer] of this.pointLayers) {
+       const parent = this.registry.entries.get(parentId)!;
++      if (!parent.visible) {
++        layer.object.visible = false;
++        continue;
++      }
+       layer.object.position.set(
+         parent.display[0]! - world[0]!,
+         parent.display[1]! - world[1]!,
+@@ -663,12 +748,32 @@ export class SpaceEngine {
+     this.updateOrbits(tdbSec, now);
+     this.updateLabels(now);
+     this.postFX.render();
++    this.renderedFrames++;
++    this.renderedEpoch = tdbSec;
++    this.renderedRevision = this.sceneStamp;
+     if (!this.initialReady) {
+       this.initialReady = true;
+       this.canvas.dataset.ready = 'true';
+       this.canvas.dataset.firstFrameMs = String(
+         Math.round(performance.now() - this.started),
+       );
++      // Allow the submitted preview to reach the screen before KTX network,
++      // transcoding and upload work begins. Dispose guards both callbacks.
++      requestAnimationFrame(() => {
++        if (!this.disposed)
++          requestAnimationFrame(() => {
++            if (!this.disposed) {
++              // At least one browser paint has followed the scene submission.
++              // Optional downloads begin on the next RAF, after this marker.
++              this.canvas.dataset.painted = 'true';
++              this.canvas.dataset.firstPaintAt = String(performance.now());
++              this.progressiveReady = true;
++              requestAnimationFrame(() => {
++                if (!this.disposed) this.assets.startStreaming();
++              });
++            }
++          });
++      });
+     }
+     if (now - this.lastUI >= 250) {
+       if (this.cpuTimings) this.cpuUiUpdates++;
+@@ -727,11 +832,19 @@ export class SpaceEngine {
+         (!local && e.body.kind !== 'moon') ||
+         e.body.id === this.cameraController.targetId ||
+         e.body.parentId === this.cameraController.targetId;
++      const visible = inView && relevant && e.renderVisible;
++      // Hidden labels need no certainty traversal. Refresh every shown label
++      // from the current scene, including arrivals at an unchanged paused date.
++      if (visible && this.labels)
++        this.labels.setApproximate(
++          e.body.id,
++          this.getPositionStatus(e.body.id) === 'approximate',
++        );
+       this.labels?.update(
+         e.body.id,
+         e.screenX,
+         e.screenY,
+-        inView && relevant && e.renderVisible,
++        visible,
+         e.body.id === this.selected,
+         e.body.id === this.hovered,
+       );
+@@ -809,26 +922,6 @@ export class SpaceEngine {
+     }
+     return this.picker.result;
+   }
+-  private createOrbits(tdb: number) {
+-    for (const e of this.registry.entries.values()) {
+-      if (!e.body.parentId) continue;
+-      const layer = this.buildOrbit(e.body.id, tdb);
+-      this.scene.add(layer.line);
+-      this.orbits.push({
+-        layer,
+-        bodyId: e.body.id,
+-        parentId: e.body.parentId,
+-        epoch: tdb,
+-        period: e.body.physical.periodDays! * SEC_PER_DAY,
+-        wanted: false,
+-      });
+-    }
+-  }
+-  private buildOrbit(id: string, tdb: number) {
+-    const e = this.registry.entries.get(id)!;
+-    const p = this.registry.entries.get(e.body.parentId!)!;
+-    return this.buildProviderOrbit(e.body, e.provider, p.frameId, tdb);
+-  }
+   private buildProviderOrbit(
+     body: BodySpec,
+     provider: PositionProvider,
+@@ -866,50 +959,162 @@ export class SpaceEngine {
+     );
+     return new OrbitLayer(points, body.color, provider.certaintyAt(tdb));
+   }
+-  private refreshOrbit = () => {
++  private orbitWanted(body: BodySpec) {
++    const target = this.target(this.focusedId)!;
++    return (
++      this.layers.has('orbits') &&
++      (!['dwarf', 'asteroid', 'satellite', 'spacecraft'].includes(body.kind) ||
++        body.id === this.selected ||
++        body.id === this.hovered) &&
++      (body.parentId === 'star:sun' ||
++        (this.cameraController.distanceKm < 2e7 &&
++          (body.parentId === target.body.id ||
++            body.parentId === target.body.parentId)))
++    );
++  }
++  private refreshOrbit = async () => {
+     this.orbitRefreshQueued = false;
+-    if (this.disposed) return;
++    if (this.disposed || !this.progressiveReady || this.orbitBuild) return;
+     const tdb = this.clock.state.tdbSec;
+-    // One rebuild per scheduled task; round-robin prevents a rapidly moving
+-    // moon from starving the other visible trajectories during fast playback.
+-    for (let i = 0; i < this.orbits.length; i++) {
+-      const orbit =
+-        this.orbits[this.orbitRefreshCursor++ % this.orbits.length]!;
+-      if (!orbit.wanted || Math.abs(tdb - orbit.epoch) < orbit.period / 4)
+-        continue;
+-      try {
+-        const layer = this.buildOrbit(orbit.bodyId, tdb);
+-        layer.line.visible = false; // Rebased by the next render frame.
++    const candidates = Array.from(this.registry.entries.values()).filter(
++      (e) => {
++        if (
++          !e.visible ||
++          !e.body.parentId ||
++          !e.body.physical.periodDays ||
++          !this.orbitWanted(e.body) ||
++          (this.orbitRetry.get(e.body.id) ?? 0) > performance.now()
++        )
++          return false;
++        const orbit = this.orbits.find((o) => o.bodyId === e.body.id);
++        return !orbit || Math.abs(tdb - orbit.epoch) >= orbit.period / 4;
++      },
++    );
++    const priority = (id: string) => {
++      if (id === this.selected || id === this.focusedId) return 1000;
++      if (id === this.hovered) return 750;
++      const body = this.registry.entries.get(id)!.body;
++      return body.kind === 'moon' && this.orbitWanted(body) ? 100 : 0;
++    };
++    candidates.sort((a, b) => priority(b.body.id) - priority(a.body.id));
++    const e = candidates[0];
++    if (!e) return;
++    const task = { id: e.body.id, epoch: tdb, cancelled: false };
++    this.orbitBuild = task;
++    try {
++      const parent = this.registry.entries.get(e.body.parentId!)!;
++      const a = new Float64Array(6);
++      const period = e.body.physical.periodDays! * SEC_PER_DAY;
++      const from = Math.max(
++        tdb - period / 2,
++        e.provider.validity === 'unbounded'
++          ? -Infinity
++          : e.provider.validity.fromTdb,
++      );
++      const to = Math.min(
++        tdb + period / 2,
++        e.provider.validity === 'unbounded'
++          ? Infinity
++          : e.provider.validity.toTdb,
++      );
++      let approximate = false;
++      const points = await sampleOrbitAsync(
++        async (t, out) => {
++          if (task.cancelled || this.disposed)
++            throw Error('Orbit build superseded');
++          if (!this.chunks.get(t)) {
++            try {
++              await this.chunks.load(runtimeChunkIndex(t), 2);
++            } catch {
++              approximate = true;
++            }
++          }
++          if (task.cancelled || this.disposed)
++            throw Error('Orbit build superseded');
++          if (
++            !e.provider.stateAt(t, a).ok ||
++            !this.registry.frames.transformState(
++              e.provider.frame,
++              parent.frameId,
++              t,
++              a,
++              a,
++            )
++          )
++            throw Error('Orbit position unavailable');
++          approximate ||= e.provider.certaintyAt(t) === 'approximate';
++          for (let j = 0; j < 3; j++) out[j] = a[j]!;
++        },
++        from,
++        to,
++        tdb,
++      );
++      if (
++        task.cancelled ||
++        this.disposed ||
++        Math.abs(this.clock.state.tdbSec - tdb) >= period / 4
++      )
++        return;
++      const layer = new OrbitLayer(
++        points,
++        e.body.color,
++        approximate ? 'approximate' : 'computed',
++      );
++      layer.line.visible = false;
++      const orbit = this.orbits.find((o) => o.bodyId === e.body.id);
++      if (orbit) {
+         orbit.layer.dispose();
+         orbit.layer = layer;
+         orbit.epoch = tdb;
+-        this.scene.add(layer.line);
+-      } catch (error) {
+-        this.emit('error', `Orbit update failed: ${String(error)}`);
+-      }
+-      break;
++      } else
++        this.orbits.push({
++          layer,
++          bodyId: e.body.id,
++          parentId: e.body.parentId!,
++          epoch: tdb,
++          period,
++          wanted: false,
++        });
++      this.scene.add(layer.line);
++      this.orbitRetry.delete(e.body.id);
++    } catch {
++      // A missing optional trajectory is local to this object. Renderer recovery
++      // must never remount a working scene because a curve chunk is unavailable.
++      if (!task.cancelled)
++        this.orbitRetry.set(e.body.id, performance.now() + 1000);
++    } finally {
++      if (this.orbitBuild === task) this.orbitBuild = null;
+     }
+   };
+   private updateOrbits(tdb: number, now: number) {
+     const world = this.cameraController.world;
+-    const target = this.target(this.cameraController.targetId)!;
++    const active = this.orbitBuild;
++    if (active) {
++      const e = this.registry.entries.get(active.id)!;
++      const priority = this.selected ?? this.focusedId;
++      if (
++        !this.orbitWanted(e.body) ||
++        Math.abs(tdb - active.epoch) >=
++          (e.body.physical.periodDays! * SEC_PER_DAY) / 4 ||
++        (active.id !== priority &&
++          this.registry.entries.get(priority)?.body.parentId &&
++          !this.orbits.some(
++            (o) =>
++              o.bodyId === priority && Math.abs(tdb - o.epoch) < o.period / 4,
++          ))
++      )
++        active.cancelled = true;
++    }
+     for (const orbit of this.orbits) {
+       const p = this.registry.entries.get(orbit.parentId)!;
+       const body = this.registry.entries.get(orbit.bodyId)!;
+       const selected = orbit.bodyId === this.selected;
+-      orbit.wanted =
+-        this.layers.has('orbits') &&
+-        (!['dwarf', 'asteroid', 'satellite', 'spacecraft'].includes(
+-          body.body.kind,
+-        ) ||
+-          selected ||
+-          orbit.bodyId === this.hovered) &&
+-        (orbit.parentId === 'star:sun' ||
+-          (this.cameraController.distanceKm < 2e7 &&
+-            (orbit.parentId === target.body.id ||
+-              orbit.parentId === target.body.parentId)));
++      orbit.wanted = this.orbitWanted(body.body);
+       orbit.layer.line.visible =
+-        orbit.wanted && Math.abs(tdb - orbit.epoch) <= orbit.period / 2;
++        body.visible &&
++        p.visible &&
++        orbit.wanted &&
++        Math.abs(tdb - orbit.epoch) <= orbit.period / 2;
+       if (orbit.layer.line.visible)
+         orbit.layer.update(
+           p.display,
+@@ -921,7 +1126,9 @@ export class SpaceEngine {
+     if (!this.orbitRefreshQueued && now - this.lastOrbitRefresh >= 250) {
+       this.lastOrbitRefresh = now;
+       this.orbitRefreshQueued = true;
+-      queueMicrotask(this.refreshOrbit);
++      setTimeout(() => {
++        void this.refreshOrbit();
++      }, 0);
+     }
+   }
+   resize() {
+@@ -964,7 +1171,7 @@ export class SpaceEngine {
+   }
+   /** Semantic camera target, independent of the temporarily selected card. */
+   get focusedId(): string {
+-    return this.cameraController.targetId;
++    return this.pendingFocus?.id ?? this.cameraController.targetId;
+   }
+   getEntity(id: string): Readonly<BodySpec> | null {
+     const body = this.target(id)?.body;
+@@ -1177,13 +1384,26 @@ export class SpaceEngine {
+     this.registry.update(tdb);
+   }
+   focus(id: string, opts: FocusOptions = {}) {
++    this.updateScene(this.clock.state.tdbSec);
+     const e = this.target(id);
+     if (!e) return;
++    this.pendingFocus = null;
++    if (!this.positionReady(id) || this.pendingFrame) {
++      this.pendingFocus = { id, opts: { ...opts, select: false } };
++      this.chunks.prefetch(this.clock.state.tdbSec, 0);
++      if (opts.select !== false) this.select(id);
++      else this.mapStateChanged();
++      return;
++    }
++    this.focusReady(id, opts, performance.now());
++  }
++  private focusReady(id: string, opts: FocusOptions, now: number) {
++    const e = this.target(id)!;
+     this.cameraController.focus(
+       id,
+       e.physical,
+       id === 'planet:saturn' ? SATURN_RINGS.outerRadiusKm : this.viewRadius(id),
+-      performance.now(),
++      now,
+       opts.transition ?? true,
+       opts.wide ?? false,
+       opts.recordHistory ?? true,
+@@ -1192,30 +1412,42 @@ export class SpaceEngine {
+     else this.mapStateChanged();
+   }
+   follow(id: string | null) {
++    if (id === null) this.pendingFocus = null;
+     if (id && id !== this.cameraController.targetId) this.focus(id);
+     this.cameraController.following = id !== null;
+     this.mapStateChanged();
+   }
+   back() {
++    this.pendingFocus = null;
++    this.pendingFrame = null;
++    this.updateScene(this.clock.state.tdbSec);
+     const view = this.cameraController.back();
+     if (view) {
+       const e = this.target(view.targetId);
+       if (!e) return;
+-      const result = this.cameraController.restore(
+-        view,
+-        e.physical,
+-        this.viewRadius(view.targetId),
+-        performance.now(),
+-        this.clock.state.tdbSec,
+-      );
+-      if (!result.ok) {
+-        this.emit('commandError', {
+-          command: 'frame',
+-          message: 'The previous camera reference could not be restored.',
+-        });
+-        return;
+-      }
+-      this.select(view.targetId);
++      const restore = () => {
++        const result = this.cameraController.restore(
++          view,
++          e.physical,
++          this.viewRadius(view.targetId),
++          performance.now(),
++          this.clock.state.tdbSec,
++        );
++        if (!result.ok) {
++          this.emit('commandError', {
++            command: 'frame',
++            message: 'The previous camera reference could not be restored.',
++          });
++          return;
++        }
++        this.select(view.targetId);
++      };
++      if (!e.visible) {
++        this.pendingFocus = { id: view.targetId, opts: {}, restore };
++        this.pendingFrame = view.frame;
++        this.select(view.targetId);
++        this.chunks.prefetch(this.clock.state.tdbSec, 0);
++      } else restore();
+     }
+   }
+   setLayer(id: string, on: boolean) {
+@@ -1235,7 +1467,12 @@ export class SpaceEngine {
+    */
+   getObjectsInView(): readonly ObjectInView[] {
+     this.inViewSnapshot.begin();
+-    if (!this.disposed && this.initialReady) {
++    if (
++      !this.disposed &&
++      this.initialReady &&
++      this.renderedEpoch === this.clock.state.tdbSec &&
++      this.renderedRevision === this.registry.frames.cacheRevision
++    ) {
+       for (const e of this.registry.entries.values()) {
+         const rendered =
+           e.visible &&
+@@ -1257,11 +1494,16 @@ export class SpaceEngine {
+     return this.layers.whenSettled();
+   }
+   setFrame(frame: CameraFrame): CameraFrameResult {
++    this.pendingFrame = null;
+     const result = this.cameraController.setFrame(
+       frame,
+       this.clock.state.tdbSec,
+     );
+-    if (!result.ok)
++    if (!result.ok && result.reason !== 'unsupported-frame') {
++      this.pendingFrame = frame;
++      this.chunks.prefetch(this.clock.state.tdbSec, 0);
++      this.mapStateChanged();
++    } else if (!result.ok)
+       this.emit('commandError', {
+         command: 'frame',
+         message:
+@@ -1318,14 +1560,20 @@ export class SpaceEngine {
+   }
+   getMapState(): MapState {
+     return {
+-      focus: this.selected ?? this.cameraController.targetId,
++      focus: this.selected ?? this.focusedId,
+       ...(this.clock.mode !== 'live'
+         ? { t: tdbToIso(this.clock.state.tdbSec) }
+         : {}),
+       scale: this.scale,
+       layers: this.layers.enabledIds(),
+-      frame: this.cameraController.frameId,
+-      camera: { preset: this.cameraController.preset },
++      frame: this.pendingFrame ?? this.cameraController.frameId,
++      camera: {
++        preset: this.pendingFocus
++          ? this.pendingFocus.opts.wide
++            ? 'wide'
++            : 'close'
++          : this.cameraController.preset,
++      },
+     };
+   }
+   applyMapState(state: MapState, opts: ApplyMapStateOptions = {}): void {
+@@ -1354,7 +1602,7 @@ export class SpaceEngine {
+             message: String(error),
+           }),
+         );
+-      this.registry.update(this.clock.tick());
++      this.updateScene(this.clock.tick());
+       this.setFrame(frame);
+       this.focus(state.focus, {
+         wide: state.camera?.preset === 'wide',
+@@ -1370,10 +1618,17 @@ export class SpaceEngine {
+     this.mapStateChanged();
+   }
+   getMetrics(id: string): ObjectMetrics | null {
++    this.updateScene(this.clock.state.tdbSec);
+     const e = this.target(id),
+       sun = this.registry.entries.get('star:sun'),
+       earth = this.registry.entries.get('planet:earth');
+-    if (!e || !sun || !earth) return null;
++    if (
++      !e?.visible ||
++      !sun?.visible ||
++      !earth?.visible ||
++      !this.positionReady(id)
++    )
++      return null;
+     const p = e.physical;
+     return {
+       distanceSunKm: Math.hypot(
+@@ -1388,17 +1643,46 @@ export class SpaceEngine {
+       ),
+       speedKmPerSec: Math.hypot(p[3]!, p[4]!, p[5]!),
+       radiusKm: e.body.physical.meanRadiusKm!,
+-      certainty: e.body.provenance.certainty,
++      certainty:
++        this.getPositionStatus(id) === 'approximate'
++          ? 'approximate'
++          : e.body.provenance.certainty,
+     };
+   }
++  getPositionStatus(id: string): 'ready' | 'approximate' | 'loading' {
++    this.updateScene(this.clock.state.tdbSec);
++    const e = this.target(id);
++    if (!e?.visible || !this.positionReady(id)) return 'loading';
++    const entity = this.registry.entries.get(id);
++    if (!entity)
++      return e.body.provenance.certainty === 'approximate'
++        ? 'approximate'
++        : 'ready';
++    const certainty = entity.provider.certaintyAt(this.clock.state.tdbSec);
++    return certainty === 'approximate' ||
++      (entity.body.parentId &&
++        this.getPositionStatus(entity.body.parentId) === 'approximate')
++      ? 'approximate'
++      : 'ready';
++  }
+   diagnostics() {
+     const focus = this.target(this.cameraController.targetId);
+     return {
+       ...this.perf.stats(),
+       backend: this.backend,
++      adapter: this.adapterDescription,
+       tier: this.quality.tier,
+       gpuBytes: this.assets.gpuBytes,
+       pendingTextures: this.assets.pending,
++      textureState: this.assets.textureState,
++      chunks: this.chunks.diagnostics,
++      positionStatus: Array.from(this.registry.entries.keys(), (id) => ({
++        id,
++        status: this.getPositionStatus(id),
++      })),
++      pendingFocus: this.pendingFocus?.id ?? null,
++      pendingFrame: this.pendingFrame,
++      pendingOrbit: this.orbitBuild?.id ?? null,
+       textureCount: this.renderer.info.memory.textures,
+       entities: this.registry.entries.size,
+       sourcePoints: this.sourcePoints.size,
+@@ -1435,14 +1719,34 @@ export class SpaceEngine {
+           innerRadius: e.visual.rings!.mesh.geometry.parameters.innerRadius,
+           outerRadius: e.visual.rings!.mesh.geometry.parameters.outerRadius,
+         })),
+-      orbits: this.orbits.map((orbit) => ({
+-        id: orbit.bodyId,
+-        epoch: orbit.epoch,
+-        vertices: orbit.layer.points.length / 3,
+-        visible: orbit.layer.line.visible,
+-        dashed: orbit.layer.line.material.dashed,
+-        width: orbit.layer.line.material.linewidth,
+-      })),
++      orbits: this.orbits
++        .map((orbit) => ({
++          id: orbit.bodyId,
++          epoch: orbit.epoch,
++          vertices: orbit.layer.points.length / 3,
++          visible: orbit.layer.line.visible,
++          dashed: orbit.layer.line.material.dashed,
++          width: orbit.layer.line.material.linewidth,
++        }))
++        .concat(
++          Array.from(this.registry.entries.values())
++            .filter(
++              (e) =>
++                e.body.parentId &&
++                e.body.physical.periodDays &&
++                !this.orbits.some((o) => o.bodyId === e.body.id),
++            )
++            .map((e) => ({
++              id: e.body.id,
++              epoch: 0,
++              vertices: 0,
++              visible: false,
++              dashed:
++                e.provider.certaintyAt(this.clock.state.tdbSec) ===
++                'approximate',
++              width: 0,
++            })),
++        ),
+       orientations: Array.from(this.registry.entries.values()).map((e) => ({
+         id: e.body.id,
+         frame: e.fixedFrameId ?? null,
+@@ -1454,13 +1758,17 @@ export class SpaceEngine {
+       selected: this.selected,
+       focusScreen: focus ? { x: focus.screenX, y: focus.screenY } : null,
+       ready: this.initialReady,
++      renderedFrames: this.renderedFrames,
++      renderedEpoch: this.renderedEpoch,
++      renderedRevision: this.renderedRevision,
++      sceneRevision: this.registry.frames.cacheRevision,
+     };
+   }
+   referenceView(bodyId: string, phase: 'day' | 'night' | 'quarter' | 'limb') {
+     this.focus(bodyId, { transition: false });
+     const body = this.registry.entries.get(bodyId),
+       sun = this.registry.entries.get('star:sun');
+-    if (!body || !sun) return;
++    if (!body?.visible || !sun?.visible) return;
+     const x = sun.physical[0]! - body.physical[0]!,
+       y = sun.physical[1]! - body.physical[1]!,
+       z = sun.physical[2]! - body.physical[2]!;
+@@ -1541,6 +1849,39 @@ export class SpaceEngine {
+       this.start();
+     } else this.renderer.setAnimationLoop(null);
+   }
++  /** Lab settlement only. Consumer publication and first paint never await
++   * optional trajectories. Benchmarks require the same visible curve workload
++   * as the accepted renderer, rather than measuring an incomplete scene. */
++  async whenOrbitsSettled(timeoutMs = 60000) {
++    const deadline = performance.now() + timeoutMs;
++    this.chunks.prefetch(this.clock.state.tdbSec, 0);
++    await this.chunks.load(runtimeChunkIndex(this.clock.state.tdbSec));
++    while (performance.now() < deadline) {
++      if (this.disposed || document.hidden)
++        throw Error('Scene settlement interrupted');
++      const tdb = this.clock.state.tdbSec;
++      this.updateScene(tdb);
++      this.applyPendingView(performance.now());
++      const ready =
++        !this.orbitBuild &&
++        Array.from(this.registry.entries.values()).every((e) => {
++          if (
++            !e.body.parentId ||
++            !e.body.physical.periodDays ||
++            !this.orbitWanted(e.body)
++          )
++            return true;
++          const orbit = this.orbits.find((o) => o.bodyId === e.body.id);
++          return (
++            e.visible && orbit && Math.abs(tdb - orbit.epoch) < orbit.period / 4
++          );
++        });
++      if (this.progressiveReady && ready) return;
++      await this.refreshOrbit();
++      await new Promise<void>((done) => setTimeout(done, 16));
++    }
++    throw Error('Visible orbit data did not settle');
++  }
+   /** Lab-only five-path CPU timing, including renderer submission, not GPU time.
+    * Run in a dedicated deterministic test page with no concurrent interactions.
+    */
+@@ -1611,6 +1952,7 @@ export class SpaceEngine {
+       for (const path of CPU_PATHS) {
+         onPath(path.id);
+         this.focus(path.focus, { transition: false });
++        await this.whenOrbitsSettled();
+         const timings = new CpuTimings(frames);
+         this.cpuClockEvents = this.cpuUiUpdates = 0;
+         for (let index = -warmupFrames; index < frames; index++) {
+@@ -1780,6 +2122,7 @@ export class SpaceEngine {
+           throw new Error(
+             'Textures did not settle. Wait for loading and run again.',
+           );
++        await this.whenOrbitsSettled();
+         await wait(3000);
+         this.perf.reset();
+         await wait(10000);
+@@ -1839,6 +2182,8 @@ export class SpaceEngine {
+     }
+   }
+   dispose() {
++    if (this.orbitBuild) this.orbitBuild.cancelled = true;
++    this.chunks.dispose();
+     if (this.disposed) return;
+     this.disposed = true;
+     this.renderer.setAnimationLoop(null);
+diff --git a/packages/engine/src/assets/AssetManager.ts b/packages/engine/src/assets/AssetManager.ts
+index 6d39ea5..75ade35 100644
+--- a/packages/engine/src/assets/AssetManager.ts
++++ b/packages/engine/src/assets/AssetManager.ts
+@@ -3,6 +3,10 @@ import type { Texture, WebGPURenderer } from 'three/webgpu';
+ import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
+ import { decodeShape, registerShapeGeometry } from './ShapeGeometry';
+ import { configureSurfaceMapping } from './SurfaceMapping';
++import {
++  adoptTextureContent,
++  createTexturePlaceholder,
++} from './TexturePlaceholder';
+ interface AssetRecord {
+   texture: Texture;
+   resolution: number;
+@@ -10,6 +14,7 @@ interface AssetRecord {
+   loading: boolean;
+   data: boolean;
+   references: number;
++  failedResolution: number | null;
+ }
+ interface ManifestEntry {
+   name: string;
+@@ -21,32 +26,42 @@ export class AssetManager {
+   private records = new Map<string, AssetRecord>();
+   private loader: KTX2Loader;
+   private disposed = false;
++  private streaming = false;
++  private textureQueue: { name: string; record: AssetRecord }[] = [];
++  private activeTextureLoads = 0;
+   constructor(
+     private renderer: WebGPURenderer,
+     private manifest: ManifestEntry[],
++    private maxResolution = Infinity,
+   ) {
+     this.loader = new KTX2Loader()
+       .setTranscoderPath('/basis/')
+       .setWorkerLimit(2)
+       .detectSupport(renderer);
+   }
+-  static async create(renderer: WebGPURenderer) {
++  static async create(renderer: WebGPURenderer, maxResolution = Infinity) {
+     const response = await fetch('/assets/textures/manifest.json');
+     if (!response.ok) throw new Error('Texture manifest unavailable');
+     const manager = new AssetManager(
+       renderer,
+       (await response.json()) as ManifestEntry[],
++      maxResolution,
+     );
+     try {
+-      await Promise.all(['phobos', 'deimos'].map(async (name) => {
+-        const response = await fetch(`/assets/shapes/${name}.bin.gz`);
+-        if (!response.ok || !response.body) throw new Error(`Missing shape ${name}`);
+-        const buffer = await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+-        // Reject invalid assets during startup, not on first focus.
+-        decodeShape(buffer).dispose();
+-        manager.shapes.set(name, buffer);
+-      }));
+-      await manager.preload([
++      await Promise.all(
++        ['phobos', 'deimos'].map(async (name) => {
++          const response = await fetch(`/assets/shapes/${name}.bin.gz`);
++          if (!response.ok || !response.body)
++            throw new Error(`Missing shape ${name}`);
++          const buffer = await new Response(
++            response.body.pipeThrough(new DecompressionStream('gzip')),
++          ).arrayBuffer();
++          // Reject invalid assets during startup, not on first focus.
++          decodeShape(buffer).dispose();
++          manager.shapes.set(name, buffer);
++        }),
++      );
++      manager.prepare([
+         'sun',
+         'earth_daymap',
+         'earth_nightmap',
+@@ -102,76 +117,133 @@ export class AssetManager {
+     configureSurfaceMapping(texture, name);
+     texture.needsUpdate = true;
+   }
+-  async preload(names: string[]) {
+-    await Promise.all(
+-      names.map(async (name) => {
+-        const entry = this.url(name, 1024);
+-        if (!entry) throw new Error(`Missing texture ${name}`);
+-        const texture = await this.loader.loadAsync(entry.file);
+-        if (this.disposed) {
+-          texture.dispose();
+-          return;
+-        }
+-        const data = /normal|specular|cloud|height/.test(name);
+-        this.configure(texture, data, name);
+-        // Catalog LOD may hide every sphere at startup. Keep the small hero
+-        // texture set resident so first focus does not allocate new textures.
+-        this.renderer.initTexture(texture);
+-        this.records.set(name, {
+-          texture,
+-          resolution: 1024,
+-          desired: 1024,
+-          loading: false,
+-          data,
+-          references: 0,
+-        });
+-      }),
+-    );
++  private prepare(names: string[]) {
++    for (const name of names) {
++      const entry = this.url(name, 1024);
++      if (!entry) throw new Error(`Missing texture ${name}`);
++      const texture = createTexturePlaceholder(name);
++      const data = /normal|specular|cloud|height/.test(name);
++      this.configure(texture, data, name);
++      this.records.set(name, {
++        texture,
++        resolution: 0,
++        desired: 1024,
++        loading: false,
++        data,
++        references: 0,
++        failedResolution: null,
++      });
++    }
++  }
++  /** Called only after the first scene submission. No KTX/basis download can
++   * hold that first frame; mobile first receives and retains real 1K maps. */
++  startStreaming() {
++    if (this.disposed || this.streaming) return;
++    this.streaming = true;
++    for (const [name, record] of this.records) void this.upgrade(name, record);
+   }
+   load(name: string, res = 2048, data = false): Texture {
+     const record = this.records.get(name);
+     if (!record) throw new Error(`Texture not preloaded: ${name}`);
+     record.data = data;
+     record.references++;
+-    record.desired = res;
++    record.desired = Math.min(res, this.maxResolution);
+     void this.upgrade(name, record);
+     return record.texture;
+   }
+-  private async upgrade(name: string, record: AssetRecord) {
+-    if (this.disposed || record.loading || this.records.get(name)!==record) return;
+-    const entry = this.url(name, record.desired);
+-    if (!entry || entry.res === record.resolution) return;
++  private upgrade(name: string, record: AssetRecord) {
++    if (
++      !this.streaming ||
++      this.disposed ||
++      record.loading ||
++      this.records.get(name) !== record
++    )
++      return;
++    // First real map is always the small baseline, even if HIGH was selected.
++    const entry = this.url(
++      name,
++      record.resolution === 0 ? 1024 : record.desired,
++    );
++    if (
++      !entry ||
++      entry.res === record.resolution ||
++      entry.res === record.failedResolution
++    )
++      return;
+     record.loading = true;
++    this.textureQueue.push({ name, record });
++    this.pumpTextures();
++  }
++  private pumpTextures() {
++    // KTX fetches share the browser's per-origin connections with date data.
++    // Two loads also match our transcoder workers, leaving room for chunks.
++    while (
++      !this.disposed &&
++      this.activeTextureLoads < 2 &&
++      this.textureQueue.length
++    ) {
++      // Give every small baseline a turn before optional sharper maps.
++      this.textureQueue.sort(
++        (a, b) =>
++          Number(a.record.resolution > 0) - Number(b.record.resolution > 0),
++      );
++      const { name, record } = this.textureQueue.shift()!;
++      if (this.records.get(name) !== record) continue;
++      this.activeTextureLoads++;
++      void this.upgradeNow(name, record).finally(() => {
++        record.loading = false;
++        this.activeTextureLoads--;
++        if (
++          !this.disposed &&
++          this.records.get(name) === record &&
++          record.failedResolution === null
++        )
++          this.upgrade(name, record);
++        this.pumpTextures();
++      });
++    }
++  }
++  private async upgradeNow(name: string, record: AssetRecord) {
++    // Quality can change while queued. Choose the current request when it starts.
++    const entry = this.url(
++      name,
++      record.resolution === 0 ? 1024 : record.desired,
++    );
++    if (
++      !entry ||
++      entry.res === record.resolution ||
++      entry.res === record.failedResolution
++    )
++      return;
+     try {
+       const loaded = await this.loader.loadAsync(entry.file);
+       if (this.disposed || this.records.get(name) !== record) {
+         loaded.dispose();
+         return;
+       }
+-      record.texture.dispose();
+-      record.texture.copy(loaded);
++      adoptTextureContent(record.texture, loaded);
+       this.configure(record.texture, record.data, name);
+       this.renderer.initTexture(record.texture);
+       record.resolution = entry.res;
++      record.failedResolution = null;
+       loaded.dispose();
+     } catch (error) {
++      if (this.disposed || this.records.get(name) !== record) return;
++      record.failedResolution = entry.res;
+       console.warn(
+         `Texture upgrade failed for ${name}; retaining loaded map`,
+         error,
+       );
+-    } finally {
+-      record.loading = false;
+-      if (
+-        !this.disposed &&
+-        this.url(name, record.desired)?.res !== record.resolution &&
+-        entry.res !== this.url(name, record.desired)?.res
+-      )
+-        void this.upgrade(name, record);
+     }
+   }
+   setResolution(res: number) {
+     for (const [name, record] of this.records) {
+-      record.desired = name === 'stars_milky_way' ? Math.min(res, 4096) : res;
++      record.desired = Math.min(
++        name === 'stars_milky_way' ? Math.min(res, 4096) : res,
++        this.maxResolution,
++      );
++      // An explicit quality command can retry a previous failure once.
++      record.failedResolution = null;
+       void this.upgrade(name, record);
+     }
+   }
+@@ -186,6 +258,7 @@ export class AssetManager {
+   }
+   dispose() {
+     this.disposed = true;
++    this.textureQueue.length = 0;
+     this.loader.dispose();
+     for (const r of this.records.values()) r.texture.dispose();
+     this.records.clear();
+@@ -201,7 +274,25 @@ export class AssetManager {
+   }
+   get pending() {
+     let count = 0;
+-    for (const r of this.records.values()) if (r.loading) count++;
++    for (const [name, r] of this.records) {
++      if (
++        r.loading ||
++        (r.failedResolution === null &&
++          this.url(name, r.resolution === 0 ? 1024 : r.desired)?.res !==
++            r.resolution)
++      )
++        count++;
++    }
+     return count;
+   }
++  get textureState() {
++    return Array.from(this.records, ([name, r]) => ({
++      name,
++      resolution: r.resolution,
++      desired: r.desired,
++      placeholder: r.resolution === 0,
++      loading: r.loading,
++      failed: r.failedResolution !== null,
++    }));
++  }
+ }
+diff --git a/packages/engine/src/labels/LabelSystem.ts b/packages/engine/src/labels/LabelSystem.ts
+index f311a46..7a5b5fd 100644
+--- a/packages/engine/src/labels/LabelSystem.ts
++++ b/packages/engine/src/labels/LabelSystem.ts
+@@ -4,6 +4,8 @@ import type { LabelCandidate } from './LabelLayout';
+ interface Label extends LabelCandidate {
+   id: string;
+   name: string;
++  baseName: string;
++  approximate: boolean;
+   color: string;
+   slot: number;
+ }
+@@ -42,6 +44,8 @@ export class LabelSystem {
+     const label: Label = {
+       id,
+       name,
++      baseName: name,
++      approximate: false,
+       color,
+       importance,
+       width,
+@@ -61,6 +65,27 @@ export class LabelSystem {
+   begin() {
+     for (const label of this.ordered) label.visible = false;
+   }
++  setApproximate(id: string, approximate: boolean) {
++    const label = this.labels.get(id);
++    if (!label || label.approximate === approximate) return;
++    label.approximate = approximate;
++    label.name = label.baseName + (approximate ? ' · approximate' : '');
++    const probe = document.createElement('div');
++    probe.className = 'space-label';
++    probe.textContent = label.name;
++    probe.style.visibility = 'hidden';
++    this.host.appendChild(probe);
++    label.width = Math.max(16, probe.getBoundingClientRect().width);
++    probe.remove();
++    if (label.slot >= 0)
++      this.pool[label.slot]!.element.textContent = label.name;
++  }
++  hide(id: string) {
++    const label = this.labels.get(id);
++    if (!label) return;
++    label.visible = label.show = false;
++    if (label.slot >= 0) this.release(this.pool[label.slot]!);
++  }
+   remove(id: string) {
+     const label = this.labels.get(id);
+     if (!label) return;
+diff --git a/packages/engine/src/layers/OrbitLayer.ts b/packages/engine/src/layers/OrbitLayer.ts
+index d75c1c1..435f288 100644
+--- a/packages/engine/src/layers/OrbitLayer.ts
++++ b/packages/engine/src/layers/OrbitLayer.ts
+@@ -83,21 +83,26 @@ export class OrbitLayer {
+     const x = parent[0]! - camera[0]!,
+       y = parent[1]! - camera[1]!,
+       z = parent[2]! - camera[2]!;
+-    for (let i = 0; i < this.start.count; i++) {
+-      const a = i * 3,
+-        b = a + 3;
+-      this.start.setXYZ(
+-        i,
+-        x + this.points[a]! * scale,
+-        y + this.points[a + 1]! * scale,
+-        z + this.points[a + 2]! * scale,
+-      );
+-      this.end.setXYZ(
+-        i,
+-        x + this.points[b]! * scale,
+-        y + this.points[b + 1]! * scale,
+-        z + this.points[b + 2]! * scale,
+-      );
++    // LineGeometry stores consecutive segment endpoints in one float32 buffer.
++    // Carry the float64 endpoint forward rather than calculate each interior
++    // point twice. Keep the original subtract/multiply/add order before upload.
++    const data = this.start.data.array,
++      stride = this.start.data.stride;
++    let px = x + this.points[0]! * scale,
++      py = y + this.points[1]! * scale,
++      pz = z + this.points[2]! * scale;
++    for (let i = 0, point = 3; i < this.start.count; i++, point += 3) {
++      const start = i * stride + this.start.offset,
++        end = i * stride + this.end.offset;
++      data[start] = px;
++      data[start + 1] = py;
++      data[start + 2] = pz;
++      px = x + this.points[point]! * scale;
++      py = y + this.points[point + 1]! * scale;
++      pz = z + this.points[point + 2]! * scale;
++      data[end] = px;
++      data[end + 1] = py;
++      data[end + 2] = pz;
+     }
+     this.start.data.needsUpdate = true;
+     this.line.material.linewidth = selected ? 2 : 1;
+diff --git a/packages/engine/src/layers/sampleOrbit.ts b/packages/engine/src/layers/sampleOrbit.ts
+index daef38c..165163b 100644
+--- a/packages/engine/src/layers/sampleOrbit.ts
++++ b/packages/engine/src/layers/sampleOrbit.ts
+@@ -60,3 +60,65 @@ export function sampleOrbit(
+   }
+   return new Float64Array(values);
+ }
++
++/** Same seed order, subdivision criterion and endpoints as sampleOrbit. Await
++ * data one position at a time, with a CPU yield budget even on cache hits. */
++export async function sampleOrbitAsync(
++  evaluate: (tdb: number, out: Float64Array) => Promise<void>,
++  from: number,
++  to: number,
++  epoch: number,
++  tolerance = 0.0002,
++): Promise<Float64Array> {
++  if (
++    !Number.isFinite(from) ||
++    !Number.isFinite(to) ||
++    !(to > from) ||
++    !(tolerance > 0)
++  )
++    throw new Error('Invalid orbit interval');
++  const times = Array.from({ length: 33 }, (_, i) =>
++    i === 0 ? from : i === 32 ? to : from + ((to - from) * i) / 32,
++  );
++  if (epoch > from && epoch < to && !times.includes(epoch)) times.push(epoch);
++  times.sort((a, b) => a - b);
++  const values: number[] = [];
++  let yieldedAt = performance.now();
++  async function position(t: number) {
++    if (performance.now() - yieldedAt >= 6) {
++      await new Promise<void>((done) => setTimeout(done, 0));
++      yieldedAt = performance.now();
++    }
++    const out = new Float64Array(3);
++    await evaluate(t, out);
++    if (!out.every(Number.isFinite)) throw new Error('Non-finite orbit sample');
++    return out;
++  }
++  async function append(
++    aTime: number,
++    a: Float64Array,
++    bTime: number,
++    b: Float64Array,
++    depth: number,
++  ): Promise<void> {
++    const midTime = (aTime + bTime) / 2;
++    const mid = await position(midTime);
++    const error = Math.hypot(
++      mid[0]! - (a[0]! + b[0]!) / 2,
++      mid[1]! - (a[1]! + b[1]!) / 2,
++      mid[2]! - (a[2]! + b[2]!) / 2,
++    );
++    if (depth < 6 && error > tolerance * Math.max(1, Math.hypot(...mid))) {
++      await append(aTime, a, midTime, mid, depth + 1);
++      await append(midTime, mid, bTime, b, depth + 1);
++    } else values.push(b[0]!, b[1]!, b[2]!);
++  }
++  let previous = await position(from);
++  values.push(...previous);
++  for (let i = 1; i < times.length; i++) {
++    const next = await position(times[i]!);
++    await append(times[i - 1]!, previous, times[i]!, next, 0);
++    previous = next;
++  }
++  return new Float64Array(values);
++}
+diff --git a/packages/engine/src/scene/EntityRegistry.ts b/packages/engine/src/scene/EntityRegistry.ts
+index 43efdbd..eaa8192 100644
+--- a/packages/engine/src/scene/EntityRegistry.ts
++++ b/packages/engine/src/scene/EntityRegistry.ts
+@@ -3,6 +3,7 @@ import {
+   createCatalogProvider,
+   createSolarSystemFrameTree,
+   registerCatalogFrames,
++  createBodyProvider,
+ } from '@space/astro';
+ import type { createPlanet } from '../bodies/PlanetFactory';
+ import type { LodLevel } from '../lod/LodSystem';
+@@ -27,7 +28,15 @@ export interface RenderEntity {
+   fixedFrameId?: `FIXED:${string}` | undefined;
+ }
+ export class EntityRegistry {
+-  readonly frames = createSolarSystemFrameTree();
++  readonly frames: ReturnType<typeof createSolarSystemFrameTree>;
++  constructor(
++    private readonly providerFor: (
++      body: BodySpec,
++    ) => PositionProvider = createCatalogProvider,
++    analytic: (body: string) => PositionProvider = createBodyProvider,
++  ) {
++    this.frames = createSolarSystemFrameTree(analytic);
++  }
+   readonly entries = new Map<string, RenderEntity>();
+   loadCatalog(
+     bodies: readonly BodySpec[],
+@@ -42,7 +51,7 @@ export class EntityRegistry {
+   ) {
+     if (this.entries.has(body.id))
+       throw new Error(`Duplicate entity ${body.id}`);
+-    const provider = supplied ?? createCatalogProvider(body);
++    const provider = supplied ?? this.providerFor(body);
+     if (!supplied) registerCatalogFrames(this.frames, body, provider);
+     const frameId = supplied
+       ? (`ICRF_BODY:registered/${body.id}` as const)
+@@ -79,6 +88,10 @@ export class EntityRegistry {
+   update(tdbSec: number) {
+     for (const e of this.entries.values()) {
+       e.visible = this.frames.resolveOrigin(e.frameId, tdbSec, e.physical);
++      if (!e.visible) {
++        e.renderVisible = false;
++        continue;
++      }
+       e.display[0] = e.physical[0]!;
+       e.display[1] = e.physical[1]!;
+       e.display[2] = e.physical[2]!;
+diff --git a/packages/engine/test/objects-in-view.test.ts b/packages/engine/test/objects-in-view.test.ts
+index c81e69e..8d28950 100644
+--- a/packages/engine/test/objects-in-view.test.ts
++++ b/packages/engine/test/objects-in-view.test.ts
+@@ -63,10 +63,14 @@ function setup() {
+   const state = {
+     disposed: false,
+     initialReady: true,
++    clock: { state: { tdbSec: 100 } },
++    renderedEpoch: 100,
++    renderedRevision: 0,
+     camera,
+     inViewCenter: new Vector4(),
+     inViewSnapshot: new ObjectsInViewSnapshot(EXPLORABLE_BODIES),
+     registry: {
++      frames: { cacheRevision: 0 },
+       entries: new Map(
+         EXPLORABLE_BODIES.slice(0, 2).map((body, i) => [
+           body.id,
+@@ -130,3 +134,15 @@ it('invalid providers, disabled rendered entities, startup and disposal fail clo
+   Object.assign(engine, { initialReady: true, disposed: true });
+   expect(engine.getObjectsInView()).toEqual([]);
+ });
++it('withholds membership across a date jump or arriving chunk until a matching scene has rendered', () => {
++  const { engine, state } = setup();
++  expect(engine.getObjectsInView()).toHaveLength(2);
++  state.clock.state.tdbSec = 101;
++  expect(engine.getObjectsInView()).toEqual([]);
++  Object.assign(engine, { renderedEpoch: 101 });
++  expect(engine.getObjectsInView()).toHaveLength(2);
++  state.registry.frames.cacheRevision = 1;
++  expect(engine.getObjectsInView()).toEqual([]);
++  Object.assign(engine, { renderedRevision: 1 });
++  expect(engine.getObjectsInView()).toHaveLength(2);
++});
+diff --git a/packages/engine/test/orbits.test.ts b/packages/engine/test/orbits.test.ts
+index 1ddc2a6..d023fe7 100644
+--- a/packages/engine/test/orbits.test.ts
++++ b/packages/engine/test/orbits.test.ts
+@@ -1,6 +1,127 @@
+ import { expect, it } from 'vitest';
+ import { sampleOrbit } from '../src/layers/sampleOrbit';
+ import { OrbitLayer } from '../src/layers/OrbitLayer';
++import type { InterleavedBufferAttribute } from 'three/webgpu';
++
++function endpoints(layer: OrbitLayer, name: 'instanceStart' | 'instanceEnd') {
++  return layer.line.geometry.getAttribute(name) as InterleavedBufferAttribute;
++}
++
++/** Independent previous accessor-based upload; compare actual bytes, not epsilon. */
++function originalUpload(
++  layer: OrbitLayer,
++  parent: Float64Array,
++  camera: Float64Array,
++  scale: number,
++) {
++  const start = endpoints(layer, 'instanceStart'),
++    end = endpoints(layer, 'instanceEnd');
++  const x = parent[0]! - camera[0]!,
++    y = parent[1]! - camera[1]!,
++    z = parent[2]! - camera[2]!;
++  for (let i = 0; i < start.count; i++) {
++    const a = i * 3,
++      b = a + 3;
++    start.setXYZ(
++      i,
++      x + layer.points[a]! * scale,
++      y + layer.points[a + 1]! * scale,
++      z + layer.points[a + 2]! * scale,
++    );
++    end.setXYZ(
++      i,
++      x + layer.points[b]! * scale,
++      y + layer.points[b + 1]! * scale,
++      z + layer.points[b + 2]! * scale,
++    );
++  }
++}
++
++function bytes(layer: OrbitLayer) {
++  const array = endpoints(layer, 'instanceStart').data.array;
++  return new Uint8Array(array.buffer, array.byteOffset, array.byteLength);
++}
++
++it('uploads byte-identical shared endpoints at solar and near-surface camera origins', () => {
++  const points = new Float64Array(3 * 2113);
++  for (let i = 0; i < points.length; i++)
++    points[i] = Math.sin(i * 0.137) * 149597870.7 + i * 0.000013;
++  const actual = new OrbitLayer(points, '#ffffff', 'computed'),
++    original = new OrbitLayer(points, '#ffffff', 'computed');
++  const origins = [
++    [0, 0, 0, 149597870.69, -2e8, 3e8],
++    [
++      149597870.7, -3900000, 1700000, 149604641.7084, -3900000.0001,
++      1700000.000001,
++    ],
++    [-4e9, 1e9, -5e9, -4e9 + 0.00001, 1e9 - 0.00001, -5e9 + 0.00001],
++  ];
++  try {
++    for (const origin of origins)
++      for (const scale of [0, 1, 1.0000001, 50]) {
++        const parent = new Float64Array(origin.slice(0, 3)),
++          camera = new Float64Array(origin.slice(3));
++        originalUpload(original, parent, camera, scale);
++        actual.update(parent, camera, scale, false);
++        expect(bytes(actual)).toEqual(bytes(original));
++      }
++    expect(endpoints(actual, 'instanceStart').data).toBe(
++      endpoints(actual, 'instanceEnd').data,
++    );
++  } finally {
++    actual.dispose();
++    original.dispose();
++  }
++});
++
++it('reuploads changed points and camera/parent/scale with one dirty revision and unchanged styles', () => {
++  const points = new Float64Array([0.000001, -0, 1, 1, 2, 3, 4, 5, 6]),
++    copy = points.slice(),
++    actual = new OrbitLayer(points, '#ffffff', 'approximate'),
++    original = new OrbitLayer(points, '#ffffff', 'approximate');
++  try {
++    for (let n = 0; n < 5; n++) {
++      const parent = new Float64Array([149597870.7 + n, n, 2 * n]),
++        camera = new Float64Array([149597870.69, -n, 3 * n]);
++      points[3] = copy[3]! + n * 0.0001;
++      const version = endpoints(actual, 'instanceStart').data.version;
++      originalUpload(original, parent, camera, 1 + n);
++      actual.update(parent, camera, 1 + n, n % 2 === 0);
++      expect(bytes(actual)).toEqual(bytes(original));
++      expect(endpoints(actual, 'instanceStart').data.version).toBe(version + 1);
++      expect(actual.line.material.linewidth).toBe(n % 2 === 0 ? 2 : 1);
++      expect(actual.line.material.opacity).toBe(n % 2 === 0 ? 0.38 : 0.12);
++      expect(actual.line.material.dashed).toBe(true);
++    }
++  } finally {
++    actual.dispose();
++    original.dispose();
++  }
++});
++
++it('retains minimum-segment, closed-loop and signed-zero inputs without mutating physical points', () => {
++  for (const points of [
++    new Float64Array([-0, 0, -0, 1, -1, 1]),
++    new Float64Array([1, 2, 3, 4, 5, 6, 1, 2, 3]),
++  ]) {
++    const originalPoints = points.slice(),
++      actual = new OrbitLayer(points, '#ffffff', 'predicted'),
++      original = new OrbitLayer(points, '#ffffff', 'predicted');
++    try {
++      for (const scale of [-1, 0, 1]) {
++        const parent = new Float64Array([-0, 0, -0]),
++          camera = new Float64Array([0, -0, 0]);
++        originalUpload(original, parent, camera, scale);
++        actual.update(parent, camera, scale, true);
++        expect(bytes(actual)).toEqual(bytes(original));
++        expect(points).toEqual(originalPoints);
++      }
++    } finally {
++      actual.dispose();
++      original.dispose();
++    }
++  }
++});
+ 
+ it('adapts a curved path more finely than a straight path and includes the current epoch', () => {
+   const curve = sampleOrbit(
+diff --git a/tools/phase-four-status.mjs b/tools/phase-four-status.mjs
+index 3bf4e8b..d42ded3 100644
+--- a/tools/phase-four-status.mjs
++++ b/tools/phase-four-status.mjs
+@@ -39,30 +39,40 @@ const failed =
+   result.verdict === 'failed' ||
+   stages.some(([, value]) => value.exitCode !== 0);
+ const finished = result.status === 'finished';
+-let reviewed = false;
++let reviewRecord;
+ const reviewFile = resolve(folder, 'review.json');
+-if (finished && !failed && existsSync(reviewFile)) {
++if (finished && existsSync(reviewFile)) {
+   try {
+     const review = JSON.parse(
+       readFileSync(reviewFile, 'utf8').replace(/^\uFEFF/, ''),
+     );
+-    reviewed =
++    const matches =
+       review.resultSha256 === createHash('sha256').update(raw).digest('hex') &&
+       review.candidateCommit === result.candidateCommit &&
+-      review.verdict === 'reviewed-pass';
++      review.sourceSha256 === result.sourceSha256 &&
++      ['reviewed-pass', 'reviewed-fail'].includes(review.verdict);
++    if (matches) reviewRecord = review;
+   } catch {
+     /* A partial or mismatched review never establishes acceptance. */
+   }
+ }
++const reviewed = !failed && reviewRecord?.verdict === 'reviewed-pass';
++const diagnosticOnly = result.diagnosticOnly === true;
+ console.log(
+   finished
+     ? failed
+-      ? 'FINISHED — a check failed'
+-      : stages.length
+-        ? `FINISHED — recorded checks passed; ${reviewed ? 'review recorded' : 'review pending'}`
+-        : 'FINISHED — no check results recorded; inspect the logs'
++      ? `FINISHED — a check failed${reviewRecord ? '; review recorded' : ''}`
++      : diagnosticOnly
++        ? `FINISHED — diagnostic captures completed; ${reviewed ? 'review recorded' : 'review pending'}. Acceptance gates remain pending.`
++        : stages.length
++          ? `FINISHED — recorded checks passed; ${reviewed ? 'review recorded' : 'review pending'}`
++          : 'FINISHED — no check results recorded; inspect the logs'
+     : `RUNNING — ${result.activeStage ?? 'starting'}; results are not final`,
+ );
++if (diagnosticOnly)
++  console.log(
++    'Diagnostic timings include instrumentation overhead and cannot pass the performance acceptance gate.',
++  );
+ if (result.candidateSource ?? result.candidateCommit)
+   console.log(`Source: ${result.candidateSource ?? result.candidateCommit}`);
+ if (result.pid) console.log(`Wrapper PID: ${result.pid}`);
+@@ -77,6 +87,10 @@ if (result.failure)
+     `Failure: ${result.failure.message ?? result.failure.error ?? 'Inspect logs'}`,
+   );
+ if (result.finishedAt) console.log(`Finished: ${result.finishedAt}`);
++const pendingGates = reviewRecord?.pendingGates ?? result.pendingGates;
++if (pendingGates?.length)
++  console.log(`Pending phase gates: ${pendingGates.join('; ')}`);
++if (reviewRecord) console.log(`Review: ${reviewFile}`);
+ console.log(`Results and logs: ${resolve(folder)}`);
+ console.log(
+   'This command only reads the recorded run; it does not launch tests.',

@@ -340,7 +340,7 @@ test('a selection during startup restores the latest route, and the standalone l
   page,
 }) => {
   const held: Route[] = [];
-  await page.route('**/data/corrections/**', (route) => {
+  await page.route('**/data/stars.bin', (route) => {
     held.push(route);
   });
   await page.goto('/object/planet/earth' + datedQuery);
@@ -351,7 +351,7 @@ test('a selection during startup restores the latest route, and the standalone l
   await page.getByPlaceholder('Where would you like to go?').fill('Mars');
   await page.locator('.search-result').click();
   await expect(page).toHaveURL(/\/object\/planet\/mars\?/);
-  await page.unroute('**/data/corrections/**');
+  await page.unroute('**/data/stars.bin');
   await Promise.all(held.map((route) => route.continue().catch(() => {})));
   await ready(page);
   expect(

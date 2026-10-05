@@ -1,0 +1,8 @@
+{
+  output: 'C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\local-search.json',
+  samples: 1000,
+  medianMs: 0.00980000000004111,
+  p95Ms: 0.03449999999997999,
+  maxMs: 0.7110000000000127,
+  thresholdMs: 16
+}

@@ -1,0 +1,21 @@
+{
+  "list": [
+    "planet:jupiter",
+    "moon:io",
+    "moon:europa",
+    "moon:ganymede",
+    "moon:callisto"
+  ],
+  "visibleLabels": [
+    "Jupiter",
+    "Ganymede",
+    "Callisto"
+  ],
+  "expectedCenters": [
+    "planet:jupiter",
+    "moon:io",
+    "moon:europa",
+    "moon:ganymede",
+    "moon:callisto"
+  ]
+}

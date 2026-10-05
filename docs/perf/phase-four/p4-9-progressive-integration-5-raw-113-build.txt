@@ -1,0 +1,56 @@
+
+> space-time-continuum@ build C:\Users\waqar\Documents\TheSpaceTimeContinuum\.tools\phase-four\p4-9\progressive-integration-5\candidate
+> tsx tools/validate-catalog.ts && tsx tools/fixtures/build-runtime-chunks.ts --check && pnpm --filter web build && node tools/check-startup-budget.mjs
+
+Validated 21 catalog bodies
+{
+  "mode": "verified",
+  "version": "ec190c00101ff5a573c924f77c96e49b238002087e633c3824f1f93eacd8413b",
+  "chunks": 2623,
+  "totalBytes": 27642384,
+  "maxBytes": 10568,
+  "maxCorrectionBytes": 6624,
+  "manifestBytes": 3258
+}
+
+> web@ build C:\Users\waqar\Documents\TheSpaceTimeContinuum\.tools\phase-four\p4-9\progressive-integration-5\candidate\apps\web
+> next build
+
+▲ Next.js 16.3.6 (Turbopack)
+✓ Running next.config.ts took 37ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 4.1s
+  Running TypeScript ...
+  Finished TypeScript in 4.0s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/28) ...
+  Generating static pages using 11 workers (7/28) 
+  Generating static pages using 11 workers (14/28) 
+  Generating static pages using 11 workers (21/28) 
+✓ Generating static pages using 11 workers (28/28) in 949ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /[alias]
+├ ○ /about/data
+├ ƒ /event/[id]
+├ ○ /lab/poc
+├ ○ /lab/precision
+├ ○ /lab/probe
+└   /object/[kind]/[slug]
+  ├ ● /object/star/sun
+  ├ ● /object/planet/mercury
+  ├ ● /object/planet/venus
+  └ ● [+18 more paths]
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+{"cap":1500000,"total":1074869,"passed":true,"scripts":28,"report":"C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate\\apps\\web\\.next\\startup-budget.json"}

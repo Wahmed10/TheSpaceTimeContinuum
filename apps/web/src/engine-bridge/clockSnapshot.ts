@@ -1,14 +1,5 @@
-import {
-  MAX_UTC_MS,
-  MIN_UTC_MS,
-  tdbToIso,
-  utcMsToTdb,
-  type ClockMode,
-  type ClockSnapshot,
-} from '@space/astro';
-
-const minTdb = utcMsToTdb(MIN_UTC_MS);
-const maxTdb = utcMsToTdb(MAX_UTC_MS);
+import type { ClockMode, ClockSnapshot } from '@space/astro';
+import { uiTime } from './uiTimeAdapter';
 
 /** Adapt the existing throttled clock sample without another subscription. */
 export function clockUiState(
@@ -16,6 +7,7 @@ export function clockUiState(
   previous: { mode: ClockMode; clockClamped: boolean },
   commandedMode?: ClockMode,
 ) {
+  const { minTdb, maxTdb, tdbToIso } = uiTime();
   // A clamp may happen between 4 Hz samples. Its one-tick flag can already be
   // cleared when the next sample arrives, but the paused outward boundary and
   // preceding playback intent still identify it. Explicit commands reset it.

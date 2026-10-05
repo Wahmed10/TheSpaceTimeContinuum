@@ -13,3 +13,6 @@ export * from './ephemeris/JupiterMoonsProvider';
 export * from './ephemeris/MeanElementsProvider';
 export * from './ephemeris/catalogProviders';
 export * from './ephemeris/OsculatingElementsProvider';
+export * from './ephemeris/PolynomialCorrection';
+export * from './ephemeris/RuntimeChunk';
+export * from './ephemeris/StreamedEphemeris';

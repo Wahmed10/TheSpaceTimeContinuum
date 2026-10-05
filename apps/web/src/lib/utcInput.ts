@@ -1,4 +1,4 @@
-import { MAX_UTC_MS, MIN_UTC_MS } from '@space/astro';
+import { MAX_UTC_MS, MIN_UTC_MS } from '@space/domain';
 
 export type UtcInputResult =
   | { ok: true; utcMs: number; iso: string }

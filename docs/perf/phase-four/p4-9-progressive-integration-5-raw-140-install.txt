@@ -1,0 +1,36 @@
+Scope: all 7 workspace projects
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +269
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 269, reused 268, downloaded 0, added 51
+Progress: resolved 269, reused 269, downloaded 0, added 168
+Progress: resolved 269, reused 269, downloaded 0, added 247
+Progress: resolved 269, reused 269, downloaded 0, added 249
+Progress: resolved 269, reused 269, downloaded 0, added 267
+Progress: resolved 269, reused 269, downloaded 0, added 268
+Progress: resolved 269, reused 269, downloaded 0, added 269
+Progress: resolved 269, reused 269, downloaded 0, added 269, done
+
+devDependencies:
++ @axe-core/playwright 4.13.0
++ @playwright/test 1.63.0
++ @types/node 24.13.6
++ @vitest/coverage-v8 5.0.1
++ eslint 9.39.5
++ prettier 3.9.8
++ sharp 0.34.5
++ tsx 4.23.15
++ typescript 5.9.3
++ typescript-eslint 8.70.1
++ vitest 5.0.1
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: esbuild@0.18.20, esbuild@0.25.12, esbuild@0.28.2,   │
+│   sharp@0.34.5.                                                              │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Done in 13.1s using pnpm v10.32.1

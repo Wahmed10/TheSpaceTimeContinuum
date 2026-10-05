@@ -1,0 +1,258 @@
+{
+  "id": "dwarf:pluto",
+  "beforeFrames": 54,
+  "renderedFrames": 56,
+  "renderedEpoch": 843307269.1823883,
+  "renderedRevision": 0,
+  "sceneRevision": 0,
+  "cameraWorld": [
+    2982800603.6162095,
+    -3877052520.8037004,
+    -2108615391.7227426
+  ],
+  "center": {
+    "x": 720,
+    "y": 499.99999999999983
+  },
+  "target": {
+    "id": "dwarf:pluto",
+    "level": 3,
+    "visible": true
+  },
+  "textureState": [
+    {
+      "name": "sun",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "earth_daymap",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "earth_nightmap",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "earth_clouds",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "earth_normal_map",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "earth_specular_map",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "moon",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "moon_normal",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "moon_height",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "mars",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "mars_normal",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "mercury",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "venus_atmosphere",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "jupiter",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "saturn",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "saturn_ring_alpha",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "uranus",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "neptune",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "pluto",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "charon",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "io",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "europa",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "ganymede",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "callisto",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "ceres",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "triton",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "phobos",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "deimos",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    },
+    {
+      "name": "stars_milky_way",
+      "resolution": 1024,
+      "desired": 1024,
+      "placeholder": false,
+      "loading": false,
+      "failed": false
+    }
+  ],
+  "phase": "quarter",
+  "tier": "low"
+}

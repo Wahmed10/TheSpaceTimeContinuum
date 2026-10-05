@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { isoToTdb, tdbToIso } from '@space/astro';
+import { loadUiTime, tdbToIso } from './uiTimeAdapter';
 import { useEngineStore } from './useEngineStore';
 import { parseExploreLocation } from '../lib/routeState';
 import type { RouteIssue } from '../lib/routeState';
@@ -11,6 +11,8 @@ import { clockUiState } from './clockSnapshot';
 declare global {
   interface Window {
     __spaceEngine?: SpaceEngine;
+    /** Installed before navigation only by the production shell attribution audit. */
+    __spaceEngineStartGate?: Promise<void>;
   }
 }
 export default function EngineCanvas() {
@@ -50,12 +52,19 @@ export default function EngineCanvas() {
         if (initialLocation.route.status !== 'lab')
           unsubs.push(initializeUserSettings());
         useEngineStore.setState({ linkIssues: initialLocation.issues });
-        const { SpaceEngine } = await import('@space/engine');
+        if (debug.test && window.__spaceEngineStartGate)
+          await window.__spaceEngineStartGate;
+        if (disposed || expired) return;
+        const [{ SpaceEngine }, { isoToTdb }] = await Promise.all([
+          import('@space/engine'),
+          loadUiTime(),
+        ]);
         if (disposed || expired) return;
         engine = await SpaceEngine.create(canvas, {
           forceWebGL: generation > 0 || debug.forceWebGL,
           labels: labels.current!,
           test: debug.test,
+          focus: state.focus,
           ...(state.t ? { tdbSec: isoToTdb(state.t) } : {}),
         });
         if (disposed || expired) {

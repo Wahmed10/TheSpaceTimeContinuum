@@ -544,7 +544,7 @@ test('obsolete asynchronous startup cannot replace a newer canvas after leaving 
   page,
 }) => {
   const held: Route[] = [];
-  await page.route('**/data/corrections/**', (route) => {
+  await page.route('**/data/stars.bin', (route) => {
     held.push(route);
   });
   await page.goto('/object/planet/earth' + query);
@@ -569,7 +569,7 @@ test('obsolete asynchronous startup cannot replace a newer canvas after leaving 
   await page.getByPlaceholder('Where would you like to go?').fill('Europa');
   await page.locator('.search-result').click();
   await expect(page).toHaveURL(/\/object\/moon\/europa\?/);
-  await page.unroute('**/data/corrections/**');
+  await page.unroute('**/data/stars.bin');
   await Promise.all(held.map((route) => route.continue().catch(() => {})));
   await ready(page);
   await expect(page.locator('canvas')).toHaveCount(1);

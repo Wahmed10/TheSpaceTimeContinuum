@@ -1,0 +1,62 @@
+{
+  "phase": "Phase4",
+  "status": "accepted",
+  "acceptedAt": "2026-10-05T03:51:32.760Z",
+  "testedCommit": "035fc967ed9ba88550773ea8f757fd5ff905d23c",
+  "testedSourceSha256": "95e97a1ee10e912119162931eb0878b39a4537e9b75c9c1e6de7667912565e86",
+  "sourceState": "Approved uncommitted implementation on tested HEAD; this documentation continuation makes no commit, push or deployment.",
+  "automatedResultSha256": "ac7cb38dacf64f4c6677f8c4f932dd98b88bb7f0153ff2386ac31fc2fd81942a",
+  "originalAutomatedReviewSha256": "c0e2fbd295b14c5c3faa4f0f92c7d1d25a096c3b929f7a7f1386cb6c14083bb3",
+  "updatedLocalReviewSha256": "509dbeb947a72e3f17abe31896ead8832a7840758a1ea39f3d2bbf0f05a3974d",
+  "automatedReview": "docs/perf/phase-four/p4-9-progressive-integration-5-review.json",
+  "automatedEvidence": {
+    "units": 480,
+    "expectedDiagnostics": 2,
+    "browser": 108,
+    "performance": 4,
+    "profiles": 3,
+    "cpuPairs": 3,
+    "sourceFiles": 3091,
+    "immutableReferenceFiles": 220,
+    "preservedUserArtifacts": 14,
+    "rawArtifacts": 193,
+    "captures": 128,
+    "firstFrameDesktopMaxMs": 901,
+    "firstFrameSimulated4GMaxMs": 4421.100000023842,
+    "startupMaxBytes": 929385,
+    "startupBuildBytes": 1074869,
+    "dateJumpMaxMs": 112.89999997615814,
+    "cpuMeanMaxIncreasePercent": 3.6101083762702046,
+    "cpuP95MaxIncreasePercent": 12.49999813735483
+  },
+  "userReview": {
+    "recordedAt": "2026-10-05T03:51:32.760Z",
+    "result": "accepted with deliberately deferred design polish",
+    "evidence": "User reports completing all UX walkthrough tests: links work well; keyboard search has no issues; mobile works with access to other features; settings work. User intentionally defers opinion-based UX design improvements until later implementation phases.",
+    "observations": [
+      {
+        "topic": "Orbit curves after refresh",
+        "finding": "Expected progressive background construction. Adaptive curve sampling and compact correction chunks are optional work after first paint; current object positions remain live and independent.",
+        "disposition": "Explain behavior; optional future loading cue/scheduling polish, no runtime change."
+      },
+      {
+        "topic": "Neptune open orbit section",
+        "finding": "Code review verifies a one-period interval clipped to1900-2100 provider validity. Catalog period60182days/about164.77years at current date would extend into2109; clipping removes about8.15years. This is consistent with the report; exact reported screenshot not reproduced.",
+        "disposition": "Preserve validated open arc. Track clearer truncation presentation; a different interior gap remains a potential defect."
+      },
+      {
+        "topic": "Reduced motion appears unchanged in a planet view",
+        "finding": "Setting affects transitions: camera focus uses300ms cross-fade, interface transitions are suppressed and Return to LIVE skips animation. It does not change a stationary view or disable simulation playback/planet rotation. Existing reviewed tests cover camera fades and real system/override LIVE behavior.",
+        "disposition": "Explain and document comparison by selecting another planet. No new defect established."
+      }
+    ]
+  },
+  "pendingPhase4Gates": [],
+  "preservedBoundaries": [
+    "Original science/visual/accuracy/CPU/startup limits",
+    "Accepted Phase2/3 device coverage and ADR0010 upstream allocation exception",
+    "Accepted Charon/Io source-image limitations",
+    "Phone emulation is not new physical-phone throughput/thermal/totalVRAM evidence",
+    "Phase4B/5,new objects,server/database/search work and deployment remain outside this completed phase"
+  ]
+}

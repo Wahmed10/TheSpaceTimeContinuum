@@ -83,21 +83,26 @@ export class OrbitLayer {
     const x = parent[0]! - camera[0]!,
       y = parent[1]! - camera[1]!,
       z = parent[2]! - camera[2]!;
-    for (let i = 0; i < this.start.count; i++) {
-      const a = i * 3,
-        b = a + 3;
-      this.start.setXYZ(
-        i,
-        x + this.points[a]! * scale,
-        y + this.points[a + 1]! * scale,
-        z + this.points[a + 2]! * scale,
-      );
-      this.end.setXYZ(
-        i,
-        x + this.points[b]! * scale,
-        y + this.points[b + 1]! * scale,
-        z + this.points[b + 2]! * scale,
-      );
+    // LineGeometry stores consecutive segment endpoints in one float32 buffer.
+    // Carry the float64 endpoint forward rather than calculate each interior
+    // point twice. Keep the original subtract/multiply/add order before upload.
+    const data = this.start.data.array,
+      stride = this.start.data.stride;
+    let px = x + this.points[0]! * scale,
+      py = y + this.points[1]! * scale,
+      pz = z + this.points[2]! * scale;
+    for (let i = 0, point = 3; i < this.start.count; i++, point += 3) {
+      const start = i * stride + this.start.offset,
+        end = i * stride + this.end.offset;
+      data[start] = px;
+      data[start + 1] = py;
+      data[start + 2] = pz;
+      px = x + this.points[point]! * scale;
+      py = y + this.points[point + 1]! * scale;
+      pz = z + this.points[point + 2]! * scale;
+      data[end] = px;
+      data[end + 1] = py;
+      data[end + 2] = pz;
     }
     this.start.data.needsUpdate = true;
     this.line.material.linewidth = selected ? 2 : 1;

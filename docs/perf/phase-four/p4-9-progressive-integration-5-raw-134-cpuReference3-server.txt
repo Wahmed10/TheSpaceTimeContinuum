@@ -1,0 +1,10 @@
+▲ Next.js 16.3.6 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://0.0.0.0:3001
+✓ Ready in 662ms
+✓ Running next.config.ts took 59ms
+
+ GET / 200 in 384ms (next.js: 191ms, application-code: 194ms)
+ GET /?renderer=webgl&perf=1&test=1 200 in 54ms (next.js: 7ms, application-code: 47ms)
+[browser] THREE.TSL: "transformedNormalWorld" is deprecated. Use "normalWorld" instead. Stack trace not available. Enable "THREE.Node.captureStackTrace" to capture stack traces. (../../packages/engine/src/render/PostFX.ts:34:24)
+[browser] THREE.TSL: "transformedNormalView" is deprecated. Use "normalView" instead. Stack trace not available. Enable "THREE.Node.captureStackTrace" to capture stack traces.

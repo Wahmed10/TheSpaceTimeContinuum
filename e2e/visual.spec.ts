@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
-test('deterministic material reference views', async ({ page }) => {
+import { writeFile } from 'node:fs/promises';
+import { freezeRenderedView } from './rendered-view';
+test('deterministic material reference views', async ({ page }, info) => {
   test.setTimeout(240000);
   await page.goto('/?renderer=webgl&test=1');
   const canvas = page.locator('canvas');
@@ -23,23 +25,43 @@ test('deterministic material reference views', async ({ page }) => {
     content:
       'body * { visibility: hidden !important; } canvas[role] { visibility: visible !important; }',
   });
+  async function renderView(
+    name: string,
+    id: string,
+    phase?: 'day' | 'night' | 'quarter' | 'limb',
+  ) {
+    const readiness = await freezeRenderedView(
+      page,
+      id,
+      () =>
+        page.evaluate(
+          ({ id, phase }) => {
+            const engine = window.__spaceEngine!;
+            if (phase) engine.referenceView(id, phase);
+            else engine.focus(id, { transition: false });
+            engine.setRendering(true);
+          },
+          { id, phase },
+        ),
+      true,
+    );
+    await writeFile(
+      info.outputPath(`${name}-readiness.json`),
+      JSON.stringify({ ...readiness, phase }, null, 2),
+    );
+    await expect(canvas).toHaveScreenshot(`${name}.png`, {
+      maxDiffPixelRatio: 0.015,
+      timeout: 30000,
+    });
+    await page.evaluate(() => window.__spaceEngine!.setRendering(true));
+  }
   for (const [name, id] of [
     ['earth-terminator', 'planet:earth'],
     ['moon-quarter', 'moon:moon'],
     ['mars-close', 'planet:mars'],
     ['sun-bloom', 'star:sun'],
   ]) {
-    await page.evaluate(
-      (id) => window.__spaceEngine!.focus(id!, { transition: false }),
-      id,
-    );
-    await page.waitForTimeout(500);
-    await page.evaluate(() => window.__spaceEngine!.setRendering(false));
-    await expect(canvas).toHaveScreenshot(`${name}.png`, {
-      maxDiffPixelRatio: 0.015,
-      timeout: 30000,
-    });
-    await page.evaluate(() => window.__spaceEngine!.setRendering(true));
+    await renderView(name!, id!);
   }
   for (const [name, id, phase] of [
     ['earth-day', 'planet:earth', 'day'],
@@ -47,16 +69,6 @@ test('deterministic material reference views', async ({ page }) => {
     ['earth-limb', 'planet:earth', 'limb'],
     ['moon-full', 'moon:moon', 'day'],
   ] as const) {
-    await page.evaluate(
-      ({ id, phase }) => window.__spaceEngine!.referenceView(id, phase),
-      { id, phase },
-    );
-    await page.waitForTimeout(500);
-    await page.evaluate(() => window.__spaceEngine!.setRendering(false));
-    await expect(canvas).toHaveScreenshot(`${name}.png`, {
-      maxDiffPixelRatio: 0.015,
-      timeout: 30000,
-    });
-    await page.evaluate(() => window.__spaceEngine!.setRendering(true));
+    await renderView(name, id, phase);
   }
 });

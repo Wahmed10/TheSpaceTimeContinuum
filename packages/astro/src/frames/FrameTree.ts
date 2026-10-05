@@ -67,6 +67,15 @@ export class FrameTree {
     if (frameStamp !== undefined) this.externalStamp = frameStamp;
   }
   private externalStamp: number | undefined;
+  /** Async coefficients may arrive while paused at an unchanged epoch. */
+  private revision = 0;
+  get cacheRevision(): number {
+    return this.revision;
+  }
+  invalidate(): void {
+    this.stamp++;
+    this.revision++;
+  }
   has(id: FrameId): boolean {
     return this.nodes.has(id);
   }

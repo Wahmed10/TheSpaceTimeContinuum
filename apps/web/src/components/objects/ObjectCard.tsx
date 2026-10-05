@@ -71,9 +71,11 @@ export default function ObjectCard({
             <span style={{ background: body.color }} />
           </h2>
           <p className="position-certainty">
-            {certaintyLabel(
-              snapshot.metrics?.certainty ?? body.provenance.certainty,
-            )}{' '}
+            {snapshot.positionStatus === 'loading'
+              ? 'Loading'
+              : certaintyLabel(
+                  snapshot.metrics?.certainty ?? body.provenance.certainty,
+                )}{' '}
             position
           </p>
         </>

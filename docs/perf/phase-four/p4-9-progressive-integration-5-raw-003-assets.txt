@@ -1,0 +1,1 @@
+Every distributed texture has a credit and matching manifest; 79.96 MB / 80 MB

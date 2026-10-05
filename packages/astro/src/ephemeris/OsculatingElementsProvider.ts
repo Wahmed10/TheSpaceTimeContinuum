@@ -6,6 +6,11 @@ import type {
   StateResult,
 } from '@space/domain';
 import { solveKepler } from './KeplerProvider';
+export interface OsculatingGrid {
+  startTdbSec: number;
+  firstIndex: number;
+  fullCount: number;
+}
 /** Locally propagated Horizons osculating ellipses, blended with smoothstep.
  * This avoids angular unwrapping and preserves endpoint states and velocities.
  * Blended velocity includes the time derivative of the blend weight. */
@@ -15,6 +20,7 @@ export class OsculatingElementsProvider implements PositionProvider {
   private readonly elements: Float64Array;
   private readonly stepSec: number;
   private readonly count: number;
+  private readonly grid: OsculatingGrid;
   private readonly a = new Float64Array(6);
   private readonly b = new Float64Array(6);
   private readonly result: StateResult;
@@ -26,6 +32,7 @@ export class OsculatingElementsProvider implements PositionProvider {
     readonly id: string,
     readonly frame: FrameId,
     buffer: ArrayBuffer,
+    grid?: OsculatingGrid,
   ) {
     if (buffer.byteLength < 24) throw new Error('Truncated orbit table');
     const view = new DataView(buffer),
@@ -42,6 +49,22 @@ export class OsculatingElementsProvider implements PositionProvider {
       buffer.byteLength !== 24 + this.count * 56
     )
       throw new Error('Invalid orbit table');
+    this.grid = grid ?? {
+      startTdbSec: start,
+      firstIndex: 0,
+      fullCount: this.count,
+    };
+    if (
+      !Number.isFinite(this.grid.startTdbSec) ||
+      !Number.isInteger(this.grid.firstIndex) ||
+      this.grid.firstIndex < 0 ||
+      !Number.isInteger(this.grid.fullCount) ||
+      this.grid.fullCount < 2 ||
+      this.grid.fullCount > 100000 ||
+      this.grid.firstIndex + this.count > this.grid.fullCount ||
+      start !== this.grid.startTdbSec + this.grid.firstIndex * this.stepSec
+    )
+      throw Error('Invalid original orbit grid');
     this.elements = new Float64Array(this.count * 7);
     for (let i = 0; i < this.elements.length; i++) {
       const value = view.getFloat64(24 + i * 8, true);
@@ -73,7 +96,9 @@ export class OsculatingElementsProvider implements PositionProvider {
     const anomaly = solveKepler(
       data[j + 5]! +
         data[j + 6]! *
-          (tdbSec - (this.validity.fromTdb + index * this.stepSec)),
+          (tdbSec -
+            (this.grid.startTdbSec +
+              (this.grid.firstIndex + index) * this.stepSec)),
       e,
     );
     const ca = Math.cos(anomaly),
@@ -106,11 +131,18 @@ export class OsculatingElementsProvider implements PositionProvider {
     out: Float64Array,
     offset = 0,
   ): StateResult | StateFailure {
-    const sample = (tdbSec - this.validity.fromTdb) / this.stepSec;
-    if (!Number.isFinite(sample) || sample < 0 || sample > this.count - 1)
+    const sample = (tdbSec - this.grid.startTdbSec) / this.stepSec;
+    const globalIndex = Math.min(this.grid.fullCount - 2, Math.floor(sample));
+    const index = globalIndex - this.grid.firstIndex;
+    if (
+      !Number.isFinite(sample) ||
+      sample < 0 ||
+      sample > this.grid.fullCount - 1 ||
+      index < 0 ||
+      index + 1 >= this.count
+    )
       return this.failure;
-    const index = Math.min(this.count - 2, Math.floor(sample)),
-      u = sample - index;
+    const u = sample - globalIndex;
     this.propagate(index, tdbSec, this.a);
     this.propagate(index + 1, tdbSec, this.b);
     const weight = u * u * (3 - 2 * u),

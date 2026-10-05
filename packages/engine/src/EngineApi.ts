@@ -23,6 +23,7 @@ export type EngineApi = Pick<
   | 'setReducedMotion'
   | 'suspendRendering'
   | 'getMetrics'
+  | 'getPositionStatus'
   | 'getEntity'
   | 'on'
   | 'registerEntities'

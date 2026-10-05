@@ -6,6 +6,7 @@ import type {
   StateResult,
 } from '@space/domain';
 import { toAstroTime } from './AstronomyEngineProvider';
+import type { CorrectionResolver } from './AstronomyEngineProvider';
 import { AU_KM, SEC_PER_DAY, MIN_UTC_MS, MAX_UTC_MS } from '../time/constants';
 import { utcMsToTdb } from '../time/scales';
 import { getEphemerisCorrection } from './ResidualTable';
@@ -42,16 +43,27 @@ export class JupiterMoonsProvider implements PositionProvider {
     ok: false,
     reason: 'out-of-validity',
   };
+  private readonly approximate: StateResult = {
+    ok: true,
+    frame: this.frame,
+    certainty: 'approximate',
+    stale: false,
+  };
   constructor(
     readonly moon: GalileanMoon,
     private readonly cache = defaultCache,
+    private readonly correctionAt: CorrectionResolver = () =>
+      getEphemerisCorrection(moon),
   ) {
     if (!['io', 'europa', 'ganymede', 'callisto'].includes(moon))
       throw new Error(`Unknown Galilean moon ${moon}`);
     this.id = `astronomy:${moon}`;
   }
-  certaintyAt(_tdbSec: number): Certainty {
-    return 'computed';
+  certaintyAt(tdbSec: number): Certainty {
+    return this.moon !== 'callisto' ||
+      this.correctionAt(tdbSec)?.contains(tdbSec)
+      ? 'computed'
+      : 'approximate';
   }
   stateAt(
     tdbSec: number,
@@ -71,9 +83,9 @@ export class JupiterMoonsProvider implements PositionProvider {
     out[offset + 3] = (state.vx * AU_KM) / SEC_PER_DAY;
     out[offset + 4] = (state.vy * AU_KM) / SEC_PER_DAY;
     out[offset + 5] = (state.vz * AU_KM) / SEC_PER_DAY;
-    const correction = getEphemerisCorrection(this.moon);
-    if (correction && !correction.addTo(tdbSec, out, offset))
-      return this.failure;
-    return this.result;
+    const correction = this.correctionAt(tdbSec);
+    return this.moon !== 'callisto' || correction?.addTo(tdbSec, out, offset)
+      ? this.result
+      : this.approximate;
   }
 }

@@ -1,0 +1,41 @@
+
+> space-time-continuum@ verify C:\Users\waqar\Documents\TheSpaceTimeContinuum\.tools\phase-four\p4-9\progressive-integration-5\candidate
+> pnpm typecheck && pnpm lint && pnpm test
+
+
+> space-time-continuum@ typecheck C:\Users\waqar\Documents\TheSpaceTimeContinuum\.tools\phase-four\p4-9\progressive-integration-5\candidate
+> pnpm -r typecheck
+
+Scope: 6 of 7 workspace projects
+packages/domain typecheck$ tsc --noEmit
+packages/domain typecheck: Done
+packages/astro typecheck$ tsc --noEmit
+packages/db typecheck$ tsc --noEmit
+packages/db typecheck: Done
+packages/astro typecheck: Done
+packages/engine typecheck$ tsc --noEmit
+packages/ingest typecheck$ tsc --noEmit
+packages/ingest typecheck: Done
+packages/engine typecheck: Done
+apps/web typecheck$ next typegen && tsc --noEmit
+apps/web typecheck: Generating route types...
+apps/web typecheck: ✓ Types generated successfully
+apps/web typecheck: Done
+
+> space-time-continuum@ lint C:\Users\waqar\Documents\TheSpaceTimeContinuum\.tools\phase-four\p4-9\progressive-integration-5\candidate
+> eslint . && tsx tools/check-boundaries.ts
+
+Package boundaries passed
+
+> space-time-continuum@ test C:\Users\waqar\Documents\TheSpaceTimeContinuum\.tools\phase-four\p4-9\progressive-integration-5\candidate
+> vitest run
+
+
+ RUN  v5.0.1 C:/Users/waqar/Documents/TheSpaceTimeContinuum/.tools/phase-four/p4-9/progressive-integration-5/candidate
+
+
+ Test Files  56 passed (56)
+      Tests  480 passed | 2 expected fail (482)
+   Start at  20:34:28
+   Duration  32.80s (tests 69%, import 21%, transform 9%, worker 1%)
+

@@ -7,7 +7,11 @@ import type {
 } from '@space/domain';
 import { AU_KM, SEC_PER_DAY, MIN_UTC_MS, MAX_UTC_MS } from '../time/constants';
 import { utcMsToTdb, tdbMinusTt } from '../time/scales';
-import {getEphemerisCorrection} from './ResidualTable';
+import { getEphemerisCorrection } from './ResidualTable';
+import type { EphemerisCorrection } from './PolynomialCorrection';
+export type CorrectionResolver = (
+  tdbSec: number,
+) => EphemerisCorrection | undefined;
 let lastTdb = NaN;
 let lastTime: Astronomy.AstroTime;
 // Use TT directly: converting via UTC would substitute astronomy-engine's future
@@ -35,12 +39,26 @@ export class AstronomyEngineProvider implements PositionProvider {
     stale: false,
   };
   private failure: StateFailure = { ok: false, reason: 'out-of-validity' };
+  private readonly approximate: StateResult = {
+    ok: true,
+    frame: 'ICRF_SSB',
+    certainty: 'approximate',
+    stale: false,
+  };
   readonly id: string;
-  constructor(readonly body: Astronomy.Body) {
+  constructor(
+    readonly body: Astronomy.Body,
+    private readonly correctionAt: CorrectionResolver = () =>
+      getEphemerisCorrection(body),
+  ) {
     this.id = `astronomy:${body}`;
   }
-  certaintyAt(_tdbSec: number): Certainty {
-    return 'computed';
+  certaintyAt(tdbSec: number): Certainty {
+    return this.body === Astronomy.Body.EMB ||
+      this.body === Astronomy.Body.SSB ||
+      this.correctionAt(tdbSec)?.contains(tdbSec)
+      ? 'computed'
+      : 'approximate';
   }
   stateAt(
     tdbSec: number,
@@ -60,13 +78,21 @@ export class AstronomyEngineProvider implements PositionProvider {
     out[offset + 3] = (s.vx * AU_KM) / SEC_PER_DAY;
     out[offset + 4] = (s.vy * AU_KM) / SEC_PER_DAY;
     out[offset + 5] = (s.vz * AU_KM) / SEC_PER_DAY;
-    const correction=getEphemerisCorrection(this.body);
-    if(correction&&!correction.addTo(tdbSec,out,offset))return this.failure;
-    return this.result;
+    const correction = this.correctionAt(tdbSec);
+    // Missing/outside corrections never resurrect an earlier epoch's state.
+    // Fresh local analytics remain explicitly approximate and never stale.
+    return this.body === Astronomy.Body.EMB ||
+      this.body === Astronomy.Body.SSB ||
+      correction?.addTo(tdbSec, out, offset)
+      ? this.result
+      : this.approximate;
   }
 }
-export function createBodyProvider(body: string): AstronomyEngineProvider {
+export function createBodyProvider(
+  body: string,
+  correctionAt?: CorrectionResolver,
+): AstronomyEngineProvider {
   if (!Object.values(Astronomy.Body).includes(body as Astronomy.Body))
     throw new Error(`Unknown body ${body}`);
-  return new AstronomyEngineProvider(body as Astronomy.Body);
+  return new AstronomyEngineProvider(body as Astronomy.Body, correctionAt);
 }

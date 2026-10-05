@@ -4,6 +4,8 @@ import type { LabelCandidate } from './LabelLayout';
 interface Label extends LabelCandidate {
   id: string;
   name: string;
+  baseName: string;
+  approximate: boolean;
   color: string;
   slot: number;
 }
@@ -42,6 +44,8 @@ export class LabelSystem {
     const label: Label = {
       id,
       name,
+      baseName: name,
+      approximate: false,
       color,
       importance,
       width,
@@ -60,6 +64,27 @@ export class LabelSystem {
   }
   begin() {
     for (const label of this.ordered) label.visible = false;
+  }
+  setApproximate(id: string, approximate: boolean) {
+    const label = this.labels.get(id);
+    if (!label || label.approximate === approximate) return;
+    label.approximate = approximate;
+    label.name = label.baseName + (approximate ? ' · approximate' : '');
+    const probe = document.createElement('div');
+    probe.className = 'space-label';
+    probe.textContent = label.name;
+    probe.style.visibility = 'hidden';
+    this.host.appendChild(probe);
+    label.width = Math.max(16, probe.getBoundingClientRect().width);
+    probe.remove();
+    if (label.slot >= 0)
+      this.pool[label.slot]!.element.textContent = label.name;
+  }
+  hide(id: string) {
+    const label = this.labels.get(id);
+    if (!label) return;
+    label.visible = label.show = false;
+    if (label.slot >= 0) this.release(this.pool[label.slot]!);
   }
   remove(id: string) {
     const label = this.labels.get(id);

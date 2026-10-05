@@ -1,0 +1,5 @@
+
+> space-time-continuum@ licenses:check C:\Users\waqar\Documents\TheSpaceTimeContinuum\.tools\phase-four\p4-9\progressive-integration-5\candidate
+> tsx tools/check-licenses.ts
+
+Checked 72 production dependencies

@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import sharp from 'sharp';
 import { writeFile } from 'node:fs/promises';
+import { freezeRenderedView } from './rendered-view';
 
 test('Saturn rings render both sides, shadows and stable quality geometry', async ({
   page,
@@ -50,15 +51,27 @@ test('Saturn rings render both sides, shadows and stable quality geometry', asyn
     planetShadow: boolean,
     ringShadow: boolean,
   ) => {
-    await page.evaluate(
-      ({ side, planetShadow, ringShadow }) => {
-        window.__spaceEngine!.ringReferenceView(side, planetShadow, ringShadow);
-        window.__spaceEngine!.setRendering(true);
-      },
-      { side, planetShadow, ringShadow },
+    const readiness = await freezeRenderedView(
+      page,
+      'planet:saturn',
+      () =>
+        page.evaluate(
+          ({ side, planetShadow, ringShadow }) => {
+            window.__spaceEngine!.ringReferenceView(
+              side,
+              planetShadow,
+              ringShadow,
+            );
+            window.__spaceEngine!.setRendering(true);
+          },
+          { side, planetShadow, ringShadow },
+        ),
+      true,
     );
-    await page.waitForTimeout(700);
-    await page.evaluate(() => window.__spaceEngine!.setRendering(false));
+    await writeFile(
+      testInfo.outputPath(name + '-readiness.json'),
+      JSON.stringify({ ...readiness, side, planetShadow, ringShadow }, null, 2),
+    );
     return canvas.screenshot({ path: testInfo.outputPath(`${name}.png`) });
   };
   const none = await capture('north-no-shadows', 'north', false, false);

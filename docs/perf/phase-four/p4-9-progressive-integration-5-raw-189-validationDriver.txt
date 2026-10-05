@@ -1,0 +1,13 @@
+✔ retains original one-pair report names by default (0.837ms)
+✔ predeclares three unique report/log identities and rejects missing-work configurations (0.2477ms)
+✔ collects all fixed pairs after a failure and retains every failure (0.7453ms)
+✔ collects a failed independent check and still runs later checks without clearing failure (1.053ms)
+✔ retains all independent failures including a failed setup prerequisite within a group (0.1718ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 72.9349

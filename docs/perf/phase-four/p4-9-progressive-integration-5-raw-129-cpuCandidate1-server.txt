@@ -1,0 +1,16 @@
+▲ Next.js 16.3.6 (Turbopack)
+- Local:         http://localhost:3002
+- Network:       http://0.0.0.0:3002
+✓ Ready in 696ms
+✓ Running next.config.ts took 59ms
+
+ GET / 200 in 70ms (next.js: 11ms, application-code: 59ms)
+ GET /?renderer=webgl&perf=1&test=1 200 in 52ms (next.js: 6ms, application-code: 45ms)
+ GET /object/star/sun?t=2026-09-22T00%3A00%3A00.000Z&scale=true&renderer=webgl&test=1&perf=1 200 in 1191ms (next.js: 352ms, generate-params: 805ms, application-code: 34ms)
+ GET /object/planet/earth?t=2026-09-22T00%3A00%3A00.000Z&scale=true&renderer=webgl&test=1&perf=1 200 in 89ms (next.js: 17ms, generate-params: 9ms, application-code: 63ms)
+ GET /object/moon/moon?t=2026-09-22T00%3A00%3A00.000Z&scale=true&renderer=webgl&test=1&perf=1 200 in 48ms (next.js: 7ms, generate-params: 10ms, application-code: 31ms)
+[browser] THREE.TSL: "transformedNormalWorld" is deprecated. Use "normalWorld" instead. Stack trace not available. Enable "THREE.Node.captureStackTrace" to capture stack traces. (../../packages/engine/src/render/PostFX.ts:34:24)
+[browser] THREE.TSL: "transformedNormalView" is deprecated. Use "normalView" instead. Stack trace not available. Enable "THREE.Node.captureStackTrace" to capture stack traces.
+ GET /object/planet/mars?t=2026-09-22T00%3A00%3A00.000Z&scale=true&renderer=webgl&test=1&perf=1 200 in 45ms (next.js: 7ms, generate-params: 9ms, application-code: 30ms)
+ GET /object/planet/earth?t=2026-09-22T00%3A00%3A00.000Z&scale=true&renderer=webgl&test=1&perf=1 200 in 52ms (next.js: 7ms, generate-params: 9ms, application-code: 36ms)
+ GET /object/star/sun?t=2026-09-22T00%3A00%3A00.000Z&renderer=webgl&test=1&perf=1 200 in 79ms (next.js: 7ms, generate-params: 12ms, application-code: 59ms)

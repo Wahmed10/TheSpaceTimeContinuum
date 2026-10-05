@@ -63,10 +63,14 @@ function setup() {
   const state = {
     disposed: false,
     initialReady: true,
+    clock: { state: { tdbSec: 100 } },
+    renderedEpoch: 100,
+    renderedRevision: 0,
     camera,
     inViewCenter: new Vector4(),
     inViewSnapshot: new ObjectsInViewSnapshot(EXPLORABLE_BODIES),
     registry: {
+      frames: { cacheRevision: 0 },
       entries: new Map(
         EXPLORABLE_BODIES.slice(0, 2).map((body, i) => [
           body.id,
@@ -129,4 +133,16 @@ it('invalid providers, disabled rendered entities, startup and disposal fail clo
   expect(engine.getObjectsInView()).toEqual([]);
   Object.assign(engine, { initialReady: true, disposed: true });
   expect(engine.getObjectsInView()).toEqual([]);
+});
+it('withholds membership across a date jump or arriving chunk until a matching scene has rendered', () => {
+  const { engine, state } = setup();
+  expect(engine.getObjectsInView()).toHaveLength(2);
+  state.clock.state.tdbSec = 101;
+  expect(engine.getObjectsInView()).toEqual([]);
+  Object.assign(engine, { renderedEpoch: 101 });
+  expect(engine.getObjectsInView()).toHaveLength(2);
+  state.registry.frames.cacheRevision = 1;
+  expect(engine.getObjectsInView()).toEqual([]);
+  Object.assign(engine, { renderedRevision: 1 });
+  expect(engine.getObjectsInView()).toHaveLength(2);
 });

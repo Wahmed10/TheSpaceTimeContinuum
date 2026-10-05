@@ -1,4 +1,5 @@
-import { utcMsToTdb, tdbToIso, MIN_UTC_MS, MAX_UTC_MS } from '@space/astro';
+import { MIN_UTC_MS, MAX_UTC_MS } from '@space/domain';
+import { utcMsToTdb, tdbToIso } from './uiTimeAdapter';
 import { useEngineStore } from './useEngineStore';
 import { parseUtcDateInput } from '../lib/utcInput';
 import type { EngineApi } from '@space/engine';

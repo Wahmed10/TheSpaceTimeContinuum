@@ -39,30 +39,40 @@ const failed =
   result.verdict === 'failed' ||
   stages.some(([, value]) => value.exitCode !== 0);
 const finished = result.status === 'finished';
-let reviewed = false;
+let reviewRecord;
 const reviewFile = resolve(folder, 'review.json');
-if (finished && !failed && existsSync(reviewFile)) {
+if (finished && existsSync(reviewFile)) {
   try {
     const review = JSON.parse(
       readFileSync(reviewFile, 'utf8').replace(/^\uFEFF/, ''),
     );
-    reviewed =
+    const matches =
       review.resultSha256 === createHash('sha256').update(raw).digest('hex') &&
       review.candidateCommit === result.candidateCommit &&
-      review.verdict === 'reviewed-pass';
+      review.sourceSha256 === result.sourceSha256 &&
+      ['reviewed-pass', 'reviewed-fail'].includes(review.verdict);
+    if (matches) reviewRecord = review;
   } catch {
     /* A partial or mismatched review never establishes acceptance. */
   }
 }
+const reviewed = !failed && reviewRecord?.verdict === 'reviewed-pass';
+const diagnosticOnly = result.diagnosticOnly === true;
 console.log(
   finished
     ? failed
-      ? 'FINISHED — a check failed'
-      : stages.length
-        ? `FINISHED — recorded checks passed; ${reviewed ? 'review recorded' : 'review pending'}`
-        : 'FINISHED — no check results recorded; inspect the logs'
+      ? `FINISHED — a check failed${reviewRecord ? '; review recorded' : ''}`
+      : diagnosticOnly
+        ? `FINISHED — diagnostic captures completed; ${reviewed ? 'review recorded' : 'review pending'}. Acceptance gates remain pending.`
+        : stages.length
+          ? `FINISHED — recorded checks passed; ${reviewed ? 'review recorded' : 'review pending'}`
+          : 'FINISHED — no check results recorded; inspect the logs'
     : `RUNNING — ${result.activeStage ?? 'starting'}; results are not final`,
 );
+if (diagnosticOnly)
+  console.log(
+    'Diagnostic timings include instrumentation overhead and cannot pass the performance acceptance gate.',
+  );
 if (result.candidateSource ?? result.candidateCommit)
   console.log(`Source: ${result.candidateSource ?? result.candidateCommit}`);
 if (result.pid) console.log(`Wrapper PID: ${result.pid}`);
@@ -77,6 +87,10 @@ if (result.failure)
     `Failure: ${result.failure.message ?? result.failure.error ?? 'Inspect logs'}`,
   );
 if (result.finishedAt) console.log(`Finished: ${result.finishedAt}`);
+const pendingGates = reviewRecord?.pendingGates ?? result.pendingGates;
+if (pendingGates?.length)
+  console.log(`Pending phase gates: ${pendingGates.join('; ')}`);
+if (reviewRecord) console.log(`Review: ${reviewFile}`);
 console.log(`Results and logs: ${resolve(folder)}`);
 console.log(
   'This command only reads the recorded run; it does not launch tests.',

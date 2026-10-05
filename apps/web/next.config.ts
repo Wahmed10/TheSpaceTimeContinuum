@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
 import { networkInterfaces } from 'node:os';
 const config: NextConfig = {
+  // Isolated validation builds opt in to emitted module attribution maps.
+  productionBrowserSourceMaps: process.env.SPACE_BUILD_AUDIT === '1',
   // Friendly redirects must validate the original percent-encoded query.
   // Next's default Proxy URL normalization reconstructs decoded parameters.
   skipProxyUrlNormalize: true,
@@ -24,6 +26,15 @@ const config: NextConfig = {
   ],
   async headers() {
     return [
+      {
+        source: '/data/chunks/:version([a-f0-9]{64})/:file',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
       {
         source: '/(.*)',
         headers: [

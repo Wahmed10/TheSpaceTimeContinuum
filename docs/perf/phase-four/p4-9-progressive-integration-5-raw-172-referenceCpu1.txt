@@ -1,0 +1,19 @@
+
+> space-time-continuum@ perf:cpu C:\Users\waqar\Documents\TheSpaceTimeContinuum\.tools\cpu-phase-three\reference
+> node --import tsx tools/run-cpu-perf.mjs "--url" "http://localhost:3001" "--output" "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-reference-1.json"
+
+[cpu-path] solar-orbit
+[cpu-path] earth-leo
+[cpu-path] moon-orbit
+[cpu-path] mars-orbit
+[cpu-path] earth-moon-zoom
+CPU evidence saved to C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-reference-1.json
+┌─────────┬───────────────────┬────────────────────┬────────────────────┐
+│ (index) │ path              │ meanMs             │ p95Ms              │
+├─────────┼───────────────────┼────────────────────┼────────────────────┤
+│ 0       │ 'solar-orbit'     │ 1.7124999950329463 │ 2.8000000715255737 │
+│ 1       │ 'earth-leo'       │ 1.6958333253860474 │ 2.6999999284744263 │
+│ 2       │ 'moon-orbit'      │ 1.5166666676600775 │ 2.799999952316284  │
+│ 3       │ 'mars-orbit'      │ 1.454166661699613  │ 2.399999976158142  │
+│ 4       │ 'earth-moon-zoom' │ 1.4708333323399225 │ 2.299999952316284  │
+└─────────┴───────────────────┴────────────────────┴────────────────────┘

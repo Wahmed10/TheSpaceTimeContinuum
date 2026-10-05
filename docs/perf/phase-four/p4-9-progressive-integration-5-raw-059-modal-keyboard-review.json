@@ -1,0 +1,110 @@
+{
+  "profile": "desktop",
+  "traversal": [
+    {
+      "key": "Tab",
+      "inside": true,
+      "tag": "BUTTON",
+      "label": "Close search"
+    },
+    {
+      "key": "Tab",
+      "inside": true,
+      "tag": "INPUT",
+      "label": "Find a world"
+    },
+    {
+      "key": "Tab",
+      "inside": true,
+      "tag": "BUTTON",
+      "label": "Close search"
+    },
+    {
+      "key": "Tab",
+      "inside": true,
+      "tag": "INPUT",
+      "label": "Find a world"
+    },
+    {
+      "key": "Tab",
+      "inside": true,
+      "tag": "BUTTON",
+      "label": "Close search"
+    },
+    {
+      "key": "Tab",
+      "inside": true,
+      "tag": "INPUT",
+      "label": "Find a world"
+    },
+    {
+      "key": "Tab",
+      "inside": true,
+      "tag": "BUTTON",
+      "label": "Close search"
+    },
+    {
+      "key": "Tab",
+      "inside": true,
+      "tag": "INPUT",
+      "label": "Find a world"
+    },
+    {
+      "key": "Shift+Tab",
+      "inside": true,
+      "tag": "BUTTON",
+      "label": "Close search"
+    },
+    {
+      "key": "Shift+Tab",
+      "inside": true,
+      "tag": "INPUT",
+      "label": "Find a world"
+    },
+    {
+      "key": "Shift+Tab",
+      "inside": true,
+      "tag": "BUTTON",
+      "label": "Close search"
+    },
+    {
+      "key": "Shift+Tab",
+      "inside": true,
+      "tag": "INPUT",
+      "label": "Find a world"
+    },
+    {
+      "key": "Shift+Tab",
+      "inside": true,
+      "tag": "BUTTON",
+      "label": "Close search"
+    },
+    {
+      "key": "Shift+Tab",
+      "inside": true,
+      "tag": "INPUT",
+      "label": "Find a world"
+    },
+    {
+      "key": "Shift+Tab",
+      "inside": true,
+      "tag": "BUTTON",
+      "label": "Close search"
+    },
+    {
+      "key": "Shift+Tab",
+      "inside": true,
+      "tag": "INPUT",
+      "label": "Find a world"
+    }
+  ],
+  "selectedOnReturn": [
+    0,
+    2
+  ],
+  "nativeCaretKey": "ArrowRight",
+  "caret": [
+    2,
+    2
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "measuredAt": "2026-10-05T00:35:18.986Z",
+  "cap": 1500000,
+  "total": 1074869,
+  "reserve": 64000,
+  "passed": true,
+  "method": "All emitted browser JS/CSS gzip level6; largest HTML gzip; critical static data counted uncompressed; maximum one date bundle; 64KB header/flight reserve. Texture/basis and curve/prefetch work deferred beyond first paint. Live CDP cap is a separate acceptance gate.",
+  "scripts": [
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\008azcev4oi3u.js",
+      "bytes": 2002
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\06lm5o0fc332j.js",
+      "bytes": 10877
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\070db1--mdk3i.js",
+      "bytes": 3635
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\0cz1d0mv5g_q7.js",
+      "bytes": 39627
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\0huzl5kqr9s7p.js",
+      "bytes": 271977
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\0myxe04d62xb7.js",
+      "bytes": 23396
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\18v5c9g0pgfq8.js",
+      "bytes": 1267
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\19oytnic7-f6c.js",
+      "bytes": 8760
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\19tp6v6_t-dby.js",
+      "bytes": 7993
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\1hje2l066ab-s.js",
+      "bytes": 44155
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\1m6wqndmi18ra.js",
+      "bytes": 12082
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\1ohhdn4xxpqeu.js",
+      "bytes": 621
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\1shm5zg3ql8dd.js",
+      "bytes": 71638
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\2cm6lbphkds6a.js",
+      "bytes": 299
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\2o0zbx1nimoz6.js",
+      "bytes": 9995
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\2oo5rli34yg7a.js",
+      "bytes": 1997
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\2rgt8h72rzzsz.js",
+      "bytes": 60849
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\2_e55372h_8v8.js",
+      "bytes": 3683
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\37evtpv2i923c.js",
+      "bytes": 1883
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\3ayg321kz30mk.js",
+      "bytes": 13439
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\3ds36vfpq8fw2.js",
+      "bytes": 1928
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\3dx2kjadlzf1g.js",
+      "bytes": 33108
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\3l187lsl-69av.js",
+      "bytes": 3454
+    },
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\turbopack-2h-frg2v9a_vv.js",
+      "bytes": 3885
+    },
+    {
+      "file": "apps\\web\\.next\\static\\media\\basis_transcoder.1nyhl65_x6yw2.js",
+      "bytes": 15169
+    },
+    {
+      "file": "apps\\web\\.next\\static\\Ttbpfcd5nWVSQsYjqN8Sf\\_buildManifest.js",
+      "bytes": 154
+    },
+    {
+      "file": "apps\\web\\.next\\static\\Ttbpfcd5nWVSQsYjqN8Sf\\_clientMiddlewareManifest.js",
+      "bytes": 201
+    },
+    {
+      "file": "apps\\web\\.next\\static\\Ttbpfcd5nWVSQsYjqN8Sf\\_ssgManifest.js",
+      "bytes": 93
+    }
+  ],
+  "styles": [
+    {
+      "file": "apps\\web\\.next\\static\\chunks\\03f_dw1jb4r-g.css",
+      "bytes": 8320
+    }
+  ],
+  "html": {
+    "file": "apps\\web\\.next\\server\\app\\about\\data.html",
+    "bytes": 4652
+  },
+  "critical": [
+    {
+      "file": "apps\\web\\public\\data\\stars.bin",
+      "bytes": 181920
+    },
+    {
+      "file": "apps\\web\\public\\assets\\textures\\manifest.json",
+      "bytes": 12549
+    },
+    {
+      "file": "apps\\web\\public\\assets\\shapes\\phobos.bin.gz",
+      "bytes": 71605
+    },
+    {
+      "file": "apps\\web\\public\\assets\\shapes\\deimos.bin.gz",
+      "bytes": 73088
+    },
+    {
+      "file": "maximum current-date bundle",
+      "bytes": 10568
+    }
+  ]
+}

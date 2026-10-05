@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { tdbToIso } from '@space/astro';
+import { tdbToIso } from './uiTimeAdapter';
 import { RouteStateController } from './routeStateController';
 import { useEngineStore } from './useEngineStore';
 

@@ -24,13 +24,16 @@ import {
   SEC_PER_DAY,
   tdbToIso,
   isoToTdb,
-  registerEphemerisCorrection,
-  registerOsculatingTable,
+  utcMsToTdb,
+  StreamedEphemeris,
+  runtimeChunkIndex,
 } from '@space/astro';
-import type { ClockSnapshot } from '@space/astro';
+import type { ClockSnapshot, RuntimeChunkManifest } from '@space/astro';
 import { createRenderer } from './render/RendererFactory';
 import { PostFX } from './render/PostFX';
 import { AssetManager } from './assets/AssetManager';
+import { RuntimeChunkCache } from './assets/RuntimeChunkCache';
+import chunkManifest from './assets/runtime-chunks.json';
 import { createPlanet } from './bodies/PlanetFactory';
 import { createStarfield } from './bodies/Starfield';
 import { EntityRegistry } from './scene/EntityRegistry';
@@ -51,7 +54,7 @@ import type { SourcePoint } from './layers/SourcePointLayer';
 import type { PointSource } from './layers/PointSource';
 import { LayerRegistry } from './layers/LayerRegistry';
 import { OrbitLayer } from './layers/OrbitLayer';
-import { sampleOrbit } from './layers/sampleOrbit';
+import { sampleOrbit, sampleOrbitAsync } from './layers/sampleOrbit';
 import { Picker } from './picking/Picker';
 import { projectedDiameter, selectLod } from './lod/LodSystem';
 import { PerfMonitor } from './perf/PerfMonitor';
@@ -125,8 +128,18 @@ export class SpaceEngine {
   private scene = new Scene();
   private camera = new PerspectiveCamera(45, 1, 0.1, 1e12);
   private assets: AssetManager;
-  private registry = new EntityRegistry();
-  readonly cameraController = new CameraController(this.registry.frames);
+  private registry: EntityRegistry;
+  readonly cameraController: CameraController;
+  private pendingFocus: {
+    id: string;
+    opts: FocusOptions;
+    restore?: () => void;
+  } | null = null;
+  private pendingFrame: CameraFrame | null = null;
+  private sceneEpoch = NaN;
+  private sceneStamp = -1;
+  private sourceEpoch = NaN;
+  private progressiveReady = false;
   private restoringMapState = false;
   private frameUnavailable = false;
   private perf = new PerfMonitor();
@@ -172,7 +185,9 @@ export class SpaceEngine {
   }[] = [];
   private orbitRefreshQueued = false;
   private lastOrbitRefresh = 0;
-  private orbitRefreshCursor = 0;
+  private orbitBuild: { id: string; epoch: number; cancelled: boolean } | null =
+    null;
+  private orbitRetry = new Map<string, number>();
   private last = 0;
   private lastUI = 0;
   private disposed = false;
@@ -181,47 +196,45 @@ export class SpaceEngine {
   private height = 1;
   private started = performance.now();
   private initialReady = false;
+  private renderedFrames = 0;
+  private renderedEpoch = NaN;
+  private renderedRevision = -1;
   private deterministic = false;
   private postFX: PostFX;
   static async create(canvas: HTMLCanvasElement, options: EngineOptions = {}) {
     const started = performance.now();
-    await Promise.all(
-      [
-        ...EXPLORABLE_BODIES.flatMap((body) =>
-          body.astronomyBody ? [body.astronomyBody] : [],
-        ),
-        'callisto',
-      ].map(async (body) => {
-        const response = await fetch(
-          `/data/corrections/${body.toLowerCase()}.bin`,
-        );
-        if (!response.ok) throw new Error(`Ephemeris unavailable for ${body}`);
-        registerEphemerisCorrection(body, await response.arrayBuffer());
-      }),
-    );
-    await Promise.all(
-      EXPLORABLE_BODIES.filter(
-        (body) =>
-          body.provenance.providerId === 'jpl-horizons-orbital-elements',
-      ).map(async (body) => {
-        const response = await fetch(
-          `/data/orbits/${body.id.split(':')[1]}.bin`,
-        );
-        if (!response.ok)
-          throw new Error(`Orbital data unavailable for ${body.name}`);
-        registerOsculatingTable(body.id, await response.arrayBuffer());
-      }),
-    );
+    const chunks = new RuntimeChunkCache(chunkManifest as RuntimeChunkManifest);
+    const initialEpoch =
+      options.tdbSec ??
+      (options.test
+        ? isoToTdb('2026-09-22T00:00:00Z')
+        : utcMsToTdb(Date.now()));
+    // The one current bundle travels alongside renderer startup. Its absence
+    // never prevents fresh analytic positions or the first scene frame.
+    void chunks.load(runtimeChunkIndex(initialEpoch)).catch(() => {});
     const { renderer, backend } = await createRenderer(canvas, {
       forceWebGL: options.forceWebGL ?? false,
       dpr: Math.min(devicePixelRatio, 2),
+    }).catch((error: unknown) => {
+      chunks.dispose();
+      throw error;
     });
     let assets: AssetManager | undefined;
     try {
-      assets = await AssetManager.create(renderer);
-      const starsResponse = await fetch('/data/stars.bin');
-      if (!starsResponse.ok) throw new Error('Star catalog unavailable');
-      const stars = new Float32Array(await starsResponse.arrayBuffer());
+      const mobile =
+        matchMedia('(pointer: coarse)').matches || innerWidth < 760;
+      const [assetResult, starResult] = await Promise.allSettled([
+        AssetManager.create(renderer, mobile ? 1024 : Infinity),
+        (async () => {
+          const response = await fetch('/data/stars.bin');
+          if (!response.ok) throw new Error('Star catalog unavailable');
+          return new Float32Array(await response.arrayBuffer());
+        })(),
+      ]);
+      if (assetResult.status === 'fulfilled') assets = assetResult.value;
+      else throw assetResult.reason;
+      if (starResult.status === 'rejected') throw starResult.reason;
+      const stars = starResult.value;
       const engine = new SpaceEngine(
         canvas,
         renderer,
@@ -229,12 +242,14 @@ export class SpaceEngine {
         options,
         assets,
         stars,
+        chunks,
       );
       engine.started = started;
       engine.start();
       return engine;
     } catch (error) {
       assets?.dispose();
+      chunks.dispose();
       renderer.dispose();
       throw error;
     }
@@ -246,8 +261,23 @@ export class SpaceEngine {
     options: EngineOptions,
     assets: AssetManager,
     stars: Float32Array,
+    private chunks: RuntimeChunkCache,
   ) {
     this.assets = assets;
+    const ephemeris = new StreamedEphemeris(chunks.manifest, (t) =>
+      chunks.get(t),
+    );
+    this.registry = new EntityRegistry(
+      (body) => ephemeris.catalog(body),
+      (body) => ephemeris.analytic(body),
+    );
+    this.cameraController = new CameraController(this.registry.frames);
+    chunks.subscribe((index) => {
+      // FrameTree memoizes paused epochs. Newly available coefficients must
+      // invalidate the matching date even when the clock has not advanced.
+      if (index === runtimeChunkIndex(this.clock.state.tdbSec))
+        this.registry.frames.invalidate();
+    });
     this.deterministic = options.test ?? false;
     this.backend = backend;
     const hardware = renderer.backend as unknown as {
@@ -374,9 +404,16 @@ export class SpaceEngine {
     if (options.test) this.clock.setTime(isoToTdb('2026-09-22T00:00:00Z'));
     if (options.tdbSec !== undefined) this.clock.setTime(options.tdbSec);
     const tdb = this.clock.tick();
-    this.registry.update(tdb);
-    this.createOrbits(tdb);
-    const focus = options.focus ?? 'star:sun';
+    this.updateScene(tdb);
+    const requestedFocus = options.focus ?? 'star:sun';
+    const focus = this.registry.entries.get(requestedFocus)?.visible
+      ? requestedFocus
+      : 'star:sun';
+    if (focus !== requestedFocus)
+      this.pendingFocus = {
+        id: requestedFocus,
+        opts: { transition: false, recordHistory: false, select: false },
+      };
     const e = this.registry.entries.get(focus)!;
     this.cameraController.focus(
       focus,
@@ -454,6 +491,35 @@ export class SpaceEngine {
     if (this.disposed || document.hidden || this.renderSuspensions) return;
     this.renderer.setAnimationLoop(this.frame);
   }
+  private updateScene(tdb: number) {
+    const stamp = this.registry.frames.cacheRevision;
+    if (this.sceneEpoch === tdb && this.sceneStamp === stamp) return;
+    this.registry.update(tdb);
+    this.sceneEpoch = tdb;
+    this.sceneStamp = stamp;
+  }
+  private applyPendingView(now: number) {
+    if (this.pendingFrame) {
+      const result = this.cameraController.setFrame(
+        this.pendingFrame,
+        this.clock.state.tdbSec,
+      );
+      if (result.ok) this.pendingFrame = null;
+    }
+    const pending = this.pendingFocus;
+    if (!pending || !this.positionReady(pending.id) || this.pendingFrame)
+      return;
+    this.pendingFocus = null;
+    if (pending.restore) pending.restore();
+    else this.focusReady(pending.id, pending.opts, now);
+  }
+  private positionReady(id: string) {
+    return (
+      !!this.target(id)?.visible &&
+      (this.registry.entries.has(id) ||
+        this.sourceEpoch === this.clock.state.tdbSec)
+    );
+  }
   private frame = (now: number) => {
     if (this.disposed) return;
     const cpuStart = this.cpuTimings ? performance.now() : 0;
@@ -461,7 +527,13 @@ export class SpaceEngine {
     this.last = now;
     this.perf.add(dt);
     const tdbSec = this.clock.tick(this.cpuClockMs);
-    this.registry.update(tdbSec);
+    if (this.progressiveReady)
+      this.chunks.prefetch(
+        tdbSec,
+        this.clock.mode === 'paused' ? 0 : this.clock.state.rate,
+        now,
+      );
+    this.updateScene(tdbSec);
     for (const [id, layer] of this.sourceLayers) {
       const priorError = layer.error;
       layer.sample(
@@ -473,13 +545,17 @@ export class SpaceEngine {
       if (layer.error && !priorError)
         this.emit('sourceError', { layerId: id, message: layer.error });
     }
+    this.sourceEpoch = tdbSec;
+    this.applyPendingView(now);
     const target = this.target(this.cameraController.targetId)!;
-    const cameraResult = this.cameraController.update(
-      target.physical,
-      now,
-      this.focusRadius(),
-      tdbSec,
-    );
+    const cameraResult = target.visible
+      ? this.cameraController.update(
+          target.physical,
+          now,
+          this.focusRadius(),
+          tdbSec,
+        )
+      : undefined;
     if (cameraResult?.ok === false) {
       if (!this.frameUnavailable)
         this.emit('commandError', {
@@ -489,9 +565,7 @@ export class SpaceEngine {
         });
       this.frameUnavailable = true;
     } else this.frameUnavailable = false;
-    this.canvas.style.opacity = String(
-      1 - Math.max(this.clock.state.fade, this.cameraController.fade),
-    );
+    this.canvas.style.opacity = String(1 - this.cameraController.fade);
     const world = this.cameraController.world;
     this.layers.setBand(
       this.cameraController.distanceKm < 2e6
@@ -505,6 +579,13 @@ export class SpaceEngine {
       layer.render(world, this.layers.has(id));
     for (const layer of this.pointLayers.values()) layer.object.visible = false;
     for (const e of this.registry.entries.values()) {
+      if (!e.visible) {
+        e.visual.group.visible = false;
+        e.renderVisible = false;
+        e.pointLayer?.sizes.setX(e.pointIndex, 0);
+        this.labels?.hide(e.body.id);
+        continue;
+      }
       const d = Math.hypot(
         e.physical[0]! - world[0]!,
         e.physical[1]! - world[1]!,
@@ -534,7 +615,7 @@ export class SpaceEngine {
       }
       if (e.body.kind === 'moon' && e.body.parentId) {
         const p = this.registry.entries.get(e.body.parentId);
-        if (p)
+        if (p?.visible)
           childDisplayPosition(
             e.physical,
             p.physical,
@@ -638,6 +719,10 @@ export class SpaceEngine {
     }
     for (const [parentId, layer] of this.pointLayers) {
       const parent = this.registry.entries.get(parentId)!;
+      if (!parent.visible) {
+        layer.object.visible = false;
+        continue;
+      }
       layer.object.position.set(
         parent.display[0]! - world[0]!,
         parent.display[1]! - world[1]!,
@@ -663,12 +748,32 @@ export class SpaceEngine {
     this.updateOrbits(tdbSec, now);
     this.updateLabels(now);
     this.postFX.render();
+    this.renderedFrames++;
+    this.renderedEpoch = tdbSec;
+    this.renderedRevision = this.sceneStamp;
     if (!this.initialReady) {
       this.initialReady = true;
       this.canvas.dataset.ready = 'true';
       this.canvas.dataset.firstFrameMs = String(
         Math.round(performance.now() - this.started),
       );
+      // Allow the submitted preview to reach the screen before KTX network,
+      // transcoding and upload work begins. Dispose guards both callbacks.
+      requestAnimationFrame(() => {
+        if (!this.disposed)
+          requestAnimationFrame(() => {
+            if (!this.disposed) {
+              // At least one browser paint has followed the scene submission.
+              // Optional downloads begin on the next RAF, after this marker.
+              this.canvas.dataset.painted = 'true';
+              this.canvas.dataset.firstPaintAt = String(performance.now());
+              this.progressiveReady = true;
+              requestAnimationFrame(() => {
+                if (!this.disposed) this.assets.startStreaming();
+              });
+            }
+          });
+      });
     }
     if (now - this.lastUI >= 250) {
       if (this.cpuTimings) this.cpuUiUpdates++;
@@ -727,11 +832,19 @@ export class SpaceEngine {
         (!local && e.body.kind !== 'moon') ||
         e.body.id === this.cameraController.targetId ||
         e.body.parentId === this.cameraController.targetId;
+      const visible = inView && relevant && e.renderVisible;
+      // Hidden labels need no certainty traversal. Refresh every shown label
+      // from the current scene, including arrivals at an unchanged paused date.
+      if (visible && this.labels)
+        this.labels.setApproximate(
+          e.body.id,
+          this.getPositionStatus(e.body.id) === 'approximate',
+        );
       this.labels?.update(
         e.body.id,
         e.screenX,
         e.screenY,
-        inView && relevant && e.renderVisible,
+        visible,
         e.body.id === this.selected,
         e.body.id === this.hovered,
       );
@@ -809,26 +922,6 @@ export class SpaceEngine {
     }
     return this.picker.result;
   }
-  private createOrbits(tdb: number) {
-    for (const e of this.registry.entries.values()) {
-      if (!e.body.parentId) continue;
-      const layer = this.buildOrbit(e.body.id, tdb);
-      this.scene.add(layer.line);
-      this.orbits.push({
-        layer,
-        bodyId: e.body.id,
-        parentId: e.body.parentId,
-        epoch: tdb,
-        period: e.body.physical.periodDays! * SEC_PER_DAY,
-        wanted: false,
-      });
-    }
-  }
-  private buildOrbit(id: string, tdb: number) {
-    const e = this.registry.entries.get(id)!;
-    const p = this.registry.entries.get(e.body.parentId!)!;
-    return this.buildProviderOrbit(e.body, e.provider, p.frameId, tdb);
-  }
   private buildProviderOrbit(
     body: BodySpec,
     provider: PositionProvider,
@@ -866,50 +959,162 @@ export class SpaceEngine {
     );
     return new OrbitLayer(points, body.color, provider.certaintyAt(tdb));
   }
-  private refreshOrbit = () => {
+  private orbitWanted(body: BodySpec) {
+    const target = this.target(this.focusedId)!;
+    return (
+      this.layers.has('orbits') &&
+      (!['dwarf', 'asteroid', 'satellite', 'spacecraft'].includes(body.kind) ||
+        body.id === this.selected ||
+        body.id === this.hovered) &&
+      (body.parentId === 'star:sun' ||
+        (this.cameraController.distanceKm < 2e7 &&
+          (body.parentId === target.body.id ||
+            body.parentId === target.body.parentId)))
+    );
+  }
+  private refreshOrbit = async () => {
     this.orbitRefreshQueued = false;
-    if (this.disposed) return;
+    if (this.disposed || !this.progressiveReady || this.orbitBuild) return;
     const tdb = this.clock.state.tdbSec;
-    // One rebuild per scheduled task; round-robin prevents a rapidly moving
-    // moon from starving the other visible trajectories during fast playback.
-    for (let i = 0; i < this.orbits.length; i++) {
-      const orbit =
-        this.orbits[this.orbitRefreshCursor++ % this.orbits.length]!;
-      if (!orbit.wanted || Math.abs(tdb - orbit.epoch) < orbit.period / 4)
-        continue;
-      try {
-        const layer = this.buildOrbit(orbit.bodyId, tdb);
-        layer.line.visible = false; // Rebased by the next render frame.
+    const candidates = Array.from(this.registry.entries.values()).filter(
+      (e) => {
+        if (
+          !e.visible ||
+          !e.body.parentId ||
+          !e.body.physical.periodDays ||
+          !this.orbitWanted(e.body) ||
+          (this.orbitRetry.get(e.body.id) ?? 0) > performance.now()
+        )
+          return false;
+        const orbit = this.orbits.find((o) => o.bodyId === e.body.id);
+        return !orbit || Math.abs(tdb - orbit.epoch) >= orbit.period / 4;
+      },
+    );
+    const priority = (id: string) => {
+      if (id === this.selected || id === this.focusedId) return 1000;
+      if (id === this.hovered) return 750;
+      const body = this.registry.entries.get(id)!.body;
+      return body.kind === 'moon' && this.orbitWanted(body) ? 100 : 0;
+    };
+    candidates.sort((a, b) => priority(b.body.id) - priority(a.body.id));
+    const e = candidates[0];
+    if (!e) return;
+    const task = { id: e.body.id, epoch: tdb, cancelled: false };
+    this.orbitBuild = task;
+    try {
+      const parent = this.registry.entries.get(e.body.parentId!)!;
+      const a = new Float64Array(6);
+      const period = e.body.physical.periodDays! * SEC_PER_DAY;
+      const from = Math.max(
+        tdb - period / 2,
+        e.provider.validity === 'unbounded'
+          ? -Infinity
+          : e.provider.validity.fromTdb,
+      );
+      const to = Math.min(
+        tdb + period / 2,
+        e.provider.validity === 'unbounded'
+          ? Infinity
+          : e.provider.validity.toTdb,
+      );
+      let approximate = false;
+      const points = await sampleOrbitAsync(
+        async (t, out) => {
+          if (task.cancelled || this.disposed)
+            throw Error('Orbit build superseded');
+          if (!this.chunks.get(t)) {
+            try {
+              await this.chunks.load(runtimeChunkIndex(t), 2);
+            } catch {
+              approximate = true;
+            }
+          }
+          if (task.cancelled || this.disposed)
+            throw Error('Orbit build superseded');
+          if (
+            !e.provider.stateAt(t, a).ok ||
+            !this.registry.frames.transformState(
+              e.provider.frame,
+              parent.frameId,
+              t,
+              a,
+              a,
+            )
+          )
+            throw Error('Orbit position unavailable');
+          approximate ||= e.provider.certaintyAt(t) === 'approximate';
+          for (let j = 0; j < 3; j++) out[j] = a[j]!;
+        },
+        from,
+        to,
+        tdb,
+      );
+      if (
+        task.cancelled ||
+        this.disposed ||
+        Math.abs(this.clock.state.tdbSec - tdb) >= period / 4
+      )
+        return;
+      const layer = new OrbitLayer(
+        points,
+        e.body.color,
+        approximate ? 'approximate' : 'computed',
+      );
+      layer.line.visible = false;
+      const orbit = this.orbits.find((o) => o.bodyId === e.body.id);
+      if (orbit) {
         orbit.layer.dispose();
         orbit.layer = layer;
         orbit.epoch = tdb;
-        this.scene.add(layer.line);
-      } catch (error) {
-        this.emit('error', `Orbit update failed: ${String(error)}`);
-      }
-      break;
+      } else
+        this.orbits.push({
+          layer,
+          bodyId: e.body.id,
+          parentId: e.body.parentId!,
+          epoch: tdb,
+          period,
+          wanted: false,
+        });
+      this.scene.add(layer.line);
+      this.orbitRetry.delete(e.body.id);
+    } catch {
+      // A missing optional trajectory is local to this object. Renderer recovery
+      // must never remount a working scene because a curve chunk is unavailable.
+      if (!task.cancelled)
+        this.orbitRetry.set(e.body.id, performance.now() + 1000);
+    } finally {
+      if (this.orbitBuild === task) this.orbitBuild = null;
     }
   };
   private updateOrbits(tdb: number, now: number) {
     const world = this.cameraController.world;
-    const target = this.target(this.cameraController.targetId)!;
+    const active = this.orbitBuild;
+    if (active) {
+      const e = this.registry.entries.get(active.id)!;
+      const priority = this.selected ?? this.focusedId;
+      if (
+        !this.orbitWanted(e.body) ||
+        Math.abs(tdb - active.epoch) >=
+          (e.body.physical.periodDays! * SEC_PER_DAY) / 4 ||
+        (active.id !== priority &&
+          this.registry.entries.get(priority)?.body.parentId &&
+          !this.orbits.some(
+            (o) =>
+              o.bodyId === priority && Math.abs(tdb - o.epoch) < o.period / 4,
+          ))
+      )
+        active.cancelled = true;
+    }
     for (const orbit of this.orbits) {
       const p = this.registry.entries.get(orbit.parentId)!;
       const body = this.registry.entries.get(orbit.bodyId)!;
       const selected = orbit.bodyId === this.selected;
-      orbit.wanted =
-        this.layers.has('orbits') &&
-        (!['dwarf', 'asteroid', 'satellite', 'spacecraft'].includes(
-          body.body.kind,
-        ) ||
-          selected ||
-          orbit.bodyId === this.hovered) &&
-        (orbit.parentId === 'star:sun' ||
-          (this.cameraController.distanceKm < 2e7 &&
-            (orbit.parentId === target.body.id ||
-              orbit.parentId === target.body.parentId)));
+      orbit.wanted = this.orbitWanted(body.body);
       orbit.layer.line.visible =
-        orbit.wanted && Math.abs(tdb - orbit.epoch) <= orbit.period / 2;
+        body.visible &&
+        p.visible &&
+        orbit.wanted &&
+        Math.abs(tdb - orbit.epoch) <= orbit.period / 2;
       if (orbit.layer.line.visible)
         orbit.layer.update(
           p.display,
@@ -921,7 +1126,9 @@ export class SpaceEngine {
     if (!this.orbitRefreshQueued && now - this.lastOrbitRefresh >= 250) {
       this.lastOrbitRefresh = now;
       this.orbitRefreshQueued = true;
-      queueMicrotask(this.refreshOrbit);
+      setTimeout(() => {
+        void this.refreshOrbit();
+      }, 0);
     }
   }
   resize() {
@@ -964,7 +1171,7 @@ export class SpaceEngine {
   }
   /** Semantic camera target, independent of the temporarily selected card. */
   get focusedId(): string {
-    return this.cameraController.targetId;
+    return this.pendingFocus?.id ?? this.cameraController.targetId;
   }
   getEntity(id: string): Readonly<BodySpec> | null {
     const body = this.target(id)?.body;
@@ -1177,13 +1384,26 @@ export class SpaceEngine {
     this.registry.update(tdb);
   }
   focus(id: string, opts: FocusOptions = {}) {
+    this.updateScene(this.clock.state.tdbSec);
     const e = this.target(id);
     if (!e) return;
+    this.pendingFocus = null;
+    if (!this.positionReady(id) || this.pendingFrame) {
+      this.pendingFocus = { id, opts: { ...opts, select: false } };
+      this.chunks.prefetch(this.clock.state.tdbSec, 0);
+      if (opts.select !== false) this.select(id);
+      else this.mapStateChanged();
+      return;
+    }
+    this.focusReady(id, opts, performance.now());
+  }
+  private focusReady(id: string, opts: FocusOptions, now: number) {
+    const e = this.target(id)!;
     this.cameraController.focus(
       id,
       e.physical,
       id === 'planet:saturn' ? SATURN_RINGS.outerRadiusKm : this.viewRadius(id),
-      performance.now(),
+      now,
       opts.transition ?? true,
       opts.wide ?? false,
       opts.recordHistory ?? true,
@@ -1192,30 +1412,42 @@ export class SpaceEngine {
     else this.mapStateChanged();
   }
   follow(id: string | null) {
+    if (id === null) this.pendingFocus = null;
     if (id && id !== this.cameraController.targetId) this.focus(id);
     this.cameraController.following = id !== null;
     this.mapStateChanged();
   }
   back() {
+    this.pendingFocus = null;
+    this.pendingFrame = null;
+    this.updateScene(this.clock.state.tdbSec);
     const view = this.cameraController.back();
     if (view) {
       const e = this.target(view.targetId);
       if (!e) return;
-      const result = this.cameraController.restore(
-        view,
-        e.physical,
-        this.viewRadius(view.targetId),
-        performance.now(),
-        this.clock.state.tdbSec,
-      );
-      if (!result.ok) {
-        this.emit('commandError', {
-          command: 'frame',
-          message: 'The previous camera reference could not be restored.',
-        });
-        return;
-      }
-      this.select(view.targetId);
+      const restore = () => {
+        const result = this.cameraController.restore(
+          view,
+          e.physical,
+          this.viewRadius(view.targetId),
+          performance.now(),
+          this.clock.state.tdbSec,
+        );
+        if (!result.ok) {
+          this.emit('commandError', {
+            command: 'frame',
+            message: 'The previous camera reference could not be restored.',
+          });
+          return;
+        }
+        this.select(view.targetId);
+      };
+      if (!e.visible) {
+        this.pendingFocus = { id: view.targetId, opts: {}, restore };
+        this.pendingFrame = view.frame;
+        this.select(view.targetId);
+        this.chunks.prefetch(this.clock.state.tdbSec, 0);
+      } else restore();
     }
   }
   setLayer(id: string, on: boolean) {
@@ -1235,7 +1467,12 @@ export class SpaceEngine {
    */
   getObjectsInView(): readonly ObjectInView[] {
     this.inViewSnapshot.begin();
-    if (!this.disposed && this.initialReady) {
+    if (
+      !this.disposed &&
+      this.initialReady &&
+      this.renderedEpoch === this.clock.state.tdbSec &&
+      this.renderedRevision === this.registry.frames.cacheRevision
+    ) {
       for (const e of this.registry.entries.values()) {
         const rendered =
           e.visible &&
@@ -1257,11 +1494,16 @@ export class SpaceEngine {
     return this.layers.whenSettled();
   }
   setFrame(frame: CameraFrame): CameraFrameResult {
+    this.pendingFrame = null;
     const result = this.cameraController.setFrame(
       frame,
       this.clock.state.tdbSec,
     );
-    if (!result.ok)
+    if (!result.ok && result.reason !== 'unsupported-frame') {
+      this.pendingFrame = frame;
+      this.chunks.prefetch(this.clock.state.tdbSec, 0);
+      this.mapStateChanged();
+    } else if (!result.ok)
       this.emit('commandError', {
         command: 'frame',
         message:
@@ -1318,14 +1560,20 @@ export class SpaceEngine {
   }
   getMapState(): MapState {
     return {
-      focus: this.selected ?? this.cameraController.targetId,
+      focus: this.selected ?? this.focusedId,
       ...(this.clock.mode !== 'live'
         ? { t: tdbToIso(this.clock.state.tdbSec) }
         : {}),
       scale: this.scale,
       layers: this.layers.enabledIds(),
-      frame: this.cameraController.frameId,
-      camera: { preset: this.cameraController.preset },
+      frame: this.pendingFrame ?? this.cameraController.frameId,
+      camera: {
+        preset: this.pendingFocus
+          ? this.pendingFocus.opts.wide
+            ? 'wide'
+            : 'close'
+          : this.cameraController.preset,
+      },
     };
   }
   applyMapState(state: MapState, opts: ApplyMapStateOptions = {}): void {
@@ -1354,7 +1602,7 @@ export class SpaceEngine {
             message: String(error),
           }),
         );
-      this.registry.update(this.clock.tick());
+      this.updateScene(this.clock.tick());
       this.setFrame(frame);
       this.focus(state.focus, {
         wide: state.camera?.preset === 'wide',
@@ -1370,10 +1618,17 @@ export class SpaceEngine {
     this.mapStateChanged();
   }
   getMetrics(id: string): ObjectMetrics | null {
+    this.updateScene(this.clock.state.tdbSec);
     const e = this.target(id),
       sun = this.registry.entries.get('star:sun'),
       earth = this.registry.entries.get('planet:earth');
-    if (!e || !sun || !earth) return null;
+    if (
+      !e?.visible ||
+      !sun?.visible ||
+      !earth?.visible ||
+      !this.positionReady(id)
+    )
+      return null;
     const p = e.physical;
     return {
       distanceSunKm: Math.hypot(
@@ -1388,17 +1643,46 @@ export class SpaceEngine {
       ),
       speedKmPerSec: Math.hypot(p[3]!, p[4]!, p[5]!),
       radiusKm: e.body.physical.meanRadiusKm!,
-      certainty: e.body.provenance.certainty,
+      certainty:
+        this.getPositionStatus(id) === 'approximate'
+          ? 'approximate'
+          : e.body.provenance.certainty,
     };
+  }
+  getPositionStatus(id: string): 'ready' | 'approximate' | 'loading' {
+    this.updateScene(this.clock.state.tdbSec);
+    const e = this.target(id);
+    if (!e?.visible || !this.positionReady(id)) return 'loading';
+    const entity = this.registry.entries.get(id);
+    if (!entity)
+      return e.body.provenance.certainty === 'approximate'
+        ? 'approximate'
+        : 'ready';
+    const certainty = entity.provider.certaintyAt(this.clock.state.tdbSec);
+    return certainty === 'approximate' ||
+      (entity.body.parentId &&
+        this.getPositionStatus(entity.body.parentId) === 'approximate')
+      ? 'approximate'
+      : 'ready';
   }
   diagnostics() {
     const focus = this.target(this.cameraController.targetId);
     return {
       ...this.perf.stats(),
       backend: this.backend,
+      adapter: this.adapterDescription,
       tier: this.quality.tier,
       gpuBytes: this.assets.gpuBytes,
       pendingTextures: this.assets.pending,
+      textureState: this.assets.textureState,
+      chunks: this.chunks.diagnostics,
+      positionStatus: Array.from(this.registry.entries.keys(), (id) => ({
+        id,
+        status: this.getPositionStatus(id),
+      })),
+      pendingFocus: this.pendingFocus?.id ?? null,
+      pendingFrame: this.pendingFrame,
+      pendingOrbit: this.orbitBuild?.id ?? null,
       textureCount: this.renderer.info.memory.textures,
       entities: this.registry.entries.size,
       sourcePoints: this.sourcePoints.size,
@@ -1435,14 +1719,34 @@ export class SpaceEngine {
           innerRadius: e.visual.rings!.mesh.geometry.parameters.innerRadius,
           outerRadius: e.visual.rings!.mesh.geometry.parameters.outerRadius,
         })),
-      orbits: this.orbits.map((orbit) => ({
-        id: orbit.bodyId,
-        epoch: orbit.epoch,
-        vertices: orbit.layer.points.length / 3,
-        visible: orbit.layer.line.visible,
-        dashed: orbit.layer.line.material.dashed,
-        width: orbit.layer.line.material.linewidth,
-      })),
+      orbits: this.orbits
+        .map((orbit) => ({
+          id: orbit.bodyId,
+          epoch: orbit.epoch,
+          vertices: orbit.layer.points.length / 3,
+          visible: orbit.layer.line.visible,
+          dashed: orbit.layer.line.material.dashed,
+          width: orbit.layer.line.material.linewidth,
+        }))
+        .concat(
+          Array.from(this.registry.entries.values())
+            .filter(
+              (e) =>
+                e.body.parentId &&
+                e.body.physical.periodDays &&
+                !this.orbits.some((o) => o.bodyId === e.body.id),
+            )
+            .map((e) => ({
+              id: e.body.id,
+              epoch: 0,
+              vertices: 0,
+              visible: false,
+              dashed:
+                e.provider.certaintyAt(this.clock.state.tdbSec) ===
+                'approximate',
+              width: 0,
+            })),
+        ),
       orientations: Array.from(this.registry.entries.values()).map((e) => ({
         id: e.body.id,
         frame: e.fixedFrameId ?? null,
@@ -1454,13 +1758,17 @@ export class SpaceEngine {
       selected: this.selected,
       focusScreen: focus ? { x: focus.screenX, y: focus.screenY } : null,
       ready: this.initialReady,
+      renderedFrames: this.renderedFrames,
+      renderedEpoch: this.renderedEpoch,
+      renderedRevision: this.renderedRevision,
+      sceneRevision: this.registry.frames.cacheRevision,
     };
   }
   referenceView(bodyId: string, phase: 'day' | 'night' | 'quarter' | 'limb') {
     this.focus(bodyId, { transition: false });
     const body = this.registry.entries.get(bodyId),
       sun = this.registry.entries.get('star:sun');
-    if (!body || !sun) return;
+    if (!body?.visible || !sun?.visible) return;
     const x = sun.physical[0]! - body.physical[0]!,
       y = sun.physical[1]! - body.physical[1]!,
       z = sun.physical[2]! - body.physical[2]!;
@@ -1541,6 +1849,39 @@ export class SpaceEngine {
       this.start();
     } else this.renderer.setAnimationLoop(null);
   }
+  /** Lab settlement only. Consumer publication and first paint never await
+   * optional trajectories. Benchmarks require the same visible curve workload
+   * as the accepted renderer, rather than measuring an incomplete scene. */
+  async whenOrbitsSettled(timeoutMs = 60000) {
+    const deadline = performance.now() + timeoutMs;
+    this.chunks.prefetch(this.clock.state.tdbSec, 0);
+    await this.chunks.load(runtimeChunkIndex(this.clock.state.tdbSec));
+    while (performance.now() < deadline) {
+      if (this.disposed || document.hidden)
+        throw Error('Scene settlement interrupted');
+      const tdb = this.clock.state.tdbSec;
+      this.updateScene(tdb);
+      this.applyPendingView(performance.now());
+      const ready =
+        !this.orbitBuild &&
+        Array.from(this.registry.entries.values()).every((e) => {
+          if (
+            !e.body.parentId ||
+            !e.body.physical.periodDays ||
+            !this.orbitWanted(e.body)
+          )
+            return true;
+          const orbit = this.orbits.find((o) => o.bodyId === e.body.id);
+          return (
+            e.visible && orbit && Math.abs(tdb - orbit.epoch) < orbit.period / 4
+          );
+        });
+      if (this.progressiveReady && ready) return;
+      await this.refreshOrbit();
+      await new Promise<void>((done) => setTimeout(done, 16));
+    }
+    throw Error('Visible orbit data did not settle');
+  }
   /** Lab-only five-path CPU timing, including renderer submission, not GPU time.
    * Run in a dedicated deterministic test page with no concurrent interactions.
    */
@@ -1611,6 +1952,7 @@ export class SpaceEngine {
       for (const path of CPU_PATHS) {
         onPath(path.id);
         this.focus(path.focus, { transition: false });
+        await this.whenOrbitsSettled();
         const timings = new CpuTimings(frames);
         this.cpuClockEvents = this.cpuUiUpdates = 0;
         for (let index = -warmupFrames; index < frames; index++) {
@@ -1780,6 +2122,7 @@ export class SpaceEngine {
           throw new Error(
             'Textures did not settle. Wait for loading and run again.',
           );
+        await this.whenOrbitsSettled();
         await wait(3000);
         this.perf.reset();
         await wait(10000);
@@ -1839,6 +2182,8 @@ export class SpaceEngine {
     }
   }
   dispose() {
+    if (this.orbitBuild) this.orbitBuild.cancelled = true;
+    this.chunks.dispose();
     if (this.disposed) return;
     this.disposed = true;
     this.renderer.setAnimationLoop(null);

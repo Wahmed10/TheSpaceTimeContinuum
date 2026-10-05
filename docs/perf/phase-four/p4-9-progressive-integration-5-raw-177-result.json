@@ -1,0 +1,517 @@
+{
+  "status": "finished",
+  "activeStage": null,
+  "pid": 38320,
+  "startedAt": "2026-10-05T00:33:55.522Z",
+  "candidateCommit": "035fc967ed9ba88550773ea8f757fd5ff905d23c",
+  "candidateSource": "035fc967ed9ba88550773ea8f757fd5ff905d23c + approved progressive scene integration snapshot SHA256 95e97a1ee10e912119162931eb0878b39a4537e9b75c9c1e6de7667912565e86",
+  "sourceSha256": "95e97a1ee10e912119162931eb0878b39a4537e9b75c9c1e6de7667912565e86",
+  "referenceCommit": "4409ef5d8f97299d9058360c97d560493d067c1c",
+  "localVerify": {
+    "typecheck": "Engine typecheck passed",
+    "lint": "Changed runtime/test/driver/helper sources pass ESLint; runner node--check passed",
+    "focused": "16orbit/label-readiness/objects-in-view tests in3files pass;5driver default/identity/failure-collection tests pass. Nine predetermined alternating Node diagnostic microbenchmark pairs have exact upload bytes; median ratio0.458. No science/material/CPU/startup limits changed."
+  },
+  "protocol": {
+    "measurementPass": "Fresh full orbit upload validation; all runtime gates plus three predetermined uninstrumented CPU pairs",
+    "productionBuild": "SPACE_BUILD_AUDIT=1 emits module source maps in isolated candidate; default builds keep maps disabled",
+    "shell": "Root/Earth/Charon actual search/catalog, retained diagnostic overlay and engine gate. All framework/shared/UI/catalog gzip9 bytes countâ‰¤200000. Resolve actual sourceMappingURL and map hashes; source-free generated imports require complete exact-code match and retained code/references. Unknown code and any Three/renderer before gate fail. UI time adapter and engine import occur after gate.",
+    "shellBudgetBytes": 200000,
+    "engineBudgetBytes": 450000,
+    "assetBudgetBytes": 80000000,
+    "performanceCases": 4,
+    "cold": "Five fresh cache-disabled samples each, actual first preview painted before optional streaming. Desktop100Mbps/20Mbps/20ms/CPU1 <=2500ms; simulated4G4Mbps/1Mbps/150ms/CPU4 <=5000ms. Every pre-paint request counted using actual CDP encoded transfer bytes including late completion, cap1500000. No old full science bins.",
+    "navigation": "Actual native local search/card/history commands, motion enabled. Six targets are rendered/warmed before two measurement rounds; assets/camera settled through public snapshots. No tasks>50ms desktop/>100ms phone. Flight+automation duration is separate from command latency. Trace/video/screenshot off.",
+    "hardware": "Both actual desktop HIGH WebGL2/WebGPU physical adapters required, five views each/nonzero30+samples/p95<=16.7ms/12meshes/300draws/350M compressed mips. New phone-width4G/CPU emulation is not physical-phone throughput, thermal or total-VRAM proof. Preserve previously accepted device-coverage boundary; do not reopen it.",
+    "geometry": "Navigation <=12 meshes/300 draws desktop and<=6/150 phone; compressed mips350Mdesktop/128Mphone, not total measured VRAM. ULTRA600M unchanged policy/final regression remains separate.",
+    "finalRegression": "108browser/4performance/3profiles/3fresh five-path CPU pairs; independent failures retained, overall verdict remainsfailed.",
+    "cpu": "Fresh reference4409ef5d8f97299d9058360c97d560493d067c1c and candidate sequential on this same Windows/Node/Chromium runner, ordinary dev builds on both, fixed SwiftShader LOW1440x1000/DPR1/21bodies/120frames+30warmup/path/schema2/date2026-09-22/rate1/scheduled-count equality. Every5path mean andp95<=1.20reference, fail closed on incomparable environment/schema/counts. CPU frame submission excludes RAF waits and is not GPU execution. Current bundle/visible curves settle before each path, never blocking consumer startup.",
+    "boundaries": "Phase4B/5, deployment, server search/database and new assets excluded; changed-UX user review remains pending.",
+    "browserCases": 108,
+    "browserFiles": 22,
+    "originalConsumerCases": 85,
+    "extraScientificVisualCases": 14,
+    "reactProfileCases": 3,
+    "localLookupSamples": 1000,
+    "localLookupThresholdMs": 16,
+    "browserProtocol": {
+      "measurementChannel": "chromium",
+      "physicalArgs": [
+        "--use-angle=d3d11"
+      ],
+      "unsafeWebgpu": false,
+      "frameRateLimitDisabled": false,
+      "functional": "97 original SwiftShader functional cases;11 physical scene cases (2 native search response,3 texture/mobile/header,6 progressive data). Phone width/touch/CPU remains emulation on desktop hardware."
+    },
+    "scientificRegression": "All eight original visual references at1.5%, precision<0.5px/all11depth,texture stability; Saturn rings both sides/shadows/quality geometry, Mars irregular shapes and every body-detail quality transition, six existing planet maps,10 new-body orientation propagation,orbit date-jump/layer behavior and six moon systems/touch focus. Scientific models/source limitations are not reopened for user approval.",
+    "react": "Separate isolated next build --profile; complete Explore subtree overview and open card/list30sec/1day-per-sec, callback health/playing86400/time advance/allbinsâ‰¤4/historyquiet; original lab profile; not normal-production timing.",
+    "startupBuild": "All emitted browser JS/CSS gzip6 plus largest HTML, raw critical star/shape/texture manifest bytes, maximum one date bundle,64KB protocol reserve. Build fails above1500000. Generated2623 immutable bundles retain8KB correction/16KB combined caps.",
+    "data": "Six new browser cases: held chunks preserve painting/approximate planets/loading orbital models; paused arrival; late old-date/focus races without stale metrics; offline fallback; five cache-disabled distant desktop jumps <=1000ms requiring all21 current positions and rendered revision; repeated fixed-range reuse; sustained forward/reverse1year/sec after initial1s acquisition across>40 chunk boundaries each. Date jumps also record current-readiness/render-revision transitions and CDP transfer response/finish timestamps; peak concurrent KTX<=2 required; no texture-settle wait added.",
+    "texture": "Three foundation physical-backend delayed1K/detail/mobile/cache-header proofs repeated at integrated source; original99browser cases retained.",
+    "cpuRepetitions": 3,
+    "cpuAcceptance": "Every original mean/p95 path must pass in all three pairs; no pair selection or cross-pair averaging"
+  },
+  "pendingGates": [
+    "Review full verify/science/chunk-boundaries/4performance/108browser/3profiles and ALL three clean original20percent CPU pairs; no unreviewed pass",
+    "User changed-consumer-UX review after all automatic gates pass"
+  ],
+  "method": "Fresh full validation of one production change: OrbitLayer computes each vertex once and writes the unchanged shared segment endpoint buffer directly. Independent byte-for-byte tests prove Float64 rebase/multiply/add order, Float32 uploads, mutated points, scale, signed zero and near-surface origins; geometry/material/style/data/model/cadence/original CPU protocol unchanged. Nine predetermined alternating Node pairs indicate reduced upload cost but are diagnostic only. Prior native2400frame review does not reproduce clean spikes or establish sole cause; failed EarthLEO+21.137percent/Moonp95+26.316percent remainfailed. Fresh verify480expected unit passes+2expected diagnostics,5driver checks,all2623derivedchunks/staticcaps,1000lookup/normalbuild/shell/engine/assets/licenses;4startup/navigation/physicalHIGH cases,108production browser cases/22files,3separateproduction profiles. Three PREDECLARED uninstrumented ordinary-dev sequential same-machine reference4409ef5 then consumer CPU pairs, each5paths120+30/fixeddate-rate/LOW1440x1000DPR1/equal scheduled counts/environment/original20percent everymean+p95. ALL three must pass; no outlier filtering, averaging across pairs, best-result selection, diagnostic acceptance or inherited runtime performance. Independent groups/pairs continue after failures, all failures retained, integrity/setup failclosed, only owned3001/3002 stopped and rootdev3000 untouched. Source/reference/14preserved and provenance hashes frozen. Changed-consumer-UX review follows automated review; no Phase4B/5, scientific/reference/threshold change, commit/push/deploy/completion claim.",
+  "install": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "install",
+      "--offline",
+      "--frozen-lockfile"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "install.log",
+    "stderr": "install-stderr.log"
+  },
+  "validationDriver": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "node",
+      "--test",
+      "tools/validation-stage.test.mjs",
+      "tools/cpu-validation-plan.test.mjs"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "validationDriver.log",
+    "stderr": "validationDriver-stderr.log"
+  },
+  "verify": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "verify"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "verify.log",
+    "stderr": "verify-stderr.log"
+  },
+  "localSearch": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/phase-four-search-perf.ts",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\local-search.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "localSearch.log",
+    "stderr": "localSearch-stderr.log"
+  },
+  "build": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "build"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "build.log",
+    "stderr": "build-stderr.log"
+  },
+  "engineBundle": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "node",
+      "tools/measure-engine.mjs"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "engineBundle.log",
+    "stderr": "engineBundle-stderr.log"
+  },
+  "assets": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "tsx",
+      "tools/check-assets.ts"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "assets.log",
+    "stderr": "assets-stderr.log"
+  },
+  "licenses": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "licenses:check"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "licenses.log",
+    "stderr": "licenses-stderr.log"
+  },
+  "productionServer": {
+    "pid": 23084,
+    "port": 3002,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "mode": "start",
+    "log": "production-server.log",
+    "startedAt": "2026-10-05T00:35:22.054Z"
+  },
+  "shellAttribution": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "node",
+      "tools/measure-shell.mjs",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\shell.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "shellAttribution.log",
+    "stderr": "shellAttribution-stderr.log"
+  },
+  "performance": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-performance.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\performance",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "performance.json",
+    "stderr": "performance-stderr.log",
+    "stats": {
+      "startTime": "2026-10-05T00:35:30.126Z",
+      "duration": 307639.5,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportErrors": 0,
+    "completeCaseCount": 4
+  },
+  "browser": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-accessibility.spec.ts",
+      "e2e/phase-four-objects.spec.ts",
+      "e2e/phase-four-controls.spec.ts",
+      "e2e/phase-four-mobile.spec.ts",
+      "e2e/phase-four-cards.spec.ts",
+      "e2e/phase-four-search.spec.ts",
+      "e2e/phase-four-search-latency.spec.ts",
+      "e2e/phase-four-history.spec.ts",
+      "e2e/phase-four-routing.spec.ts",
+      "e2e/phase-four-state.spec.ts",
+      "e2e/phase-four-url.spec.ts",
+      "e2e/startup.spec.ts",
+      "e2e/precision.spec.ts",
+      "e2e/visual.spec.ts",
+      "e2e/rings.spec.ts",
+      "e2e/body-detail.spec.ts",
+      "e2e/phase-three-materials.spec.ts",
+      "e2e/orientations.spec.ts",
+      "e2e/orbits.spec.ts",
+      "e2e/moon-systems.spec.ts",
+      "e2e/progressive-textures.spec.ts",
+      "e2e/progressive-data.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\browser",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "browser.json",
+    "stderr": "browser-stderr.log",
+    "stats": {
+      "startTime": "2026-10-05T00:40:41.328Z",
+      "duration": 1277395.216,
+      "expected": 108,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportErrors": 0,
+    "completeCaseCount": 108
+  },
+  "productionServerLog": {
+    "exitCode": 0,
+    "errors": [],
+    "output": "production-server.log"
+  },
+  "browserRegression": {
+    "exitCode": 0
+  },
+  "profileBuild": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "--filter",
+      "web",
+      "exec",
+      "next",
+      "build",
+      "--profile"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "profileBuild.log",
+    "stderr": "profileBuild-stderr.log"
+  },
+  "profilingServer": {
+    "pid": 38180,
+    "port": 3002,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "mode": "start",
+    "log": "profiling-server.log",
+    "startedAt": "2026-10-05T01:02:14.347Z"
+  },
+  "reactProfile": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "exec",
+      "playwright",
+      "test",
+      "--config=phase-four.playwright.config.ts",
+      "e2e/phase-four-react-profile.spec.ts",
+      "e2e/react-profile.spec.ts",
+      "--output=C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\react-profile",
+      "--reporter=json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "reactProfile.json",
+    "stderr": "reactProfile-stderr.log",
+    "stats": {
+      "startTime": "2026-10-05T01:02:16.216Z",
+      "duration": 113502.953,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportErrors": 0,
+    "completeCaseCount": 3
+  },
+  "profilingServerLog": {
+    "exitCode": 0,
+    "errors": [],
+    "output": "profiling-server.log"
+  },
+  "profileRegression": {
+    "exitCode": 0
+  },
+  "cpuReference1Server": {
+    "pid": 22944,
+    "port": 3001,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\cpu-phase-three\\reference",
+    "mode": "dev",
+    "log": "cpuReference1-server.log",
+    "startedAt": "2026-10-05T01:04:16.309Z"
+  },
+  "referenceCpu1": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "perf:cpu",
+      "--url",
+      "http://localhost:3001",
+      "--output",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-reference-1.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\cpu-phase-three\\reference",
+    "output": "referenceCpu1.log",
+    "stderr": "referenceCpu1-stderr.log"
+  },
+  "cpuReference1ServerLog": {
+    "exitCode": 0,
+    "errors": [],
+    "output": "cpuReference1-server.log"
+  },
+  "cpuCandidate1Server": {
+    "pid": 18936,
+    "port": 3002,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "mode": "dev",
+    "log": "cpuCandidate1-server.log",
+    "startedAt": "2026-10-05T01:07:47.163Z"
+  },
+  "candidateCpu1": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "perf:cpu",
+      "--url",
+      "http://localhost:3002",
+      "--output",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-current-1.json",
+      "--baseline",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-reference-1.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "candidateCpu1.log",
+    "stderr": "candidateCpu1-stderr.log"
+  },
+  "cpuCandidate1ServerLog": {
+    "exitCode": 0,
+    "errors": [],
+    "output": "cpuCandidate1-server.log"
+  },
+  "cpuRegression1": {
+    "exitCode": 0
+  },
+  "cpuReference2Server": {
+    "pid": 41740,
+    "port": 3001,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\cpu-phase-three\\reference",
+    "mode": "dev",
+    "log": "cpuReference2-server.log",
+    "startedAt": "2026-10-05T01:11:25.882Z"
+  },
+  "referenceCpu2": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "perf:cpu",
+      "--url",
+      "http://localhost:3001",
+      "--output",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-reference-2.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\cpu-phase-three\\reference",
+    "output": "referenceCpu2.log",
+    "stderr": "referenceCpu2-stderr.log"
+  },
+  "cpuReference2ServerLog": {
+    "exitCode": 0,
+    "errors": [],
+    "output": "cpuReference2-server.log"
+  },
+  "cpuCandidate2Server": {
+    "pid": 27256,
+    "port": 3002,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "mode": "dev",
+    "log": "cpuCandidate2-server.log",
+    "startedAt": "2026-10-05T01:14:57.000Z"
+  },
+  "candidateCpu2": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "perf:cpu",
+      "--url",
+      "http://localhost:3002",
+      "--output",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-current-2.json",
+      "--baseline",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-reference-2.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "candidateCpu2.log",
+    "stderr": "candidateCpu2-stderr.log"
+  },
+  "cpuCandidate2ServerLog": {
+    "exitCode": 0,
+    "errors": [],
+    "output": "cpuCandidate2-server.log"
+  },
+  "cpuRegression2": {
+    "exitCode": 0
+  },
+  "cpuReference3Server": {
+    "pid": 28648,
+    "port": 3001,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\cpu-phase-three\\reference",
+    "mode": "dev",
+    "log": "cpuReference3-server.log",
+    "startedAt": "2026-10-05T01:18:32.846Z"
+  },
+  "referenceCpu3": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "perf:cpu",
+      "--url",
+      "http://localhost:3001",
+      "--output",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-reference-3.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\cpu-phase-three\\reference",
+    "output": "referenceCpu3.log",
+    "stderr": "referenceCpu3-stderr.log"
+  },
+  "cpuReference3ServerLog": {
+    "exitCode": 0,
+    "errors": [],
+    "output": "cpuReference3-server.log"
+  },
+  "cpuCandidate3Server": {
+    "pid": 19500,
+    "port": 3002,
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "mode": "dev",
+    "log": "cpuCandidate3-server.log",
+    "startedAt": "2026-10-05T01:22:04.447Z"
+  },
+  "candidateCpu3": {
+    "exitCode": 0,
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:/Users/waqar/AppData/Roaming/npm/node_modules/pnpm/bin/pnpm.cjs",
+      "perf:cpu",
+      "--url",
+      "http://localhost:3002",
+      "--output",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-current-3.json",
+      "--baseline",
+      "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\cpu-reference-3.json"
+    ],
+    "cwd": "C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\candidate",
+    "output": "candidateCpu3.log",
+    "stderr": "candidateCpu3-stderr.log"
+  },
+  "cpuCandidate3ServerLog": {
+    "exitCode": 0,
+    "errors": [],
+    "output": "cpuCandidate3-server.log"
+  },
+  "cpuRegression3": {
+    "exitCode": 0
+  },
+  "verdict": "automated-measurements-pass-review-pending",
+  "sourceIntegrity": {
+    "exitCode": 0,
+    "files": 3091,
+    "preservedEvidence": 14
+  },
+  "sourceUnchanged": true,
+  "preservedEvidenceUnchanged": true,
+  "finishedAt": "2026-10-05T01:25:41.341Z"
+}

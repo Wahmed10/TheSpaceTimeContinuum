@@ -1,0 +1,18 @@
+{
+  output: 'C:\\Users\\waqar\\Documents\\TheSpaceTimeContinuum\\.tools\\phase-four\\p4-9\\progressive-integration-5\\shell.json',
+  pass: true,
+  routes: [
+    { route: '/', shellGzipBytes: 196576, failures: [] },
+    {
+      route: '/object/planet/earth',
+      shellGzipBytes: 192943,
+      failures: []
+    },
+    {
+      route: '/object/moon/charon',
+      shellGzipBytes: 192943,
+      failures: []
+    }
+  ],
+  errors: []
+}

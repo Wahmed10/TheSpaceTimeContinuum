@@ -46,7 +46,7 @@ test('a stalled startup shows a recoverable error instead of an endless loader',
 }) => {
   const held: Route[] = [];
   await page.clock.install();
-  await page.route('**/data/corrections/**', (route) => {
+  await page.route('**/data/stars.bin', (route) => {
     held.push(route);
   });
   await page.goto('/?renderer=webgl&test=1');

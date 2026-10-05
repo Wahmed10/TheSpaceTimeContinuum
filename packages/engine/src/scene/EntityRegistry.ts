@@ -3,6 +3,7 @@ import {
   createCatalogProvider,
   createSolarSystemFrameTree,
   registerCatalogFrames,
+  createBodyProvider,
 } from '@space/astro';
 import type { createPlanet } from '../bodies/PlanetFactory';
 import type { LodLevel } from '../lod/LodSystem';
@@ -27,7 +28,15 @@ export interface RenderEntity {
   fixedFrameId?: `FIXED:${string}` | undefined;
 }
 export class EntityRegistry {
-  readonly frames = createSolarSystemFrameTree();
+  readonly frames: ReturnType<typeof createSolarSystemFrameTree>;
+  constructor(
+    private readonly providerFor: (
+      body: BodySpec,
+    ) => PositionProvider = createCatalogProvider,
+    analytic: (body: string) => PositionProvider = createBodyProvider,
+  ) {
+    this.frames = createSolarSystemFrameTree(analytic);
+  }
   readonly entries = new Map<string, RenderEntity>();
   loadCatalog(
     bodies: readonly BodySpec[],
@@ -42,7 +51,7 @@ export class EntityRegistry {
   ) {
     if (this.entries.has(body.id))
       throw new Error(`Duplicate entity ${body.id}`);
-    const provider = supplied ?? createCatalogProvider(body);
+    const provider = supplied ?? this.providerFor(body);
     if (!supplied) registerCatalogFrames(this.frames, body, provider);
     const frameId = supplied
       ? (`ICRF_BODY:registered/${body.id}` as const)
@@ -79,6 +88,10 @@ export class EntityRegistry {
   update(tdbSec: number) {
     for (const e of this.entries.values()) {
       e.visible = this.frames.resolveOrigin(e.frameId, tdbSec, e.physical);
+      if (!e.visible) {
+        e.renderVisible = false;
+        continue;
+      }
       e.display[0] = e.physical[0]!;
       e.display[1] = e.physical[1]!;
       e.display[2] = e.physical[2]!;

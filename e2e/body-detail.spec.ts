@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { writeFile } from 'node:fs/promises';
+import { freezeRenderedView } from './rendered-view';
 
 for (const group of [
   {
@@ -67,15 +69,26 @@ for (const group of [
         .toBe(0);
       for (const id of group.ids) {
         for (const phase of ['day', 'quarter'] as const) {
-          await page.evaluate(
-            ({ id, phase }) => {
-              window.__spaceEngine!.referenceView(id, phase);
-              window.__spaceEngine!.setRendering(true);
-            },
-            { id, phase },
+          const readiness = await freezeRenderedView(page, id, () =>
+            page.evaluate(
+              ({ id, phase }) => {
+                window.__spaceEngine!.referenceView(id, phase);
+                window.__spaceEngine!.setRendering(true);
+              },
+              { id, phase },
+            ),
           );
-          await page.waitForTimeout(600);
-          await page.evaluate(() => window.__spaceEngine!.setRendering(false));
+          await writeFile(
+            testInfo.outputPath(
+              id.replace(':', '-') +
+                '-' +
+                tier +
+                '-' +
+                phase +
+                '-readiness.json',
+            ),
+            JSON.stringify({ ...readiness, phase, tier }, null, 2),
+          );
           await canvas.screenshot({
             path: testInfo.outputPath(
               `${id.replace(':', '-')}-${tier}-${phase}.png`,
