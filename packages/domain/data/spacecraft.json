@@ -1,0 +1,79 @@
+[
+  {
+    "id": "spacecraft:voyager-1",
+    "name": "Voyager 1",
+    "aliases": ["Voyager I"],
+    "sourceUrl": "https://science.nasa.gov/mission/voyager/voyager-1/",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:voyager-2",
+    "name": "Voyager 2",
+    "aliases": ["Voyager II"],
+    "sourceUrl": "https://science.nasa.gov/mission/voyager/voyager-2/",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:new-horizons",
+    "name": "New Horizons",
+    "aliases": [],
+    "sourceUrl": "https://science.nasa.gov/mission/new-horizons/",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:jwst",
+    "name": "James Webb Space Telescope",
+    "aliases": ["JWST", "Webb"],
+    "sourceUrl": "https://science.nasa.gov/mission/webb/",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:parker",
+    "name": "Parker Solar Probe",
+    "aliases": ["PSP"],
+    "sourceUrl": "https://science.nasa.gov/mission/parker-solar-probe/",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:juno",
+    "name": "Juno",
+    "aliases": [],
+    "sourceUrl": "https://science.nasa.gov/mission/juno/",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:europa-clipper",
+    "name": "Europa Clipper",
+    "aliases": [],
+    "sourceUrl": "https://science.nasa.gov/mission/europa-clipper/",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:juice",
+    "name": "JUICE",
+    "aliases": ["Jupiter Icy Moons Explorer"],
+    "sourceUrl": "https://www.esa.int/Science_Exploration/Space_Science/Juice",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:psyche",
+    "name": "Psyche",
+    "aliases": [],
+    "sourceUrl": "https://science.nasa.gov/mission/psyche/",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:lucy",
+    "name": "Lucy",
+    "aliases": [],
+    "sourceUrl": "https://science.nasa.gov/mission/lucy/",
+    "sourceVerifiedAt": "2026-10-05"
+  },
+  {
+    "id": "spacecraft:bepicolombo",
+    "name": "BepiColombo",
+    "aliases": [],
+    "sourceUrl": "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo",
+    "sourceVerifiedAt": "2026-10-05"
+  }
+]
