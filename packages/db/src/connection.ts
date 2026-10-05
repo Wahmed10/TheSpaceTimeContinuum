@@ -13,6 +13,7 @@ export function createDatabase(env: NodeJS.ProcessEnv = process.env) {
     max: 3,
     connectionTimeoutMillis: 15_000,
     idleTimeoutMillis: 10_000,
+    statement_timeout: 30_000,
   });
   const db = drizzle({ client: pool, schema });
   return { db, close: () => pool.end() };

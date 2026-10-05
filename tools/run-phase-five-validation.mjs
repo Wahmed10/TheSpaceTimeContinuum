@@ -100,13 +100,20 @@ if (process.argv[2] === '--prepare') {
     sourceSha256: createHash('sha256')
       .update(JSON.stringify(source))
       .digest('hex'),
-    protocol:
-      'P4B.1 scoped offline install + pnpm verify; not phase acceptance or a live database test',
-    pendingGates: [
-      'independent raw-result/source review',
-      'real Neon development-branch migration/seed/integration',
-      'P4B.1 commit after live gate',
-    ],
+    protocol: process.argv.includes('--live-ingestion')
+      ? 'P4B.2 scoped offline install + pnpm verify + live Neon ingestion persistence; not scheduled ingestion or phase acceptance'
+      : 'P4B.1 scoped offline install + pnpm verify; not phase acceptance or a live database test',
+    liveIngestion: process.argv.includes('--live-ingestion'),
+    pendingGates: process.argv.includes('--live-ingestion')
+      ? [
+          'independent raw-result/source review',
+          'P4B.2 scoped commit after reviewed live persistence',
+        ]
+      : [
+          'independent raw-result/source review',
+          'real Neon development-branch migration/seed/integration',
+          'P4B.1 commit after live gate',
+        ],
     createdAt: new Date().toISOString(),
   };
   save(resolve(folder, 'launch.json'), launch);
@@ -122,6 +129,10 @@ if (!launchFile)
   throw new Error('Pass launch.json or --prepare <unique-run-id>');
 const manifest = JSON.parse(readFileSync(resolve(launchFile), 'utf8'));
 const { candidate, runDirectory: folder } = manifest;
+if (existsSync(resolve(folder, 'result.json')))
+  throw new Error(
+    'This job already has results; preserve them and do not launch a duplicate',
+  );
 const result = {
   status: 'running',
   pid: process.pid,
@@ -152,10 +163,20 @@ const check = () => {
 persist();
 try {
   check();
-  for (const [name, args] of [
-    ['install', ['install', '--offline', '--frozen-lockfile']],
-    ['verify', ['verify']],
-  ]) {
+  const stages = [
+    ['install', ['install', '--offline', '--frozen-lockfile'], candidate],
+    ['verify', ['verify'], candidate],
+    ...(manifest.liveIngestion
+      ? [
+          [
+            'liveIngestion',
+            ['--filter', '@space/db', 'test:ingestion'],
+            manifest.root,
+          ],
+        ]
+      : []),
+  ];
+  for (const [name, args, checkout] of stages) {
     result.activeStage = name;
     persist();
     const out = openSync(resolve(folder, `${name}.log`), 'w');
@@ -163,17 +184,21 @@ try {
     let stage;
     try {
       stage = spawnSync(manifest.node, [manifest.pnpmCli, ...args], {
-        cwd: candidate,
+        cwd: checkout,
         windowsHide: true,
         stdio: ['ignore', out, err],
         timeout: 30 * 60 * 1000,
-        // This job never reads/copies credentials or performs live DB writes.
+        // Candidates never receive secrets; the explicit live gate reads root ignored config.
         env: {
           ...process.env,
           CI: 'true',
-          DATABASE_URL: '',
-          TEST_DATABASE_URL: '',
-          DB_TEST_ALLOW_WRITES: '',
+          ...(name === 'liveIngestion'
+            ? {}
+            : {
+                DATABASE_URL: '',
+                TEST_DATABASE_URL: '',
+                DB_TEST_ALLOW_WRITES: '',
+              }),
         },
       });
     } finally {

@@ -86,7 +86,10 @@ export async function latestSnapshot(
             eq(layerSnapshots.groupKey, group),
           ),
         )
-        .orderBy(desc(layerSnapshots.ingestedAt))
+        .orderBy(
+          desc(layerSnapshots.fetchedAt),
+          desc(layerSnapshots.ingestedAt),
+        )
         .limit(1)
     )[0] ?? null
   );

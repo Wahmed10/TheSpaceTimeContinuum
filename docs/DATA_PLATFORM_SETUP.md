@@ -46,3 +46,26 @@ Commands redact driver errors because driver messages can contain connection det
 ## Later scheduled setup
 
 The ingestion workflow and API/status will be implemented after the database gate passes. GitHub will need separately configured `DATABASE_URL` and `PROVIDER_CONTACT` secrets. The contact value must identify the project to data providers. No secret has been configured, no workflow has been dispatched and no notification delivery has been verified by this guide.
+
+## P4B.2 ingestion runner
+
+The database foundation is reviewed accepted and committed as `4936a47`. Provider runner code is implemented and undergoing its own verification. The approved contact is `https://github.com/Wahmed10/TheSpaceTimeContinuum/issues`. A User-Agent identifies our app to the provider and supplies a contact route; it grants no access and sends no message. Local configuration now includes this contact and `INGEST_PROVIDERS=dummy`.
+
+```powershell
+pnpm.cmd ingest:due
+pnpm.cmd --filter @space/db test:ingestion
+```
+
+The first command runs only due providers, sequentially. Currently the only provider is an explicitly labeled local scheduled-ingestion proof; it writes a real snapshot and records but makes no external scientific requests. It returns `not-due-or-blocked` when a prior run is not yet due, a lease is owned elsewhere, or the host is paused. A successful skipped invocation is not evidence that a scheduled run persisted data.
+
+Any non-200 provider response—including a redirect—pauses the host across runner invocations and records a failure. No automatic HTTP retry/resume occurs. Network/payload failures use delayed capped backoff, retaining the last good snapshot. After investigating the actual request/status, an operator can explicitly acknowledge a resume:
+
+```powershell
+pnpm.cmd ingest:due resume <provider-id> <operator-name> "Investigated and corrected the request"
+```
+
+The resume is host-wide and audited. Never run it blindly just to clear a warning. CLI failure output uses bounded codes and withholds raw responses/driver messages. The separate live test checks host exclusivity across two connection pools, atomic bookkeeping, failed replacement rollback, revalidation deduplication, persistent pause/operator resume, retention limits and lease-expiration recovery. Its UUID-namespaced fixtures are removed afterward; catalog/provider data is not removed.
+
+Response bodies are capped at 16MiB with a 30-second request/body deadline. Database statements also have a 30-second timeout. Source snapshots/raw records are retained for at most 30 days with 100-row/32MiB budgets per source, preserving newest last-good groups only when that current set itself fits the budget. An over-budget replacement rolls back. Ingestion claims expire after ten minutes; overlapping processes cannot fetch the same host concurrently under an active lease. A worker whose lease expires cannot publish late results.
+
+GitHub workflow/secrets, API/status and actual scheduled persistence remain later gates; local runner code is not proof of those services.

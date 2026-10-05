@@ -10,7 +10,8 @@
     "migrate": "tsx src/cli.ts migrate",
     "seed": "tsx src/cli.ts seed",
     "check": "tsx src/cli.ts check",
-    "test:integration": "tsx test/integration.ts"
+    "test:integration": "tsx test/integration.ts",
+    "test:ingestion": "tsx test/ingestion-integration.ts"
   },
   "dependencies": {
     "@space/domain": "workspace:*",
