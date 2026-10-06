@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+﻿import { test, expect } from '@playwright/test';
 test('all 21 catalog entries load and computed/approximate bodies can be focused and layered', async ({
   page,
 }) => {
@@ -12,8 +12,7 @@ test('all 21 catalog entries load and computed/approximate bodies can be focused
     await page.evaluate(() => window.__spaceEngine!.diagnostics().entities),
   ).toBe(21);
   await page.getByRole('button', { name: 'Find a world' }).click();
-  await expect(page.locator('.search-result')).toHaveCount(21);
-  await expect(page.getByText('21 destinations', { exact: true })).toBeVisible();
+  await expect(page.locator('.search-result')).toHaveCount(8);
   await page.locator('.search-result').last().scrollIntoViewIfNeeded();
   await expect(page.locator('.search-result').last()).toBeInViewport();
   await page.getByRole('button', { name: 'Close search' }).click();
@@ -47,9 +46,9 @@ test('all 21 catalog entries load and computed/approximate bodies can be focused
     expect(metrics!.radiusKm).toBeGreaterThan(400);
     if (name === 'Titan' || name === 'Ceres') {
       expect(metrics!.certainty).toBe('approximate');
-      await expect(
-        page.getByText('Approximate orbit', { exact: true }),
-      ).toBeVisible();
+      await expect(page.locator('.position-certainty')).toHaveText(
+        'Approximate position',
+      );
     }
     await expect
       .poll(() =>
@@ -61,11 +60,11 @@ test('all 21 catalog entries load and computed/approximate bodies can be focused
     });
   }
   await page.getByRole('button', { name: 'Layers', exact: true }).click();
-  await page.getByLabel('Dwarfs', { exact: true }).uncheck();
+  await page.getByLabel('Dwarf planets', { exact: true }).uncheck();
   expect(
     await page.evaluate(() => window.__spaceEngine!.getMapState().layers),
   ).not.toContain('dwarfs');
-  await page.getByLabel('Dwarfs', { exact: true }).check();
+  await page.getByLabel('Dwarf planets', { exact: true }).check();
   expect(
     await page.evaluate(() => window.__spaceEngine!.getMapState().layers),
   ).toContain('dwarfs');

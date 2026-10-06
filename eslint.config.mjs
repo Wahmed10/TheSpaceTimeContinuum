@@ -4,6 +4,7 @@ export default tseslint.config(
     ignores: [
       '**/node_modules/**',
       '.tools/**',
+      'docs/perf/**',
       'coverage/**',
       '**/.next/**',
       '**/dist/**',

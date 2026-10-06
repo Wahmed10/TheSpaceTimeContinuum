@@ -29,7 +29,10 @@ for (const system of systems)
     await expect(canvas).toHaveAttribute('data-ready', 'true', {
       timeout: 60000,
     });
-    await page.evaluate(() => window.__spaceEngine!.clock.setTime(631152000));
+    await page.evaluate(() => {
+      window.__spaceEngine!.clock.setTime(631152000);
+      window.__spaceEngine!.clock.pause();
+    });
     await page.addStyleTag({
       content:
         'body * { visibility: hidden !important; } canvas[role] { visibility: visible !important; }',
@@ -58,6 +61,17 @@ for (const system of systems)
         .toBe(true);
       await canvas.screenshot({ path: info.outputPath(`${scale}-system.png`) });
       for (const moon of system.moons) {
+        await expect
+          .poll(
+            () =>
+              page.evaluate(
+                (id) =>
+                  window.__spaceEngine!.getPositionStatus(id) !== 'loading',
+                moon,
+              ),
+            { timeout: 30000 },
+          )
+          .toBe(true);
         await page.evaluate(
           (moon) => window.__spaceEngine!.focus(moon, { transition: false }),
           moon,

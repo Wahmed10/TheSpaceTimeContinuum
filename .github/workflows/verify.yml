@@ -7,6 +7,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -23,6 +24,11 @@ jobs:
       - run: pnpm build
   browser:
     runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -32,14 +38,38 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm test:e2e
+      - run: pnpm build
+      - run: pnpm exec playwright test --config=hosted.playwright.config.ts --shard=${{ matrix.shard }}/3
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: renderer-evidence
+          name: renderer-evidence-${{ matrix.shard }}
           path: |
             docs/perf/screens
             docs/perf/precision-webgl.json
             docs/perf/texture-stability.json
             docs/perf/react-profile.json
             test-results
+  profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm --filter web exec next build --profile
+      - run: pnpm exec playwright test --config=profile.playwright.config.ts
+        env:
+          SPACE_PRODUCTION_PROFILING: '1'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: production-react-profile
+          path: |
+            test-results
+            docs/perf/react-profile.json

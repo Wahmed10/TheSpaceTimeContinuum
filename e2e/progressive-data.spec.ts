@@ -209,7 +209,7 @@ test('offline correction failures keep newly calculated positions marked approxi
     await page.evaluate(() => window.__spaceEngine!.getMetrics('moon:charon')),
   ).toBeNull();
 });
-test('five uncached desktop date jumps finish within one second while rendering continues', async ({
+test('five uncached desktop date jumps finish within one second while rendering continues @physical-gpu', async ({
   page,
 }, info) => {
   const cdp = await page.context().newCDPSession(page);
@@ -389,7 +389,7 @@ test('fixed-range chunks are reused for repeated dates without more downloads', 
     ),
   ).toBe(requests);
 });
-test('forward and reverse one-year-per-second playback crosses prefetched boundaries without repeated loading', async ({
+test('forward and reverse one-year-per-second playback crosses prefetched boundaries without repeated loading @physical-gpu', async ({
   page,
 }, info) => {
   test.setTimeout(90000);

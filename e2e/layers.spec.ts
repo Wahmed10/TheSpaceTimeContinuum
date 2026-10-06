@@ -1,3 +1,4 @@
+import { settledSceneResources } from './helpers/sceneResources';
 import { test, expect } from '@playwright/test';
 
 test('layer toggles and map restoration reuse GPU resources', async ({
@@ -20,6 +21,7 @@ test('layer toggles and map restoration reuse GPU resources', async ({
     )
     .toBe(0);
   await page.waitForTimeout(500);
+  await settledSceneResources(page);
   const before = await page.evaluate(() => window.__spaceEngine!.diagnostics());
   expect(before.layers).toHaveLength(12);
   expect(

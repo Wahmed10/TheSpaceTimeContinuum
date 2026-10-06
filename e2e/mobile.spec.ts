@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { openTime, closeTime } from './helpers/consumerControls';
 test.use({
   viewport: { width: 390, height: 844 },
   isMobile: true,
@@ -14,11 +15,11 @@ test('touch layout, search, layers, and timeline remain operable', async ({
   });
   await expect(page.locator('.error-panel')).toHaveCount(0);
   await page.getByRole('button', { name: 'Find a world' }).tap();
-  await expect(page.locator('.search-result')).toHaveCount(21);
+  await expect(page.locator('.search-result')).toHaveCount(8);
   await page.locator('.search-result').last().scrollIntoViewIfNeeded();
   await expect(page.locator('.search-result').last()).toBeInViewport();
   await page.getByPlaceholder('Where would you like to go?').fill('Moon');
-  await page.locator('.search-result').tap();
+  await page.locator('.search-result[data-entity-id="moon:moon"]').tap();
   await expect(
     page.getByRole('heading', { name: 'Moon', exact: true }),
   ).toBeVisible();
@@ -34,7 +35,9 @@ test('touch layout, search, layers, and timeline remain operable', async ({
   await page.getByRole('button', { name: 'Layers', exact: true }).tap();
   await page.getByLabel('Orbital paths').uncheck();
   await page.keyboard.press('Escape');
+  await openTime(page);
   await page.getByRole('button', { name: 'LIVE', exact: true }).tap();
+  await closeTime(page);
   await expect(
     page.getByRole('button', { name: 'Pause', exact: true }),
   ).toBeVisible();

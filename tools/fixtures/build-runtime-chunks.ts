@@ -31,7 +31,8 @@ for (const file of [
   'packages/astro/src/ephemeris/PolynomialCorrection.ts',
   'packages/astro/src/ephemeris/OsculatingElementsProvider.ts',
 ])
-  hash.update(readFileSync(file));
+  // Git checkouts may use CRLF on Windows; source identity must be portable.
+  hash.update(readFileSync(file, 'utf8').replace(/\r\n/g, '\n'));
 function load(
   id: string,
   kind: RuntimeBody['kind'],
@@ -115,7 +116,7 @@ for (let index = manifest.fromIndex; index <= manifest.toIndex; index++) {
 const metadata = JSON.stringify(manifest, null, 2) + '\n';
 for (const file of [manifestFile, `${folder}/manifest.json`]) {
   if (check) {
-    if (readFileSync(file, 'utf8') !== metadata)
+    if (readFileSync(file, 'utf8').replace(/\r\n/g, '\n') !== metadata)
       throw Error(`Stale chunk manifest ${file}`);
   } else writeFileSync(file, metadata);
 }

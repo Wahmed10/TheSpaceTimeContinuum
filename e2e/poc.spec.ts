@@ -1,40 +1,52 @@
 import { test, expect } from '@playwright/test';
-test('WebGL renderer, focus, clock, scale, and search', async ({ page }) => {
+import { openTime, closeTime, toggleScale } from './helpers/consumerControls';
+test('WebGL lab renderer, focus, clock, scale, and search', async ({
+  page,
+}) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/lab/poc?renderer=webgl&test=1&perf=1');
   await expect(page.locator('canvas')).toHaveAttribute('data-ready', 'true', {
     timeout: 60000,
   });
-  await page.waitForTimeout(2000);
   await expect(page.locator('.error-panel')).toHaveCount(0);
-  await page.screenshot({ path: 'docs/perf/screens/solar-system-webgl.png' });
-  await page
-    .getByRole('button', { name: 'Earth', exact: false })
-    .first()
-    .click();
+  await page.getByRole('button', { name: 'Find a world', exact: true }).click();
+  const input = page.getByRole('combobox', {
+    name: 'Find a world',
+    exact: true,
+  });
+  await input.fill('Earth');
+  await input.press('Enter');
   await expect(
     page.getByRole('heading', { name: 'Earth', exact: true }),
   ).toBeVisible();
-  await page.waitForTimeout(6500);
-  await expect(page.locator('.error-panel')).toHaveCount(0);
-  await page.screenshot({ path: 'docs/perf/screens/earth-webgl.png' });
-  await page.getByRole('button', { name: 'Play', exact: true }).click();
+  await expect
+    .poll(() => page.evaluate(() => window.__spaceEngine!.focusedId))
+    .toBe('planet:earth');
+  if (
+    await page.getByRole('button', { name: 'Pause', exact: true }).isVisible()
+  )
+    await page.getByRole('button', { name: 'Pause', exact: true }).click();
   await expect(
-    page.getByRole('button', { name: 'Pause', exact: true }),
+    page.getByRole('button', { name: 'Play', exact: true }),
   ).toBeVisible();
+  await openTime(page);
   await page.getByLabel('Playback speed').selectOption('86400');
-  await page
-    .getByRole('button', { name: 'Explore scale', exact: true })
-    .click();
-  await page.getByRole('button', { name: 'Find a world' }).click();
-  await page.getByPlaceholder('Where would you like to go?').fill('Mars');
-  await page.getByPlaceholder('Where would you like to go?').press('Enter');
+  await closeTime(page);
+  await expect(page.getByRole('button', { name: 'Pause', exact: true })).toBeVisible();
+  await expect
+    .poll(() => page.evaluate(() => window.__spaceEngine!.clock.rate))
+    .toBe(86400);
+  await toggleScale(page, 'Explore');
+  await page.getByRole('button', { name: 'Find a world', exact: true }).click();
+  await input.fill('Mars');
+  await input.press('Enter');
   await expect(
     page.getByRole('heading', { name: 'Mars', exact: true }),
   ).toBeVisible();
-  await page.waitForTimeout(6500);
+  await expect
+    .poll(() => page.evaluate(() => window.__spaceEngine!.focusedId))
+    .toBe('planet:mars');
   await expect(page.locator('.error-panel')).toHaveCount(0);
-  await page.screenshot({ path: 'docs/perf/screens/mars-webgl.png' });
   expect(errors).toEqual([]);
 });

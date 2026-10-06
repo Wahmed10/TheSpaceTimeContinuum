@@ -1,3 +1,4 @@
+﻿import { settledSceneResources } from './helpers/sceneResources';
 import { test, expect } from '@playwright/test';
 
 test('public provider registration adds focusable objects and preserves existing GPU resources', async ({
@@ -79,6 +80,7 @@ test('public provider registration adds focusable objects and preserves existing
       ),
     )
     .toBe(true);
+  await settledSceneResources(page);
   const before = await page.evaluate(() => window.__spaceEngine!.diagnostics());
   for (let i = 0; i < 10; i++) {
     await page.evaluate(() => window.__spaceEngine!.setLayer('neo', false));

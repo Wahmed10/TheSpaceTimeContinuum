@@ -1,3 +1,4 @@
+import { settledSceneResources } from './helpers/sceneResources';
 import { test, expect } from '@playwright/test';
 declare global {
   interface Window {
@@ -82,6 +83,7 @@ test('10k external points support focus, touch picking, visibility, failure isol
       page.evaluate(() => window.__spaceEngine!.diagnostics().selected),
     )
     .toBe('asteroid:point-0');
+  await settledSceneResources(page);
   const before = await page.evaluate(
     () => window.__spaceEngine!.diagnostics().geometries,
   );
