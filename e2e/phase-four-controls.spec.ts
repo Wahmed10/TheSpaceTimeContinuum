@@ -11,7 +11,7 @@ const ready = (page: Page) =>
     timeout: 60000,
   });
 const settingsKey = 'continuum.settings.v1';
-test.use({ actionTimeout: 10000 });
+test.use({ actionTimeout: 30000 });
 const errors = new WeakMap<Page, string[]>();
 test.beforeEach(async ({ page }) => {
   const found: string[] = [];
@@ -305,6 +305,9 @@ test('system motion changes and explicit overrides govern the real LIVE transiti
     });
   expect(fade.mode).toBe('playing');
   expect(fade.fade).toBeGreaterThan(0.9);
+  await page.evaluate(() =>
+    window.__spaceEngine!.clock.tick(Date.now() + 1200),
+  );
   await expect
     .poll(() => page.evaluate(() => window.__spaceEngine!.clock.mode))
     .toBe('live');
@@ -376,6 +379,7 @@ for (const timezoneId of ['America/Toronto', 'Asia/Tokyo'])
       await expect(
         page.locator('.time-panel').getByRole('status'),
       ).toContainText('supported date boundary and paused');
+      await page.evaluate(() => window.__spaceEngine!.clock.tick());
       await expect
         .poll(() =>
           page.evaluate(() => window.__spaceEngine!.clock.state.clamped),

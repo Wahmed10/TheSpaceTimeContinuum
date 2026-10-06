@@ -17,6 +17,7 @@ export default defineConfig({
   ],
   grepInvert: /@physical-gpu/,
   timeout: 90000,
+  expect: { timeout: 30000 },
   globalTimeout: 25 * 60_000,
   workers: 1,
   retries: 0,

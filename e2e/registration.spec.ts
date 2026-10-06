@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 
 test('public provider registration adds focusable objects and preserves existing GPU resources', async ({
   page,
-}) => {
+}, info) => {
   await page.goto('/?renderer=webgl&test=1');
   await expect(page.locator('canvas')).toHaveAttribute('data-ready', 'true', {
     timeout: 60000,
@@ -89,6 +89,10 @@ test('public provider registration adds focusable objects and preserves existing
     await page.waitForTimeout(30);
   }
   const after = await page.evaluate(() => window.__spaceEngine!.diagnostics());
+  await info.attach('resource-reuse-diagnostics', {
+    body: JSON.stringify({ before, after }, null, 2),
+    contentType: 'application/json',
+  });
   expect(after.geometries).toBe(before.geometries);
   expect(after.selected).toBe('asteroid:test-registration');
   expect(after.focusScreen!.x).toBeCloseTo(720, 0);

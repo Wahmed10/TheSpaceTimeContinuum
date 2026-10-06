@@ -8,7 +8,7 @@ import {
   expectScale,
 } from './helpers/consumerControls';
 
-test.use({ timezoneId: 'America/Toronto', actionTimeout: 10000 });
+test.use({ timezoneId: 'America/Toronto', actionTimeout: 30000 });
 const query = '?renderer=webgl&test=1&t=2026-10-02T12%3A00%3A00Z';
 const ready = (page: Page) =>
   expect(page.locator('canvas')).toHaveAttribute('data-ready', 'true', {

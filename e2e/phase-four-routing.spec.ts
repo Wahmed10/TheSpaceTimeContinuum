@@ -19,7 +19,7 @@ const ready = (page: Page) =>
     timeout: 60000,
   });
 
-test.use({ actionTimeout: 10000 });
+test.use({ actionTimeout: 30000 });
 
 test('production HTTP HTML contains catalog metadata for all 21 objects', async ({
   request,

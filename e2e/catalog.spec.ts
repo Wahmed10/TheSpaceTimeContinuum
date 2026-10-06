@@ -29,6 +29,17 @@ test('all 21 catalog entries load and computed/approximate bodies can be focused
     await expect(
       page.getByRole('heading', { name: name!, exact: true }),
     ).toBeVisible();
+    await expect
+      .poll(() =>
+        page.evaluate((id) => {
+          const engine = window.__spaceEngine!;
+          return (
+            engine.focusedId === id &&
+            engine.getPositionStatus(id!) !== 'loading'
+          );
+        }, id),
+      )
+      .toBe(true);
     await page.evaluate(
       (id) => window.__spaceEngine!.focus(id!, { transition: false }),
       id,

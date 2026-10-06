@@ -5,6 +5,9 @@ import type { Page } from '@playwright/test';
 export async function settledSceneResources(page: Page) {
   await page.evaluate(async () => {
     const engine = window.__spaceEngine!;
+    // Automatic quality may replace/dispose geometry during a reuse comparison.
+    // Keep the current workload fixed rather than measuring that adaptation.
+    engine.setQuality(engine.diagnostics().tier);
     engine.clock.pause();
     await engine.whenOrbitsSettled();
   });

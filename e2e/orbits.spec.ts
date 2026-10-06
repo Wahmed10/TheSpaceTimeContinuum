@@ -39,6 +39,7 @@ test('wide orbits highlight selection, style approximation, refresh after date j
   await page.evaluate(() =>
     window.__spaceEngine!.focus('dwarf:ceres', { transition: false }),
   );
+  await page.evaluate(() => window.__spaceEngine!.whenOrbitsSettled());
   await expect
     .poll(() =>
       page.evaluate(
